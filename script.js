@@ -42,7 +42,6 @@ function showSection(section) {
     setTimeout(() => {
       section.style.opacity = 1;
       section.style.position = 'static';
-      // section.style.fontSize = window.matchMedia('(max-width: 768px)').matches?"0.7rem": "1rem";
       section.style.pointerEvents = 'auto';
       section.classList.add('fade-in');
       

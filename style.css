@@ -45,7 +45,10 @@ header {
   background-color: var(--dark);
   padding: 20px;
   text-align: center;
+  position: relative;
 }
+
+
 
 h1 {
   font-family: "Dynalight", cursive;
@@ -63,7 +66,7 @@ nav {
   border-top: 2px solid var(--medium-dark);
   box-shadow: var(--bottom-shadow);
   background-color: var(--low-dark);
-  min-height: 50px;
+  min-height: 45px;
 
 }
 
@@ -146,6 +149,15 @@ h2 {
   margin-bottom: 10px;
 }
 
+.about-container{
+  overflow-y: auto;
+  height: 100%;
+}
+
+.about-container-inside{
+  height: 220px;
+}
+
 .project-container {
   display: flex;
   flex-wrap: wrap;
@@ -156,8 +168,42 @@ footer {
   width: 102%;
   background-color: var(--low-dark);
   text-align: center;
-  min-height: 30px;
+  min-height: 45px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-container{
+  font-weight: 400;
+  text-align: left;
+  font-size: 0.75rem;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  color: var(--medium-light);
+}
+
+.social-links-container{
+  font-size: 0.8rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 25px;
+  gap: 10px;
+}
+
+.social-icon{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.github{
+  fill: white;
 }
 
 .about, .contact, .projects{
@@ -198,7 +244,6 @@ form {
 
 .form-group {
   margin-bottom: 10px;
-  
 }
 
 label {
@@ -302,20 +347,72 @@ button:active::after {
     min-height: 35px;
     max-height: 40px;
   }
-  body {
+  html {
     overflow: hidden;
     font-size: 0.7rem;
   }
 
+  h1{
+    font-size: 2rem;
+  }
+  
   .main-container {
     width: 90%;
   }
   
   .fade-in {
-    font-size: 0.7rem !important;
+    font-size: 0.85rem !important;
     width: 90%;
   }
 
+  .about-container{
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .about-container-inside{
+    height: 220px;
+  }
+
+  form {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .form-group {
+    margin-bottom: 5px;
+  }
+  
+  footer{
+    padding: 5px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-height: auto;
+  }
+
+  .contact-container{
+    text-align: center;
+    position: static;
+    font-size: 0.7rem;
+    
+  }
+
+  .social-links-container{
+    margin-right: 0;
+    position: static;
+    justify-content: center;
+    width: 50%;
+  }
+
+  .social-icon{
+    width: 1rem;
+    height: 1rem;
+  }
+  
   main h2 {
     margin-top: 10px;
     text-align: left;
@@ -329,6 +426,8 @@ button:active::after {
   }
 
   button{
+    font-size: 0.8rem;
+    margin-top: 0px;
     width: 100%;
   }
 }
