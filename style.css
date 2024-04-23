@@ -348,7 +348,8 @@ button:active::after {
     max-height: 40px;
   }
   html {
-    overflow: hidden;
+    height: 100%;
+    overflow: auto;
     font-size: 0.7rem;
   }
 
@@ -391,7 +392,7 @@ button:active::after {
     justify-content: center;
     align-items: center;
     gap: 5px;
-    min-height: auto;
+    height: auto;
   }
 
   .contact-container{
@@ -405,12 +406,13 @@ button:active::after {
     margin-right: 0;
     position: static;
     justify-content: center;
+    gap: 20px;
     width: 50%;
   }
 
   .social-icon{
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
   }
   
   main h2 {
