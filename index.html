@@ -1,4 +1,7 @@
+
 <!DOCTYPE html>
+<div id="loader" class="center"></div>
+
 <html lang="en">
 
 <head>
@@ -6,24 +9,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gustavo de Azevêdo | Portfolio</title>
-  <style>
-    *{
-      padding: 0; 
-      margin: 0;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border: none;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
-
-<iframe id="mainFrame"></iframe>
-
-<script>
-  const userLanguage = navigator.language || navigator.userLanguage;
-  document.getElementById("mainFrame").src = userLanguage.includes("pt") ? "./languages/portuguese.html" : "./languages/english.html";
-</script>
-
+  
 </html>
+
+<script type="module" src="./languageDecision.js"></script>
+<script type="module" src="./sectionsHandler.js"></script>
+<script type="module" src="./handleForm.js"></script>
+
