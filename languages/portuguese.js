@@ -1,4 +1,4 @@
-export function portuguese(){
+export function portuguese() {
   return `
   <head>
     <meta charset="UTF-8">
@@ -47,11 +47,11 @@ export function portuguese(){
             <div class="form-container">
               <div class="form-group">
                 <label for="name">Seu Nome:</label>
-                <input type="text" id="name" name="name" placeholder="Seu nome aqui" required autocomplete="name">
+                <input autocomplete="given-name" type="text" id="name" name="name" placeholder="Seu nome aqui" required autocomplete="name">
               </div>
               <div class="form-group">
                 <label for="email">Seu Email:</label>
-                <input type="email" id="email" name="email" placeholder="exemplo@exemplo.com" required
+                <input autocomplete="email" type="email" id="email" name="email" placeholder="exemplo@exemplo.com" required
                   autocomplete="email">
               </div>
 
@@ -163,6 +163,6 @@ export function portuguese(){
     </footer>
     <script src="./script.js"></script>
   </body>
-  <iframe name="placeholder" style="display: none; visibility: hidden;"></iframe>
-  `
+  <iframe id="frame" name="placeholder" style="display: none; visibility: hidden;"></iframe>
+  `;
 }

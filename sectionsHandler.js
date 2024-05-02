@@ -5,10 +5,6 @@ const buttons = [aboutButton, projectsButton, contactButton];
 
 let isAnimating = false;
 
-// document.onsubmit = () => {
-//   showCustomAlert()
-// }
-
 document.onreadystatechange = () => {
   if (document.readyState !== 'complete') {
     document.querySelector('body').style.visibility = 'hidden';

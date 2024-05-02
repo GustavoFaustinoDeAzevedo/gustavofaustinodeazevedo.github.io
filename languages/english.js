@@ -1,4 +1,4 @@
-export function english(){
+export function english() {
   return `
   <head>
     <meta charset="UTF-8">
@@ -45,22 +45,23 @@ export function english(){
       <section id="contact" class="main-container">
         <h2>Contact</h2>
         <div class="form-container-outside">
+        
           <form id="contactForm" action="https://formspree.io/f/mnqelzyz" method="POST" target="placeholder">
 
             <div class="form-container">
               <div class="form-group">
                 <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" placeholder="Your name here" required autocomplete="name">
+                <input autocomplete="given-name" type="text" id="name" name="name" placeholder="Your name here" required autocomplete="name">
               </div>
               <div class="form-group">
                 <label for="email">Your Email:</label>
-                <input type="email" id="email" name="email" placeholder="example@example.com" required autocomplete="email">
+                <input autocomplete="email" type="email" id="email" name="email" placeholder="example@example.com" required autocomplete="email">
               </div>
 
 
               <div class="form-group">
                 <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" placeholder="Your message here" required></textarea>
+                <textarea autocomplete="off" id="message" name="message" rows="5" placeholder="Your message here" required></textarea>
               </div>
             </div>
             <button type="submit" id="submitBtn" >Send Message</button>
@@ -166,6 +167,6 @@ export function english(){
     <script src="./script.js"></script>
   </body>
 
-  <iframe name="placeholder" style="display: none; visibility: hidden;"></iframe>
+  <iframe id="frame" name="placeholder" style="display: none; visibility: hidden;"></iframe>
   `;
 }

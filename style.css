@@ -239,7 +239,7 @@ form {
 
 .form-container-outside {
   overflow-y: auto;
-  height: 100%;
+  max-height: 350px;
 }
 
 .form-container {
@@ -247,7 +247,6 @@ form {
   flex-direction: column;
   align-items: stretch;
   padding: 5px;
-  max-height: 350px;
 }
 
 .form-group {
@@ -281,7 +280,6 @@ button {
   align-self: end;
   width: 150px;
   position: relative;
-  z-index: 1;
   display: block;
   margin-top: 15px;
   padding: 10px 20px;
@@ -349,97 +347,6 @@ button:active::after {
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  nav {
-    min-height: 35px;
-    max-height: 40px;
-  }
-  html {
-    height: 100%;
-    overflow: auto;
-    font-size: 0.7rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .main-container {
-    width: 90%;
-  }
-
-  .fade-in {
-    font-size: 0.85rem !important;
-    width: 90%;
-  }
-
-  .about-container {
-    overflow-y: auto;
-    height: 100%;
-  }
-
-  .about-container-inside {
-    height: 220px;
-  }
-
-  form {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .form-group {
-    margin-bottom: 5px;
-  }
-
-  footer {
-    padding: 5px 0;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    height: auto;
-  }
-
-  .contact-container {
-    text-align: center;
-    position: static;
-    font-size: 0.7rem;
-  }
-
-  .social-links-container {
-    margin-right: 0;
-    position: static;
-    justify-content: center;
-    gap: 20px;
-    width: 50%;
-  }
-
-  .social-icon {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  main h2 {
-    margin-top: 10px;
-    text-align: left;
-    margin-bottom: 5px;
-  }
-
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  button {
-    font-size: 0.8rem;
-    margin-top: 0px;
-    width: 100%;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -494,16 +401,9 @@ button:active::after {
   }
 }
 
-.hidden {
-  display: none;
-  visibility: hidden;
-  position: absolute;
-  z-index: -1;
-  right: -1000px;
-}
-
 #customAlert {
-  display: flex;
+  display: none;
+  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -513,17 +413,24 @@ button:active::after {
   z-index: 1000;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.25s ease-in-out;
 }
 
 .custom-alert-content {
-  background-color: #fff;
+  opacity: 0;
+  scale: 0.5;
+  background-color: var(--low-dark);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 10px 10px 1px rgba(0, 0, 0, 0.3);
   text-align: center;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .custom-alert button {
+  align-self: end;
   padding: 10px 20px;
   margin-top: 20px;
   background-color: #3498db;
@@ -535,4 +442,130 @@ button:active::after {
 
 .custom-alert button:hover {
   background-color: #2980b9;
+}
+
+@media screen and (max-height: 530px) {
+  html {
+    height: 100%;
+    overflow: hidden;
+    font-size: 0.6rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  nav {
+    min-height: 35px;
+    max-height: 40px;
+  }
+
+  .form-container-outside {
+    overflow-y: auto;
+    max-height: 240px;
+  }
+
+  footer {
+    padding: 0;
+    gap: 5px;
+    height: auto;
+  }
+}
+
+@media screen and (max-height: 600px) and (min-width: 769px) {
+  .form-container-outside {
+    overflow-y: auto;
+    max-height: 170px;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 550px) {
+  nav {
+    min-height: 35px;
+    max-height: 40px;
+  }
+  html {
+    height: 100%;
+    overflow: auto;
+    font-size: 0.7rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .main-container {
+    width: 90%;
+  }
+
+  .fade-in {
+    font-size: 0.85rem !important;
+    width: 90%;
+  }
+
+  .about-container {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .about-container-inside {
+    height: 220px;
+  }
+
+  form {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .form-group {
+    margin-bottom: 2px;
+  }
+
+  footer {
+    padding: 5px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: auto;
+  }
+
+  .contact-container {
+    text-align: center;
+    position: static;
+    font-size: 0.7rem;
+  }
+
+  .social-links-container {
+    margin-right: 0;
+    position: static;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+  }
+
+  .social-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  main h2 {
+    margin-top: 10px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    font-size: 0.8rem;
+    margin-top: 0px;
+    width: 100%;
+  }
 }
