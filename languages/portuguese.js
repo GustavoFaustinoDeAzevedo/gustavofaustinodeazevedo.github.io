@@ -9,17 +9,17 @@ export function portuguese() {
 
   <body lang="pt-BR">
     <div id="loader" class="center"></div>
-    <header>
+    <div class="header">
       <h1>Gustavo de Azevêdo</h1>
       <p>Desenvolvedor Web Front-End</p>
-    </header>
-    <nav>
+    </div>
+    <div class="nav">
       <ul>
         <li id="aboutButton" class="active"><a>Sobre Mim</a></li>
         <li id="projectsButton"><a>Projetos</a></li>
         <li id="contactButton"><a>Contato</a></li>
       </ul>
-    </nav>
+    </div>
     <main>
       <section id="about" class="main-container">
         <h2>Sobre Mim</h2>
@@ -67,7 +67,7 @@ export function portuguese() {
 
       </section>
     </main>
-    <footer>
+    <div class="footer">
       <p>&copy; 2024 Gustavo Faustino de Azevêdo</p>
       <div class="contact-container">
         <address>
@@ -160,7 +160,7 @@ export function portuguese() {
           </svg>
         </a>
       </div>
-    </footer>
+    </div>
     <script src="./script.js"></script>
   </body>
   <iframe id="frame" name="placeholder" style="display: none; visibility: hidden;"></iframe>

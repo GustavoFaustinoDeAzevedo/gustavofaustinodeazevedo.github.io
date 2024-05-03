@@ -50,7 +50,7 @@ body {
   overflow: hidden;
 }
 
-header {
+.header {
   width: 100%;
   background-image: var(--background-image1);
   background-color: var(--dark);
@@ -67,7 +67,7 @@ h1 {
   margin-bottom: 5px;
 }
 
-nav {
+.nav {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -78,7 +78,7 @@ nav {
   min-height: 45px;
 }
 
-nav ul {
+.nav ul {
   width: 100%;
   list-style: none;
   margin: 0;
@@ -88,7 +88,7 @@ nav ul {
   align-items: center;
 }
 
-nav li {
+.nav li {
   border-left: 1px solid var(--medium-dark);
   border-right: 1px solid var(--medium-dark);
   width: 100%;
@@ -100,21 +100,21 @@ nav li {
   transition: all 0.5s ease-in-out;
 }
 
-nav li:hover {
+.nav li:hover {
   cursor: pointer;
   background-color: var(--low-dark-hover);
   color: var(--light);
 }
 
-nav li.active {
+.nav li.active {
   color: var(--low-light);
 }
 
-nav li:active {
+.nav li:active {
   background-color: var(--low-dark);
 }
 
-nav a {
+.nav a {
   user-select: none;
   text-decoration: none;
   transition: all 0.5s ease-in-out;
@@ -170,7 +170,7 @@ h2 {
   justify-content: space-between;
 }
 
-footer {
+.footer {
   width: 102%;
   background-color: var(--low-dark);
   text-align: center;
@@ -226,11 +226,12 @@ footer {
 }
 
 .contact {
+  max-height: 100%;
   overflow: hidden;
 }
 
 form {
-  height: 420px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -238,8 +239,8 @@ form {
 }
 
 .form-container-outside {
-  overflow-y: auto;
-  max-height: 350px;
+  overflow-y: hidden;
+  max-height: 100%;
 }
 
 .form-container {
@@ -444,7 +445,7 @@ button:active::after {
   background-color: #2980b9;
 }
 
-@media screen and (max-height: 530px) {
+@media screen and (max-height: 650px) {
   html {
     height: 100%;
     overflow: hidden;
@@ -455,32 +456,25 @@ button:active::after {
     font-size: 2.5rem;
   }
 
-  nav {
+  .nav {
     min-height: 35px;
     max-height: 40px;
   }
 
   .form-container-outside {
     overflow-y: auto;
-    max-height: 240px;
+    max-height: 37vh;
   }
 
-  footer {
+  .footer {
     padding: 0;
     gap: 5px;
     height: auto;
   }
 }
 
-@media screen and (max-height: 600px) and (min-width: 769px) {
-  .form-container-outside {
-    overflow-y: auto;
-    max-height: 170px;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 550px) {
-  nav {
+@media (max-width: 780px) and (min-height: 650px) {
+  .nav {
     min-height: 35px;
     max-height: 40px;
   }
@@ -524,7 +518,7 @@ button:active::after {
     margin-bottom: 2px;
   }
 
-  footer {
+  .footer {
     padding: 5px 0;
     justify-content: center;
     align-items: center;
@@ -549,6 +543,165 @@ button:active::after {
   .social-icon {
     width: 2rem;
     height: 2rem;
+  }
+
+  main h2 {
+    margin-top: 10px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    font-size: 0.8rem;
+    margin-top: 0px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) and (max-height: 650px) {
+  .nav {
+    min-height: 35px;
+    max-height: 40px;
+  }
+  html {
+    height: 100%;
+    overflow: hidden;
+    font-size: 0.6rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .main-container {
+    width: 90%;
+  }
+
+  .fade-in {
+    font-size: 0.85rem !important;
+    width: 90%;
+  }
+
+  .about-container {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .about-container-inside {
+    height: 220px;
+  }
+
+  form {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .form-group {
+    margin-bottom: 2px;
+  }
+
+  .footer {
+    padding: 5px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: auto;
+  }
+
+  .contact-container {
+    text-align: center;
+    position: static;
+    font-size: 0.7rem;
+  }
+
+  .social-links-container {
+    margin-right: 0;
+    position: static;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+  }
+
+  .social-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  main h2 {
+    margin-top: 10px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    font-size: 0.8rem;
+    margin-top: 0px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 480px) and (max-height: 650px) {
+  .nav {
+    min-height: 35px;
+    max-height: 40px;
+  }
+  html {
+    height: 100%;
+    overflow: hidden;
+    font-size: 0.6rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .main-container {
+    width: 90%;
+  }
+
+  .fade-in {
+    font-size: 0.85rem !important;
+    width: 90%;
+  }
+
+  .about-container {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .about-container-inside {
+    height: 220px;
+  }
+
+  form {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .form-group {
+    margin-bottom: 2px;
+  }
+  .social-icon {
+    width: 1.8rem;
+    height: 1.8rem;
   }
 
   main h2 {

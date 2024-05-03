@@ -9,17 +9,17 @@ export function english() {
   <!-- " -->
   <body style="visibility: hidden;">
     <div id="loader" class="center"></div>
-    <header>
+    <div class="header">
       <h1>Gustavo de Azevêdo</h1>
       <p>Front-end web developer</p>
-    </header>
-    <nav>
+    </div>
+    <div class="nav">
       <ul>
         <li id="aboutButton" class="active"><a>About</a></li>
         <li id="projectsButton"><a>Projects</a></li>
         <li id="contactButton"><a>Contact</a></li>
       </ul>
-    </nav>
+    </div>
     <main>
       <section id="about" class="main-container">
         <h2>About Me</h2>
@@ -70,7 +70,7 @@ export function english() {
 
       </section>
     </main>
-    <footer>
+    <div class="footer">
       <p>&copy; 2024 Gustavo Faustino de Azevêdo</p>
       <div class="contact-container">
         <address>
@@ -163,7 +163,7 @@ export function english() {
           </svg>
         </a>
       </div>
-    </footer> 
+    </div> 
     <script src="./script.js"></script>
   </body>
 
