@@ -37,6 +37,7 @@ export function portuguese() {
       <section id="projects" class="main-container">
         <h2>Projetos</h2>
         <div class="project-container">
+        <canvas></canvas>
         </div>
       </section>
       <section id="contact" class="main-container">
