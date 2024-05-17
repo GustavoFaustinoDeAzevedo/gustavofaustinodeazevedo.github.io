@@ -1,0 +1,48 @@
+.footer {
+  width: 102%;
+  background-color: var(--low-dark);
+  text-align: center;
+  min-height: 45px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-container {
+  font-weight: 400;
+  text-align: left;
+  font-size: 0.75rem;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  color: var(--medium-light);
+}
+
+.social-links-container {
+  font-size: 0.8rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 25px;
+  gap: 10px;
+}
+
+.social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.github {
+  fill: white;
+}
+
+.fade-in {
+  font-size: 1rem !important;
+  width: 80%;
+  opacity: 1;
+  transition: all 0.5s ease-in;
+}
