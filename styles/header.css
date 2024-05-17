@@ -1,0 +1,69 @@
+.header {
+  width: 100%;
+  background-image: var(--background-image1);
+  background-color: var(--dark);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Dynalight', cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  margin-bottom: 5px;
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 102%;
+  border-top: 2px solid var(--medium-dark);
+  box-shadow: var(--bottom-shadow);
+  background-color: var(--low-dark);
+  min-height: 45px;
+}
+
+.nav ul {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav li {
+  border-left: 1px solid var(--medium-dark);
+  border-right: 1px solid var(--medium-dark);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--medium-light);
+  transition: all 0.5s ease-in-out;
+}
+
+.nav li:hover {
+  cursor: pointer;
+  background-color: var(--low-dark-hover);
+  color: var(--light);
+}
+
+.nav li.active {
+  color: var(--low-light);
+}
+
+.nav li:active {
+  background-color: var(--low-dark);
+}
+
+.nav a {
+  user-select: none;
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+}
