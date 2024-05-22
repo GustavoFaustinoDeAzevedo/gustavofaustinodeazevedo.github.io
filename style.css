@@ -169,6 +169,26 @@ h2 {
   justify-content: space-between;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.grid-item {
+  background-color: #444;
+
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.grid-image {
+  width: 100px;
+}
+
 .footer {
   width: 102%;
   background-color: var(--low-dark);

@@ -40,7 +40,22 @@ export function english() {
       <section id="projects" class="main-container">
         <h2>Projects</h2>
         <div class="project-container">
-        <canvas></canvas>
+          <div class="grid-container">
+            <div class="grid-item">
+              <image class="grid-image" src="/assets/notes_project.png"></image>
+              <h3>Notes App</h3>
+              </p>A simple "notes app" made with javascript, css and HTML<p>
+              <p>Check it <a href="">here</a></p>
+              <p>Github code <a href="https://github.com/GustavoFaustinoDeAzevedo/projects/tree/main/notes" target="_blank">here</a></p>
+            </div>
+            <div class="grid-item">
+              <image class="grid-image" src="/assets/notes_project.png"></image>
+              <h3>Notes App</h3>
+              </p>A simple "notes app" made with javascript, css and HTML<p>
+              <p>Check it <a href="">here</a></p>
+              <p>Github code <a href="https://github.com/GustavoFaustinoDeAzevedo/projects/tree/main/notes" target="_blank">here</a></p>
+            </div>
+          </div>
         </div>
       </section>
       <section id="contact" class="main-container">
