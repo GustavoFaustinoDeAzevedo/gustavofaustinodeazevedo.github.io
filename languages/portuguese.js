@@ -8,19 +8,32 @@ export function portuguese() {
   </head>
 
   <body lang="pt-BR">
+  <div class="dropdown-container">
+  <label for="dropdown">Idioma:</label>
+  <select id="dropdown">
+    <option value="en">Inglês</option>
+    <option value="pt">Português&nbsp;&nbsp;</option>
+  </select>
+</div>
     <div id="loader" class="center"></div>
     <div class="header">
       <h1>Gustavo de Azevêdo</h1>
       <p>Desenvolvedor Web Front-End</p>
     </div>
+    <!-- ============================= -->
+    <!-- =            Nav            = -->
+    <!-- ============================= -->
     <div class="nav">
       <ul>
-        <li id="aboutButton" class="active"><a>Sobre Mim</a></li>
-        <li id="projectsButton"><a>Projetos</a></li>
+        <li id="aboutButton"><a>Sobre Mim</a></li>
+        <li id="projectsButton" class="active"><a>Projetos</a></li>
         <li id="contactButton"><a>Contato</a></li>
       </ul>
     </div>
     <main>
+    <!-- ============================= -->
+    <!-- =           About           = -->
+    <!-- ============================= -->
       <section id="about" class="main-container">
         <h2>Sobre Mim</h2>
         <div class="about-container">
@@ -34,12 +47,32 @@ export function portuguese() {
           </div>
         </div>
       </section>
+      <!-- ============================= -->
+      <!-- =          Project          = -->
+      <!-- ============================= -->
       <section id="projects" class="main-container">
         <h2>Projetos</h2>
+        Em desenvolvimento, mas o primeiro projeto já pode ser acessado
         <div class="project-container">
-        <canvas></canvas>
+          <div class="grid-container">
+          
+            <div class="grid-item">
+            
+            <a href="https://gustavofaustinodeazevedo.github.io/portfolioProjects/notes/"  target="_blank"><image class="grid-image" src="/assets/notes_project.png"></image></a>
+            <h2>Notes App</h2>
+
+              <p>Um simples "aplicativo de anotações" feito em javascript, css e HTML</p>
+              <div class="links">
+                <a href="https://gustavofaustinodeazevedo.github.io/portfolioProjects/notes/"  target="_blank">Teste</a>
+                <a href="https://github.com/GustavoFaustinoDeAzevedo/portfolioProjects/tree/main/notes" target="_blank">Github</a>
+            </div>
+              </div>
+        </div>
         </div>
       </section>
+      <!-- ============================= -->
+      <!-- =          centact          = -->
+      <!-- ============================= -->
       <section id="contact" class="main-container">
         <h2>Contato</h2>
         <div class="form-container-outside">

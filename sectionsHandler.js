@@ -11,7 +11,7 @@ document.onreadystatechange = () => {
     document.querySelector('#loader').style.visibility = 'visible';
   } else {
     document.querySelector('body').style.visibility = 'visible';
-    showSection(about);
+    showSection(projects);
     document.querySelector('#loader').style.display = 'none';
   }
 };

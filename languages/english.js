@@ -8,19 +8,33 @@ export function english() {
   </head>
   <!-- " -->
   <body style="visibility: hidden;">
+  <div class="dropdown-container">
+    <label for="dropdown">Language:</label>
+    <select id="dropdown">
+      <option value="en">English</option>
+      <option value="pt">Portuguese</option>
+      
+    </select>
+  </div>
     <div id="loader" class="center"></div>
     <div class="header">
       <h1>Gustavo de Azevêdo</h1>
       <p>Front-end web developer</p>
     </div>
+    <!-- ============================= -->
+    <!-- =            Nav            = -->
+    <!-- ============================= -->
     <div class="nav">
       <ul>
-        <li id="aboutButton" class="active"><a>About</a></li>
-        <li id="projectsButton"><a>Projects</a></li>
+        <li id="aboutButton" ><a>About</a></li>
+        <li id="projectsButton" class="active"><a>Projects</a></li>
         <li id="contactButton"><a>Contact</a></li>
       </ul>
     </div>
     <main>
+    <!-- ============================= -->
+    <!-- =          about            = -->
+    <!-- ============================= -->
       <section id="about" class="main-container">
         <h2>About Me</h2>
         <div class="about-container">
@@ -37,27 +51,30 @@ export function english() {
           </div>
         </div>
       </section>
+      <!-- ============================= -->
+      <!-- =          Project          = -->
+      <!-- ============================= -->
       <section id="projects" class="main-container">
         <h2>Projects</h2>
+        In development, but the first project can be accessed 
         <div class="project-container">
           <div class="grid-container">
             <div class="grid-item">
-              <image class="grid-image" src="/assets/notes_project.png"></image>
-              <h3>Notes App</h3>
-              </p>A simple "notes app" made with javascript, css and HTML<p>
-              <p>Check it <a href="">here</a></p>
-              <p>Github code <a href="https://github.com/GustavoFaustinoDeAzevedo/projects/tree/main/notes" target="_blank">here</a></p>
+            
+              <a href="https://gustavofaustinodeazevedo.github.io/portfolioProjects/notes/"  target="_blank"><image class="grid-image" src="/assets/notes_project.png"></image></a>
+              <h2>Notes App</h2>
+              <p>A simple "notes app" made with javascript, css and HTML</p>
+              <div class="links">
+                <a href="https://gustavofaustinodeazevedo.github.io/portfolioProjects/notes/"  target="_blank">Test</a>
+                <a href="https://github.com/GustavoFaustinoDeAzevedo/portfolioProjects/tree/main/notes" target="_blank">Github</a>
             </div>
-            <div class="grid-item">
-              <image class="grid-image" src="/assets/notes_project.png"></image>
-              <h3>Notes App</h3>
-              </p>A simple "notes app" made with javascript, css and HTML<p>
-              <p>Check it <a href="">here</a></p>
-              <p>Github code <a href="https://github.com/GustavoFaustinoDeAzevedo/projects/tree/main/notes" target="_blank">here</a></p>
-            </div>
+              </div>
           </div>
         </div>
       </section>
+      <!-- ============================= -->
+      <!-- =          Contact          = -->
+      <!-- ============================= -->
       <section id="contact" class="main-container">
         <h2>Contact</h2>
         <div class="form-container-outside">
