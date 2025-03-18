@@ -5,11 +5,17 @@ export const initialState = {
   hidden: [],
   maximized: [],
   zIndex: {},
+  language: navigator.language || navigator.userLanguage,
   contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
 };
 
 export function windowReducer(state, action) {
   switch (action.type) {
+    case "LANGUAGE":
+      return {
+        ...state,
+        language: action.payload
+      }
     case "FOCUS_WINDOW":
       return {
         ...state,

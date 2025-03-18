@@ -75,7 +75,7 @@
   .desktop {
     height: 100vh;
     position: relative;
-    background: var(--color-background);
+    background: var(--color-background) !important;
     overflow: hidden;
     top: 0;
     left: 0;
@@ -388,23 +388,31 @@
 
   .taskbar-item {
     height: 40px;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     display: none;
     align-items: center;
     gap: 0.5rem;
     color: #ffffff;
-    background-color: #ffffff1a;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.2s;
 
-    &:hover {
-      background-color: #ffffff33;
-    }
-
     &.active, &.minimized, &.open {
       display: flex;
-      background-color: #ffffff33;
+      background-color: none;
+    }
+
+    &:hover {
+      background-color: #ffffff43;
+    }
+
+    &:active {
+      background-color: #ffffff1a;
+
+      &>* {
+        transition: all 0.2s;
+        transform: scale(0.8);
+      }
     }
   }
 
@@ -412,6 +420,17 @@
     display: flex;
     align-items: center;
     color: #ffffff;
+  }
+
+  .language {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #ffffff33;
+    }
   }
 
   .clock {

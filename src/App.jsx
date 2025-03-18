@@ -11,6 +11,7 @@ import {
   showContextMenu,
   hideContextMenu,
   maximizeWindow,
+  changeLanguage,
 } from './actions/windowActions';
 
 import Window from './components/Window';
@@ -23,9 +24,11 @@ gsap.registerPlugin(useGSAP);
 function App() {
   // Disable right-click on elements without the class "enable-context"
   useEffect(() => {
+    // changeLanguage(dispatch, navigator.language || navigator.userLanguage);
+
     const disableRightClick = (e) => {
       if (!e.target.closest('.enable-context')) {
-        e.preventDefault();
+        // e.preventDefault();
       }
     };
 
@@ -93,6 +96,8 @@ function App() {
         windows={windows}
         openedWindows={state.opened}
         minimizedWindows={state.minimized}
+        language={state.language}
+        onChangeLanguage={changeLanguage}
         onWindowClick={(id) => minimizeWindow(dispatch, id)}
       />
 

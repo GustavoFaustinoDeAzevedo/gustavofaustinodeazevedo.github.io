@@ -1,4 +1,4 @@
-export const focusWindow = (dispatch, id, zIndex) => {
+export const focusWindow = (dispatch, id) => {
   dispatch({
     type: "FOCUS_WINDOW",
     payload: id
@@ -43,4 +43,12 @@ export const showContextMenu = (dispatch, x, y, type, target) => {
 export const hideContextMenu = (dispatch) => {
   dispatch({ type: "HIDE_CONTEXT_MENU" });
 };
+
+export const changeLanguage = (dispatch, language) => {
+  dispatch({
+    type: "LANGUAGE",
+    payload: language
+  });
+};
+
 
