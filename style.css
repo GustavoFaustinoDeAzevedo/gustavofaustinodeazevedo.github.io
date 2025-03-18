@@ -1,7 +1,5 @@
 @layer base, components, utilities;
 
-
-
 @layer base {
   :root {
     --color-primary: #2563eb;
@@ -131,75 +129,79 @@
     background-repeat: no-repeat;
     display: inline-block;
 
-    &.about-icon {
-      mask-image: url('components/icons/user.svg');
-      -webkit-mask-image: url('components/icons/user.svg');
+    &.about {
+      mask-image: url('public/icons/user.svg');
+      -webkit-mask-image: url('public/icons/user.svg');
     }
 
-    &.skills-icon {
-      mask-image: url('components/icons/tools.svg');
-      -webkit-mask-image: url('components/icons/tools.svg');
+    &.skills {
+      mask-image: url('public/icons/tools.svg');
+      -webkit-mask-image: url('public/icons/tools.svg');
     }
 
-    &.projects-icon {
-      mask-image: url('components/icons/folder.svg');
-      -webkit-mask-image: url('components/icons/folder.svg');
+    &.projects {
+      mask-image: url('public/icons/folder.svg');
+      -webkit-mask-image: url('public/icons/folder.svg');
     }
 
-    &.contact-icon {
-      mask-image: url('components/icons/envelope.svg');
-      -webkit-mask-image: url('components/icons/envelope.svg');
+    &.contact {
+      mask-image: url('icons/envelope.svg');
+      -webkit-mask-image: url('icons/envelope.svg');
     }
 
-    &.window-icon {
-      mask-image: url('components/icons/window.svg');
-      -webkit-mask-image: url('components/icons/window.svg');
+    &.window {
+      mask-image: url('public/icons/window_icon.svg');
+      -webkit-mask-image: url('public/icons/window_icon.svg');
     }
 
-    &.minimize-icon {
-      mask-image: url('components/icons/minus.svg');
-      -webkit-mask-image: url('components/icons/minus.svg');
+    &.minimize {
+      mask-image: url('public/icons/minus.svg');
+      -webkit-mask-image: url('public/icons/minus.svg');
     }
 
-    &.maximize-icon {
-      mask-image: url('components/icons/arrows_pointing_out.svg');
-      -webkit-mask-image: url('components/icons/arrows_pointing_out.svg');
+    &.maximize {
+      mask-image: url('public/icons/arrows_pointing_out.svg');
+      -webkit-mask-image: url('public/icons/arrows_pointing_out.svg');
     }
 
-    &.restore-icon {
-      mask-image: url('components/icons/arrows_pointing_in.svg');
-      -webkit-mask-image: url('components/icons/arrows_pointing_in.svg');
+    &.restore {
+      mask-image: url('public/icons/arrows_pointing_in.svg');
+      -webkit-mask-image: url('public/icons/arrows_pointing_in.svg');
     }
 
-    &.x-icon {
-      mask-image: url('components/icons/x_icon.svg');
-      -webkit-mask-image: url('components/icons/x_icon.svg');
+    &.close {
+      mask-image: url('public/icons/x_icon.svg');
+      -webkit-mask-image: url('public/icons/x_icon.svg');
     }
 
-    &.sort-icon {
-      mask-image: url('components/icons/sort.svg');
-      -webkit-mask-image: url('components/icons/sort.svg');
+    &.sort {
+      mask-image: url('public/icons/sort.svg');
+      -webkit-mask-image: url('public/icons/sort.svg');
     }
 
-    &.refresh-icon {
-      mask-image: url('components/icons/refresh.svg');
-      -webkit-mask-image: url('components/icons/refresh.svg');
+    &.refresh {
+      mask-image: url('public/icons/refresh.svg');
+      -webkit-mask-image: url('public/icons/refresh.svg');
     }
 
-    &.new-icon {
-      mask-image: url('components/icons/new.svg');
-      -webkit-mask-image: url('components/icons/new.svg');
+    &.new {
+      mask-image: url('public/icons/new.svg');
+      -webkit-mask-image: url('public/icons/new.svg');
     }
 
-
-    &.download-icon {
-      mask-image: url('components/icons/arrow_down_tray.svg');
-      -webkit-mask-image: url('components/icons/arrow_down_tray.svg');
+    &.download {
+      mask-image: url('public/icons/arrow_down_tray.svg');
+      -webkit-mask-image: url('public/icons/arrow_down_tray.svg');
     }
 
-    &.resize-icon {
-      mask-image: url('components/icons/resize_corner.svg');
-      -webkit-mask-image: url('components/icons/resize_corner.svg');
+    &.resize {
+      mask-image: url('public/icons/resize_corner.svg');
+      -webkit-mask-image: url('public/icons/resize_corner.svg');
+    }
+
+    &.view {
+      mask-image: url('public/icons/squares.svg');
+      -webkit-mask-image: url('public/icons/squares.svg');
     }
 
 
@@ -219,12 +221,15 @@
     display: none;
     flex-direction: column;
     overflow: hidden;
-    resize: both;
 
 
     &.active {
       display: flex;
       z-index: 10;
+    }
+
+    &.open {
+      display: flex;
     }
 
     &.maximized {
@@ -384,7 +389,7 @@
   .taskbar-item {
     height: 40px;
     padding: 0 1rem;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 0.5rem;
     color: #ffffff;
@@ -397,7 +402,8 @@
       background-color: #ffffff33;
     }
 
-    &.active {
+    &.active, &.minimized, &.open {
+      display: flex;
       background-color: #ffffff33;
     }
   }
@@ -411,6 +417,11 @@
   .clock {
     padding: 0 1rem;
     font-size: 0.9rem;
+  }
+
+  .about-text {
+    text-align: justify;
+    max-width: 500px;
   }
 
   .skills-list {
@@ -440,7 +451,7 @@
   .project-card {
     padding: 1rem;
     border-radius: var(--border-radius);
-    background: #f8fafc;
+    background: #1f3449;
     box-shadow: 0 2px 8px #0000001a;
   }
 
