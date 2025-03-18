@@ -583,3 +583,14 @@ noscript {
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
+.in-progress {
+  color: #92fffa57;
+  position: absolute;
+  z-index: 9999;
+  right: 2rem;
+  bottom: 4.5rem;
+  text-align: left;
+  user-select: none;
+  -webkit-user-select: none;
+}
