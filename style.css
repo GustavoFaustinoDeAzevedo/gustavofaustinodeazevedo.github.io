@@ -570,3 +570,16 @@
     scroll-behavior: auto !important;
   }
 }
+
+noscript {
+  font-size: large;
+  background-color: #07080C;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
