@@ -221,7 +221,7 @@
     display: none;
     flex-direction: column;
     overflow: hidden;
-
+    resize: both;
 
     &.active {
       display: flex;
