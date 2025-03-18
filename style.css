@@ -121,93 +121,6 @@
     }
   }
 
-  .icon {
-    width: 25px;
-    height: 25px;
-    background-color: var(--color-text);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block;
-
-    &.about {
-      mask-image: url('public/icons/user.svg');
-      -webkit-mask-image: url('public/icons/user.svg');
-    }
-
-    &.skills {
-      mask-image: url('public/icons/tools.svg');
-      -webkit-mask-image: url('public/icons/tools.svg');
-    }
-
-    &.projects {
-      mask-image: url('public/icons/folder.svg');
-      -webkit-mask-image: url('public/icons/folder.svg');
-    }
-
-    &.contact {
-      mask-image: url('public/icons/envelope.svg');
-      -webkit-mask-image: url('public/icons/envelope.svg');
-    }
-
-    &.window {
-      mask-image: url('public/icons/window_icon.svg');
-      -webkit-mask-image: url('public/icons/window_icon.svg');
-    }
-
-    &.minimize {
-      mask-image: url('public/icons/minus.svg');
-      -webkit-mask-image: url('public/icons/minus.svg');
-    }
-
-    &.maximize {
-      mask-image: url('public/icons/arrows_pointing_out.svg');
-      -webkit-mask-image: url('public/icons/arrows_pointing_out.svg');
-    }
-
-    &.restore {
-      mask-image: url('public/icons/arrows_pointing_in.svg');
-      -webkit-mask-image: url('public/icons/arrows_pointing_in.svg');
-    }
-
-    &.close {
-      mask-image: url('public/icons/x_icon.svg');
-      -webkit-mask-image: url('public/icons/x_icon.svg');
-    }
-
-    &.sort {
-      mask-image: url('public/icons/sort.svg');
-      -webkit-mask-image: url('public/icons/sort.svg');
-    }
-
-    &.refresh {
-      mask-image: url('public/icons/refresh.svg');
-      -webkit-mask-image: url('public/icons/refresh.svg');
-    }
-
-    &.new {
-      mask-image: url('public/icons/new.svg');
-      -webkit-mask-image: url('public/icons/new.svg');
-    }
-
-    &.download {
-      mask-image: url('public/icons/arrow_down_tray.svg');
-      -webkit-mask-image: url('public/icons/arrow_down_tray.svg');
-    }
-
-    &.resize {
-      mask-image: url('public/icons/resize_corner.svg');
-      -webkit-mask-image: url('public/icons/resize_corner.svg');
-    }
-
-    &.view {
-      mask-image: url('public/icons/squares.svg');
-      -webkit-mask-image: url('public/icons/squares.svg');
-    }
-
-
-  }
-
-
   .window {
     position: absolute;
     background: var(--color-background-secondary);
@@ -347,7 +260,8 @@
     left: 0;
     right: 0;
     height: var(--taskbar-height);
-    background: #ffffff1a;
+
+    background: #181818;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     display: flex;
@@ -364,13 +278,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    background-color: none;
     cursor: pointer;
     border-radius: 0.5rem;
     transition: background-color 0.2s;
+    color: #ffffff;
+
+    &>* {
+      width: 40px;
+      height: 40px;
+    }
 
     &:hover {
+      background-color: #ffffff43;
+    }
+
+    &:active {
       background-color: #ffffff1a;
+
+      &>* {
+        transition: all 0.2s;
+        transform: scale(0.8);
+      }
     }
   }
 
@@ -378,7 +307,7 @@
     flex: 1;
     display: flex;
     gap: 0.5rem;
-    margin: 0 1rem;
+    margin: 0 2rem;
     overflow-x: auto;
 
     &::-webkit-scrollbar {
@@ -391,7 +320,7 @@
     padding: 0 0.5rem;
     display: none;
     align-items: center;
-    gap: 0.5rem;
+    background-color: none;
     color: #ffffff;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -399,7 +328,6 @@
 
     &.active, &.minimized, &.open {
       display: flex;
-      background-color: none;
     }
 
     &:hover {
@@ -424,14 +352,55 @@
 
   .language {
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
+    position: relative;
 
-    &:hover {
-      background-color: #ffffff33;
+    .language-button {
+      font-size: small;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #ffffff33;
+      }
+    }
+
+    .language-list {
+      transform: "translateY(100%)";
+      position: absolute;
+      display: none;
+      background: "lightblue";
+      top: -8rem;
+      left: -4rem;
+      width: max-content;
+      border: 2px var(--border-style) var(--color-border);
+      background-color: var(--color-one);
+      border-radius: 5px;
+      list-style: none;
+      z-index: 999;
+      cursor: pointer;
+
+      &.active {
+        background-color: var(--color-four);
+        border-left: 2px solid var(--color-primary);
+      }
+
+      li {
+        padding: 0.5rem 1rem;
+        line-height: 2rem;
+        background-color: var(--color-two);
+        -webkit-user-select: none;
+        user-select: none;
+
+        &.active {
+          background-color: var(--color-four);
+          border-left: 2px solid var(--color-primary);
+        }
+      }
     }
   }
+
+
 
   .clock {
     padding: 0 1rem;
@@ -455,6 +424,7 @@
     & li {
       padding: 0.5rem 1rem;
       background: var(--color-primary);
+
       color: #ffffff;
       border-radius: var(--border-radius);
       font-size: 0.9rem;
@@ -604,12 +574,113 @@ noscript {
 }
 
 .in-progress {
+  pointer-events: none;
   color: #92fffa57;
   position: absolute;
   z-index: 9999;
   right: 2rem;
   bottom: 4.5rem;
   text-align: left;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
+
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  background-color: var(--color-text);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+
+  &.about {
+    -webkit-mask-image: url('public/icons/user.svg');
+    mask-image: url('public/icons/user.svg');
+
+  }
+
+  &.skills {
+    -webkit-mask-image: url('public/icons/tools.svg');
+    mask-image: url('public/icons/tools.svg');
+
+  }
+
+  &.projects {
+    -webkit-mask-image: url('public/icons/folder.svg');
+    mask-image: url('public/icons/folder.svg');
+
+  }
+
+  &.contact {
+    -webkit-mask-image: url('public/icons/envelope.svg');
+    mask-image: url('public/icons/envelope.svg');
+
+  }
+
+  &.window-icon {
+    -webkit-mask-image: url('public/icons/window_icon.svg');
+    mask-image: url('public/icons/window_icon.svg');
+
+  }
+
+  &.minimize {
+    -webkit-mask-image: url('public/icons/minus.svg');
+    mask-image: url('public/icons/minus.svg');
+
+  }
+
+  &.maximize {
+    -webkit-mask-image: url('public/icons/arrows_pointing_out.svg');
+    mask-image: url('public/icons/arrows_pointing_out.svg');
+
+  }
+
+  &.restore {
+    -webkit-mask-image: url('public/icons/arrows_pointing_in.svg');
+    mask-image: url('public/icons/arrows_pointing_in.svg');
+
+  }
+
+  &.close {
+    -webkit-mask-image: url('public/icons/x_icon.svg');
+    mask-image: url('public/icons/x_icon.svg');
+
+  }
+
+  &.sort {
+    -webkit-mask-image: url('public/icons/sort.svg');
+    mask-image: url('public/icons/sort.svg');
+
+  }
+
+  &.refresh {
+    -webkit-mask-image: url('public/icons/refresh.svg');
+    mask-image: url('public/icons/refresh.svg');
+
+  }
+
+  &.new {
+    -webkit-mask-image: url('public/icons/new.svg');
+    mask-image: url('public/icons/new.svg');
+
+  }
+
+  &.download {
+    -webkit-mask-image: url('public/icons/arrow_down_tray.svg');
+    mask-image: url('public/icons/arrow_down_tray.svg');
+
+  }
+
+  &.resize {
+    -webkit-mask-image: url('public/icons/resize_corner.svg');
+    mask-image: url('public/icons/resize_corner.svg');
+
+  }
+
+  &.view {
+    -webkit-mask-image: url('public/icons/squares.svg');
+    mask-image: url('public/icons/squares.svg');
+
+  }
 }

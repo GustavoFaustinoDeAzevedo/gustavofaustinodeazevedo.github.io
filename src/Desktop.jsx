@@ -21,7 +21,7 @@ import ContextMenu from './components/ContextMenu';
 
 gsap.registerPlugin(useGSAP);
 
-function App() {
+const Desktop = () => {
   // Disable right-click on elements without the class "enable-context"
   useEffect(() => {
     // changeLanguage(dispatch, navigator.language || navigator.userLanguage);
@@ -46,6 +46,11 @@ function App() {
       ease: 'power2.out',
     });
   }, []);
+
+  const handleLanguage = (language) => {
+    if (language.includes('POR')) return 'ENG';
+    return 'POR';
+  };
 
   return (
     <div
@@ -97,7 +102,9 @@ function App() {
         openedWindows={state.opened}
         minimizedWindows={state.minimized}
         language={state.language}
-        onChangeLanguage={changeLanguage}
+        onChangeLanguage={() =>
+          changeLanguage(dispatch, handleLanguage(state.language))
+        }
         onWindowClick={(id) => minimizeWindow(dispatch, id)}
       />
 
@@ -111,6 +118,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
-export default App;
+export default Desktop;

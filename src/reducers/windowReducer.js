@@ -1,3 +1,7 @@
+const browserLanguage = navigator.language || navigator.userLanguage;
+const supportedLanguages = ['en-US', 'pt-BR'];
+const defaultLanguage = supportedLanguages.includes(browserLanguage.split('-')[0]) ? browserLanguage : 'ENG';
+
 export const initialState = {
   active: null,
   opened: [],
@@ -5,7 +9,7 @@ export const initialState = {
   hidden: [],
   maximized: [],
   zIndex: {},
-  language: navigator.language || navigator.userLanguage,
+  language: defaultLanguage.includes('pt' || 'POR') ? 'POR' : 'ENG',
   contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
 };
 
