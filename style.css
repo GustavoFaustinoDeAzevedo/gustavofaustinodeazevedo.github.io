@@ -145,8 +145,8 @@
     }
 
     &.contact {
-      mask-image: url('icons/envelope.svg');
-      -webkit-mask-image: url('icons/envelope.svg');
+      mask-image: url('public/icons/envelope.svg');
+      -webkit-mask-image: url('public/icons/envelope.svg');
     }
 
     &.window {
