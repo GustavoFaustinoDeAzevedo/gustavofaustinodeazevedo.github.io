@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 const ContextMenu = ({ x, y, items, target, onClose, language }) => {
   const menuRef = useRef(null);
@@ -24,19 +25,7 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
     }
   }, [x, y]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [onClose]);
+  useClickOutside(menuRef, onClose);
 
   return (
     <div ref={menuRef} className="context-menu active">

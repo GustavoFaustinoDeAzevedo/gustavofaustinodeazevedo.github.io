@@ -41,13 +41,21 @@ export const showContextMenu = (dispatch, x, y, type, target) => {
 };
 
 export const hideContextMenu = (dispatch) => {
-  dispatch({ type: "HIDE_CONTEXT_MENU" });
+  dispatch({
+    type: "HIDE_CONTEXT_MENU"
+  });
 };
 
 export const changeLanguage = (dispatch, language) => {
   dispatch({
     type: "CHANGE_LANGUAGE",
     payload: language
+  });
+};
+
+export const resetFocus = (dispatch) => {
+  dispatch({
+    type: "RESET_FOCUS",
   });
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 gsap.registerPlugin(Draggable);
 
@@ -16,12 +17,19 @@ function Window({
   onMinimize,
   onMaximize,
   onClose,
+  onUnfocus,
   onContextMenu,
   children,
   desktopRef,
 }) {
   const windowRef = useRef(null);
   const headerRef = useRef(null);
+
+  const className = `window 
+  ${isFocused ? 'focus' : ''}
+  ${isMinimized ? 'minimized' : ''} 
+  ${isOpen ? 'open' : ''}
+  ${isMaximized ? 'maximized' : ''}`;
 
   useEffect(() => {
     if (windowRef.current && headerRef.current) {
@@ -44,22 +52,23 @@ function Window({
     }
   }, [desktopRef, isOpen]);
 
-  const className = `window 
-    ${isFocused ? 'focus' : ''}
-    ${isMinimized ? 'minimized' : ''} 
-    ${isOpen ? 'open' : ''}
-    ${isMaximized ? 'maximized' : ''}`;
+  useClickOutside(windowRef, onUnfocus, isFocused);
 
   return (
     <div
       ref={windowRef}
       className={className}
       style={{ zIndex: zIndex }}
-      onMouseDown={onFocus}
       onContextMenu={onContextMenu}
     >
       <div className="window-header">
-        <span ref={headerRef} className="window-title">
+        <span
+          onTouchStart={onFocus}
+          onClick={onFocus}
+          onMouseDown={onFocus}
+          ref={headerRef}
+          className="window-title"
+        >
           {title}
         </span>
         <div className="window-controls">
@@ -78,7 +87,12 @@ function Window({
           </button>
         </div>
       </div>
-      <div className="window-content">
+      <div
+        onTouchStart={onFocus}
+        onMouseDown={onFocus}
+        onClick={onFocus}
+        className="window-content"
+      >
         {children || <DefaultContent id={id} />}
       </div>
     </div>

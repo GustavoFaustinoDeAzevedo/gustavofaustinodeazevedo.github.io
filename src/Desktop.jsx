@@ -12,6 +12,7 @@ import {
   hideContextMenu,
   maximizeWindow,
   changeLanguage,
+  resetFocus,
 } from './actions/windowActions';
 
 import Window from './components/Window';
@@ -22,15 +23,6 @@ import ContextMenu from './components/ContextMenu';
 gsap.registerPlugin(useGSAP);
 
 const Desktop = () => {
-  /**
-   * Custom hook to manage desktop state and actions.
-   *
-   * @property {Object} state - The current state of the desktop.
-   * @property {Function} dispatch - Function to dispatch actions to update the desktop state.
-   * @property {Object} desktopRef - Reference to the desktop element.
-   *
-   * @returns {DesktopContext} The context containing state, dispatch, and desktopRef.
-   */
   const { state, dispatch, desktopRef } = useDesktop();
 
   useEffect(() => {
@@ -97,6 +89,7 @@ const Desktop = () => {
           isOpen={state.opened.includes(id)}
           zIndex={state.zIndex[id] || 0}
           onFocus={() => focusWindow(dispatch, id)}
+          onUnfocus={() => resetFocus(dispatch)}
           onMinimize={() => minimizeWindow(dispatch, id)}
           onMaximize={() => maximizeWindow(dispatch, id)}
           onClose={() => closeWindow(dispatch, id)}

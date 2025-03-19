@@ -27,6 +27,12 @@ export function windowReducer(state, action) {
         zIndex: { ...state.zIndex, [action.payload]: Math.max(...Object.values(state.zIndex), 0) + 1 }
       };
 
+    case "RESET_FOCUS":
+      return {
+        ...state,
+        focus: null,
+        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+      }
     case "OPEN_WINDOW":
       return { ...state, opened: [...state.opened, action.payload], focus: action.payload };
 
@@ -55,11 +61,22 @@ export function windowReducer(state, action) {
       };
 
     case "SHOW_CONTEXT_MENU":
-      return { ...state, contextMenu: { ...action.payload, show: true } };
+      return {
+        ...state,
+        contextMenu: { ...action.payload, show: true }
+      };
 
     case "HIDE_CONTEXT_MENU":
-      return { ...state, contextMenu: { show: false, x: 0, y: 0, type: null, target: null } };
+      return {
+        ...state,
+        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+      };
 
+    case "CLICK_OUTSIDE":
+      return {
+        ...state,
+        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+      };
     default:
       return state;
   }

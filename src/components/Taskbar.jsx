@@ -10,21 +10,8 @@ const Taskbar = ({
   onChangeLanguage,
 }) => {
   const [time, setTime] = useState('00:00');
-  const languageListRef = useRef(null);
   const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      setTime(`${hours}:${minutes}`);
-    };
-
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const languageListRef = useRef(null);
 
   const toggleAnimation = () => {
     if (languageListRef.current) {
@@ -61,6 +48,19 @@ const Taskbar = ({
         : (languageListRef.current.style.display = 'none');
     }
   };
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      setTime(`${hours}:${minutes}`);
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
