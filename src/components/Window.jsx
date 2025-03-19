@@ -58,8 +58,10 @@ function Window({
       onMouseDown={onFocus}
       onContextMenu={onContextMenu}
     >
-      <div ref={headerRef} className="window-header">
-        <span className="window-title">{title}</span>
+      <div className="window-header">
+        <span ref={headerRef} className="window-title">
+          {title}
+        </span>
         <div className="window-controls">
           <button className="minimize" onClick={onMinimize}>
             <i className="icon minimize"></i>

@@ -90,24 +90,26 @@ const Taskbar = ({
             <p className="language-button" onClick={toggleAnimation}>
               {language}
             </p>
-            <ul
-              ref={languageListRef}
-              className="language-list"
-              onTransitionEnd={handleTransitionEnd}
-            >
-              <li
-                onClick={onChangeLanguage}
-                className={language.includes('ENG') ? 'active' : ''}
+            <div className="language-list-container">
+              <ul
+                ref={languageListRef}
+                className="language-list"
+                onTransitionEnd={handleTransitionEnd}
               >
-                English-US
-              </li>
-              <li
-                onClick={onChangeLanguage}
-                className={language.includes('POR') ? 'active' : ''}
-              >
-                Portuguese-BR
-              </li>
-            </ul>
+                <li
+                  onClick={onChangeLanguage}
+                  className={language.includes('ENG') ? 'active' : ''}
+                >
+                  English-US
+                </li>
+                <li
+                  onClick={onChangeLanguage}
+                  className={language.includes('POR') ? 'active' : ''}
+                >
+                  Portuguese-BR
+                </li>
+              </ul>
+            </div>
           </div>
           <span className="clock">{time}</span>
         </div>

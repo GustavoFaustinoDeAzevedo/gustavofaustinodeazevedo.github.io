@@ -175,14 +175,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 0.5rem;
-    cursor: move;
     -webkit-user-select: none;
     user-select: none;
   }
 
+  .window-title {
+    flex-grow: 1;
+    cursor: move;
+  }
+
   .window-controls {
     display: flex;
+    align-items: center;
+    flex-grow: 0;
     gap: 0.5rem;
+    height: 100%;
 
     & button {
       width: 24px;
@@ -384,41 +391,49 @@
       }
     }
 
-    .language-list {
-      transform: "translateY(100%)";
+    .language-list-container {
       position: absolute;
-      display: none;
-      background: "lightblue";
-      top: -8rem;
-      left: -4rem;
-      width: max-content;
-      border: 2px var(--border-style) var(--color-border);
-      background-color: var(--color-one);
-      border-radius: 5px;
-      list-style: none;
-      z-index: 999;
-      cursor: pointer;
+      overflow: hidden;
+      top: -7rem;
+      left: -3rem;
+      pointer-events: none;
 
-      &.active {
-        background-color: var(--color-four);
-        border-left: 2px solid var(--color-primary);
-      }
+      .language-list {
+        transform: "translateY(100%)";
 
-      li {
-        width: 100%;
-        padding: 0.5rem 1rem;
-        line-height: 2rem;
-        background-color: var(--color-two);
-        -webkit-user-select: none;
-        user-select: none;
-        border-left: 2px solid rgba(255, 255, 255, 0);
+        display: none;
+        background: "lightblue";
+        width: max-content;
+        border: 2px var(--border-style) var(--color-border);
+        background-color: var(--color-one);
+        border-radius: 5px;
+        list-style: none;
+        z-index: 999;
+        cursor: pointer;
+        pointer-events: initial;
 
         &.active {
           background-color: var(--color-four);
           border-left: 2px solid var(--color-primary);
         }
+
+        li {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          line-height: 2rem;
+          background-color: var(--color-two);
+          -webkit-user-select: none;
+          user-select: none;
+          border-left: 2px solid rgba(255, 255, 255, 0);
+
+          &.active {
+            background-color: var(--color-four);
+            border-left: 2px solid var(--color-primary);
+          }
+        }
       }
     }
+
   }
 
 
