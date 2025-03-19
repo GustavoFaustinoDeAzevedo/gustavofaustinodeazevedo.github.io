@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const ContextMenu = ({ x, y, items, target, onClose }) => {
+const ContextMenu = ({ x, y, items, target, onClose, language }) => {
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -24,8 +24,28 @@ const ContextMenu = ({ x, y, items, target, onClose }) => {
     }
   }, [x, y]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
     <div ref={menuRef} className="context-menu active">
+      {language.includes('ENG') ? (
+        <p>Context Menu Example</p>
+      ) : (
+        <p>Exemplo de Menu de Contexto</p>
+      )}
+      <div className="context-menu-separator" />
       {/* {items.map((item, index) => {
         if (item.separator) {
           return (

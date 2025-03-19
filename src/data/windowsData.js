@@ -1,6 +1,6 @@
 export const windows = [
-  { id: 'about', title: 'About Me', icon: 'icon about' },
-  { id: 'projects', title: 'Projects', icon: 'icon projects' },
-  { id: 'skills', title: 'Skills', icon: 'icon skills' },
-  { id: 'contact', title: 'Contact', icon: 'icon contact' }
+  { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'icon about' },
+  { id: 'projects', title: { eng: 'Projects', por: 'Projetos' }, icon: 'icon projects' },
+  { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'icon skills' },
+  { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'icon contact' }
 ];

@@ -92,14 +92,14 @@
 
   .desktop-icon {
     width: 80px;
-    height: 90px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.2rem;
     border-radius: 0.5rem;
     transition: background-color 0.2s;
     text-align: center;
@@ -386,11 +386,13 @@
       }
 
       li {
+        width: 100%;
         padding: 0.5rem 1rem;
         line-height: 2rem;
         background-color: var(--color-two);
         -webkit-user-select: none;
         user-select: none;
+        border-left: 2px solid rgba(255, 255, 255, 0);
 
         &.active {
           background-color: var(--color-four);

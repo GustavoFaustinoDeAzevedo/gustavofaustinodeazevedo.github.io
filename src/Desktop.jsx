@@ -22,20 +22,28 @@ import ContextMenu from './components/ContextMenu';
 gsap.registerPlugin(useGSAP);
 
 const Desktop = () => {
-  // Disable right-click on elements without the class "enable-context"
-  useEffect(() => {
-    // changeLanguage(dispatch, navigator.language || navigator.userLanguage);
+  /**
+   * Custom hook to manage desktop state and actions.
+   *
+   * @property {Object} state - The current state of the desktop.
+   * @property {Function} dispatch - Function to dispatch actions to update the desktop state.
+   * @property {Object} desktopRef - Reference to the desktop element.
+   *
+   * @returns {DesktopContext} The context containing state, dispatch, and desktopRef.
+   */
+  const { state, dispatch, desktopRef } = useDesktop();
 
+  useEffect(() => {
+    // Disable right-click on elements without the class "enable-context"
     const disableRightClick = (e) => {
-      if (!e.target.closest('.enable-context')) {
-        // e.preventDefault();
+      if (!e.target.closest('enable-context')) {
+        e.preventDefault();
       }
     };
 
     document.addEventListener('contextmenu', disableRightClick);
     return () => document.removeEventListener('contextmenu', disableRightClick);
   }, []);
-  const { state, dispatch, desktopRef } = useDesktop();
 
   useGSAP(() => {
     gsap.from('.desktop-icon', {
@@ -54,12 +62,10 @@ const Desktop = () => {
 
   return (
     <div
-      className="desktop"
+      className="desktop enable-context"
       ref={desktopRef}
       onContextMenu={(e) => {
-        if (!e.target.closest('.window') && !e.target.closest('.taskbar')) {
-          showContextMenu(dispatch, e.clientX, e.clientY, 'desktop');
-        }
+        showContextMenu(dispatch, e.clientX, e.clientY, 'desktop');
       }}
     >
       <div className="desktop-icons">
@@ -67,8 +73,9 @@ const Desktop = () => {
           <DesktopIcon
             key={id}
             id={id}
-            title={title}
+            title={state.language.includes('POR') ? title.por : title.eng}
             icon={icon}
+            language={state.language}
             onClick={() => {
               if (!state.opened.includes(id)) {
                 openWindow(dispatch, id);
@@ -83,7 +90,7 @@ const Desktop = () => {
         <Window
           key={id}
           id={id}
-          title={title}
+          title={state.language.includes('POR') ? title.por : title.eng}
           isActive={state.active === id}
           isMinimized={state.minimized.includes(id)}
           isMaximized={state.maximized.includes(id)}
@@ -98,6 +105,7 @@ const Desktop = () => {
       ))}
 
       <Taskbar
+        className={'enable-context'}
         windows={windows}
         openedWindows={state.opened}
         minimizedWindows={state.minimized}
@@ -110,6 +118,7 @@ const Desktop = () => {
 
       {state.contextMenu.show && (
         <ContextMenu
+          language={state.language}
           x={state.contextMenu.x}
           y={state.contextMenu.y}
           // items={}
