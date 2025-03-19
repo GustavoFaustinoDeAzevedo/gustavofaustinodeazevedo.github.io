@@ -7,7 +7,7 @@ gsap.registerPlugin(Draggable);
 function Window({
   id,
   title,
-  isActive,
+  isFocused,
   isMinimized,
   isMaximized,
   zIndex,
@@ -45,7 +45,7 @@ function Window({
   }, [desktopRef, isOpen]);
 
   const className = `window 
-    ${isActive ? 'active' : ''}
+    ${isFocused ? 'focus' : ''}
     ${isMinimized ? 'minimized' : ''} 
     ${isOpen ? 'open' : ''}
     ${isMaximized ? 'maximized' : ''}`;

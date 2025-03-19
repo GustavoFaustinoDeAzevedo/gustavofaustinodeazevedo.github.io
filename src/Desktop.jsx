@@ -91,7 +91,7 @@ const Desktop = () => {
           key={id}
           id={id}
           title={state.language.includes('POR') ? title.por : title.eng}
-          isActive={state.active === id}
+          isFocused={state.focus === id}
           isMinimized={state.minimized.includes(id)}
           isMaximized={state.maximized.includes(id)}
           isOpen={state.opened.includes(id)}
@@ -107,6 +107,7 @@ const Desktop = () => {
       <Taskbar
         className={'enable-context'}
         windows={windows}
+        focusedWindow={state.focus}
         openedWindows={state.opened}
         minimizedWindows={state.minimized}
         language={state.language}

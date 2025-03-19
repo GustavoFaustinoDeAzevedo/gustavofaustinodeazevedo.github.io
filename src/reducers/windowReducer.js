@@ -3,7 +3,7 @@ const supportedLanguages = ['en-US', 'pt-BR'];
 const defaultLanguage = supportedLanguages.includes(browserLanguage.split('-')[0]) ? browserLanguage : 'ENG';
 
 export const initialState = {
-  active: null,
+  focus: null,
   opened: [],
   minimized: [],
   hidden: [],
@@ -15,7 +15,7 @@ export const initialState = {
 
 export function windowReducer(state, action) {
   switch (action.type) {
-    case "LANGUAGE":
+    case "CHANGE_LANGUAGE":
       return {
         ...state,
         language: action.payload
@@ -23,19 +23,19 @@ export function windowReducer(state, action) {
     case "FOCUS_WINDOW":
       return {
         ...state,
-        active: action.payload,
+        focus: action.payload,
         zIndex: { ...state.zIndex, [action.payload]: Math.max(...Object.values(state.zIndex), 0) + 1 }
       };
 
     case "OPEN_WINDOW":
-      return { ...state, opened: [...state.opened, action.payload], active: action.payload };
+      return { ...state, opened: [...state.opened, action.payload], focus: action.payload };
 
     case "CLOSE_WINDOW":
       return {
         ...state,
         opened: state.opened.filter(id => id !== action.payload),
         hidden: [...state.hidden, action.payload],
-        active: state.active === action.payload ? null : state.active
+        focus: state.focus === action.payload ? null : state.focus
       };
 
     case "MINIMIZE_WINDOW":

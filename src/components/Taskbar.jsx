@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const Taskbar = ({
   language,
   windows,
+  focusedWindow,
   openedWindows,
   minimizedWindows,
   onWindowClick,
@@ -68,18 +69,18 @@ const Taskbar = ({
           <i className="icon window-icon"></i>
         </div>
         <div className="taskbar-items">
-          {windows.map(({ id, title, icon }) => {
+          {windows.map(({ id, icon }) => {
             return (
               <div
                 key={id}
                 className={`taskbar-item 
-                ${openedWindows.includes(id) ? 'active' : ''} 
+                ${focusedWindow === id ? 'focus' : ''}
+                ${openedWindows.includes(id) ? 'open' : ''} 
                 ${minimizedWindows.includes(id) ? 'minimized' : ''}
               `}
                 onClick={() => onWindowClick(id)}
               >
                 <i className={`icon ${icon}`}></i>
-                {/* <span>{title}</span> */}
               </div>
             );
           })}

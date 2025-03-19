@@ -136,7 +136,7 @@
     overflow: hidden;
     resize: both;
 
-    &.active {
+    &.focus {
       display: flex;
       z-index: 10;
     }
@@ -326,13 +326,10 @@
     cursor: pointer;
     transition: background-color 0.2s;
 
-    &.active, &.minimized, &.open {
-      display: flex;
-    }
-
     &:hover {
       background-color: #ffffff43;
     }
+
 
     &:active {
       background-color: #ffffff1a;
@@ -341,6 +338,28 @@
         transition: all 0.2s;
         transform: scale(0.8);
       }
+    }
+
+    &.focus, &.minimized, &.open {
+      display: flex;
+    }
+
+    &.focus:not(.minimized) {
+      background-color: #ffffff1a;
+
+      &:hover {
+        background-color: #ffffff43;
+      }
+
+      &:active {
+        background-color: #ffffff1a;
+
+        &>* {
+          transition: all 0.2s;
+          transform: scale(0.8);
+        }
+      }
+
     }
   }
 
@@ -573,19 +592,6 @@ noscript {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-}
-
-.in-progress {
-  pointer-events: none;
-  color: #92fffa57;
-  position: absolute;
-  z-index: 9999;
-  right: 2rem;
-  bottom: 4.5rem;
-  text-align: left;
-  -webkit-user-select: none;
-  user-select: none;
-
 }
 
 .icon {

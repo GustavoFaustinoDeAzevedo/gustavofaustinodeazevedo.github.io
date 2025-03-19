@@ -46,7 +46,7 @@ export const hideContextMenu = (dispatch) => {
 
 export const changeLanguage = (dispatch, language) => {
   dispatch({
-    type: "LANGUAGE",
+    type: "CHANGE_LANGUAGE",
     payload: language
   });
 };
