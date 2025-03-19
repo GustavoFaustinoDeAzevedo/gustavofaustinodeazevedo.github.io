@@ -434,7 +434,6 @@ npm run lint
 ## Usage
 
 Once the project is running, you can interact with the desktop icons to open different windows. The taskbar at the bottom allows you to manage open windows and access the start menu. The contact form can be used to send messages (not working for now).
->>>>>>> c00cdb6fa616ae090c3da5c4c87a76168fd46be8
 
 ## Screenshots
 
@@ -470,7 +469,6 @@ The `Old_Portfolio` directory contains the previous version of the portfolio wit
 ### Public Assets
 
 The `public` directory contains public assets like icons and images.
->>>>>>> c00cdb6fa616ae090c3da5c4c87a76168fd46be8
 
 ## License
 
@@ -478,8 +476,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgements
 
-<<<<<<< HEAD
 - Fonts by [Google Fonts](https://fonts.google.com/)
 =======
-- Fonts by [Google Fonts](https://fonts.google.com/)
->>>>>>> c00cdb6fa616ae090c3da5c4c87a76168fd46be8
