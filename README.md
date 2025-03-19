@@ -1,5 +1,5 @@
 # Desktop Portfolio Documentation (Work in Progress)
-
+Note: This documentation could contain outdated information.
 A modern, interactive desktop-like portfolio website built with React and GSAP, featuring a Windows-like interface with draggable windows, taskbar, and context menus. **Note: This project is still a work in progress.**
 
 ## Table of Contents
