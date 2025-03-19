@@ -17,6 +17,7 @@ A modern, interactive desktop-like portfolio website built with React and GSAP, 
 - [Performance Considerations](#performance-considerations)
 - [Browser Support](#browser-support)
 - [Setup and Installation](#setup-and-installation)
+- [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Contribution](#contribution)
 - [Contact](#contact)
