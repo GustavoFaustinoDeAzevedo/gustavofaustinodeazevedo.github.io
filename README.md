@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Desktop Portfolio Documentation (Work in Progress)
 
 A modern, interactive desktop-like portfolio website built with React and GSAP, featuring a Windows-like interface with draggable windows, taskbar, and context menus. **Note: This project is still a work in progress.**
@@ -301,7 +300,7 @@ If you would like to contribute to this project, please fork the repository and 
 - Implement proper TypeScript types
 - Follow React best practices
 - Maintain consistent naming
-=======
+
 # Desktop Portfolio (Work in Progress)
 
 This is a desktop portfolio project built with HTML, CSS, and JavaScript. **Note: This project is still a work in progress.**
@@ -440,12 +439,11 @@ Once the project is running, you can interact with the desktop icons to open dif
 ![Screenshot 1](public/images/screenshot1.png)
 ![Screenshot 2](public/images/screenshot2.png)
 
-<<<<<<< HEAD
 ## Contact
 
 - [gustavofaustino18@hotmail.com](mailto:gustavofaustino18@hotmail.com)
 - [LinkedIn](https://www.linkedin.com/in/gustavo-faustino-de-azevedo/).
-=======
+
 ## Contribution
 
 If you would like to contribute to this project, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
@@ -477,4 +475,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgements
 
 - Fonts by [Google Fonts](https://fonts.google.com/)
-=======
