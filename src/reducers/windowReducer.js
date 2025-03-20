@@ -10,7 +10,7 @@ export const initialState = {
   maximized: [],
   zIndex: {},
   language: defaultLanguage.includes('pt' || 'POR') ? 'POR' : 'ENG',
-  contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+  contextMenu: { show: false, x: 0, y: 0, target: null }
 };
 
 export function windowReducer(state, action) {
@@ -34,8 +34,16 @@ export function windowReducer(state, action) {
         contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
       }
     case "OPEN_WINDOW":
-      return { ...state, opened: [...state.opened, action.payload], focus: action.payload };
-
+      return {
+        ...state,
+        opened: state.opened.includes(action.payload) ?
+          [...state.opened] :
+          [...state.opened, action.payload],
+        minimized: state.minimized.includes(action.payload) ?
+          state.minimized.filter(id => id !== action.payload) :
+          [...state.minimized],
+        focus: action.payload
+      };
     case "CLOSE_WINDOW":
       return {
         ...state,
@@ -43,15 +51,14 @@ export function windowReducer(state, action) {
         hidden: [...state.hidden, action.payload],
         focus: state.focus === action.payload ? null : state.focus
       };
-
     case "MINIMIZE_WINDOW":
       return {
         ...state,
         minimized: state.minimized.includes(action.payload)
           ? state.minimized.filter(id => id !== action.payload)
-          : [...state.minimized, action.payload]
+          : [...state.minimized, action.payload],
+        focus: state.minimized.includes(action.payload) ? action.payload : null
       };
-
     case "MAXIMIZE_WINDOW":
       return {
         ...state,
@@ -59,19 +66,16 @@ export function windowReducer(state, action) {
           ? state.maximized.filter(id => id !== action.payload)
           : [...state.maximized, action.payload]
       };
-
     case "SHOW_CONTEXT_MENU":
       return {
         ...state,
         contextMenu: { ...action.payload, show: true }
       };
-
     case "HIDE_CONTEXT_MENU":
       return {
         ...state,
         contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
       };
-
     case "CLICK_OUTSIDE":
       return {
         ...state,

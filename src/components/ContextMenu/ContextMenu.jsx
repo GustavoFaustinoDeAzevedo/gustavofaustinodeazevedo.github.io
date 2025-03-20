@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useClickOutside } from '../hooks/useClickOutside';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 const ContextMenu = ({ x, y, items, target, onClose, language }) => {
   const menuRef = useRef(null);
@@ -29,32 +29,30 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
 
   return (
     <div ref={menuRef} className="context-menu active">
-      {language.includes('ENG') ? (
-        <p>Context Menu Example</p>
-      ) : (
-        <p>Exemplo de Menu de Contexto</p>
-      )}
-      <div className="context-menu-separator" />
-      {/* {items.map((item, index) => {
-        if (item.separator) {
+      {items.actions.map((action, index) => {
+        if (action.separator) {
           return (
             <div key={`sep-${index}`} className="context-menu-separator" />
           );
         }
         return (
           <div
-            key={item.action}
+            key={items.id || `item-${index}`}
             className="context-menu-item"
             onClick={() => {
-              item.handler(target);
-              onClose();
+              if (action.handler) {
+                action.handler(target);
+              }
+              if (onClose) {
+                onClose();
+              }
             }}
           >
-            {item.icon && <i className={item.icon}></i>}
-            <span>{item.label}</span>
+            {action.icon && <i className={`icon ${action.icon}`}></i>}
+            <span>{action.label}</span>
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 };

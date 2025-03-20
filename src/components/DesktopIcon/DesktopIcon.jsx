@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DesktopIcon({ id, title, icon, onClick }) {
+function DesktopIcon({ title, icon, onClick }) {
   return (
     <div
       className="desktop-icon"

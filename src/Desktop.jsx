@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useDesktop } from './hooks/useDesktop';
 import { windows } from './data/windowsData';
+import { contextMenuData } from './data/contextMenuData';
 import {
   focusWindow,
   openWindow,
@@ -12,7 +13,6 @@ import {
   hideContextMenu,
   maximizeWindow,
   changeLanguage,
-  resetFocus,
 } from './actions/windowActions';
 
 import Window from './components/Window';
@@ -69,7 +69,9 @@ const Desktop = () => {
             icon={icon}
             language={state.language}
             onClick={() => {
-              if (!state.opened.includes(id)) {
+              if (title.por === 'Novo' || title.por === 'new') {
+                console.log('new');
+              } else if (!state.opened.includes(id)) {
                 openWindow(dispatch, id);
                 focusWindow(dispatch, id);
               }
@@ -89,7 +91,7 @@ const Desktop = () => {
           isOpen={state.opened.includes(id)}
           zIndex={state.zIndex[id] || 0}
           onFocus={() => focusWindow(dispatch, id)}
-          onUnfocus={() => resetFocus(dispatch)}
+          onUnfocus={() => focusWindow(dispatch, null)}
           onMinimize={() => minimizeWindow(dispatch, id)}
           onMaximize={() => maximizeWindow(dispatch, id)}
           onClose={() => closeWindow(dispatch, id)}
@@ -115,7 +117,9 @@ const Desktop = () => {
           language={state.language}
           x={state.contextMenu.x}
           y={state.contextMenu.y}
-          // items={}
+          items={contextMenuData.find(
+            (contextMenuData) => contextMenuData.id === state.contextMenu.target
+          )}
           onClose={() => hideContextMenu(dispatch)}
         />
       )}
