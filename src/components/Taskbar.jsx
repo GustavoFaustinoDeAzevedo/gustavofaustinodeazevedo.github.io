@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 const Taskbar = ({
   language,
@@ -12,6 +13,7 @@ const Taskbar = ({
   const [time, setTime] = useState('00:00');
   const [visible, setVisible] = useState(false);
   const languageListRef = useRef(null);
+  const languageButtonRef = useRef(null);
 
   const toggleAnimation = () => {
     if (languageListRef.current) {
@@ -62,6 +64,8 @@ const Taskbar = ({
     return () => clearInterval(interval);
   }, []);
 
+  useClickOutside(languageButtonRef, toggleAnimation, visible, languageListRef);
+
   return (
     <>
       <div className="taskbar">
@@ -87,7 +91,11 @@ const Taskbar = ({
         </div>
         <div className="taskbar-right">
           <div className="language">
-            <p className="language-button" onClick={toggleAnimation}>
+            <p
+              ref={languageButtonRef}
+              className="language-button"
+              onClick={toggleAnimation}
+            >
               {language}
             </p>
             <div className="language-list-container">
