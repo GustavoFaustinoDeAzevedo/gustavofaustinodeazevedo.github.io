@@ -1,27 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import useClickOutside from '../../hooks/useClickOutside';
 
 gsap.registerPlugin(Draggable);
 
-function Window({
+const Window = ({
   id,
   title,
-  isFocused,
-  isMinimized,
-  isMaximized,
   zIndex,
-  onFocus,
   isOpen,
-  onMinimize,
-  onMaximize,
-  onClose,
-  onUnfocus,
-  onContextMenu,
   children,
   desktopRef,
-}) {
+  ...handlers
+}) => {
+  const {
+    isFocused,
+    isMinimized,
+    isMaximized,
+    onFocus,
+    onUnfocus,
+    onMinimize,
+    onMaximize,
+    onClose,
+    onContextMenu,
+  } = handlers;
+
   const windowRef = useRef(null);
   const headerRef = useRef(null);
 
@@ -97,7 +101,7 @@ function Window({
       </div>
     </div>
   );
-}
+};
 
 function DefaultContent({ id }) {
   switch (id) {

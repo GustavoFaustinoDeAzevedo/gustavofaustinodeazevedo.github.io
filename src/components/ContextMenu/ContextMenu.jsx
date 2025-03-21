@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const ContextMenu = ({ x, y, items, target, onClose, language }) => {
   const menuRef = useRef(null);
@@ -37,7 +37,7 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
         }
         return (
           <div
-            key={items.id || `item-${index}`}
+            key={`item-${index}`}
             className="context-menu-item"
             onClick={() => {
               if (action.handler) {

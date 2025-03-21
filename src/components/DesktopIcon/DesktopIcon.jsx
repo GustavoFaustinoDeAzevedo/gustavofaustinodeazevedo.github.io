@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DesktopIcon({ title, icon, onClick }) {
+const DesktopIcon = ({ title, icon, onClick }) => {
   return (
     <div
       className="desktop-icon"
@@ -11,6 +11,6 @@ function DesktopIcon({ title, icon, onClick }) {
       <span>{title}</span>
     </div>
   );
-}
+};
 
 export default DesktopIcon;

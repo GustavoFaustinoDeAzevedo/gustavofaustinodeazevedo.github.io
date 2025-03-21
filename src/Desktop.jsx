@@ -13,6 +13,7 @@ import {
   hideContextMenu,
   maximizeWindow,
   changeLanguage,
+  resetFocus,
 } from './actions/windowActions';
 
 import Window from './components/Window';
@@ -52,6 +53,18 @@ const Desktop = () => {
     return 'POR';
   };
 
+  const taskbarProps = {
+    className: 'enable-context',
+    windows,
+    focusedWindow: state.focus,
+    openedWindows: state.opened,
+    minimizedWindows: state.minimized,
+    language: state.language,
+    onChangeLanguage: () =>
+      changeLanguage(dispatch, handleLanguage(state.language)),
+    onWindowClick: (id) => minimizeWindow(dispatch, id),
+  };
+
   return (
     <div
       className="desktop enable-context"
@@ -61,64 +74,55 @@ const Desktop = () => {
       }}
     >
       <div className="desktop-icons">
-        {windows.map(({ id, title, icon }) => (
-          <DesktopIcon
-            key={id}
-            id={id}
-            title={state.language.includes('POR') ? title.por : title.eng}
-            icon={icon}
-            language={state.language}
-            onClick={() => {
+        {windows.map(({ id, title, icon }) => {
+          const isPortuguese = state.language.includes('POR');
+          const desktopIconProps = {
+            id,
+            title: isPortuguese ? title.por : title.eng,
+            icon,
+            language: state.language,
+            onClick: () => {
               if (title.por === 'Novo' || title.por === 'new') {
                 console.log('new');
               } else if (!state.opened.includes(id)) {
                 openWindow(dispatch, id);
                 focusWindow(dispatch, id);
               }
-            }}
-          />
-        ))}
+            },
+          };
+
+          return <DesktopIcon key={id} {...desktopIconProps} />;
+        })}
       </div>
 
-      {windows.map(({ id, title }) => (
-        <Window
-          key={id}
-          id={id}
-          title={state.language.includes('POR') ? title.por : title.eng}
-          isFocused={state.focus === id}
-          isMinimized={state.minimized.includes(id)}
-          isMaximized={state.maximized.includes(id)}
-          isOpen={state.opened.includes(id)}
-          zIndex={state.zIndex[id] || 0}
-          onFocus={() => focusWindow(dispatch, id)}
-          onUnfocus={() => focusWindow(dispatch, null)}
-          onMinimize={() => minimizeWindow(dispatch, id)}
-          onMaximize={() => maximizeWindow(dispatch, id)}
-          onClose={() => closeWindow(dispatch, id)}
-          desktopRef={desktopRef}
-        />
-      ))}
+      {windows.map(({ id, title }) => {
+        const windowProps = {
+          id,
+          desktopRef,
+          title: state.language.includes('POR') ? title.por : title.eng,
+          isFocused: state.focus === id,
+          isMinimized: state.minimized.includes(id),
+          isMaximized: state.maximized.includes(id),
+          isOpen: state.opened.includes(id),
+          zIndex: state.zIndex[id] || 0,
+          onFocus: () => focusWindow(dispatch, id),
+          onUnfocus: () => resetFocus(dispatch),
+          onMinimize: () => minimizeWindow(dispatch, id),
+          onMaximize: () => maximizeWindow(dispatch, id),
+          onClose: () => closeWindow(dispatch, id),
+        };
 
-      <Taskbar
-        className={'enable-context'}
-        windows={windows}
-        focusedWindow={state.focus}
-        openedWindows={state.opened}
-        minimizedWindows={state.minimized}
-        language={state.language}
-        onChangeLanguage={() =>
-          changeLanguage(dispatch, handleLanguage(state.language))
-        }
-        onWindowClick={(id) => minimizeWindow(dispatch, id)}
-      />
+        return <Window key={id} {...windowProps} />;
+      })}
+
+      <Taskbar {...taskbarProps} />
 
       {state.contextMenu.show && (
         <ContextMenu
+          {...state.contextMenu}
           language={state.language}
-          x={state.contextMenu.x}
-          y={state.contextMenu.y}
           items={contextMenuData.find(
-            (contextMenuData) => contextMenuData.id === state.contextMenu.target
+            (contextMenu) => contextMenu.id === state.contextMenu.target
           )}
           onClose={() => hideContextMenu(dispatch)}
         />

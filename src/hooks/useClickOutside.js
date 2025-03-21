@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 // Custom hook to detect clicks outside a specified element
-export const useClickOutside = (ref, handler, enabled = true, optionalRef = null, elementClassToBlock = '.context-menu.active') => {
+const useClickOutside = (ref, handler, enabled = true, optionalRef = null, elementClassToBlock = '.context-menu.active') => {
   useEffect(() => {
     // If the hook is not enabled, do nothing
     if (!enabled) return;
@@ -13,7 +13,7 @@ export const useClickOutside = (ref, handler, enabled = true, optionalRef = null
 
       // If the click is inside the ref element, inside an element with specified class, or inside the optional ref, do nothing
       if (
-        !ref.current ||
+
         event.target.closest(elementClassToBlock) ||
         ref.current.contains(event.target) ||
         secondRef)
@@ -34,3 +34,5 @@ export const useClickOutside = (ref, handler, enabled = true, optionalRef = null
     };
   }, [ref, handler, enabled]); // Dependencies array for useEffect
 };
+
+export default useClickOutside;

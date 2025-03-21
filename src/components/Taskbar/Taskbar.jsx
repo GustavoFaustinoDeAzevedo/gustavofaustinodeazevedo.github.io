@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import React, { useEffect, useState } from 'react';
+import toggleOpenMenuAnimation from '../../animations/elementTransitions';
+import createRefs from '../../scripts/createRefs';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const Taskbar = ({
   language,
@@ -10,46 +12,12 @@ const Taskbar = ({
   onWindowClick,
   onChangeLanguage,
 }) => {
+  const refs = createRefs(['languageList', 'languageButton', 'startWindow']);
   const [time, setTime] = useState('00:00');
-  const [visible, setVisible] = useState(false);
-  const languageListRef = useRef(null);
-  const languageButtonRef = useRef(null);
-
-  const toggleAnimation = () => {
-    if (languageListRef.current) {
-      if (visible) {
-        // Animation to "slide out" downwards
-        languageListRef.current.style.transform = 'translateY(0)';
-        languageListRef.current.style.opacity = '1';
-        requestAnimationFrame(() => {
-          languageListRef.current.style.transition =
-            'transform 0.1s ease-out, opacity 0.1s ease-out';
-          languageListRef.current.style.opacity = '0';
-          languageListRef.current.style.transform = 'translateY(100%)';
-        });
-      } else {
-        // Animation to "slide in" upwards
-        languageListRef.current.style.display = 'block';
-        languageListRef.current.style.transform = 'translateY(100%)';
-        languageListRef.current.style.opacity = '0';
-        requestAnimationFrame(() => {
-          languageListRef.current.style.transition =
-            'transform 0.1s ease-in, opacity 0.1s ease-in';
-          languageListRef.current.style.opacity = '1';
-          languageListRef.current.style.transform = 'translateY(0)';
-        });
-      }
-      setVisible(!visible);
-    }
-  };
-
-  const handleTransitionEnd = () => {
-    if (languageListRef.current) {
-      visible
-        ? (languageListRef.current.style.display = 'block')
-        : (languageListRef.current.style.display = 'none');
-    }
-  };
+  const [windowsVisibility, setWindowsVisibility] = useState({
+    window1: false,
+    window2: false,
+  });
 
   useEffect(() => {
     const updateClock = () => {
@@ -64,12 +32,46 @@ const Taskbar = ({
     return () => clearInterval(interval);
   }, []);
 
-  useClickOutside(languageButtonRef, toggleAnimation, visible, languageListRef);
+  useClickOutside(
+    refs.languageButton,
+    () => {
+      toggleOpenMenuAnimation(refs.languageList, windowsVisibility.window1);
+      toggleWindowVisibility('window1');
+    },
+    windowsVisibility.window1,
+    refs.languageList
+  );
+
+  const toggleWindowVisibility = (window) => {
+    setWindowsVisibility((prevVisibility) => ({
+      ...prevVisibility,
+      [window]: !prevVisibility[window], // Alterna o estado específico da janela
+    }));
+  };
+
+  const handleTransitionEnd = () => {
+    if (refs.languageList.current) {
+      windowsVisibility.window1
+        ? (refs.languageList.current.style.display = 'block')
+        : (refs.languageList.current.style.display = 'none');
+    }
+  };
+
+  //================================================================
 
   return (
     <>
       <div className="taskbar">
-        <div className="start-button">
+        <div
+          onClick={() => {
+            toggleOpenMenuAnimation(
+              refs.startWindow,
+              windowsVisibility.window1
+            );
+            toggleWindowVisibility('window2');
+          }}
+          className="start-button"
+        >
           <i className="icon window-icon"></i>
         </div>
         <div className="taskbar-items">
@@ -92,15 +94,21 @@ const Taskbar = ({
         <div className="taskbar-right">
           <div className="language">
             <p
-              ref={languageButtonRef}
+              ref={refs.languageButton}
               className="language-button"
-              onClick={toggleAnimation}
+              onClick={() => {
+                toggleOpenMenuAnimation(
+                  refs.languageList,
+                  windowsVisibility.window1
+                );
+                toggleWindowVisibility('window1');
+              }}
             >
               {language}
             </p>
             <div className="language-list-container">
               <ul
-                ref={languageListRef}
+                ref={refs.languageList}
                 className="language-list"
                 onTransitionEnd={handleTransitionEnd}
               >
