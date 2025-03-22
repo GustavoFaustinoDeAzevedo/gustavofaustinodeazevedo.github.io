@@ -1,0 +1,93 @@
+.icon {
+  width: 25px;
+  height: 25px;
+  background-color: var(--color-text);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+
+  &.about {
+    -webkit-mask-image: url('public/icons/user.svg');
+    mask-image: url('public/icons/user.svg');
+  }
+
+  &.skills {
+    -webkit-mask-image: url('public/icons/tools.svg');
+    mask-image: url('public/icons/tools.svg');
+  }
+
+  &.projects {
+    -webkit-mask-image: url('public/icons/folder.svg');
+    mask-image: url('public/icons/folder.svg');
+  }
+
+  &.contact {
+    -webkit-mask-image: url('public/icons/envelope.svg');
+    mask-image: url('public/icons/envelope.svg');
+  }
+
+  &.window-icon {
+    -webkit-mask-image: url('public/icons/window_icon.svg');
+    mask-image: url('public/icons/window_icon.svg');
+  }
+
+  &.minimize {
+    -webkit-mask-image: url('public/icons/minus.svg');
+    mask-image: url('public/icons/minus.svg');
+  }
+
+  &.maximize {
+    -webkit-mask-image: url('public/icons/arrows_pointing_out.svg');
+    mask-image: url('public/icons/arrows_pointing_out.svg');
+  }
+
+  &.restore {
+    -webkit-mask-image: url('public/icons/arrows_pointing_in.svg');
+    mask-image: url('public/icons/arrows_pointing_in.svg');
+  }
+
+  &.close {
+    -webkit-mask-image: url('public/icons/x_icon.svg');
+    mask-image: url('public/icons/x_icon.svg');
+  }
+
+  &.sort {
+    -webkit-mask-image: url('public/icons/sort.svg');
+    mask-image: url('public/icons/sort.svg');
+  }
+
+  &.refresh {
+    -webkit-mask-image: url('public/icons/refresh.svg');
+    mask-image: url('public/icons/refresh.svg');
+  }
+
+  &.new {
+    -webkit-mask-image: url('public/icons/new.svg');
+    mask-image: url('public/icons/new.svg');
+  }
+
+  &.download {
+    -webkit-mask-image: url('public/icons/arrow_down_tray.svg');
+    mask-image: url('public/icons/arrow_down_tray.svg');
+  }
+
+  &.resize {
+    -webkit-mask-image: url('public/icons/resize_corner.svg');
+    mask-image: url('public/icons/resize_corner.svg');
+  }
+
+  &.view {
+    -webkit-mask-image: url('public/icons/squares.svg');
+    mask-image: url('public/icons/squares.svg');
+  }
+
+  &.plus-circle {
+    -webkit-mask-image: url('public/icons/plus_circle.svg');
+    mask-image: url('public/icons/plus_circle.svg');
+  }
+
+  &.new-file {
+    -webkit-mask-image: url('public/icons/new_file.svg');
+    mask-image: url('public/icons/new_file.svg');
+  }
+}

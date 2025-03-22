@@ -1,0 +1,63 @@
+@layer components {
+  .language {
+    cursor: pointer;
+    position: relative;
+
+    .language-button {
+      font-size: small;
+      background-color: none;
+      background: none;
+      color: var(--color-text);
+      border: none;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #ffffff33;
+      }
+    }
+
+    .language-list-container {
+      position: absolute;
+      overflow: hidden;
+      top: -7rem;
+      left: -3rem;
+      pointer-events: none;
+
+      .language-list {
+        transform: "translateY(100%)";
+        display: none;
+        background: "lightblue";
+        width: max-content;
+        border: 2px var(--border-style) var(--color-border);
+        background-color: var(--color-one);
+        border-radius: 5px;
+        list-style: none;
+        z-index: 999;
+        cursor: pointer;
+        pointer-events: initial;
+
+        &.active {
+          background-color: var(--color-four);
+          border-left: 2px solid var(--color-primary);
+        }
+
+        li {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          line-height: 2rem;
+          background-color: var(--color-two);
+          -webkit-user-select: none;
+          user-select: none;
+          border-left: 2px solid rgba(255, 255, 255, 0);
+
+          &.active {
+            background-color: var(--color-four);
+            border-left: 2px solid var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+}

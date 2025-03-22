@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import createRefs from '../../scripts/createRefs';
 import useClickOutside from '../../hooks/useClickOutside';
+import StartMenu from './StartMenu';
 
 const Taskbar = ({
   language,
@@ -12,7 +13,11 @@ const Taskbar = ({
   onWindowClick,
   onChangeLanguage,
 }) => {
-  const refs = createRefs(['languageList', 'languageButton', 'startWindow']);
+  const { languageList, languageButton, startWindow } = createRefs([
+    'languageList',
+    'languageButton',
+    'startWindow',
+  ]);
   const [time, setTime] = useState('00:00');
   const [windowsVisibility, setWindowsVisibility] = useState({
     window1: false,
@@ -33,13 +38,13 @@ const Taskbar = ({
   }, []);
 
   useClickOutside(
-    refs.languageButton,
+    languageButton,
     () => {
-      toggleOpenMenuAnimation(refs.languageList, windowsVisibility.window1);
+      toggleOpenMenuAnimation(languageList, windowsVisibility.window1);
       toggleWindowVisibility('window1');
     },
     windowsVisibility.window1,
-    refs.languageList
+    languageList
   );
 
   const toggleWindowVisibility = (window) => {
@@ -49,11 +54,11 @@ const Taskbar = ({
     }));
   };
 
-  const handleTransitionEnd = () => {
-    if (refs.languageList.current) {
-      windowsVisibility.window1
-        ? (refs.languageList.current.style.display = 'block')
-        : (refs.languageList.current.style.display = 'none');
+  const handleTransitionEnd = (ref, window) => {
+    if (ref.current) {
+      windowsVisibility[window]
+        ? (ref.current.style.display = 'block')
+        : (ref.current.style.display = 'none');
     }
   };
 
@@ -61,56 +66,74 @@ const Taskbar = ({
 
   return (
     <>
-      <div className="taskbar">
-        <div
+      <nav className="taskbar">
+        <StartMenu
+          visible={windowsVisibility.window2}
+          toggleWindowVisibility={toggleWindowVisibility}
+          handleTransitionEnd={handleTransitionEnd}
+        />
+        {/* <button
+          className="start-button"
           onClick={() => {
-            toggleOpenMenuAnimation(
-              refs.startWindow,
-              windowsVisibility.window1
-            );
+            toggleOpenMenuAnimation(startWindow, windowsVisibility.window2);
             toggleWindowVisibility('window2');
           }}
-          className="start-button"
+          aria-label="Init Menu"
         >
           <i className="icon window-icon"></i>
-        </div>
-        <div className="taskbar-items">
-          {windows.map(({ id, icon }) => {
-            return (
-              <div
-                key={id}
-                className={`taskbar-item 
-                ${focusedWindow === id ? 'focus' : ''}
-                ${openedWindows.includes(id) ? 'open' : ''} 
-                ${minimizedWindows.includes(id) ? 'minimized' : ''}
-              `}
-                onClick={() => onWindowClick(id)}
-              >
-                <i className={`icon ${icon}`}></i>
-              </div>
-            );
-          })}
-        </div>
-        <div className="taskbar-right">
-          <div className="language">
-            <p
-              ref={refs.languageButton}
+        </button>
+
+        {/* <!-- Start Window --> */}
+        {/* <section className="start-window-container">
+          <div ref={startWindow} className="start-window-content">
+            <input type="text" aria-label="Menu Init Search Input" />
+            <section>dsadsadasdasd</section>
+            <section>asdasdasdasdasd</section>
+          </div>
+        </section>  */}
+
+        {/* <!-- Taskbar Icons --> */}
+        <ul className="taskbar-items">
+          {windows.map(({ id, icon }) => (
+            <li
+              key={id}
+              className={`taskbar-item 
+          ${focusedWindow === id ? 'focus' : ''}
+          ${openedWindows.includes(id) ? 'open' : ''} 
+          ${minimizedWindows.includes(id) ? 'minimized' : ''}
+        `}
+              onClick={() => onWindowClick(id)}
+            >
+              <i className={`${icon}`}></i>
+            </li>
+          ))}
+        </ul>
+
+        {/* <!-- Taskbar Right Section --> */}
+        <section className="taskbar-right">
+          {/* <!-- Languages --> */}
+          <section className="language">
+            <button
+              ref={languageButton}
               className="language-button"
               onClick={() => {
                 toggleOpenMenuAnimation(
-                  refs.languageList,
+                  languageList,
                   windowsVisibility.window1
                 );
                 toggleWindowVisibility('window1');
               }}
+              aria-label="Select language"
             >
               {language}
-            </p>
+            </button>
             <div className="language-list-container">
               <ul
-                ref={refs.languageList}
+                ref={languageList}
                 className="language-list"
-                onTransitionEnd={handleTransitionEnd}
+                onTransitionEnd={() =>
+                  handleTransitionEnd(languageList, 'window1')
+                }
               >
                 <li
                   onClick={onChangeLanguage}
@@ -126,10 +149,14 @@ const Taskbar = ({
                 </li>
               </ul>
             </div>
-          </div>
-          <span className="clock">{time}</span>
-        </div>
-      </div>
+          </section>
+
+          {/* <!-- Relógio --> */}
+          <span className="clock" aria-label={`Hora atual: ${time}`}>
+            {time}
+          </span>
+        </section>
+      </nav>
     </>
   );
 };
