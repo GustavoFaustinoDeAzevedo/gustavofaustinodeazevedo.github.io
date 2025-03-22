@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
+import { RefsProvider } from './contexts/RefsContext';
 import { useGSAP } from '@gsap/react';
 import { useDesktop } from './hooks/useDesktop';
 import { windows } from './data/windowsData';
+
 import { contextMenuData } from './data/contextMenuData';
 import {
   focusWindow,
@@ -66,68 +68,70 @@ const Desktop = () => {
   };
 
   return (
-    <div
-      className="desktop enable-context"
-      ref={desktopRef}
-      onContextMenu={(e) => {
-        showContextMenu(dispatch, e.clientX, e.clientY, 'desktop');
-      }}
-    >
-      <div className="desktop-icons">
-        {windows.map(({ id, title, icon }) => {
-          const isPortuguese = state.language.includes('POR');
-          const desktopIconProps = {
+    <RefsProvider>
+      <div
+        className="desktop enable-context"
+        ref={desktopRef}
+        onContextMenu={(e) => {
+          showContextMenu(dispatch, e.clientX, e.clientY, 'desktop');
+        }}
+      >
+        <div className="desktop-icons">
+          {windows.map(({ id, title, icon }) => {
+            const isPortuguese = state.language.includes('POR');
+            const desktopIconProps = {
+              id,
+              title: isPortuguese ? title.por : title.eng,
+              icon,
+              language: state.language,
+              onClick: () => {
+                if (title.por === 'Novo' || title.por === 'new') {
+                  console.log('new');
+                } else if (!state.opened.includes(id)) {
+                  openWindow(dispatch, id);
+                  focusWindow(dispatch, id);
+                }
+              },
+            };
+
+            return <DesktopIcon key={id} {...desktopIconProps} />;
+          })}
+        </div>
+
+        {windows.map(({ id, title }) => {
+          const windowProps = {
             id,
-            title: isPortuguese ? title.por : title.eng,
-            icon,
-            language: state.language,
-            onClick: () => {
-              if (title.por === 'Novo' || title.por === 'new') {
-                console.log('new');
-              } else if (!state.opened.includes(id)) {
-                openWindow(dispatch, id);
-                focusWindow(dispatch, id);
-              }
-            },
+            desktopRef,
+            title: state.language.includes('POR') ? title.por : title.eng,
+            isFocused: state.focus === id,
+            isMinimized: state.minimized.includes(id),
+            isMaximized: state.maximized.includes(id),
+            isOpen: state.opened.includes(id),
+            zIndex: state.zIndex[id] || 0,
+            onFocus: () => focusWindow(dispatch, id),
+            onUnfocus: () => resetFocus(dispatch),
+            onMinimize: () => minimizeWindow(dispatch, id),
+            onMaximize: () => maximizeWindow(dispatch, id),
+            onClose: () => closeWindow(dispatch, id),
           };
 
-          return <DesktopIcon key={id} {...desktopIconProps} />;
+          return <Window key={id} {...windowProps} />;
         })}
+
+        <Taskbar {...taskbarProps} />
+
+        {state.contextMenu.show && (
+          <ContextMenu
+            {...state.contextMenu}
+            language={state.language}
+            items={contextMenuData.find(
+              (contextMenu) => contextMenu.id === state.contextMenu.target
+            )}
+            onClose={() => hideContextMenu(dispatch)}
+          />
+        )}
       </div>
-
-      {windows.map(({ id, title }) => {
-        const windowProps = {
-          id,
-          desktopRef,
-          title: state.language.includes('POR') ? title.por : title.eng,
-          isFocused: state.focus === id,
-          isMinimized: state.minimized.includes(id),
-          isMaximized: state.maximized.includes(id),
-          isOpen: state.opened.includes(id),
-          zIndex: state.zIndex[id] || 0,
-          onFocus: () => focusWindow(dispatch, id),
-          onUnfocus: () => resetFocus(dispatch),
-          onMinimize: () => minimizeWindow(dispatch, id),
-          onMaximize: () => maximizeWindow(dispatch, id),
-          onClose: () => closeWindow(dispatch, id),
-        };
-
-        return <Window key={id} {...windowProps} />;
-      })}
-
-      <Taskbar {...taskbarProps} />
-
-      {state.contextMenu.show && (
-        <ContextMenu
-          {...state.contextMenu}
-          language={state.language}
-          items={contextMenuData.find(
-            (contextMenu) => contextMenu.id === state.contextMenu.target
-          )}
-          onClose={() => hideContextMenu(dispatch)}
-        />
-      )}
-    </div>
+    </RefsProvider>
   );
 };
 

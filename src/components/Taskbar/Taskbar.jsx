@@ -3,6 +3,7 @@ import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import createRefs from '../../scripts/createRefs';
 import useClickOutside from '../../hooks/useClickOutside';
 import StartMenu from './StartMenu';
+import { useRefs } from '../../contexts/RefsContext';
 
 const Taskbar = ({
   language,
@@ -18,6 +19,9 @@ const Taskbar = ({
     'languageButton',
     'startWindow',
   ]);
+
+  const { createRef, getRef } = useRefs();
+
   const [time, setTime] = useState('00:00');
   const [windowsVisibility, setWindowsVisibility] = useState({
     window1: false,
@@ -62,6 +66,42 @@ const Taskbar = ({
     }
   };
 
+  const closeWindow = (windowRef, handler, id) => {
+    if (!windowRef.current) return;
+
+    gsap.to(windowRef.current, {
+      scale: 0.9, // Reduz levemente o tamanho
+      opacity: 0, // Some suavemente
+      duration: 0.2, // Duração da animação
+      ease: 'power2.inOut',
+      onComplete: () => handler(id), // Chama a função de fechar após a animação
+    });
+  };
+
+  const openWindow = (windowRef) => {
+    if (!windowRef.current) return;
+
+    // Define o estado inicial (invisível e pequeno)
+    gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
+
+    // Faz a animação de abertura
+    gsap.to(windowRef.current, {
+      scale: 1, // Tamanho normal
+      opacity: 1, // Totalmente visível
+      duration: 0.3, // Duração da animação
+      ease: 'power2.out',
+    });
+  };
+
+  const windowClickHandler = (id) => {
+    const windowRef = getRef(id);
+    if (minimizedWindows.includes(id)) {
+      openWindow(windowRef);
+    } else {
+      closeWindow(windowRef, onWindowClick, id);
+    }
+  };
+
   //================================================================
 
   return (
@@ -102,7 +142,7 @@ const Taskbar = ({
           ${openedWindows.includes(id) ? 'open' : ''} 
           ${minimizedWindows.includes(id) ? 'minimized' : ''}
         `}
-              onClick={() => onWindowClick(id)}
+              onClick={() => windowClickHandler(id)}
             >
               <i className={`${icon}`}></i>
             </li>

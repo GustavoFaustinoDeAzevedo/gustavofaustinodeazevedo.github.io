@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import useClickOutside from '../../hooks/useClickOutside';
+import DefaultContent from './DefaultContent';
 
 gsap.registerPlugin(Draggable);
 
@@ -53,10 +54,79 @@ const Window = ({
       const y = Math.floor(Math.random() * (desktop.offsetHeight / 4));
 
       gsap.set(windowRef.current, { x, y });
+
+      openWindow(windowRef, y);
     }
   }, [desktopRef, isOpen]);
 
+  useEffect(() => {
+    // Chama a animação ao montar a janela
+  }, [isOpen]);
+
   useClickOutside(windowRef, onUnfocus, isFocused);
+
+  const openWindow = (windowRef) => {
+    if (!windowRef.current) return;
+
+    // Define o estado inicial (invisível e pequeno)
+    gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
+
+    // Faz a animação de abertura
+    gsap.to(windowRef.current, {
+      scale: 1, // Tamanho normal
+      opacity: 1, // Totalmente visível
+      duration: 0.3, // Duração da animação
+      ease: 'power2.out',
+    });
+  };
+
+  const closeWindow = (handler) => {
+    if (!windowRef.current) return;
+
+    gsap.to(windowRef.current, {
+      scale: 0.9, // Reduz levemente o tamanho
+      opacity: 0, // Some suavemente
+      duration: 0.2, // Duração da animação
+      ease: 'power2.inOut',
+      onComplete: () => handler(), // Chama a função de fechar após a animação
+    });
+  };
+
+  const maximizeWindow = () => {
+    if (!windowRef.current) return;
+
+    const rect = windowRef.current.getBoundingClientRect();
+    const clone = windowRef.current.cloneNode(true);
+
+    Object.assign(clone.style, {
+      position: 'fixed',
+      top: `${rect.top}px`,
+      left: `${rect.left}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      margin: '0',
+      opacity: '1',
+      pointerEvents: 'none',
+      zIndex: '9999',
+    });
+
+    document.body.appendChild(clone);
+
+    gsap.to(clone, {
+      x: -rect.left,
+      y: -rect.top,
+      width: '100vw',
+      height: '100vh',
+      scale: 1,
+      duration: 0.3,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        document.body.removeChild(clone);
+        windowRef.current.classList.add('maximized'); // Aplica a classe de full-screen
+        onMaximize();
+      },
+    });
+  };
 
   return (
     <div
@@ -76,17 +146,17 @@ const Window = ({
           {title}
         </span>
         <div className="window-controls">
-          <button className="minimize" onClick={onMinimize}>
+          <button className="minimize" onClick={() => closeWindow(onMinimize)}>
             <i className="icon minimize"></i>
           </button>
-          <button className="maximize" onClick={onMaximize}>
+          <button className="maximize" onClick={maximizeWindow}>
             {isMaximized ? (
               <i className="icon restore"></i>
             ) : (
               <i className="icon maximize"></i>
             )}
           </button>
-          <button className="close" onClick={onClose}>
+          <button className="close" onClick={() => closeWindow(onClose)}>
             <i className="icon close"></i>
           </button>
         </div>
@@ -102,53 +172,5 @@ const Window = ({
     </div>
   );
 };
-
-function DefaultContent({ id }) {
-  switch (id) {
-    case 'about':
-      return (
-        <>
-          <h2>👋 Hello, I'm a Developer</h2>
-          <p className="about-text"></p>
-        </>
-      );
-    case 'projects':
-      return (
-        <div className="project-grid">
-          <article className="project-card">
-            <h3>Project One</h3>
-            <p>Project Card Example</p>
-          </article>
-        </div>
-      );
-    case 'skills':
-      return (
-        <ul className="skills-list">
-          <li>HTML5 & CSS3</li>
-          <li>JavaScript</li>
-          <li>React</li>
-          <li>UI/UX Design</li>
-          <li>Responsive Design</li>
-        </ul>
-      );
-    case 'contact':
-      return (
-        <form className="contact-form">
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" required />
-
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-
-          <label htmlFor="message">Message:</label>
-          <textarea id="message" name="message" required></textarea>
-
-          <button type="submit">Send Message</button>
-        </form>
-      );
-    default:
-      return null;
-  }
-}
 
 export default Window;
