@@ -24,6 +24,9 @@ export function windowReducer(state, action) {
       return {
         ...state,
         focus: action.payload,
+        minimized: !state.minimized.includes(action.payload)
+          ? state.minimized.filter(id => id !== action.payload)
+          : [...state.minimized, action.payload],
         zIndex: { ...state.zIndex, [action.payload]: Math.max(...Object.values(state.zIndex), 0) + 1 }
       };
 

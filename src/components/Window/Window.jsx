@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import { useRefs } from '../../contexts/RefsContext';
 import useClickOutside from '../../hooks/useClickOutside';
 import DefaultContent from './DefaultContent';
 
@@ -27,7 +28,8 @@ const Window = ({
     onContextMenu,
   } = handlers;
 
-  const windowRef = useRef(null);
+  const { createRef, getRef } = useRefs();
+  const windowRef = createRef(id);
   const headerRef = useRef(null);
 
   const className = `window 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import createRefs from '../../scripts/createRefs';
+import gsap from 'gsap';
 import useClickOutside from '../../hooks/useClickOutside';
 import StartMenu from './StartMenu';
 import { useRefs } from '../../contexts/RefsContext';
@@ -11,17 +12,16 @@ const Taskbar = ({
   focusedWindow,
   openedWindows,
   minimizedWindows,
-  onWindowClick,
+  onWindowMinimize,
+  onWindowRestore,
   onChangeLanguage,
 }) => {
-  const { languageList, languageButton, startWindow } = createRefs([
+  const { languageList, languageButton } = createRefs([
     'languageList',
     'languageButton',
-    'startWindow',
   ]);
 
   const { createRef, getRef } = useRefs();
-
   const [time, setTime] = useState('00:00');
   const [windowsVisibility, setWindowsVisibility] = useState({
     window1: false,
@@ -78,17 +78,17 @@ const Taskbar = ({
     });
   };
 
-  const openWindow = (windowRef) => {
+  const openWindow = (windowRef, handler, id) => {
     if (!windowRef.current) return;
-
     // Define o estado inicial (invisível e pequeno)
-    gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
+    gsap.set(windowRef.current, { scale: 0.9, opacity: 0 });
 
     // Faz a animação de abertura
+    handler(id);
     gsap.to(windowRef.current, {
       scale: 1, // Tamanho normal
       opacity: 1, // Totalmente visível
-      duration: 0.3, // Duração da animação
+      duration: 0.2, // Duração da animação
       ease: 'power2.out',
     });
   };
@@ -96,9 +96,9 @@ const Taskbar = ({
   const windowClickHandler = (id) => {
     const windowRef = getRef(id);
     if (minimizedWindows.includes(id)) {
-      openWindow(windowRef);
+      openWindow(windowRef, onWindowMinimize, id);
     } else {
-      closeWindow(windowRef, onWindowClick, id);
+      closeWindow(windowRef, onWindowRestore, id);
     }
   };
 
@@ -112,26 +112,6 @@ const Taskbar = ({
           toggleWindowVisibility={toggleWindowVisibility}
           handleTransitionEnd={handleTransitionEnd}
         />
-        {/* <button
-          className="start-button"
-          onClick={() => {
-            toggleOpenMenuAnimation(startWindow, windowsVisibility.window2);
-            toggleWindowVisibility('window2');
-          }}
-          aria-label="Init Menu"
-        >
-          <i className="icon window-icon"></i>
-        </button>
-
-        {/* <!-- Start Window --> */}
-        {/* <section className="start-window-container">
-          <div ref={startWindow} className="start-window-content">
-            <input type="text" aria-label="Menu Init Search Input" />
-            <section>dsadsadasdasd</section>
-            <section>asdasdasdasdasd</section>
-          </div>
-        </section>  */}
-
         {/* <!-- Taskbar Icons --> */}
         <ul className="taskbar-items">
           {windows.map(({ id, icon }) => (

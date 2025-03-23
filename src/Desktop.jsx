@@ -50,9 +50,13 @@ const Desktop = () => {
     });
   }, []);
 
-  const handleLanguage = (language) => {
+  const languageHandler = (language) => {
     if (language.includes('POR')) return 'ENG';
     return 'POR';
+  };
+
+  const minimizeHandler = (id) => {
+    minimizeWindow(dispatch, id);
   };
 
   const taskbarProps = {
@@ -63,8 +67,9 @@ const Desktop = () => {
     minimizedWindows: state.minimized,
     language: state.language,
     onChangeLanguage: () =>
-      changeLanguage(dispatch, handleLanguage(state.language)),
-    onWindowClick: (id) => minimizeWindow(dispatch, id),
+      changeLanguage(dispatch, languageHandler(state.language)),
+    onWindowMinimize: (id) => minimizeWindow(dispatch, id),
+    onWindowRestore: (id) => minimizeWindow(dispatch, id),
   };
 
   return (
@@ -110,7 +115,7 @@ const Desktop = () => {
             zIndex: state.zIndex[id] || 0,
             onFocus: () => focusWindow(dispatch, id),
             onUnfocus: () => resetFocus(dispatch),
-            onMinimize: () => minimizeWindow(dispatch, id),
+            onMinimize: () => minimizeHandler(id),
             onMaximize: () => maximizeWindow(dispatch, id),
             onClose: () => closeWindow(dispatch, id),
           };
