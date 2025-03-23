@@ -13,7 +13,7 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
 
       // If the click is inside the ref element, inside an element with specified class, or inside the optional ref, do nothing
       if (
-
+        !ref.current ||
         event.target.closest(elementClassToBlock) ||
         ref.current.contains(event.target) ||
         secondRef)

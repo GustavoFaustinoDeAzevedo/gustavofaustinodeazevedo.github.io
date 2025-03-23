@@ -20,7 +20,7 @@ import {
 
 import Window from './components/Window';
 import DesktopIcon from './components/DesktopIcon';
-import Taskbar from './components/Taskbar';
+import { Taskbar } from './components/Taskbar';
 import ContextMenu from './components/ContextMenu';
 
 gsap.registerPlugin(useGSAP);
