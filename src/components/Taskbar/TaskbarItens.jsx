@@ -1,4 +1,6 @@
 import React from 'react';
+import { minimize, restore } from './taskbarAnimations';
+import { useRefs } from '../../contexts/RefsContext';
 
 const TaskbarItems = ({
   windows,
@@ -8,9 +10,15 @@ const TaskbarItems = ({
   onWindowMinimize,
   onWindowRestore,
 }) => {
+  const { createRef, getRef } = useRefs();
   const handleTaskbarClick = (id) => {
+    const windowRef = getRef(id);
     const isMinimized = minimizedWindows.includes(id);
-    isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
+    if (isMinimized) {
+      restore(windowRef, () => onWindowRestore(id), isMinimized);
+    } else {
+      minimize(windowRef, () => onWindowMinimize(id), isMinimized);
+    }
   };
 
   return (

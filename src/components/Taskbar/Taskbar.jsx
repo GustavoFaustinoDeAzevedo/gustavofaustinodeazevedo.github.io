@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import gsap from 'gsap';
 import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItens';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
-import useClickOutside from '../../hooks/useClickOutside';
-import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import createRefs from '../../scripts/createRefs';
 
 const Taskbar = ({
@@ -28,10 +25,10 @@ const Taskbar = ({
     languageMenu: false,
   });
 
-  useClickOutside(languageButton, () => {
-    toggleOpenMenuAnimation(languageList, windowsVisibility.languageMenu);
-    toggleWindowVisibility('languageMenu');
-  });
+  // useClickOutside(languageButton, () => {
+  //   toggleOpenMenuAnimation(languageList, windowsVisibility.languageMenu);
+  //   toggleWindowVisibility('languageMenu');
+  // });
 
   const toggleWindowVisibility = (window) => {
     setWindowsVisibility((prev) => ({
