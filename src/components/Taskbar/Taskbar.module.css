@@ -1,4 +1,6 @@
 @layer components {
+
+  /* Main taskbar container */
   .taskbar {
     position: fixed;
     bottom: 0;
@@ -15,93 +17,33 @@
     z-index: 1000;
     -webkit-user-select: none;
     user-select: none;
-  }
 
-  .start-button {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-one);
-    border: none;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
-    color: #ffffff;
-
-    &>* {
+    /* Start button styling */
+    .start-button {
       width: 40px;
       height: 40px;
-    }
-
-    &:hover {
-      background-color: #ffffff43;
-    }
-
-    &:active {
-      background-color: #ffffff1a;
-
-      &>* {
-        transition: all 0.2s;
-        transform: scale(0.8);
-      }
-    }
-  }
-
-  .start-menu-history {
-    list-style: none;
-    display: flex;
-    gap: 5px
-  }
-
-  .taskbar-items {
-    flex: 1;
-    display: flex;
-    gap: 0.5rem;
-    margin: 0 2rem;
-    overflow-x: auto;
-
-    &::-webkit-scrollbar {
-      display: hidden;
-    }
-  }
-
-  .taskbar-item {
-    height: 40px;
-    padding: 0 0.5rem;
-    display: none;
-    align-items: center;
-    background-color: var(--color-one);
-    color: #ffffff;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #ffffff43;
-    }
-
-    &:active {
-      background-color: #ffffff1a;
-
-      &>* {
-        transition: all 0.2s;
-        transform: scale(0.8);
-      }
-    }
-
-    &.focus, &.minimized, &.open {
       display: flex;
-    }
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-one);
+      border: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+      color: #ffffff;
 
-    &.focus:not(.minimized) {
-      background-color: #ffffff1a;
+      /* Icon inside the start button */
+      &>* {
+        width: 40px;
+        height: 40px;
+      }
 
+      /* Hover effect for start button */
       &:hover {
         background-color: #ffffff43;
       }
 
+      /* Active (pressed) effect for start button */
       &:active {
         background-color: #ffffff1a;
 
@@ -111,16 +53,141 @@
         }
       }
     }
-  }
 
-  .taskbar-right {
-    display: flex;
-    align-items: center;
-    color: #ffffff;
-  }
+    /* Start menu container */
+    .start-menu-container {
+      position: absolute;
+      overflow: hidden;
+      bottom: 4rem;
+      left: 2rem;
+      pointer-events: none;
 
-  .clock {
-    padding: 0 1rem;
-    font-size: 0.9rem;
+      .start-menu-content {
+        padding: 15px;
+        transform: "translateY(100%)";
+        display: none;
+        /* background: "lightblue"; */
+        width: max-content;
+        border: 2px var(--border-style) var(--color-border);
+        background-color: var(--color-two);
+        border-radius: 5px;
+        list-style: none;
+        z-index: 999;
+        pointer-events: initial;
+
+        input {
+          width: 100%;
+          background-color: var(--color-three);
+          padding: 0.3rem;
+          color: var(--color-text);
+          pointer-events: initial;
+        }
+
+        .search-content {
+          height: 12rem;
+          width: 30rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+
+        .history-container {
+          border: 1px solid var(--color-four);
+
+          /* History list inside the start menu */
+          .start-menu-history {
+            height: 12rem;
+            width: 30rem;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+          }
+        }
+
+
+      }
+
+
+      .start-menu {}
+    }
+
+    /* Taskbar items container */
+    .taskbar-items {
+      flex: 1;
+      display: flex;
+      gap: 0.5rem;
+      margin: 0 2rem;
+      overflow-x: auto;
+
+      /* Hide scrollbar for taskbar items */
+      &::-webkit-scrollbar {
+        display: hidden;
+      }
+
+      /* Individual taskbar item */
+      .taskbar-item {
+        height: 40px;
+        padding: 0 0.5rem;
+        display: none;
+        align-items: center;
+        background-color: var(--color-one);
+        color: #ffffff;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        /* Hover effect for taskbar item */
+        &:hover {
+          background-color: #ffffff43;
+        }
+
+        /* Active (pressed) effect for taskbar item */
+        &:active {
+          background-color: #ffffff1a;
+
+          &>* {
+            transition: all 0.2s;
+            transform: scale(0.8);
+          }
+        }
+
+        /* Display taskbar items based on state */
+        &.focus, &.minimized, &.open {
+          display: flex;
+        }
+
+        /* Focused taskbar item styling */
+        &.focus:not(.minimized) {
+          background-color: #ffffff1a;
+
+          &:hover {
+            background-color: #ffffff43;
+          }
+
+          &:active {
+            background-color: #ffffff1a;
+
+            &>* {
+              transition: all 0.2s;
+              transform: scale(0.8);
+            }
+          }
+        }
+      }
+    }
+
+    /* Right section of the taskbar */
+    .taskbar-right {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+
+      /* Clock inside the taskbar */
+      .clock {
+        padding: 0 1rem;
+        font-size: 0.9rem;
+      }
+    }
   }
 }

@@ -35,16 +35,16 @@ const StartMenu = ({ toggleWindowVisibility, visible, history }) => {
       </button>
 
       {/* Start Menu Window */}
-      <section className="start-window-container">
-        <div ref={startMenuRef} className="start-window-content">
+      <section className="start-menu-container">
+        <div ref={startMenuRef} className="start-menu-content">
           {/* Search Input */}
           <input type="text" aria-label="Start Menu Search Input" />
 
           {/* Search Results Section */}
-          <section>{/* Search Content */}</section>
+          <section className="search-content">{/* Search Content */}</section>
 
           {/* Recent Items Section */}
-          <fieldset>
+          <fieldset className="history-container">
             {/* Recent Content */}
             <legend>History:</legend>
             <ul className="start-menu-history">

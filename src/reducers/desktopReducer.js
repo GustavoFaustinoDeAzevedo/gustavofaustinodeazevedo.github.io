@@ -52,7 +52,7 @@ export function desktopReducer(state, action) {
         history: (() => {
           const filteredHistory = state.history.filter(item => item !== action.payload);
           const newHistory = [action.payload, ...filteredHistory];
-          return newHistory.slice(0, 8);
+          return newHistory.slice(0, 10);
         })()
       };
     case "CLOSE_WINDOW":

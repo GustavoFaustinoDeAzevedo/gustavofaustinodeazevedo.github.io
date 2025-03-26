@@ -7,13 +7,13 @@
     --color-header-two: #191c29b3;
     --color-one: #1a1b26;
     --color-two: #252631;
-    --color-tree: #31323C;
+    --color-three: #31323C;
     --color-four: #3C3D47;
     --color-light: #3A3D4F;
     --color-input-area: #2F3345;
 
     --color-background: linear-gradient(135deg, var(--color-one), var(--color-two));
-    --color-background-secondary: linear-gradient(135deg, var(--color-tree), var(--color-four));
+    --color-background-secondary: linear-gradient(135deg, var(--color-three), var(--color-four));
     --color-background-tertiary: linear-gradient(135deg, #1a1b26, #24283b);
 
     --color-header: #0e0e0e;
