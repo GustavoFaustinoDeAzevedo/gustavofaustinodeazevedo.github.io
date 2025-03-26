@@ -1,8 +1,8 @@
 import { useReducer, useRef } from "react";
-import { windowReducer, initialState } from "../reducers/windowReducer";
+import { desktopReducer, initialState } from "../reducers/desktopReducer";
 
 export function useDesktop() {
-  const [state, dispatch] = useReducer(windowReducer, initialState);
+  const [state, dispatch] = useReducer(desktopReducer, initialState);
   const desktopRef = useRef(null);
 
   return { state, dispatch, desktopRef };

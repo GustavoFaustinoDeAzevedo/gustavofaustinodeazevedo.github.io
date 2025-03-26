@@ -7,7 +7,7 @@ const DesktopIcon = ({ title, icon, onClick }) => {
       onTouchStart={onClick}
       onDoubleClick={onClick}
     >
-      <i className={`bi ${icon}`}></i>
+      <i className={`${icon}`}></i>
       <span>{title}</span>
     </div>
   );

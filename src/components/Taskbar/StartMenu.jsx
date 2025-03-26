@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import useClickOutside from '../../hooks/useClickOutside';
+import { windows } from '../../data/windowsData';
 
-const StartMenu = ({ toggleWindowVisibility, visible }) => {
+const StartMenu = ({ toggleWindowVisibility, visible, history }) => {
   // Local refs for Start Menu and Button
   const startMenuRef = useRef(null);
   const startButtonRef = useRef(null);
@@ -40,10 +41,18 @@ const StartMenu = ({ toggleWindowVisibility, visible }) => {
           <input type="text" aria-label="Start Menu Search Input" />
 
           {/* Search Results Section */}
-          <section>{/* Search Content */}dsadsadasdasd</section>
+          <section>{/* Search Content */}</section>
 
           {/* Recent Items Section */}
-          <section>{/* Recent Content */}asdasdasdasdasd</section>
+          <fieldset>
+            {/* Recent Content */}
+            <legend>History:</legend>
+            <ul className="start-menu-history">
+              {history.map((id) => {
+                return <li key={`history-${id}`}>{id}</li>;
+              })}
+            </ul>
+          </fieldset>
         </div>
       </section>
     </div>

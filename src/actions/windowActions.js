@@ -5,7 +5,7 @@ export const focusWindow = (dispatch, id) => {
   });
 };
 
-export const openWindow = (dispatch, id) => {
+export const openWindow = (dispatch, id, title, icon) => {
   dispatch({
     type: "OPEN_WINDOW",
     payload: id

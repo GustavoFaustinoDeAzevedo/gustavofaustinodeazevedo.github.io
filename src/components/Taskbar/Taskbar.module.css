@@ -49,6 +49,12 @@
     }
   }
 
+  .start-menu-history {
+    list-style: none;
+    display: flex;
+    gap: 5px
+  }
+
   .taskbar-items {
     flex: 1;
     display: flex;

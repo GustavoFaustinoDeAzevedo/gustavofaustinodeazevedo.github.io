@@ -28,7 +28,7 @@ const TaskbarItems = ({
           key={id}
           className={`taskbar-item 
             ${focusedWindow === id ? 'focus' : ''}
-            ${openedWindows.includes(id) ? 'open' : ''} 
+            ${openedWindows.includes(id) ? 'open' : ''}
             ${minimizedWindows.includes(id) ? 'minimized' : ''}`}
           onClick={() => handleTaskbarClick(id)}
         >

@@ -14,6 +14,7 @@ const Taskbar = ({
   onWindowMinimize,
   onWindowRestore,
   onChangeLanguage,
+  history,
 }) => {
   const { languageList, languageButton } = createRefs([
     'languageList',
@@ -42,6 +43,7 @@ const Taskbar = ({
       <StartMenu
         visible={windowsVisibility.startMenu}
         toggleWindowVisibility={toggleWindowVisibility}
+        history={history}
       />
       <TaskbarItems
         windows={windows}
