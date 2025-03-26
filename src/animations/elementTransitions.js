@@ -6,7 +6,7 @@ const toggleOpenMenuAnimation = (ref, visible) => {
       gsap.fromTo(
         ref.current,
         { y: 0, opacity: 1 },
-        { y: '100%', opacity: 0, duration: 0.1, ease: 'power1.out' }
+        { y: '100%', opacity: 0, duration: 0.2, ease: 'power2.inOut' }
       );
     } else {
       // Animation to "slide in" upwards
@@ -19,8 +19,8 @@ const toggleOpenMenuAnimation = (ref, visible) => {
       gsap.to(ref.current, {
         y: 0,
         opacity: 1,
-        duration: 0.1,
-        ease: 'power1.in',
+        duration: 0.2,
+        ease: 'power2.in',
       });
     }
   }
