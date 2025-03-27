@@ -3,22 +3,27 @@ import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import useClickOutside from '../../hooks/useClickOutside';
 import { windows } from '../../data/windowsData';
 
-const StartMenu = ({ toggleWindowVisibility, visible, history }) => {
+const StartMenu = ({
+  toggleWindowVisibility,
+  isVisible,
+  history,
+  language,
+}) => {
   // Local refs for Start Menu and Button
   const startMenuRef = useRef(null);
   const startButtonRef = useRef(null);
 
   // Handles the toggle animation and visibility of the Start Menu
-  const handleStartButtonClick = () => {
-    toggleOpenMenuAnimation(startMenuRef, visible);
+  const handleOpenMenuButtonClick = () => {
+    toggleOpenMenuAnimation(startMenuRef, isVisible);
     toggleWindowVisibility('startMenu');
   };
 
   // Detects clicks outside to close the Start Menu
   useClickOutside(
     startButtonRef,
-    handleStartButtonClick,
-    visible,
+    handleOpenMenuButtonClick,
+    isVisible,
     startMenuRef
   );
 
@@ -27,9 +32,10 @@ const StartMenu = ({ toggleWindowVisibility, visible, history }) => {
       {/* Start Button */}
       <button
         ref={startButtonRef}
+        title={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
         className="start-button"
-        onClick={handleStartButtonClick}
-        aria-label="Start Menu"
+        onClick={handleOpenMenuButtonClick}
+        aria-label={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
       >
         <i className="icon window-icon"></i>
       </button>

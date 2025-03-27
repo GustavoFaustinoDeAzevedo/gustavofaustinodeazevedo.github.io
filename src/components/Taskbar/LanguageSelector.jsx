@@ -2,22 +2,26 @@ import React, { useRef } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import useClickOutside from '../../hooks/useClickOutside';
 
-const LanguageSelector = ({ language, onChangeLanguage }) => {
+const LanguageSelector = ({
+  language,
+  onChangeLanguage,
+  toggleWindowVisibility,
+  isVisible,
+}) => {
   // Local refs for Language Menu and Button
   const languageMenuRef = useRef(null);
   const languageButtonRef = useRef(null);
-  const [isVisible, setIsVisible] = React.useState(false);
 
-  // Toggles the language menu visibility
-  const handleLanguageToggle = () => {
+  // Toggles the language menu visibility{
+  const handleOpenMenuButtonClick = () => {
     toggleOpenMenuAnimation(languageMenuRef, isVisible);
-    setIsVisible(!isVisible);
+    toggleWindowVisibility('languageMenu');
   };
 
   // Detects clicks outside to close the Language Menu
   useClickOutside(
     languageButtonRef,
-    handleLanguageToggle,
+    handleOpenMenuButtonClick,
     isVisible,
     languageMenuRef
   );
@@ -27,24 +31,30 @@ const LanguageSelector = ({ language, onChangeLanguage }) => {
       <button
         ref={languageButtonRef}
         className="language-button"
-        onClick={handleLanguageToggle}
-        aria-label="Select language"
+        onClick={handleOpenMenuButtonClick}
+        aria-label={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
+        title={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
       >
         {language}
       </button>
       <div className="language-list-container">
-        <ul ref={languageMenuRef} className="language-list">
+        <ul
+          ref={languageMenuRef}
+          className={`language-list ${isVisible ? 'active' : ''}`}
+        >
           <li
             onClick={onChangeLanguage}
             className={language.includes('ENG') ? 'active' : ''}
+            aria-label={language !== 'POR' ? 'English-US' : 'Inglês-US'}
           >
-            English-US
+            {language !== 'POR' ? 'English-US' : 'Inglês-US'}
           </li>
           <li
             onClick={onChangeLanguage}
             className={language.includes('POR') ? 'active' : ''}
+            aria-label={language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}
           >
-            Portuguese-BR
+            {language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}
           </li>
         </ul>
       </div>

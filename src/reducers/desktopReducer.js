@@ -12,7 +12,7 @@ export const initialState = {
   zIndex: {},
   history: [],
   language: defaultLanguage.includes('pt' || 'POR') ? 'POR' : 'ENG',
-  contextMenu: { show: false, x: 0, y: 0, target: null },
+  contextMenu: { show: false, x: 0, y: 0, target: null, data: null },
 
 };
 
@@ -85,12 +85,12 @@ export function desktopReducer(state, action) {
     case "HIDE_CONTEXT_MENU":
       return {
         ...state,
-        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+        contextMenu: { show: false, x: 0, y: 0, type: null, target: null, data: null }
       };
     case "CLICK_OUTSIDE":
       return {
         ...state,
-        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+        contextMenu: { show: false, x: 0, y: 0, type: null, target: null, data: null }
       };
     default:
       return state;

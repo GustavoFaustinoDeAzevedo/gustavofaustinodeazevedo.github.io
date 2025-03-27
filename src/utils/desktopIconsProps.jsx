@@ -5,6 +5,7 @@ export const getDesktopIconProps = (state, dispatch, id, title, icon) => ({
   id,
   title: state.language.includes('POR') ? title.por : title.eng,
   icon,
+  dispatch,
   language: state.language,
   onClick: () => {
     if (title.por === 'Novo' || title.por === 'new') {

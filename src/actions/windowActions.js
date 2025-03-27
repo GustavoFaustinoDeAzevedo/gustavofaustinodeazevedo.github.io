@@ -33,10 +33,10 @@ export const minimizeWindow = (dispatch, id) => {
   });
 };
 
-export const showContextMenu = (dispatch, x, y, target) => {
+export const showContextMenu = (dispatch, x, y, target, data) => {
   dispatch({
     type: "SHOW_CONTEXT_MENU",
-    payload: { x, y, target }
+    payload: { x, y, target, data }
   });
 };
 

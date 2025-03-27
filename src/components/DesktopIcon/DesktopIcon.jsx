@@ -1,15 +1,25 @@
 import React from 'react';
 
-const DesktopIcon = ({ title, icon, onClick }) => {
+const DesktopIcon = ({ title, icon, dispatch, id, onClick }) => {
+  const dataInfo = JSON.stringify({
+    title,
+    icon,
+    dispatch,
+    id,
+    handler: onClick,
+  });
   return (
-    <div
+    <a
       className="desktop-icon"
+      title={title}
       onTouchStart={onClick}
       onDoubleClick={onClick}
+      data-info={dataInfo}
+      id="desktopIcon"
     >
       <i className={`${icon}`}></i>
       <p className="icon-text">{title}</p>
-    </div>
+    </a>
   );
 };
 

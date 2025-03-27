@@ -14,6 +14,7 @@ const Window = ({
   isOpen,
   children,
   desktopRef,
+  language,
   ...handlers
 }) => {
   const {
@@ -136,6 +137,7 @@ const Window = ({
       className={className}
       style={{ zIndex: zIndex }}
       onContextMenu={onContextMenu}
+      id="window"
     >
       <div className="window-header">
         <span
@@ -143,22 +145,55 @@ const Window = ({
           onClick={onFocus}
           onMouseDown={onFocus}
           ref={headerRef}
+          title={title}
+          aria-label={title}
           className="window-title"
         >
           {title}
         </span>
         <div className="window-controls">
-          <button className="minimize" onClick={() => closeWindow(onMinimize)}>
+          <button
+            aria-label={language !== 'POR' ? 'Minimize' : 'Minimizar'}
+            title={language !== 'POR' ? 'Minimize' : 'Minimizar'}
+            className="minimize"
+            onClick={() => closeWindow(onMinimize)}
+          >
             <i className="icon minimize"></i>
           </button>
-          <button className="maximize" onClick={maximizeWindow}>
+          <button
+            aria-label={
+              isMaximized
+                ? language !== 'POR'
+                  ? 'Maximize'
+                  : 'Maximizar'
+                : language !== 'POR'
+                ? 'Restore'
+                : 'Restaurar'
+            }
+            title={
+              isMaximized
+                ? language !== 'POR'
+                  ? 'Maximize'
+                  : 'Maximizar'
+                : language !== 'POR'
+                ? 'Restore'
+                : 'Restaurar'
+            }
+            className="maximize"
+            onClick={maximizeWindow}
+          >
             {isMaximized ? (
               <i className="icon restore"></i>
             ) : (
               <i className="icon maximize"></i>
             )}
           </button>
-          <button className="close" onClick={() => closeWindow(onClose)}>
+          <button
+            aria-label={language !== 'POR' ? 'Close' : 'Fechar'}
+            title={language !== 'POR' ? 'Close' : 'Fechar'}
+            className="close"
+            onClick={() => closeWindow(onClose)}
+          >
             <i className="icon close"></i>
           </button>
         </div>

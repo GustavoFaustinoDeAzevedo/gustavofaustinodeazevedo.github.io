@@ -239,25 +239,18 @@
 
 
           .language-list {
-            transform: "translateY(100%)";
-            display: none;
+            transform: translateY(100%);
+            display: flex;
+            flex-wrap: wrap;
             background: "lightblue";
             width: max-content;
-            border: 2px var(--border-style) var(--color-border);
-            background-color: var(--color-one);
+            border: 2px var(--border-style) var(--c-border);
+            background-color: var(--c-background);
             border-radius: 5px;
             list-style: none;
             z-index: 999;
             cursor: pointer;
             pointer-events: initial;
-
-
-            &.active {
-              display: flex !important;
-              flex-wrap: wrap;
-              background-color: var(--color-four);
-              border-left: 2px solid var(--color-primary);
-            }
 
 
             li {
@@ -282,8 +275,11 @@
 
       /* Clock inside the taskbar */
       .clock {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: right;
         padding: 0 1rem;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
   }

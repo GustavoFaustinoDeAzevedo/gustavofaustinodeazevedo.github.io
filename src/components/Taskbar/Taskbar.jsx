@@ -41,7 +41,8 @@ const Taskbar = ({
   return (
     <nav className="taskbar">
       <StartMenu
-        visible={windowsVisibility.startMenu}
+        language={language}
+        isVisible={windowsVisibility.startMenu}
         toggleWindowVisibility={toggleWindowVisibility}
         history={history}
       />
@@ -59,6 +60,7 @@ const Taskbar = ({
           languageButton={languageButton}
           languageList={languageList}
           windowsVisibility={windowsVisibility}
+          isVisible={windowsVisibility.languageMenu}
           toggleWindowVisibility={toggleWindowVisibility}
           onChangeLanguage={onChangeLanguage}
         />

@@ -4,6 +4,10 @@
   background-color: var(--color-text);
   background-size: contain;
   background-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   display: inline-block;
 
   &.about {
@@ -96,8 +100,13 @@
     mask-image: url('/icons/magnify_glass.svg');
   }
 
-  &.color-picker {
+  &.paint {
     -webkit-mask-image: url('/icons/paint_brush_solid.svg');
     mask-image: url('/icons/paint_brush_solid.svg');
+  }
+
+  &.color-picker {
+    -webkit-mask-image: url('/icons/dropper.svg');
+    mask-image: url('/icons/dropper.svg');
   }
 }

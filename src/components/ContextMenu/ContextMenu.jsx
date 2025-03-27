@@ -29,7 +29,7 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
 
   return (
     <div ref={menuRef} className="context-menu active">
-      {items.actions.map((action, index) => {
+      {items.map((action, index) => {
         if (action.separator) {
           return (
             <div key={`sep-${index}`} className="context-menu-separator" />
@@ -40,8 +40,16 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
             key={`item-${index}`}
             className="context-menu-item"
             onClick={() => {
-              if (action.handler) {
-                action.handler(target);
+              let dataInfo = null;
+              if (target?.dataset?.info) {
+                try {
+                  dataInfo = JSON.parse(target.dataset.info);
+                } catch (error) {
+                  console.error('Failed to parse dataset info:', error);
+                }
+              }
+              if (typeof action.handler === 'function') {
+                action.handler(dataInfo);
               }
               if (onClose) {
                 onClose();

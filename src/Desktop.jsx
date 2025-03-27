@@ -29,6 +29,7 @@ const Desktop = () => {
 
   useEffect(() => {
     // Disable right-click on elements without the class "enable-context"
+
     const disableRightClick = (e) => {
       if (!e.target.closest('enable-context')) {
         e.preventDefault();
@@ -72,13 +73,27 @@ const Desktop = () => {
     onWindowRestore: (id) => minimizeWindow(dispatch, id),
   };
 
+  const itemsHandler = () => {
+    const firstScope = contextMenuData.find(
+      (data) => data.id === state.contextMenu.target
+    );
+    if (firstScope) return firstScope.actions;
+    return contextMenuData[0].actions;
+  };
+
   return (
     <RefsProvider>
       <div
         className="desktop enable-context"
         ref={desktopRef}
         onContextMenu={(e) => {
-          showContextMenu(dispatch, e.clientX, e.clientY, 'desktop');
+          showContextMenu(
+            dispatch,
+            e.clientX,
+            e.clientY,
+            e.target.id,
+            e.target
+          );
         }}
       >
         <div className="desktop-icons">
@@ -100,6 +115,7 @@ const Desktop = () => {
             isMaximized: state.maximized.includes(id),
             isOpen: state.opened.includes(id),
             zIndex: state.zIndex[id] || 0,
+            language: state.language,
             onFocus: () => focusWindow(dispatch, id),
             onUnfocus: () => resetFocus(dispatch),
             onMinimize: () => minimizeHandler(id),
@@ -116,9 +132,7 @@ const Desktop = () => {
           <ContextMenu
             {...state.contextMenu}
             language={state.language}
-            items={contextMenuData.find(
-              (contextMenu) => contextMenu.id === state.contextMenu.target
-            )}
+            items={itemsHandler()}
             onClose={() => hideContextMenu(dispatch)}
           />
         )}
