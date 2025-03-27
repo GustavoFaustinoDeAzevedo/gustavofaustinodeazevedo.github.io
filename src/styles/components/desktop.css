@@ -21,22 +21,30 @@
 
       /* Individual desktop icon styling */
       .desktop-icon {
-        width: 80px;
-        height: 80px;
+        padding-top: 0.3rem;
+        width: fit-content;
+        height: fit-content;
+        min-width: 90px;
+        min-height: 50px;
+        max-height: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         color: #ffffff;
         cursor: pointer;
+        line-height: 1.2;
         border-radius: 0.5rem;
         transition: background-color 0.2s;
         -webkit-user-select: none;
         user-select: none;
-        text-overflow: ellipsis;
+        overflow: hidden;
+
+
 
         /* Hover effect for desktop icons */
         &:hover {
+
           background-color: #ffffff1a;
         }
 
@@ -47,9 +55,13 @@
         }
 
         /* Label text for the desktop icon */
-        span {
-          font-size: 0.8rem;
+        .icon-text {
+          text-align: center;
+          text-overflow: ellipsis;
+          white-space: normal;
           word-wrap: break-word;
+          font-size: 0.8rem;
+
         }
       }
     }

@@ -8,7 +8,7 @@ const DesktopIcon = ({ title, icon, onClick }) => {
       onDoubleClick={onClick}
     >
       <i className={`${icon}`}></i>
-      <span>{title}</span>
+      <p className="icon-text">{title}</p>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItens';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
-import createRefs from '../../scripts/createRefs';
+import { useRefs } from '../../contexts/RefsContext';
 
 const Taskbar = ({
   language,
@@ -16,7 +16,7 @@ const Taskbar = ({
   onChangeLanguage,
   history,
 }) => {
-  const { languageList, languageButton } = createRefs([
+  const { languageList, languageButton } = useRefs([
     'languageList',
     'languageButton',
   ]);

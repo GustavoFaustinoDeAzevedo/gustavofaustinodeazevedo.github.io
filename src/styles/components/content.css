@@ -13,10 +13,9 @@
 
     & li {
       padding: 0.5rem 1rem;
-      background: var(--color-primary);
+      background: var(--c-accent);
       -webkit-user-select: none;
       user-select: none;
-      color: #ffffff;
       border-radius: var(--border-radius);
       font-size: 0.9rem;
     }
@@ -49,37 +48,38 @@
       width: 100%;
       min-width: 300px;
       max-width: 600px;
-      padding: 0.8rem;
-      color: #ffffff;
-      background-color: var(--color-input-area);
-      border: 2px solid #161226;
+      padding: 0.5rem;
+
+      background-color: var(--c-background-focus);
+      border: 1px solid var(--c-background-focus);
       border-radius: var(--border-radius);
       font-family: inherit;
 
       &:focus {
         outline: none;
-        border-color: #525252;
+        background-color: var(--c-background);
       }
     }
 
     & textarea {
       min-height: 150px;
       resize: vertical;
+      color: inherit;
     }
 
     & button {
       justify-self: start;
       padding: 0.8rem 2rem;
-      background: var(--color-primary);
-      color: #ffffff;
+      background: var(--c-accent);
       border: none;
       border-radius: var(--border-radius);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.3s;
+      color: inherit;
 
       &:hover {
-        background: var(--color-secondary);
+        background: var(--c-accent-hover);
       }
     }
   }

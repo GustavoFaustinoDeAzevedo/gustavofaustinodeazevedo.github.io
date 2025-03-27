@@ -37,9 +37,11 @@ const StartMenu = ({ toggleWindowVisibility, visible, history }) => {
       {/* Start Menu Window */}
       <section className="start-menu-container">
         <div ref={startMenuRef} className="start-menu-content">
-          {/* Search Input */}
-          <input type="text" aria-label="Start Menu Search Input" />
-
+          <div className="input-container">
+            <i className="icon search">&#128269;</i>
+            {/* Search Input */}
+            <input type="text" aria-label="Start menu search input" />
+          </div>
           {/* Search Results Section */}
           <section className="search-content">{/* Search Content */}</section>
 

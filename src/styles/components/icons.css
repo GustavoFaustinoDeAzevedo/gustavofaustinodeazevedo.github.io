@@ -90,4 +90,14 @@
     -webkit-mask-image: url('/icons/new_file.svg');
     mask-image: url('/icons/new_file.svg');
   }
+
+  &.search {
+    -webkit-mask-image: url('/icons/magnify_glass.svg');
+    mask-image: url('/icons/magnify_glass.svg');
+  }
+
+  &.color-picker {
+    -webkit-mask-image: url('/icons/paint_brush_solid.svg');
+    mask-image: url('/icons/paint_brush_solid.svg');
+  }
 }

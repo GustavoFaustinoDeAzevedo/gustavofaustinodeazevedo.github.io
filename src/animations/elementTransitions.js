@@ -11,7 +11,7 @@ const toggleOpenMenuAnimation = (ref, visible) => {
     } else {
       // Animation to "slide in" upwards
       gsap.set(ref.current, {
-        display: 'block',
+        display: 'flex',
         y: '100%',
         opacity: 0,
       });
