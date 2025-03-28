@@ -3,7 +3,7 @@ import { minimize, restore } from './taskbarAnimations';
 import { useRefs } from '../../contexts/RefsContext';
 
 const TaskbarItems = ({
-  windows,
+  desktopIconsData,
   focusedWindow,
   openedWindows,
   minimizedWindows,
@@ -23,7 +23,7 @@ const TaskbarItems = ({
 
   return (
     <ul className="taskbar-items">
-      {windows.map(({ id, icon }) => (
+      {desktopIconsData.map(({ id, icon }) => (
         <li
           key={id}
           className={`taskbar-item 

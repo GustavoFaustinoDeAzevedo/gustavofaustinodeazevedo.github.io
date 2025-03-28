@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { RefsProvider } from './contexts/RefsContext';
 import { useGSAP } from '@gsap/react';
 import { useDesktop } from './hooks/useDesktop';
-import { windows } from './data/windowsData';
+import { desktopIconsData } from './data/desktopIconsData';
 import { getDesktopIconProps } from './utils/desktopIconsProps';
 import { contextMenuData } from './data/contextMenuData';
 import {
@@ -61,7 +61,7 @@ const Desktop = () => {
 
   const taskbarProps = {
     className: 'enable-context',
-    windows,
+    desktopIconsData,
     focusedWindow: state.focus,
     openedWindows: state.opened,
     minimizedWindows: state.minimized,
@@ -99,7 +99,7 @@ const Desktop = () => {
         }}
       >
         <div className="desktop-icons">
-          {windows.map(({ id, title, icon }) => (
+          {desktopIconsData.map(({ id, title, icon }) => (
             <DesktopIcon
               key={id}
               {...getDesktopIconProps(state, dispatch, id, title, icon)}
@@ -107,7 +107,7 @@ const Desktop = () => {
           ))}
         </div>
 
-        {windows.map(({ id, title }) => {
+        {desktopIconsData.map(({ id, title }) => {
           const windowProps = {
             id,
             desktopRef,

@@ -9,12 +9,12 @@ const DesktopIcon = ({ title, icon, dispatch, id, onClick }) => {
   });
   return (
     <a
-      className="desktop-icon"
+      className="desktop-icon parent"
       title={title}
       onTouchStart={onClick}
       onDoubleClick={onClick}
       data-info={dataInfo}
-      id="desktopIcon"
+      id="desktop-icon"
     >
       <i className={`${icon}`}></i>
       <p className="icon-text">{title}</p>

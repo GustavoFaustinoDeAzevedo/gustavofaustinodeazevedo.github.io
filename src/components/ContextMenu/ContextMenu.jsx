@@ -49,9 +49,11 @@ const ContextMenu = ({
             className="context-menu-item"
             onClick={() => {
               let dataInfo = null;
-              if (target && target.dataset.info) {
+              const finalTarget = target.closest('.parent');
+              console.log('finalTarget:', finalTarget.dataset.info);
+              if (finalTarget && finalTarget.dataset.info) {
                 try {
-                  dataInfo = JSON.parse(target.dataset.info);
+                  dataInfo = JSON.parse(finalTarget.dataset.info);
                 } catch (error) {
                   console.error('Failed to parse dataset info:', error);
                 }

@@ -29,7 +29,7 @@ const Window = ({
     onContextMenu,
   } = handlers;
 
-  const { createRef, getRef } = useRefs();
+  const { createRef } = useRefs();
   const windowRef = createRef(id);
   const headerRef = useRef(null);
 
@@ -134,7 +134,7 @@ const Window = ({
   return (
     <div
       ref={windowRef}
-      className={className}
+      className={`${className} parent`}
       style={{ zIndex: zIndex }}
       onContextMenu={onContextMenu}
       id={id}

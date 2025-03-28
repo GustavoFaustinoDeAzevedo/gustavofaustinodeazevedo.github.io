@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 import useClickOutside from '../../hooks/useClickOutside';
-import { windows } from '../../data/windowsData';
+import { desktopIconsData } from '../../data/desktopIconsData';
 
 const StartMenu = ({
   toggleWindowVisibility,

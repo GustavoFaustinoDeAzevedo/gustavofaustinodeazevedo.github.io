@@ -7,7 +7,7 @@ import { useRefs } from '../../contexts/RefsContext';
 
 const Taskbar = ({
   language,
-  windows,
+  desktopIconsData,
   focusedWindow,
   openedWindows,
   minimizedWindows,
@@ -47,7 +47,7 @@ const Taskbar = ({
         history={history}
       />
       <TaskbarItems
-        windows={windows}
+        desktopIconsData={desktopIconsData}
         focusedWindow={focusedWindow}
         openedWindows={openedWindows}
         minimizedWindows={minimizedWindows}

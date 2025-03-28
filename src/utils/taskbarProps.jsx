@@ -6,7 +6,7 @@ const toggleLanguage = (language) => (language.includes('POR') ? 'ENG' : 'POR');
 // Generate props for Taskbar component
 export const getTaskbarProps = ({ ...props }) => ({
   className: 'enable-context',
-  windows: props.windows,
+  desktopIconsData: props.desktopIconsData,
   focusedWindow: props.focus,
   openedWindows: props.opened,
   minimizedWindows: props.minimized,
