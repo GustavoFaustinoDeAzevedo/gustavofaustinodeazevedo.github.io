@@ -87,13 +87,15 @@ const Desktop = () => {
         className="desktop enable-context"
         ref={desktopRef}
         onContextMenu={(e) => {
-          showContextMenu(
-            dispatch,
-            e.clientX,
-            e.clientY,
-            e.target.id,
-            e.target
-          );
+          if (e.target) {
+            showContextMenu(
+              dispatch,
+              e.clientX,
+              e.clientY,
+              e.target || 'default',
+              e
+            );
+          }
         }}
       >
         <div className="desktop-icons">
@@ -131,6 +133,8 @@ const Desktop = () => {
         {state.contextMenu.show && (
           <ContextMenu
             {...state.contextMenu}
+            state={state}
+            dispatch={dispatch}
             language={state.language}
             items={itemsHandler()}
             onClose={() => hideContextMenu(dispatch)}

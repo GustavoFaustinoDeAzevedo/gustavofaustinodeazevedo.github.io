@@ -5,7 +5,7 @@ export const focusWindow = (dispatch, id) => {
   });
 };
 
-export const openWindow = (dispatch, id, title, icon) => {
+export const openWindow = (dispatch, id) => {
   dispatch({
     type: "OPEN_WINDOW",
     payload: id
@@ -33,10 +33,10 @@ export const minimizeWindow = (dispatch, id) => {
   });
 };
 
-export const showContextMenu = (dispatch, x, y, target, data) => {
+export const showContextMenu = (dispatch, x, y, target, element) => {
   dispatch({
     type: "SHOW_CONTEXT_MENU",
-    payload: { x, y, target, data }
+    payload: { x, y, target, element }
   });
 };
 

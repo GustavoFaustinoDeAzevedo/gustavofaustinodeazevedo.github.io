@@ -11,9 +11,8 @@ export const getDesktopIconProps = (state, dispatch, id, title, icon) => ({
     if (title.por === 'Novo' || title.por === 'new') {
       console.log('new');
     } else if (!state.opened.includes(id)) {
-      openWindow(dispatch, id, title, icon);
+      openWindow(dispatch, id);
       focusWindow(dispatch, id);
-      console.log(state.history);
     }
   },
 });

@@ -1,9 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
 
-const ContextMenu = ({ x, y, items, target, onClose, language }) => {
+const ContextMenu = ({
+  x,
+  y,
+  items,
+  dispatch,
+  state,
+  target,
+  onClose,
+  language,
+}) => {
   const menuRef = useRef(null);
-
   useEffect(() => {
     if (menuRef.current) {
       const rect = menuRef.current.getBoundingClientRect();
@@ -41,7 +49,7 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
             className="context-menu-item"
             onClick={() => {
               let dataInfo = null;
-              if (target?.dataset?.info) {
+              if (target && target.dataset.info) {
                 try {
                   dataInfo = JSON.parse(target.dataset.info);
                 } catch (error) {
@@ -49,7 +57,7 @@ const ContextMenu = ({ x, y, items, target, onClose, language }) => {
                 }
               }
               if (typeof action.handler === 'function') {
-                action.handler(dataInfo);
+                action.handler({ state, dispatch, ...dataInfo });
               }
               if (onClose) {
                 onClose();

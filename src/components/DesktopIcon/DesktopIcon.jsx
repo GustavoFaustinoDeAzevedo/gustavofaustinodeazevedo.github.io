@@ -4,7 +4,6 @@ const DesktopIcon = ({ title, icon, dispatch, id, onClick }) => {
   const dataInfo = JSON.stringify({
     title,
     icon,
-    dispatch,
     id,
     handler: onClick,
   });

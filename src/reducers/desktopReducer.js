@@ -12,7 +12,7 @@ export const initialState = {
   zIndex: {},
   history: [],
   language: defaultLanguage.includes('pt' || 'POR') ? 'POR' : 'ENG',
-  contextMenu: { show: false, x: 0, y: 0, target: null, data: null },
+  contextMenu: { show: false, x: 0, y: 0, target: null, element: null },
 
 };
 
@@ -37,7 +37,7 @@ export function desktopReducer(state, action) {
       return {
         ...state,
         focus: null,
-        contextMenu: { show: false, x: 0, y: 0, type: null, target: null }
+        contextMenu: { show: false, x: 0, y: 0, target: null, element: null }
       };
     case "OPEN_WINDOW":
       return {
@@ -50,6 +50,7 @@ export function desktopReducer(state, action) {
           : [...state.minimized],
         focus: action.payload.id,
         history: (() => {
+
           const filteredHistory = state.history.filter(item => item !== action.payload);
           const newHistory = [action.payload, ...filteredHistory];
           return newHistory.slice(0, 10);
@@ -85,12 +86,12 @@ export function desktopReducer(state, action) {
     case "HIDE_CONTEXT_MENU":
       return {
         ...state,
-        contextMenu: { show: false, x: 0, y: 0, type: null, target: null, data: null }
+        contextMenu: { show: false, x: 0, y: 0, target: null, element: null }
       };
     case "CLICK_OUTSIDE":
       return {
         ...state,
-        contextMenu: { show: false, x: 0, y: 0, type: null, target: null, data: null }
+        contextMenu: { show: false, x: 0, y: 0, target: null, element: null }
       };
     default:
       return state;
