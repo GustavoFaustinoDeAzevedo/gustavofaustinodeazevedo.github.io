@@ -9,7 +9,7 @@ export const initialState = {
   minimized: [],
   hidden: [],
   maximized: [],
-  zIndex: {},
+  zIndex: [],
   history: [],
   language: defaultLanguage.includes('pt' || 'POR') ? 'POR' : 'ENG',
   contextMenu: { show: false, x: 0, y: 0, target: null, element: null },
@@ -48,9 +48,8 @@ export function desktopReducer(state, action) {
         minimized: state.minimized.includes(action.payload)
           ? state.minimized.filter(id => id !== action.payload)
           : [...state.minimized],
-        focus: action.payload.id,
+        focus: action.payload,
         history: (() => {
-
           const filteredHistory = state.history.filter(item => item !== action.payload);
           const newHistory = [action.payload, ...filteredHistory];
           return newHistory.slice(0, 10);
