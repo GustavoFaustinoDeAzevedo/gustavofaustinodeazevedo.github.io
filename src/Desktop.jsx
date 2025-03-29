@@ -74,11 +74,18 @@ const Desktop = () => {
   };
 
   const itemsHandler = () => {
+    const { target } = state.contextMenu;
+    const finalTarget = target?.closest?.('.parent');
+    const dataInfo = finalTarget?.dataset?.info
+      ? JSON.parse(finalTarget.dataset.info)
+      : {};
+    const targetContextId = dataInfo?.targetContextId || 'default';
+
     const firstScope = contextMenuData.find(
-      (data) => data.id === state.contextMenu.target
+      (data) => data.targetContextId === targetContextId
     );
-    if (firstScope) return firstScope.actions;
-    return contextMenuData[0].actions;
+    if (firstScope) return firstScope?.actions || [];
+    return contextMenuData[0]?.actions || [];
   };
 
   return (
@@ -92,7 +99,7 @@ const Desktop = () => {
               dispatch,
               e.clientX,
               e.clientY,
-              e.target || 'default',
+              e.target.closest('.parent') || 'default',
               e
             );
           }

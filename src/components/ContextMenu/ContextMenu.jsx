@@ -12,6 +12,8 @@ const ContextMenu = ({
   language,
 }) => {
   const menuRef = useRef(null);
+  const dataInfo = useRef(null);
+
   useEffect(() => {
     if (menuRef.current) {
       const rect = menuRef.current.getBoundingClientRect();
@@ -31,7 +33,21 @@ const ContextMenu = ({
       menuRef.current.style.left = `${adjustedX}px`;
       menuRef.current.style.top = `${adjustedY}px`;
     }
-  }, [x, y]);
+
+    let finalTarget = null;
+
+    if (target && typeof target.closest === 'function') {
+      finalTarget = target.closest('.parent');
+    }
+    if (finalTarget && finalTarget.dataset.info) {
+      try {
+        dataInfo.current = JSON.parse(finalTarget.dataset.info);
+        console.log(dataInfo.current);
+      } catch (error) {
+        console.error('Failed to parse dataset info: ', error);
+      }
+    }
+  }, [x, y, dataInfo]);
 
   useClickOutside(menuRef, onClose);
 
@@ -48,18 +64,8 @@ const ContextMenu = ({
             key={`item-${index}`}
             className="context-menu-item"
             onClick={() => {
-              let dataInfo = null;
-              const finalTarget = target.closest('.parent');
-              console.log('finalTarget:', finalTarget.dataset.info);
-              if (finalTarget && finalTarget.dataset.info) {
-                try {
-                  dataInfo = JSON.parse(finalTarget.dataset.info);
-                } catch (error) {
-                  console.error('Failed to parse dataset info:', error);
-                }
-              }
               if (typeof action.handler === 'function') {
-                action.handler({ state, dispatch, ...dataInfo });
+                action.handler({ state, dispatch, ...dataInfo.current });
               }
               if (onClose) {
                 onClose();
