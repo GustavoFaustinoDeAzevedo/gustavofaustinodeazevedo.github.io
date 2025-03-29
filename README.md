@@ -71,6 +71,7 @@ As I gain more experience, the project will be updated with new projects and inf
 - ReactJS
 - GSAP
 - HeroIcons
+- Vite
 
 ---
 
