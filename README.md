@@ -1,4 +1,3 @@
-````markdown
 # GustavOS
 
 > This portfolio project showcases an operating system simulation implemented with React/JavaScript.
@@ -90,4 +89,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Demo
 
 [Click here to see for yourself](https://gustavofaustinodeazevedo.github.io)
-````
+
+---
