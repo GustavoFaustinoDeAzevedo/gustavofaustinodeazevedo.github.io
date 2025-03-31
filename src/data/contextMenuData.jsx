@@ -35,11 +35,8 @@ export const contextMenuData = [
       {
         label: 'Change Background',
         icon: 'color-picker',
-        handler: () => {
-          const color = prompt('Enter a color (name or hex):', '#ffffff');
-          if (color) {
-            document.body.style.backgroundColor = color;
-          }
+        handler: (target) => {
+          openWindowHandler(target);
         },
       },
     ],
@@ -99,11 +96,8 @@ export const contextMenuData = [
       {
         label: 'Change Background',
         icon: 'color-picker',
-        handler: () => {
-          const color = prompt('Enter a color (name or hex):', '#ffffff');
-          if (color) {
-            document.body.style.backgroundColor = color;
-          }
+        handler: (target) => {
+          openWindowHandler(target);
         },
       },
     ],
