@@ -1,11 +1,22 @@
+import React from 'react';
+
 const DefaultContent = ({ id }) => {
   switch (id) {
     case 'about':
       return (
-        <>
-          <h2>👋 Hello, I'm a Developer</h2>
-          <p className="about-text"></p>
-        </>
+        <div className="about-me-wraper">
+          <h2>
+            👋 Hi, I'm Gustavo, a Web Developer specializing in React and
+            JavaScript.
+          </h2>
+          <p className="about-me-text">
+            I'm a Computer Engineering graduate passionate about building sleek,
+            user-friendly interfaces with HTML, CSS, and React — especially dark
+            themes. I'm eager to bring my skills to an entry-level front-end
+            developer role, where I can contribute, grow, and collaborate alone
+            or with a dynamic team.
+          </p>
+        </div>
       );
     case 'projects':
       return (

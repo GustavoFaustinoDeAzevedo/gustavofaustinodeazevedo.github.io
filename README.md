@@ -19,27 +19,33 @@ As I gain more experience, the project will be updated with new projects and inf
 - [x] Draggable windows.
 - [x] A basic Context menu.
 - [x] Executable Desktop Icons
-- [x] Clock + Date
-- [x] A modify language system + button on taskbar
-- [x] A basic start menu
+- [x] Clock + Date.
+- [x] A modify language system + button on taskbar.
+- [x] A basic start menu.
+
+---
+
+## On Going
+
+- [◽] Better react reduce organization.
 
 ---
 
 ## Things to Be Done
 
 - [ ] Improve start menu.
-- [ ] Change background color/image
-- [ ] Context menu needs some improvements
+- [ ] Change background color/image.
+- [ ] Context menu needs some improvements.
 - [ ] Add simple OS-based projects:
-  - [ ] Todo List
-  - [ ] Basic Paint
-  - [ ] Minefield
-  - [ ] Snake
-  - [ ] Text editor
-  - [ ] Basic image editor
-  - [ ] Notes
-  - [ ] I'll think about more in the future 😅
-- [ ] Improve animations
+  - [ ] Todo List.
+  - [ ] Basic Paint.
+  - [ ] Minefield.
+  - [ ] Snake.
+  - [ ] Text editor.
+  - [ ] Basic image editor.
+  - [ ] Notes.
+  - [ ] I'll think about more in the future 😅.
+- [ ] Improve animations.
 - [ ] Add automated tests.
 - [ ] Improve developer documentation.
 
