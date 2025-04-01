@@ -42,7 +42,6 @@ const ContextMenu = ({
     if (finalTarget && finalTarget.dataset.info) {
       try {
         dataInfo.current = JSON.parse(finalTarget.dataset.info);
-        console.log(dataInfo.current);
       } catch (error) {
         console.error('Failed to parse dataset info: ', error);
       }
@@ -64,8 +63,24 @@ const ContextMenu = ({
             key={`item-${index}`}
             className="context-menu-item"
             onClick={() => {
-              if (typeof action.handler === 'function') {
-                action.handler({ state, dispatch, ...dataInfo.current });
+              switch (action.type) {
+                case 'view-action':
+                  action.handler({ state, dispatch, ...dataInfo.current });
+                  break;
+                case 'sort':
+                  break;
+                case 'refresh':
+                  window.location.reload();
+                  break;
+                case 'change-background':
+                  action.handler({
+                    state,
+                    dispatch,
+                    id: 'background-color-picker',
+                  });
+                  break;
+                default:
+                  onClose();
               }
               if (onClose) {
                 onClose();

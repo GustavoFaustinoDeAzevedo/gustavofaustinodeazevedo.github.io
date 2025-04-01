@@ -2,6 +2,7 @@ import { focusWindow, openWindow } from '../actions/windowActions';
 
 const openWindowHandler = (target) => {
   const { state, id, dispatch } = target;
+
   const lowerCaseId = id?.toLowerCase();
 
   if (dispatch && lowerCaseId) {
@@ -19,22 +20,37 @@ export const contextMenuData = [
       {
         label: 'View',
         icon: 'view',
-        handler: (target) => {},
+        type: 'view-action',
+        handler: (target) => {
+          openWindowHandler(target);
+        },
       },
-      { label: 'Sort By', icon: 'sort', handler: () => {} },
+      {
+        label: 'Sort By',
+        icon: 'sort',
+        type: 'sort',
+        handler: () => {},
+      },
       {
         label: 'Refresh',
         icon: 'refresh',
+        type: 'refresh',
         handler: () => {
           window.location.reload();
         },
       },
       { separator: true },
-      { label: 'New', icon: 'plus-circle', handler: () => {} },
+      {
+        label: 'New',
+        icon: 'plus-circle',
+        type: 'new-item',
+        handler: () => {},
+      },
       { separator: true },
       {
         label: 'Change Background',
         icon: 'color-picker',
+        type: 'change-background',
         handler: (target) => {
           openWindowHandler(target);
         },
@@ -47,29 +63,39 @@ export const contextMenuData = [
       {
         label: 'View',
         icon: 'view',
+        type: 'view-action',
         handler: (target) => {
           openWindowHandler(target);
         },
       },
-      { label: 'Sort By', icon: 'sort', handler: () => {} },
+      {
+        label: 'Sort By',
+        icon: 'sort',
+        type: 'sort',
+        handler: () => {},
+      },
       {
         label: 'Refresh',
         icon: 'refresh',
+        type: 'refresh',
         handler: () => {
           window.location.reload();
         },
       },
       { separator: true },
-      { label: 'New', icon: 'plus-circle', handler: () => {} },
+      {
+        label: 'New',
+        icon: 'plus-circle',
+        type: 'new-item',
+        handler: () => {},
+      },
       { separator: true },
       {
         label: 'Change Background',
         icon: 'color-picker',
-        handler: () => {
-          const color = prompt('Enter a color (name or hex):', '#ffffff');
-          if (color) {
-            document.body.style.backgroundColor = color;
-          }
+        type: 'change-background',
+        handler: (target) => {
+          openWindowHandler(target);
         },
       },
     ],
@@ -80,22 +106,35 @@ export const contextMenuData = [
       {
         label: 'View',
         icon: 'view',
+        type: 'view-action',
         handler: (target) => {},
       },
-      { label: 'Sort By', icon: 'sort', handler: () => {} },
+      {
+        label: 'Sort By',
+        icon: 'sort',
+        type: 'sort',
+        handler: () => {},
+      },
       {
         label: 'Refresh',
         icon: 'refresh',
+        type: 'refresh',
         handler: () => {
           window.location.reload();
         },
       },
       { separator: true },
-      { label: 'New', icon: 'plus-circle', handler: () => {} },
+      {
+        label: 'New',
+        icon: 'plus-circle',
+        type: 'new-item',
+        handler: () => {},
+      },
       { separator: true },
       {
         label: 'Change Background',
         icon: 'color-picker',
+        type: 'change-background',
         handler: (target) => {
           openWindowHandler(target);
         },
