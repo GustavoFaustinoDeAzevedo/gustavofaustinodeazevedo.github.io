@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
+import { desktopIconsData } from '../../data/desktopIconsData';
 
 const ContextMenu = ({
   x,
@@ -13,6 +14,7 @@ const ContextMenu = ({
 }) => {
   const menuRef = useRef(null);
   const dataInfo = useRef(null);
+  const [ascendingOrder, setAscendingOrder] = useState(true);
 
   useEffect(() => {
     if (menuRef.current) {
@@ -48,6 +50,15 @@ const ContextMenu = ({
     }
   }, [x, y, dataInfo]);
 
+  const handleToggleSort = () => {
+    const newFileIcon = desktopIconsData.pop();
+    desktopIconsData.sort((a, b) =>
+      ascendingOrder ? a.id.localeCompare(b.id) : b.id.localeCompare(a.id)
+    );
+    desktopIconsData.push(newFileIcon);
+    setAscendingOrder(!ascendingOrder);
+  };
+
   useClickOutside(menuRef, onClose);
 
   return (
@@ -68,6 +79,8 @@ const ContextMenu = ({
                   action.handler({ state, dispatch, ...dataInfo.current });
                   break;
                 case 'sort':
+                  handleToggleSort();
+
                   break;
                 case 'refresh':
                   window.location.reload();
