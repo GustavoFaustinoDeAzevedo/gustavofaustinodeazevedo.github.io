@@ -4,6 +4,8 @@ export const desktopIconsData = [
   { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'icon skills' },
   { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'icon contact' },
   { id: 'background-color-picker', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'icon color-picker' },
-  { id: '', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle' }
+  { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle' }
 
 ];
+
+export const placeholder = { id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'icon close' };

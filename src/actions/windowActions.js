@@ -59,4 +59,23 @@ export const resetFocus = (dispatch) => {
   });
 };
 
+export const addIcon = (dispatch, props) => {
+  dispatch({
+    type: "ADD_ICON",
+    payload: props
+  });
+};
+
+export const removeIcon = (dispatch, props) => {
+  dispatch({
+    type: "REMOVE_ICON",
+    payload: props
+  });
+};
+
+export const sortIcons = (dispatch, props) => {
+  dispatch({
+    type: "SORT_ICONS",
+  });
+};
 

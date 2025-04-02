@@ -1,4 +1,5 @@
-import { focusWindow, openWindow } from '../actions/windowActions';
+import { addIcon, focusWindow, openWindow } from '../actions/windowActions';
+import { placeholder } from '../data/desktopIconsData';
 
 // Generate props for a DesktopIcon component
 export const getDesktopIconProps = (state, dispatch, id, title, icon) => ({
@@ -9,7 +10,7 @@ export const getDesktopIconProps = (state, dispatch, id, title, icon) => ({
   language: state.language,
   onClick: () => {
     if (title.por === 'Novo' || title.por === 'new') {
-      console.log('new');
+      addIcon(dispatch, placeholder);
     } else if (!state.opened.includes(id)) {
       openWindow(dispatch, id);
       focusWindow(dispatch, id);

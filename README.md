@@ -22,6 +22,7 @@ As I gain more experience, the project will be updated with new projects and inf
 - [x] Clock + Date.
 - [x] A modify language system + button on taskbar.
 - [x] A basic start menu.
+- [x] A basic sort for desktop icons.
 
 ---
 
@@ -34,7 +35,7 @@ As I gain more experience, the project will be updated with new projects and inf
 ## Things to Be Done
 
 - [ ] Improve start menu.
-- [ ] Change background color/image.
+- [ ] Option to change background color/image.
 - [ ] Context menu needs some improvements.
 - [ ] Add simple OS-based projects:
   - [ ] Todo List.

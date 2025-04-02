@@ -137,7 +137,7 @@ const Window = ({
       className={`${className} parent`}
       style={{ zIndex: zIndex }}
       onContextMenu={onContextMenu}
-      id={id}
+      id={`window-${zIndex}-${id}`}
     >
       <div className="window-header">
         <span

@@ -51,8 +51,8 @@
   }
 
   &.close {
-    -webkit-mask-image: url('/icons/x_icon.svg');
-    mask-image: url('/icons/x_icon.svg');
+    -webkit-mask-image: url('/icons/not_icon.svg');
+    mask-image: url('/icons/not_icon.svg');
   }
 
   &.sort {

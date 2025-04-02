@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { RefsProvider } from './contexts/RefsContext';
 import { useGSAP } from '@gsap/react';
 import { useDesktop } from './hooks/useDesktop';
-import { desktopIconsData } from './data/desktopIconsData';
 import { getDesktopIconProps } from './utils/desktopIconsProps';
 import { contextMenuData } from './data/contextMenuData';
 import {
@@ -26,6 +25,7 @@ gsap.registerPlugin(useGSAP);
 
 const Desktop = () => {
   const { state, dispatch, desktopRef } = useDesktop();
+  const desktopIconsData = state.desktopIcons.desktopIconsData;
 
   useEffect(() => {
     // Disable right-click on elements without the class "enable-context"
@@ -106,15 +106,15 @@ const Desktop = () => {
         }}
       >
         <div className="desktop-icons">
-          {desktopIconsData.map(({ id, title, icon }) => (
+          {desktopIconsData.map(({ id, title, icon }, index) => (
             <DesktopIcon
-              key={id}
+              key={`desktop-icon-${id}-${index}`}
               {...getDesktopIconProps(state, dispatch, id, title, icon)}
             />
           ))}
         </div>
 
-        {desktopIconsData.map(({ id, title }) => {
+        {desktopIconsData.map(({ id, title }, index) => {
           const windowProps = {
             id,
             desktopRef,
@@ -132,7 +132,12 @@ const Desktop = () => {
             onClose: () => closeWindow(dispatch, id),
           };
 
-          return <Window key={id} {...windowProps} />;
+          return (
+            id !== 'new' &&
+            id !== 'placeholder' && (
+              <Window key={`window-${id}-${index}`} {...windowProps} />
+            )
+          );
         })}
 
         <Taskbar {...taskbarProps} />

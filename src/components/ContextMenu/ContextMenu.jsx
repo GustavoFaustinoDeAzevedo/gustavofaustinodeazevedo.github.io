@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
 import { desktopIconsData } from '../../data/desktopIconsData';
+import { sortIcons } from '../../actions/windowActions';
 
 const ContextMenu = ({
   x,
@@ -14,6 +15,7 @@ const ContextMenu = ({
 }) => {
   const menuRef = useRef(null);
   const dataInfo = useRef(null);
+  const [iconsData, setIconsData] = useState([...desktopIconsData]);
   const [ascendingOrder, setAscendingOrder] = useState(true);
 
   useEffect(() => {
@@ -51,13 +53,21 @@ const ContextMenu = ({
   }, [x, y, dataInfo]);
 
   const handleToggleSort = () => {
-    const newFileIcon = desktopIconsData.pop();
-    desktopIconsData.sort((a, b) =>
-      ascendingOrder ? a.id.localeCompare(b.id) : b.id.localeCompare(a.id)
-    );
-    desktopIconsData.push(newFileIcon);
-    setAscendingOrder(!ascendingOrder);
+    setAscendingOrder((prev) => !prev);
   };
+
+  useEffect(() => {
+    setIconsData((prevIcons) => {
+      if (prevIcons.length === 0) return prevIcons;
+      const newFileIcon =
+        prevIcons.length > 0 ? prevIcons[prevIcons.length - 1] : null;
+      const sortedIcons = [...prevIcons.slice(0, -1)].sort((a, b) =>
+        ascendingOrder ? a.id.localeCompare(b.id) : b.id.localeCompare(a.id)
+      );
+
+      return newFileIcon ? [...sortedIcons, newFileIcon] : sortedIcons;
+    });
+  }, [ascendingOrder]);
 
   useClickOutside(menuRef, onClose);
 
@@ -79,7 +89,7 @@ const ContextMenu = ({
                   action.handler({ state, dispatch, ...dataInfo.current });
                   break;
                 case 'sort':
-                  handleToggleSort();
+                  sortIcons(dispatch);
 
                   break;
                 case 'refresh':

@@ -23,18 +23,22 @@ const TaskbarItems = ({
 
   return (
     <ul className="taskbar-items">
-      {desktopIconsData.map(({ id, icon }) => (
-        <li
-          key={id}
-          className={`taskbar-item 
+      {desktopIconsData.map(
+        ({ id, icon }, index) =>
+          id !== 'new' &&
+          id !== 'placeholder' && (
+            <li
+              key={`taskbar-icon-${index}-${id}`}
+              className={`taskbar-item 
             ${focusedWindow === id ? 'focus' : ''}
             ${openedWindows.includes(id) ? 'open' : ''}
             ${minimizedWindows.includes(id) ? 'minimized' : ''}`}
-          onClick={() => handleTaskbarClick(id)}
-        >
-          <i className={`${icon}`}></i>
-        </li>
-      ))}
+              onClick={() => handleTaskbarClick(id)}
+            >
+              <i className={`${icon}`}></i>
+            </li>
+          )
+      )}
     </ul>
   );
 };
