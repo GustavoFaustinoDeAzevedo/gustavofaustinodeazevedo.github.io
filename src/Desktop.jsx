@@ -75,7 +75,16 @@ const Desktop = () => {
       onWindowMinimize: (id) => minimizeWindow(dispatch, id),
       onWindowRestore: (id) => minimizeWindow(dispatch, id),
     }),
-    [desktopIconsData, state.language, handleChangeLanguage]
+    [
+      desktopIconsData,
+      state.focus,
+      state.opened,
+      state.minimized,
+      state.history,
+      state.language,
+      dispatch,
+      handleChangeLanguage,
+    ]
   );
 
   // 6. Handler para as ações do Context Menu com dependência de state.contextMenu
