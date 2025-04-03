@@ -12,12 +12,13 @@ const TaskbarItems = ({
 }) => {
   const { createRef, getRef } = useRefs();
   const handleTaskbarClick = (id) => {
+    console.log(minimizedWindows);
     const windowRef = getRef(id);
     const isMinimized = minimizedWindows.includes(id);
     if (isMinimized) {
-      restore(windowRef, () => onWindowRestore(id), isMinimized);
+      restore(windowRef, onWindowRestore(id));
     } else {
-      minimize(windowRef, () => onWindowMinimize(id), isMinimized);
+      minimize(windowRef, onWindowMinimize(id));
     }
   };
 

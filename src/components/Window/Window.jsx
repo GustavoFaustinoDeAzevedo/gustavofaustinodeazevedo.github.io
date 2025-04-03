@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { useRefs } from '../../contexts/RefsContext';
@@ -33,71 +33,47 @@ const Window = ({
   const windowRef = createRef(id);
   const headerRef = useRef(null);
 
-  const className = `window 
-  ${isFocused ? 'focus' : ''}
-  ${isMinimized ? 'minimized' : ''} 
-  ${isOpen ? 'open' : ''}
-  ${isMaximized ? 'maximized' : ''}`;
+  // Usa useMemo para derivar a classe com base nos estados
+  const className = useMemo(
+    () =>
+      `window 
+      ${isFocused ? 'focus' : ''} 
+      ${isMinimized ? 'minimized' : ''} 
+      ${isOpen ? 'open' : ''} 
+      ${isMaximized ? 'maximized' : ''}`,
+    [isFocused, isMinimized, isOpen, isMaximized]
+  );
 
-  useEffect(() => {
-    if (windowRef.current && headerRef.current) {
-      // Initialize draggable
-      Draggable.create(windowRef.current, {
-        trigger: headerRef.current,
-        type: 'x,y',
-        bounds: desktopRef.current,
-        inertia: true,
-        onPress: onFocus,
-        onDragStart: onFocus,
-      });
-
-      // Random initial position
-      const desktop = document.querySelector('.desktop');
-      const x = Math.floor(Math.random() * (desktop.offsetWidth / 2));
-      const y = Math.floor(Math.random() * (desktop.offsetHeight / 4));
-
-      gsap.set(windowRef.current, { x, y });
-
-      openWindow(windowRef, y);
-    }
-  }, [desktopRef, isOpen]);
-
-  useEffect(() => {
-    // Chama a animação ao montar a janela
-  }, [isOpen]);
-
-  useClickOutside(windowRef, onUnfocus, isFocused);
-
-  const openWindow = (windowRef) => {
+  // Função para abrir a janela com animação
+  const openWindow = useCallback(() => {
     if (!windowRef.current) return;
-
-    // Define o estado inicial (invisível e pequeno)
     gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
-
-    // Faz a animação de abertura
     gsap.to(windowRef.current, {
-      scale: 1, // Tamanho normal
-      opacity: 1, // Totalmente visível
-      duration: 0.3, // Duração da animação
+      scale: 1,
+      opacity: 1,
+      duration: 0.3,
       ease: 'power2.out',
     });
-  };
+  }, [windowRef]);
 
-  const closeWindow = (handler) => {
+  // Função que fecha (ou minimiza/fecha) a janela com animação
+  const closeWindow = useCallback(
+    (handler) => {
+      if (!windowRef.current) return;
+      gsap.to(windowRef.current, {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.inOut',
+        onComplete: () => handler(),
+      });
+    },
+    [windowRef]
+  );
+
+  // Função para maximizar a janela com uma animação separada
+  const maximizeWindow = useCallback(() => {
     if (!windowRef.current) return;
-
-    gsap.to(windowRef.current, {
-      scale: 0.9, // Reduz levemente o tamanho
-      opacity: 0, // Some suavemente
-      duration: 0.2, // Duração da animação
-      ease: 'power2.inOut',
-      onComplete: () => handler(), // Chama a função de fechar após a animação
-    });
-  };
-
-  const maximizeWindow = () => {
-    if (!windowRef.current) return;
-
     const rect = windowRef.current.getBoundingClientRect();
     const clone = windowRef.current.cloneNode(true);
 
@@ -125,17 +101,54 @@ const Window = ({
       ease: 'power2.inOut',
       onComplete: () => {
         document.body.removeChild(clone);
-        windowRef.current.classList.add('maximized'); // Aplica a classe de full-screen
+        windowRef.current.classList.add('maximized');
         onMaximize();
       },
     });
-  };
+  }, [windowRef, onMaximize]);
+
+  // Handlers específicos para minimizar e fechar, memorizados para evitar funções inline
+  const handleMinimize = useCallback(
+    () => closeWindow(onMinimize),
+    [closeWindow, onMinimize]
+  );
+  const handleClose = useCallback(
+    () => closeWindow(onClose),
+    [closeWindow, onClose]
+  );
+
+  // Efeito para inicializar o Draggable e a animação de abertura
+  useEffect(() => {
+    if (windowRef.current && headerRef.current) {
+      Draggable.create(windowRef.current, {
+        trigger: headerRef.current,
+        type: 'x,y',
+        bounds: desktopRef.current,
+        inertia: true,
+        onPress: onFocus,
+        onDragStart: onFocus,
+      });
+
+      // Define uma posição inicial aleatória
+      const desktop = document.querySelector('.desktop');
+      if (desktop) {
+        const x = Math.floor(Math.random() * (desktop.offsetWidth / 2));
+        const y = Math.floor(Math.random() * (desktop.offsetHeight / 4));
+        gsap.set(windowRef.current, { x, y });
+      }
+
+      openWindow();
+    }
+  }, [isOpen]);
+
+  // Hook para fechar a janela ao clicar fora (se for o caso)
+  useClickOutside(windowRef, onUnfocus, isFocused);
 
   return (
     <div
       ref={windowRef}
       className={`${className} parent`}
-      style={{ zIndex: zIndex }}
+      style={{ zIndex }}
       onContextMenu={onContextMenu}
       id={`window-${zIndex}-${id}`}
     >
@@ -156,7 +169,7 @@ const Window = ({
             aria-label={language !== 'POR' ? 'Minimize' : 'Minimizar'}
             title={language !== 'POR' ? 'Minimize' : 'Minimizar'}
             className="minimize"
-            onClick={() => closeWindow(onMinimize)}
+            onClick={handleMinimize}
           >
             <i className="icon minimize"></i>
           </button>
@@ -192,7 +205,7 @@ const Window = ({
             aria-label={language !== 'POR' ? 'Close' : 'Fechar'}
             title={language !== 'POR' ? 'Close' : 'Fechar'}
             className="close"
-            onClick={() => closeWindow(onClose)}
+            onClick={handleClose}
           >
             <i className="icon close"></i>
           </button>

@@ -21,26 +21,22 @@ import DesktopIcon from './components/DesktopIcon';
 import { Taskbar } from './components/Taskbar';
 import ContextMenu from './components/ContextMenu';
 
-// Registra o plugin GSAP (necessário para alguns hooks ou animações customizadas)
 gsap.registerPlugin(useGSAP);
 
 const Desktop = () => {
   const { state, dispatch, desktopRef } = useDesktop();
   const desktopIconsData = state.desktopIcons.desktopIconsData;
 
-  // 1. useEffect para desabilitar o clique direito
   useEffect(() => {
     const disableRightClick = (e) => {
-      // Aqui adicionamos o ponto para buscar pela classe, garantindo que a verificação seja correta
       if (!e.target.closest('.enable-context')) {
         e.preventDefault();
       }
     };
     document.addEventListener('contextmenu', disableRightClick);
     return () => document.removeEventListener('contextmenu', disableRightClick);
-  }, []); // vazio: roda apenas uma vez
+  }, []);
 
-  // 2. Animação GSAP – useGSAP executa a animação apenas uma vez, se o array de dependência for vazio
   useGSAP(() => {
     gsap.from('.desktop-icon', {
       duration: 0.5,
@@ -51,17 +47,14 @@ const Desktop = () => {
     });
   }, []);
 
-  // 3. Função para alternar idioma, memorizada para estabilidade de referência
   const languageHandler = useCallback((currentLanguage) => {
     return currentLanguage.includes('POR') ? 'ENG' : 'POR';
   }, []);
 
-  // 4. Handler para mudança de idioma, memorizado com dependências relevantes
   const handleChangeLanguage = useCallback(() => {
     changeLanguage(dispatch, languageHandler(state.language));
   }, [dispatch, state.language, languageHandler]);
 
-  // 5. Criação de props para o Taskbar, memorizados para evitar nova criação a cada render
   const taskbarProps = useMemo(
     () => ({
       className: 'enable-context',
@@ -72,8 +65,12 @@ const Desktop = () => {
       history: state.history,
       language: state.language,
       onChangeLanguage: handleChangeLanguage,
-      onWindowMinimize: (id) => minimizeWindow(dispatch, id),
-      onWindowRestore: (id) => minimizeWindow(dispatch, id),
+      onWindowMinimize: (id) => {
+        minimizeWindow(dispatch, id);
+      },
+      onWindowRestore: (id) => {
+        focusWindow(dispatch, id);
+      },
     }),
     [
       desktopIconsData,
@@ -87,7 +84,6 @@ const Desktop = () => {
     ]
   );
 
-  // 6. Handler para as ações do Context Menu com dependência de state.contextMenu
   const itemsHandler = useCallback(() => {
     const { target } = state.contextMenu;
     const finalTarget = target?.closest?.('.parent');
@@ -104,7 +100,6 @@ const Desktop = () => {
       : contextMenuData[0]?.actions || [];
   }, [state.contextMenu]);
 
-  // 7. Memoriza a função de contexto para o clique direito no desktop
   const handleContextMenu = useCallback(
     (e) => {
       if (e.target) {
@@ -120,7 +115,6 @@ const Desktop = () => {
     [dispatch]
   );
 
-  // 8. Memoriza o mapeamento dos ícones do desktop
   const desktopIconsList = useMemo(
     () =>
       desktopIconsData.map(({ id, title, icon }, index) => (
@@ -132,11 +126,9 @@ const Desktop = () => {
     [desktopIconsData, state, dispatch]
   );
 
-  // 9. Memoriza a renderização das janelas (Windows) – evitando recriação em cada render se os dados não mudarem
   const windowsList = useMemo(
     () =>
       desktopIconsData.map(({ id, title }, index) => {
-        // Ignorando itens específicos indicados por "id"
         if (id === 'new' || id === 'placeholder') return null;
         return (
           <Window
@@ -199,4 +191,4 @@ const Desktop = () => {
   );
 };
 
-export default Desktop;
+export default React.memo(Desktop);

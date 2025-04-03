@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItens';
 import LanguageSelector from './LanguageSelector';
@@ -26,17 +26,12 @@ const Taskbar = ({
     languageMenu: false,
   });
 
-  // useClickOutside(languageButton, () => {
-  //   toggleOpenMenuAnimation(languageList, windowsVisibility.languageMenu);
-  //   toggleWindowVisibility('languageMenu');
-  // });
-
-  const toggleWindowVisibility = (window) => {
+  const toggleWindowVisibility = useCallback((windowKey) => {
     setWindowsVisibility((prev) => ({
       ...prev,
-      [window]: !prev[window],
+      [windowKey]: !prev[windowKey],
     }));
-  };
+  }, []);
 
   return (
     <nav className="taskbar">
@@ -70,4 +65,4 @@ const Taskbar = ({
   );
 };
 
-export default Taskbar;
+export default React.memo(Taskbar);

@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-// This component is used to create a desktop icon with a title and an icon.
-// It takes in three props: title, icon, and onClick.
-// The title is the text that will be displayed below the icon.
-const DesktopIcon = ({ title, id, icon, onClick }) => {
-  // Renders a clickable desktop icon with a title and an icon.
-  // Supports touch and double-click events.
+const DesktopIcon = React.memo(({ title, id, icon, onClick }) => {
+  const dataInfo = useMemo(
+    () =>
+      JSON.stringify({
+        title,
+        icon,
+        id,
+        targetContextId: 'desktop-icon',
+        handler: onClick,
+      }),
+    [title, icon, id, onClick]
+  );
 
-  const dataInfo = JSON.stringify({
-    title,
-    icon,
-    id,
-    targetContextId: 'desktop-icon',
-    handler: onClick,
-  });
   return (
     <a
       className="desktop-icon parent"
@@ -24,10 +23,10 @@ const DesktopIcon = ({ title, id, icon, onClick }) => {
       data-info={dataInfo}
       id={title}
     >
-      <i className={`${icon}`}></i>
+      <i className={icon}></i>
       <p className="icon-text">{title}</p>
     </a>
   );
-};
+});
 
 export default DesktopIcon;
