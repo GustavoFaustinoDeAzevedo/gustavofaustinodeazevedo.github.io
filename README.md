@@ -28,7 +28,7 @@ As I gain more experience, the project will be updated with new projects and inf
 
 ## On Going
 
-◽ Better react reduce organization.
+◽ Changing program layout
 
 ---
 
@@ -49,6 +49,7 @@ As I gain more experience, the project will be updated with new projects and inf
 - [ ] Improve animations.
 - [ ] Add automated tests.
 - [ ] Improve developer documentation.
+- [ ] Better react reduce organization.
 
 ---
 

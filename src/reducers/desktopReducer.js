@@ -15,7 +15,7 @@ export const initialState = {
   minimized: [],
   hidden: [],
   maximized: [],
-  zIndex: {},
+  zIndex: [],
   history: [],
   language: getLanguage(defaultLanguage),
   contextMenu: { show: false, x: 0, y: 0, target: null, element: null },
@@ -60,11 +60,9 @@ const toggleSort = (desktopIcons) => {
 
 export function desktopReducer(state, action) {
   switch (action.type) {
-    case "CHANGE_LANGUAGE":
-      return {
-        ...state,
-        language: action.payload
-      };
+
+
+    //related to windows
 
     case "FOCUS_WINDOW":
       return {
@@ -116,6 +114,9 @@ export function desktopReducer(state, action) {
           ? state.maximized.filter(id => id !== action.payload)
           : [...state.maximized, action.payload]
       };
+
+    //related to context menu
+
     case "SHOW_CONTEXT_MENU":
       return {
         ...state,
@@ -131,6 +132,8 @@ export function desktopReducer(state, action) {
         ...state,
         contextMenu: { show: false, x: 0, y: 0, target: null, element: null }
       };
+
+    //related to icon
 
     case "ADD_ICON":
       return {
@@ -158,6 +161,14 @@ export function desktopReducer(state, action) {
           desktopIconsData: toggleSort(state.desktopIcons),
           sort: state.desktopIcons.sort === "asc" ? "desc" : "asc"
         }
+      };
+
+    //miscs
+
+    case "CHANGE_LANGUAGE":
+      return {
+        ...state,
+        language: action.payload
       };
 
     default:
