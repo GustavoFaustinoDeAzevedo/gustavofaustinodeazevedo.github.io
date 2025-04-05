@@ -1,6 +1,6 @@
 @import './base.css';
 @import './utilities.css';
-@import './components/desktop.css';
+@import './components/background.css';
 @import './components/window.css';
 @import '../components/Taskbar/Taskbar.module.css';
 @import './components/start-menu.css';

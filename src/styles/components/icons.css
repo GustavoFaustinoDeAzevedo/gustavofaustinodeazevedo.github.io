@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     flex-wrap: wrap;
     gap: 1.6rem 0.5rem;
     position: absolute;
@@ -28,18 +29,17 @@
       cursor: pointer;
       line-height: 1.2;
       border-radius: 0.5rem;
-      transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      transition: filter 0.2s ease-in-out,text-shadow 0.2s ease-in-out;
 
 
       /* Hover effect for desktop icons */
       &:hover, &:focus {
         transition: all 0.2s;
-        background-color: #ffffff1a;
-        box-shadow: 0 0 10px #ffffff1a;
+        filter: drop-shadow(0px 0px 25px #ffffff);
+        text-shadow: 0px 0px 15px #ffffff;
+        /* background-color: #ffffff1a; */
+        /* box-shadow: 0 0 10px #ffffff1a; */
         color: var(--color-text);
-        transform: scale(1.05);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;

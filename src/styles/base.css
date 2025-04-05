@@ -98,4 +98,15 @@
     background-color: var(--input-required-bg);
     color: var(--input-required-color);
   }
+
+  .desktop {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: none !important;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
 }

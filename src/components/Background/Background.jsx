@@ -6,7 +6,7 @@ import DesktopIcon from '../DesktopIcon';
 const Background = ({ state, dispatch, desktopRef }) => {
 
   return (
-    <div className="desktop"></div>
+    <div className="background"></div>
   );
 };
 

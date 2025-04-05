@@ -45,8 +45,9 @@ const App = () => {
       y: 20,
       stagger: 0.1,
       ease: 'power2.out',
-      onComplete: () => {gsap.set(".desktop-icon", { clearProps: "transform" });}
-
+      onComplete: () => {
+        gsap.set('.desktop-icon', { clearProps: 'transform' });
+      },
     });
   }, []);
 
@@ -163,11 +164,14 @@ const App = () => {
   );
 
   return (
-    <RefsProvider ref={desktopRef}>
+    <div className='desktop' ref={desktopRef}>
       <Background state={state} dispatch={dispatch} desktopRef={desktopRef} />
-      <div className="desktop-icons-wrapper">{desktopIconsList}</div>
-      {windowsList}
-      <Taskbar {...taskbarProps} />
+      <RefsProvider>
+        <div className="desktop-icons-wrapper">{desktopIconsList}</div>
+
+        {windowsList}
+        <Taskbar {...taskbarProps} />
+      </RefsProvider>
       {/* <div
         className="desktop"
         ref={desktopRef}
@@ -190,7 +194,7 @@ const App = () => {
           />
         )}
       </div> */}
-    </RefsProvider>
+    </div>
   );
 };
 
