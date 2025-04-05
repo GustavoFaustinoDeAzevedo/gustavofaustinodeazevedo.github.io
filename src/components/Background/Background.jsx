@@ -3,10 +3,10 @@ import { desktopIconsData } from '../../data/desktopIconsData';
 import { getDesktopIconProps } from '../../utils/desktopIconsProps';
 import DesktopIcon from '../DesktopIcon';
 
-const Background = ({ state, dispatch, desktopRef }) => {
+const Background = ({ state, dispatch, desktopRef,onContextMenu }) => {
 
   return (
-    <div className="background"></div>
+    <div className="background" onContextMenu={onContextMenu}></div>
   );
 };
 

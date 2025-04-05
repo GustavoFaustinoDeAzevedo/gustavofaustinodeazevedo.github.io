@@ -1,19 +1,19 @@
 @layer components {
 
   .desktop-icons-wrapper {
+    height: calc(100vh - var(--taskbar-height));
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-
     flex-wrap: wrap;
     gap: 1.6rem 0.5rem;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    height: calc(100vh - var(--taskbar-height));
+    pointer-events: none;
 
 
     /* Individual desktop icon styling */
@@ -29,13 +29,14 @@
       cursor: pointer;
       line-height: 1.2;
       border-radius: 0.5rem;
-      transition: filter 0.2s ease-in-out,text-shadow 0.2s ease-in-out;
+      transition: filter 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+      pointer-events: initial;
 
 
       /* Hover effect for desktop icons */
       &:hover, &:focus {
         transition: all 0.2s;
-        filter: drop-shadow(0px 0px 25px #ffffff);
+        filter: drop-shadow(0px 0px 15px #ffffff);
         text-shadow: 0px 0px 15px #ffffff;
         /* background-color: #ffffff1a; */
         /* box-shadow: 0 0 10px #ffffff1a; */

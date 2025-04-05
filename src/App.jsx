@@ -165,12 +165,24 @@ const App = () => {
 
   return (
     <div className='desktop' ref={desktopRef}>
-      <Background state={state} dispatch={dispatch} desktopRef={desktopRef} />
+      <Background state={state} dispatch={dispatch} onContextMenu={handleContextMenu} />
       <RefsProvider>
-        <div className="desktop-icons-wrapper">{desktopIconsList}</div>
+        <div className="desktop-icons-wrapper related-background">{desktopIconsList}</div>
 
         {windowsList}
+
         <Taskbar {...taskbarProps} />
+
+        {state.contextMenu.show && (
+          <ContextMenu
+            {...state.contextMenu}
+            state={state}
+            dispatch={dispatch}
+            language={state.language}
+            items={itemsHandler()}
+            onClose={() => hideContextMenu(dispatch)}
+          />
+        )}
       </RefsProvider>
       {/* <div
         className="desktop"
