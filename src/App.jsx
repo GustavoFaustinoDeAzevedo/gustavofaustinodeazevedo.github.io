@@ -20,7 +20,7 @@ import Window from './components/Window';
 import DesktopIcon from './components/DesktopIcon';
 import { Taskbar } from './components/Taskbar';
 import ContextMenu from './components/ContextMenu';
-import Desktop from './components/Background';
+import Background from './components/Background';
 
 gsap.registerPlugin(useGSAP);
 
@@ -164,7 +164,7 @@ const App = () => {
 
   return (
     <RefsProvider ref={desktopRef}>
-      <Desktop state={state} dispatch={dispatch} desktopRef={desktopRef} />
+      <Background state={state} dispatch={dispatch} desktopRef={desktopRef} />
       <div className="desktop-icons-wrapper">{desktopIconsList}</div>
       {windowsList}
       <Taskbar {...taskbarProps} />
