@@ -20,10 +20,11 @@ import Window from './components/Window';
 import DesktopIcon from './components/DesktopIcon';
 import { Taskbar } from './components/Taskbar';
 import ContextMenu from './components/ContextMenu';
+import Desktop from './components/Background';
 
 gsap.registerPlugin(useGSAP);
 
-const Desktop = () => {
+const App = () => {
   const { state, dispatch, desktopRef } = useDesktop();
   const desktopIconsData = state.desktopIcons.desktopIconsData;
 
@@ -44,16 +45,14 @@ const Desktop = () => {
       y: 20,
       stagger: 0.1,
       ease: 'power2.out',
+      onComplete: () => {gsap.set(".desktop-icon", { clearProps: "transform" });}
+
     });
   }, []);
 
-  const languageHandler = useCallback((currentLanguage) => {
-    return currentLanguage.includes('POR') ? 'ENG' : 'POR';
-  }, []);
-
   const handleChangeLanguage = useCallback(() => {
-    changeLanguage(dispatch, languageHandler(state.language));
-  }, [dispatch, state.language, languageHandler]);
+    changeLanguage(dispatch, state.language.includes('POR') ? 'ENG' : 'POR');
+  }, [dispatch, state.language]);
 
   const taskbarProps = useMemo(
     () => ({
@@ -115,17 +114,6 @@ const Desktop = () => {
     [dispatch]
   );
 
-  const desktopIconsList = useMemo(
-    () =>
-      desktopIconsData.map(({ id, title, icon }, index) => (
-        <DesktopIcon
-          key={`desktop-icon-${id}-${index}`}
-          {...getDesktopIconProps(state, dispatch, id, title, icon)}
-        />
-      )),
-    [desktopIconsData, state, dispatch]
-  );
-
   const windowsList = useMemo(
     () =>
       desktopIconsData.map(({ id, title }, index) => {
@@ -163,9 +151,24 @@ const Desktop = () => {
     ]
   );
 
+  const desktopIconsList = useMemo(
+    () =>
+      desktopIconsData.map(({ id, title, icon }, index) => (
+        <DesktopIcon
+          key={`desktop-icon-${id}-${index}`}
+          {...getDesktopIconProps(state, dispatch, id, title, icon)}
+        />
+      )),
+    [desktopIconsData, state, dispatch]
+  );
+
   return (
-    <RefsProvider>
-      <div
+    <RefsProvider ref={desktopRef}>
+      <Desktop state={state} dispatch={dispatch} desktopRef={desktopRef} />
+      <div className="desktop-icons-wrapper">{desktopIconsList}</div>
+      {windowsList}
+      <Taskbar {...taskbarProps} />
+      {/* <div
         className="desktop"
         ref={desktopRef}
         onContextMenu={handleContextMenu}
@@ -186,9 +189,9 @@ const Desktop = () => {
             onClose={() => hideContextMenu(dispatch)}
           />
         )}
-      </div>
+      </div> */}
     </RefsProvider>
   );
 };
 
-export default React.memo(Desktop);
+export default React.memo(App);

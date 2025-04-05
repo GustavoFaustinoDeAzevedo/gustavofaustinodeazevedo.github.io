@@ -9,7 +9,13 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
     // Listener function to handle click events
     const listener = (event) => {
       // Check if the optional reference contains the event (click) target
-      const secondRef = optionalRef ? optionalRef.current.contains(event.target) : false;
+      const secondRef = null;
+      if (optionalRef && optionalRef.current) {
+        secondRef = optionalRef.current.contains(event.target);
+      } else if (optionalRef && !optionalRef.current) {
+        console.log(optionalRef);
+        secondRef = optionalRef.contains(event.target);
+      }
 
       // If the click is inside the ref element, inside an element with specified class, or inside the optional ref, do nothing
       if (

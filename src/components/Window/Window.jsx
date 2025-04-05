@@ -33,7 +33,7 @@ const Window = ({
   const windowRef = createRef(id);
   const headerRef = useRef(null);
 
-  // Usa useMemo para derivar a classe com base nos estados
+  // Use useMemo to derive class based on states
   const className = useMemo(
     () =>
       `window 
@@ -44,7 +44,7 @@ const Window = ({
     [isFocused, isMinimized, isOpen, isMaximized]
   );
 
-  // Função para abrir a janela com animação
+  // Function to open the window with animation
   const openWindow = useCallback(() => {
     if (!windowRef.current) return;
     gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
@@ -56,7 +56,7 @@ const Window = ({
     });
   }, [windowRef]);
 
-  // Função que fecha (ou minimiza/fecha) a janela com animação
+  // Function that closes (or minimizes/closes) the window with animation
   const closeWindow = useCallback(
     (handler) => {
       if (!windowRef.current) return;
@@ -71,7 +71,7 @@ const Window = ({
     [windowRef]
   );
 
-  // Função para maximizar a janela com uma animação separada
+  // Function to maximize the window with a separate animation
   const maximizeWindow = useCallback(() => {
     if (!windowRef.current) return;
     const rect = windowRef.current.getBoundingClientRect();
@@ -107,7 +107,7 @@ const Window = ({
     });
   }, [windowRef, onMaximize]);
 
-  // Handlers específicos para minimizar e fechar, memorizados para evitar funções inline
+  // Specific handlers for minimizing and closing, memorized to avoid inline functions
   const handleMinimize = useCallback(
     () => closeWindow(onMinimize),
     [closeWindow, onMinimize]
@@ -117,7 +117,7 @@ const Window = ({
     [closeWindow, onClose]
   );
 
-  // Efeito para inicializar o Draggable e a animação de abertura
+  // Effect to initialize the Draggable and the opening animation
   useEffect(() => {
     if (windowRef.current && headerRef.current) {
       Draggable.create(windowRef.current, {
@@ -129,8 +129,8 @@ const Window = ({
         onDragStart: onFocus,
       });
 
-      // Define uma posição inicial aleatória
-      const desktop = document.querySelector('.desktop');
+      // Set a random starting position
+      const desktop = document.querySelector('body');
       if (desktop) {
         const x = Math.floor(Math.random() * (desktop.offsetWidth / 2));
         const y = Math.floor(Math.random() * (desktop.offsetHeight / 4));
@@ -141,8 +141,8 @@ const Window = ({
     }
   }, [isOpen]);
 
-  // Hook para fechar a janela ao clicar fora (se for o caso)
-  useClickOutside(windowRef, onUnfocus, isFocused);
+  // Hook to close window on click outside (if applicable)
+  // useClickOutside(windowRef, onUnfocus, isFocused);
 
   return (
     <div

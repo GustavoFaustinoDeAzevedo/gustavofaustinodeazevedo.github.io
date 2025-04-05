@@ -2,71 +2,17 @@
 
   /* Main container for the desktop layout */
   .desktop {
+
     height: 100vh;
-    position: relative;
+    width: 100vw;
+    position: absolute;
     background: var(--color-background) !important;
     overflow: hidden;
     top: 0;
     left: 0;
+    z-index: 0;
 
     /* Container for desktop icons */
-    .desktop-icons {
-      padding: 1rem;
-      display: grid;
-      justify-content: space-evenly;
-      grid-template-columns: repeat(auto-fill, 80px);
-      gap: 1rem;
-      position: relative;
-      z-index: 1;
 
-      /* Individual desktop icon styling */
-      .desktop-icon {
-        padding: 0.3rem 0;
-        width: auto;
-        height: auto;
-        min-width: 5.3rem;
-        min-height: 50px;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        color: #ffffff;
-        cursor: pointer;
-        line-height: 1.2;
-        border-radius: 0.5rem;
-        transition: background-color 0.2s;
-
-
-        /* Hover effect for desktop icons */
-        &:hover, &:focus {
-          background-color: #ffffff1a;
-        }
-
-        /* Icon inside the desktop icon */
-        i {
-          width: 100%;
-          font-size: 2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        /* Label text for the desktop icon */
-        .icon-text {
-          width: 5rem;
-          text-align: center;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          -webkit-line-clamp: 2;
-          line-clamp: 2;
-          word-wrap: break-word;
-          font-size: 0.8rem;
-
-
-          -webkit-user-select: none;
-          user-select: none;
-        }
-      }
-    }
   }
 }

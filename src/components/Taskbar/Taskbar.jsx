@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItens';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
-import { useRefs } from '../../contexts/RefsContext';
+import toggleOpenMenuAnimation from '../../animations/elementTransitions';
 
 const Taskbar = ({
   language,
@@ -16,21 +16,25 @@ const Taskbar = ({
   onChangeLanguage,
   history,
 }) => {
-  const { languageList, languageButton } = useRefs([
-    'languageList',
-    'languageButton',
-  ]);
-
   const [windowsVisibility, setWindowsVisibility] = useState({
     startMenu: false,
     languageMenu: false,
   });
 
+  const windowsRef = useRef({});
+
   const toggleWindowVisibility = useCallback((windowKey) => {
-    setWindowsVisibility((prev) => ({
-      ...prev,
-      [windowKey]: !prev[windowKey],
-    }));
+    setWindowsVisibility((prev) => {
+      const newVisibility = !prev[windowKey];
+      const ref = windowsRef.current[windowKey];
+      if (ref) {
+        toggleOpenMenuAnimation(ref, newVisibility);
+      }
+      return {
+        ...prev,
+        [windowKey]: newVisibility,
+      };
+    });
   }, []);
 
   return (
@@ -38,7 +42,8 @@ const Taskbar = ({
       <StartMenu
         language={language}
         isVisible={windowsVisibility.startMenu}
-        toggleWindowVisibility={toggleWindowVisibility}
+        windowRef={(element) => (windowsRef.current.startMenu = element)}
+        toggleWindowVisibility={() => toggleWindowVisibility('startMenu')}
         history={history}
       />
       <TaskbarItems
@@ -51,12 +56,10 @@ const Taskbar = ({
       />
       <section className="taskbar-right">
         <LanguageSelector
+          windowRef={(element) => (windowsRef.current.languageMenu = element)}
           language={language}
-          languageButton={languageButton}
-          languageList={languageList}
-          windowsVisibility={windowsVisibility}
           isVisible={windowsVisibility.languageMenu}
-          toggleWindowVisibility={toggleWindowVisibility}
+          toggleWindowVisibility={() => toggleWindowVisibility('languageMenu')}
           onChangeLanguage={onChangeLanguage}
         />
         <Clock />

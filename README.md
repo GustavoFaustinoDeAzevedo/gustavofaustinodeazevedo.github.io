@@ -28,7 +28,7 @@ As I gain more experience, the project will be updated with new projects and inf
 
 ## On Going
 
-◽ Changing program layout
+◽ Refatoring everything
 
 ---
 

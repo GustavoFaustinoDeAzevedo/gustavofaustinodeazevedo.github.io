@@ -8,6 +8,7 @@
     color: var(--c-text);
     min-width: min-content;
     min-height: max-content;
+    max-height: calc(100vh - var(--taskbar-height));;
     display: none;
     flex-direction: column;
     overflow: hidden;

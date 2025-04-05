@@ -7,31 +7,32 @@ const LanguageSelector = ({
   onChangeLanguage,
   toggleWindowVisibility,
   isVisible,
+  windowRef,
 }) => {
   // Local refs for Language Menu and Button
   const languageMenuRef = useRef(null);
   const languageButtonRef = useRef(null);
 
   // Toggles the language menu visibility{
-  const handleOpenMenuButtonClick = () => {
-    toggleOpenMenuAnimation(languageMenuRef, isVisible);
-    toggleWindowVisibility('languageMenu');
-  };
+  // const handleOpenMenuButtonClick = () => {
+  //   toggleOpenMenuAnimation(languageMenuRef, isVisible);
+  //   toggleWindowVisibility('languageMenu');
+  // };
 
   // Detects clicks outside to close the Language Menu
-  useClickOutside(
-    languageButtonRef,
-    handleOpenMenuButtonClick,
-    isVisible,
-    languageMenuRef
-  );
+  // useClickOutside(
+  //   languageButtonRef,
+  //   toggleWindowVisibility,
+  //   isVisible,
+  //   windowRef
+  // );
 
   return (
     <section className="language">
       <button
         ref={languageButtonRef}
         className="language-button"
-        onClick={handleOpenMenuButtonClick}
+        onClick={toggleWindowVisibility}
         aria-label={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
         title={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
       >
@@ -39,7 +40,7 @@ const LanguageSelector = ({
       </button>
       <div className="language-list-container">
         <ul
-          ref={languageMenuRef}
+          ref={windowRef}
           className={`language-list ${isVisible ? 'active' : ''}`}
         >
           <li
