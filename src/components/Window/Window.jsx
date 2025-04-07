@@ -148,7 +148,7 @@ const Window = ({
     <div
       ref={windowRef}
       className={`${className} parent`}
-      style={{ zIndex }}
+      style={{ zIndex: zIndex }}
       onContextMenu={onContextMenu}
       id={`window-${zIndex}-${id}`}
     >

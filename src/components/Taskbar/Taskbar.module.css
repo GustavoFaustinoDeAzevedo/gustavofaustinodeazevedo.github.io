@@ -72,7 +72,7 @@
         gap: 10px;
         width: max-content;
         border: 2px var(--border-style) var(--c-border);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        box-shadow: 0 8px 8px 0 rgba(31, 38, 135, 0.37);
         background: var(--c-secondary-background);
         border-radius: 5px;
         list-style: none;

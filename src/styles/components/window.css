@@ -1,14 +1,14 @@
 @layer components {
   .window {
     position: absolute;
-    background: var(--c-secondary-background);
+    background: var(--c-background2);
     border-radius: var(--border-radius);
     border: 1px solid var(--c-border);
     box-shadow: 0 16px 32px #00000027;
     color: var(--c-text);
     min-width: min-content;
     min-height: max-content;
-    max-width: max-content;
+    max-width: 100%;
     max-height: calc(100vh - var(--taskbar-height));
     display: none;
     flex-direction: column;
@@ -110,10 +110,10 @@
     .window-content {
       flex: 1;
       display: flex;
-      overflow-y: auto;
-      scrollbar-color: auto;
+      overflow-y: hidden;
       display: inline-block;
       width: auto;
+      height: auto;
     }
   }
 }
