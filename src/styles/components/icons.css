@@ -17,6 +17,7 @@
 
 
     /* Individual desktop icon styling */
+
     .desktop-icon {
       padding: 0.3rem 0;
       width: 5rem;
@@ -24,21 +25,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       color: #ffffff;
       cursor: pointer;
       line-height: 1.2;
       border-radius: 0.5rem;
-      transition: filter 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
       pointer-events: initial;
 
 
       /* Hover effect for desktop icons */
       &:hover, &:focus {
         transition: all 0.2s;
-        filter: drop-shadow(0px 0px 15px #ffffff);
         text-shadow: 0px 0px 15px #ffffff;
-        /* background-color: #ffffff1a; */
+        background-color: #ffffff1a;
         /* box-shadow: 0 0 10px #ffffff1a; */
         color: var(--color-text);
         -webkit-user-select: none;
