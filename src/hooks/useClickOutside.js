@@ -9,7 +9,7 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
     // Listener function to handle click events
     const listener = (event) => {
       // Check if the optional reference contains the event (click) target
-      const secondRef = null;
+      let secondRef = null;
       if (optionalRef && optionalRef.current) {
         secondRef = optionalRef.current.contains(event.target);
       } else if (optionalRef && !optionalRef.current) {
