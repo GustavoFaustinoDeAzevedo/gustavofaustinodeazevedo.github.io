@@ -2,7 +2,7 @@
   :root {
     --c-background: #1e1e1e;
 
-    --c-text: #ffffff;
+    --c-text: #fdfdfd;
 
     --c-secondary-background: #252526;
 
@@ -27,8 +27,8 @@
     --c-header-active: #0a0a0a;
     --c-header-inactive: #2d2d2d;
 
-    --color-primary: #2563eb;
-    --color-secondary: #4f46e5;
+    --c-primary: #2563eb;
+    --c-secondary: #4f46e5;
     --color-accent: #0078D4;
     --color-header-one: #181818;
     --color-header-two: #191c29b3;
@@ -61,6 +61,10 @@
     padding: 0;
     box-sizing: border-box;
     scrollbar-color: #4a5568 #2d334a;
+    text-shadow: 0 1px 0px #000000,
+    0 -1px 0px #000000,
+    1px 0px 0px #000000,
+    -1px 0px 0px #000000;
 
     &::-webkit-scrollbar {
       width: 12px;

@@ -6,8 +6,9 @@ const DefaultContent = ({ id }) => {
       return (
         <div className="about-me" aria-label="About Me Section">
           <h2 aria-label="About Me Title">
-            👋 Hello, I'm Gustavo, a Web Developer specializing in React and JavaScript, complemented by a strong foundation in HTML and CSS.
+            👋 Hello, I'm Gustavo!
           </h2>
+          <h3>Web Developer specializing in React and JavaScript, complemented by a strong foundation in HTML and CSS.</h3>
           <hr />
           <div className="about-me-wraper">
             <img
@@ -25,8 +26,8 @@ const DefaultContent = ({ id }) => {
             <p className="about-me-text" aria-label="About Me Text">
               I'm a Computer Engineering graduate passionate about building
               sleek, user-friendly interfaces with HTML, CSS, and React —
-              especially dark themes. I'm eager to bring my skills to an
-              entry-level front-end developer role, where I can contribute,
+              especially dark themes. I'm eager to bring my skills to a
+              junior front-end developer role, where I can contribute,
               grow, and collaborate alone or with a dynamic team.
             </p>
             
