@@ -8,6 +8,7 @@
     color: var(--c-text);
     min-width: min-content;
     min-height: max-content;
+    max-width: max-content;
     max-height: calc(100vh - var(--taskbar-height));
     display: none;
     flex-direction: column;
@@ -108,16 +109,11 @@
 
     .window-content {
       flex: 1;
-      padding: 1rem;
-      padding-left: 1.25rem;
       display: flex;
       overflow-y: auto;
       scrollbar-color: auto;
-
       display: inline-block;
-      width: 100%;
-      height: 100%;
-
+      width: auto;
     }
   }
 }
