@@ -142,7 +142,7 @@ const Window = ({
   }, [isOpen]);
 
   // Hook to close window on click outside (if applicable)
-  // useClickOutside(windowRef, onUnfocus, isFocused);
+useClickOutside(windowRef, onUnfocus, isFocused);
 
   return (
     <div
