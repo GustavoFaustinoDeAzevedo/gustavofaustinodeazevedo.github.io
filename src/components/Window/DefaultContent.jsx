@@ -87,6 +87,7 @@ const DefaultContent = ({ id }) => {
           </label>
           <textarea
             id="message"
+            type="text"
             name="message"
             required
             aria-label="Message input"

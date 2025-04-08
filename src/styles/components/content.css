@@ -203,8 +203,10 @@
 
     & textarea {
       min-height: 150px;
+      max-height: 50vh;
       resize: vertical;
       color: inherit;
+      
     }
 
     & button {
