@@ -8,6 +8,7 @@
     --c-background4: #5d5d5d;
     --c-background5: #666666;
 
+
     /* Blue tone palette */
     /* Very light blue */
     --blue-100: #d0eaff;
@@ -45,7 +46,7 @@
 
     --c-hover: #323233;
 
-    --c-accent: #005f99 ;
+    --c-accent: #005f99;
 
     --c-error: #f48771;
 
@@ -93,6 +94,26 @@
     --input-required-border: #ff0000;
     --input-required-bg: #ffe6e6;
     --input-required-color: #ff0000;
+
+    --box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.10),
+      1px 1px 0px rgba(0, 0, 0, 0.20),
+      2px 2px 0px rgba(0, 0, 0, 0.30),
+      3px 3px 0px rgba(0, 0, 0, 0.40),
+      5px 5px 0px rgba(0, 0, 0, 0.50),
+      6px 6px 0px rgba(0, 0, 0, 0.60),
+      9px 9px 0px rgba(0, 0, 0, 0.70),
+      12px 12px 0px rgba(0, 0, 0, 0.80),
+      15px 15px 0px rgba(0, 0, 0, 0.90),
+      18px 18px 0px rgba(0, 0, 0, 1.00),
+      -1px 1px 0px rgba(0, 0, 0, 0.20),
+      -2px 2px 0px rgba(0, 0, 0, 0.30),
+      -3px 3px 0px rgba(0, 0, 0, 0.40),
+      -5px 5px 0px rgba(0, 0, 0, 0.50),
+      -6px 6px 0px rgba(0, 0, 0, 0.60),
+      -9px 9px 0px rgba(0, 0, 0, 0.70),
+      -12px 12px 0px rgba(0, 0, 0, 0.80),
+      -15px 15px 0px rgba(0, 0, 0, 0.90),
+      -18px 18px 0px rgba(0, 0, 0, 1.00);
   }
 
   * {
@@ -150,10 +171,19 @@
   }
 
   /* Handle */
-  ::-webkit-scrollbar-thumb {
+  /* ::-webkit-scrollbar-thumb {
     background-color: var(--c-background4);
     border-radius: 10px;
     transition: background-color 0.4s ease;
+  } */
+
+  ::-webkit-scrollbar-thumb {
+    background: #444444; /* Azul secundário para combinar */
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666666; /* Um azul um pouco mais escuro no hover */
   }
 
   .no-scroll::-webkit-scrollbar-track,
@@ -162,7 +192,7 @@
   }
 
   /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+  /* ::-webkit-scrollbar-thumb:hover {
     background-color: var(--c-background5);
-  }
+  } */
 }
