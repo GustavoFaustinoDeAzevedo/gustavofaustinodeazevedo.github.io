@@ -22,7 +22,8 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
         !ref.current ||
         event.target.closest(elementClassToBlock) ||
         ref.current.contains(event.target) ||
-        secondRef)
+        secondRef
+      )
         return;
 
       // If the click is outside, call the handler
