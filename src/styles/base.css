@@ -1,12 +1,12 @@
 @layer base {
   :root {
-    --c-background: #1e1e1e;
+    --c-background: #121212;
     --c-background1: #0d0d0d;
     --c-background2: #1a1a1a;
     --c-background2-t: #1f1f1f80;
     --c-background3: #333333;
-    --c-background4: #666666;
-
+    --c-background4: #5d5d5d;
+    --c-background5: #666666;
 
     /* Blue tone palette */
     /* Very light blue */
@@ -18,7 +18,7 @@
     /* Secondary highlights */
     --blue-400: #5eb3ff;
     /* Main highlight) */
-    --blue-500: #1e90ff;
+    --blue-500: #BB86FC;
     /* Hover or callouts */
     --blue-600: #1874cd;
     /* Contrasts in titles or buttons */
@@ -32,7 +32,7 @@
     --text-color: #fdfdfd;
 
     --c-text: #fdfdfd;
-    --c-text1: #dfdfdf;
+    --c-text1: #E0E0E0;
     --c-text2: #bdbdbd;
     --c-text3: #35db7a;
     --c-text4: #ff8679;
@@ -45,7 +45,7 @@
 
     --c-hover: #323233;
 
-    --c-accent: #007acc;
+    --c-accent: #005f99 ;
 
     --c-error: #f48771;
 
@@ -53,7 +53,7 @@
 
     --c-warning: #ffcc00;
 
-    --c-accent-hover: #005f99;
+    --c-accent-hover: #007acc;
     --c-background-hover: #323233;
 
     --c-accent-focus: #0090ff;
@@ -64,7 +64,7 @@
 
     --c-primary: var(--blue-500);
     --c-secondary: var(--blue-400);
-    --color-accent: #0078D4;
+    --color-accent: #004477;
     --color-header-one: #181818;
     --color-header-two: #191c29b3;
     --color-one: #1a1b26;
@@ -151,8 +151,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    
-    background-color: var(--c-background3);
+    background-color: var(--c-background4);
     border-radius: 10px;
     transition: background-color 0.4s ease;
   }
@@ -164,6 +163,6 @@
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--c-background4);
+    background-color: var(--c-background5);
   }
 }
