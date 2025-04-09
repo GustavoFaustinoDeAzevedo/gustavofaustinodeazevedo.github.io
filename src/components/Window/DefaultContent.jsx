@@ -1,4 +1,5 @@
 import React from 'react';
+import AnimatedInput from './AnimatedInput';
 
 const DefaultContent = ({ id }) => {
   switch (id) {
@@ -59,39 +60,46 @@ const DefaultContent = ({ id }) => {
       );
     case 'contact':
       return (
-        <form className="contact-form" aria-label="Contact Form">
-          <label htmlFor="name" aria-label="Name">
-            Name:
-          </label>
-          <input
-            type="text"
+        <form
+          className="contact-form"
+          aria-label="Contact Form"
+          action="https://formspree.io/f/mnqelzyz"
+          method="POST"
+          target="placeholder"
+        >
+          <AnimatedInput
             id="name"
-            name="name"
-            aria-label="Name input"
+            type="input"
+            name="Name"
             required
-          />
+            ariaLabel="Name input"
+            inputPlaceholder="Ex: Charlie Lima"
+          >
+            Name
+          </AnimatedInput>
 
-          <label htmlFor="email" aria-label="Email">
-            Email:
-          </label>
-          <input
-            type="email"
+          <AnimatedInput
             id="email"
-            name="email"
-            aria-label="Email input"
+            type="email"
+            name="message"
             required
-          />
+            ariaLabel="Email input"
+            inputPlaceholder="exemplo@email.com"
+          >
+            Email
+          </AnimatedInput>
 
-          <label htmlFor="message" aria-label="Message">
-            Message:
-          </label>
-          <textarea
+          <AnimatedInput
             id="message"
             type="text"
             name="message"
             required
-            aria-label="Message input"
-          ></textarea>
+            ariaLabel="Message input"
+            inputPlaceholder="Your text here..."
+            textArea={true}
+          >
+            Message
+          </AnimatedInput>
 
           <button type="submit" aria-label="Submit Button">
             Send Message

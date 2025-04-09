@@ -16,7 +16,7 @@
       width: 50%;
       max-width: 440px;
       border: none;
-      border-top: 1px outset #666666; 
+      border-top: 1px outset #666666;
 
     }
 
@@ -176,28 +176,59 @@
 
   .contact-form {
     display: grid;
-    gap: 1rem;
-    padding: 5px;
+    gap: 2rem;
+    padding: 4rem;
     width: 100%;
 
-    & label {
-      font-weight: 500;
-    }
 
-    & input, & textarea {
+    & .input-container {
+      position: relative;
       width: 100%;
-      min-width: 300px;
-      max-width: 600px;
-      padding: 0.5rem;
+      height: mfit-content;
 
-      background-color: var(--c-background-focus);
-      border: 1px solid var(--c-background-focus);
-      border-radius: var(--border-radius);
-      font-family: inherit;
+      & .placeholder {
+        position: absolute;
+        left: 1rem;
+        top: 0.8rem;
+        font-size: 1rem;
+        color: var(--c-text);
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
 
-      &:focus {
-        outline: none;
-        background-color: var(--c-background);
+      & input, & textarea {
+        width: 100%;
+        min-width: 300px;
+        max-width: 600px;
+        padding: 1rem;
+        background-color: var(--c-background-focus);
+        border: 1px solid var(--c-background-focus);
+        border-radius: var(--border-radius);
+        color: var(--c-text);
+        font-family: inherit;
+        
+        &::placeholder{
+          color: #ffffff;
+          visibility: visible;
+        }
+        /* hides the input placeholder when the input is not focused */
+        &::placeholder {
+          visibility: hidden;
+          opacity: 0.4;
+        }
+
+        &:focus::placeholder {
+          visibility: visible;
+        }
+
+
+        &:focus {
+          outline: none;
+          background-color: var(--c-background);
+        }
+
+        
       }
     }
 
@@ -206,7 +237,7 @@
       max-height: 50vh;
       resize: vertical;
       color: inherit;
-      
+
     }
 
     & button {
@@ -224,5 +255,6 @@
         background: var(--c-accent-hover);
       }
     }
+
   }
 }
