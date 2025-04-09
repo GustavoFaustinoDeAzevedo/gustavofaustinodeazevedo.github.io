@@ -9,7 +9,7 @@
     min-width: min-content;
     min-height: max-content;
     max-width: 100%;
-    max-height: calc(100vh - var(--taskbar-height));
+    max-height: calc(100dvh - var(--taskbar-height));
     display: none;
     flex-direction: column;
     overflow: hidden;

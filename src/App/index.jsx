@@ -15,6 +15,7 @@ import { useHandleContextMenu } from './useHandleContextMenu';
 import Background from '../components/Background';
 import Taskbar from '../components/Taskbar';
 import ContextMenu from '../components/ContextMenu';
+import Button from '../components/Button';
 
 gsap.registerPlugin(useGSAP);
 
@@ -49,6 +50,7 @@ const App = () => {
 
   return (
     <div className="desktop" ref={desktopRef}>
+
       <Background
         state={state}
         dispatch={dispatch}

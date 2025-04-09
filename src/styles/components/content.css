@@ -242,7 +242,7 @@
 
     & button {
       justify-self: start;
-      padding: 0.8rem 2rem;
+      /* padding: */
       background: var(--c-accent);
       border: none;
       border-radius: var(--border-radius);

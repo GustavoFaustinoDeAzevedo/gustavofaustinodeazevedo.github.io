@@ -17,6 +17,8 @@
     "gsap": "^3.12.7",
     "interactjs": "^1.10.26",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "styletron-engine-atomic": "^1.6.2",
+    "styletron-react": "^6.1.1"
   }
 }

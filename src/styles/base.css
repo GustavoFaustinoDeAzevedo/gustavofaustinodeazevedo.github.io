@@ -23,7 +23,6 @@
     /* Hover or callouts */
     --blue-600: #1874cd;
     /* Contrasts in titles or buttons */
-    --blue-700: #1565c0;
     /* Subtle focus */
     --blue-800: #124e8d;
     /* Details and reinforcing depth */
@@ -63,8 +62,8 @@
     --c-header-active: #0a0a0a;
     --c-header-inactive: #2d2d2d;
 
-    --c-primary: var(--blue-500);
-    --c-secondary: var(--blue-400);
+    --c-primary: #1565c0;
+    --c-secondary: #6c757d;
     --color-accent: #004477;
     --color-header-one: #181818;
     --color-header-two: #191c29b3;
@@ -86,7 +85,7 @@
 
     --spacing-unit: 1rem;
     --border-radius: 0.5rem;
-    --taskbar-height: 48px;
+    --taskbar-height: 3rem;
     --window-header-height: 32px;
 
     --border-style: solid;

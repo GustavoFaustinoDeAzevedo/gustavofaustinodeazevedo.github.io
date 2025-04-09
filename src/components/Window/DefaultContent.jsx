@@ -1,5 +1,6 @@
 import React from 'react';
 import AnimatedInput from './AnimatedInput';
+import Button from '../Button';
 
 const DefaultContent = ({ id }) => {
   switch (id) {
@@ -100,10 +101,9 @@ const DefaultContent = ({ id }) => {
           >
             Message
           </AnimatedInput>
-
-          <button type="submit" aria-label="Submit Button">
+          <Button type="submit" ariaLabel="Submit Button" variant={'primary'}>
             Send Message
-          </button>
+          </Button>
         </form>
       );
     default:
