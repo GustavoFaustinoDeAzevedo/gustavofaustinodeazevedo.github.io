@@ -1,6 +1,6 @@
 import React from 'react';
 import { minimize, restore } from './taskbarAnimations';
-import { useRefs } from '../../contexts/RefsContext';
+import { useRefs } from '../../contexts/useRefs';
 
 const TaskbarItems = ({
   desktopIconsData,
