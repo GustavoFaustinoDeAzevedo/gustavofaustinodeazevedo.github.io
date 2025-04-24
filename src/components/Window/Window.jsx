@@ -1,7 +1,7 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import gsap from 'gsap';
 
-import WindowHeader from './WindowHeader.jsx';
+import WindowHeader from './WindowHeader';
 import WindowContent from './WindowContent';
 import useWindowTimeline from './hooks/useWindowTimeline';
 import useInitialState from './hooks/useInitialState';
