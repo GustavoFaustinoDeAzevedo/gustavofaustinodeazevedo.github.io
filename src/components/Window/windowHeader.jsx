@@ -36,20 +36,20 @@ const WindowHeader = ({
         aria-label={
           isMaximized
             ? language !== 'POR'
-              ? 'Maximize'
-              : 'Maximizar'
+              ? 'Restore'
+              : 'Restaurar'
             : language !== 'POR'
-            ? 'Restore'
-            : 'Restaurar'
+            ? 'Maximize'
+            : 'Maximizar'
         }
         title={
           isMaximized
             ? language !== 'POR'
-              ? 'Maximize'
-              : 'Maximizar'
+              ? 'Restore'
+              : 'Restaurar'
             : language !== 'POR'
-            ? 'Restore'
-            : 'Restaurar'
+            ? 'Maximize'
+            : 'Maximizar'
         }
         className="maximize"
         onClick={onMaximize}

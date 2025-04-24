@@ -1,26 +1,25 @@
 import React, { useRef } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
-import useClickOutside from '../../hooks/useClickOutside';
+
 import { desktopIconsData } from '../../data/desktopIconsData';
 
 const StartMenu = ({
-  toggleWindowVisibility,
+  toggleMenuVisibility,
   isVisible,
   history,
   language,
   windowRef,
+  startButtonRef,
+  onClick,
 }) => {
   // Local refs for Start Menu and Button
   const startMenuRef = useRef(null);
-  const startButtonRef = useRef(null);
-  // Handles the toggle animation and visibility of the Start Menu
-  // const handleOpenMenuButtonClick = () => {
-  //   toggleOpenMenuAnimation(startMenuRef, isVisible);
-  //   toggleWindowVisibility('startMenu');
-  // };
 
-  // Detects clicks outside to close the Start Menu
-  // useClickOutside(startButtonRef, toggleWindowVisibility, isVisible, windowRef);
+  // Handles the toggle animation and visibility of the Start Menu
+  const handleOpenMenuButtonClick = () => {
+    toggleOpenMenuAnimation(startMenuRef, isVisible);
+    toggleMenuVisibility('startMenu');
+  };
 
   return (
     <div className="start-menu">
@@ -29,7 +28,7 @@ const StartMenu = ({
         ref={startButtonRef}
         title={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
         className="start-button"
-        onClick={toggleWindowVisibility}
+        onClick={onClick}
         aria-label={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
       >
         <i className="icon window-icon"></i>
@@ -37,7 +36,7 @@ const StartMenu = ({
 
       {/* Start Menu Window */}
       <section className="start-menu-container">
-        <div ref={windowRef} className="start-menu-content">
+        <div ref={startMenuRef} className="start-menu-content">
           <div className="input-container">
             <i className="icon search">&#128269;</i>
             {/* Search Input */}

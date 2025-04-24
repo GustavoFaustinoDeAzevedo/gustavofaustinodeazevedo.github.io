@@ -1,65 +1,89 @@
 import React, { useState, useCallback, useRef } from 'react';
 import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItens';
+import useClickOutside from '../../hooks/useClickOutside';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
-import toggleOpenMenuAnimation from '../../animations/elementTransitions';
+import { useSelector } from 'react-redux';
 
 const Taskbar = ({
-  language,
-  desktopIconsData,
-  focusedWindow,
-  openedWindows,
-  minimizedWindows,
+  className,
+  // language,
+  // focusedWindow,
+  // openedWindowList,
   onWindowMinimize,
   onWindowRestore,
   onChangeLanguage,
-  history,
+  // history,
 }) => {
-  const [windowsVisibility, setWindowsVisibility] = useState({
-    startMenu: false,
+  const language = useSelector((state) => state.settings.language);
+  const openedWindowList = useSelector(
+    (state) => state.window.openedWindowList
+  );
+  const focusedWindow = useSelector((state) => state.window.focusedWindow);
+  const history = useSelector((state) => state.window.history);
+
+  const [menuVisibility, setMenuVisibility] = useState({
     languageMenu: false,
+    startMenu: false,
   });
 
-  const windowsRef = useRef({});
+  const menuRef = useRef([]);
+  const buttonRef = useRef(null);
+  const actualVisibleMenu = useRef('');
 
-  const toggleWindowVisibility = useCallback((windowKey) => {
-    setWindowsVisibility((prev) => {
-      const newVisibility = !prev[windowKey];
-      const ref = windowsRef.current[windowKey];
-      if (ref) {
-        toggleOpenMenuAnimation(ref, newVisibility);
+  const toggleMenuVisibility = (visibilityKey) => {
+    setMenuVisibility((prev) => {
+      const isVisible = !prev[visibilityKey];
+
+      if (isVisible) {
+        actualVisibleMenu.current = visibilityKey;
+      } else if (actualVisibleMenu.current === visibilityKey) {
+        actualVisibleMenu.current = null;
       }
       return {
         ...prev,
-        [windowKey]: newVisibility,
+        [visibilityKey]: isVisible,
       };
     });
-  }, []);
+  };
+  // Detects clicks outside to close the Start Menu
+  useClickOutside(
+    menuRef,
+    () => {
+      setMenuVisibility((prev) => {
+        return { ...prev, startMenu: false, languageMenu: false };
+      });
+    },
+    menuVisibility[actualVisibleMenu.current],
+    buttonRef
+  );
 
   return (
     <nav className="taskbar">
       <StartMenu
         language={language}
-        isVisible={windowsVisibility.startMenu}
-        windowRef={(element) => (windowsRef.current.startMenu = element)}
-        toggleWindowVisibility={() => toggleWindowVisibility('startMenu')}
+        startButtonRef={(element) => (buttonRef.current = element)}
+        isVisible={menuVisibility.startMenu}
+        windowRef={(element) => (menuRef.current = element)}
+        toggleMenuVisibility={() => toggleMenuVisibility}
+        onClick={() => toggleMenuVisibility('startMenu')}
         history={history}
       />
       <TaskbarItems
-        desktopIconsData={desktopIconsData}
         focusedWindow={focusedWindow}
-        openedWindows={openedWindows}
-        minimizedWindows={minimizedWindows}
+        openedWindowList={openedWindowList}
         onWindowMinimize={onWindowMinimize}
         onWindowRestore={onWindowRestore}
       />
       <section className="taskbar-right">
         <LanguageSelector
-          windowRef={(element) => (windowsRef.current.languageMenu = element)}
+          languageButtonRef={(element) => (buttonRef.current = element)}
+          windowRef={(element) => (menuRef.current = element)}
           language={language}
-          isVisible={windowsVisibility.languageMenu}
-          toggleWindowVisibility={() => toggleWindowVisibility('languageMenu')}
+          isVisible={menuVisibility.languageMenu}
+          // toggleWindowVisibility={() => toggleMenuVisibility()}
+          onClick={() => toggleMenuVisibility('languageMenu')}
           onChangeLanguage={onChangeLanguage}
         />
         <Clock />
@@ -68,4 +92,4 @@ const Taskbar = ({
   );
 };
 
-export default React.memo(Taskbar);
+export default Taskbar;

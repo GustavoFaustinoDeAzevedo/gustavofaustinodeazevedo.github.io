@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-const DesktopIcon = React.memo(({ title, id, icon, onClick }) => {
+const DesktopIcon = React.memo(({ id, title, icon, onClick }) => {
   const dataInfo = useMemo(
     () =>
       JSON.stringify({
@@ -21,9 +21,9 @@ const DesktopIcon = React.memo(({ title, id, icon, onClick }) => {
       onTouchStart={onClick}
       onDoubleClick={onClick}
       data-info={dataInfo}
-      id={title}
+      id={id}
     >
-      <i className={icon}></i>
+      <i className={`icon ${icon}`}></i>
       <p className="icon-text">{title}</p>
     </a>
   );

@@ -1,20 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
 import { desktopIconsData } from '../../data/desktopIconsData';
-import { sortIcons } from '../../actions/windowActions';
+import actions from '../../store/actions';
 
 const ContextMenu = ({
-  x,
-  y,
+  position,
   items,
-  dispatch,
-  state,
   target,
   onClose,
   language,
 }) => {
   const menuRef = useRef(null);
   const dataInfo = useRef(null);
+  const {x,y} = position;
   const [iconsData, setIconsData] = useState([...desktopIconsData]);
   const [ascendingOrder, setAscendingOrder] = useState(true);
 
@@ -52,10 +50,6 @@ const ContextMenu = ({
     }
   }, [x, y, dataInfo]);
 
-  const handleToggleSort = () => {
-    setAscendingOrder((prev) => !prev);
-  };
-
   useEffect(() => {
     setIconsData((prevIcons) => {
       if (prevIcons.length === 0) return prevIcons;
@@ -70,7 +64,10 @@ const ContextMenu = ({
   }, [ascendingOrder]);
 
   useClickOutside(menuRef, onClose);
-
+  const desktopIconActions = actions.useDesktopIconsActions();
+  const windowActios = actions.useWindowActions();
+  const handleSortIcons = desktopIconActions.handleSortIcons;
+  const handleViewItem = windowActios.handleOpenWindow;
   return (
     <div ref={menuRef} className="context-menu active">
       {items.map((action, index) => {
@@ -86,19 +83,17 @@ const ContextMenu = ({
             onClick={() => {
               switch (action.type) {
                 case 'view-action':
-                  action.handler({ state, dispatch, ...dataInfo.current });
+                  handleViewItem({ ...dataInfo.current });
                   break;
                 case 'sort':
-                  sortIcons(dispatch);
+                  handleSortIcons();
 
                   break;
                 case 'refresh':
                   window.location.reload();
                   break;
                 case 'change-background':
-                  action.handler({
-                    state,
-                    dispatch,
+                  handleViewItem({
                     id: 'background-color-picker',
                   });
                   break;

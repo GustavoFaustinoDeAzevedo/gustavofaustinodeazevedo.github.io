@@ -1,66 +1,106 @@
 import gsap from 'gsap';
 
 
+const useWindowAnimations = {
 
-const useWindowAnimations = (windowRef, onMaximize) => {
-  const openWindow = () => {
-    if (!windowRef.current) return;
+  openWindow: (windowRef, handler = () => { }) => {
+    if (!windowRef?.current) return;
     gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
     gsap.to(windowRef.current, {
       scale: 1,
       opacity: 1,
       duration: 0.3,
       ease: 'power2.out',
-    });
-  };
+      onComplete: () => {
 
-  const closeWindow = (handler) => {
-    if (!windowRef.current) return;
+        handler()
+      }
+    });
+  },
+
+  closeWindow: (windowRef, handler = () => { }) => {
+    if (!windowRef?.current) return;
     gsap.to(windowRef.current, {
       scale: 0.9,
       opacity: 0,
       duration: 0.2,
       ease: 'power2.inOut',
-      onComplete: handler,
-    });
-  };
-
-  const maximizeWindow = () => {
-    if (!windowRef.current) return;
-    const rect = windowRef.current.getBoundingClientRect();
-    const clone = windowRef.current.cloneNode(true);
-
-    Object.assign(clone.style, {
-      position: 'fixed',
-      top: `${rect.top}px`,
-      left: `${rect.left}px`,
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
-      margin: '0',
-      opacity: '1',
-      pointerEvents: 'none',
-      zIndex: '9999',
-    });
-
-    document.body.appendChild(clone);
-
-    gsap.to(clone, {
-      x: -rect.left,
-      y: -rect.top,
-      width: '100vw',
-      height: '100vh',
-      scale: 1,
-      duration: 0.3,
-      ease: 'power2.inOut',
       onComplete: () => {
-        document.body.removeChild(clone);
-        windowRef.current.classList.add('maximized');
-        onMaximize();
+
+        handler()
+
+      }
+    });
+  },
+
+  maximizeWindow: (windowRef, handler = () => { }, x, y, width, height) => {
+
+    if (!windowRef?.current) return;
+    return gsap.to(windowRef.current, {
+      x: x || 0,
+      y: y || 0,
+      width: width || '100vw',
+      height: height || '100vh',
+      duration: 0.35,
+      ease: 'expo.inOut',
+      onComplete: () => {
+        // windowRef.current.classList.contains('maximized') ?
+        //   windowRef.current.classList.remove('maximized') :
+        //   windowRef.current.classList.add('maximized')
+        handler();
       },
     });
-  };
+  },
 
-  return { openWindow, closeWindow, maximizeWindow };
-};
+  minimizeWindow: (windowRef, handler = () => { }, x, y) => {
+
+    if (!windowRef?.current) return;
+
+    if (windowRef.current.classList.contains('minimized')) {
+      gsap.killTweensOf(windowRef.current);
+      gsap.set(windowRef.current, { clearProps: 'display,opacity,width,height' });
+      handler();
+      return;
+    }
+
+    const width = windowRef.current.getBoundingClientRect();
+
+    gsap.set(windowRef.current, {
+      minWidth: 0,
+      minHeight: 0,
+
+    })
+    gsap.to(windowRef.current, {
+      scale: 0.8,
+      duration: 0.25,
+      opacity: 0.8,
+      // x: x,
+      ease: 'power4.inOut',
+    })
+
+    gsap.to(windowRef.current, {
+      x: x,
+      y: '100vh',
+      opacity: 0,
+      scale: 0.2,
+      width: 0,
+      height: 0,
+      duration: 0.4,
+      display: 'none',
+      ease: 'power2.inOut',
+      onComplete: () => {
+        handler();
+      },
+    })
+
+
+  },
+
+  // restoreWindow: (windowRef, handler = () => {
+  //   windowRef.current.classList.remove('minimized');
+  //   gsap.killTweensOf(windowRef.current);
+  //   gsap.set(windowRef.current, { clearProps: 'all' });
+  // })
+}
 
 export default useWindowAnimations;

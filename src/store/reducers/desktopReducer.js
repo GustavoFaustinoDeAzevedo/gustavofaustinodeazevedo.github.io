@@ -1,4 +1,4 @@
-import { desktopIconsData } from "../data/desktopIconsData";
+import { desktopIconsData } from "../../data/desktopIconsData";
 
 const browserLanguage = navigator.language || navigator.userLanguage;
 const supportedLanguages = ['en-US', 'pt-BR'];
@@ -31,13 +31,13 @@ const updateHistory = (history, id) => {
   return [id, ...filteredHistory].slice(0, 10);
 };
 
-// Refatoração de addIcon: usamos a troca direta dos dois últimos itens
+
 const addIcon = (desktopIcons, iconToBeAdded) => {
   const iconsData = [...desktopIcons.desktopIconsData, iconToBeAdded];
   if (iconsData.length >= 2) {
     const lastIndex = iconsData.length - 1;
     const secondLastIndex = iconsData.length - 2;
-    // Troca os dois últimos itens
+
     [iconsData[secondLastIndex], iconsData[lastIndex]] = [iconsData[lastIndex], iconsData[secondLastIndex]];
   }
   return iconsData;
@@ -61,16 +61,16 @@ const toggleSort = (desktopIcons) => {
   return sortedIcons;
 };
 
-// Função auxiliar para trocar um item em arrays (para minimizar e maximizar)
+
 const toggleItemInArray = (array, item) =>
   array.includes(item) ? array.filter((x) => x !== item) : [...array, item];
 
-// Constante para o estado padrão do contexto do menu
+
 const defaultContextMenuState = { show: false, x: 0, y: 0, target: null, element: null };
 
 export function desktopReducer(state, action) {
   switch (action.type) {
-    // --- Relacionado a Windows ---
+
     case "FOCUS_WINDOW":
       return {
         ...state,
@@ -117,7 +117,7 @@ export function desktopReducer(state, action) {
         maximized: toggleItemInArray(state.maximized, action.payload),
       };
 
-    // --- Relacionado ao Context Menu ---
+
     case "SHOW_CONTEXT_MENU":
       return {
         ...state,
@@ -131,7 +131,7 @@ export function desktopReducer(state, action) {
         contextMenu: defaultContextMenuState,
       };
 
-    // --- Relacionado aos Ícones ---
+
     case "ADD_ICON":
       return {
         ...state,
@@ -163,7 +163,7 @@ export function desktopReducer(state, action) {
         },
       };
 
-    // --- Diversos ---
+
     case "CHANGE_LANGUAGE":
       return {
         ...state,

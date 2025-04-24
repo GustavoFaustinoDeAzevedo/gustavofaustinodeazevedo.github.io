@@ -2,6 +2,6 @@
 import { useContext } from 'react';
 import { RefsContext } from './RefsContext';
 
-export function useRefs() {
+export default function useRefs() {
   return useContext(RefsContext);
 }

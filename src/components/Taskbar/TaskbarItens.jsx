@@ -1,40 +1,31 @@
 import React from 'react';
-import { minimize, restore } from './taskbarAnimations';
-import { useRefs } from '../../contexts/useRefs';
+import windowAnimations from '../Window/useWindowAnimations';
+import useRefs from '../../contexts/useRefs';
 
 const TaskbarItems = ({
-  desktopIconsData,
   focusedWindow,
-  openedWindows,
-  minimizedWindows,
+  openedWindowList,
   onWindowMinimize,
   onWindowRestore,
 }) => {
-  const { createRef, getRef } = useRefs();
-  const handleTaskbarClick = (id) => {
-    console.log(minimizedWindows);
-    const windowRef = getRef(id);
-    const isMinimized = minimizedWindows.includes(id);
-    if (isMinimized) {
-      restore(windowRef, onWindowRestore(id));
-    } else {
-      minimize(windowRef, onWindowMinimize(id));
-    }
-  };
+  const { getRef } = useRefs();
 
+  const handleTaskbarClick = (id, isMinimized) => {
+    isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
+  };
   return (
     <ul className="taskbar-items">
-      {desktopIconsData.map(
-        ({ id, icon }, index) =>
-          id !== 'new' &&
+      {openedWindowList.map(
+        ({ id, isMinimized, icon }, index) =>
+          id !== 'New' &&
           id !== 'placeholder' && (
             <li
               key={`taskbar-icon-${index}-${id}`}
-              className={`taskbar-item 
-            ${focusedWindow === id ? 'focus' : ''}
-            ${openedWindows.includes(id) ? 'open' : ''}
-            ${minimizedWindows.includes(id) ? 'minimized' : ''}`}
-              onClick={() => handleTaskbarClick(id)}
+              className={`taskbar-item open 
+            ${focusedWindow === id ? 'focus' : ''} 
+            ${isMinimized ? 'minimized' : ''}
+            `}
+              onClick={() => handleTaskbarClick(id, isMinimized, index)}
             >
               <i className={`${icon}`}></i>
             </li>

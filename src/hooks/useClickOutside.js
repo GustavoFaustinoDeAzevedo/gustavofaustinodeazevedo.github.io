@@ -13,7 +13,7 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
       if (optionalRef && optionalRef.current) {
         secondRef = optionalRef.current.contains(event.target);
       } else if (optionalRef && !optionalRef.current) {
-        console.log(optionalRef);
+
         secondRef = optionalRef.contains(event.target);
       }
 

@@ -1,14 +1,17 @@
-import { focusWindow, openWindow } from '../actions/windowActions';
+import actions from '../store/actions';
+
 
 const openWindowHandler = (target) => {
-  const { state, id, dispatch } = target;
-
+  const { id } = target;
+  const windowActions = actions.useWindowActions();
+  const openWindow = windowActions.handleOpenWindow;
+  const focusWindow = windowActions.handleFocusWindow;
   const lowerCaseId = id?.toLowerCase();
 
   if (dispatch && lowerCaseId) {
     if (Array.isArray(state.opened) && !state.opened.includes(lowerCaseId)) {
-      openWindow(dispatch, lowerCaseId);
-      focusWindow(dispatch, lowerCaseId);
+      openWindow(lowerCaseId);
+      focusWindow(lowerCaseId);
     }
   }
 };
@@ -29,7 +32,7 @@ export const contextMenuData = [
         label: 'Sort By',
         icon: 'sort',
         type: 'sort',
-        handler: () => {},
+        handler: () => { },
       },
       {
         label: 'Refresh',
@@ -44,7 +47,7 @@ export const contextMenuData = [
         label: 'New',
         icon: 'plus-circle',
         type: 'new-item',
-        handler: () => {},
+        handler: () => { },
       },
       { separator: true },
       {
@@ -72,7 +75,7 @@ export const contextMenuData = [
         label: 'Sort By',
         icon: 'sort',
         type: 'sort',
-        handler: () => {},
+        handler: () => { },
       },
       {
         label: 'Refresh',
@@ -87,7 +90,7 @@ export const contextMenuData = [
         label: 'New',
         icon: 'plus-circle',
         type: 'new-item',
-        handler: () => {},
+        handler: () => { },
       },
       { separator: true },
       {
@@ -107,13 +110,13 @@ export const contextMenuData = [
         label: 'View',
         icon: 'view',
         type: 'view-action',
-        handler: (target) => {},
+        handler: (target) => { },
       },
       {
         label: 'Sort By',
         icon: 'sort',
         type: 'sort',
-        handler: () => {},
+        handler: () => { },
       },
       {
         label: 'Refresh',
@@ -128,7 +131,7 @@ export const contextMenuData = [
         label: 'New',
         icon: 'plus-circle',
         type: 'new-item',
-        handler: () => {},
+        handler: () => { },
       },
       { separator: true },
       {

@@ -1,4 +1,4 @@
-// File: components/utils/getRandomPosition.js
+
 const getRandomPosition = () => {
   const desktop = document.querySelector('body');
   if (!desktop) return { x: 0, y: 0 };

@@ -3,7 +3,9 @@ import AnimatedInput from './AnimatedInput';
 import Button from '../Button';
 
 const DefaultContent = ({ id }) => {
-  switch (id) {
+  
+  const section = id.split("#")[1];
+  switch (section) {
     case 'about':
       return (
         <div className="about-me" aria-label="About Me Section">

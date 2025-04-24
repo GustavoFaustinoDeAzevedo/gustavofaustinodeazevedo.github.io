@@ -1,19 +1,36 @@
-import { addIcon, focusWindow, openWindow } from '../actions/windowActions';
+// import { addIcon, focusWindow, openWindow } from '../actions/windowActions';
+import { useRef } from 'react';
 import { placeholder } from '../data/desktopIconsData';
+// import { useSelector } from 'react-redux';
+// import useWindowActions from '../hooks/useWindowActions';
 
 // Generate props for a DesktopIcon component
-export const getDesktopIconProps = (state, dispatch, id, title, icon) => ({
+export const getDesktopIconProps = (
+  windowList,
+  language,
+  handleOpenWindow,
+  handleAddIcon,
   id,
-  title: state.language.includes('POR') ? title.por : title.eng,
-  icon,
-  dispatch,
-  language: state.language,
-  onClick: () => {
-    if (title.por === 'Novo' || title.por === 'new') {
-      addIcon(dispatch, placeholder);
-    } else if (!state.opened.includes(id)) {
-      openWindow(dispatch, id);
-      focusWindow(dispatch, id);
-    }
-  },
-});
+  finalTitle,
+  icon
+) => {
+  return {
+    id: id,
+    title: finalTitle,
+    icon: icon,
+    language: language,
+    onClick: () => {
+      if (finalTitle === 'Novo' || finalTitle === 'New') {
+        handleAddIcon(placeholder);
+      } else {
+        try {
+          if (!windowList.find((win) => win.id === id)) {
+            handleOpenWindow(id, finalTitle, icon);
+          }
+        } catch (error) {
+          console.error('Error opening window:', error);
+        }
+      }
+    },
+  };
+};

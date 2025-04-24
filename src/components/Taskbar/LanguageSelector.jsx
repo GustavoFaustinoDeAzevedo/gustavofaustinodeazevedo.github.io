@@ -6,12 +6,13 @@ const LanguageSelector = ({
   language,
   onChangeLanguage,
   toggleWindowVisibility,
+  languageButtonRef,
   isVisible,
   windowRef,
+  onClick,
 }) => {
   // Local refs for Language Menu and Button
   const languageMenuRef = useRef(null);
-  const languageButtonRef = useRef(null);
 
   // Toggles the language menu visibility{
   // const handleOpenMenuButtonClick = () => {
@@ -32,7 +33,7 @@ const LanguageSelector = ({
       <button
         ref={languageButtonRef}
         className="language-button"
-        onClick={toggleWindowVisibility}
+        onClick={onClick}
         aria-label={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
         title={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
       >
