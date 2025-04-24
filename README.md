@@ -23,7 +23,7 @@ As I gain more experience, the project will be updated with new projects and inf
 - [x] A modify language system + button on taskbar.
 - [x] A basic start menu.
 - [x] A basic sort for desktop icons.
-- [x] Better React states organization after migration from useReducer to redux. 
+- [x] Better React states organization after migration from React's `useReducer` to Redux. 
 
 ---
 
