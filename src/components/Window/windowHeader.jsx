@@ -1,4 +1,3 @@
-// File: components/WindowHeader.jsx
 import React from 'react';
 
 const WindowHeader = ({
