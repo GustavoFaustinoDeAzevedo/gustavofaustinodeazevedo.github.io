@@ -1,14 +1,14 @@
 import React from 'react';
 
 const WindowHeader = ({
-  title,
-  headerRef,
-  onFocus,
-  language,
-  isMaximized,
-  onMinimize,
-  onMaximize,
-  onClose,
+  title = 'Untitled',
+  headerRef = null,
+  onFocus = () => {},
+  language = 'ENG',
+  isMaximized = false,
+  onMinimize = () => {},
+  onMaximize = () => {},
+  onClose = () => {},
 }) => (
   <div className="window-header">
     <span
@@ -24,8 +24,8 @@ const WindowHeader = ({
     </span>
     <div className="window-controls">
       <button
-        aria-label={language !== 'POR' ? 'Minimize' : 'Minimizar'}
-        title={language !== 'POR' ? 'Minimize' : 'Minimizar'}
+        aria-label={language === 'POR' ? 'Minimizar' : 'Minimize'}
+        title={language === 'POR' ? 'Minimizar' : 'Minimize'}
         className="minimize"
         onClick={onMinimize}
       >
@@ -33,35 +33,31 @@ const WindowHeader = ({
       </button>
       <button
         aria-label={
-          isMaximized
-            ? language !== 'POR'
-              ? 'Restore'
-              : 'Restaurar'
-            : language !== 'POR'
-            ? 'Maximize'
-            : 'Maximizar'
+          language === 'POR'
+            ? isMaximized
+              ? 'Restaurar'
+              : 'Maximizar'
+            : isMaximized
+            ? 'Restore'
+            : 'Maximize'
         }
         title={
-          isMaximized
-            ? language !== 'POR'
-              ? 'Restore'
-              : 'Restaurar'
-            : language !== 'POR'
-            ? 'Maximize'
-            : 'Maximizar'
+          language === 'POR'
+            ? isMaximized
+              ? 'Restaurar'
+              : 'Maximizar'
+            : isMaximized
+            ? 'Restore'
+            : 'Maximize'
         }
         className="maximize"
         onClick={onMaximize}
       >
-        {isMaximized ? (
-          <i className="icon restore" />
-        ) : (
-          <i className="icon maximize" />
-        )}
+        <i className={`icon ${isMaximized ? 'restore' : 'maximize'}`} />
       </button>
       <button
-        aria-label={language !== 'POR' ? 'Close' : 'Fechar'}
-        title={language !== 'POR' ? 'Close' : 'Fechar'}
+        aria-label={language === 'POR' ? 'Fechar' : 'Close'}
+        title={language === 'POR' ? 'Fechar' : 'Close'}
         className="close"
         onClick={onClose}
       >
