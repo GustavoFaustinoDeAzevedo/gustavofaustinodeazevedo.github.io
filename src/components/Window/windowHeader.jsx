@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WindowHeader = ({
+export const WindowHeader = ({
   title = 'Untitled',
   headerRef = null,
   onFocus = () => {},
