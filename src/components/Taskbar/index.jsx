@@ -1,6 +1,6 @@
 import Taskbar from './Taskbar';
 import StartMenu from './StartMenu';
-import TaskbarItems from './TaskbarItens';
+import TaskbarItems from './TaskbarItems';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
 

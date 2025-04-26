@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import StartMenu from './StartMenu';
-import TaskbarItems from './TaskbarItens';
+import TaskbarItems from './TaskbarItems';
 import useClickOutside from '../../hooks/useClickOutside';
 import LanguageSelector from './LanguageSelector';
 import Clock from './Clock';
@@ -16,6 +16,8 @@ const Taskbar = ({
   onChangeLanguage,
   // history,
 }) => {
+  //TODO: fazer o hook de animação em outro arquivo usando use
+
   const language = useSelector((state) => state.settings.language);
   const openedWindowList = useSelector(
     (state) => state.window.openedWindowList

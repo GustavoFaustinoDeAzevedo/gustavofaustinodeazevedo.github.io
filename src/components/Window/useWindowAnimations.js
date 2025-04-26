@@ -5,8 +5,7 @@ const useWindowAnimations = {
 
   openWindow: (windowRef, handler = () => { }) => {
     if (!windowRef?.current) return;
-    gsap.set(windowRef.current, { scale: 0.8, opacity: 0 });
-    gsap.to(windowRef.current, {
+    gsap.fromTo(windowRef.current, { scale: 0.8, opacity: 0 }, {
       scale: 1,
       opacity: 1,
       duration: 0.3,

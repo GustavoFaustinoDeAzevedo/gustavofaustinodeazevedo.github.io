@@ -3,41 +3,40 @@ import AnimatedInput from './AnimatedInput';
 import Button from '../Button';
 
 const DefaultContent = ({ id }) => {
-  
-  const section = id.split("#")[1];
+  const section = id.split('#')[1];
   switch (section) {
     case 'about':
       return (
-        <div className="about-me" aria-label="About Me Section">
-          <hr />
-          <h2 aria-label="About Me Title">👋 Hello, I'm Gustavo!</h2>
-          <h3>
-            Web Developer specializing in React and JavaScript, complemented by
-            a strong foundation in HTML and CSS.
-          </h3>
-          <hr />
-          <div className="about-me-wraper">
+        <main className="about-me" aria-label="About Me Section">
+          <figure className="about-me-image">
             <img
-              className="about-me-image"
               src="images/profile-pic.png"
-              alt="Gustavo's Photo"
-              aria-label="Gustavo's Photo"
+              alt="A profile picture of Gustavo Faustino de Azevedo"
               loading="lazy"
               decoding="async"
               referrerPolicy="no-referrer"
               fetchPriority="high"
-              importance="high"
-              onClick={() => console.log('Image clicked')}
-            ></img>
-            <p className="about-me-text" aria-label="About Me Text">
+            />
+          </figure>
+
+          <section className="about-me-title">
+            <h2 aria-label="Introduction Title">👋 Hello, I'm Gustavo!</h2>
+            <h3>
+              Web Developer specializing in React and JavaScript, complemented
+              by a strong foundation in HTML and CSS.
+            </h3>
+            <hr />
+          </section>
+          <section className="about-me-text">
+            <p aria-label="Introduction Text">
               I'm a Computer Engineering graduate passionate about building
               sleek, user-friendly interfaces with HTML, CSS, and React —
               especially dark themes. I'm eager to bring my skills to a junior
               front-end developer role, where I can contribute, grow, and
               collaborate alone or with a dynamic team.
             </p>
-          </div>
-        </div>
+          </section>
+        </main>
       );
     case 'projects':
       return (

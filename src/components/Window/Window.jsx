@@ -1,5 +1,6 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
 import WindowContent from './WindowContent';
@@ -11,6 +12,9 @@ import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
 import getRandomPosition from './utils/getRandomPosition';
 import useWindowAnimations from './useWindowAnimations';
+// import useWindowTimeline from './useWindowTimeline';
+
+gsap.registerPlugin(useGSAP);
 
 const Window = ({
   id,
@@ -30,17 +34,27 @@ const Window = ({
   onContextMenu,
   children,
 }) => {
+  //TODO: fazer o hook de animação em outro arquivo usando useEffect
+
   const { createRef } = useRefs();
   const windowRef = createRef(id);
+  const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
   const maximizeOrRestoreRef = useRef(() => {});
-  const minimizeRef = useRef(() => {});
+  // const minimizeRef = useRef(() => {});
+
+  const isWindowMounted = useRef(false);
+  const minimizeTimelineRef = useRef(null);
 
   const { initialState, updateInitialState } = useInitialState(windowRef);
-  const timelineRef = useWindowTimeline(windowRef, index);
+
   const { openWindow, maximizeWindow } = useWindowAnimations;
 
-  useClickOutside(windowRef, onUnfocus, isFocused);
+  useEffect(() => {
+    if (!timelineRef.current) {
+      timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
+    }
+  }, [windowRef, index]);
 
   useEffect(() => {
     if (!windowRef.current || !headerRef.current) return;
@@ -55,6 +69,7 @@ const Window = ({
 
     const { x, y } = getRandomPosition();
     gsap.set(windowRef.current, { x, y });
+    // timelineRef.current.tweenFromTo('show', 'showEnd');
     openWindow(windowRef, onFocus);
     updateInitialState();
   }, []);
@@ -64,7 +79,7 @@ const Window = ({
   //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
   // }, [isMinimized]);
 
-  useEffect(() => {
+  useGSAP(() => {
     maximizeOrRestoreRef.current = () => {
       if (isMaximized) {
         // RESTORE
@@ -92,16 +107,33 @@ const Window = ({
     };
   }, [isMaximized, onMaximize]);
 
-  useEffect(() => {
-    minimizeRef.current = () => {
-      if (timelineRef && timelineRef.current) {
-        console.log(isMinimized);
-        isMinimized
-          ? timelineRef.current.reverse()
-          : timelineRef.current.play();
-      }
-    };
-  }, [isMinimized, onMinimize]);
+  const handleMinimize = () => {
+    if (timelineRef && timelineRef.current) {
+      onMinimize();
+      timelineRef.current.play();
+    }
+  };
+
+  // useEffect(() => {
+  //   // prevIsMinimized.current = !isMinimized;
+  //   if (isWindowMounted.current === false) {
+  //     isWindowMounted.current = true;
+  //     return;
+  //   }
+  //   // minimizeTimelineRef.current = timelineRef.current.tweenFromTo(
+  //   //   'minimize',
+  //   //   'minimizeEnd'
+  //   // );
+
+  //   if (timelineRef.current) {
+  //     console.log('isMinimized mudou: ', isMinimized);
+  //     if (isMinimized) {
+  //       timelineRef.current.reverse();
+  //     } else {
+  //       timelineRef.current.play();
+  //     }
+  //   }
+  // }, [isMinimized]);
 
   const className = useMemo(
     () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
@@ -137,7 +169,7 @@ const Window = ({
     >
       <WindowHeader
         headerRef={headerRef}
-        onMinimize={onMinimize}
+        onMinimize={handleMinimize}
         onMaximize={() => maximizeOrRestoreRef.current()}
         onClose={onClose}
         {...{ id, title, isOpen, isFocused, isMinimized, isMaximized }}

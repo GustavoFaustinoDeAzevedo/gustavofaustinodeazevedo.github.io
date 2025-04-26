@@ -65,6 +65,6 @@ export const useWindowList = (desktopRef) => {
             />
           )
         ),
-    [windowList, language, focusedWindow]
+    [windowList, language, focusedWindow, desktopRef, handleFocusWindow, handleMinimizeWindow, handleMaximizeWindow, handleResetFocus, handleCloseWindow]
   );
 };
