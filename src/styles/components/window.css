@@ -148,11 +148,10 @@
 
     & .window-content {
       flex: 1;
-      display: flex;
-      overflow-y: hidden;
-      display: inline-block;
+      min-height: fit-content;
       width: auto;
       height: auto;
+      position: relative;
       container-type: inline-size;
     }
   }

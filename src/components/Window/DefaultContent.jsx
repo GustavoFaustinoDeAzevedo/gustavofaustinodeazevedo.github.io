@@ -20,11 +20,8 @@ const DefaultContent = ({ id }) => {
           </figure>
 
           <section className="about-me-title">
-            <h2 aria-label="Introduction Title">👋 Hello, I'm Gustavo!</h2>
-            <h3>
-              Web Developer specializing in React and JavaScript, complemented
-              by a strong foundation in HTML and CSS.
-            </h3>
+            <h2 aria-label="Introduction Title">Hello, I'm Gustavo!</h2>
+            <h3>React/JS Web Developer | HTML/CSS expertise.</h3>
             <hr />
           </section>
           <section className="about-me-text">
