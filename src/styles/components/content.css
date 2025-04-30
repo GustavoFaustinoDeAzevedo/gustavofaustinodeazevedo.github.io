@@ -48,19 +48,16 @@
 
     & p {
       text-align: justify;
-      transition: all 0.5s ease-in-out;
     }
 
     & .about-me-text {
       color: #B0C4DE;
       width: 80cqw;
       overflow: auto;
-      transition: all 0.5s ease-in-out;
-
     }
 
     & .about-me-image, & .about-me-title, & .about-me-text {
-      transition: all 0.5s ease-out, width 0s;
+      transition: all 1s ease, width 0s;
     }
 
     @media screen {
@@ -118,38 +115,39 @@
         border-radius: 0;
       }
 
-      & .about-me-text {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        top: 10%;
-        transform: translate(400px, -50%);
-
-        margin-bottom: 5em;
-
-      }
-
-      & .about-me-image {
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        transform: translate(100px, 260px);
-        width: max-content;
-      }
-
       & .about-me-title {
         position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: left;
         align-items: flex-start;
-        transform: translateY(0px);
+        top: 10%;
+        transform: translate(50px,-20%);
         width: max-content;
 
         /* Ou inline-block */
         /* width: auto; */
+      }
+
+      & .about-me-image {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: flex-start;
+        top: 50%;
+        transform: translate(10px, -50%);
+        width: max-content;
+      }
+
+      & .about-me-text {
+        position: absolute;
+        width: 50cqw;
+        overflow: visible;
+        top: 50%;
+        transform: translate(300px, -100px);
+        margin-bottom: 5em;
+
       }
     }
   }
