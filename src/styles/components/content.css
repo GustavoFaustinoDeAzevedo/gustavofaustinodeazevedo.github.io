@@ -11,7 +11,6 @@
     background-size: 21px 21px;
     background-color: #121212;
     padding: 2rem;
-    transition: all 0.5s ease-in-out;
 
     overflow: hidden;
 
@@ -26,6 +25,7 @@
 
     & h2, & h3 {
       width: 95cqw;
+      transition: font-size 1s ease;
     }
 
     & h2 {
@@ -43,21 +43,43 @@
       max-width: 12rem;
       border-radius: 50%;
       margin: 2rem 3rem;
-      transition: all 0.5s ease-in-out;
+      transition: all 1s ease;
     }
 
     & p {
+      transition: font-size 1s ease;
+      font-size: 0.8rem;
       text-align: justify;
+      display: inline-block;
+    }
+
+    & .about-me-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      text-align: center;
+      width: max-content;
     }
 
     & .about-me-text {
       color: #B0C4DE;
-      width: 80cqw;
-      overflow: auto;
+      width: 700px;
+      height: 100px;
+      /* max-height: 37cqh; */
+      overflow: visible;
+      max-width: 80%;
     }
 
+
     & .about-me-image, & .about-me-title, & .about-me-text {
-      transition: all 1s ease, width 0s;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      bottom: auto;
+      right: auto;
+      transition: all 1s ease, width 0.3s ease;
     }
 
     @media screen {
@@ -94,7 +116,6 @@
         & h3 {
           font-size: 1.2rem;
           font-weight: 500;
-          padding: 0 2rem;
           margin-bottom: 1rem;
         }
 
@@ -105,54 +126,41 @@
 
   @container (min-width: 700px) {
     .about-me {
-      position: relative;
       opacity: 1;
       /* Faz o fade-in */
       transform: scale(1);
       /* Volta ao tamanho normal */
 
-      & img {
-        border-radius: 0;
+      & .about-me-image {
+        transform: translate(-50%, -130%);
+        /* transform: translate(0%, -65%); */
+
+        /* width: max-content; */
       }
 
       & .about-me-title {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        top: 10%;
-        transform: translate(50px,-20%);
-        width: max-content;
+        transform: translate(-50%, -90%);
+        /* transform: translate(-50%, -260%); */
+        /* width: max-content; */
 
         /* Ou inline-block */
         /* width: auto; */
       }
 
-      & .about-me-image {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        top: 50%;
-        transform: translate(10px, -50%);
-        width: max-content;
-      }
+
 
       & .about-me-text {
-        position: absolute;
-        width: 50cqw;
-        overflow: visible;
-        top: 50%;
-        transform: translate(300px, -100px);
-        margin-bottom: 5em;
+        transform: translate(-50%, 60%);
 
+        /* transform: translate(-15%, -145px); */
+        & p {
+          font-size: 1rem;
+        }
       }
     }
   }
 
-  @container (max-width: 700px) {
+  @container (max-width: 699px) {
 
 
 
@@ -164,44 +172,38 @@
       /* Volta ao tamanho normal */
 
       & p {
-        line-height: 120%;
+        /* line-height: 120%; */
       }
 
-
-
       & .about-me-image {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        text-align: left;
-        top: 5%;
-        left: 50%;
-        transform: translate(-50%, -10%);
+        transform: translate(-50%, -120%);
         width: max-content;
+
+        & img {
+          width: 11rem;
+        }
       }
 
       & .about-me-title {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-        width: max-content;
+
+        transform: translate(-50%, -80%);
+
+
+        & h2 {
+          font-size: 2rem;
+        }
+
+        & h3 {
+          font-size: 1rem;
+        }
       }
 
       & .about-me-text {
-        position: absolute;
-        height: 20cqh;
-        bottom: 8cqh;
-        left: 50%;
-        transform: translate(-50%, 20%);
-        /* width: max-content; */
+        /* width: 80%; */
+        /* bottom: 8cqh;
+        left: 50%; */
+
+        transform: translate(-50%, 60%);
       }
     }
   }

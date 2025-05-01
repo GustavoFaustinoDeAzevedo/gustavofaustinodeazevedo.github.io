@@ -8,7 +8,7 @@ const DefaultContent = ({ id }) => {
     case 'about':
       return (
         <main className="about-me" aria-label="About Me Section">
-          <figure className="about-me-image">
+          <section className="about-me-image">
             <img
               src="images/profile-pic.png"
               alt="A profile picture of Gustavo Faustino de Azevedo"
@@ -17,7 +17,7 @@ const DefaultContent = ({ id }) => {
               referrerPolicy="no-referrer"
               fetchPriority="high"
             />
-          </figure>
+          </section>
 
           <section className="about-me-title">
             <h2 aria-label="Introduction Title">Hello, I'm Gustavo!</h2>
