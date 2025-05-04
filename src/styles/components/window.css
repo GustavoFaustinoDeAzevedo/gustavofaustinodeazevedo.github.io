@@ -149,10 +149,13 @@
     & .window-content {
       flex: 1;
       min-height: fit-content;
+      min-width: fit-content;
       width: auto;
       height: auto;
       position: relative;
       container-type: inline-size;
+
+
     }
   }
 }

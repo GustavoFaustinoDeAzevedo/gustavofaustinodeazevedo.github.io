@@ -8,31 +8,33 @@ const DefaultContent = ({ id }) => {
     case 'about':
       return (
         <main className="about-me" aria-label="About Me Section">
-          <section className="about-me-image">
-            <img
-              src="images/profile-pic.png"
-              alt="A profile picture of Gustavo Faustino de Azevedo"
-              loading="lazy"
-              decoding="async"
-              referrerPolicy="no-referrer"
-              fetchPriority="high"
-            />
-          </section>
+          <div className="about-me-wrapper">
+            <section className="about-me-image">
+              <img
+                src="images/profile-pic.png"
+                alt="A profile picture of Gustavo Faustino de Azevedo"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                fetchPriority="high"
+              />
+            </section>
 
-          <section className="about-me-title">
-            <h2 aria-label="Introduction Title">Hello, I'm Gustavo!</h2>
-            <h3>React/JS Web Developer | HTML/CSS expertise.</h3>
-            <hr />
-          </section>
-          <section className="about-me-text">
-            <p aria-label="Introduction Text">
-              I'm a Computer Engineering graduate passionate about building
-              sleek, user-friendly interfaces with HTML, CSS, and React —
-              especially dark themes. I'm eager to bring my skills to a junior
-              front-end developer role, where I can contribute, grow, and
-              collaborate alone or with a dynamic team.
-            </p>
-          </section>
+            <section className="about-me-title">
+              <h2 aria-label="Introduction Title">Hello, I'm Gustavo!</h2>
+              <h3>React/JS Web Developer | HTML/CSS expertise.</h3>
+              <hr />
+            </section>
+            <section className="about-me-text">
+              <p aria-label="Introduction Text">
+                I'm a Computer Engineering graduate passionate about building
+                sleek, user-friendly interfaces with HTML, CSS, and React —
+                especially dark themes. I'm eager to bring my skills to a junior
+                front-end developer role, where I can contribute, grow, and
+                collaborate alone or with a dynamic team.
+              </p>
+            </section>
+          </div>
         </main>
       );
     case 'projects':
