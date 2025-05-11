@@ -12,6 +12,8 @@ import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
 import getRandomPosition from './utils/getRandomPosition';
 import useWindowAnimations from './useWindowAnimations';
+import { useMachine } from '@xstate/react';
+import { windowMachine } from '../../machines/windowMachine';
 // import useWindowTimeline from './useWindowTimeline';
 
 gsap.registerPlugin(useGSAP);
@@ -34,13 +36,12 @@ const Window = ({
   onContextMenu,
   children,
 }) => {
-  //TODO: fazer o hook de animação em outro arquivo usando useEffect
-
   const { createRef } = useRefs();
   const windowRef = createRef(id);
   const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
   const maximizeOrRestoreRef = useRef(() => {});
+  const minimizeOrRestoreRef = useRef(() => {});
   // const minimizeRef = useRef(() => {});
 
   const isWindowMounted = useRef(false);
@@ -50,40 +51,23 @@ const Window = ({
 
   const { openWindow, maximizeWindow } = useWindowAnimations;
 
-  useEffect(() => {
-    if (!timelineRef.current) {
-      timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
-    }
-  }, [windowRef, index]);
+  const [state, send] = useMachine(windowMachine);
 
   useEffect(() => {
-    if (!windowRef.current || !headerRef.current) return;
+    console.log('State changed:', state.value);
 
-    useWindowDraggable(
-      windowRef.current,
-      headerRef.current,
-      desktopRef.current,
-      onFocus,
-      updateInitialState
-    );
-
-    const { x, y } = getRandomPosition();
-    gsap.set(windowRef.current, { x, y });
-    // timelineRef.current.tweenFromTo('show', 'showEnd');
-    openWindow(windowRef, onFocus);
-    updateInitialState();
-  }, []);
-
-  // useEffect(() => {
-  //   if (!timelineRef.current) return;
-  //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
-  // }, [isMinimized]);
-
-  useGSAP(() => {
-    maximizeOrRestoreRef.current = () => {
-      if (isMaximized) {
-        // RESTORE
-
+    switch (state.value) {
+      case 'unset':
+        send({ type: 'OPEN', onFocus });
+        break;
+      case 'minimized':
+        gsap.to(windowRef.current, {
+          scale: 0.5,
+          opacity: 0.7,
+          duration: 0.5,
+        });
+        break;
+      case 'maximized':
         const { x, y, width, height } = initialState;
         const rounded = {
           x: Math.round(x),
@@ -99,20 +83,112 @@ const Window = ({
           rounded.width,
           rounded.height
         );
-      } else {
-        // MAXIMIZE
-        updateInitialState();
-        maximizeWindow(windowRef, onMaximize);
-      }
-    };
-  }, [isMaximized, onMaximize]);
-
-  const handleMinimize = () => {
-    if (timelineRef && timelineRef.current) {
-      onMinimize();
-      timelineRef.current.play();
+        break;
+      case 'closed':
+        gsap.to(windowRef.current, {
+          opacity: 0,
+          scale: 0,
+          duration: 0.5,
+          onComplete: () => onClose(),
+        });
+        break;
+      default:
+        gsap.to(windowRef.current, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+        });
+        break;
     }
-  };
+  }, [state]);
+
+  // useEffect(() => {
+  //   if (!timelineRef.current) {
+  //     timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
+  //   }
+  // }, [windowRef, index]);
+
+  useEffect(() => {
+    if (!windowRef.current || !headerRef.current) return;
+
+    useWindowDraggable(
+      windowRef.current,
+      headerRef.current,
+      desktopRef.current,
+      onFocus,
+      updateInitialState
+    );
+
+    const { x, y } = getRandomPosition();
+    gsap.set(windowRef.current, { x, y });
+    // openWindow(windowRef, onFocus);
+  }, []);
+
+  // useEffect(() => {
+  //   if (!timelineRef.current) return;
+  //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
+  // }, [isMinimized]);
+
+  // useGSAP(() => {
+  //   maximizeOrRestoreRef.current = () => {
+  //     if (isMaximized) {
+
+  //       const { x, y, width, height } = initialState;
+  //       const rounded = {
+  //         x: Math.round(x),
+  //         y: Math.round(y),
+  //         width: `${Math.round(width)}px`,
+  //         height: `${Math.round(height)}px`,
+  //       };
+  //       maximizeWindow(
+  //         windowRef,
+  //         onMaximize,
+  //         rounded.x,
+  //         rounded.y,
+  //         rounded.width,
+  //         rounded.height
+  //       );
+  //     } else {
+  //       updateInitialState();
+  //       maximizeWindow(windowRef, onMaximize);
+  //     }
+  //   };
+  // }, [isMaximized, onMaximize]);
+
+  // useGSAP(() => {
+  //   minimizeOrRestoreRef.current = () => {
+  //     if (isMinimized) {
+  //       // RESTORE
+
+  //       const { x, y, width, height } = initialState;
+  //       const rounded = {
+  //         x: Math.round(x),
+  //         y: Math.round(y),
+  //         width: `${Math.round(width)}px`,
+  //         height: `${Math.round(height)}px`,
+  //       };
+  //       minimizeWindow(
+  //         windowRef,
+  //         onMinimize,
+  //         rounded.x,
+  //         rounded.y,
+  //         rounded.width,
+  //         rounded.height
+  //       );
+  //     } else {
+  //       // MAXIMIZE
+  //       updateInitialState();
+  //       maximizeWindow(windowRef, onMinimize);
+  //     }
+  //   };
+  // }, [isMinimized, onMaximize]);
+
+  // const handleMinimize = () => {
+  //   if (timelineRef && timelineRef.current) {
+  //     onMinimize();
+  //     timelineRef.current.play();
+  //   }
+  // };
 
   // useEffect(() => {
   //   // prevIsMinimized.current = !isMinimized;
@@ -159,6 +235,19 @@ const Window = ({
   //   maximizeWindow(windowRef, onMaximize, x, y, width, height);
   // }, [initialState, onMaximize]);
 
+  const handleMinimize = () => {
+    const rect = windowRef.current.getBoundingClientRect();
+    send({ type: 'MINIMIZE', x: rect.x, y: rect.y });
+  };
+
+  const handleMaximize = () => {
+    if (!isMaximized) {
+      const rect = windowRef.current.getBoundingClientRect();
+      send({ type: 'MAXIMIZE', width: rect.width, height: rect.height });
+    } else {
+      send({ type: 'RESTORE' });
+    }
+  };
   return (
     <div
       ref={windowRef}
@@ -169,9 +258,10 @@ const Window = ({
     >
       <WindowHeader
         headerRef={headerRef}
+        // onMinimize={() => minimizeOrRestoreRef.current()}
         onMinimize={handleMinimize}
-        onMaximize={() => maximizeOrRestoreRef.current()}
-        onClose={onClose}
+        onMaximize={handleMaximize}
+        onClose={() => send({ type: 'CLOSE' })}
         {...{ id, title, isOpen, isFocused, isMinimized, isMaximized }}
       />
       <WindowContent

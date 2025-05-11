@@ -4,8 +4,13 @@ import { getDesktopIconProps } from '../utils/desktopIconsProps';
 import actions from '../store/actions';
 import { useSelector } from 'react-redux';
 import { placeholder } from '../data/desktopIconsData';
+import useRefs from '../contexts/useRefs';
+import { useMachine } from '@xstate/react';
+import { windowMachine } from '../machines/windowMachine';
 
 const useDesktopIconsList = () => {
+
+
   const windowActions = actions.useWindowActions();
   const desktopIconsActions = actions.useDesktopIconsActions();
 
@@ -22,6 +27,7 @@ const useDesktopIconsList = () => {
     } else {
       try {
         if (!windowList.find((win) => win.id === id)) {
+          
           handleOpenWindow(id, finalTitle, icon, windowRef);
         }
       } catch (error) {
@@ -30,11 +36,6 @@ const useDesktopIconsList = () => {
     }
   };
 
-  const test = (id) =>
-    console.log(
-      language,
-      windowList.find((win) => win.id === id)
-    );
   return desktopIconsData.map(({ id, title, icon }, index) => {
     const finalTitle = language === 'POR' ? title.por : title.eng;
     return (

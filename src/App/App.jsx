@@ -27,6 +27,7 @@ const App = () => {
   useDisableRightClick();
   const language = useSelector((state) => state.language);
   const contextMenu = useSelector((state) => state.contextMenu);
+
   const contextMenuActions = actions.useContextMenuActions();
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
   const handleChangeLanguage = useCallback(() => {
@@ -45,7 +46,6 @@ const App = () => {
 
   return (
     <div className="desktop" ref={desktopRef}>
-      
       <Background onContextMenu={handleContextMenu} />
       <div className="desktop-icons-wrapper related-background">
         {desktopIconsStack}

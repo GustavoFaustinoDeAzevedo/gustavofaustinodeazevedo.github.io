@@ -43,9 +43,6 @@ const useWindowAnimations = {
       duration: 0.35,
       ease: 'expo.inOut',
       onComplete: () => {
-        // windowRef.current.classList.contains('maximized') ?
-        //   windowRef.current.classList.remove('maximized') :
-        //   windowRef.current.classList.add('maximized')
         handler();
       },
     });
