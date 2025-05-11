@@ -11,6 +11,8 @@ import { windowMachine } from '../machines/windowMachine';
 const useDesktopIconsList = () => {
 
 
+
+
   const windowActions = actions.useWindowActions();
   const desktopIconsActions = actions.useDesktopIconsActions();
 
@@ -34,11 +36,6 @@ const useDesktopIconsList = () => {
       }
     }
   };
-  const test = (id) =>
-    console.log(
-      language,
-      windowList.find((win) => win.id === id)
-    );
   return desktopIconsData.map(({ id, title, icon}, index) => {
     const finalTitle = language === 'POR' ? title.por : title.eng;
     return (

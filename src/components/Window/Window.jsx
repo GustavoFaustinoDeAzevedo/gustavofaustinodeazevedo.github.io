@@ -222,6 +222,19 @@ const Window = ({
       send({ type: 'RESTORE' });
     }
   };
+  const handleMinimize = () => {
+    const rect = windowRef.current.getBoundingClientRect();
+    send({ type: 'MINIMIZE', x: rect.x, y: rect.y });
+  };
+
+  const handleMaximize = () => {
+    if (!isMaximized) {
+      const rect = windowRef.current.getBoundingClientRect();
+      send({ type: 'MAXIMIZE', width: rect.width, height: rect.height });
+    } else {
+      send({ type: 'RESTORE' });
+    }
+  };
   return (
     <div
       ref={windowRef}
@@ -232,6 +245,7 @@ const Window = ({
     >
       <WindowHeader
         headerRef={headerRef}
+        // onMinimize={() => minimizeOrRestoreRef.current()}
         // onMinimize={() => minimizeOrRestoreRef.current()}
         onMinimize={handleMinimize}
         onMaximize={handleMaximize}
