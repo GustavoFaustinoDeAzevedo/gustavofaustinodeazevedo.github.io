@@ -208,33 +208,6 @@ const Window = ({
 
   //   maximizeWindow(windowRef, onMaximize, x, y, width, height);
   // }, [initialState, onMaximize]);
-
-  const handleMinimize = () => {
-    const rect = windowRef.current.getBoundingClientRect();
-    send({ type: 'MINIMIZE', x: rect.x, y: rect.y });
-  };
-
-  const handleMaximize = () => {
-    if (!isMaximized) {
-      const rect = windowRef.current.getBoundingClientRect();
-      send({ type: 'MAXIMIZE', width: rect.width, height: rect.height });
-    } else {
-      send({ type: 'RESTORE' });
-    }
-  };
-  const handleMinimize = () => {
-    const rect = windowRef.current.getBoundingClientRect();
-    send({ type: 'MINIMIZE', x: rect.x, y: rect.y });
-  };
-
-  const handleMaximize = () => {
-    if (!isMaximized) {
-      const rect = windowRef.current.getBoundingClientRect();
-      send({ type: 'MAXIMIZE', width: rect.width, height: rect.height });
-    } else {
-      send({ type: 'RESTORE' });
-    }
-  };
   return (
     <div
       ref={windowRef}
