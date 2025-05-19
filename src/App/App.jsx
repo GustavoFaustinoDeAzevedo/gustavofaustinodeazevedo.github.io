@@ -27,6 +27,15 @@ const App = () => {
   useDisableRightClick();
   const language = useSelector((state) => state.language);
   const contextMenu = useSelector((state) => state.contextMenu);
+  const windowList = useSelector((state) => state.window.openedWindowList);
+  const focusedWindow = useSelector((state) => state.window.focusedWindow);
+  const {
+    handleFocusWindow,
+    handleOpenWindow,
+    handleResetFocus,
+    handleCloseWindow,
+    handleUpdateWindow,
+  } = actions.useWindowActions();
   const contextMenuActions = actions.useContextMenuActions();
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
   const handleChangeLanguage = useCallback(() => {
@@ -41,18 +50,27 @@ const App = () => {
   const handleContextMenu = useHandleContextMenu();
 
   const desktopIconsStack = useDesktopIconsList();
-  const windowsStack = useWindowList(desktopRef);
+  const windowsStack = useWindowList(
+    desktopRef,
+    windowList,
+    focusedWindow,
+    language,
+    handleOpenWindow,
+    handleFocusWindow,
+    handleResetFocus,
+    handleCloseWindow,
+    handleUpdateWindow
+  );
 
   return (
     <div className="desktop" ref={desktopRef}>
-      
       <Background onContextMenu={handleContextMenu} />
       <div className="desktop-icons-wrapper related-background">
         {desktopIconsStack}
       </div>
       <RefsProvider>
         {windowsStack}
-        <Taskbar {...taskbarProps} />
+        {/* <Taskbar {...taskbarProps} /> */}
       </RefsProvider>
       {contextMenu.visible && (
         <ContextMenu

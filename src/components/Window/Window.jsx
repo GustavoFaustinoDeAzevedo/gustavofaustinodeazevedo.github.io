@@ -12,6 +12,7 @@ import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
 import getRandomPosition from './utils/getRandomPosition';
 import useWindowAnimations from './useWindowAnimations';
+import { updateWindow } from '../../store/slices/windowSlice';
 // import useWindowTimeline from './useWindowTimeline';
 
 gsap.registerPlugin(useGSAP);
@@ -22,14 +23,24 @@ const Window = ({
   zIndex,
   isOpen,
   title,
+  icon,
+  x,
+  y,
+  startX,
+  startY,
+  width,
+  height,
+  content,
+  startWidth,
+  startHeight,
   isFocused,
   isMinimized,
   isMaximized,
+  isRequestingRestore,
   desktopRef,
   onFocus,
   onUnfocus,
-  onMinimize,
-  onMaximize,
+  onUpdateWindow,
   onClose,
   onContextMenu,
   children,
@@ -40,38 +51,59 @@ const Window = ({
   const windowRef = createRef(id);
   const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
-  const maximizeOrRestoreRef = useRef(() => {});
-  // const minimizeRef = useRef(() => {});
 
-  const isWindowMounted = useRef(false);
-  const minimizeTimelineRef = useRef(null);
-
-  const { initialState, updateInitialState } = useInitialState(windowRef);
-
-  const { openWindow, maximizeWindow } = useWindowAnimations;
-
-  useEffect(() => {
-    if (!timelineRef.current) {
-      timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
-    }
-  }, [windowRef, index]);
+  const { openWindow, maximizeWindow, restoreWindow } = useWindowAnimations;
 
   useEffect(() => {
     if (!windowRef.current || !headerRef.current) return;
 
+    const { randomX, randomY } = getRandomPosition();
+    gsap.set(windowRef.current, { x: randomX, y: randomY });
+    openWindow(windowRef);
+
+    const { width, height } = windowRef.current.getBoundingClientRect();
+    onUpdateWindow({
+      id,
+      x: randomX,
+      y: randomY,
+      startX: randomX,
+      startY: randomY,
+      width,
+      height,
+      startWidth: width,
+      startHeight: height,
+    });
+
     useWindowDraggable(
-      windowRef.current,
+      windowRef,
       headerRef.current,
       desktopRef.current,
       onFocus,
-      updateInitialState
+      ({ startX, startY, x, y, width, height, startWidth, startHeight }) =>
+        onUpdateWindow({
+          id,
+          startX,
+          startY,
+          x,
+          y,
+          width,
+          height,
+          startWidth,
+          startHeight,
+        }),
+      width,
+      height
     );
 
-    const { x, y } = getRandomPosition();
-    gsap.set(windowRef.current, { x, y });
-    // timelineRef.current.tweenFromTo('show', 'showEnd');
-    openWindow(windowRef, onFocus);
-    updateInitialState();
+    // const observer = new MutationObserver(() => {
+    //   const rect = windowRef.current.getBoundingClientRect();
+    // });
+    // observer.observe(windowRef.current, {
+    //   attributes: true,
+    //   attributeFilter: ['style'],
+    // });
+
+    // return () => observer.disconnect();
   }, []);
 
   // useEffect(() => {
@@ -79,39 +111,63 @@ const Window = ({
   //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
   // }, [isMinimized]);
 
-  useGSAP(() => {
-    maximizeOrRestoreRef.current = () => {
-      if (isMaximized) {
-        // RESTORE
+  useEffect(() => {
+    if (!windowRef.current) return;
+    if (isMaximized) {
+      maximizeWindow(windowRef, () =>
+        onUpdateWindow({
+          id,
+          startX: x,
+          startY: y,
+          x: 0,
+          y: 0,
+          width: '100vw',
+          height: '100vh',
+          startWidth: width,
+          startHeight: height,
+        })
+      );
+    }
+  }, [isMaximized]);
 
-        const { x, y, width, height } = initialState;
-        const rounded = {
-          x: Math.round(x),
-          y: Math.round(y),
-          width: `${Math.round(width)}px`,
-          height: `${Math.round(height)}px`,
-        };
-        maximizeWindow(
-          windowRef,
-          onMaximize,
-          rounded.x,
-          rounded.y,
-          rounded.width,
-          rounded.height
-        );
-      } else {
-        // MAXIMIZE
-        updateInitialState();
-        maximizeWindow(windowRef, onMaximize);
-      }
-    };
-  }, [isMaximized, onMaximize]);
+  useEffect(() => {
+    if (!windowRef.current) return;
+    if ((isMaximized || isMinimized) && isRequestingRestore) {
+      restoreWindow(
+        windowRef,
+        () =>
+          onUpdateWindow({
+            id,
+            maximized: isMinimized && isMaximized ? true : false,
+            minimized: false,
+            requestingRestore: false,
+          }),
+        startX,
+        startY,
+        startWidth,
+        startHeight
+      );
+    }
+  }, [isRequestingRestore]);
 
   const handleMinimize = () => {
-    if (timelineRef && timelineRef.current) {
-      onMinimize();
-      timelineRef.current.play();
-    }
+    onUpdateWindow({
+      id,
+      minimized: true,
+    });
+  };
+  const handleMaximize = () => {
+    onUpdateWindow({
+      id: id,
+      maximized: true,
+    });
+  };
+
+  const handleRestore = () => {
+    onUpdateWindow({
+      id: id,
+      requestingRestore: true,
+    });
   };
 
   // useEffect(() => {
@@ -170,7 +226,8 @@ const Window = ({
       <WindowHeader
         headerRef={headerRef}
         onMinimize={handleMinimize}
-        onMaximize={() => maximizeOrRestoreRef.current()}
+        onMaximize={handleMaximize}
+        onRestore={handleRestore}
         onClose={onClose}
         {...{ id, title, isOpen, isFocused, isMinimized, isMaximized }}
       />
@@ -178,7 +235,7 @@ const Window = ({
         onFocus={onFocus}
         isOpen={isOpen}
         id={id}
-        children={children}
+        content={content}
       />
     </div>
   );

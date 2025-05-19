@@ -8,6 +8,7 @@ const WindowHeader = ({
   isMaximized = false,
   onMinimize = () => {},
   onMaximize = () => {},
+  onRestore = () => {},
   onClose = () => {},
 }) => {
   return (
@@ -52,7 +53,7 @@ const WindowHeader = ({
               : 'Maximize'
           }
           className="maximize"
-          onClick={onMaximize}
+          onClick={() => (isMaximized ? onRestore() : onMaximize())}
         >
           <i className={`icon ${isMaximized ? 'restore' : 'maximize'}`} />
         </button>

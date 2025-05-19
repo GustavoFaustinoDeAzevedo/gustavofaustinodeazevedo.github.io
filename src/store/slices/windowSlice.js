@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useRef } from 'react';
 
 /**
  * Calculates the next z-index value for a window or retrieves the maximum z-index value.
@@ -10,7 +9,7 @@ import { useRef } from 'react';
  */
 const getNextZIndex = (state, getMaxZIndex = false) => {
   try {
-    const zIndexes = Object.values(state.openedWindowList).map((win) => win.zIndex || 0);
+    const zIndexes = state.openedWindowList.map((win) => win.zIndex || 0);
     let maxZ = Math.max(0, ...zIndexes);
     if (getMaxZIndex) return maxZ;
     return maxZ + 1;
@@ -69,54 +68,94 @@ const windowSlice = createSlice({
       const window = state.openedWindowList.find((win) => win.id === id);
       if (window) {
         window.zIndex = getNextZIndex(state);
-        window.isMinimized = false;
+        window.windowState.minimized = false;
       }
     },
     openWindow: (state, action) => {
+
       const { id, title, icon } = action.payload;
-      updateHistory(state.history, id);
+      state.history = updateHistory(state.history, id);
       const finalId = `window#${id}#${new Date() * Math.random()}`
       state.openedWindowList = [...state.openedWindowList, {
         id: finalId,
-        title: title,
-        icon: icon,
-        open: true,
-        isMaximized: false,
-        isMinimized: false,
+        title,
+        icon,
         zIndex: getNextZIndex(state),
+        content: '',
+        position: {
+          startX: 0,
+          startY: 0,
+          x: 0,
+          y: 0,
+        },
+        size: {
+          startWidth: 0,
+          startHeight: 0,
+          width: 0,
+          height: 0,
+        },
+        windowState: {
+          open: true,
+          maximized: false,
+          minimized: false,
+          requestingRestore: false,
+        },
       }];
       state.focusedWindow = finalId;
     },
+
     closeWindow: (state, action) => {
       state.openedWindowList = state.openedWindowList.filter(win => win.id !== action.payload);
-    },
-
-    maximizeWindow: (state, action) => {
-      const windowIndex = indexLocator(action.payload, state);
-      if (windowIndex !== -1) {
-        state.openedWindowList[windowIndex].isMaximized = !state.openedWindowList[windowIndex].isMaximized;
-        state.focusedWindow = action.payload;
-      }
-    },
-    minimizeWindow: (state, action) => {
-      const windowIndex = indexLocator(action.payload, state);
-
-      if (state.openedWindowList[windowIndex]) {
-        state.openedWindowList[windowIndex].isMinimized = true;
-      }
-    },
-    restoreWindow: (state, action) => {
-      const windowIndex = indexLocator(action.payload, state);
-      if (state.openedWindowList[windowIndex]) {
-        state.openedWindowList[windowIndex].isMinimized = false;
-        state.focusedWindow = action.payload;
-        state.openedWindowList[windowIndex].zIndex = getNextZIndex(state);
-      }
     },
 
     resetFocus: (state) => {
       state.focusedWindow = null;
     },
+
+    updateWindow: (state, action) => {
+      const { id, title, icon, startX, startY, x, y, startWidth, startHeight, width, height, minimized, maximized, content, requestingRestore } = action.payload;
+      const windowIndex = indexLocator(id, state);
+      const window = state.openedWindowList[windowIndex];
+      if (!window) return;
+
+      if (title) window.title = title;
+      if (icon) window.icon = icon;
+
+      if (startX !== undefined) {
+        window.position.startX = startX;
+      }
+      if (startY !== undefined) {
+        window.position.startY = startY;
+      }
+
+      if (x !== undefined) {
+        window.position.x = x;
+      }
+      if (y !== undefined) {
+        window.position.y = y;
+      }
+
+      if (startWidth !== undefined) {
+        window.size.startWidth = startWidth;
+      }
+      if (startHeight !== undefined) {
+        window.size.startHeight = startHeight;
+      }
+
+      if (width !== undefined) {
+        window.size.width = width;
+      }
+      if (height !== undefined) {
+        window.size.height = height;
+      }
+
+      if (minimized !== undefined) window.windowState.minimized = minimized;
+      if (maximized !== undefined) window.windowState.maximized = maximized;
+      if (requestingRestore !== undefined) window.windowState.requestingRestore = requestingRestore;
+
+      if (content !== undefined) window.content = content;
+    }
+
   },
 });
 
@@ -124,10 +163,8 @@ export const {
   focusWindow,
   openWindow,
   closeWindow,
-  maximizeWindow,
-  minimizeWindow,
-  restoreWindow,
   resetFocus,
+  updateWindow
 } = windowSlice.actions;
 
 export default windowSlice.reducer;

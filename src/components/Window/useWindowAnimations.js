@@ -32,20 +32,17 @@ const useWindowAnimations = {
     });
   },
 
-  maximizeWindow: (windowRef, handler = () => { }, x, y, width, height) => {
+  maximizeWindow: (windowRef, handler = () => { }) => {
 
     if (!windowRef?.current) return;
     return gsap.to(windowRef.current, {
-      x: x || 0,
-      y: y || 0,
-      width: width || '100vw',
-      height: height || '100vh',
+      x: 0,
+      y: 0,
+      width: '100vw',
+      height: '100vh',
       duration: 0.35,
       ease: 'expo.inOut',
       onComplete: () => {
-        // windowRef.current.classList.contains('maximized') ?
-        //   windowRef.current.classList.remove('maximized') :
-        //   windowRef.current.classList.add('maximized')
         handler();
       },
     });
@@ -95,11 +92,24 @@ const useWindowAnimations = {
 
   },
 
-  // restoreWindow: (windowRef, handler = () => {
-  //   windowRef.current.classList.remove('minimized');
-  //   gsap.killTweensOf(windowRef.current);
-  //   gsap.set(windowRef.current, { clearProps: 'all' });
-  // })
+  restoreWindow: (windowRef, handler = () => { }, x, y, width, height) => {
+
+    if (!windowRef?.current) return;
+    return gsap.to(windowRef.current, {
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+      scale: 1,
+      opacity: 1,
+      display: 'flex',
+      duration: 0.35,
+      ease: 'expo.inOut',
+      onComplete: () => {
+        handler();
+      },
+    });
+  },
 }
 
 export default useWindowAnimations;
