@@ -135,6 +135,10 @@ const Window = ({
             maximized: isMinimized && isMaximized ? true : false,
             minimized: false,
             requestingRestore: false,
+            x: startX,
+            y: startY,
+            width: startWidth,
+            height: startHeight,
           }),
         startX,
         startY,
@@ -149,12 +153,14 @@ const Window = ({
       id,
       minimized: true,
     });
+    onUnfocus();
   };
   const handleMaximize = () => {
     onUpdateWindow({
       id: id,
       maximized: true,
     });
+    onFocus(id);
   };
 
   const handleRestore = () => {
@@ -162,52 +168,15 @@ const Window = ({
       id: id,
       requestingRestore: true,
     });
+    onFocus(id);
   };
-
-  // useEffect(() => {
-  //   // prevIsMinimized.current = !isMinimized;
-  //   if (isWindowMounted.current === false) {
-  //     isWindowMounted.current = true;
-  //     return;
-  //   }
-  //   // minimizeTimelineRef.current = timelineRef.current.tweenFromTo(
-  //   //   'minimize',
-  //   //   'minimizeEnd'
-  //   // );
-
-  //   if (timelineRef.current) {
-  //     console.log('isMinimized mudou: ', isMinimized);
-  //     if (isMinimized) {
-  //       timelineRef.current.reverse();
-  //     } else {
-  //       timelineRef.current.play();
-  //     }
-  //   }
-  // }, [isMinimized]);
 
   const className = useMemo(
     () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
     [isFocused, isMinimized, isOpen, isMaximized]
   );
 
-  // const handleMaximize = useCallback(() => {
-  //   updateInitialState();
-  //   maximizeWindow(windowRef, onMaximize);
-  // }, [onMaximize]);
-
-  // const handleRestore = useCallback(() => {
-  //   let { x, y, width, height } = initialState.current;
-
-  //   x = Math.round(x);
-  //   y = Math.round(y);
-  //   width = Math.round(width);
-  //   height = Math.round(height);
-
-  //   width = width + 'px';
-  //   height = height + 'px';
-
-  //   maximizeWindow(windowRef, onMaximize, x, y, width, height);
-  // }, [initialState, onMaximize]);
+  useClickOutside(windowRef, onUnfocus, isFocused);
   return (
     <div
       ref={windowRef}
@@ -218,8 +187,6 @@ const Window = ({
     >
       <WindowHeader
         headerRef={headerRef}
-        // onMinimize={() => minimizeOrRestoreRef.current()}
-        // onMinimize={() => minimizeOrRestoreRef.current()}
         onMinimize={handleMinimize}
         onMaximize={handleMaximize}
         onRestore={handleRestore}

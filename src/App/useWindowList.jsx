@@ -25,7 +25,6 @@ export const useWindowList = (
               position,
               size,
               zIndex,
-              open,
               icon,
               content,
             },
