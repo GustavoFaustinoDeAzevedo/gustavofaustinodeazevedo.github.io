@@ -45,15 +45,11 @@ const Window = ({
   onContextMenu,
   children,
 }) => {
-  //TODO: fazer o hook de animação em outro arquivo usando useEffect
-
   const { createRef } = useRefs();
   const windowRef = createRef(id);
   const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
-
   const { openWindow, maximizeWindow, restoreWindow } = useWindowAnimations;
-
   useEffect(() => {
     if (!windowRef.current || !headerRef.current) return;
 
@@ -94,7 +90,6 @@ const Window = ({
       width,
       height
     );
-
     // const observer = new MutationObserver(() => {
     //   const rect = windowRef.current.getBoundingClientRect();
     // });
@@ -110,7 +105,6 @@ const Window = ({
   //   if (!timelineRef.current) return;
   //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
   // }, [isMinimized]);
-
   useEffect(() => {
     if (!windowRef.current) return;
     if (isMaximized) {
@@ -215,6 +209,19 @@ const Window = ({
   //   maximizeWindow(windowRef, onMaximize, x, y, width, height);
   // }, [initialState, onMaximize]);
 
+  const handleMinimize = () => {
+    const rect = windowRef.current.getBoundingClientRect();
+    send({ type: 'MINIMIZE', x: rect.x, y: rect.y });
+  };
+
+  const handleMaximize = () => {
+    if (!isMaximized) {
+      const rect = windowRef.current.getBoundingClientRect();
+      send({ type: 'MAXIMIZE', width: rect.width, height: rect.height });
+    } else {
+      send({ type: 'RESTORE' });
+    }
+  };
   return (
     <div
       ref={windowRef}
@@ -225,6 +232,7 @@ const Window = ({
     >
       <WindowHeader
         headerRef={headerRef}
+        // onMinimize={() => minimizeOrRestoreRef.current()}
         onMinimize={handleMinimize}
         onMaximize={handleMaximize}
         onRestore={handleRestore}

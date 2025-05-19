@@ -20,8 +20,6 @@ const TaskbarItem = ({
       timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
     }
   }, [windowRef, index]);
-
-  console.log(isMinimized);
   const handleMinimize = () => {
     if (timelineRef?.current) {
       if (isMinimized) {

@@ -4,8 +4,13 @@ import { getDesktopIconProps } from '../utils/desktopIconsProps';
 import actions from '../store/actions';
 import { useSelector } from 'react-redux';
 import { placeholder } from '../data/desktopIconsData';
+import useRefs from '../contexts/useRefs';
+import { useMachine } from '@xstate/react';
+import { windowMachine } from '../machines/windowMachine';
 
 const useDesktopIconsList = () => {
+
+
   const windowActions = actions.useWindowActions();
   const desktopIconsActions = actions.useDesktopIconsActions();
 
@@ -29,7 +34,6 @@ const useDesktopIconsList = () => {
       }
     }
   };
-
   const test = (id) =>
     console.log(
       language,
