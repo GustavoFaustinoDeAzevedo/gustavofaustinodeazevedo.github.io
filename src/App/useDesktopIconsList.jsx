@@ -21,22 +21,25 @@ const useDesktopIconsList = () => {
   const windowList = useSelector((state) => state.window.openedWindowList);
   const desktopIconsData = useSelector((state) => state.icon.desktopIconList);
 
-  const handleOnClick = (id, finalTitle, icon, windowRef) => {
+  const handleOnClick = (id, finalTitle, icon) => {
     if (finalTitle === 'Novo' || finalTitle === 'New') {
       handleAddIcon(placeholder);
     } else {
       try {
         if (!windowList.find((win) => win.id === id)) {
-          
-          handleOpenWindow(id, finalTitle, icon, windowRef);
+          handleOpenWindow(id, finalTitle, icon);
         }
       } catch (error) {
         console.error('Error opening window:', error);
       }
     }
   };
-
-  return desktopIconsData.map(({ id, title, icon }, index) => {
+  const test = (id) =>
+    console.log(
+      language,
+      windowList.find((win) => win.id === id)
+    );
+  return desktopIconsData.map(({ id, title, icon}, index) => {
     const finalTitle = language === 'POR' ? title.por : title.eng;
     return (
       <DesktopIcon
@@ -46,16 +49,6 @@ const useDesktopIconsList = () => {
         icon={icon}
         language={language}
         onClick={() => handleOnClick(id, finalTitle, icon)}
-
-        //   ...getDesktopIconProps(
-        //   windowList,
-        //   language,
-        //   handleOpenWindow,
-        //   handleAddIcon,
-        //   id,
-        //   finalTitle,
-        //   icon
-        // )
       />
     );
   });

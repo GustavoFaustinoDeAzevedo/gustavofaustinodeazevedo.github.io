@@ -1,14 +1,14 @@
 import React from 'react';
 import DefaultContent from './DefaultContent';
 
-const WindowContent = ({ onFocus, isOpen, id, children }) => (
+const WindowContent = ({ onFocus, isOpen, id, content }) => (
   <div
     onTouchStart={onFocus}
     onMouseDown={onFocus}
     onClick={onFocus}
     className="window-content"
   >
-    {isOpen && (children || <DefaultContent id={id} />)}
+    {isOpen && (content || <DefaultContent id={id} />)}
   </div>
 );
 
