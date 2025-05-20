@@ -70,7 +70,7 @@ const useWindowAnimations = {
       scale: 0.8,
       duration: 0.25,
       opacity: 0.8,
-      // x: x,
+      //x: x,
       ease: 'power4.inOut',
     })
 
@@ -88,8 +88,6 @@ const useWindowAnimations = {
         handler();
       },
     })
-
-
   },
 
   restoreWindow: (windowRef, handler = () => { }, x, y, width, height) => {
