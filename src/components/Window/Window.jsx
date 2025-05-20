@@ -37,6 +37,7 @@ const Window = ({
   isMinimized,
   isMaximized,
   isRequestingRestore,
+  isRequestingClose,
   desktopRef,
   onFocus,
   onUnfocus,
@@ -49,8 +50,13 @@ const Window = ({
   const windowRef = createRef(id);
   const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
-  const { openWindow, maximizeWindow, restoreWindow, minimizeWindow } =
-    useWindowAnimations;
+  const {
+    openWindow,
+    maximizeWindow,
+    restoreWindow,
+    minimizeWindow,
+    closeWindow,
+  } = useWindowAnimations;
 
   const className = useMemo(
     () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
@@ -143,7 +149,7 @@ const Window = ({
           });
           onUnfocus();
         },
-        index*64
+        index * 64
       );
     }
   }, [isMinimized]);
@@ -178,6 +184,20 @@ const Window = ({
     }
   }, [isRequestingRestore]);
 
+  useEffect(() => {
+    if (!windowRef.current) return;
+
+    if (isOpen && isRequestingClose) {
+      closeWindow(windowRef, () => {
+        onClose({
+          id,
+          isRequestingClose: true,
+        });
+        onUnfocus(id);
+      });
+    }
+  }, [isRequestingClose]);
+
   const handleMinimize = () => {
     onUpdateWindow({
       id,
@@ -198,6 +218,13 @@ const Window = ({
     });
   };
 
+  const handleClose = () => {
+    onUpdateWindow({
+      id: id,
+      requestingClose: true,
+    });
+  };
+
   useClickOutside(windowRef, onUnfocus, isFocused);
   return (
     <div
@@ -212,7 +239,7 @@ const Window = ({
         onMinimize={handleMinimize}
         onMaximize={handleMaximize}
         onRestore={handleRestore}
-        onClose={onClose}
+        onClose={handleClose}
         {...{ id, title, isOpen, isFocused, isMinimized, isMaximized }}
       />
       <WindowContent

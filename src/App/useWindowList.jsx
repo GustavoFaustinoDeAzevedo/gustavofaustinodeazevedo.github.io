@@ -46,6 +46,7 @@ export const useWindowList = (
               startWidth={size.startWidth}
               startHeight={size.startHeight}
               isRequestingRestore={windowState.requestingRestore}
+              isRequestingClose={windowState.requestingClose}
               width={size.width}
               height={size.height}
               isOpen={windowState.open}
