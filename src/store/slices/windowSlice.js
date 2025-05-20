@@ -99,6 +99,7 @@ const windowSlice = createSlice({
           maximized: false,
           minimized: false,
           requestingRestore: false,
+          requestingClose: false
         },
       }];
       state.focusedWindow = finalId;
@@ -113,7 +114,7 @@ const windowSlice = createSlice({
     },
 
     updateWindow: (state, action) => {
-      const { id, title, icon, startX, startY, x, y, startWidth, startHeight, width, height, minimized, maximized, content, requestingRestore } = action.payload;
+      const { id, title, icon, startX, startY, x, y, startWidth, startHeight, width, height, minimized, maximized, content, requestingRestore, requestingClose } = action.payload;
       const windowIndex = indexLocator(id, state);
       const window = state.openedWindowList[windowIndex];
       if (!window) return;
@@ -152,6 +153,7 @@ const windowSlice = createSlice({
       if (minimized !== undefined) window.windowState.minimized = minimized;
       if (maximized !== undefined) window.windowState.maximized = maximized;
       if (requestingRestore !== undefined) window.windowState.requestingRestore = requestingRestore;
+      if (requestingClose !== undefined) window.windowState.requestingClose = requestingClose;
 
       if (content !== undefined) window.content = content;
     }
