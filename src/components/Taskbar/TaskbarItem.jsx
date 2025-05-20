@@ -9,10 +9,9 @@ const TaskbarItem = ({
   onWindowMinimize,
   onWindowRestore,
 }) => {
-
   const clickHandler = () => {
-    return isMinimized ? onWindowRestore : onWindowMinimize
-  }
+    return isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
+  };
 
   return (
     <li

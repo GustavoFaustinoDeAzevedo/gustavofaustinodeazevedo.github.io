@@ -106,17 +106,20 @@ const Window = ({
     if (!windowRef.current) return;
     if (isMaximized) {
       const { width, height } = getWindowInfo(windowRef);
-      maximizeWindow(windowRef, () =>
+      maximizeWindow(windowRef, () => {
         onUpdateWindow({
           id,
+          x: 0,
+          y: 0,
           startX: x,
           startY: y,
           width: 0,
           height: 0,
           startWidth: width,
           startHeight: height,
-        })
-      );
+        });
+        onFocus(id);
+      });
     }
   }, [isMaximized]);
 
@@ -126,14 +129,20 @@ const Window = ({
       const { width, height } = getWindowInfo(windowRef);
       minimizeWindow(
         windowRef,
-        () =>
+        () => {
           onUpdateWindow({
             id,
+            x: startX,
+            y: startY,
             startX: x,
             startY: y,
+            width: startWidth,
+            height: startHeight,
             startWidth: width,
             startHeight: height,
-          }),
+          });
+          onUnfocus();
+        },
         x
       );
     }
@@ -144,7 +153,7 @@ const Window = ({
     if ((isMaximized || isMinimized) && isRequestingRestore) {
       restoreWindow(
         windowRef,
-        () =>
+        () => {
           onUpdateWindow({
             id,
             maximized: isMinimized && isMaximized ? true : false,
@@ -152,9 +161,15 @@ const Window = ({
             requestingRestore: false,
             x: startX,
             y: startY,
+            startX: x,
+            startY: y,
             width: startWidth,
             height: startHeight,
-          }),
+            startWidth: width,
+            startHeight: height,
+          });
+          onFocus(id);
+        },
         startX,
         startY,
         startWidth,
@@ -168,14 +183,12 @@ const Window = ({
       id,
       minimized: true,
     });
-    onUnfocus();
   };
   const handleMaximize = () => {
     onUpdateWindow({
       id: id,
       maximized: true,
     });
-    onFocus(id);
   };
 
   const handleRestore = () => {
@@ -183,7 +196,6 @@ const Window = ({
       id: id,
       requestingRestore: true,
     });
-    onFocus(id);
   };
 
   useClickOutside(windowRef, onUnfocus, isFocused);

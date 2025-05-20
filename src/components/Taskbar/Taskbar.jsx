@@ -14,7 +14,6 @@ const Taskbar = ({
   language,
   onChangeLanguage,
   onUpdateWindow,
-  onFocus,
   onUnfocus,
 }) => {
   const [menuVisibility, setMenuVisibility] = useState({
@@ -58,14 +57,12 @@ const Taskbar = ({
       id,
       minimized: true,
     });
-    onUnfocus();
   };
   const handleMaximize = (id) => {
     onUpdateWindow({
       id: id,
       maximized: true,
     });
-    onFocus(id);
   };
 
   const handleRestore = (id) => {
@@ -73,7 +70,6 @@ const Taskbar = ({
       id: id,
       requestingRestore: true,
     });
-    onFocus(id);
   };
 
   return (
@@ -90,8 +86,8 @@ const Taskbar = ({
       <TaskbarItems
         focusedWindow={focusedWindow}
         openedWindowList={windowList}
-        onWindowMinimize={handleMinimize}
-        onWindowRestore={handleRestore}
+        onWindowMinimize={(id) => handleMinimize(id)}
+        onWindowRestore={(id) => handleRestore(id)}
       />
       <section className="taskbar-right">
         <LanguageSelector

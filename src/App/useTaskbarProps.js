@@ -13,7 +13,6 @@ export const useTaskbarProps = ({ windowList,
       language: language,
       onChangeLanguage: handleChangeLanguage,
       onUpdateWindow: (data) => handleUpdateWindow(data),
-      onFocus: () => handleFocusWindow(id),
       onUnfocus: () => handleResetFocus()
     }),
     [windowList, focusedWindow, history, language, handleChangeLanguage, handleUpdateWindow]
