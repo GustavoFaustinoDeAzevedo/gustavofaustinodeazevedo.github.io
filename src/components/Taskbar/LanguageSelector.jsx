@@ -27,7 +27,6 @@ const LanguageSelector = ({
   //   isVisible,
   //   windowRef
   // );
-
   return (
     <section className="language">
       <button
@@ -37,7 +36,7 @@ const LanguageSelector = ({
         aria-label={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
         title={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
       >
-        {language}
+        {language === 'ENG' ? 'ENG' : 'POR'}
       </button>
       <div className="language-list-container">
         <ul
@@ -46,14 +45,14 @@ const LanguageSelector = ({
         >
           <li
             onClick={onChangeLanguage}
-            className={language.includes('ENG') ? 'active' : ''}
+            className={language === 'ENG' ? 'active' : ''}
             aria-label={language !== 'POR' ? 'English-US' : 'Inglês-US'}
           >
             {language !== 'POR' ? 'English-US' : 'Inglês-US'}
           </li>
           <li
             onClick={onChangeLanguage}
-            className={language.includes('POR') ? 'active' : ''}
+            className={language === 'POR' ? 'active' : ''}
             aria-label={language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}
           >
             {language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}

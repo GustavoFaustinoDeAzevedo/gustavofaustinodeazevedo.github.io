@@ -12,18 +12,22 @@ const TaskbarItems = ({
       {openedWindowList?.[0]?.open &&
         openedWindowList
           .filter(({ id }) => id !== 'New' && id !== 'placeholder')
-          .map(({ id, isMinimized, icon }, index) => (
+          .map(({ id, state, icon }, index) => 
+          {
+            console.log(state )
+
+           return (
             <TaskbarItem
               key={id}
               id={id}
-              isMinimized={isMinimized}
+              isMinimized={state.minimized}
               icon={icon}
               index={index}
               focusedWindow={focusedWindow}
               onWindowMinimize={onWindowMinimize}
               onWindowRestore={onWindowRestore}
             />
-          ))}
+          )})}
     </ul>
   ), [openedWindowList, focusedWindow, onWindowMinimize, onWindowRestore]);
 

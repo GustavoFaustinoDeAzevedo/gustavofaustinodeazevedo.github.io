@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import useRefs from '../../contexts/useRefs';
-import useWindowTimeline from '../Window/hooks/useWindowTimeline';
 
 const TaskbarItem = ({
   id,
@@ -11,26 +9,10 @@ const TaskbarItem = ({
   onWindowMinimize,
   onWindowRestore,
 }) => {
-  const { getRef } = useRefs();
-  const windowRef = getRef(id);
-  const timelineRef = getRef('timeline' + id);
 
-  useEffect(() => {
-    if (!timelineRef.current) {
-      timelineRef.current = useWindowTimeline(windowRef, index, timelineRef);
-    }
-  }, [windowRef, index]);
-  const handleMinimize = () => {
-    if (timelineRef?.current) {
-      if (isMinimized) {
-        onWindowRestore(id);
-        timelineRef.current.reverse();
-      } else {
-        onWindowMinimize(id);
-        timelineRef.current?.play();
-      }
-    }
-  };
+  const clickHandler = () => {
+    return isMinimized ? onWindowRestore : onWindowMinimize
+  }
 
   return (
     <li
@@ -39,7 +21,7 @@ const TaskbarItem = ({
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
          `}
-      onClick={handleMinimize}
+      onClick={clickHandler}
     >
       <i className={`${icon}`}></i>
     </li>

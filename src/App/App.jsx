@@ -29,6 +29,8 @@ const App = () => {
   const contextMenu = useSelector((state) => state.contextMenu);
   const windowList = useSelector((state) => state.window.openedWindowList);
   const focusedWindow = useSelector((state) => state.window.focusedWindow);
+  const history = useSelector((state) => state.window.history);
+
   const {
     handleFocusWindow,
     handleOpenWindow,
@@ -36,6 +38,7 @@ const App = () => {
     handleCloseWindow,
     handleUpdateWindow,
   } = actions.useWindowActions();
+
   const contextMenuActions = actions.useContextMenuActions();
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
   const handleChangeLanguage = useCallback(() => {
@@ -43,7 +46,16 @@ const App = () => {
   }, [language]);
 
   const taskbarProps = useTaskbarProps({
+    windowList,
+    history,
+    focusedWindow,
+    language,
     handleChangeLanguage,
+    handleUpdateWindow,
+    handleFocusWindow,
+    handleResetFocus,
+    handleCloseWindow,
+    handleOpenWindow,
   });
 
   const itemsHandler = useItemsHandler();
@@ -70,7 +82,7 @@ const App = () => {
       </div>
       <RefsProvider>
         {windowsStack}
-        {/* <Taskbar {...taskbarProps} /> */}
+        <Taskbar {...taskbarProps} />
       </RefsProvider>
       {contextMenu.visible && (
         <ContextMenu

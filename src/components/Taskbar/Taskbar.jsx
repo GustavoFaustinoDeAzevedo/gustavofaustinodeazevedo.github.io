@@ -7,24 +7,16 @@ import Clock from './Clock';
 import { useSelector } from 'react-redux';
 
 const Taskbar = ({
+  windowList,
   className,
-  // language,
-  // focusedWindow,
-  // openedWindowList,
-  onWindowMinimize,
-  onWindowRestore,
+  focusedWindow,
+  history,
+  language,
   onChangeLanguage,
-  // history,
+  onUpdateWindow,
+  onFocus,
+  onUnfocus,
 }) => {
-  //TODO: fazer o hook de animação em outro arquivo usando use
-
-  const language = useSelector((state) => state.settings.language);
-  const openedWindowList = useSelector(
-    (state) => state.window.openedWindowList
-  );
-  const focusedWindow = useSelector((state) => state.window.focusedWindow);
-  const history = useSelector((state) => state.window.history);
-
   const [menuVisibility, setMenuVisibility] = useState({
     languageMenu: false,
     startMenu: false,
@@ -61,6 +53,29 @@ const Taskbar = ({
     buttonRef
   );
 
+  const handleMinimize = () => {
+    onUpdateWindow({
+      id,
+      minimized: true,
+    });
+    onUnfocus();
+  };
+  const handleMaximize = () => {
+    onUpdateWindow({
+      id: id,
+      maximized: true,
+    });
+    onFocus(id);
+  };
+
+  const handleRestore = () => {
+    onUpdateWindow({
+      id: id,
+      requestingRestore: true,
+    });
+    onFocus(id);
+  };
+
   return (
     <nav className="taskbar">
       <StartMenu
@@ -74,9 +89,9 @@ const Taskbar = ({
       />
       <TaskbarItems
         focusedWindow={focusedWindow}
-        openedWindowList={openedWindowList}
-        onWindowMinimize={onWindowMinimize}
-        onWindowRestore={onWindowRestore}
+        openedWindowList={windowList}
+        onWindowMinimize={handleMinimize}
+        onWindowRestore={handleRestore}
       />
       <section className="taskbar-right">
         <LanguageSelector
@@ -84,7 +99,6 @@ const Taskbar = ({
           windowRef={(element) => (menuRef.current = element)}
           language={language}
           isVisible={menuVisibility.languageMenu}
-          // toggleWindowVisibility={() => toggleMenuVisibility()}
           onClick={() => toggleMenuVisibility('languageMenu')}
           onChangeLanguage={onChangeLanguage}
         />

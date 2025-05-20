@@ -10,8 +10,8 @@ const useWindowAnimations = {
       opacity: 1,
       duration: 0.3,
       ease: 'power2.out',
+      display: 'flex',
       onComplete: () => {
-
         handler()
       }
     });

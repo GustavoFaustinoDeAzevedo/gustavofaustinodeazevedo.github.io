@@ -49,7 +49,17 @@ const Window = ({
   const windowRef = createRef(id);
   const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
-  const { openWindow, maximizeWindow, restoreWindow } = useWindowAnimations;
+  const { openWindow, maximizeWindow, restoreWindow, minimizeWindow } =
+    useWindowAnimations;
+
+  const className = useMemo(
+    () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
+    [isFocused, isMinimized, isOpen, isMaximized]
+  );
+
+  const getWindowInfo = (windowRef) =>
+    windowRef.current.getBoundingClientRect();
+
   useEffect(() => {
     if (!windowRef.current || !headerRef.current) return;
 
@@ -57,7 +67,7 @@ const Window = ({
     gsap.set(windowRef.current, { x: randomX, y: randomY });
     openWindow(windowRef);
 
-    const { width, height } = windowRef.current.getBoundingClientRect();
+    const { width, height } = getWindowInfo(windowRef);
     onUpdateWindow({
       id,
       x: randomX,
@@ -90,39 +100,44 @@ const Window = ({
       width,
       height
     );
-    // const observer = new MutationObserver(() => {
-    //   const rect = windowRef.current.getBoundingClientRect();
-    // });
-    // observer.observe(windowRef.current, {
-    //   attributes: true,
-    //   attributeFilter: ['style'],
-    // });
-
-    // return () => observer.disconnect();
   }, []);
 
-  // useEffect(() => {
-  //   if (!timelineRef.current) return;
-  //   isMinimized ? timelineRef.current.play(0) : timelineRef.current.reverse(1);
-  // }, [isMinimized]);
   useEffect(() => {
     if (!windowRef.current) return;
     if (isMaximized) {
+      const { width, height } = getWindowInfo(windowRef);
       maximizeWindow(windowRef, () =>
         onUpdateWindow({
           id,
           startX: x,
           startY: y,
-          x: 0,
-          y: 0,
-          width: '100vw',
-          height: '100vh',
+          width: 0,
+          height: 0,
           startWidth: width,
           startHeight: height,
         })
       );
     }
   }, [isMaximized]);
+
+  useEffect(() => {
+    if (!windowRef.current) return;
+    if (isMinimized) {
+      const { width, height } = getWindowInfo(windowRef);
+      minimizeWindow(
+        windowRef,
+        () =>
+          onUpdateWindow({
+            id,
+            startX: x,
+            startY: y,
+            startWidth: width,
+            startHeight: height,
+          }),
+        x
+      );
+    }
+  }, [isMinimized]);
 
   useEffect(() => {
     if (!windowRef.current) return;
@@ -170,11 +185,6 @@ const Window = ({
     });
     onFocus(id);
   };
-
-  const className = useMemo(
-    () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
-    [isFocused, isMinimized, isOpen, isMaximized]
-  );
 
   useClickOutside(windowRef, onUnfocus, isFocused);
   return (
