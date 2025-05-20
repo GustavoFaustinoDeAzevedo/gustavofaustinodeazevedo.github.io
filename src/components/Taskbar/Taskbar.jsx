@@ -53,14 +53,14 @@ const Taskbar = ({
     buttonRef
   );
 
-  const handleMinimize = () => {
+  const handleMinimize = (id) => {
     onUpdateWindow({
       id,
       minimized: true,
     });
     onUnfocus();
   };
-  const handleMaximize = () => {
+  const handleMaximize = (id) => {
     onUpdateWindow({
       id: id,
       maximized: true,
@@ -68,7 +68,7 @@ const Taskbar = ({
     onFocus(id);
   };
 
-  const handleRestore = () => {
+  const handleRestore = (id) => {
     onUpdateWindow({
       id: id,
       requestingRestore: true,
