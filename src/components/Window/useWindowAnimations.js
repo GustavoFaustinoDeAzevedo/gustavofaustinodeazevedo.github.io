@@ -59,35 +59,27 @@ const useWindowAnimations = {
       return;
     }
 
-    const width = windowRef.current.getBoundingClientRect();
+    const { width } = windowRef.current.getBoundingClientRect();
 
-    gsap.set(windowRef.current, {
-      minWidth: 0,
-      minHeight: 0,
-
-    })
-    gsap.to(windowRef.current, {
-      scale: 0.8,
-      duration: 0.25,
-      opacity: 0.8,
-      //x: x,
-      ease: 'power4.inOut',
-    })
-
-    gsap.to(windowRef.current, {
-      x: x,
-      y: '100vh',
-      opacity: 0,
-      scale: 0.2,
-      width: 0,
-      height: 0,
+    const tl = gsap.timeline();
+    tl.to(windowRef.current, {
+      scale: 0.3,
       duration: 0.4,
+      ease: 'power2.inOut',
+    }).to(windowRef.current, {
+      width: 0,
+      x: x,
+      duration: 0.2,
+    }).to(windowRef.current, {
+      y: '100vh',
+      scale: 0,
+      duration: 0.2,
       display: 'none',
       ease: 'power2.inOut',
       onComplete: () => {
         handler();
       },
-    })
+    });
   },
 
   restoreWindow: (windowRef, handler = () => { }, x, y, width, height) => {
@@ -98,17 +90,22 @@ const useWindowAnimations = {
       y: y,
       width: width,
       height: height,
-      maxWidth: '100%',
-      maxHeight: 'calc(100dvh - var(--taskbar-height))',
+
       scale: 1,
       opacity: 1,
       display: 'flex',
-      duration: 0.35,
+      duration: 0.4,
       ease: 'expo.inOut',
       onComplete: () => {
         handler();
+        gsap.set(windowRef.current, {
+          minWidth: 'max-content',
+          minHeight: '10%',
+
+        })
       },
     });
+
   },
 }
 
