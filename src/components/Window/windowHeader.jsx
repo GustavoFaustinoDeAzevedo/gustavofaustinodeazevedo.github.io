@@ -4,6 +4,7 @@ const WindowHeader = ({
   title = 'Untitled',
   headerRef = null,
   onFocus = () => {},
+  icon = '',
   language = 'ENG',
   isMaximized = false,
   onMinimize = () => {},
@@ -22,7 +23,7 @@ const WindowHeader = ({
         aria-label={title}
         className="window-title"
       >
-        {title}
+        <i className={icon} /> {title}
       </span>
       <div className="window-controls">
         <button
