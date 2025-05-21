@@ -4,16 +4,13 @@ import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
 import WindowContent from './WindowContent';
-import useWindowTimeline from './hooks/useWindowTimeline';
-import useInitialState from './hooks/useInitialState';
 import useClickOutside from '../../hooks/useClickOutside';
 import useWindowDraggable from './useWindowDraggable';
 import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
 import getRandomPosition from './utils/getRandomPosition';
 import useWindowAnimations from './useWindowAnimations';
-import { updateWindow } from '../../store/slices/windowSlice';
-// import useWindowTimeline from './useWindowTimeline';
+
 
 gsap.registerPlugin(useGSAP);
 
@@ -48,7 +45,6 @@ const Window = ({
 }) => {
   const { createRef } = useRefs();
   const windowRef = createRef(id);
-  const timelineRef = createRef('timeline' + id);
   const headerRef = useRef(null);
   const {
     openWindow,
@@ -240,7 +236,7 @@ const Window = ({
         onMaximize={handleMaximize}
         onRestore={handleRestore}
         onClose={handleClose}
-        {...{ id, title, isOpen, isFocused, isMinimized, isMaximized }}
+        {...{ id, title, icon, isOpen, isFocused, isMinimized, isMaximized }}
       />
       <WindowContent
         onFocus={onFocus}
