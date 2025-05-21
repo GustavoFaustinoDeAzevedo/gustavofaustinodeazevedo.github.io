@@ -1,7 +1,7 @@
 
 const getWindowClass = ({ isFocused, isMinimized, isOpen, isMaximized }) => {
   // console.log(isOpen);
-  return `window ${isFocused ? 'focus' : ''}   `;
+  return `window ${isFocused ? 'focus' : ''}  ${isMaximized ? 'maximized' : ''}`;
 };
-// ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''} ${isOpen ? 'open' : ''} ${isOpen ? 'open' : ''}
+// ${isMinimized ? 'minimized' : ''}  ${isOpen ? 'open' : ''}
 export default getWindowClass;

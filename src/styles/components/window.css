@@ -21,6 +21,13 @@
       transition: none;
     }
 
+    &.maximized {
+      max-height: calc(100% - var(--taskbar-height)) !important;
+      border-radius: 0 !important;
+      border-width: 0px !important;
+      resize: none !important;
+    }
+
     &.open, &.focus:not(.minimized) {
       display: flex;
     }
@@ -40,24 +47,12 @@
         &.open {
           width: 100% !important;
           height: calc(100vh - var(--taskbar-height)) !important;
-
           top: 0 !important;
           left: 0 !important;
           border-radius: 0;
           border: none !important;
           transform: translate3d(0, 0, 0) !important;
-          resize: none;
-        }
-      }
-
-      @media (min-width: 600px) {
-        &.open.maximized {
-          /* width: 100% !important; */
-          max-height: calc(100% - var(--taskbar-height)) !important;
-          border-radius: 0 !important;
-          border-width: 0px !important;
-          /* transition: border 0.2s ease; */
-          resize: none;
+          resize: none !important;
         }
       }
     }

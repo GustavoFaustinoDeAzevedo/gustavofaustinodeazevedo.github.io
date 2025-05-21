@@ -98,6 +98,8 @@ const useWindowAnimations = {
       y: y,
       width: width,
       height: height,
+      maxWidth: '100%',
+      maxHeight: 'calc(100dvh - var(--taskbar-height))',
       scale: 1,
       opacity: 1,
       display: 'flex',
