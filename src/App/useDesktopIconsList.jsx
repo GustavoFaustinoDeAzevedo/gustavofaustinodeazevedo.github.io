@@ -8,20 +8,14 @@ import useRefs from '../contexts/useRefs';
 import { useMachine } from '@xstate/react';
 import { windowMachine } from '../machines/windowMachine';
 
-const useDesktopIconsList = () => {
-
-
-
-
-  const windowActions = actions.useWindowActions();
-  const desktopIconsActions = actions.useDesktopIconsActions();
-
+const useDesktopIconsList = (
+  language,
+  windowList,
+  desktopIconsData,
+  desktopIconsActions,
+  handleOpenWindow
+) => {
   const handleAddIcon = desktopIconsActions.handleNewDesktopIcon;
-  const handleOpenWindow = windowActions.handleOpenWindow;
-
-  const language = useSelector((state) => state.language);
-  const windowList = useSelector((state) => state.window.openedWindowList);
-  const desktopIconsData = useSelector((state) => state.icon.desktopIconList);
 
   const handleOnClick = (id, finalTitle, icon) => {
     if (finalTitle === 'Novo' || finalTitle === 'New') {
@@ -36,7 +30,7 @@ const useDesktopIconsList = () => {
       }
     }
   };
-  return desktopIconsData.map(({ id, title, icon}, index) => {
+  return desktopIconsData.map(({ id, title, icon }, index) => {
     const finalTitle = language === 'POR' ? title.por : title.eng;
     return (
       <DesktopIcon

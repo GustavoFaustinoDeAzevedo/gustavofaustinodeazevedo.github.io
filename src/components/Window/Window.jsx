@@ -11,7 +11,6 @@ import useRefs from '../../contexts/useRefs';
 import getRandomPosition from './utils/getRandomPosition';
 import useWindowAnimations from './useWindowAnimations';
 
-
 gsap.registerPlugin(useGSAP);
 
 const Window = ({
@@ -33,8 +32,11 @@ const Window = ({
   isFocused,
   isMinimized,
   isMaximized,
+  isRequestingOpen,
   isRequestingRestore,
   isRequestingClose,
+  isRequestingMaximize,
+  isRequestingMinimize,
   desktopRef,
   onFocus,
   onUnfocus,
@@ -102,11 +104,11 @@ const Window = ({
       width,
       height
     );
-  }, []);
+  }, [isRequestingOpen]);
 
   useEffect(() => {
     if (!windowRef.current) return;
-    if (isMaximized) {
+    if (isMaximized && !isRequestingRestore) {
       const { width, height } = getWindowInfo(windowRef);
       maximizeWindow(windowRef, () => {
         onUpdateWindow({
@@ -127,7 +129,7 @@ const Window = ({
 
   useEffect(() => {
     if (!windowRef.current) return;
-    if (isMinimized) {
+    if (isMinimized && !isRequestingRestore) {
       const { width, height } = getWindowInfo(windowRef);
       minimizeWindow(
         windowRef,
@@ -145,7 +147,7 @@ const Window = ({
           });
           onUnfocus();
         },
-        index * 64
+        index * 49
       );
     }
   }, [isMinimized]);

@@ -18,16 +18,7 @@ export const useWindowList = (
         .filter(({ id }) => id !== 'new' && id !== 'placeholder')
         .map(
           (
-            {
-              id,
-              title,
-              windowState,
-              position,
-              size,
-              zIndex,
-              icon,
-              content,
-            },
+            { id, title, windowState, position, size, zIndex, icon, content },
             index
           ) => (
             <Window
@@ -45,8 +36,11 @@ export const useWindowList = (
               startY={position.startY}
               startWidth={size.startWidth}
               startHeight={size.startHeight}
+              isRequestingOpen={windowState.requestingOpen}
               isRequestingRestore={windowState.requestingRestore}
               isRequestingClose={windowState.requestingClose}
+              isRequestingMaximize={windowState.requestingMaximize}
+              isRequestingMinimize={windowState.requestingMinimize}
               width={size.width}
               height={size.height}
               isOpen={windowState.open}
