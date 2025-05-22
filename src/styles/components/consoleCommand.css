@@ -1,0 +1,20 @@
+@layer components {
+
+  .console-command {
+    font-family: Consolas, "courier new", sans-serif;
+    font-size: large;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    resize: none;
+    display: block;
+    background-color: #000000;
+    text-overflow: clip;
+    white-space: wrap;
+    top: 0;
+    left: 0;
+    color: white;
+  }
+}

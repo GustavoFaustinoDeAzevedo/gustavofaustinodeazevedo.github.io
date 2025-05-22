@@ -9,6 +9,7 @@ import actions from '../store/actions';
 import Background from '../components/Background';
 import Taskbar from '../components/Taskbar';
 import ContextMenu from '../components/ContextMenu';
+import ConsoleCommand from '../components/ConsoleCommand';
 
 import { useDisableRightClick } from './useDisableRightClick';
 import { useTaskbarProps } from './useTaskbarProps';
@@ -112,6 +113,7 @@ const App = () => {
           onClose={handleHideContextMenu}
         />
       )}
+      
     </div>
   );
 };

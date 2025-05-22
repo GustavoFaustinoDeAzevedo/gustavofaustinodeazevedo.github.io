@@ -7,10 +7,7 @@ const DefaultContent = ({ id }) => {
   switch (section) {
     case 'about':
       return (
-        <main
-          className="about-me"
-          aria-label="About Me Section"
-        >
+        <main className="about-me" aria-label="About Me Section">
           <div className="about-me-wrapper">
             <section className="about-me-image">
               <img
@@ -109,6 +106,8 @@ const DefaultContent = ({ id }) => {
           </Button>
         </form>
       );
+    case 'cmd':
+      return <textarea className="console-command"></textarea>;
     default:
       return null;
   }
