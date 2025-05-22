@@ -4,7 +4,9 @@ export const desktopIconsData = [
   { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'icon skills' },
   { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'icon contact' },
   { id: 'background-color-picker', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'icon color-picker' },
-  { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle' }
+  { id: 'cmd', title: { eng: 'Command Prompt', por: 'Prompt de Comando' }, icon: 'icon command' },
+  
+  { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle' },
 
 ];
 

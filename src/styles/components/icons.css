@@ -186,4 +186,9 @@
     -webkit-mask-image: url('/icons/dropper.svg');
     mask-image: url('/icons/dropper.svg');
   }
+
+  &.command {
+    -webkit-mask-image: url('/icons/cmd.svg');
+    mask-image: url('/icons/cmd.svg');
+  }
 }
