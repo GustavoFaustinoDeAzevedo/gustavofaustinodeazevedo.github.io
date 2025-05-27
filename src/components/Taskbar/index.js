@@ -1,8 +1,8 @@
 import Taskbar from './Taskbar';
-import StartMenu from './StartMenu';
 import TaskbarItems from './TaskbarItems';
-import LanguageSelector from './LanguageSelector';
+import StartMenu from './StartMenu';
 import Clock from './Clock';
+import LanguageSelector from './LanguageSelector';
 
 export { StartMenu, TaskbarItems, LanguageSelector, Clock };
 export default Taskbar;

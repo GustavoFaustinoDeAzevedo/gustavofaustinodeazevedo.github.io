@@ -1,9 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
-import StartMenu from './StartMenu';
-import TaskbarItems from './TaskbarItems';
+import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '../Taskbar';
 import useClickOutside from '../../hooks/useClickOutside';
-import LanguageSelector from './LanguageSelector';
-import Clock from './Clock';
 import { useSelector } from 'react-redux';
 
 const Taskbar = ({

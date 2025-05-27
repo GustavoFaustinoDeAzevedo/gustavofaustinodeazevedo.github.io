@@ -1,3 +1,7 @@
+@import './startMenu.css';
+@import './languageSelector.css';
+
+
 @layer components {
 
   /* Main taskbar container */
