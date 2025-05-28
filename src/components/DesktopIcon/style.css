@@ -191,4 +191,9 @@
     -webkit-mask-image: url('/icons/cmd.svg');
     mask-image: url('/icons/cmd.svg');
   }
+
+  &.task-manager {
+    -webkit-mask-image: url('/icons/gear.svg');
+    mask-image: url('/icons/gear.svg');
+  }
 }

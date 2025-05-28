@@ -108,6 +108,13 @@ const DefaultContent = ({ id }) => {
       );
     case 'cmd':
       return <textarea className="console-command"></textarea>;
+    case 'taskManager':
+      return (
+        <div className="task-manager" aria-label="Task Manager">
+          <h2>Task Manager</h2>
+          <p>Manage your tasks here.</p>
+        </div>
+      );
     default:
       return null;
   }

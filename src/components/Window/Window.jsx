@@ -147,7 +147,7 @@ const Window = ({
           });
           onUnfocus();
         },
-        index * 49
+        index*55
       );
     }
   }, [isMinimized]);

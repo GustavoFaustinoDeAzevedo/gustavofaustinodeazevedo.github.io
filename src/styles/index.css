@@ -1,11 +1,8 @@
 @import './base.css';
 @import './utilities.css';
-@import './components/background.css';
-@import './components/window.css';
-@import '../components/Taskbar/Taskbar.module.css';
-@import './components/start-menu.css';
-@import './components/language.css';
-@import './components/content.css';
-@import './components/context-menu.css';
-@import './components/icons.css';
-@import './components/consoleCommand.css'
+@import '../components/Background/style.css';
+@import '../components/Window/style.css';
+@import '../components/Taskbar/style.css';
+@import '../components/DesktopIcon/style.css';
+@import '../components/ContextMenu/style.css';
+@import '../components/ConsoleCommand/style.css'
