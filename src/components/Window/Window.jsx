@@ -1,4 +1,5 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+// components/Window/index.js
+import React, { useRef, useMemo, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -8,43 +9,39 @@ import useClickOutside from '../../hooks/useClickOutside';
 import useWindowDraggable from './useWindowDraggable';
 import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
-import getRandomPosition from './utils/getRandomPosition';
+
 import useWindowAnimations from './useWindowAnimations';
+import useWindowLifecycle from './hooks/useWindowLifeCycle';
 
 gsap.registerPlugin(useGSAP);
 
-const Window = ({
-  id,
-  index,
-  zIndex,
-  isOpen,
-  title,
-  icon,
-  x,
-  y,
-  startX,
-  startY,
-  width,
-  height,
-  content,
-  startWidth,
-  startHeight,
-  isFocused,
-  isMinimized,
-  isMaximized,
-  isRequestingOpen,
-  isRequestingRestore,
-  isRequestingClose,
-  isRequestingMaximize,
-  isRequestingMinimize,
-  desktopRef,
-  onFocus,
-  onUnfocus,
-  onUpdateWindow,
-  onClose,
-  onContextMenu,
-  children,
-}) => {
+const Window = ({ windowParams, windowActions, desktopRef }) => {
+  const {
+    id,
+    index,
+    zIndex,
+    isOpen,
+    title,
+    icon,
+    x,
+    y,
+    startX,
+    startY,
+    width,
+    height,
+    content,
+    startWidth,
+    startHeight,
+    isFocused,
+    isMinimized,
+    isMaximized,
+    isRequestingOpen,
+    isRequestingRestore,
+    isRequestingClose,
+  } = windowParams;
+  const { onFocus, onUnfocus, onUpdateWindow, onClose, onContextMenu } =
+    windowActions;
+
   const { createRef } = useRefs();
   const windowRef = createRef(id);
   const headerRef = useRef(null);
@@ -61,169 +58,43 @@ const Window = ({
     [isFocused, isMinimized, isOpen, isMaximized]
   );
 
-  const getWindowInfo = (windowRef) =>
-    windowRef.current.getBoundingClientRect();
+  const getWindowInfo = useCallback(
+    () => windowRef.current?.getBoundingClientRect() ?? { width: 0, height: 0 },
+    [windowRef]
+  );
 
-  useEffect(() => {
-    if (!windowRef.current || !headerRef.current) return;
+  const updateWindowState = useCallback(
+    (updates) => onUpdateWindow({ id, ...updates }),
+    [id, onUpdateWindow]
+  );
 
-    const { randomX, randomY } = getRandomPosition();
-    gsap.set(windowRef.current, { x: randomX, y: randomY });
-    openWindow(windowRef);
+  useWindowLifecycle({
+    windowRef,
+    headerRef,
+    desktopRef,
+    windowParams,
+    onFocus,
+    onUnfocus,
+    onClose,
+    updateWindowState,
+    animations: {
+      openWindow,
+      maximizeWindow,
+      restoreWindow,
+      minimizeWindow,
+      closeWindow,
+    },
+    getWindowInfo,
+    useWindowDraggable,
+  });
 
-    const { width, height } = getWindowInfo(windowRef);
-    onUpdateWindow({
-      id,
-      x: randomX,
-      y: randomY,
-      startX: randomX,
-      startY: randomY,
-      width,
-      height,
-      startWidth: width,
-      startHeight: height,
-    });
-
-    useWindowDraggable(
-      windowRef,
-      headerRef.current,
-      desktopRef.current,
-      onFocus,
-      ({ startX, startY, x, y, width, height, startWidth, startHeight }) =>
-        onUpdateWindow({
-          id,
-          startX,
-          startY,
-          x,
-          y,
-          width,
-          height,
-          startWidth,
-          startHeight,
-        }),
-      width,
-      height
-    );
-  }, [isRequestingOpen]);
-
-  useEffect(() => {
-    if (!windowRef.current) return;
-    if (isMaximized && !isRequestingRestore) {
-      const { width, height } = getWindowInfo(windowRef);
-      maximizeWindow(windowRef, () => {
-        onUpdateWindow({
-          id,
-          x: 0,
-          y: 0,
-          startX: x,
-          startY: y,
-          width: 0,
-          height: 0,
-          startWidth: width,
-          startHeight: height,
-        });
-        onFocus(id);
-      });
-    }
-  }, [isMaximized]);
-
-  useEffect(() => {
-    if (!windowRef.current) return;
-    if (isMinimized && !isRequestingRestore) {
-      const { width, height } = getWindowInfo(windowRef);
-      minimizeWindow(
-        windowRef,
-        () => {
-          onUpdateWindow({
-            id,
-            x: startX,
-            y: startY,
-            startX: x,
-            startY: y,
-            width: startWidth,
-            height: startHeight,
-            startWidth: width,
-            startHeight: height,
-          });
-          onUnfocus();
-        },
-        index*55
-      );
-    }
-  }, [isMinimized]);
-
-  useEffect(() => {
-    if (!windowRef.current) return;
-    if ((isMaximized || isMinimized) && isRequestingRestore) {
-      restoreWindow(
-        windowRef,
-        () => {
-          onUpdateWindow({
-            id,
-            maximized: isMinimized && isMaximized ? true : false,
-            minimized: false,
-            requestingRestore: false,
-            x: startX,
-            y: startY,
-            startX: x,
-            startY: y,
-            width: startWidth,
-            height: startHeight,
-            startWidth: width,
-            startHeight: height,
-          });
-          onFocus(id);
-        },
-        startX,
-        startY,
-        startWidth,
-        startHeight
-      );
-    }
-  }, [isRequestingRestore]);
-
-  useEffect(() => {
-    if (!windowRef.current) return;
-
-    if (isOpen && isRequestingClose) {
-      closeWindow(windowRef, () => {
-        onClose({
-          id,
-          isRequestingClose: true,
-        });
-        onUnfocus(id);
-      });
-    }
-  }, [isRequestingClose]);
-
-  const handleMinimize = () => {
-    onUpdateWindow({
-      id,
-      minimized: true,
-    });
-  };
-  const handleMaximize = () => {
-    onUpdateWindow({
-      id: id,
-      maximized: true,
-    });
-  };
-
-  const handleRestore = () => {
-    onUpdateWindow({
-      id: id,
-      requestingRestore: true,
-    });
-  };
-
-  const handleClose = () => {
-    onUpdateWindow({
-      id: id,
-      requestingClose: true,
-    });
-  };
+  const handleMinimize = () => updateWindowState({ minimized: true });
+  const handleMaximize = () => updateWindowState({ maximized: true });
+  const handleRestore = () => updateWindowState({ requestingRestore: true });
+  const handleClose = () => updateWindowState({ requestingClose: true });
 
   useClickOutside(windowRef, onUnfocus, isFocused);
+
   return (
     <div
       ref={windowRef}
