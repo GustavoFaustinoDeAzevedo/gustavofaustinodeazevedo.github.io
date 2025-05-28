@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import Window from '../components/Window';
+import WindowWrapper from '../components/WindowWrapper';
 
-export const useWindowList = (
+const useWindowList = (
   desktopRef,
   windowList,
   focusedWindow,
@@ -16,53 +16,25 @@ export const useWindowList = (
     () =>
       windowList
         .filter(({ id }) => id !== 'new' && id !== 'placeholder')
-        .map(
-          (
-            { id, title, windowState, position, size, zIndex, icon, content },
-            index
-          ) => (
-            <Window
-              key={id}
-              id={id}
-              icon={icon}
-              desktopRef={desktopRef}
-              title={title}
-              isFocused={focusedWindow === id}
-              isMinimized={windowState.minimized}
-              isMaximized={windowState.maximized}
-              x={position.x}
-              y={position.y}
-              startX={position.startX}
-              startY={position.startY}
-              startWidth={size.startWidth}
-              startHeight={size.startHeight}
-              isRequestingOpen={windowState.requestingOpen}
-              isRequestingRestore={windowState.requestingRestore}
-              isRequestingClose={windowState.requestingClose}
-              isRequestingMaximize={windowState.requestingMaximize}
-              isRequestingMinimize={windowState.requestingMinimize}
-              width={size.width}
-              height={size.height}
-              isOpen={windowState.open}
-              zIndex={zIndex}
-              language={language}
-              index={index}
-              content={content}
-              onUpdateWindow={(data) => handleUpdateWindow(data)}
-              onFocus={() => handleFocusWindow(id)}
-              onUnfocus={() => handleResetFocus()}
-              onClose={() => handleCloseWindow(id)}
-            />
-          )
-        ),
-    [
-      windowList,
-      language,
-      focusedWindow,
-      desktopRef,
-      handleFocusWindow,
-      handleResetFocus,
-      handleCloseWindow,
-    ]
+        .map(({ ...window }, index) => (
+          <WindowWrapper
+            key={window.id}
+            window={window}
+            index={index}
+            isFocused={focusedWindow === window.id}
+            desktopRef={desktopRef}
+            handlers={{
+              handleOpenWindow,
+              handleFocusWindow,
+              handleResetFocus,
+              handleCloseWindow,
+              handleUpdateWindow,
+            }}
+            language={language}
+          />
+        )),
+    [windowList, focusedWindow]
   );
 };
+
+export default useWindowList;

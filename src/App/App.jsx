@@ -13,7 +13,7 @@ import ConsoleCommand from '../components/ConsoleCommand';
 
 import { useDisableRightClick } from './useDisableRightClick';
 import { useTaskbarProps } from './useTaskbarProps';
-import { useWindowList } from './useWindowList';
+import useWindowList from './useWindowList';
 import useDesktopIconsList from './useDesktopIconsList';
 import { useItemsHandler } from './useItemsHandler';
 import { useHandleContextMenu } from './useHandleContextMenu';
@@ -113,7 +113,6 @@ const App = () => {
           onClose={handleHideContextMenu}
         />
       )}
-      
     </div>
   );
 };
