@@ -11,7 +11,7 @@ import getWindowClass from './utils/getWindowClass';
 import useRefs from '../../contexts/useRefs';
 
 import useWindowAnimations from './useWindowAnimations';
-import useWindowLifecycle from './hooks/useWindowLifeCycle';
+import useWindowLifecycle from './hooks/useWindowLifecycle';
 
 gsap.registerPlugin(useGSAP);
 
