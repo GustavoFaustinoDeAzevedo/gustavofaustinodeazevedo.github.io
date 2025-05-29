@@ -59,10 +59,9 @@ const DefaultContent = ({ id }) => {
         >
           <li aria-label="HTML5 & CSS3">HTML5 & CSS3</li>
           <li aria-label="JavaScript">JavaScript</li>
-          <li aria-label="React.js & React Native">React.js & React Native</li>
+          <li aria-label="React.js & React Native">React.js</li>
           <li aria-label="UI/UX Design">UI/UX Design</li>
           <li aria-label="Responsive Design">Responsive Design</li>
-          <li aria-label="RESTful APIs">RESTful APIs</li>
           <li aria-label="Web Performance">Web Performance</li>
           <li aria-label="Git & GitHub">Git & GitHub</li>
         </ul>
