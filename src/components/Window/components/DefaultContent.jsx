@@ -1,13 +1,17 @@
 import React from 'react';
 import AnimatedInput from './AnimatedInput';
-import Button from '../Button';
+import Button from '../../Button';
 
 const DefaultContent = ({ id }) => {
   const section = id.split('#')[1];
   switch (section) {
     case 'about':
       return (
-        <main className="about-me" aria-label="About Me Section">
+        <main
+          className="about-me"
+          aria-label="About Me Section"
+          data-initial-dimension='{"width": "430px", "height": "550px"}'
+        >
           <div className="about-me-wrapper">
             <section className="about-me-image">
               <img
@@ -48,7 +52,11 @@ const DefaultContent = ({ id }) => {
       );
     case 'skills':
       return (
-        <ul className="skills-list" aria-label="Skills List">
+        <ul
+          className="skills-list"
+          aria-label="Skills List"
+          data-initial-dimension='{"width": "645px", "height": "160px"}'
+        >
           <li aria-label="HTML5 & CSS3">HTML5 & CSS3</li>
           <li aria-label="JavaScript">JavaScript</li>
           <li aria-label="React.js & React Native">React.js & React Native</li>
@@ -67,6 +75,7 @@ const DefaultContent = ({ id }) => {
           action="https://formspree.io/f/mnqelzyz"
           method="POST"
           target="placeholder"
+          data-initial-dimension='{"width": "490px", "height": "550px"}'
         >
           <AnimatedInput
             id="name"
@@ -107,7 +116,12 @@ const DefaultContent = ({ id }) => {
         </form>
       );
     case 'cmd':
-      return <textarea className="console-command"></textarea>;
+      return (
+        <textarea
+          className="console-command"
+          data-initial-dimension='{"width": "580px", "height": "330px"}'
+        ></textarea>
+      );
     case 'taskManager':
       return (
         <div className="task-manager" aria-label="Task Manager">

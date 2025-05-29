@@ -1,7 +1,7 @@
 @import './base.css';
 @import './utilities.css';
 @import '../components/Background/style.css';
-@import '../components/Window/style.css';
+@import '../components/Window/styles/index.css';
 @import '../components/Taskbar/style.css';
 @import '../components/DesktopIcon/style.css';
 @import '../components/ContextMenu/style.css';
