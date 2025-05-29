@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import actions from '../store/actions';
+import actions from '../../store/actions';
 
 export const useHandleContextMenu = () => {
   const contextMenuActions = actions.useContextMenuActions();
@@ -12,7 +12,6 @@ export const useHandleContextMenu = () => {
         e.target.closest('.parent') || 'default',
         e.outerHTML
       );
-      
     }
   }, []);
 };

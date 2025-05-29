@@ -11,12 +11,12 @@ import Taskbar from '../components/Taskbar';
 import ContextMenu from '../components/ContextMenu';
 import ConsoleCommand from '../components/ConsoleCommand';
 
-import { useDisableRightClick } from './useDisableRightClick';
-import { useTaskbarProps } from './useTaskbarProps';
-import useWindowList from './useWindowList';
-import useDesktopIconsList from './useDesktopIconsList';
-import { useItemsHandler } from './useItemsHandler';
-import { useHandleContextMenu } from './useHandleContextMenu';
+import { useDisableRightClick } from './hooks/useDisableRightClick';
+import { useTaskbarProps } from './hooks/useTaskbarProps';
+import createWindowList from './utils/createWindowList';
+import createIconsList from './utils/createIconsList';
+import { useItemsHandler } from './hooks/useItemsHandler';
+import { useHandleContextMenu } from './hooks/useHandleContextMenu';
 
 gsap.registerPlugin(useGSAP);
 
@@ -67,7 +67,7 @@ const App = () => {
     handleOpenWindow,
   });
 
-  const windowsStack = useWindowList(
+  const windowsStack = createWindowList(
     desktopRef,
     windowList,
     focusedWindow,
@@ -83,7 +83,7 @@ const App = () => {
   const itemsHandler = useItemsHandler();
   const handleContextMenu = useHandleContextMenu();
 
-  const desktopIconsStack = useDesktopIconsList(
+  const desktopIconsStack = createIconsList(
     language,
     windowList,
     desktopIconsData,

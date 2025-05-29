@@ -1,6 +1,6 @@
 import React from 'react';
 import AnimatedInput from './AnimatedInput';
-import Button from '../../Button';
+import Button from '../../ui/Button';
 
 const DefaultContent = ({ id }) => {
   const section = id.split('#')[1];
@@ -55,7 +55,7 @@ const DefaultContent = ({ id }) => {
         <ul
           className="skills-list"
           aria-label="Skills List"
-          data-initial-dimension='{"width": "645px", "height": "160px"}'
+          data-initial-dimension='{"width": "535px", "height": "160px"}'
         >
           <li aria-label="HTML5 & CSS3">HTML5 & CSS3</li>
           <li aria-label="JavaScript">JavaScript</li>
@@ -93,7 +93,7 @@ const DefaultContent = ({ id }) => {
             name="message"
             required
             ariaLabel="Email input"
-            inputPlaceholder="exemplo@email.com"
+            inputPlaceholder="example@email.com"
           >
             Email
           </AnimatedInput>
