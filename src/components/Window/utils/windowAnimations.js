@@ -1,13 +1,15 @@
 import gsap from 'gsap';
 
 
-const useWindowAnimations = {
+const windowAnimations = {
 
-  openWindow: (windowRef, handler = () => { }) => {
+  openWindow: (windowRef, width, height, handler = () => { }) => {
     if (!windowRef?.current) return;
     gsap.fromTo(windowRef.current, { scale: 0.8, opacity: 0 }, {
       scale: 1,
       opacity: 1,
+      width: width,
+      height: height,
       duration: 0.3,
       ease: 'power2.out',
       display: 'flex',
@@ -63,20 +65,20 @@ const useWindowAnimations = {
 
     gsap.to(windowRef.current, {
 
-        x: x,
-        y: '100vh',
-        minWidth: '150px',
-        minHeight: '150px',
-        width: 0,
-        height: 0,
-        scale: 0,
-        duration: 0.4,
-        display: 'none',
-        ease: 'expo.inOut',
-        onComplete: () => {
-          handler();
-        },
-      });
+      x: x,
+      y: '100vh',
+      minWidth: '150px',
+      minHeight: '150px',
+      width: 0,
+      height: 0,
+      scale: 0,
+      duration: 0.4,
+      display: 'none',
+      ease: 'expo.inOut',
+      onComplete: () => {
+        handler();
+      },
+    });
   },
 
   restoreWindow: (windowRef, handler = () => { }, x, y, width, height) => {
@@ -106,4 +108,4 @@ const useWindowAnimations = {
   },
 }
 
-export default useWindowAnimations;
+export default windowAnimations;

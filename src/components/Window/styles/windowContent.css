@@ -285,6 +285,7 @@
     flex-wrap: wrap;
     justify-content: safe;
     gap: 1rem;
+    padding: 1rem;
 
 
     & li {

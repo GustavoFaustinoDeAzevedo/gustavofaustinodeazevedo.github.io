@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 gsap.registerPlugin(Draggable);
 
-const useWindowDraggable = (windowRef, triggerEl, bounds, onFocus, onUpdateWindow, width, height) => {
+const createWindowDraggable = (windowRef, triggerEl, bounds, onFocus, onUpdateWindow, width, height) => {
 
 
 
@@ -29,4 +29,4 @@ const useWindowDraggable = (windowRef, triggerEl, bounds, onFocus, onUpdateWindo
   });
 };
 
-export default useWindowDraggable;
+export default createWindowDraggable;

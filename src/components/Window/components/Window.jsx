@@ -5,39 +5,27 @@ import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
 import WindowContent from './WindowContent';
-import useClickOutside from '../../hooks/useClickOutside';
-import useWindowDraggable from './useWindowDraggable';
-import getWindowClass from './utils/getWindowClass';
-import useRefs from '../../contexts/useRefs';
+import useClickOutside from '../../../hooks/useClickOutside';
+import createWindowDraggable from '../utils/createWindowDraggable';
+import getWindowClass from '../utils/getWindowClass';
+import useRefs from '../../../contexts/useRefs';
 
-import useWindowAnimations from './useWindowAnimations';
-import useWindowLifecycle from './hooks/useWindowLifecycle';
+import windowAnimations from '../utils/windowAnimations';
+import useWindowLifecycle from '../hooks/useWindowLifecycle';
 
 gsap.registerPlugin(useGSAP);
 
 const Window = ({ windowParams, windowActions, desktopRef }) => {
   const {
     id,
-    index,
     zIndex,
     isOpen,
     title,
     icon,
-    x,
-    y,
-    startX,
-    startY,
-    width,
-    height,
     content,
-    startWidth,
-    startHeight,
     isFocused,
     isMinimized,
     isMaximized,
-    isRequestingOpen,
-    isRequestingRestore,
-    isRequestingClose,
   } = windowParams;
   const { onFocus, onUnfocus, onUpdateWindow, onClose, onContextMenu } =
     windowActions;
@@ -51,7 +39,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     restoreWindow,
     minimizeWindow,
     closeWindow,
-  } = useWindowAnimations;
+  } = useMemo(() => windowAnimations, []);
 
   const className = useMemo(
     () => getWindowClass({ isFocused, isMinimized, isOpen, isMaximized }),
@@ -85,7 +73,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
       closeWindow,
     },
     getWindowInfo,
-    useWindowDraggable,
+    createWindowDraggable,
   });
 
   const handleMinimize = () => updateWindowState({ minimized: true });

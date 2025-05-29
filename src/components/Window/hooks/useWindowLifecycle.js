@@ -1,6 +1,5 @@
 import getRandomPosition from '../utils/getRandomPosition';
 import gsap from 'gsap';
-
 import { useEffect } from 'react';
 
 const useWindowLifecycle = ({
@@ -20,7 +19,7 @@ const useWindowLifecycle = ({
     closeWindow,
   },
   getWindowInfo,
-  useWindowDraggable,
+  createWindowDraggable,
 }) => {
   const {
     id,
@@ -47,9 +46,12 @@ const useWindowLifecycle = ({
 
     const { randomX, randomY } = getRandomPosition();
     gsap.set(windowRef.current, { x: randomX, y: randomY });
-    openWindow(windowRef);
 
-    const { width, height } = getWindowInfo();
+    const childElement = windowRef.current.querySelector("[data-initial-dimension]");
+    const { width, height } = JSON.parse(childElement?.dataset?.initialDimension ?? '{"width": "0", "height": "0"}');
+
+    openWindow(windowRef, width, height);
+
     updateWindowState({
       x: randomX,
       y: randomY,
@@ -61,7 +63,7 @@ const useWindowLifecycle = ({
       startHeight: height,
     });
 
-    useWindowDraggable(
+    createWindowDraggable(
       windowRef,
       headerRef.current,
       desktopRef.current,

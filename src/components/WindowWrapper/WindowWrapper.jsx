@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Window from '../Window/Window';
+import Window from '../Window/components/Window';
 
 const WindowWrapper = ({
   window,
