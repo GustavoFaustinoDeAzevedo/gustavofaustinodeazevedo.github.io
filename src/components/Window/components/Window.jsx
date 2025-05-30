@@ -26,6 +26,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     isFocused,
     isMinimized,
     isMaximized,
+    src
   } = windowParams;
   const { onFocus, onUnfocus, onUpdateWindow, onClose, onContextMenu } =
     windowActions;
@@ -103,6 +104,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         onFocus={onFocus}
         isOpen={isOpen}
         id={id}
+        src={src}
         content={content}
       />
     </div>

@@ -10,29 +10,38 @@ const createIconsList = (
 ) => {
   const handleAddIcon = desktopIconsActions.handleNewDesktopIcon;
 
-  const handleOnClick = (id, finalTitle, icon) => {
-    if (finalTitle === 'Novo' || finalTitle === 'New') {
+  const handleOnClick = (id, windowTitle, windowIcon, src) => {
+    if (windowTitle === 'Novo' || windowTitle === 'New') {
       handleAddIcon(placeholder);
     } else {
       try {
         if (!windowList.find((win) => win.id === id)) {
-          handleOpenWindow(id, finalTitle, icon);
+          handleOpenWindow(id, windowTitle, windowIcon, src);
         }
       } catch (error) {
         console.error('Error opening window:', error);
       }
     }
   };
-  return desktopIconsData.map(({ id, title, icon }, index) => {
-    const finalTitle = language === 'POR' ? title.por : title.eng;
+  return desktopIconsData.map(({ id, title, icon, windowParams }, index) => {
+    const iconTitle = language === 'POR' ? title.por : title.eng;
+    let windowTitle = iconTitle;
+    let windowIcon = icon;
+    let src = '';
+    if (windowParams) {
+      windowTitle =
+        language === 'POR' ? windowParams.title.por : windowParams.title.eng;
+      windowIcon = windowParams.icon;
+      src = windowParams.src || '';
+    }
     return (
       <DesktopIcon
         key={`desktop-icon-${id}-${index}`}
         id={id}
-        title={finalTitle}
+        title={iconTitle}
         icon={icon}
         language={language}
-        onClick={() => handleOnClick(id, finalTitle, icon)}
+        onClick={() => handleOnClick(id, windowTitle, windowIcon, src)}
       />
     );
   });
