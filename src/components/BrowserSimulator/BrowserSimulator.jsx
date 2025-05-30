@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
-const BrowserSimulator = () => {
-  const [inputUrl, setInputUrl] = useState('https://example.com');
-  const [history, setHistory] = useState(['https://example.com']);
+const BrowserSimulator = (props) => {
+  const [inputUrl, setInputUrl] = useState(props.src ?? 'https://example.com');
+  const [history, setHistory] = useState([props.src ?? 'https://example.com']);
   const [historyIndex, setHistoryIndex] = useState(0);
   const iframeRef = useRef(null);
 
@@ -45,7 +45,7 @@ const BrowserSimulator = () => {
     <div
       className="browser-container"
       aria-label="Browser"
-      data-initial-dimension='{"width": "600px", "height": "400px"}'
+      data-initial-dimension='{"width": "1000px", "height": "600px"}'
     >
       <header className="browser-header" aria-label="Browser Header">
         <div className="browser-controls" aria-label="Browser Controls">

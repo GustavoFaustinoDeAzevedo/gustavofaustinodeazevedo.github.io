@@ -222,4 +222,14 @@
     mask-image: url('/icons/chevron_down.svg');
   }
 
+  &.github {
+    -webkit-mask-image: url('/icons/github-mark.svg');
+    mask-image: url('/icons/github-mark.svg');
+  }
+
+  &.linkedin {
+    -webkit-mask-image: url('/icons/linkedin.svg');
+    mask-image: url('/icons/linkedin.svg');
+  }
+
 }
