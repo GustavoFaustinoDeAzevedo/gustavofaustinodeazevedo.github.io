@@ -1,7 +1,7 @@
-import DesktopIcon from '../components/DesktopIcon';
-import { placeholder } from '../data/desktopIconsData';
+import DesktopIcon from '../../components/DesktopIcon';
+import { placeholder } from '../../data/desktopIconsData';
 
-const useDesktopIconsList = (
+const createIconsList = (
   language,
   windowList,
   desktopIconsData,
@@ -38,4 +38,4 @@ const useDesktopIconsList = (
   });
 };
 
-export default useDesktopIconsList;
+export default createIconsList;

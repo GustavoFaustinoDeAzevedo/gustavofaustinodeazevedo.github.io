@@ -48,7 +48,7 @@ const useWindowLifecycle = ({
     gsap.set(windowRef.current, { x: randomX, y: randomY });
 
     const childElement = windowRef.current.querySelector("[data-initial-dimension]");
-    const { width, height } = JSON.parse(childElement?.dataset?.initialDimension ?? '{"width": "0", "height": "0"}');
+    const { width, height } = JSON.parse(childElement?.dataset?.initialDimension ?? '{"width": "350", "height": "450"}');
 
     openWindow(windowRef, width, height);
 

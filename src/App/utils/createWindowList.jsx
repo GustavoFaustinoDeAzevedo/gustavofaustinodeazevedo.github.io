@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import WindowWrapper from '../components/WindowWrapper';
+import WindowWrapper from '../../components/WindowWrapper';
 
-const useWindowList = (
+const createWindowList = (
   desktopRef,
   windowList,
   focusedWindow,
@@ -37,4 +37,4 @@ const useWindowList = (
   );
 };
 
-export default useWindowList;
+export default createWindowList;

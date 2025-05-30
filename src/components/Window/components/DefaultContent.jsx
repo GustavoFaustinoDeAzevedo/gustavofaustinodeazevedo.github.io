@@ -1,6 +1,7 @@
 import React from 'react';
 import AnimatedInput from './AnimatedInput';
-import Button from '../../Button';
+import Button from '../../ui/Button';
+import BrowserSimulator from '../../BrowserSimulator';
 
 const DefaultContent = ({ id }) => {
   const section = id.split('#')[1];
@@ -43,11 +44,8 @@ const DefaultContent = ({ id }) => {
       );
     case 'projects':
       return (
-        <div className="project-grid" aria-label="Projects">
-          <article className="project-card" aria-label="Project One">
-            <h3>Project One</h3>
-            <p>Project Card Example</p>
-          </article>
+        <div className="folder" aria-label="Projects">
+
         </div>
       );
     case 'skills':
@@ -55,14 +53,13 @@ const DefaultContent = ({ id }) => {
         <ul
           className="skills-list"
           aria-label="Skills List"
-          data-initial-dimension='{"width": "645px", "height": "160px"}'
+          data-initial-dimension='{"width": "535px", "height": "160px"}'
         >
           <li aria-label="HTML5 & CSS3">HTML5 & CSS3</li>
           <li aria-label="JavaScript">JavaScript</li>
-          <li aria-label="React.js & React Native">React.js & React Native</li>
+          <li aria-label="React.js & React Native">React.js</li>
           <li aria-label="UI/UX Design">UI/UX Design</li>
           <li aria-label="Responsive Design">Responsive Design</li>
-          <li aria-label="RESTful APIs">RESTful APIs</li>
           <li aria-label="Web Performance">Web Performance</li>
           <li aria-label="Git & GitHub">Git & GitHub</li>
         </ul>
@@ -94,7 +91,7 @@ const DefaultContent = ({ id }) => {
             name="message"
             required
             ariaLabel="Email input"
-            inputPlaceholder="exemplo@email.com"
+            inputPlaceholder="example@email.com"
           >
             Email
           </AnimatedInput>
@@ -128,6 +125,10 @@ const DefaultContent = ({ id }) => {
           <h2>Task Manager</h2>
           <p>Manage your tasks here.</p>
         </div>
+      );
+    case 'browser':
+      return (
+        <BrowserSimulator></BrowserSimulator>
       );
     default:
       return null;

@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 
 // Custom hook to detect clicks outside a specified element
-const useClickOutside = (ref, handler, enabled = true, optionalRef = null, elementClassToBlock = '.context-menu.active') => {
+const useClickOutside = (ref, handler, enabled, optionalRef = null, elementClassToBlock = '.context-menu.active') => {
   useEffect(() => {
-    // If the hook is not enabled, do nothing
-    if (!enabled) return;
+    // If the hook is not enabled, return empty cleanup function
+    if (!enabled) {
+      return () => {};
+    }
 
     // Listener function to handle click events
     const listener = (event) => {
       // Check if the optional reference contains the event (click) target
-      let secondRef = null;
+      let secondRef = false;
       if (optionalRef && optionalRef.current) {
         secondRef = optionalRef.current.contains(event.target);
-      } else if (optionalRef && !optionalRef.current) {
-
+      } else if (optionalRef && optionalRef instanceof Element) {
         secondRef = optionalRef.contains(event.target);
       }
 
@@ -39,7 +40,9 @@ const useClickOutside = (ref, handler, enabled = true, optionalRef = null, eleme
       document.removeEventListener('mousedown', listener);
       document.removeEventListener('touchstart', listener);
     };
-  }, [ref, handler, enabled]); // Dependencies array for useEffect
+  }, [enabled]); // Dependencies array for useEffect
+  
+  return undefined;
 };
 
 export default useClickOutside;

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { contextMenuData } from '../data/contextMenuData';
+import { contextMenuData } from '../../data/contextMenuData';
 import { useSelector } from 'react-redux';
 
 export const useItemsHandler = () => {
@@ -17,7 +17,7 @@ export const useItemsHandler = () => {
     const firstScope = contextMenuData.find(
       (data) => data.targetContextId === targetContextId
     );
-    
+
     return firstScope?.actions || contextMenuData[0]?.actions || [];
   }, [contextMenu]);
 };

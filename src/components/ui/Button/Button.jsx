@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import StyledButton from "../../styles/components/StyledButton";
+import React, { useRef, useState } from 'react';
+import StyledButton from './StyledButton';
 
 const Button = ({ children, onClick, type, ariaLabel, variant }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -7,7 +7,7 @@ const Button = ({ children, onClick, type, ariaLabel, variant }) => {
 
   const handleMouseUp = () => {
     setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 400); 
+    setTimeout(() => setIsAnimating(false), 400);
   };
 
   return (
