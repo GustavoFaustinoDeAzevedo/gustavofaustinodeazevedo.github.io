@@ -43,11 +43,7 @@ const DefaultContent = ({ id }) => {
         </main>
       );
     case 'projects':
-      return (
-        <div className="folder" aria-label="Projects">
-
-        </div>
-      );
+      return <div className="folder" aria-label="Projects"></div>;
     case 'skills':
       return (
         <ul
@@ -127,9 +123,15 @@ const DefaultContent = ({ id }) => {
         </div>
       );
     case 'browser':
-      return (
-        <BrowserSimulator></BrowserSimulator>
-      );
+      return <BrowserSimulator></BrowserSimulator>;
+    case 'github':
+      return <BrowserSimulator
+        src={'https://github.com/GustavoFaustinoDeAzevedo'}
+      ></BrowserSimulator>;
+    case 'linkedin':
+      return <BrowserSimulator
+        src={'https://www.linkedin.com/in/gustavo-faustino-de-azevedo/'}
+      ></BrowserSimulator>;
     default:
       return null;
   }

@@ -7,6 +7,8 @@ export const desktopIconsData = [
   { id: 'cmd', title: { eng: 'Command Prompt', por: 'Prompt de Comando' }, icon: 'icon command' },
   { id: 'task-manager', title: { eng: 'Task Manager', por: 'Gerenciador de Tarefas' }, icon: 'icon task-manager' },
   { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'icon browser' },
+  { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'icon github' },
+  { id: 'linkedin', title: { eng: 'Linkedin', por: 'Linkedin' }, icon: 'icon linkedin' },
 
   { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle' },
 
