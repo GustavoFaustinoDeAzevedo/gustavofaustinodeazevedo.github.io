@@ -17,8 +17,17 @@ const WindowWrapper = ({
     handleUpdateWindow,
   } = handlers;
 
-  const { id, title, windowState, position, size, zIndex, icon, content } =
-    window;
+  const {
+    id,
+    title,
+    windowState,
+    position,
+    size,
+    zIndex,
+    icon,
+    content,
+    src,
+  } = window;
 
   const windowParamsObj = {
     id,
@@ -27,6 +36,7 @@ const WindowWrapper = ({
     isOpen: windowState.open,
     title,
     icon,
+    src,
     x: position.x,
     y: position.y,
     startX: position.startX,

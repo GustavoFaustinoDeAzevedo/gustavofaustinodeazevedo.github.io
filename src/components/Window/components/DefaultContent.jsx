@@ -3,7 +3,7 @@ import AnimatedInput from './AnimatedInput';
 import Button from '../../ui/Button';
 import BrowserSimulator from '../../BrowserSimulator';
 
-const DefaultContent = ({ id }) => {
+const DefaultContent = ({ id, src }) => {
   const section = id.split('#')[1];
   switch (section) {
     case 'about':
@@ -125,13 +125,17 @@ const DefaultContent = ({ id }) => {
     case 'browser':
       return <BrowserSimulator></BrowserSimulator>;
     case 'github':
-      return <BrowserSimulator
-        src={'https://github.com/GustavoFaustinoDeAzevedo'}
-      ></BrowserSimulator>;
+      return (
+        <BrowserSimulator
+          src={src}
+        ></BrowserSimulator>
+      );
     case 'linkedin':
-      return <BrowserSimulator
-        src={'https://www.linkedin.com/in/gustavo-faustino-de-azevedo/'}
-      ></BrowserSimulator>;
+      return (
+        <BrowserSimulator
+          src={src}
+        ></BrowserSimulator>
+      );
     default:
       return null;
   }

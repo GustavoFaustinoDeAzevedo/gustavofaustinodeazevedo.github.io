@@ -75,7 +75,7 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { id, title, icon } = action.payload;
+      const { id, title, icon, src } = action.payload;
       state.history = updateHistory(state.history, id);
 
       // Generate a unique id for the new window
@@ -86,6 +86,7 @@ const windowSlice = createSlice({
         icon,
         zIndex: getNextZIndex(state),
         content: '',
+        src: src,
         position: {
           startX: 0,
           startY: 0,

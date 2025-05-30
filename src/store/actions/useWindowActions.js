@@ -9,8 +9,8 @@ const useWindowActions = () => {
     dispatch(updateWindow(data));
   };
 
-  const handleOpenWindow = (id, title, icon) => {
-    dispatch(openWindow({ id, title, icon }));
+  const handleOpenWindow = (id, title, icon, src) => {
+    dispatch(openWindow({ id, title, icon, src }));
   };
 
   const handleFocusWindow = (id) => {
