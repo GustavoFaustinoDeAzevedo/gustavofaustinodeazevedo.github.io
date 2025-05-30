@@ -103,7 +103,7 @@
   }
 
   &.contact {
-    -webkit-mask-image: url('c/icons/envelope.svg');
+    -webkit-mask-image: url('/icons/envelope.svg');
     mask-image: url('/icons/envelope.svg');
   }
 
@@ -196,4 +196,30 @@
     -webkit-mask-image: url('/icons/gear.svg');
     mask-image: url('/icons/gear.svg');
   }
+
+  &.browser {
+    -webkit-mask-image: url('/icons/globe.svg');
+    mask-image: url('/icons/globe.svg');
+  }
+
+  &.arrow-left {
+    -webkit-mask-image: url('/icons/chevron_left.svg');
+    mask-image: url('/icons/chevron_left.svg');
+  }
+
+  &.arrow-right {
+    -webkit-mask-image: url('/icons/chevron_right.svg');
+    mask-image: url('/icons/chevron_right.svg');
+  }
+
+  &.arrow-up {
+    -webkit-mask-image: url('/icons/chevron_up.svg');
+    mask-image: url('/icons/chevron_up.svg');
+  }
+
+  &.arrow-down {
+    -webkit-mask-image: url('/icons/chevron_down.svg');
+    mask-image: url('/icons/chevron_down.svg');
+  }
+
 }

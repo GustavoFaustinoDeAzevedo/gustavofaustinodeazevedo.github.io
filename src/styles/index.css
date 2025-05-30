@@ -3,6 +3,6 @@
 @import '../components/Background/style.css';
 @import '../components/Window/styles/index.css';
 @import '../components/Taskbar/style.css';
-@import '../components/DesktopIcon/style.css';
+@import '../components/DesktopIcon/desktopIcon.css';
 @import '../components/ContextMenu/style.css';
 @import '../components/ConsoleCommand/style.css'

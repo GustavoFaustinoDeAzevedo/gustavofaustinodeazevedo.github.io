@@ -1,6 +1,7 @@
 import React from 'react';
 import AnimatedInput from './AnimatedInput';
 import Button from '../../ui/Button';
+import BrowserSimulator from '../../BrowserSimulator';
 
 const DefaultContent = ({ id }) => {
   const section = id.split('#')[1];
@@ -43,11 +44,8 @@ const DefaultContent = ({ id }) => {
       );
     case 'projects':
       return (
-        <div className="project-grid" aria-label="Projects">
-          <article className="project-card" aria-label="Project One">
-            <h3>Project One</h3>
-            <p>Project Card Example</p>
-          </article>
+        <div className="folder" aria-label="Projects">
+
         </div>
       );
     case 'skills':
@@ -127,6 +125,10 @@ const DefaultContent = ({ id }) => {
           <h2>Task Manager</h2>
           <p>Manage your tasks here.</p>
         </div>
+      );
+    case 'browser':
+      return (
+        <BrowserSimulator></BrowserSimulator>
       );
     default:
       return null;
