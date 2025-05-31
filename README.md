@@ -4,11 +4,17 @@
 
 ---
 
+## Last README Update
+
+`31-05-2025`
+
+---
+
 ## Description
 
 This project is a personal portfolio website designed to showcase my skills and experience in web development, specifically using React/JS and HTML/CSS. It serves as a centralized hub for my projects, professional background, and contact information.
 
-As I gain more experience, the project will be updated with new projects and information. It is a work in progress, and will be improved over time.
+As I gain more experience, the project will be updated with new content and information. It is an eternal work in progress project, and will be improved over time.
 
 ---
 
@@ -20,9 +26,9 @@ As I gain more experience, the project will be updated with new projects and inf
 - [x] A basic Context menu.
 - [x] Executable Desktop Icons
 - [x] Clock + Date.
-- [x] A modify language system + button on taskbar.
-- [x] A basic start menu.
-- [x] A basic sort for desktop icons.
+- [x] A modify language system + button on taskbar. (Broken)
+- [x] A basic start menu. (Broken)
+- [x] A basic sort for desktop icons. (Broken)
 - [x] Better React states organization after migration from React's `useReducer` to Redux. 
 
 ---

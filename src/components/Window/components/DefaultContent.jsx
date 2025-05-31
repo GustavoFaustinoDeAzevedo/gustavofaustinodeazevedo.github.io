@@ -130,12 +130,6 @@ const DefaultContent = ({ id, src }) => {
           src={src}
         ></BrowserSimulator>
       );
-    case 'linkedin':
-      return (
-        <BrowserSimulator
-          src={src}
-        ></BrowserSimulator>
-      );
     default:
       return null;
   }
