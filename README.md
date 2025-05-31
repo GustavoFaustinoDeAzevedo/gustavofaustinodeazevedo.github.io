@@ -80,7 +80,7 @@ As I gain more experience, the project will be updated with new content and info
 - GSAP
 - HeroIcons
 - Vite
-
+- Redux 
 ---
 
 ## Contributions
