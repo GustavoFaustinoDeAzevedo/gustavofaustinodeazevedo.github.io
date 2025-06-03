@@ -31,7 +31,7 @@
       justify-content: center;
       background-color: var(--color-one);
       border: none;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       border-radius: 0.5rem;
       transition: background-color 0.2s;
       color: #ffffff;
@@ -166,7 +166,7 @@
         background-color: var(--color-one);
         color: #ffffff;
         border-radius: 0.5rem;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         transition: background-color 0.2s;
 
         /* Hover effect for taskbar item */
@@ -216,7 +216,7 @@
       color: #ffffff;
 
       .language {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         position: relative;
 
         .language-button {
@@ -253,7 +253,7 @@
             border-radius: 5px;
             list-style: none;
             z-index: 999;
-            cursor: pointer;
+            cursor: var(--cursor-pointer);
             pointer-events: initial;
 
 

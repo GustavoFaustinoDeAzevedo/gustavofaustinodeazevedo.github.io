@@ -27,7 +27,7 @@
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       line-height: 1.2;
       border-radius: 0.5rem;
       transition: background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
