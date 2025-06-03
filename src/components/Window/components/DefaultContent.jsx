@@ -2,6 +2,7 @@ import React from 'react';
 import AnimatedInput from './AnimatedInput';
 import Button from '../../ui/Button';
 import BrowserSimulator from '../../BrowserSimulator';
+import TaskManager from '../../TaskManager';
 
 const DefaultContent = ({ id, src }) => {
   const section = id.split('#')[1];
@@ -115,21 +116,12 @@ const DefaultContent = ({ id, src }) => {
           data-initial-dimension='{"width": "580px", "height": "330px"}'
         ></textarea>
       );
-    case 'taskManager':
-      return (
-        <div className="task-manager" aria-label="Task Manager">
-          <h2>Task Manager</h2>
-          <p>Manage your tasks here.</p>
-        </div>
-      );
+    case 'task-manager':
+      return <TaskManager></TaskManager>;
     case 'browser':
       return <BrowserSimulator></BrowserSimulator>;
     case 'github':
-      return (
-        <BrowserSimulator
-          src={src}
-        ></BrowserSimulator>
-      );
+      return <BrowserSimulator src={src}></BrowserSimulator>;
     default:
       return null;
   }

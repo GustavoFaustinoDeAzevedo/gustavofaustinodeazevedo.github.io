@@ -311,90 +311,93 @@
     box-shadow: 0 2px 8px #0000001a;
   }
 
-  .contact-form {
-    display: grid;
-    gap: 2rem;
-    padding: 4rem;
-    width: 100%;
+  .window-content {
 
-
-    & .input-container {
-      position: relative;
+    & .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 4rem;
       width: 100%;
-      height: mfit-content;
+      max-width: 600px;
 
-      & .placeholder {
-        position: absolute;
-        left: 1rem;
-        top: 0.8rem;
-        font-size: 1rem;
-        color: var(--c-text);
-        pointer-events: none;
-        -webkit-user-select: none;
-        user-select: none;
-      }
-
-      & input, & textarea {
+      & .input-container {
+        position: relative;
         width: 100%;
-        min-width: 300px;
-        max-width: 600px;
-        padding: 1rem;
-        background-color: var(--c-background-focus);
-        border: 1px solid var(--c-background-focus);
+        height: mfit-content;
+
+        & .placeholder {
+          position: absolute;
+          left: 1rem;
+          top: 0.8rem;
+          font-size: 1rem;
+          color: var(--c-text);
+          pointer-events: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+
+        & input, & textarea {
+          width: 100%;
+          min-width: 300px;
+          max-width: 600px;
+          padding: 1rem;
+          background-color: var(--c-background-focus);
+          border: 1px solid var(--c-background-focus);
+          border-radius: var(--border-radius);
+          color: var(--c-text);
+          font-family: inherit;
+
+          &::placeholder {
+            color: #ffffff;
+            visibility: visible;
+          }
+
+          /* hides the input placeholder when the input is not focused */
+          &::placeholder {
+            visibility: hidden;
+            opacity: 0.4;
+          }
+
+          &:focus::placeholder {
+            visibility: visible;
+          }
+
+
+          &:focus {
+            outline: none;
+            background-color: var(--c-background);
+          }
+
+
+        }
+      }
+
+      & textarea {
+        min-height: 150px;
+        max-height: 50vh;
+        resize: vertical;
+        color: inherit;
+
+      }
+
+      & button {
+        justify-self: start;
+        /* padding: */
+        background: var(--c-accent);
+        border: none;
         border-radius: var(--border-radius);
-        color: var(--c-text);
-        font-family: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        color: inherit;
 
-        &::placeholder {
-          color: #ffffff;
-          visibility: visible;
+
+        &:hover {
+          background: var(--c-accent-hover);
         }
-
-        /* hides the input placeholder when the input is not focused */
-        &::placeholder {
-          visibility: hidden;
-          opacity: 0.4;
-        }
-
-        &:focus::placeholder {
-          visibility: visible;
-        }
-
-
-        &:focus {
-          outline: none;
-          background-color: var(--c-background);
-        }
-
-
       }
     }
-
-    & textarea {
-      min-height: 150px;
-      max-height: 50vh;
-      resize: vertical;
-      color: inherit;
-
-    }
-
-    & button {
-      justify-self: start;
-      /* padding: */
-      background: var(--c-accent);
-      border: none;
-      border-radius: var(--border-radius);
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      color: inherit;
-
-
-      &:hover {
-        background: var(--c-accent-hover);
-      }
-    }
-
   }
 
   .browser-container {
@@ -430,7 +433,7 @@
           width: 1.2rem !important;
           height: 1.2rem !important;
           border-radius: 50%;
-          
+
           background-color: none !important;
           fill: var(--c-text);
           border: none;

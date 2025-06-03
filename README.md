@@ -35,6 +35,9 @@ As I gain more experience, the project will be updated with new content and info
 
 ## Things to Be Done
 
+- [ ] Improve animations.
+- [ ] Add automated tests.
+- [ ] Improve developer documentation.
 - [ ] Improve start menu.
 - [ ] Option to change background color/image.
 - [ ] Context menu needs some improvements.
@@ -47,9 +50,6 @@ As I gain more experience, the project will be updated with new content and info
   - [ ] Basic image editor.
   - [ ] Notes.
   - [ ] I'll think about more in the future 😅.
-- [ ] Improve animations.
-- [ ] Add automated tests.
-- [ ] Improve developer documentation.
 
 ---
 

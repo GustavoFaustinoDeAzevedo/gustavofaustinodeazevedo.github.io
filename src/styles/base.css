@@ -95,6 +95,35 @@
     --input-required-bg: #ffe6e6;
     --input-required-color: #ff0000;
 
+    --cursor-pointer: default;
+    --cursor-text: text;
+    --cursor-move: move;
+    --cursor-resize: ew-resize;
+    --cursor-resize-vertical: ns-resize;
+    --cursor-resize-diagonal: nwse-resize;
+    --cursor-resize-diagonal-alt: nesw-resize;
+    --cursor-resize-all: all-scroll;
+    --cursor-not-allowed: not-allowed;
+    --cursor-grabbing: grabbing;
+    --cursor-grab: grab;
+    --cursor-default: default;
+    --cursor-help: help;
+    --cursor-progress: progress;
+    --cursor-wait: wait;
+    --cursor-crosshair: crosshair;
+    --cursor-zoom-in: zoom-in;
+    --cursor-zoom-out: zoom-out;
+    --cursor-move: move;
+    --cursor-copy: copy;
+    --cursor-alias: alias;
+    --cursor-cell: cell;
+    --cursor-context-menu: context-menu;
+    --cursor-no-drop: no-drop;
+    --cursor-all-scroll: all-scroll;
+    --cursor-col-resize: col-resize;
+    --cursor-row-resize: row-resize;
+    --cursor-vertical-text: vertical-text;
+
     --box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.10),
       1px 1px 0px rgba(0, 0, 0, 0.20),
       2px 2px 0px rgba(0, 0, 0, 0.30),
@@ -140,13 +169,16 @@
 
   h1, h2, h3 {
     line-height: 1.2;
-    margin-block-end: var(--spacing-unit);
   }
 
   input:required:invalid {
     border: 2px solid var(--input-required-border);
     background-color: var(--input-required-bg);
     color: var(--input-required-color);
+  }
+
+  ul {
+    list-style: none;
   }
 
   /* button {
