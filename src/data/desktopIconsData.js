@@ -5,7 +5,7 @@ export const desktopIconsData = [
   { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'icon contact' },
   { id: 'background-color-picker', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'icon color-picker' },
   { id: 'cmd', title: { eng: 'Command Prompt', por: 'Prompt de Comando' }, icon: 'icon command' },
-  { id: 'task-manager', title: { eng: 'Task Manager', por: 'Gerenciador de Tarefas' }, icon: 'icon task-manager' },
+  { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: 'icon task-manager' },
   { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'icon browser' },
   { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'icon github', windowParams: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: 'icon browser' } },
 
