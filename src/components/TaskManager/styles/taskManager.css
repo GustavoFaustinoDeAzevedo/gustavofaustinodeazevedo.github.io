@@ -29,7 +29,7 @@
         display: flex;
         flex-direction: column;
         overflow-y: auto;
-        max-height: 300px;
+        height: 300px;
         gap: 0.5rem;
         border-bottom: 1px solid var(--c-border);
 
@@ -97,7 +97,6 @@
             cursor: var(--cursor-pointer);
             gap: 0.5rem;
             user-select: none;
-            transition: all 0.1s ease-in-out;
 
             &:hover {
               background-color: var(--c-border);
@@ -107,26 +106,47 @@
               background-color: var(--c-border-active);
             }
 
+            &.selected {
+              background-color: var(--c-border);
+
+              &:active {
+                background-color: var(--c-border-active);
+              }
+            }
+
+            transition: all 0.1s ease-in-out;
+
             & .task-name-cell {
               flex-grow: 1;
+              font-size: 0.8rem;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
               width: 100%;
+
+
             }
 
             & .task-status-cell {
+
               width: 100px;
               text-align: right;
               color: var(--c-text-secondary);
             }
+
+
           }
 
         }
       }
 
-
-      .task-manager-footer {}
+      .task-manager-footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        padding: 1rem;
+      }
     }
   }
 }

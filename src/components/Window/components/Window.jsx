@@ -105,6 +105,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         isOpen={isOpen}
         id={id}
         src={src}
+        windowActions={windowActions}
         content={content}
       />
     </div>

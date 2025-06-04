@@ -61,7 +61,7 @@ const windowSlice = createSlice({
   initialState: {
     openedWindowList: [],
     focusedWindow: null,
-    history: []
+    history: [], // Initial history with a placeholder
   },
   reducers: {
     focusWindow: (state, action) => {
