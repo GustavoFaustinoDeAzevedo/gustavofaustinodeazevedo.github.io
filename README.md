@@ -6,7 +6,7 @@
 
 ## Last README Update
 
-`31-05-2025`
+`03-06-2025`
 
 ---
 
@@ -29,7 +29,7 @@ As I gain more experience, the project will be updated with new content and info
 - [x] A modify language system + button on taskbar. (Broken)
 - [x] A basic start menu. (Broken)
 - [x] A basic sort for desktop icons. (Broken)
-- [x] Better React states organization after migration from React's `useReducer` to Redux. 
+- [x] Better React states organization after migration from React's `useReducer` to Redux.
 
 ---
 
@@ -77,10 +77,13 @@ As I gain more experience, the project will be updated with new content and info
 ## Technologies Used
 
 - ReactJS
+- CSS
 - GSAP
 - HeroIcons
 - Vite
-- Redux 
+- Redux
+- React-Colorful
+
 ---
 
 ## Contributions

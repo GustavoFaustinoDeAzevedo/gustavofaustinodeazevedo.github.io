@@ -3,8 +3,10 @@ import AnimatedInput from './AnimatedInput';
 import Button from '../../ui/Button';
 import BrowserSimulator from '../../BrowserSimulator';
 import TaskManager from '../../TaskManager';
+import { ChangeBackground } from '../../Settings';
+import Tests from '../../Tests';
 
-const DefaultContent = ({ id, src }) => {
+const DefaultContent = ({ id, src, windowActions }) => {
   const section = id.split('#')[1];
   switch (section) {
     case 'about':
@@ -117,11 +119,18 @@ const DefaultContent = ({ id, src }) => {
         ></textarea>
       );
     case 'task-manager':
-      return <TaskManager></TaskManager>;
+      return <TaskManager windowActions={windowActions}></TaskManager>;
     case 'browser':
       return <BrowserSimulator></BrowserSimulator>;
     case 'github':
       return <BrowserSimulator src={src}></BrowserSimulator>;
+    case 'background-color-picker':
+    case 'change-background':
+      return <ChangeBackground></ChangeBackground>;
+    case 'tests':
+      return (
+        <Tests data-initial-dimension='{"width": "500px", "height": "400px"}'></Tests>
+      );
     default:
       return null;
   }

@@ -71,8 +71,6 @@
       opacity: 0;
     }
 
-
-
     & .window-header {
       height: var(--window-header-height);
       background: var(--c-header-inactive);
@@ -84,6 +82,9 @@
       user-select: none;
       transition: background-color 0.2s ease;
 
+      & .icon{
+        background-color: var(--c-icon-bg) !important;
+      }
 
       .maximized & {
         pointer-events: none;

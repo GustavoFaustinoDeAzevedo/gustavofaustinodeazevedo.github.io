@@ -22,8 +22,12 @@
     -webkit-user-select: none;
     user-select: none;
 
+    & .icon {
+          background-color: var(--c-icon-bg);
+        }
+
     /* Start button styling */
-    .start-button {
+    & .start-button {
       width: 40px;
       height: 40px;
       display: flex;
@@ -59,7 +63,7 @@
     }
 
     /* Start menu container */
-    .start-menu-container {
+    & .start-menu-container {
       position: absolute;
       overflow: hidden;
       bottom: 4rem;
@@ -67,7 +71,7 @@
       pointer-events: none;
 
 
-      .start-menu-content {
+      & .start-menu-content {
         transform: translateY(100%);
         padding: 30px;
         display: flex;
@@ -83,11 +87,11 @@
         z-index: 999;
         pointer-events: initial;
 
-        .input-container {
+        & .input-container {
           position: relative;
           display: inline-block;
 
-          .icon {
+          & .icon {
             position: absolute;
             width: 20px !important;
             height: 20px !important;
@@ -98,7 +102,7 @@
             pointer-events: none;
           }
 
-          input {
+          & input {
             width: 100%;
             border-radius: 50px;
             text-indent: 30px;
@@ -115,7 +119,7 @@
           }
         }
 
-        .search-content {
+        & .search-content {
           height: 12rem;
           width: 30rem;
           display: flex;
@@ -123,11 +127,11 @@
           gap: 5px;
         }
 
-        .history-container {
+        & .history-container {
           border: 1px solid var(--color-four);
 
           /* History list inside the start menu */
-          .start-menu-history {
+          & .start-menu-history {
             height: 12rem;
             width: 30rem;
             list-style: none;
@@ -163,11 +167,13 @@
         padding: 0 0.5rem;
         display: none;
         align-items: center;
-        background-color: var(--color-one);
+        /* background-color: var(--color-one); */
         color: #ffffff;
         border-radius: 0.5rem;
         cursor: var(--cursor-pointer);
         transition: background-color 0.2s;
+
+        
 
         /* Hover effect for taskbar item */
         &:hover {

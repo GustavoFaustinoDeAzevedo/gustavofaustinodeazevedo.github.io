@@ -16,6 +16,7 @@
     pointer-events: none;
 
 
+
     /* Individual desktop icon styling */
 
     .desktop-icon {
@@ -26,21 +27,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
+      color: var(--c-background1);
       cursor: var(--cursor-pointer);
       line-height: 1.2;
       border-radius: 0.5rem;
-      transition: background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
       pointer-events: initial;
+
 
 
       /* Hover effect for desktop icons */
       &:hover, &:focus {
         transition: all 0.2s;
-        text-shadow: 0px 0px 15px #ffffff;
-        background-color: #ffffff1a;
+        text-shadow: 0px 0px 15px rgba(var(--c-desktop-bg-contrast));
+        background-color: rgba(var(--c-desktop-bg-contrast), 0.2);
         /* box-shadow: 0 0 10px #ffffff1a; */
-        color: var(--color-text);
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
@@ -49,14 +50,17 @@
       }
 
       /* Icon inside the desktop icon */
-      i {
+      & .icon {
         width: 100%;
         font-size: 2rem;
         margin-bottom: 0.5rem;
+        background-color: rgb(var(--c-desktop-bg-contrast));
+        transition: background-color 0.3s ease-in-out;
+        /* filter: invert(1); */
       }
 
       /* Label text for the desktop icon */
-      .icon-text {
+      & .icon-text {
         width: 5rem;
         text-align: center;
         display: -webkit-box;
@@ -66,10 +70,11 @@
         line-clamp: 2;
         word-wrap: break-word;
         font-size: 0.8rem;
-
-
+        color: rgb(var(--c-desktop-bg-contrast));
         -webkit-user-select: none;
         user-select: none;
+        transition: color 0.3s ease-in-out;
+        /* filter: invert(1) ; */
       }
     }
   }
@@ -78,7 +83,7 @@
 .icon {
   width: 25px;
   height: 25px;
-  background-color: var(--color-text);
+
   background-size: contain;
   background-repeat: no-repeat;
   -webkit-mask-size: contain;
@@ -86,6 +91,7 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   display: inline-block;
+
 
   &.about {
     -webkit-mask-image: url('/icons/user.svg');

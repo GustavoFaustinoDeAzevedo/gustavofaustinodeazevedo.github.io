@@ -1,21 +1,29 @@
+import { useSelector } from 'react-redux';
 import Button from '../ui/Button';
+import { useCallback, useState } from 'react';
+import actions from '../../store/actions';
 
-const TaskManager = () => {
+const TaskManager = (props) => {
+  const { onUpdateWindow } = props.windowActions;
+
   // This is a placeholder for the task list.
-  const taskList = [
-    { name: 'Task 1', status: 'Running' },
-    { name: 'Task 2', status: 'Completed' },
-    { name: 'Task 3', status: 'Pending' },
-    { name: 'Task 4', status: 'Running' },
-    { name: 'Task 5', status: 'Failed' },
-    { name: 'Task 6', status: 'Completed' },
-    { name: 'Task 7', status: 'Pending' },
-    { name: 'Task 8', status: 'Running' },
-    { name: 'Task 9', status: 'Completed' },
-    { name: 'Task 10', status: 'Pending' },
-    { name: 'Task 11', status: 'Running' },
-    { name: 'Task 12', status: 'Failed' },
-  ];
+  const taskList = useSelector((state) => state.window.openedWindowList);
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  const toggleTaskSelection = (taskId) => {
+    if (selectedTask === taskId) {
+      setSelectedTask(null); // Deselect if already selected
+    } else {
+      setSelectedTask(taskId); // Select the new task
+    }
+  };
+
+  const updateWindowState = useCallback(
+    (updates) => onUpdateWindow({ id: selectedTask, ...updates }),
+    [selectedTask, onUpdateWindow]
+  );
+
+  const handleClose = () => updateWindowState({ requestingClose: true });
 
   return (
     <div className="task-manager" aria-label="Task Manager">
@@ -25,33 +33,53 @@ const TaskManager = () => {
       <main className="task-manager-main">
         <table>
           <thead className="task-list-header">
-            <tr className="task-list-header-row"> 
-              <th colSpan={'2'} className="task-list-header-cell">
+            <tr className="task-list-header-row">
+              <th className="task-list-header-cell">
                 <p>Name </p>
                 <i className="icon arrow-down"></i>
               </th>
             </tr>
           </thead>
           <tbody className="task-list-body">
-            {taskList.map((task, index) => (
-              <tr className="task-row" key={`${index}-task-row`}>
-                <td key={`${index}-task-name`} className="task-name-cell">
-                  <span className="task-name">{task.name}</span>
-                </td>
-
-                <td key={`${index}-task-status`} className="task-status-cell">
-                  <span className={`task-status ${task.status.toLowerCase()}`}>
-                    {task.status}
-                  </span>
-                </td>
+            {taskList.length === 0 ? (
+              <tr className="task-row">
+                <td className="task-name-cell">No processes running</td>
               </tr>
-            ))}
+            ) : (
+              taskList.map((task, index) => (
+                <tr
+                  className={`task-row ${
+                    selectedTask === task.id ? 'selected' : ''
+                  }`}
+                  key={`task-row-${index}`}
+                  onClick={() => toggleTaskSelection(task.id)}
+                >
+                  <td
+                    id={`task-cell-${index}`}
+                    key={`task-cell-${index}`}
+                    className="task-name-cell"
+                  >
+                    <p className="task-name">{task.title || 'Untitled Task'}</p>
+                  </td>
+                  {/* <td key={`${index}-task-status`} className="task-status-cell">
+                    <span className={`task-status ${task.status.toLowerCase()}`}>
+                      {task.status}
+                    </span>
+                  </td> */}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </main>
 
       <footer className="task-manager-footer">
-        <Button type="submit" ariaLabel="Submit Button" variant={'danger'}>
+        <Button
+          type="submit"
+          ariaLabel="Submit Button"
+          variant={'danger'}
+          onClick={handleClose}
+        >
           Terminate
         </Button>
       </footer>

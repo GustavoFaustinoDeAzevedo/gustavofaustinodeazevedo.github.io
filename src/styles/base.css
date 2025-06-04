@@ -1,14 +1,20 @@
 @layer base {
   :root {
+
+
     --c-background: #121212;
     --c-background1: #0d0d0d;
+    --c-background1-contrast: 255, 255, 255;
     --c-background2: #1a1a1a;
     --c-background2-t: #1f1f1f80;
     --c-background3: #333333;
     --c-background4: #5d5d5d;
     --c-background5: #666666;
 
-
+    --c-desktop-bg: #0d0d0d;
+    --c-desktop-default-bg: #0d0d0d;
+    --c-desktop-bg-contrast: 255, 255, 255;
+    --c-desktop-default-bg-contrast: 255, 255, 255;
 
     /* Blue tone palette */
     /* Very light blue */
@@ -65,7 +71,9 @@
 
     --c-primary: #1565c0;
     --c-secondary: #6c757d;
-    --color-accent: #004477;
+
+    --c-icon-bg: #f0f0f0;
+    /* --color-accent: #004477;
     --color-header-one: #181818;
     --color-header-two: #191c29b3;
     --color-one: #1a1b26;
@@ -73,14 +81,14 @@
     --color-three: #31323C;
     --color-four: #3C3D47;
     --color-light: #3A3D4F;
-    --color-input-area: #2F3345;
+    --color-input-area: #2F3345; */
 
-    --color-background: #1E1E1E;
+    /* --color-background: #1E1E1E;
     --color-background-secondary: linear-gradient(135deg, var(--color-three), var(--color-four));
-    --color-background-tertiary: linear-gradient(135deg, #1a1b26, #24283b);
+    --color-background-tertiary: linear-gradient(135deg, #1a1b26, #24283b); */
 
-    --color-header: #0e0e0e;
-    --color-border: #2D2D2D;
+    /* --color-header: #0e0e0e;
+    --color-border: #2D2D2D; */
 
     --color-text: #ffffff;
 
@@ -88,7 +96,6 @@
     --border-radius: 0.5rem;
     --taskbar-height: 3rem;
     --window-header-height: 32px;
-
     --border-style: solid;
 
     --input-required-border: #ff0000;
