@@ -1,8 +1,5 @@
 import React, { useRef } from 'react';
 import toggleOpenMenuAnimation from '../../animations/elementTransitions';
-
-import { desktopIconsData } from '../../data/desktopIconsData';
-
 const StartMenu = ({
   toggleMenuVisibility,
   isVisible,

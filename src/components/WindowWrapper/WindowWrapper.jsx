@@ -27,6 +27,7 @@ const WindowWrapper = ({
     icon,
     content,
     src,
+    filesData,
   } = window;
 
   const windowParamsObj = {
@@ -37,6 +38,7 @@ const WindowWrapper = ({
     title,
     icon,
     src,
+    filesData,
     x: position.x,
     y: position.y,
     startX: position.startX,
@@ -53,11 +55,11 @@ const WindowWrapper = ({
     isRequestingClose: windowState.requestingClose,
     isRequestingMaximize: windowState.requestingMaximize,
     isRequestingMinimize: windowState.requestingMinimize,
-    content,
   };
 
   const windowActionsObj = {
-    onUpdateWindow: handleUpdateWindow,
+    onOpen: () => handleOpenWindow(),
+    onUpdateWindow: (params) => handleUpdateWindow({id, ...params}),
     onFocus: () => handleFocusWindow(id),
     onUnfocus: () => handleResetFocus(),
     onClose: () => handleCloseWindow(id),

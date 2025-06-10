@@ -1,10 +1,10 @@
 @import './base.css';
 @import './utilities.css';
-@import '../components/Background/style.css';
+@import '../components/Desktop/style.css';
 @import '../components/TaskManager/styles/index.css';
 @import '../components/Window/styles/index.css';
 @import '../components/Taskbar/style.css';
-@import '../components/DesktopIcon/desktopIcon.css';
+@import '../components/FilesExplorer/styles/index.css';
 @import '../components/ContextMenu/style.css';
 @import '../components/ConsoleCommand/style.css';
 @import '../components/Settings/index.css';

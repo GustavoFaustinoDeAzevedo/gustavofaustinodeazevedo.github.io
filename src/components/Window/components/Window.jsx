@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
-import WindowContent from './WindowContent';
+import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '../../../hooks/useClickOutside';
 import createWindowDraggable from '../utils/createWindowDraggable';
 import getWindowClass from '../utils/getWindowClass';
@@ -22,11 +22,11 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     isOpen,
     title,
     icon,
-    content,
+    filesData,
     isFocused,
     isMinimized,
     isMaximized,
-    src
+    src,
   } = windowParams;
   const { onFocus, onUnfocus, onUpdateWindow, onClose, onContextMenu } =
     windowActions;
@@ -100,13 +100,13 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         onClose={handleClose}
         {...{ id, title, icon, isOpen, isFocused, isMinimized, isMaximized }}
       />
-      <WindowContent
+      <WindowContentWrapper
         onFocus={onFocus}
         isOpen={isOpen}
         id={id}
         src={src}
         windowActions={windowActions}
-        content={content}
+        filesData={filesData}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import windowReducer from './slices/windowSlice';
 import contextMenuReducer from './slices/contextMenuSlice';
 import languageReducer from './slices/settingsSlice';
-import iconReducer from './slices/desktopIconSlice';
+import filesReducer from './slices/filesSlice';
 import settingsReducer from './slices/settingsSlice'
 
 const logger = (store) => (next) => (action) => {
@@ -17,7 +17,7 @@ const store = configureStore({
     window: windowReducer,
     contextMenu: contextMenuReducer,
     language: languageReducer,
-    icon: iconReducer,
+    file: filesReducer,
     settings: settingsReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
