@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { filesData } from '../../data/filesData';
 
 // Utility functions
 
@@ -75,7 +76,7 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { id, title, icon, src } = action.payload;
+      const { id, title, icon, src, filesData } = action.payload;
       state.history = updateHistory(state.history, id);
 
       // Generate a unique id for the new window
@@ -87,6 +88,7 @@ const windowSlice = createSlice({
         zIndex: getNextZIndex(state),
         content: '',
         src: src,
+        filesData: filesData ?? [],
         position: {
           startX: 0,
           startY: 0,
@@ -124,6 +126,8 @@ const windowSlice = createSlice({
     },
 
     updateWindow: (state, action) => {
+      if (!action.payload?.id || action.payload.id === undefined) return;
+
       const {
         id,
         title,
@@ -138,12 +142,13 @@ const windowSlice = createSlice({
         height,
         minimized,
         maximized,
-        content,
+        filesData,
         requestingOpen,
         requestingRestore,
         requestingClose,
         requestingMinimize,
         requestingMaximize,
+
       } = action.payload;
 
       const winIndex = indexLocator(id, state);
@@ -153,7 +158,8 @@ const windowSlice = createSlice({
 
       // Update basic properties
       if (title !== undefined) currentWindow.title = title;
-      if (icon !== undefined) currentWindow.icon = icon;
+      if (icon !== undefined) currentWindow.icon = icon  ;
+      if (filesData !== undefined) currentWindow.filesData = filesData;
 
       // Update position
       if (startX !== undefined) currentWindow.position.startX = startX;
@@ -175,9 +181,6 @@ const windowSlice = createSlice({
       if (requestingClose !== undefined) currentWindow.windowState.requestingClose = requestingClose;
       if (requestingMinimize !== undefined) currentWindow.windowState.requestingMinimize = requestingMinimize;
       if (requestingMaximize !== undefined) currentWindow.windowState.requestingMaximize = requestingMaximize;
-
-      // Update the window content
-      if (content !== undefined) currentWindow.content = content;
     }
   },
 });

@@ -1,6 +1,6 @@
 @layer components {
 
-  .desktop-icons-wrapper {
+  .desktop-files-wrapper {
     height: calc(100vh - var(--taskbar-height));
     padding: 0.5rem;
     display: flex;
@@ -19,7 +19,7 @@
 
     /* Individual desktop icon styling */
 
-    .desktop-icon {
+    &> .file {
       padding: 0.3rem 0;
       width: 5rem;
       height: 4.5rem;
@@ -49,7 +49,7 @@
         -webkit-app-region: no-drag;
       }
 
-      /* Icon inside the desktop icon */
+      /* Icon inside the file icon */
       & .icon {
         width: 100%;
         font-size: 2rem;

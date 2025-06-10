@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react';
 import { RefsProvider } from '../contexts/RefsContext';
 import actions from '../store/actions';
 
-import Background from '../components/Background';
+import Desktop from '../components/Desktop';
 import Taskbar from '../components/Taskbar';
 import ContextMenu from '../components/ContextMenu';
 import ConsoleCommand from '../components/ConsoleCommand';
@@ -14,7 +14,7 @@ import ConsoleCommand from '../components/ConsoleCommand';
 import { useDisableRightClick } from './hooks/useDisableRightClick';
 import { useTaskbarProps } from './hooks/useTaskbarProps';
 import createWindowList from './utils/createWindowList';
-import createIconsList from './utils/createIconsList';
+
 import { useItemsHandler } from './hooks/useItemsHandler';
 import { useHandleContextMenu } from './hooks/useHandleContextMenu';
 
@@ -33,7 +33,7 @@ const App = () => {
   const windowList = useSelector((state) => state.window.openedWindowList);
   const focusedWindow = useSelector((state) => state.window.focusedWindow);
   const history = useSelector((state) => state.window.history);
-  const desktopIconsData = useSelector((state) => state.icon.desktopIconList);
+  const filesData = useSelector((state) => state.file.filesList);
 
   //Action Handlers
   const {
@@ -44,7 +44,7 @@ const App = () => {
     handleUpdateWindow,
   } = actions.useWindowActions();
 
-  const desktopIconsActions = actions.useDesktopIconsActions();
+  const filesActions = actions.useFilesActions();
   const contextMenuActions = actions.useContextMenuActions();
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
 
@@ -83,22 +83,18 @@ const App = () => {
   const itemsHandler = useItemsHandler();
   const handleContextMenu = useHandleContextMenu();
 
-  const desktopIconsStack = createIconsList(
-    language,
-    windowList,
-    desktopIconsData,
-    desktopIconsActions,
-    handleOpenWindow
-  );
 
   //JSX Render
   return (
     <div className="desktop" ref={desktopRef}>
-      <Background onContextMenu={handleContextMenu} />
-
-      <div className="desktop-icons-wrapper related-background">
-        {desktopIconsStack}
-      </div>
+      <Desktop
+        onContextMenu={handleContextMenu}
+        language={language}
+        windowList={windowList}
+        filesData={filesData}
+        filesActions={filesActions}
+        handleOpenWindow={handleOpenWindow}
+      />
 
       <RefsProvider>
         {windowsStack}

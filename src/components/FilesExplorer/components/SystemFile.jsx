@@ -1,21 +1,21 @@
 import React, { useMemo } from 'react';
 
-const DesktopIcon = React.memo(({ id, title, icon, onClick }) => {
+const SystemFile = React.memo(({ id, title, icon, onClick }) => {
   const dataInfo = useMemo(
     () =>
       JSON.stringify({
         title,
         icon,
         id,
-        targetContextId: 'desktop-icon',
+        targetContextId: 'file',
         handler: onClick,
       }),
     [title, icon, id, onClick]
   );
-
+  console.log(icon);
   return (
     <a
-      className="desktop-icon parent"
+      className="file parent"
       aria-label={title}
       title={title}
       onTouchStart={onClick}
@@ -29,4 +29,4 @@ const DesktopIcon = React.memo(({ id, title, icon, onClick }) => {
   );
 });
 
-export default DesktopIcon;
+export default SystemFile;

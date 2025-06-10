@@ -1,11 +1,11 @@
 import useWindowActions from "./useWindowActions";
 import useContextMenuActions from "./useContextMenuActions";
-import useDesktopIconsActions from "./useDesktopIconsActions";
+import useFilesActions from "./useFilesActions";
 import useSettingsActions from "./useSettingsActions";
 
 export default {
   useWindowActions,
   useContextMenuActions,
-  useDesktopIconsActions,
+  useFilesActions,
   useSettingsActions,
 };

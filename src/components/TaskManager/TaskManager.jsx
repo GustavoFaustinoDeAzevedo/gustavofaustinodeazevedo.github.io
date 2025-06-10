@@ -6,15 +6,15 @@ import actions from '../../store/actions';
 const TaskManager = (props) => {
   const { onUpdateWindow } = props.windowActions;
 
-  // This is a placeholder for the task list.
+
   const taskList = useSelector((state) => state.window.openedWindowList);
   const [selectedTask, setSelectedTask] = useState(null);
 
   const toggleTaskSelection = (taskId) => {
     if (selectedTask === taskId) {
-      setSelectedTask(null); // Deselect if already selected
+      setSelectedTask(null);
     } else {
-      setSelectedTask(taskId); // Select the new task
+      setSelectedTask(taskId);
     }
   };
 
@@ -61,11 +61,6 @@ const TaskManager = (props) => {
                   >
                     <p className="task-name">{task.title || 'Untitled Task'}</p>
                   </td>
-                  {/* <td key={`${index}-task-status`} className="task-status-cell">
-                    <span className={`task-status ${task.status.toLowerCase()}`}>
-                      {task.status}
-                    </span>
-                  </td> */}
                 </tr>
               ))
             )}

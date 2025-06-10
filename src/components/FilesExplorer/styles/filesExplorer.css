@@ -1,0 +1,57 @@
+@layer components {
+
+  .files-explorer {
+    width: 100%;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    gap: 1.6rem 0.5rem;
+    pointer-events: none;
+    text-align: center;
+
+    &>.file {
+      padding: 0.3rem 0;
+      width: 5rem;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-icon-bg);
+      cursor: var(--cursor-pointer);
+      line-height: 1.2;
+      border-radius: 0.5rem;
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+      pointer-events: initial;
+      gap: 0.5rem;
+
+      &>.icon {
+        width: 5rem !important;
+        height: 5rem !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+
+      }
+
+      &:hover, &:focus {
+        transition: all 0.2s;
+        text-shadow: 0px 0px 15px rgba(var(--c-desktop-bg-contrast));
+        background-color: rgba(var(--c-desktop-bg-contrast), 0.2);
+        /* box-shadow: 0 0 10px #ffffff1a; */
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-drag: none;
+        -webkit-app-region: no-drag;
+      }
+
+
+    }
+  }
+}

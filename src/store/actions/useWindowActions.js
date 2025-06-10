@@ -5,12 +5,12 @@ import { openWindow, closeWindow, focusWindow, updateWindow, resetFocus } from '
 const useWindowActions = () => {
   const dispatch = useDispatch();
 
-  const handleUpdateWindow = (data) => {
-    dispatch(updateWindow(data));
+  const handleUpdateWindow = (windowData) => {
+    dispatch(updateWindow(windowData));
   };
 
-  const handleOpenWindow = (id, title, icon, src) => {
-    dispatch(openWindow({ id, title, icon, src }));
+  const handleOpenWindow = (id, title, icon, src, filesData) => {
+    dispatch(openWindow({ id, title, icon, src, filesData }));
   };
 
   const handleFocusWindow = (id) => {

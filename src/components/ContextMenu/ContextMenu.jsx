@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
-import { desktopIconsData } from '../../data/desktopIconsData';
+import { filesData } from '../../data/filesData';
 import actions from '../../store/actions';
 
 const ContextMenu = ({
@@ -13,7 +13,7 @@ const ContextMenu = ({
   const menuRef = useRef(null);
   const dataInfo = useRef(null);
   const {x,y} = position;
-  const [iconsData, setIconsData] = useState([...desktopIconsData]);
+  const [iconsData, setIconsData] = useState([...filesData]);
   const [ascendingOrder, setAscendingOrder] = useState(true);
 
   useEffect(() => {
@@ -64,9 +64,9 @@ const ContextMenu = ({
   }, [ascendingOrder]);
 
   useClickOutside(menuRef, onClose);
-  const desktopIconActions = actions.useDesktopIconsActions();
+  const desktopIconActions = actions.useFilesActions();
   const windowActios = actions.useWindowActions();
-  const handleSortIcons = desktopIconActions.handleSortIcons;
+  const handleSortIcons = desktopIconActions.handleSortFiles;
   const handleViewItem = windowActios.handleOpenWindow;
   return (
     <div ref={menuRef} className="context-menu active">
@@ -105,7 +105,7 @@ const ContextMenu = ({
               }
             }}
           >
-            {action.icon && <i className={`icon ${action.icon}`}></i>}
+            {action.icon && <i className={`icon ${action.icon} context-menu-icon`}></i>}
             <span>{action.label}</span>
           </div>
         );
