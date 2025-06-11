@@ -8,13 +8,14 @@ import Tests from '../../Tests';
 import actions from '../../../store/actions';
 import FilesExplorer from '../../FilesExplorer';
 import { useSelector } from 'react-redux';
+import Calculator from '../../Gadgets/Calculator';
 
 const Content = ({ id, src, filesData, windowActions }) => {
   const language = useSelector((state) => state.language);
   const filesActions = actions.useFilesActions();
   const windowList = useSelector((state) => state.window.openedWindowList);
-  console.log(filesData);
-  if (filesData.length > 0) {
+  
+  if (Array.isArray(filesData) && filesData.length > 0) {
     return (
       <FilesExplorer.FilesList
         dataInitialDimension='{"width": "1000px", "height": "600px"}'
@@ -151,6 +152,10 @@ const Content = ({ id, src, filesData, windowActions }) => {
       return (
         <Tests data-initial-dimension='{"width": "500px", "height": "400px"}'></Tests>
       );
+    case 'calculator':
+      return (
+        <Calculator />
+      )
     default:
       return null;
   }

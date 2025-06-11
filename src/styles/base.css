@@ -1,10 +1,11 @@
 @layer base {
   :root {
 
-
+    --c-hover: #f0f0f033;
+    --c-rgb-hover: 240, 240, 240;
+  
     --c-background: #121212;
     --c-background1: #0d0d0d;
-    --c-background1-contrast: 255, 255, 255;
     --c-background2: #1a1a1a;
     --c-background2-t: #1f1f1f80;
     --c-background3: #333333;
@@ -13,8 +14,8 @@
 
     --c-desktop-bg: #0d0d0d;
     --c-desktop-default-bg: #0d0d0d;
-    --c-desktop-bg-contrast: 255, 255, 255;
-    --c-desktop-default-bg-contrast: 255, 255, 255;
+    --c-rgb-desktop-bg-contrast: 255, 255, 255;
+    --c-rgb-desktop-default-bg-contrast: 255, 255, 255;
 
     /* Blue tone palette */
     /* Very light blue */
@@ -73,24 +74,6 @@
     --c-secondary: #6c757d;
 
     --c-icon-bg: #f0f0f0;
-    /* --color-accent: #004477;
-    --color-header-one: #181818;
-    --color-header-two: #191c29b3;
-    --color-one: #1a1b26;
-    --color-two: #252631;
-    --color-three: #31323C;
-    --color-four: #3C3D47;
-    --color-light: #3A3D4F;
-    --color-input-area: #2F3345; */
-
-    /* --color-background: #1E1E1E;
-    --color-background-secondary: linear-gradient(135deg, var(--color-three), var(--color-four));
-    --color-background-tertiary: linear-gradient(135deg, #1a1b26, #24283b); */
-
-    /* --color-header: #0e0e0e;
-    --color-border: #2D2D2D; */
-
-    --color-text: #ffffff;
 
     --spacing-unit: 1rem;
     --border-radius: 0.5rem;

@@ -12,7 +12,6 @@ const SystemFile = React.memo(({ id, title, icon, onClick }) => {
       }),
     [title, icon, id, onClick]
   );
-  console.log(icon);
   return (
     <a
       className="file parent"
