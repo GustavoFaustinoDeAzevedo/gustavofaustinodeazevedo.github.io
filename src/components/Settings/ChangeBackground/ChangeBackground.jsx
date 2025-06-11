@@ -10,7 +10,7 @@ export const ChangeBackground = () => {
   );
   const defaultIconColor = useRef(
     getComputedStyle(document.documentElement)
-      .getPropertyValue('--c-desktop-default-bg-contrast')
+      .getPropertyValue('--c-rgb-desktop-default-bg-contrast')
       .trim()
   );
 
@@ -25,7 +25,7 @@ export const ChangeBackground = () => {
       backgroundColor
     );
     document.documentElement.style.setProperty(
-      '--c-desktop-bg-contrast',
+      '--c-rgb-desktop-bg-contrast',
       iconColor
     );
   }, [backgroundColor]);

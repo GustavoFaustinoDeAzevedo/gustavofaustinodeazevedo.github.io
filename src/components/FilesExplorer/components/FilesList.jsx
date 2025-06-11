@@ -32,7 +32,7 @@ const FilesList = ({
             ? windowParams.title.por
             : windowParams.title.eng
           : iconTitle;
-        const windowIcon = windowParams?.icon || icon || 'window-icon';
+        const windowIcon = windowParams?.icon || icon || 'icon window-icon';
         const src = windowParams?.src || '';
 
         return (

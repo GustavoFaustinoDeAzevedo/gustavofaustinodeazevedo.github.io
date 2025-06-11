@@ -58,7 +58,7 @@ const WindowWrapper = ({
   };
 
   const windowActionsObj = {
-    onOpen: () => handleOpenWindow(),
+    onOpen: handleOpenWindow,
     onUpdateWindow: (params) => handleUpdateWindow({id, ...params}),
     onFocus: () => handleFocusWindow(id),
     onUnfocus: () => handleResetFocus(),
