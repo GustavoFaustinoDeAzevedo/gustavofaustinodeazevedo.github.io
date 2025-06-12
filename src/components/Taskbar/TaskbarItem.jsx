@@ -8,6 +8,7 @@ const TaskbarItem = ({
   focusedWindow,
   onWindowMinimize,
   onWindowRestore,
+  title,
 }) => {
   const clickHandler = () => {
     return isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
@@ -19,7 +20,9 @@ const TaskbarItem = ({
       className={`taskbar-item open 
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
-         `}
+      `}
+      title={title}
+
       onClick={clickHandler}
     >
       <i className={`${icon}`}></i>
