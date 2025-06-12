@@ -5,8 +5,9 @@
     --c-rgb-hover: 240, 240, 240;
   
     --c-background: #121212;
+    --c-background-hover: #323233;
     --c-background1: #0d0d0d;
-    --c-background2: #1a1a1a;
+    --c-background2: #232323;
     --c-background2-t: #1f1f1f80;
     --c-background3: #333333;
     --c-background4: #5d5d5d;
@@ -53,7 +54,7 @@
 
     --c-hover: #323233;
 
-    --c-accent: #005f99;
+    
 
     --c-error: #f48771;
 
@@ -61,8 +62,9 @@
 
     --c-warning: #ffcc00;
 
+    --c-accent: #005f99;
     --c-accent-hover: #007acc;
-    --c-background-hover: #323233;
+    
 
     --c-accent-focus: #0090ff;
     --c-background-focus: #3c3c3c;

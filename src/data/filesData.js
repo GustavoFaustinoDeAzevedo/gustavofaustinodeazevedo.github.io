@@ -1,12 +1,11 @@
 export const filesData = [
   { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'icon about' },
   {
-    id: 'projects', title: { eng: 'Projects Folder (Work in Progress)', por: 'Projects Folder (Em Desenvolvimento)' }, icon: 'icon projects',
+    id: 'projects', title: { eng: 'Projects Folder (Work in Progress 1/25)', por: 'Projects Folder (Em Desenvolvimento 1/25)' }, icon: 'icon projects',
     filesData: [
       { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora' } },
       { id: 'todo', title: { eng: 'To-Do List', por: 'Lista de Tarefas' } },
       { id: 'weather', title: { eng: 'Weather App', por: 'Aplicativo de Clima' } },
-      { id: 'portfolio', title: { eng: 'Portfolio', por: 'Portfólio' }, icon: 'icon browser' },
       { id: 'memory-game', title: { eng: 'Memory Game', por: 'Jogo da Memória' } },
       { id: 'snake-game', title: { eng: 'Snake Game', por: 'Jogo da Cobra' } },
       { id: 'piano-app', title: { eng: 'Piano App', por: 'Aplicativo de Piano' } },
@@ -27,7 +26,6 @@ export const filesData = [
       { id: 'drawing-app', title: { eng: 'Drawing App', por: 'Aplicativo de Desenho' } },
       { id: 'chat-app', title: { eng: 'Chat App', por: 'Aplicativo de Chat' } },
       { id: 'rss-reader', title: { eng: 'RSS Reader', por: 'Leitor de RSS' } },
-      { id: 'url-shortener', title: { eng: 'URL Shortener', por: 'Encurtador de URL' } },
       { id: 'password-manager', title: { eng: 'Password Manager', por: 'Gerenciador de Senhas' } },
       { id: 'expense-tracker', title: { eng: 'Expense Tracker', por: 'Rastreador de Despesas' } },
       { id: 'habit-tracker', title: { eng: 'Habit Tracker', por: 'Rastreador de Hábitos' } },
