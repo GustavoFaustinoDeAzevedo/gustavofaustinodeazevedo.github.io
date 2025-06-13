@@ -11,7 +11,7 @@
       height: 25%;
       padding: 0 20px;
       text-align: right;
-      background-color: var(--c-background1);
+      background-color: var(--c-header-active);
       color: var(--c-text);
       border: none;
       transition: font-size 0.2s;

@@ -1,5 +1,3 @@
-
-
 @layer components {
   .window {
     position: absolute;
@@ -82,7 +80,7 @@
       user-select: none;
       transition: background-color 0.2s ease;
 
-      & .icon{
+      & .icon {
         background-color: var(--c-icon-bg) !important;
       }
 
@@ -148,7 +146,8 @@
     & .window-content {
       flex: 1;
       min-height: fit-content;
-
+      background-color: var(--c-secondary-background);
+      background-image: var(--pattern-1);
       min-width: -webkit-fill-available;
       min-width: fit-content;
       position: relative;
