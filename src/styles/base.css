@@ -77,7 +77,7 @@
 
     --c-icon-bg: #f0f0f0;
 
-    --patern-1: repeating-linear-gradient(0deg, #474aff18, #3434340a 1px, transparent 1px, transparent);
+    --patern-1: none;
 
     --spacing-unit: 1rem;
     --border-radius: 0.5rem;

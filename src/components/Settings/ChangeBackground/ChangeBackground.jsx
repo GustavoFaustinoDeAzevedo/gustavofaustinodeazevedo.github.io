@@ -19,6 +19,11 @@ export const ChangeBackground = () => {
   );
   const [iconColor, setIconColor] = useState(defaultIconColor.current);
 
+  const handleClick = () => {
+    setBackgroundColor(defaultDesktopColor.current);
+    setIconColor(defaultIconColor.current);
+  };
+
   useEffect(() => {
     document.documentElement.style.setProperty(
       '--c-desktop-bg',
@@ -29,11 +34,6 @@ export const ChangeBackground = () => {
       iconColor
     );
   }, [backgroundColor]);
-
-  const handleClick = () => {
-    setBackgroundColor(defaultDesktopColor.current);
-    setIconColor(defaultIconColor.current);
-  };
 
   return (
     <div className="settings-change-background">
