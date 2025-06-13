@@ -2,13 +2,14 @@
   .calculator {
     width: 100%;
     height: 100%;
-    
+
 
     & .calculator-visor {
+      font-size: 3rem;
+      text-overflow: ellipsis;
       width: 100%;
       height: 25%;
       padding: 0 20px;
-      font-size: 3rem;
       text-align: right;
       background-color: var(--c-background1);
       color: var(--c-text);
@@ -17,58 +18,69 @@
     }
 
     & .calculator-keys-container {
-      height: 75%;
-      display: grid;
-      gap: 2px;
-      grid-template-columns: repeat(4, minmax(80px, 1fr));
-      background-color: var(--c-background1);
+      width: 100%;
+      height: 100%;
 
-      & .calculator-key {
+      & .calculator-keys-list {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 3px;
-        user-select: none;
-        transition: font-size 0.2s;
+        height: 75%;
+        display: grid;
+        gap: 2px;
+        grid-template-columns: repeat(4, minmax(80px, 1fr));
+        background-color: var(--c-background1);
 
-        &.main-key {
-          background-color: var(--c-background3);
+        & .calculator-key {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          user-select: none;
+          transition: font-size 0.2s;
 
-          &:hover {
-            background-color: var(--c-background2);
+          & sup {
+            margin-bottom: 10px;
+            font-size: 0.7rem;
           }
 
-          &:active {
+          &.main-key {
             background-color: var(--c-background3);
+
+            &:hover {
+              background-color: var(--c-background2);
+            }
+
+            &:active {
+              background-color: var(--c-background3);
+            }
           }
-        }
 
-        &.operation {
-          background-color: var(--c-background2);
-
-          &:hover {
-            background-color: var(--c-background3);
-          }
-
-          &:active {
+          &.operation {
             background-color: var(--c-background2);
-          }
-        }
 
-        &.double-cell {
-          grid-column: span 2;
-        }
+            &:hover {
+              background-color: var(--c-background3);
+            }
 
-        &.result {
-          background-color: var(--c-accent);
-
-          &:hover {
-            background-color: var(--c-accent-hover);
+            &:active {
+              background-color: var(--c-background2);
+            }
           }
 
-                    &:active {
+          &.double-cell {
+            grid-column: span 2;
+          }
+
+          &.result {
             background-color: var(--c-accent);
+
+            &:hover {
+              background-color: var(--c-accent-hover);
+            }
+
+            &:active {
+              background-color: var(--c-accent);
+            }
           }
         }
       }
@@ -84,5 +96,6 @@
         font-size: 1.5rem;
       }
     }
+
   }
 }
