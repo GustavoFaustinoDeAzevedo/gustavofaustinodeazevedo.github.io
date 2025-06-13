@@ -1,108 +1,252 @@
-import { useRef, useState } from 'react';
-import { evaluate } from "mathjs";
+import { useState } from 'react';
+import { evaluate } from 'mathjs';
 
 const Calculator = () => {
-  const [result, setResult] = useState(0);
-  const resultPressed = useRef(true)
+  const [result, setResult] = useState('0');
 
-  const operations = {
-    sum: (value) => {
-      setResult((prevResult) => prevResult + value);
-    },
-    sub: (value) => {
-      setResult((prevResult) => prevResult - value);
-    },
-    div: (value) => {
-      if (value === 0) return 'ZeroDivision';
-      setResult((prevResult) => prevResult / value);
-    },
-    mult: (value) => {
-      setResult((prevResult) => prevResult * value);
-    },
-    pow: (valueA, valueB) => {
-      setResult((prevResult) => (prevResult + valueA) ** valueB);
-    },
-    sqrt: (value) => {
-      setResult((prevResult) => (prevResult + value) ** 0.5);
-    },
+  const calculatorRegex = /(\d+(\.\d+)?|sin|cos|tan|log|sqrt|[-+()])/g;
+
+  const closeParentheses = (value) => {
+    const openedParentheses = (value.match(/\(/g) || []).length;
+    let closedParentheses = (value.match(/\)/g) || []).length;
+
+    while (openedParentheses > closedParentheses) {
+      value += ')';
+      closedParentheses++;
+    }
+    return value;
   };
 
   const handleClick = (e) => {
-    //console.log(e.target.innerHTML);
-    const value = e.target.innerHTML;
-    if (value !== '=' ) {
-      setResult((prevResult) => prevResult === 0 ? value : prevResult + "" + value);
-      resultPressed.current = false;
-    }else {
-      setResult((prevResult) => evaluate(prevResult));
-      resultPressed.current = true;
+    const value =
+      e.currentTarget.getAttribute('value') ||
+      e.currentTarget.textContent.trim();
+    switch (value) {
+      case 'clear':
+        setResult('0');
+        break;
+      case 'backspace':
+        setResult((prevResult) => {
+          const str = prevResult.toString();
+          if (
+            prevResult === 'Infinity' ||
+            /(sin\(|cos\(|tan\(|log\(|sqrt\()$/.test(prevResult)
+          ) {
+            return (
+              prevResult.replace(/(sin\(|cos\(|tan\(|log\(|sqrt\()$/, '') || '0'
+            );
+          } else {
+            return str.length > 1 ? str.slice(0, -1) : '0';
+          }
+        });
+        break;
+      case '=':
+        setResult((prevResult) => {
+          try {
+            const closeResultParentheses = closeParentheses(prevResult);
+            const evalResult = evaluate(closeResultParentheses);
+            return evalResult.toString();
+          } catch (error) {
+            return prevResult;
+          }
+        });
+        break;
+      default:
+        setResult((prevResult) => {
+          if (prevResult === 'Infinity') {
+            return value;
+          } else {
+            return prevResult === '0' && calculatorRegex.test(value)
+              ? value
+              : prevResult + value;
+          }
+        });
+
+        break;
     }
+    // if (value === 'clear') {
+    //   setResult('0');
+    // } else if (value === 'backspace') {
+    //   if (value === 'Error') {
+    //   } else
+    //     setResult((prevResult) => {
+    //       const str = prevResult.toString();
+    //       return str.length > 1 ? str.slice(0, -1) : '0';
+    //     });
+    // } else if (value !== '=') {
+    //   setResult((prevResult) =>
+    //     prevResult === '0' && calculatorRegex.test(value)
+    //       ? value
+    //       : prevResult + value
+    //   );
+    // } else {
+    //   setResult((prevResult) => {
+    //     try {
+    //       const evalResult = evaluate(prevResult);
+    //       return evalResult.toString();
+    //     } catch (error) {
+    //       return 'Error';
+    //     }
+    //   });
+    // }
   };
   return (
     <div className="calculator">
       <input className="calculator-visor" disabled value={result} />
-      <ul className="calculator-keys-container">
-        <li className="calculator-key operation" onClick={handleClick}>
-          a
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          b
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          c
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          /
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          7
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          8
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          9
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          *
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          4
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          5
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          6
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          -
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          1
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          2
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          3
-        </li>
-        <li className="calculator-key operation" onClick={handleClick}>
-          +
-        </li>
-        <li
-          className="calculator-key main-key double-cell"
-          onClick={handleClick}
-        >
-          0
-        </li>
-        <li className="calculator-key main-key" onClick={handleClick}>
-          .
-        </li>
-        <li className="calculator-key result" onClick={handleClick}>
-          =
-        </li>
-      </ul>
+      <math className="calculator-keys-container">
+        <ul className="calculator-keys-list">
+          <li className="calculator-key operation" onClick={handleClick}>
+            <mo>(</mo>
+          </li>
+          <li className="calculator-key operation" onClick={handleClick}>
+            <mo>)</mo>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'clear'}
+            onClick={handleClick}
+          >
+            C
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'backspace'}
+            onClick={handleClick}
+          >
+            ⌫
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'sin('}
+            onClick={handleClick}
+          >
+            <mi>sin</mi>
+            <mo>(</mo>
+            <mi>x</mi>
+            <mo>)</mo>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'cos('}
+            onClick={handleClick}
+          >
+            <mi>cos</mi>
+            <mo>(</mo>
+            <mi>x</mi>
+            <mo>)</mo>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'tan('}
+            onClick={handleClick}
+          >
+            <mi>tan</mi>
+            <mo>(</mo>
+            <mi>x</mi>
+            <mo>)</mo>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'log('}
+            onClick={handleClick}
+          >
+            <mi>log</mi>
+            <mo>(</mo>
+            <mi>x</mi>
+            <mo>)</mo>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'^'}
+            onClick={handleClick}
+          >
+            <msup>
+              <mi>x</mi>
+              <mi>y</mi>
+            </msup>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'sqrt('}
+            onClick={handleClick}
+          >
+            <msqrt>
+              <mi>x</mi>
+            </msqrt>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'!'}
+            onClick={handleClick}
+          >
+            <mi>x</mi>
+            <mo>!</mo>
+          </li>
+          <li className="calculator-key operation" onClick={handleClick}>
+            <mo>%</mo>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>7</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>8</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>9</mn>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'/'}
+            onClick={handleClick}
+          >
+            <mo>÷</mo>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>4</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>5</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>6</mn>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'*'}
+            onClick={handleClick}
+          >
+            <mo>×</mo>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>1</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>2</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>3</mn>
+          </li>
+          <li
+            className="calculator-key operation"
+            value={'-'}
+            onClick={handleClick}
+          >
+            <mo>−</mo>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mn>0</mn>
+          </li>
+          <li className="calculator-key main-key" onClick={handleClick}>
+            <mo>.</mo>
+          </li>
+          <li className="calculator-key result" onClick={handleClick}>
+            <mo>=</mo>
+          </li>
+          <li className="calculator-key operation" onClick={handleClick}>
+            <mo>+</mo>
+          </li>
+        </ul>
+      </math>
     </div>
   );
 };
