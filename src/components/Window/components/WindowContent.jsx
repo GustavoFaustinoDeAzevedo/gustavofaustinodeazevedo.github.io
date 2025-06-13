@@ -14,7 +14,7 @@ const Content = ({ id, src, filesData, windowActions }) => {
   const language = useSelector((state) => state.language);
   const filesActions = actions.useFilesActions();
   const windowList = useSelector((state) => state.window.openedWindowList);
-  
+
   if (Array.isArray(filesData) && filesData.length > 0) {
     return (
       <FilesExplorer.FilesList
@@ -147,15 +147,17 @@ const Content = ({ id, src, filesData, windowActions }) => {
       return <BrowserSimulator src={src}></BrowserSimulator>;
     case 'background-color-picker':
     case 'change-background':
-      return <ChangeBackground></ChangeBackground>;
+      return (
+        <ChangeBackground
+          handleChangeBackground={windowActions.onChangeBackground}
+        ></ChangeBackground>
+      );
     case 'tests':
       return (
         <Tests data-initial-dimension='{"width": "500px", "height": "400px"}'></Tests>
       );
     case 'calculator':
-      return (
-        <Calculator />
-      )
+      return <Calculator />;
     default:
       return null;
   }

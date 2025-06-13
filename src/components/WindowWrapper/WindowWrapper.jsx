@@ -5,7 +5,7 @@ const WindowWrapper = ({
   window,
   index,
   isFocused,
-  handlers,
+  windowActions,
   desktopRef,
   language,
 }) => {
@@ -15,7 +15,8 @@ const WindowWrapper = ({
     handleResetFocus,
     handleCloseWindow,
     handleUpdateWindow,
-  } = handlers;
+    handleChangeBackground,
+  } = windowActions;
 
   const {
     id,
@@ -59,11 +60,13 @@ const WindowWrapper = ({
 
   const windowActionsObj = {
     onOpen: handleOpenWindow,
-    onUpdateWindow: (params) => handleUpdateWindow({id, ...params}),
+    onUpdateWindow: (params) => handleUpdateWindow({ id, ...params }),
     onFocus: () => handleFocusWindow(id),
     onUnfocus: () => handleResetFocus(),
     onClose: () => handleCloseWindow(id),
     onContextMenu: () => {},
+    onChangeBackground: (backgroundColor, iconColor, backgroundImage) =>
+      handleChangeBackground(backgroundColor, iconColor, backgroundImage),
   };
 
   return (

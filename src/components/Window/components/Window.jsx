@@ -12,6 +12,7 @@ import useRefs from '../../../contexts/useRefs';
 
 import windowAnimations from '../utils/windowAnimations';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
+import actions from '../../../store/actions';
 
 gsap.registerPlugin(useGSAP);
 
