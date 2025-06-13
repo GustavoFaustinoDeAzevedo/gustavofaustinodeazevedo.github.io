@@ -30,6 +30,7 @@ As I gain more experience, the project will be updated with new content and info
 - [x] A basic start menu. (Broken)
 - [x] A basic sort for desktop icons. (Broken)
 - [x] Better React states organization after migration from React's `useReducer` to Redux.
+- [x] A simple calculator. 
 
 ---
 
