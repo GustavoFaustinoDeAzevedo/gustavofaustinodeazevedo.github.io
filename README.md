@@ -57,11 +57,11 @@ As I gain more experience, the project will be updated with new content and info
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/GustavoFaustinoDeAzevedo
+   git clone https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io
    ```
 2. Navigate to the project folder:
    ```bash
-   cd GustavOS
+   cd gustavofaustinodeazevedo.github.io
    ```
 3. Install dependencies:
    ```bash
