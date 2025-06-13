@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { changeLanguage } from '../slices/settingsSlice';
+import { changeBackground, changeLanguage } from '../slices/settingsSlice';
 
 
 const useSettingsActions = () => {
@@ -8,6 +8,10 @@ const useSettingsActions = () => {
   const handleChangeLanguage = (newLang) => {
     dispatch(changeLanguage(newLang));
   };
-  return { handleChangeLanguage }
+
+  const handleChangeBackground = (backgroundColor, iconColor, backgroundImage) => {
+    dispatch(changeBackground({ backgroundColor, iconColor, backgroundImage }));
+  }
+  return { handleChangeLanguage, handleChangeBackground }
 }
 export default useSettingsActions;

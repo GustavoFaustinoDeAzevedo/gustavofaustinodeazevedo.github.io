@@ -76,8 +76,18 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { id, title, icon, src, filesData } = action.payload;
+      const { id, title, icon, src, filesData, isUnique } = action.payload;
       state.history = updateHistory(state.history, id);
+
+      // If isUnique is true, check if a window with the same base id is already open
+      if (isUnique) {
+        const existingWindow = state.openedWindowList.find(win => win.id.startsWith(`window#${id}#`));
+        if (existingWindow) {
+          // Focus the existing window instead of opening a new one
+          state.focusedWindow = existingWindow.id;
+          return;
+        }
+      }
 
       // Generate a unique id for the new window
       const finalId = `window#${id}#${new Date().getTime()}#${Math.random()}`;
@@ -111,6 +121,7 @@ const windowSlice = createSlice({
           requestingMaximize: false,
           requestingMinimize: false,
         },
+
       };
 
       state.openedWindowList.push(newWindow);
@@ -158,7 +169,7 @@ const windowSlice = createSlice({
 
       // Update basic properties
       if (title !== undefined) currentWindow.title = title;
-      if (icon !== undefined) currentWindow.icon = icon  ;
+      if (icon !== undefined) currentWindow.icon = icon;
       if (filesData !== undefined) currentWindow.filesData = filesData;
 
       // Update position

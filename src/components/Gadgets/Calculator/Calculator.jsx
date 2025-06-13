@@ -64,31 +64,6 @@ const Calculator = () => {
 
         break;
     }
-    // if (value === 'clear') {
-    //   setResult('0');
-    // } else if (value === 'backspace') {
-    //   if (value === 'Error') {
-    //   } else
-    //     setResult((prevResult) => {
-    //       const str = prevResult.toString();
-    //       return str.length > 1 ? str.slice(0, -1) : '0';
-    //     });
-    // } else if (value !== '=') {
-    //   setResult((prevResult) =>
-    //     prevResult === '0' && calculatorRegex.test(value)
-    //       ? value
-    //       : prevResult + value
-    //   );
-    // } else {
-    //   setResult((prevResult) => {
-    //     try {
-    //       const evalResult = evaluate(prevResult);
-    //       return evalResult.toString();
-    //     } catch (error) {
-    //       return 'Error';
-    //     }
-    //   });
-    // }
   };
   return (
     <div className="calculator">

@@ -3,8 +3,7 @@ import { HexColorPicker } from 'react-colorful';
 
 export const CustomColorPicker = ({
   backgroundColor,
-  setIconColor,
-  setBackgroundColor,
+  handleChangeBackground,
 }) => {
   function getContrastYIQ(color) {
     const hexcolor = color.replace('#', '');
@@ -17,8 +16,7 @@ export const CustomColorPicker = ({
 
   const changeColor = (newColor) => {
     const contrastColor = getContrastYIQ(newColor);
-    setBackgroundColor(newColor);
-    setIconColor(contrastColor);
+    handleChangeBackground(newColor, contrastColor);
   };
 
   return <HexColorPicker color={backgroundColor} onChange={changeColor} />;

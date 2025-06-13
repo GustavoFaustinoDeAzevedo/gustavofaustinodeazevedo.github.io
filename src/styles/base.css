@@ -3,7 +3,7 @@
 
     --c-hover: #f0f0f033;
     --c-rgb-hover: 240, 240, 240;
-  
+
     --c-background: #121212;
     --c-background-hover: #323233;
     --c-background1: #0d0d0d;
@@ -48,13 +48,13 @@
 
     --c-text-secondary: #A0A0A0;
 
-    --c-secondary-background: #252526;
+    --c-secondary-background: #121212;
 
     --c-border: #3c3c3c;
 
     --c-hover: #323233;
 
-    
+
 
     --c-error: #f48771;
 
@@ -64,7 +64,7 @@
 
     --c-accent: #005f99;
     --c-accent-hover: #007acc;
-    
+
 
     --c-accent-focus: #0090ff;
     --c-background-focus: #3c3c3c;
@@ -76,6 +76,8 @@
     --c-secondary: #6c757d;
 
     --c-icon-bg: #f0f0f0;
+
+    --patern-1: none;
 
     --spacing-unit: 1rem;
     --border-radius: 0.5rem;

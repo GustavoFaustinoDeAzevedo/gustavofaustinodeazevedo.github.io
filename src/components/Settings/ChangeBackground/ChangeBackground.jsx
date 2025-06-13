@@ -1,8 +1,17 @@
 import CustomColorPicker from './utils';
 import Button from '../../ui/Button';
 import { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import actions from '../../../store/actions';
 
-export const ChangeBackground = () => {
+export const ChangeBackground = ({ handleChangeBackground }) => {
+  const desktopBackgroundColor = useSelector(
+    (state) => state.settings.desktopBackgroundColor
+  );
+  const desktopIconColor = useSelector(
+    (state) => state.settings.desktopIconColor
+  );
+
   const defaultDesktopColor = useRef(
     getComputedStyle(document.documentElement)
       .getPropertyValue('--c-desktop-default-bg')
@@ -14,35 +23,32 @@ export const ChangeBackground = () => {
       .trim()
   );
 
-  const [backgroundColor, setBackgroundColor] = useState(
-    defaultDesktopColor.current
-  );
-  const [iconColor, setIconColor] = useState(defaultIconColor.current);
+  const handleClick = () => {
+    handleChangeBackground(
+      defaultDesktopColor.current,
+      defaultIconColor.current
+    );
+  };
 
   useEffect(() => {
+    
     document.documentElement.style.setProperty(
       '--c-desktop-bg',
-      backgroundColor
+      desktopBackgroundColor
     );
     document.documentElement.style.setProperty(
       '--c-rgb-desktop-bg-contrast',
-      iconColor
+      desktopIconColor
     );
-  }, [backgroundColor]);
-
-  const handleClick = () => {
-    setBackgroundColor(defaultDesktopColor.current);
-    setIconColor(defaultIconColor.current);
-  };
+  }, [desktopBackgroundColor, desktopIconColor]);
 
   return (
     <div className="settings-change-background">
       <h3>Pick a color to change the desktop background</h3>
       <CustomColorPicker
-        backgroundColor={backgroundColor}
-        iconColor={iconColor}
-        setBackgroundColor={setBackgroundColor}
-        setIconColor={setIconColor}
+        backgroundColor={desktopBackgroundColor}
+        iconColor={desktopIconColor}
+        handleChangeBackground={handleChangeBackground}
       />
       <Button onClick={handleClick} type="submit">
         Default

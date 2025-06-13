@@ -6,11 +6,7 @@ const createWindowList = (
   windowList,
   focusedWindow,
   language,
-  handleOpenWindow,
-  handleFocusWindow,
-  handleResetFocus,
-  handleCloseWindow,
-  handleUpdateWindow
+  windowActions
 ) => {
   return useMemo(
     () =>
@@ -23,13 +19,7 @@ const createWindowList = (
             index={index}
             isFocused={focusedWindow === window.id}
             desktopRef={desktopRef}
-            handlers={{
-              handleOpenWindow,
-              handleFocusWindow,
-              handleResetFocus,
-              handleCloseWindow,
-              handleUpdateWindow,
-            }}
+            windowActions={windowActions}
             language={language}
           />
         )),

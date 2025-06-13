@@ -36,13 +36,10 @@ const App = () => {
   const filesData = useSelector((state) => state.file.filesList);
 
   //Action Handlers
-  const {
-    handleFocusWindow,
-    handleOpenWindow,
-    handleResetFocus,
-    handleCloseWindow,
-    handleUpdateWindow,
-  } = actions.useWindowActions();
+  const windowActions = {
+    ...actions.useWindowActions(),
+    ...actions.useSettingsActions(),
+  };
 
   const filesActions = actions.useFilesActions();
   const contextMenuActions = actions.useContextMenuActions();
@@ -60,11 +57,7 @@ const App = () => {
     focusedWindow,
     language,
     handleChangeLanguage,
-    handleUpdateWindow,
-    handleFocusWindow,
-    handleResetFocus,
-    handleCloseWindow,
-    handleOpenWindow,
+    windowActions,
   });
 
   const windowsStack = createWindowList(
@@ -72,17 +65,12 @@ const App = () => {
     windowList,
     focusedWindow,
     language,
-    handleOpenWindow,
-    handleFocusWindow,
-    handleResetFocus,
-    handleCloseWindow,
-    handleUpdateWindow
+    windowActions,
   );
 
   //Hooks: Icons & Context Menu
   const itemsHandler = useItemsHandler();
   const handleContextMenu = useHandleContextMenu();
-
 
   //JSX Render
   return (
@@ -93,7 +81,7 @@ const App = () => {
         windowList={windowList}
         filesData={filesData}
         filesActions={filesActions}
-        handleOpenWindow={handleOpenWindow}
+        handleOpenWindow={windowActions.handleOpenWindow}
       />
 
       <RefsProvider>
