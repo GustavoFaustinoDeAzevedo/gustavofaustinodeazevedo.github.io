@@ -1,24 +1,25 @@
+
 /**
  * Custom React hook to manage the lifecycle and animations of a window component.
  *
- * Handles window opening, maximizing, minimizing, restoring, and closing with GSAP animations,
- * updates window state, and manages focus/unfocus events.
+ * Handles opening, maximizing, minimizing, restoring, and closing window states,
+ * as well as updating window position and dimensions, and managing focus/unfocus events.
  *
- * @param {Object} params - Parameters for the window lifecycle.
+ * @param {Object} params - The parameters object.
  * @param {React.RefObject} params.windowRef - Ref to the window DOM element.
  * @param {React.RefObject} params.headerRef - Ref to the window header DOM element.
- * @param {React.RefObject} params.desktopRef - Ref to the desktop/container DOM element.
- * @param {Object} params.windowParams - State and configuration for the window.
- * @param {Function} params.onFocus - Callback when the window is focused.
- * @param {Function} params.onUnfocus - Callback when the window is unfocused.
- * @param {Function} params.onClose - Callback when the window is closed.
- * @param {Function} params.updateWindowState - Function to update the window state.
- * @param {Object} params.animations - Animation functions for window actions.
- * @param {Function} params.animations.openWindow - Function to animate opening the window.
- * @param {Function} params.animations.maximizeWindow - Function to animate maximizing the window.
- * @param {Function} params.animations.restoreWindow - Function to animate restoring the window.
- * @param {Function} params.animations.minimizeWindow - Function to animate minimizing the window.
- * @param {Function} params.animations.closeWindow - Function to animate closing the window.
+ * @param {React.RefObject} params.desktopRef - Ref to the desktop DOM element.
+ * @param {Object} params.windowParams - Current state and parameters of the window.
+ * @param {Function} params.onFocus - Callback invoked when the window gains focus.
+ * @param {Function} params.onUnfocus - Callback invoked when the window loses focus.
+ * @param {Function} params.onClose - Callback invoked when the window is closed.
+ * @param {Function} params.updateWindowState - Function to update the window's state.
+ * @param {Object} params.animations - Animation functions for window transitions.
+ * @param {Function} params.animations.openWindow - Animation for opening the window.
+ * @param {Function} params.animations.maximizeWindow - Animation for maximizing the window.
+ * @param {Function} params.animations.restoreWindow - Animation for restoring the window.
+ * @param {Function} params.animations.minimizeWindow - Animation for minimizing the window.
+ * @param {Function} params.animations.closeWindow - Animation for closing the window.
  * @param {Function} params.getWindowInfo - Function to get current window dimensions.
  * @param {Function} params.createWindowDraggable - Function to make the window draggable.
  *
@@ -151,10 +152,11 @@ const useWindowLifecycle = ({
       (!isMaximized && !isMinimized)
     )
       return;
-
+    onFocus(id);
     restoreWindow(
       windowRef,
       () => {
+
         updateWindowState({
           maximized: isMinimized && isMaximized,
           minimized: false,
@@ -168,7 +170,7 @@ const useWindowLifecycle = ({
           startWidth: width,
           startHeight: height,
         });
-        onFocus(id);
+
       },
       startX,
       startY,

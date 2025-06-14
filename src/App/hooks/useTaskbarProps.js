@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 
 export const useTaskbarProps = ({ windowList,
-  history, focusedWindow, language, handleChangeLanguage, handleUpdateWindow, handleFocusWindow, handleResetFocus, handleCloseWindow,
-  handleOpenWindow, }) => {
+  history, focusedWindow, language, handleChangeLanguage, windowActions }) => {
 
   return useMemo(
     () => ({
@@ -12,9 +11,9 @@ export const useTaskbarProps = ({ windowList,
       history: history,
       language: language,
       onChangeLanguage: handleChangeLanguage,
-      onUpdateWindow: (data) => handleUpdateWindow(data),
-      onUnfocus: () => handleResetFocus()
+      onUpdateWindow: (data) => windowActions.handleUpdateWindow(data),
+      onUnfocus: () => windowActions.handleResetFocus()
     }),
-    [windowList, focusedWindow, history, language, handleChangeLanguage, handleUpdateWindow]
+    [windowList, focusedWindow, history, language, handleChangeLanguage, windowActions]
   );
 };
