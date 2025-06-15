@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '../Taskbar';
-import useClickOutside from '../../hooks/useClickOutside';
+import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '..';
+import useClickOutside from '../../../hooks/useClickOutside';
 import { useSelector } from 'react-redux';
 
 const Taskbar = ({
@@ -9,6 +9,7 @@ const Taskbar = ({
   focusedWindow,
   history,
   language,
+  windowActions,
   onChangeLanguage,
   onUpdateWindow,
   onUnfocus,
@@ -22,7 +23,11 @@ const Taskbar = ({
   const buttonRef = useRef(null);
   const actualVisibleMenu = useRef('');
 
-  const toggleMenuVisibility = (visibilityKey) => {
+  const {handleChangeLanguage} = windowActions;
+
+
+
+    const toggleMenuVisibility = (visibilityKey) => {
     setMenuVisibility((prev) => {
       const isVisible = !prev[visibilityKey];
 
@@ -37,17 +42,6 @@ const Taskbar = ({
       };
     });
   };
-  // Detects clicks outside to close the Start Menu
-  useClickOutside(
-    menuRef,
-    () => {
-      setMenuVisibility((prev) => {
-        return { ...prev, startMenu: false, languageMenu: false };
-      });
-    },
-    menuVisibility[actualVisibleMenu.current],
-    buttonRef
-  );
 
   const handleMinimize = (id) => {
     onUpdateWindow({
@@ -76,7 +70,6 @@ const Taskbar = ({
         startButtonRef={(element) => (buttonRef.current = element)}
         isVisible={menuVisibility.startMenu}
         windowRef={(element) => (menuRef.current = element)}
-        toggleMenuVisibility={() => toggleMenuVisibility}
         onClick={() => toggleMenuVisibility('startMenu')}
         history={history}
       />
@@ -86,14 +79,14 @@ const Taskbar = ({
         onWindowMinimize={(id) => handleMinimize(id)}
         onWindowRestore={(id) => handleRestore(id)}
       />
-      <section className="taskbar-right">
+      <section className="taskbar-right-section">
         <LanguageSelector
           languageButtonRef={(element) => (buttonRef.current = element)}
           windowRef={(element) => (menuRef.current = element)}
           language={language}
           isVisible={menuVisibility.languageMenu}
           onClick={() => toggleMenuVisibility('languageMenu')}
-          onChangeLanguage={onChangeLanguage}
+          onChangeLanguage={handleChangeLanguage}
         />
         <Clock />
       </section>

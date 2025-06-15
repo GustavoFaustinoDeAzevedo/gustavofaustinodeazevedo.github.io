@@ -1,0 +1,56 @@
+@layer components {
+  .taskbar {
+    & .taskbar-items {
+      flex: 1;
+      display: flex;
+      gap: 0.5rem;
+      margin: 0 2rem;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        display: hidden;
+      }
+
+      & .taskbar-item {
+        height: 40px;
+        padding: 0 0.5rem;
+        display: flex;
+        align-items: center;
+        color: #ffffff;
+        border-radius: 0.5rem;
+        cursor: var(--cursor-pointer);
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #ffffff43;
+        }
+
+        &:active {
+          background-color: #ffffff1a;
+
+          &>* {
+            transition: all 0.2s;
+            transform: scale(0.8);
+          }
+        }
+
+        &.focus:not(.minimized) {
+          background-color: #ffffff1a;
+
+          &:hover {
+            background-color: #ffffff43;
+          }
+
+          &:active {
+            background-color: #ffffff1a;
+
+            &>* {
+              transition: all 0.2s;
+              transform: scale(0.8);
+            }
+          }
+        }
+      }
+    }
+  }
+}

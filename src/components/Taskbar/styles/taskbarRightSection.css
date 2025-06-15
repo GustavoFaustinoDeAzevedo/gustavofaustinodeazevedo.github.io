@@ -1,0 +1,86 @@
+@layer components {
+  .taskbar {
+    & .taskbar-right-section {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+
+      & .language {
+        cursor: var(--cursor-pointer);
+        position: relative;
+
+        & .language-button {
+          font-size: small;
+          background-color: none;
+          background: none;
+          color: var(--color-text);
+          border: none;
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #ffffff33;
+          }
+        }
+
+        & .language-list-container {
+          position: absolute;
+          overflow: hidden;
+          top: calc(-7rem + 4px);
+          left: -3rem;
+          pointer-events: none;
+
+
+          & .language-list {
+            transform: translateY(100%);
+            display: flex;
+            flex-wrap: wrap;
+            width: max-content;
+            border: 2px var(--border-style) var(--c-border);
+            border-bottom: none;
+            background-color: var(--c-background);
+            border-radius: 5px 5px 0 0;
+            list-style: none;
+            z-index: 999;
+            cursor: var(--cursor-pointer);
+            pointer-events: initial;
+
+
+            & li {
+              width: 100%;
+              padding: 0.5rem 1rem;
+              line-height: 2rem;
+              background-color: var(--color-two);
+              -webkit-user-select: none;
+              user-select: none;
+              border-left: 2px solid rgba(255, 255, 255, 0);
+
+              &:hover {
+                background-color: #ffffff33;
+              }
+
+              &:active {
+                background-color: var(--color-two);
+              }
+
+              &.enabled {
+                background-color: var(--color-four);
+                border-left: 2px solid var(--c-primary);
+              }
+            }
+          }
+        }
+      }
+
+      /* Clock inside the taskbar */
+      & .clock {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: right;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

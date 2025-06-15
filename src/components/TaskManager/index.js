@@ -1,2 +1,2 @@
-import TaskManager from "./TaskManager";
+import TaskManager from "./components/TaskManager";
 export default TaskManager;

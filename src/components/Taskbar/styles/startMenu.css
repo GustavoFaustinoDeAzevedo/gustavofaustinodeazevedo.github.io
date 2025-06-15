@@ -1,0 +1,148 @@
+@layer components {
+  .taskbar {
+    & .start-menu {
+      & .start-button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-one);
+        border: none;
+        cursor: var(--cursor-pointer);
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+        color: #ffffff;
+
+        /* Icon inside the start button */
+        &>* {
+          width: 40px;
+          height: 40px;
+        }
+
+        /* Hover effect for start button */
+        &:hover {
+          background-color: #ffffff43;
+        }
+
+        /* Active (pressed) effect for start button */
+        &:active {
+          background-color: #ffffff1a;
+
+          &>* {
+            transition: all 0.2s;
+            transform: scale(0.8);
+          }
+        }
+      }
+
+      & .start-menu-container {
+        position: absolute;
+        overflow: hidden;
+        bottom: 3rem;
+        left: 2rem;
+        pointer-events: none;
+
+        & .start-menu-content {
+          transform: translateY(100%);
+          padding: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 10px;
+          width: max-content;
+          background: var(--c-secondary-background);
+          border: 1px var(--border-style) var(--c-border);
+          border-bottom: none;
+          border-radius: 5px 5px 0 0;
+          box-shadow: 0 8px 8px 0 rgba(31, 38, 135, 0.37);
+          list-style: none;
+          z-index: 999;
+          pointer-events: initial;
+
+
+          & .input-container {
+            position: relative;
+            display: inline-block;
+
+
+            & .icon {
+              position: absolute;
+              width: 20px !important;
+              height: 20px !important;
+              left: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              pointer-events: none;
+              background-color: var(--c-text);
+
+              transition: all 0.2s;
+
+            }
+
+            & .icon:has(~.start-menu-search-file-input:focus) {
+              filter: brightness(175%);
+              background-color: var(--c-primary);
+            }
+
+            & .start-menu-search-file-input {
+              width: 100%;
+              padding: 0.5rem 3rem;
+              background-color: var(--c-background-focus);
+              /* opacity: 0.5; */
+              border: 1px solid var(--c-background-focus);
+              border-radius: 50px;
+              color: var(--c-text);
+              font-family: inherit;
+              transition: background-color 0.2s, opacity 0.2s;
+
+              &::placeholder {
+                color: #ffffff;
+                visibility: visible;
+              }
+
+
+              &::placeholder {
+                visibility: hidden;
+                opacity: 0.4;
+              }
+
+              &:focus::placeholder {
+                visibility: visible;
+              }
+
+
+              &:focus {
+                outline: none;
+                background-color: var(--c-background) !important;
+                /* opacity: 1; */
+              }
+            }
+          }
+
+          & .search-content {
+            height: 12rem;
+            width: 30rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+          }
+
+          & .history-container {
+            border: 1px solid var(--color-four);
+            color: var(--c-text);
+
+            & .start-menu-history {
+              height: 12rem;
+              width: 30rem;
+              list-style: none;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
