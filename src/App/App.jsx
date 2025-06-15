@@ -28,7 +28,7 @@ const App = () => {
   useDisableRightClick();
 
   //Redux Selectors
-  const language = useSelector((state) => state.language);
+  const language = useSelector((state) => state.settings.language);
   const contextMenu = useSelector((state) => state.contextMenu);
   const windowList = useSelector((state) => state.window.openedWindowList);
   const focusedWindow = useSelector((state) => state.window.focusedWindow);
@@ -45,18 +45,12 @@ const App = () => {
   const contextMenuActions = actions.useContextMenuActions();
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
 
-  //Language Toggle
-  const handleChangeLanguage = useCallback(() => {
-    changeLanguage(language === 'POR' ? 'ENG' : 'POR');
-  }, [language]);
-
   //Hooks: Windows & Taskbar
   const taskbarProps = useTaskbarProps({
     windowList,
     history,
     focusedWindow,
     language,
-    handleChangeLanguage,
     windowActions,
   });
 
@@ -65,7 +59,7 @@ const App = () => {
     windowList,
     focusedWindow,
     language,
-    windowActions,
+    windowActions
   );
 
   //Hooks: Icons & Context Menu

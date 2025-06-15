@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import Button from '../ui/Button';
+import Button from '../../ui/Button';
 import { useCallback, useState } from 'react';
-import actions from '../../store/actions';
+import actions from '../../../store/actions';
 
 const TaskManager = (props) => {
   const { onUpdateWindow } = props.windowActions;

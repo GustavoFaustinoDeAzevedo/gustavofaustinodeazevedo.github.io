@@ -1,4 +1,4 @@
-import useRefs from '../../contexts/useRefs';
+import useRefs from '../../../contexts/useRefs';
 
 const TaskbarItem = ({
   id,

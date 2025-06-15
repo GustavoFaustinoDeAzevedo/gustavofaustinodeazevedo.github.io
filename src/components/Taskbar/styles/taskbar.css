@@ -1,0 +1,23 @@
+@layer components {
+  .taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--taskbar-height);
+    border-top: 2px solid #292929;
+    background: #181818;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    z-index: 10000;
+    -webkit-user-select: none;
+    user-select: none;
+
+    & .icon {
+      background-color: var(--c-icon-bg);
+    }
+  }
+}

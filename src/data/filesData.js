@@ -1,7 +1,7 @@
 export const filesData = [
   { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'icon about' },
   {
-    id: 'projects', title: { eng: 'Projects Folder (Work in Progress 1/25)', por: 'Projects Folder (Em Desenvolvimento 1/25)' }, icon: 'icon projects',
+    id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'icon projects',
     filesData: [
       { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora' } },
       { id: 'todo', title: { eng: 'To-Do List', por: 'Lista de Tarefas' } },
