@@ -4,28 +4,29 @@ import handleOpenFile from '../utils/handleOpenFile';
 import { placeholder } from '../../../data/filesData';
 
 const FilesList = ({
+  id,
   language,
   windowList,
-  filesData,
+  children,
   fileClassName,
   filesActions,
   dataInitialDimension,
   handleOpenWindow,
 }) => {
-  if (filesData === undefined || filesData.length < 0) return;
+  if (children === undefined || children.length < 0) return;
 
   const handleNewFile =
     filesActions && typeof filesActions.handleNewFile === 'function'
       ? filesActions.handleNewFile
       : () => {};
-
+  
   return (
     <div
-      className={fileClassName}
+      className={`${id === 'desktop' ? 'background' : fileClassName}`}
       data-initial-dimension={dataInitialDimension}
     >
-      {filesData.map(
-        ({ id, title, icon, windowParams, isUnique, filesData }, index) => {
+      {children.map(
+        ({ id, title, icon, windowParams, isUnique, children }, index) => {
           const finalIcon = icon || placeholder.icon;
           const iconTitle = language === 'POR' ? title.por : title.eng;
           const windowTitle = windowParams
@@ -49,7 +50,7 @@ const FilesList = ({
                   windowTitle,
                   windowIcon,
                   src,
-                  filesData,
+                  children,
                   windowList,
                   handleOpenWindow,
                   handleNewFile,

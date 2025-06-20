@@ -23,7 +23,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     isOpen,
     title,
     icon,
-    filesData,
+    children,
     isFocused,
     isMinimized,
     isMaximized,
@@ -89,7 +89,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     <div
       ref={windowRef}
       className={`${className} parent`}
-      style={{ zIndex }}
+      style={id === 'desktop' ? { zIndex: 0 } : { zIndex: zIndex }}
       onContextMenu={onContextMenu}
       id={id}
     >
@@ -103,11 +103,12 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
       />
       <WindowContentWrapper
         onFocus={onFocus}
+        isFocused={isFocused}
         isOpen={isOpen}
         id={id}
         src={src}
         windowActions={windowActions}
-        filesData={filesData}
+        children={children}
       />
     </div>
   );

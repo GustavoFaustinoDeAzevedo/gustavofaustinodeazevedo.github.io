@@ -15,6 +15,11 @@
       color: var(--c-text);
       border: none;
       transition: font-size 0.2s;
+      
+    }
+
+    & .calculator-visor::placeholder{
+      color: var(--c-text);
     }
 
     & .calculator-keys-container {
@@ -86,7 +91,6 @@
       }
     }
 
-    /*4x5*/
     @container (min-width: 800px) {
       & .calculator-visor {
         font-size: 4.5rem;

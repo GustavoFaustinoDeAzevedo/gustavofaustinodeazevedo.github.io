@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { filesData } from '../../data/filesData';
 
 // Utility functions
 
@@ -62,7 +61,7 @@ const windowSlice = createSlice({
   initialState: {
     openedWindowList: [],
     focusedWindow: null,
-    history: [], // Initial history with a placeholder
+    history: [],
   },
   reducers: {
     focusWindow: (state, action) => {
@@ -76,9 +75,7 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { id, title, icon, src, filesData, isUnique } = action.payload;
-      state.history = updateHistory(state.history, id);
-
+      const { id, title, icon, src, children, isUnique, type } = action.payload;
       // If isUnique is true, check if a window with the same base id is already open
       if (isUnique) {
         const existingWindow = state.openedWindowList.find(win => win.id.startsWith(`window#${id}#`));
@@ -89,16 +86,20 @@ const windowSlice = createSlice({
         }
       }
 
+
+      state.history = updateHistory(state.history, title);
       // Generate a unique id for the new window
       const finalId = `window#${id}#${new Date().getTime()}#${Math.random()}`;
+
       const newWindow = {
         id: finalId,
         title,
         icon,
         zIndex: getNextZIndex(state),
+        type,
         content: '',
         src: src,
-        filesData: filesData ?? [],
+        children: children ?? [],
         position: {
           startX: 0,
           startY: 0,
@@ -153,7 +154,7 @@ const windowSlice = createSlice({
         height,
         minimized,
         maximized,
-        filesData,
+        children,
         requestingOpen,
         requestingRestore,
         requestingClose,
@@ -170,7 +171,7 @@ const windowSlice = createSlice({
       // Update basic properties
       if (title !== undefined) currentWindow.title = title;
       if (icon !== undefined) currentWindow.icon = icon;
-      if (filesData !== undefined) currentWindow.filesData = filesData;
+      if (children !== undefined) currentWindow.children = children;
 
       // Update position
       if (startX !== undefined) currentWindow.position.startX = startX;

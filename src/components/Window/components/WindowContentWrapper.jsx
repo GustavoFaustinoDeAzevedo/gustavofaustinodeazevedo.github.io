@@ -3,27 +3,30 @@ import WindowContent from './WindowContent';
 
 const WindowContentWrapper = ({
   onFocus,
+  isFocused,
   isOpen,
   id,
-  filesData,
+  children,
   windowActions,
   src,
-}) => (
-  <div
-    onTouchStart={onFocus}
-    onMouseDown={onFocus}
-    onClick={onFocus}
-    className="window-content"
-  >
-    {isOpen && (
-      <WindowContent
-        id={id}
-        src={src}
-        filesData={filesData ?? {}}
-        windowActions={windowActions}
-      />
-    )}
-  </div>
-);
-
+}) => {
+  const handleFocus = isFocused ? null : onFocus;
+  return (
+    <div
+      onTouchStart={handleFocus}
+      onMouseDown={handleFocus}
+      onClick={handleFocus}
+      className="window-content"
+    >
+      {isOpen && (
+        <WindowContent
+          id={id}
+          src={src}
+          children={children ?? {}}
+          windowActions={windowActions}
+        />
+      )}
+    </div>
+  );
+};
 export default WindowContentWrapper;

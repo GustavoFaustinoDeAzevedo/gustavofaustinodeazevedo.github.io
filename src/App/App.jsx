@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -12,7 +12,7 @@ import ContextMenu from '../components/ContextMenu';
 import ConsoleCommand from '../components/ConsoleCommand';
 
 import { useDisableRightClick } from './hooks/useDisableRightClick';
-import { useTaskbarProps } from './hooks/useTaskbarProps';
+import { taskbarProps } from './hooks/taskbarProps';
 import createWindowList from './utils/createWindowList';
 
 import { useItemsHandler } from './hooks/useItemsHandler';
@@ -25,7 +25,7 @@ const App = () => {
   const desktopRef = useRef(null);
 
   //Setup
-  useDisableRightClick();
+  // useDisableRightClick();
 
   //Redux Selectors
   const language = useSelector((state) => state.settings.language);
@@ -33,7 +33,7 @@ const App = () => {
   const windowList = useSelector((state) => state.window.openedWindowList);
   const focusedWindow = useSelector((state) => state.window.focusedWindow);
   const history = useSelector((state) => state.window.history);
-  const filesData = useSelector((state) => state.file.filesList);
+  const rootFolder = useSelector((state) => state.file.filesList);
 
   //Action Handlers
   const windowActions = {
@@ -46,13 +46,6 @@ const App = () => {
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
 
   //Hooks: Windows & Taskbar
-  const taskbarProps = useTaskbarProps({
-    windowList,
-    history,
-    focusedWindow,
-    language,
-    windowActions,
-  });
 
   const windowsStack = createWindowList(
     desktopRef,
@@ -62,35 +55,42 @@ const App = () => {
     windowActions
   );
 
-  //Hooks: Icons & Context Menu
-  const itemsHandler = useItemsHandler();
-  const handleContextMenu = useHandleContextMenu();
+  // const itemsHandler = useItemsHandler();
+  // const handleContextMenu = useHandleContextMenu();
 
   //JSX Render
   return (
     <div className="desktop" ref={desktopRef}>
       <Desktop
-        onContextMenu={handleContextMenu}
+        //onContextMenu={handleContextMenu}
         language={language}
         windowList={windowList}
-        filesData={filesData}
+        children={rootFolder.children}
         filesActions={filesActions}
         handleOpenWindow={windowActions.handleOpenWindow}
       />
 
       <RefsProvider>
         {windowsStack}
-        <Taskbar {...taskbarProps} />
+        <Taskbar
+          {...taskbarProps({
+            windowList,
+            history,
+            focusedWindow,
+            language,
+            windowActions,
+          })}
+        />
       </RefsProvider>
 
-      {contextMenu.visible && (
+      {/* {contextMenu.visible && (
         <ContextMenu
           {...contextMenu}
           language={language}
           items={itemsHandler()}
           onClose={handleHideContextMenu}
         />
-      )}
+      )} */}
     </div>
   );
 };

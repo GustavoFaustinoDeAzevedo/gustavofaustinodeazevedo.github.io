@@ -7,7 +7,7 @@ gsap.registerPlugin(Draggable);
 /**
  * Creates a draggable window element using the GSAP Draggable utility
  * @param {React.RefObject} windowRef - Reference to the window element
- * @param {HTMLElement} triggerElelent - Element that triggers the drag interaction
+ * @param {HTMLElement} triggerElement - Element that triggers the drag interaction
  * @param {Object} bounds - Boundaries constraining the window's movement
  * @param {Function} onFocus - Callback function triggered when window gains focus
  * @param {Function} onUpdateWindow - Callback function to update window properties after drag
@@ -15,18 +15,17 @@ gsap.registerPlugin(Draggable);
  * @param {number} height - Initial height of the window
  * @returns {void}
  */
-const createWindowDraggable = (windowRef, triggerElelent, bounds, onFocus, onUpdateWindow, width, height) => {
+const createWindowDraggable = (windowRef, triggerElement, bounds, onFocus, onUpdateWindow, width, height) => {
 
   Draggable.create(windowRef.current, {
-    trigger: triggerElelent,
+    trigger: triggerElement,
     type: 'x,y',
     zIndexBoost: false,
     bounds,
     inertia: true,
     onPress: onFocus,
     onDragStart:
-      onFocus
-    ,
+      onFocus,
     onDragEnd: function () {
       const { startX, startY, x, y } = this;
       const finalWidth = this.target.getBoundingClientRect().width;

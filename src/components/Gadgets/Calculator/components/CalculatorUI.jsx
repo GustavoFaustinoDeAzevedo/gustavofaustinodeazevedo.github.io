@@ -1,73 +1,12 @@
-import { useState } from 'react';
-import { evaluate } from 'mathjs';
-
-const Calculator = () => {
-  const [result, setResult] = useState('0');
-
-  const calculatorRegex = /(\d+(\.\d+)?|sin|cos|tan|log|sqrt|[-+()])/g;
-
-  const closeParentheses = (value) => {
-    const openedParentheses = (value.match(/\(/g) || []).length;
-    let closedParentheses = (value.match(/\)/g) || []).length;
-
-    while (openedParentheses > closedParentheses) {
-      value += ')';
-      closedParentheses++;
-    }
-    return value;
-  };
-
-  const handleClick = (e) => {
-    const value =
-      e.currentTarget.getAttribute('value') ||
-      e.currentTarget.textContent.trim();
-    switch (value) {
-      case 'clear':
-        setResult('0');
-        break;
-      case 'backspace':
-        setResult((prevResult) => {
-          const str = prevResult.toString();
-          if (
-            prevResult === 'Infinity' ||
-            /(sin\(|cos\(|tan\(|log\(|sqrt\()$/.test(prevResult)
-          ) {
-            return (
-              prevResult.replace(/(sin\(|cos\(|tan\(|log\(|sqrt\()$/, '') || '0'
-            );
-          } else {
-            return str.length > 1 ? str.slice(0, -1) : '0';
-          }
-        });
-        break;
-      case '=':
-        setResult((prevResult) => {
-          try {
-            const closeResultParentheses = closeParentheses(prevResult);
-            const evalResult = evaluate(closeResultParentheses);
-            return evalResult.toString();
-          } catch (error) {
-            return prevResult;
-          }
-        });
-        break;
-      default:
-        setResult((prevResult) => {
-          if (prevResult === 'Infinity') {
-            return value;
-          } else {
-            return prevResult === '0' && calculatorRegex.test(value)
-              ? value
-              : prevResult + value;
-          }
-        });
-
-        break;
-    }
-  };
+const CalculatorUI = ({result, calculating, handleClick}) => {
   return (
     <div className="calculator">
-      <input className="calculator-visor" disabled value={result} />
+      <input
+        className="calculator-visor"
+        disabled
+        value={calculating}
+        placeholder={result}
+      />
       <math className="calculator-keys-container">
         <ul className="calculator-keys-list">
           <li className="calculator-key operation" onClick={handleClick}>
@@ -226,4 +165,4 @@ const Calculator = () => {
   );
 };
 
-export default Calculator;
+export default CalculatorUI;

@@ -12,7 +12,10 @@ const TaskbarItems = ({
       <ul className="taskbar-items">
         {openedWindowList?.[0]?.windowState.open &&
           openedWindowList
-            .filter(({ id }) => id !== 'New' && id !== 'placeholder')
+            .filter(
+              ({ id }) =>
+                id !== 'New' && id !== 'placeholder' && id !== 'desktop'
+            )
             .map(({ id, title, windowState, icon }, index) => {
               return (
                 <TaskbarItem
