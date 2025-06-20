@@ -28,7 +28,7 @@ const WindowWrapper = ({
     icon,
     content,
     src,
-    filesData,
+    children,
   } = window;
 
   const windowParamsObj = {
@@ -39,7 +39,7 @@ const WindowWrapper = ({
     title,
     icon,
     src,
-    filesData,
+    children,
     x: position.x,
     y: position.y,
     startX: position.startX,

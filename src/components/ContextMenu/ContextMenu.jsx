@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
-import { filesData } from '../../data/filesData';
+import { rootFolder } from '../../data/filesData';
 import actions from '../../store/actions';
 
-const ContextMenu = ({
-  position,
-  items,
-  target,
-  onClose,
-  language,
-}) => {
+const ContextMenu = ({ position, items, target, onClose, language }) => {
   const menuRef = useRef(null);
   const dataInfo = useRef(null);
-  const {x,y} = position;
-  const [iconsData, setIconsData] = useState([...filesData]);
+  const { x, y } = position;
+  const [iconsData, setIconsData] = useState([...children]);
   const [ascendingOrder, setAscendingOrder] = useState(true);
 
   useEffect(() => {
@@ -105,7 +99,9 @@ const ContextMenu = ({
               }
             }}
           >
-            {action.icon && <i className={`icon ${action.icon} context-menu-icon`}></i>}
+            {action.icon && (
+              <i className={`icon ${action.icon} context-menu-icon`}></i>
+            )}
             <span>{action.label}</span>
           </div>
         );

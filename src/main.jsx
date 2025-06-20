@@ -29,7 +29,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       <pre style={{ color: 'white', fontSize: '1.5rem' }}>{error.message}</pre>
       <button
         onClick={resetErrorBoundary}
-        style={{padding:'5px 10px',borderRadius:'10px'}}
+        style={{ padding: '5px 10px', borderRadius: '10px' }}
       >
         Tentar novamente
       </button>
@@ -39,12 +39,12 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 
 root.render(
   <React.StrictMode>
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Provider store={store}>
-        <StyletronProvider value={engine}>
-          <App />
-        </StyletronProvider>
-      </Provider>
-    </ErrorBoundary>
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <Provider store={store}>
+      <StyletronProvider value={engine}>
+        <App />
+      </StyletronProvider>
+    </Provider>
+  </ErrorBoundary>
   </React.StrictMode>
 );

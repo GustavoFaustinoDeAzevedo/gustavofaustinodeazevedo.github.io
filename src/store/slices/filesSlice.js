@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { filesData } from '../../data/filesData';
+import { rootFolder } from '../../data/filesData';
 
 const newFile = (files, fileToBeAdded) => {
-  const filesData = [...files, fileToBeAdded];
-  if (filesData.length >= 2) {
-    const lastIndex = filesData.length - 1;
-    const secondLastIndex = filesData.length - 2;
+  const children = [...files, fileToBeAdded];
+  if (children.length >= 2) {
+    const lastIndex = children.length - 1;
+    const secondLastIndex = children.length - 2;
 
-    [filesData[secondLastIndex], filesData[lastIndex]] = [filesData[lastIndex], filesData[secondLastIndex]];
+    [children[secondLastIndex], children[lastIndex]] = [children[lastIndex], children[secondLastIndex]];
   }
-  return filesData;
+  return children;
 };
 
 const toggleSort = (files, sortType) => {
@@ -34,7 +34,7 @@ const toggleSort = (files, sortType) => {
 const fileSlice = createSlice({
   name: 'file',
   initialState: {
-    filesList: filesData,
+    filesList: rootFolder,
     sort: "asc",
   },
   reducers: {

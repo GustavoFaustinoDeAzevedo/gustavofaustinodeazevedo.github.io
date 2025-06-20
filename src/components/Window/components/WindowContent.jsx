@@ -9,24 +9,24 @@ import actions from '../../../store/actions';
 import FilesExplorer from '../../FilesExplorer';
 import { useSelector } from 'react-redux';
 import Calculator from '../../Gadgets/Calculator';
+import Desktop from '../../Desktop';
 
-const Content = ({ id, src, filesData, windowActions }) => {
+const Content = ({ id, src, children, windowActions }) => {
   const language = useSelector((state) => state.language);
   const filesActions = actions.useFilesActions();
   const windowList = useSelector((state) => state.window.openedWindowList);
 
-  if (Array.isArray(filesData) && filesData.length > 0) {
-    return (
-      <FilesExplorer.FilesList
-        dataInitialDimension='{"width": "1000px", "height": "600px"}'
-        language={language}
-        windowList={windowList}
-        fileClassName="files-explorer"
-        filesData={filesData}
-        filesActions={filesActions}
-        handleOpenWindow={windowActions.onOpen}
-      />
-    );
+  if (Array.isArray(children) && children.length > 0) {
+    const folderProps = {
+      language,
+      windowList,
+      children,
+      filesActions,
+      handleOpenWindow: windowActions.onOpen,
+      dataInitialDimension: '{"width": "1000px", "height": "600px"}',
+      fileClassName: 'files-explorer',
+    };
+    return <FilesExplorer.FilesList {...folderProps} />;
   }
   const section = id.split('#')[1];
   switch (section) {

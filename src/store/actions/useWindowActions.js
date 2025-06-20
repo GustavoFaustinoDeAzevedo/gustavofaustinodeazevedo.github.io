@@ -9,8 +9,8 @@ const useWindowActions = () => {
     dispatch(updateWindow(windowData));
   };
 
-  const handleOpenWindow = (id, title, icon, src, filesData,isUnique) => {
-    dispatch(openWindow({ id, title, icon, src, filesData, isUnique }));
+  const handleOpenWindow = ( id, title, icon, src, children, isUnique, type ) => {
+    dispatch(openWindow({ id, title, icon, src, children, isUnique, type }));
   };
 
   const handleFocusWindow = (id) => {

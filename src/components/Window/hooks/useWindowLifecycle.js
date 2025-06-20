@@ -66,7 +66,7 @@ const useWindowLifecycle = ({
     isRequestingRestore,
     isRequestingClose,
     isOpen,
-    filesData
+    children
   } = windowParams;
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const useWindowLifecycle = ({
       height,
       startWidth: width,
       startHeight: height,
-      filesData
+      children
     });
 
     createWindowDraggable(
@@ -99,7 +99,7 @@ const useWindowLifecycle = ({
       onFocus,
       (params) => updateWindowState(params),
       width,
-      height
+      height,
     );
   }, [isRequestingOpen]);
 
