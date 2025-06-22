@@ -10,6 +10,7 @@ import FilesExplorer from '../../FilesExplorer';
 import { useSelector } from 'react-redux';
 import Calculator from '../../Gadgets/Calculator';
 import Desktop from '../../Desktop';
+import Notepad from '../../Gadgets/Notepad';
 
 const Content = ({ id, src, children, windowActions }) => {
   const language = useSelector((state) => state.language);
@@ -158,6 +159,8 @@ const Content = ({ id, src, children, windowActions }) => {
       );
     case 'calculator':
       return <Calculator />;
+    case 'notepad':
+      return <Notepad />;
     default:
       return null;
   }

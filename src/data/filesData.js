@@ -6,6 +6,7 @@ export const rootFolder =
       id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'icon projects', type: 'folder',
       children: [
         { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora', type: 'app' } },
+        { id: 'notepad', title: { eng: 'Notepad (Work in Progress', por: 'Bloco de Notas (Em Desenvolvimento)', type: 'app' } },
         { id: 'todo', title: { eng: 'To-Do List', por: 'Lista de Tarefas', type: 'app' } },
         { id: 'weather', title: { eng: 'Weather App', por: 'Aplicativo de Clima', type: 'app' } },
         { id: 'memory-game', title: { eng: 'Memory Game', por: 'Jogo da Memória', type: 'app' } },
@@ -19,9 +20,7 @@ export const rootFolder =
         { id: 'stopwatch', title: { eng: 'Stopwatch', por: 'Cronômetro', type: 'app' } },
         { id: 'currency-converter', title: { eng: 'Currency Converter', por: 'Conversor de Moedas', type: 'app' } },
         { id: 'markdown-editor', title: { eng: 'Markdown Editor', por: 'Editor Markdown', type: 'app' } },
-        { id: 'text-editor', title: { eng: 'Text Editor', por: 'Editor de Texto', type: 'app' } },
         { id: 'image-gallery', title: { eng: 'Image Gallery', por: 'Galeria de Imagens', type: 'app' } },
-        { id: 'note-taking-app', title: { eng: 'Note Taking App', por: 'Aplicativo de Anotações', type: 'app' } },
         { id: 'calendar-app', title: { eng: 'Calendar App', por: 'Aplicativo de Calendário', type: 'app' } },
         { id: 'music-player', title: { eng: 'Music Player', por: 'Reprodutor de Música', type: 'app' } },
         { id: 'video-player', title: { eng: 'Video Player', por: 'Reprodutor de Vídeo', type: 'app' } },

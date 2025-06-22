@@ -1,0 +1,26 @@
+@layer components {
+  & .notepad {
+    width: 100%;
+    height: 100%;
+
+    & .notepad__nav {
+      padding: 0.5rem;
+      border: none;
+    }
+
+    & .notepad__text {
+      height: 100%;
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--c-background1);
+      color: var(--c-text);
+      resize: none;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+  }
+}
