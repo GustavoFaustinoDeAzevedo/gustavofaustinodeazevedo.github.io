@@ -2,7 +2,6 @@ import CustomColorPicker from './utils';
 import Button from '../../ui/Button';
 import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import actions from '../../../store/actions';
 
 export const ChangeBackground = ({ handleChangeBackground }) => {
   const desktopBackgroundColor = useSelector(
@@ -31,7 +30,6 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
   };
 
   useEffect(() => {
-    
     document.documentElement.style.setProperty(
       '--c-desktop-bg',
       desktopBackgroundColor
@@ -44,15 +42,23 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
 
   return (
     <div className="settings-change-background">
-      <h3>Pick a color to change the desktop background</h3>
-      <CustomColorPicker
-        backgroundColor={desktopBackgroundColor}
-        iconColor={desktopIconColor}
-        handleChangeBackground={handleChangeBackground}
-      />
-      <Button onClick={handleClick} type="submit">
-        Default
-      </Button>
+      <Accordion>
+        <Panel>
+          <h3>Pick a color to change the desktop background color</h3>
+          <CustomColorPicker
+            backgroundColor={desktopBackgroundColor}
+            iconColor={desktopIconColor}
+            handleChangeBackground={handleChangeBackground}
+          />
+          <Button onClick={handleClick} type="submit">
+            Default Color
+          </Button>
+        </Panel>
+
+        <Panel>
+          <h3></h3>
+        </Panel>
+      </Accordion>
     </div>
   );
 };

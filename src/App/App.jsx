@@ -60,30 +60,32 @@ const App = () => {
 
   //JSX Render
   return (
-    <div className="desktop" ref={desktopRef}>
-      <Desktop
-        //onContextMenu={handleContextMenu}
-        language={language}
-        windowList={windowList}
-        children={rootFolder.children}
-        filesActions={filesActions}
-        handleOpenWindow={windowActions.handleOpenWindow}
-      />
-
-      <RefsProvider>
-        {windowsStack}
-        <Taskbar
-          {...taskbarProps({
-            windowList,
-            history,
-            focusedWindow,
-            language,
-            windowActions,
-          })}
+    <>
+      {/* <GlobalStyle /> */}
+      <div className="desktop" ref={desktopRef}>
+        <Desktop
+          //onContextMenu={handleContextMenu}
+          language={language}
+          windowList={windowList}
+          children={rootFolder.children}
+          filesActions={filesActions}
+          handleOpenWindow={windowActions.handleOpenWindow}
         />
-      </RefsProvider>
 
-      {/* {contextMenu.visible && (
+        <RefsProvider>
+          {windowsStack}
+          <Taskbar
+            {...taskbarProps({
+              windowList,
+              history,
+              focusedWindow,
+              language,
+              windowActions,
+            })}
+          />
+        </RefsProvider>
+
+        {/* {contextMenu.visible && (
         <ContextMenu
           {...contextMenu}
           language={language}
@@ -91,7 +93,8 @@ const App = () => {
           onClose={handleHideContextMenu}
         />
       )} */}
-    </div>
+      </div>
+    </>
   );
 };
 
