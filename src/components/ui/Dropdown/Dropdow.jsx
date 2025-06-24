@@ -1,14 +1,27 @@
+import React from 'react';
 import StyledDropdown from './StyledDropdown';
 
-const Dropdown = ({ dropdownList}) => {
+const Dropdown = ({
+  dropdownList = [],
+  dropdownIndex = '0',
+  dropdownTitle = 'placeholder',
+  windowKey = 'dropdown',
+}) => {
   return (
-    <StyledDropdown name={dropdownList.name} id={dropdownList.name} key={dropdownList.key}>
-      {dropdownList.map((item, index) => (
-        <React.Fragment key={index}>
-          {item.isDivisor ? <hr /> : <li>{item.label}</li>}
-        </React.Fragment>
-      ))}
-    </StyledDropdown>
+    <>
+      <a>{dropdownTitle}</a>
+      <StyledDropdown
+        name={dropdownTitle}
+        id={dropdownTitle}
+        key={`${windowKey}-${dropdownIndex}`}
+      >
+        {dropdownList.map((item, index) => (
+          <React.Fragment key={`${windowKey}-${dropdownIndex}-${index}`}>
+            {item.isDivisor ? <hr /> : <li>{item.label}</li>}
+          </React.Fragment>
+        ))}
+      </StyledDropdown>
+    </>
   );
 };
 

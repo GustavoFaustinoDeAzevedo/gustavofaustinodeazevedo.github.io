@@ -1,6 +1,23 @@
 import { useState } from 'react';
+import Dropdown from '../../ui/Dropdown/Dropdow';
 
-const Notepad = () => {
+const Notepad = ({windowKey}) => {
+  const dropdownList = [
+    { label: 'New Tab' },
+    { label: 'New Window' },
+    { label: 'Open' },
+    { label: 'Recent' },
+    { label: 'Save' },
+    { label: 'Save as' },
+    { label: 'Save All' },
+    { isDivisor: true },
+    { label: 'Page Options' },
+    { label: 'Print' },
+    { isDivisor: true },
+    { label: 'Close Tab' },
+    { label: 'Close Window' },
+    { label: 'Close All' },
+  ];
   const [text, setText] = useState('');
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -10,23 +27,7 @@ const Notepad = () => {
       <nav className="notepad__nav">
         <ul>
           <li>
-            <label for="file">File</label>
-            <ul name="file">
-              <li>New Tab</li>
-              <li>New Window</li>
-              <li>Open</li>
-              <li>Recent</li>
-              <li>Save</li>
-              <li>Save as</li>
-              <li>Save All</li>
-              <li><hr /></li>
-              <li>Page Options</li>
-              <li>Print</li>
-              <li><hr /></li>
-              <li>Close Tab</li>
-              <li>Close Window</li>
-              <li>Close All</li>
-            </ul>
+            <Dropdown dropdownList={dropdownList} dropdownTitle='File' windowKey={windowKey} />
           </li>
         </ul>
       </nav>

@@ -1,44 +1,41 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-const buttonPressedAnimation = (variant) => {
-  return {
-    '0%': {
-      outline: `1px double ${variantStyles[variant].backgroundColor}`,
-    },
-    '50%': {
-      outlineStyle: 'solid',
-    },
-    '100%': {
-      outline: '10px double  #00000000',
-    },
-  };
-};
+const dropdownPressed = () => keyframes`
+  0% {
+    outline: 1px double;
+  }
+  50% {
+    outline-style: solid;
+  }
+  100% {
+    outline: 10px double transparent;
+  }
+`;
 
-const StyledDropdown = styled(
-  'ul',
-  ({ $variant = 'primary', $isAnimating }) => ({
-    width: '110px',
-    height: '30px',
-    border: 'none',
-    textAlign: 'center',
-    borderRadius: 'var(--border-radius)',
-    cursor: 'pointer',
-    fontWeight: '500',
-    transition: 'filter 300ms ease',
-    userSelect: 'none',
-    ...variantStyles[$variant],
+const StyledDropdown = styled.ul.withConfig({
+  shouldForwardProp: (prop) => !['isAnimating'].includes(prop),
+})`
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border: 1px var(--border-style) var(--c-border);
+  text-align: left;
+  border-radius: 5px;
+  cursor: pointer;
+  transform: translateY(-100%);
+  display: none;
 
-    ':hover': {
-      filter: 'brightness(140%)',
-    },
-    ':active': {
-      filter: 'brightness(60%)',
-    },
+  transition: filter 300ms ease;
+  user-select: none;
 
-    animationName: $isAnimating ? buttonPressedAnimation($variant) : 'none',
-    animationDuration: $isAnimating ? '0.37s' : 'none',
-    animationTimingFunction: 'ease-out',
-  })
-);
+  background-color: var(--c-background1);
+  color: var(--c-text);
+
+  ${({ isAnimating }) =>
+    isAnimating &&
+    css`
+      animation: ${dropdownPressed()} 0.37s ease-out;
+    `}
+`;
 
 export default StyledDropdown;
