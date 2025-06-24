@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../../ui/GlobalStyles/components/Icon';
 
 const WindowHeader = ({
   title = 'Untitled',
@@ -12,6 +13,13 @@ const WindowHeader = ({
   onRestore = () => {},
   onClose = () => {},
 }) => {
+  const style = {
+    color: 'var(--c-text)',
+    backgroundColor: 'var(--c-icon-bg)',
+    maxWidth: '1rem',
+    maxHeight: '1rem',
+  };
+
   return (
     <div className="window-header">
       <span
@@ -23,7 +31,9 @@ const WindowHeader = ({
         aria-label={title}
         className="window-title"
       >
-        <i className={icon} /> {title}
+        <Icon variant={icon} style={style} />
+        {title}
+        {/* <i className={icon} /> {title} */}
       </span>
       <div className="window-controls">
         <button
@@ -32,7 +42,8 @@ const WindowHeader = ({
           className="minimize"
           onClick={onMinimize}
         >
-          <i className="icon minimize" />
+          <Icon variant="minimize" style={style} />
+          {/* <i className="icon minimize" /> */}
         </button>
         <button
           aria-label={
@@ -56,7 +67,11 @@ const WindowHeader = ({
           className="maximize"
           onClick={() => (isMaximized ? onRestore() : onMaximize())}
         >
-          <i className={`icon ${isMaximized ? 'restore' : 'maximize'}`} />
+          <Icon
+            variant={`${isMaximized ? 'restore' : 'maximize'}`}
+            style={style}
+          />
+          {/* <i className={`icon ${isMaximized ? 'restore' : 'maximize'}`} /> */}
         </button>
         <button
           aria-label={language === 'POR' ? 'Fechar' : 'Close'}
@@ -64,7 +79,8 @@ const WindowHeader = ({
           className="close"
           onClick={onClose}
         >
-          <i className="icon close" />
+          <Icon variant="close" style={style} />
+          {/* <i className="icon close" /> */}
         </button>
       </div>
     </div>

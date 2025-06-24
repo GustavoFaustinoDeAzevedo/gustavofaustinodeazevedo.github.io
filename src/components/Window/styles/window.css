@@ -99,7 +99,8 @@
         margin-left: 1rem;
         display: flex;
         align-items: center;
-        gap: 20px
+        font-size: 0.8rem;
+        gap: 1rem;
       }
 
       & .window-controls {

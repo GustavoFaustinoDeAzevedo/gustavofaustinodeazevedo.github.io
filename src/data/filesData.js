@@ -1,9 +1,9 @@
 export const rootFolder =
 {
   id: 'desktop', title: 'desktop', type: 'desktop', children: [
-    { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'icon about', type: 'file' },
+    { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'about', type: 'file' },
     {
-      id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'icon projects', type: 'folder',
+      id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'projects', type: 'folder',
       children: [
         { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora', type: 'app' } },
         { id: 'notepad', title: { eng: 'Notepad (Work in Progress', por: 'Bloco de Notas (Em Desenvolvimento)', type: 'app' } },
@@ -32,18 +32,18 @@ export const rootFolder =
         { id: 'habit-tracker', title: { eng: 'Habit Tracker', por: 'Rastreador de Hábitos', type: 'app' } },
       ]
     },
-    { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'icon skills', type: 'file' },
-    { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'icon contact', type: 'app' },
-    { id: 'change-background', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'icon color-picker', isUnique: true, type: 'app' },
-    { id: 'cmd', title: { eng: 'Command Prompt (Work in Progress)', por: 'Prompt de Comando (Em Desenvolvimento)' }, icon: 'icon command', type: 'app' },
-    { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: 'icon task-manager', isUnique: true, type: 'app' },
-    { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'icon browser', type: 'app' },
-    { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'icon github', windowParams: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: 'icon browser', type: 'app' } },
-    //{ id: 'tests', title: { eng: 'Tests', por: 'Testes' }, icon: 'icon skills' },
+    { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'skills', type: 'file' },
+    { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'contact', type: 'app' },
+    { id: 'change-background', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'color-picker', isUnique: true, type: 'app' },
+    { id: 'cmd', title: { eng: 'Command Prompt (Work in Progress)', por: 'Prompt de Comando (Em Desenvolvimento)' }, icon: 'command', type: 'app' },
+    { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: ' task-manager', isUnique: true, type: 'app' },
+    { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'browser', type: 'app' },
+    { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'github', windowParams: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: ' browser', type: 'app' } },
+    //{ id: 'tests', title: { eng: 'Tests', por: 'Testes' }, icon: ' skills' },
 
-    { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'icon plus-circle', type: 'app' },
+    { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle', type: 'app' },
   ]
 }
   ;
 
-export const placeholder = { id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'icon window-icon' };
+export const placeholder = { id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'window-icon' };

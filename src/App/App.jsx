@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -15,13 +15,19 @@ import { useDisableRightClick } from './hooks/useDisableRightClick';
 import { taskbarProps } from './hooks/taskbarProps';
 import createWindowList from './utils/createWindowList';
 
+import {
+  lightTheme,
+  darkTheme,
+} from '../components/ui/GlobalStyles/utils/themes';
 import { useItemsHandler } from './hooks/useItemsHandler';
 import { useHandleContextMenu } from './hooks/useHandleContextMenu';
+import { ThemeProvider } from 'styled-components';
 
 gsap.registerPlugin(useGSAP);
 
 const App = () => {
   //Refs
+  const [darkMode, setDarkMode] = useState(true);
   const desktopRef = useRef(null);
 
   //Setup
@@ -61,31 +67,32 @@ const App = () => {
   //JSX Render
   return (
     <>
-      {/* <GlobalStyle /> */}
-      <div className="desktop" ref={desktopRef}>
-        <Desktop
-          //onContextMenu={handleContextMenu}
-          language={language}
-          windowList={windowList}
-          children={rootFolder.children}
-          filesActions={filesActions}
-          handleOpenWindow={windowActions.handleOpenWindow}
-        />
-
-        <RefsProvider>
-          {windowsStack}
-          <Taskbar
-            {...taskbarProps({
-              windowList,
-              history,
-              focusedWindow,
-              language,
-              windowActions,
-            })}
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        {/* <GlobalStyle /> */}
+        <div className="desktop" ref={desktopRef}>
+          <Desktop
+            //onContextMenu={handleContextMenu}
+            language={language}
+            windowList={windowList}
+            children={rootFolder.children}
+            filesActions={filesActions}
+            handleOpenWindow={windowActions.handleOpenWindow}
           />
-        </RefsProvider>
 
-        {/* {contextMenu.visible && (
+          <RefsProvider>
+            {windowsStack}
+            <Taskbar
+              {...taskbarProps({
+                windowList,
+                history,
+                focusedWindow,
+                language,
+                windowActions,
+              })}
+            />
+          </RefsProvider>
+
+          {/* {contextMenu.visible && (
         <ContextMenu
           {...contextMenu}
           language={language}
@@ -93,7 +100,8 @@ const App = () => {
           onClose={handleHideContextMenu}
         />
       )} */}
-      </div>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

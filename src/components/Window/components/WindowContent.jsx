@@ -160,7 +160,7 @@ const Content = ({ id, src, children, windowActions }) => {
     case 'calculator':
       return <Calculator />;
     case 'notepad':
-      return <Notepad />;
+      return <Notepad windowKey={id} />;
     default:
       return null;
   }
