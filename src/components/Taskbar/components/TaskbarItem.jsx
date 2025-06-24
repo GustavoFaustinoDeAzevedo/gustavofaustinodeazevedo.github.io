@@ -1,4 +1,5 @@
 import useRefs from '../../../contexts/useRefs';
+import Icon from '../../ui/GlobalStyles/components/Icon';
 
 const TaskbarItem = ({
   id,
@@ -16,16 +17,15 @@ const TaskbarItem = ({
 
   return (
     <li
-      key={`taskbar-icon-${index}-${id}`} // React key attribute
+      key={`taskbar-icon-${index}-${id}`} 
       className={`taskbar-item open 
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
       `}
       title={title}
-
       onClick={clickHandler}
     >
-      <i className={`${icon}`}></i>
+      <Icon variant={icon} />
     </li>
   );
 };

@@ -36,7 +36,7 @@ export const rootFolder =
     { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'contact', type: 'app' },
     { id: 'change-background', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'color-picker', isUnique: true, type: 'app' },
     { id: 'cmd', title: { eng: 'Command Prompt (Work in Progress)', por: 'Prompt de Comando (Em Desenvolvimento)' }, icon: 'command', type: 'app' },
-    { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: ' task-manager', isUnique: true, type: 'app' },
+    { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: 'task-manager', isUnique: true, type: 'app' },
     { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'browser', type: 'app' },
     { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'github', windowParams: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: ' browser', type: 'app' } },
     //{ id: 'tests', title: { eng: 'Tests', por: 'Testes' }, icon: ' skills' },

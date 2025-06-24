@@ -2,7 +2,7 @@
 import styled, { keyframes, css } from 'styled-components';
 import variantStyles from './buttonStyles';
 
-const buttonPressed = variant => keyframes`
+const buttonPressed = (variant) => keyframes`
   0% {
     outline: 1px double ${variantStyles[variant].backgroundColor};
   }
@@ -15,9 +15,8 @@ const buttonPressed = variant => keyframes`
 `;
 
 const StyledButton = styled.button.withConfig({
-  shouldForwardProp: prop => !['variant', 'isAnimating'].includes(prop),
+  shouldForwardProp: (prop) => !['variant', 'isAnimating'].includes(prop),
 })`
-
   width: 110px;
   height: 30px;
   border: none;
@@ -30,8 +29,7 @@ const StyledButton = styled.button.withConfig({
 
   background-color: ${({ variant = 'primary' }) =>
     variantStyles[variant].backgroundColor};
-  color: ${({ variant = 'primary' }) =>
-    variantStyles[variant].color};
+  color: ${({ variant = 'primary' }) => variantStyles[variant].color};
 
   &:hover {
     filter: brightness(1.4);

@@ -42,7 +42,7 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
 
   return (
     <div className="settings-change-background">
-      <Accordion>
+      {/* <Accordion> */}
         <Panel>
           <h3>Pick a color to change the desktop background color</h3>
           <CustomColorPicker
@@ -58,7 +58,7 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
         <Panel>
           <h3></h3>
         </Panel>
-      </Accordion>
+      {/* </Accordion> */}
     </div>
   );
 };

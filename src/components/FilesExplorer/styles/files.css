@@ -8,16 +8,12 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 1.6rem 0.5rem;
+    gap: 4vh 0.5rem;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
     pointer-events: none;
-
-
-
-    /* Individual desktop icon styling */
 
     &>.file {
       padding: 0.3rem 0;
@@ -35,13 +31,10 @@
       pointer-events: initial;
 
 
-
-      /* Hover effect for desktop icons */
       &:hover, &:focus {
         transition: all 0.2s;
         text-shadow: 0px 0px 15px rgba(var(--c-rgb-desktop-bg-contrast));
         background-color: rgba(var(--c-rgb-desktop-bg-contrast), 0.2);
-        /* box-shadow: 0 0 10px #ffffff1a; */
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
@@ -49,7 +42,6 @@
         -webkit-app-region: no-drag;
       }
 
-      /* Icon inside the file icon */
       & .icon {
         width: 100%;
         font-size: 2rem;

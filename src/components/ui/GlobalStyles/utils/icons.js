@@ -1,6 +1,6 @@
 export const iconBaseStyle = {
-  width: '25px',
-  height: '25px',
+  width: '3vh',
+  height: '3vh',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
   WebkitMaskSize: 'contain',
