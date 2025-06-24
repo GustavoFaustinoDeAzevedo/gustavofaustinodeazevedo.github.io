@@ -1,4 +1,9 @@
 import React, { useMemo } from 'react';
+import StyledFileWrapper from './StyledFileWrapper';
+import {
+  StyledFileWrapper__Icon,
+  StyledFileWrapper__Text,
+} from './StyledFileWrapper/StyledFileWrapper';
 
 const SystemFile = React.memo(({ id, title, icon, onClick }) => {
   const dataInfo = useMemo(
@@ -13,8 +18,7 @@ const SystemFile = React.memo(({ id, title, icon, onClick }) => {
     [title, icon, id, onClick]
   );
   return (
-    <a
-      className="file parent"
+    <StyledFileWrapper
       aria-label={title}
       title={title}
       onTouchStart={onClick}
@@ -22,9 +26,12 @@ const SystemFile = React.memo(({ id, title, icon, onClick }) => {
       data-info={dataInfo}
       id={id}
     >
-      <i className={`icon ${icon}`}></i>
-      <p className="icon-text">{title}</p>
-    </a>
+      <StyledFileWrapper__Icon
+        variant={icon}
+        style={{ color: 'var(--c-text)' }}
+      />
+      <StyledFileWrapper__Text>{title}</StyledFileWrapper__Text>
+    </StyledFileWrapper>
   );
 });
 

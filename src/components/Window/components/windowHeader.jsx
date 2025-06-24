@@ -33,7 +33,6 @@ const WindowHeader = ({
       >
         <Icon variant={icon} style={style} />
         {title}
-        {/* <i className={icon} /> {title} */}
       </span>
       <div className="window-controls">
         <button
@@ -43,7 +42,6 @@ const WindowHeader = ({
           onClick={onMinimize}
         >
           <Icon variant="minimize" style={style} />
-          {/* <i className="icon minimize" /> */}
         </button>
         <button
           aria-label={
@@ -71,7 +69,6 @@ const WindowHeader = ({
             variant={`${isMaximized ? 'restore' : 'maximize'}`}
             style={style}
           />
-          {/* <i className={`icon ${isMaximized ? 'restore' : 'maximize'}`} /> */}
         </button>
         <button
           aria-label={language === 'POR' ? 'Fechar' : 'Close'}
@@ -80,7 +77,6 @@ const WindowHeader = ({
           onClick={onClose}
         >
           <Icon variant="close" style={style} />
-          {/* <i className="icon close" /> */}
         </button>
       </div>
     </div>

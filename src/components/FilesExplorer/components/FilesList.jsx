@@ -1,5 +1,5 @@
 import React from 'react';
-import SystemFile from './SystemFile';
+import SystemFile from './SystemFile/SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
 import { placeholder } from '../../../data/filesData';
 
@@ -19,7 +19,7 @@ const FilesList = ({
     filesActions && typeof filesActions.handleNewFile === 'function'
       ? filesActions.handleNewFile
       : () => {};
-  
+
   return (
     <div
       className={`${id === 'desktop' ? 'background' : fileClassName}`}
