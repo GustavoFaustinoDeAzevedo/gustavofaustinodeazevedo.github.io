@@ -43,22 +43,22 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
   return (
     <div className="settings-change-background">
       {/* <Accordion> */}
-        <Panel>
-          <h3>Pick a color to change the desktop background color</h3>
-          <CustomColorPicker
-            backgroundColor={desktopBackgroundColor}
-            iconColor={desktopIconColor}
-            handleChangeBackground={handleChangeBackground}
-          />
-          <Button onClick={handleClick} type="submit">
-            Default Color
-          </Button>
-        </Panel>
+      {/* <Panel> */}
+      <h3>Pick a color to change the desktop background color</h3>
+      <CustomColorPicker
+        backgroundColor={desktopBackgroundColor}
+        iconColor={desktopIconColor}
+        handleChangeBackground={handleChangeBackground}
+      />
+      <Button onClick={handleClick} type="submit">
+        Default Color
+      </Button>
+      {/* </Panel> 
 
-        <Panel>
-          <h3></h3>
-        </Panel>
-      {/* </Accordion> */}
+      <Panel>
+        <h3></h3>
+      </Panel>
+       </Accordion>  */}
     </div>
   );
 };
