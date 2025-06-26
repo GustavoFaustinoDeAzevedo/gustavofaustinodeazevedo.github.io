@@ -1,10 +1,9 @@
-import React from 'react';
 import SystemFile from './SystemFile/SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
 import { placeholder } from '../../../data/filesData';
 
 const FilesList = ({
-  id,
+  nodeId,
   language,
   windowList,
   children,
@@ -19,10 +18,9 @@ const FilesList = ({
     filesActions && typeof filesActions.handleNewFile === 'function'
       ? filesActions.handleNewFile
       : () => {};
-
   return (
     <div
-      className={`${id === 'desktop' ? 'background' : fileClassName}`}
+      className={`${fileClassName}`}
       data-initial-dimension={dataInitialDimension}
     >
       {children.map(
@@ -47,6 +45,7 @@ const FilesList = ({
               onClick={() =>
                 handleOpenFile(
                   id,
+                  nodeId,
                   windowTitle,
                   windowIcon,
                   src,

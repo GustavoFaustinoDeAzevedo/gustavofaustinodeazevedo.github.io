@@ -30,6 +30,7 @@ export const rootFolder =
         { id: 'password-manager', title: { eng: 'Password Manager', por: 'Gerenciador de Senhas' }, type: 'app' },
         { id: 'expense-tracker', title: { eng: 'Expense Tracker', por: 'Rastreador de Despesas' }, type: 'app' },
         { id: 'habit-tracker', title: { eng: 'Habit Tracker', por: 'Rastreador de Hábitos' }, type: 'app' },
+        { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle' },
       ]
     },
     { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'skills', type: 'file' },

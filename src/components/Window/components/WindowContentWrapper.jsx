@@ -6,6 +6,7 @@ const WindowContentWrapper = ({
   isFocused,
   isOpen,
   id,
+  nodeId,
   children,
   windowActions,
   src,
@@ -21,6 +22,7 @@ const WindowContentWrapper = ({
       {isOpen && (
         <WindowContent
           id={id}
+          nodeId={nodeId}
           src={src}
           children={children ?? {}}
           windowActions={windowActions}

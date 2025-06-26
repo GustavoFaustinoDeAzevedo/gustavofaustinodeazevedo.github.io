@@ -86,13 +86,13 @@ const windowSlice = createSlice({
         }
       }
 
-
       state.history = updateHistory(state.history, title);
       // Generate a unique id for the new window
       const finalId = `window#${id}#${new Date().getTime()}#${Math.random()}`;
 
       const newWindow = {
         id: finalId,
+        nodeId: id,
         title,
         icon,
         zIndex: getNextZIndex(state),

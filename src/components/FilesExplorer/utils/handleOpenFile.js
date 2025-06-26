@@ -1,8 +1,8 @@
 import { placeholder } from "../../../data/filesData";
 
-export const handleOpenFile = (id, windowTitle, windowIcon, src, children, windowList, handleOpenWindow, handleNewFile, isUnique) => {
+export const handleOpenFile = (id, nodeId, windowTitle, windowIcon, src, children, windowList, handleOpenWindow, handleNewFile, isUnique) => {
   if (windowTitle === 'Novo' || windowTitle === 'New') {
-    handleNewFile(placeholder);
+    handleNewFile(placeholder, nodeId);
   } else {
     try {
       const window = windowList.find((win) => win.id === id)

@@ -5,8 +5,8 @@ import { addFile, removeFile, sortFiles } from '../slices/filesSlice';
 const useFilesActions = () => {
   const dispatch = useDispatch();
 
-  const handleNewFile = (newFileData) => {
-    dispatch(addFile(newFileData));
+  const handleNewFile = (newFileData, nodeId) => {
+    dispatch(addFile({newFileData, nodeId}));
   };
 
   const handleRemoveFile = (fileToRemove) => {
