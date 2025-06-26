@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import StyledFileWrapper from './StyledFileWrapper';
 import {
+  StyledFileWrapper,
   StyledFileWrapper__Icon,
   StyledFileWrapper__Text,
-} from './StyledFileWrapper/StyledFileWrapper';
+} from './StyledFileWrapper';
 
 const SystemFile = React.memo(({ id, title, icon, onClick }) => {
   const dataInfo = useMemo(

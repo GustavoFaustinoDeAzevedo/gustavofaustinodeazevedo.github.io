@@ -57,7 +57,12 @@ const StartMenu = ({
         <div ref={startMenuRef} className="start-menu-content">
           <div className="input-container">
             <img className="icon search"></img>
-            <input className='start-menu-search-file-input' type="text" aria-label="Start menu search file input" />
+            <input
+              className="start-menu-search-file-input"
+              tabIndex="-1"
+              type="text"
+              aria-label="Start menu search file input"
+            />
           </div>
           <section className="search-content">{/* Search Content */}</section>
           <fieldset className="history-container">

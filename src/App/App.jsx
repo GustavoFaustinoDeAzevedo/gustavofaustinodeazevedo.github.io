@@ -13,7 +13,7 @@ import ConsoleCommand from '../components/ConsoleCommand';
 
 import { useDisableRightClick } from './hooks/useDisableRightClick';
 import { taskbarProps } from './hooks/taskbarProps';
-import createWindowList from './utils/createWindowList';
+import createWindowList from '../components/Window/utils/createWindowList';
 
 import {
   lightTheme,
@@ -72,6 +72,7 @@ const App = () => {
         <div className="desktop" ref={desktopRef}>
           <Desktop
             //onContextMenu={handleContextMenu}
+            nodeId={'desktop'}
             language={language}
             windowList={windowList}
             children={rootFolder.children}

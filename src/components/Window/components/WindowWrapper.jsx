@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Window from '../Window/components/Window';
+import Window from './Window';
 
 const WindowWrapper = ({
   window,
@@ -20,6 +20,7 @@ const WindowWrapper = ({
 
   const {
     id,
+    nodeId,
     title,
     windowState,
     position,
@@ -33,6 +34,7 @@ const WindowWrapper = ({
 
   const windowParamsObj = {
     id,
+    nodeId,
     index,
     zIndex,
     isOpen: windowState.open,

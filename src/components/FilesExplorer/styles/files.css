@@ -1,6 +1,7 @@
 @layer components {
 
   .desktop-files-wrapper {
+    transform: translateY(1%);
     height: calc(100vh - var(--taskbar-height));
     padding: 0.5rem;
     display: flex;

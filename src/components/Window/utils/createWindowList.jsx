@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import WindowWrapper from '../../components/WindowWrapper';
+import WindowWrapper from '../../WindowWrapper';
 
 const createWindowList = (
   desktopRef,

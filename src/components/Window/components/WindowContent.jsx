@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AnimatedInput from './AnimatedInput';
 import Button from '../../ui/Button';
 import BrowserSimulator from '../../BrowserSimulator';
@@ -12,13 +12,20 @@ import Calculator from '../../Gadgets/Calculator';
 import Desktop from '../../Desktop';
 import Notepad from '../../Gadgets/Notepad';
 
-const Content = ({ id, src, children, windowActions }) => {
+const WindowContent = ({
+  id,
+  nodeId,
+  src,
+  children,
+  windowActions,
+}) => {
   const language = useSelector((state) => state.language);
   const filesActions = actions.useFilesActions();
   const windowList = useSelector((state) => state.window.openedWindowList);
 
   if (Array.isArray(children) && children.length > 0) {
     const folderProps = {
+      nodeId,
       language,
       windowList,
       children,
@@ -166,4 +173,4 @@ const Content = ({ id, src, children, windowActions }) => {
   }
 };
 
-export default Content;
+export default WindowContent;

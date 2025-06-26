@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { rootFolder } from '../../data/filesData';
+import set from 'lodash/set';
 
-const newFile = (files, fileToBeAdded) => {
-  const children = [...files, fileToBeAdded];
+const newFile = (node, fileToBeAdded) => {
+  const children = [...(node.children || []), fileToBeAdded];
+
   if (children.length >= 2) {
     const lastIndex = children.length - 1;
     const secondLastIndex = children.length - 2;
@@ -12,7 +14,25 @@ const newFile = (files, fileToBeAdded) => {
   return children;
 };
 
+const updateChildrenById = (node, targetId, fileToBeAdded) => {
+  if (node.id === targetId) {
+    node.children = newFile(node, fileToBeAdded);
+    return true;
+  }
+
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+
+      const updated = updateChildrenById(child, targetId, fileToBeAdded);
+      if (updated) return true;
+    }
+  }
+
+  return false;
+}
+
 const toggleSort = (files, sortType) => {
+
   const sortedFiles = [...files];
   if (sortedFiles.length === 0) return sortedFiles;
 
@@ -39,14 +59,20 @@ const fileSlice = createSlice({
   },
   reducers: {
     addFile: (state, action) => {
-      state.filesList = newFile(state.filesList, action.payload);
+      const { newFileData, nodeId } = action.payload;
+      updateChildrenById(state.filesList, nodeId, newFileData)
     },
     removeFile: (state, action) => {
-      state.filter(file => file.id !== action.payload.id);
+      const removeById = (node, id) => {
+        if (!node.children) return;
+        node.children = node.children.filter(child => child.id !== id);
+        node.children.forEach(child => removeById(child, id));
+      };
+      removeById(state.filesList, action.payload.id);
     },
     sortFiles: (state) => {
-      state.filesList = toggleSort(state.filesList, state.sort);
-      state.sort === "asc" ? "desc" : "asc";
+      state.filesList.children = toggleSort(state.filesList.children, state.sort);
+      state.sort = state.sort === "asc" ? "desc" : "asc";
     },
   },
 });

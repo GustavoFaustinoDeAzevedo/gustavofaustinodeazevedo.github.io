@@ -1,5 +1,11 @@
 // components/Window/index.js
-import React, { useRef, useMemo, useEffect, useCallback } from 'react';
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+  useReducer,
+} from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -19,6 +25,7 @@ gsap.registerPlugin(useGSAP);
 const Window = ({ windowParams, windowActions, desktopRef }) => {
   const {
     id,
+    nodeId,
     zIndex,
     isOpen,
     title,
@@ -106,6 +113,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         isFocused={isFocused}
         isOpen={isOpen}
         id={id}
+        nodeId={nodeId}
         src={src}
         windowActions={windowActions}
         children={children}
