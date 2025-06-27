@@ -58,7 +58,8 @@ const App = () => {
     windowList,
     focusedWindow,
     language,
-    windowActions
+    windowActions,
+    filesActions,
   );
 
   // const itemsHandler = useItemsHandler();
@@ -77,7 +78,7 @@ const App = () => {
             windowList={windowList}
             children={rootFolder.children}
             filesActions={filesActions}
-            handleOpenWindow={windowActions.handleOpenWindow}
+            windowActions={windowActions}
           />
 
           <RefsProvider>

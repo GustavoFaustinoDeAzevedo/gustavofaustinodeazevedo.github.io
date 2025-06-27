@@ -6,7 +6,8 @@ const createWindowList = (
   windowList,
   focusedWindow,
   language,
-  windowActions
+  windowActions,
+  filesActions
 ) => {
   return useMemo(
     () =>
@@ -17,9 +18,11 @@ const createWindowList = (
             key={window.id}
             window={window}
             index={index}
+            windowList={windowList}
             isFocused={focusedWindow === window.id}
             desktopRef={desktopRef}
             windowActions={windowActions}
+            filesActions={filesActions}
             language={language}
           />
         )),

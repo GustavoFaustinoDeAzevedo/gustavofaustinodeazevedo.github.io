@@ -10,21 +10,22 @@ const FilesList = ({
   fileClassName,
   filesActions,
   dataInitialDimension,
-  handleOpenWindow,
+  windowActions,
+  handleUpdate = () => {},
+  nodeType = 'desktop',
 }) => {
   if (children === undefined || children.length < 0) return;
-
-  const handleNewFile =
-    filesActions && typeof filesActions.handleNewFile === 'function'
-      ? filesActions.handleNewFile
-      : () => {};
+  const { handleNewFile } = filesActions;
   return (
     <div
       className={`${fileClassName}`}
       data-initial-dimension={dataInitialDimension}
     >
       {children.map(
-        ({ id, title, icon, windowParams, isUnique, children }, index) => {
+        (
+          { id, title, icon, type, windowParams, isUnique, children },
+          index
+        ) => {
           const finalIcon = icon || placeholder.icon;
           const iconTitle = language === 'POR' ? title.por : title.eng;
           const windowTitle = windowParams
@@ -43,18 +44,21 @@ const FilesList = ({
               icon={finalIcon}
               language={language}
               onClick={() =>
-                handleOpenFile(
+                handleOpenFile({
                   id,
                   nodeId,
                   windowTitle,
                   windowIcon,
                   src,
-                  children,
+                  isUnique,
                   windowList,
-                  handleOpenWindow,
+                  children,
                   handleNewFile,
-                  isUnique
-                )
+                  windowActions,
+                  handleUpdate,
+                  fileType: type,
+                  nodeType,
+                })
               }
             />
           );

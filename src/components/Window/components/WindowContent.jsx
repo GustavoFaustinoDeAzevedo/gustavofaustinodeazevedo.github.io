@@ -22,20 +22,6 @@ const WindowContent = ({
   const language = useSelector((state) => state.language);
   const filesActions = actions.useFilesActions();
   const windowList = useSelector((state) => state.window.openedWindowList);
-
-  if (Array.isArray(children) && children.length > 0) {
-    const folderProps = {
-      nodeId,
-      language,
-      windowList,
-      children,
-      filesActions,
-      handleOpenWindow: windowActions.onOpen,
-      dataInitialDimension: '{"width": "1000px", "height": "600px"}',
-      fileClassName: 'files-explorer',
-    };
-    return <FilesExplorer.FilesList {...folderProps} />;
-  }
   const section = id.split('#')[1];
   switch (section) {
     case 'about':

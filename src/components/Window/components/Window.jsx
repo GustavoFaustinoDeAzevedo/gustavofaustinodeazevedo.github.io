@@ -19,10 +19,11 @@ import useRefs from '../../../contexts/useRefs';
 import windowAnimations from '../utils/windowAnimations';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import actions from '../../../store/actions';
+import FilesExplorer from '../../FilesExplorer';
 
 gsap.registerPlugin(useGSAP);
 
-const Window = ({ windowParams, windowActions, desktopRef }) => {
+const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   const {
     id,
     nodeId,
@@ -34,10 +35,17 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     isFocused,
     isMinimized,
     isMaximized,
+    windowList,
+    language,
+    type,
     src,
   } = windowParams;
-  const { onFocus, onUnfocus, onUpdateWindow, onClose, onContextMenu } =
-    windowActions;
+  const {
+    handleFocusWindow,
+    handleResetFocus,
+    handleUpdateWindow,
+    handleContextMenu,
+  } = windowActions;
 
   const { createRef } = useRefs();
   const windowRef = createRef(id);
@@ -61,8 +69,8 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
   );
 
   const updateWindowState = useCallback(
-    (updates) => onUpdateWindow({ id, ...updates }),
-    [id, onUpdateWindow]
+    (updates) => handleUpdateWindow({ id, ...updates }),
+    [id, handleUpdateWindow]
   );
 
   useWindowLifecycle({
@@ -70,9 +78,7 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
     headerRef,
     desktopRef,
     windowParams,
-    onFocus,
-    onUnfocus,
-    onClose,
+    windowActions,
     updateWindowState,
     animations: {
       openWindow,
@@ -89,15 +95,16 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
   const handleMaximize = () => updateWindowState({ maximized: true });
   const handleRestore = () => updateWindowState({ requestingRestore: true });
   const handleClose = () => updateWindowState({ requestingClose: true });
+  const handleUpdate = (children) => updateWindowState({ children: children });
 
-  useClickOutside(windowRef, onUnfocus, isFocused);
+  useClickOutside(windowRef, handleResetFocus, isFocused);
 
   return (
     <div
       ref={windowRef}
       className={`${className} parent`}
       style={id === 'desktop' ? { zIndex: 0 } : { zIndex: zIndex }}
-      onContextMenu={onContextMenu}
+      onContextMenu={handleContextMenu}
       id={id}
     >
       <WindowHeader
@@ -108,8 +115,9 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         onClose={handleClose}
         {...{ id, title, icon, isOpen, isFocused, isMinimized, isMaximized }}
       />
+
       <WindowContentWrapper
-        onFocus={onFocus}
+        handleFocusWindow={handleFocusWindow}
         isFocused={isFocused}
         isOpen={isOpen}
         id={id}
@@ -117,6 +125,11 @@ const Window = ({ windowParams, windowActions, desktopRef }) => {
         src={src}
         windowActions={windowActions}
         children={children}
+        filesActions={filesActions}
+        type={type}
+        windowList={windowList}
+        language={language}
+        handleUpdate={handleUpdate}
       />
     </div>
   );
