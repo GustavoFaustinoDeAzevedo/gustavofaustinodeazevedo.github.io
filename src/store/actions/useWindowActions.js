@@ -9,7 +9,8 @@ const useWindowActions = () => {
     dispatch(updateWindow(windowData));
   };
 
-  const handleOpenWindow = ( id, title, icon, src, children, isUnique, type ) => {
+  const handleOpenWindow = (windowData) => {
+    const { id, title, icon, src, children, isUnique, type } = JSON.parse(windowData);
     dispatch(openWindow({ id, title, icon, src, children, isUnique, type }));
   };
 
