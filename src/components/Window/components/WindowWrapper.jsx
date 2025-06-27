@@ -2,80 +2,87 @@ import React, { useContext } from 'react';
 import Window from './Window';
 
 const WindowWrapper = ({
-  window,
   index,
-  isFocused,
-  windowActions,
-  desktopRef,
+  window,
   language,
+  isFocused,
+  desktopRef,
+  windowList,
+  filesActions,
+  windowActions,
 }) => {
   const {
     handleOpenWindow,
-    handleFocusWindow,
     handleResetFocus,
     handleCloseWindow,
+    handleFocusWindow,
     handleUpdateWindow,
     handleChangeBackground,
   } = windowActions;
 
   const {
     id,
-    nodeId,
-    title,
-    windowState,
-    position,
-    size,
-    zIndex,
-    icon,
-    content,
     src,
+    icon,
+    size,
+    type,
+    title,
+    zIndex,
+    nodeId,
+    content,
     children,
+    position,
+    windowState,
   } = window;
 
   const windowParamsObj = {
     id,
-    nodeId,
-    index,
-    zIndex,
-    isOpen: windowState.open,
-    title,
-    icon,
     src,
+    type,
+    icon,
+    index,
+    title,
+    zIndex,
+    nodeId,
+    language,
     children,
+    isFocused,
+    windowList,
     x: position.x,
     y: position.y,
-    startX: position.startX,
-    startY: position.startY,
     width: size.width,
     height: size.height,
+    startX: position.startX,
+    startY: position.startY,
+    isOpen: windowState.open,
     startWidth: size.startWidth,
     startHeight: size.startHeight,
-    isFocused,
     isMinimized: windowState.minimized,
     isMaximized: windowState.maximized,
     isRequestingOpen: windowState.requestingOpen,
-    isRequestingRestore: windowState.requestingRestore,
     isRequestingClose: windowState.requestingClose,
+    isRequestingRestore: windowState.requestingRestore,
     isRequestingMaximize: windowState.requestingMaximize,
     isRequestingMinimize: windowState.requestingMinimize,
   };
 
   const windowActionsObj = {
-    onOpen: handleOpenWindow,
-    onUpdateWindow: (params) => handleUpdateWindow({ id, ...params }),
-    onFocus: () => handleFocusWindow(id),
-    onUnfocus: () => handleResetFocus(),
-    onClose: () => handleCloseWindow(id),
-    onContextMenu: () => {},
-    onChangeBackground: (backgroundColor, iconColor, backgroundImage) =>
+    handleContextMenu: () => {},
+    handleResetFocus: () => handleResetFocus(),
+    handleOpenWindow: () => handleOpenWindow(),
+    handleFocusWindow: () => handleFocusWindow(id),
+    handleCloseWindow: () => handleCloseWindow(id),
+    handleUpdateWindow: (params) => handleUpdateWindow({ id, ...params }),
+    handleChangeBackground: (backgroundColor, iconColor, backgroundImage) =>
       handleChangeBackground(backgroundColor, iconColor, backgroundImage),
   };
 
   return (
     <Window
+      desktopRef={desktopRef}
       windowParams={windowParamsObj}
       windowActions={windowActionsObj}
-      desktopRef={desktopRef}
+      filesActions={filesActions}
     />
   );
 };

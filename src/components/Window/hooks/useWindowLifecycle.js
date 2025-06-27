@@ -10,9 +10,6 @@
  * @param {React.RefObject} params.headerRef - Ref to the window header DOM element.
  * @param {React.RefObject} params.desktopRef - Ref to the desktop DOM element.
  * @param {Object} params.windowParams - Current state and parameters of the window.
- * @param {Function} params.onFocus - Callback invoked when the window gains focus.
- * @param {Function} params.onUnfocus - Callback invoked when the window loses focus.
- * @param {Function} params.onClose - Callback invoked when the window is closed.
  * @param {Function} params.updateWindowState - Function to update the window's state.
  * @param {Object} params.animations - Animation functions for window transitions.
  * @param {Function} params.animations.openWindow - Animation for opening the window.
@@ -34,9 +31,10 @@ const useWindowLifecycle = ({
   headerRef,
   desktopRef,
   windowParams,
-  onFocus,
-  onUnfocus,
-  onClose,
+  windowActions,
+  // handleFocusWindow,
+  // onUnfocus,
+  // onClose,
   updateWindowState,
   animations: {
     openWindow,
@@ -66,8 +64,11 @@ const useWindowLifecycle = ({
     isRequestingRestore,
     isRequestingClose,
     isOpen,
-    children
+    children,
+    
   } = windowParams;
+
+  const { handleFocusWindow, handleResetFocus, handleCloseWindow } = windowActions
 
   useEffect(() => {
     if (!windowRef.current || !headerRef.current) return;
@@ -89,14 +90,14 @@ const useWindowLifecycle = ({
       height,
       startWidth: width,
       startHeight: height,
-      children
+      children,
     });
 
     createWindowDraggable(
       windowRef,
       headerRef.current,
       desktopRef.current,
-      onFocus,
+      handleFocusWindow,
       (params) => updateWindowState(params),
       width,
       height,
@@ -118,7 +119,7 @@ const useWindowLifecycle = ({
         startWidth: width,
         startHeight: height,
       });
-      onFocus(id);
+      handleFocusWindow(id);
     });
   }, [isMaximized]);
 
@@ -138,8 +139,9 @@ const useWindowLifecycle = ({
           height: startHeight,
           startWidth: width,
           startHeight: height,
+
         });
-        onUnfocus();
+        handleResetFocus;
       },
       index * 55
     );
@@ -152,7 +154,7 @@ const useWindowLifecycle = ({
       (!isMaximized && !isMinimized)
     )
       return;
-    onFocus(id);
+    handleFocusWindow(id);
     restoreWindow(
       windowRef,
       () => {
@@ -183,11 +185,11 @@ const useWindowLifecycle = ({
     if (!windowRef.current || !isOpen || !isRequestingClose) return;
 
     closeWindow(windowRef, () => {
-      onClose({
+      handleCloseWindow({
         id,
         isRequestingClose: true,
       });
-      onUnfocus(id);
+      handleResetFocus();
     });
   }, [isRequestingClose]);
 };

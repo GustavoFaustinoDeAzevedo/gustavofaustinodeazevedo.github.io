@@ -154,7 +154,7 @@ const windowSlice = createSlice({
         height,
         minimized,
         maximized,
-        children,
+        newChildren,
         requestingOpen,
         requestingRestore,
         requestingClose,
@@ -171,7 +171,7 @@ const windowSlice = createSlice({
       // Update basic properties
       if (title !== undefined) currentWindow.title = title;
       if (icon !== undefined) currentWindow.icon = icon;
-      if (children !== undefined) currentWindow.children = children;
+      if (newChildren !== undefined) currentWindow.children = newChildren;
 
       // Update position
       if (startX !== undefined) currentWindow.position.startX = startX;
