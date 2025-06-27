@@ -5,7 +5,7 @@ export const rootFolder =
     {
       id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'projects', type: 'folder',
       children: [
-        { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora' }, type: 'app' },
+        { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora' }, icon: 'calculator', type: 'app', },
         { id: 'notepad', title: { eng: 'Notepad (Work in Progress', por: 'Bloco de Notas (Em Desenvolvimento)' }, type: 'app' },
         { id: 'todo', title: { eng: 'To-Do List', por: 'Lista de Tarefas' }, type: 'app' },
         { id: 'weather', title: { eng: 'Weather App', por: 'Aplicativo de Clima' }, type: 'app' },
@@ -47,4 +47,8 @@ export const rootFolder =
 }
   ;
 
-export const placeholder = { id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'window-icon' };
+export const placeholder = {
+  id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'window-icon', children: [
+    { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle' }
+  ], type: 'folder'
+};

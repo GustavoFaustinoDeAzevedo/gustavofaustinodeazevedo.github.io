@@ -13,17 +13,17 @@ const createWindowList = (
     () =>
       windowList
         .filter(({ id }) => id !== 'new' && id !== 'placeholder')
-        .map(({ ...window }, index) => (
+        .map(({ ...windowParams }, index) => (
           <WindowWrapper
-            key={window.id}
-            window={window}
             index={index}
-            windowList={windowList}
-            isFocused={focusedWindow === window.id}
-            desktopRef={desktopRef}
-            windowActions={windowActions}
-            filesActions={filesActions}
+            key={windowParams.id}
+            windowParams={windowParams}
             language={language}
+            windowList={windowList}
+            desktopRef={desktopRef}
+            filesActions={filesActions}
+            windowActions={windowActions}
+            isFocused={focusedWindow === windowParams.id}
           />
         )),
     [windowList, focusedWindow]

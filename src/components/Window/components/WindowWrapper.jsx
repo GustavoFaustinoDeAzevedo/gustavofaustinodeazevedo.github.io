@@ -3,7 +3,7 @@ import Window from './Window';
 
 const WindowWrapper = ({
   index,
-  window,
+  windowParams,
   language,
   isFocused,
   desktopRef,
@@ -20,32 +20,13 @@ const WindowWrapper = ({
     handleChangeBackground,
   } = windowActions;
 
-  const {
-    id,
-    src,
-    icon,
-    size,
-    type,
-    title,
-    zIndex,
-    nodeId,
-    content,
-    children,
-    position,
-    windowState,
-  } = window;
+  const { id, size, position, windowState, ...restParams } = windowParams;
 
   const windowParamsObj = {
+    ...restParams,
     id,
-    src,
-    type,
-    icon,
     index,
-    title,
-    zIndex,
-    nodeId,
     language,
-    children,
     isFocused,
     windowList,
     x: position.x,
@@ -69,9 +50,9 @@ const WindowWrapper = ({
   const windowActionsObj = {
     handleContextMenu: () => {},
     handleResetFocus: () => handleResetFocus(),
-    handleOpenWindow: () => handleOpenWindow(),
     handleFocusWindow: () => handleFocusWindow(id),
     handleCloseWindow: () => handleCloseWindow(id),
+    handleOpenWindow: (data) => handleOpenWindow(data),
     handleUpdateWindow: (params) => handleUpdateWindow({ id, ...params }),
     handleChangeBackground: (backgroundColor, iconColor, backgroundImage) =>
       handleChangeBackground(backgroundColor, iconColor, backgroundImage),

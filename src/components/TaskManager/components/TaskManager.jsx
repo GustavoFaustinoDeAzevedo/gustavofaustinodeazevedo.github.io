@@ -3,10 +3,7 @@ import Button from '../../ui/Button';
 import { useCallback, useState } from 'react';
 import actions from '../../../store/actions';
 
-const TaskManager = (props) => {
-  const { onUpdateWindow } = props.windowActions;
-
-
+const TaskManager = ({ handleUpdateWindow }) => {
   const taskList = useSelector((state) => state.window.openedWindowList);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -19,8 +16,8 @@ const TaskManager = (props) => {
   };
 
   const updateWindowState = useCallback(
-    (updates) => onUpdateWindow({ id: selectedTask, ...updates }),
-    [selectedTask, onUpdateWindow]
+    (updates) => handleUpdateWindow({ id: selectedTask, ...updates }),
+    [selectedTask, handleUpdateWindow]
   );
 
   const handleClose = () => updateWindowState({ requestingClose: true });

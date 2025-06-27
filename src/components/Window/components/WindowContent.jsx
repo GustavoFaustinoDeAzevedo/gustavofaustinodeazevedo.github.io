@@ -18,10 +18,15 @@ const WindowContent = ({
   src,
   children,
   windowActions,
+  handleUpdate,
+  type,
+  language,
+  windowList,
+  filesActions,
 }) => {
-  const language = useSelector((state) => state.language);
-  const filesActions = actions.useFilesActions();
-  const windowList = useSelector((state) => state.window.openedWindowList);
+  // const language = useSelector((state) => state.language);
+  // const filesActions = actions.useFilesActions();
+  // const windowList = useSelector((state) => state.window.openedWindowList);
   const section = id.split('#')[1];
   switch (section) {
     case 'about':
@@ -60,8 +65,7 @@ const WindowContent = ({
           </div>
         </main>
       );
-    case 'projects':
-      return <div className="folder" aria-label="Projects"></div>;
+
     case 'skills':
       return (
         <ul
@@ -134,7 +138,11 @@ const WindowContent = ({
         ></textarea>
       );
     case 'task-manager':
-      return <TaskManager windowActions={windowActions}></TaskManager>;
+      return (
+        <TaskManager
+          handleUpdateWindow={windowActions.handleUpdateWindow}
+        ></TaskManager>
+      );
     case 'browser':
       return <BrowserSimulator></BrowserSimulator>;
     case 'github':
@@ -143,7 +151,7 @@ const WindowContent = ({
     case 'change-background':
       return (
         <ChangeBackground
-          handleChangeBackground={windowActions.onChangeBackground}
+          handleChangeBackground={windowActions.handleChangeBackground}
         ></ChangeBackground>
       );
     case 'tests':
@@ -155,7 +163,20 @@ const WindowContent = ({
     case 'notepad':
       return <Notepad windowKey={id} />;
     default:
-      return null;
+      return (
+        <FilesExplorer.FilesList
+          nodeId={nodeId}
+          language={language}
+          windowList={windowList}
+          children={children}
+          filesActions={filesActions}
+          windowActions={windowActions}
+          handleUpdate={handleUpdate}
+          nodeType={type}
+          dataInitialDimension='{"width": "1000px", "height": "600px"}'
+          fileClassName="files-explorer"
+        />
+      );
   }
 };
 

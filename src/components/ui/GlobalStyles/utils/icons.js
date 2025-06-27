@@ -40,4 +40,5 @@ export const iconVariants = {
   'arrow-down': { WebkitMaskImage: "url('/icons/chevron_down.svg')", maskImage: "url('/icons/chevron_down.svg')" },
   github: { WebkitMaskImage: "url('/icons/github-mark.svg')", maskImage: "url('/icons/github-mark.svg')" },
   linkedin: { WebkitMaskImage: "url('/icons/linkedin.svg')", maskImage: "url('/icons/linkedin.svg')" },
+  calculator: { WebkitMaskImage: "url('/icons/calculator.svg')", maskImage: "url('/icons/calculator.svg')" },
 };

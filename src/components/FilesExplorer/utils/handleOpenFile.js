@@ -8,9 +8,12 @@ export const handleOpenFile = ({ id, nodeId, windowTitle, windowIcon, src, isUni
 
   } else {
     try {
-      const window = windowList.find((win) => win.id === id)
-      if (!window) {
-        windowActions.handleOpenWindow(id, windowTitle, windowIcon, src, children, isUnique, fileType);
+      if (id === undefined || id === null) {
+        throw new Error(`Invalid file ID: ${id}`);
+      }
+      const existingWindow = windowList.find((win) => win.id === id);
+      if (!existingWindow) {
+        windowActions.handleOpenWindow(JSON.stringify({ id, title: windowTitle, icon: windowIcon, src, children, isUnique, type: fileType }));
       }
     } catch (error) {
       console.error('Error opening window:', error);

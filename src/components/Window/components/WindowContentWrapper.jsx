@@ -18,30 +18,23 @@ const WindowContentWrapper = ({
   handleUpdate,
 }) => {
   const handleFocus = isFocused ? null : onFocus;
-  const windowContent =
-    isOpen && type === 'folder' ? (
-      <FilesExplorer.FilesList
-        nodeId={nodeId}
-        language={language}
-        windowList={windowList}
-        children={children}
-        filesActions={filesActions}
-        windowActions={windowActions}
-        handleUpdate={handleUpdate}
-        nodeType={type}
-        dataInitialDimension='{"width": "1000px", "height": "600px"}'
-        fileClassName="files-explorer"
-      />
-    ) : (
-      <WindowContent
-        id={id}
-        nodeId={nodeId}
-        src={src}
-        children={children ?? {}}
-        windowActions={windowActions}
-      />
-    );
-  
+  const windowContent = isOpen ? (
+    <WindowContent
+      id={id}
+      nodeId={nodeId}
+      src={src}
+      children={children ?? {}}
+      windowActions={windowActions}
+      handleUpdate={handleUpdate}
+      type={type}
+      language={language}
+      windowList={windowList}
+      filesActions={filesActions}
+    />
+  ) : (
+    <></>
+  );
+
   return (
     <div
       onTouchStart={handleFocus}
