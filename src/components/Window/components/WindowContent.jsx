@@ -138,7 +138,11 @@ const WindowContent = ({
         ></textarea>
       );
     case 'task-manager':
-      return <TaskManager windowActions={windowActions}></TaskManager>;
+      return (
+        <TaskManager
+          handleUpdateWindow={windowActions.handleUpdateWindow}
+        ></TaskManager>
+      );
     case 'browser':
       return <BrowserSimulator></BrowserSimulator>;
     case 'github':
@@ -147,7 +151,7 @@ const WindowContent = ({
     case 'change-background':
       return (
         <ChangeBackground
-          handleChangeBackground={windowActions.onChangeBackground}
+          handleChangeBackground={windowActions.handleChangeBackground}
         ></ChangeBackground>
       );
     case 'tests':
