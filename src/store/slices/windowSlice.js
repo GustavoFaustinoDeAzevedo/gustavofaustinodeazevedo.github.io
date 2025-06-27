@@ -54,6 +54,18 @@ const indexLocator = (id, state) => {
   }
 };
 
+const newFile = (node, fileToBeAdded) => {
+  const children = [...(node.children || []), fileToBeAdded];
+
+  if (children.length >= 2) {
+    const lastIndex = children.length - 1;
+    const secondLastIndex = children.length - 2;
+
+    [children[secondLastIndex], children[lastIndex]] = [children[lastIndex], children[secondLastIndex]];
+  }
+  return children;
+};
+
 // Redux slice for managing windows
 
 const windowSlice = createSlice({
@@ -171,7 +183,7 @@ const windowSlice = createSlice({
       // Update basic properties
       if (title !== undefined) currentWindow.title = title;
       if (icon !== undefined) currentWindow.icon = icon;
-      if (newChildren !== undefined) currentWindow.children = newChildren;
+      if (newChildren !== undefined) currentWindow.children = newFile(currentWindow, newChildren);
 
       // Update position
       if (startX !== undefined) currentWindow.position.startX = startX;
