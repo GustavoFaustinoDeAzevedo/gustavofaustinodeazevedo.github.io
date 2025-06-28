@@ -90,7 +90,6 @@ const useWindowLifecycle = ({
       height,
       startWidth: width,
       startHeight: height,
-      children,
     });
 
     createWindowDraggable(
