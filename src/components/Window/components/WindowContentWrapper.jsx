@@ -1,6 +1,4 @@
-import React from 'react';
 import WindowContent from './WindowContent';
-import FilesExplorer from '../../FilesExplorer';
 
 const WindowContentWrapper = ({
   onFocus,

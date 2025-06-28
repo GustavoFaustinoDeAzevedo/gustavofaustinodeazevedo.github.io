@@ -27,11 +27,11 @@ const FilesList = ({
           index
         ) => {
           const finalIcon = icon || placeholder.icon;
-          const iconTitle = language === 'POR' ? title.por : title.eng;
+          const iconTitle = language === 'POR' ? title?.por : title?.eng;
           const windowTitle = windowParams
             ? language === 'POR'
-              ? windowParams.title.por
-              : windowParams.title.eng
+              ? windowParams.title?.por
+              : windowParams.title?.eng
             : iconTitle;
           const windowIcon = windowParams?.icon || icon || 'window-icon';
           const src = windowParams?.src || '';

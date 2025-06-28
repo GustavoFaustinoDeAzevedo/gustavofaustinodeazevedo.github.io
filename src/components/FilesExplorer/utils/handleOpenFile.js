@@ -2,8 +2,7 @@ import { placeholder } from "../../../data/filesData";
 
 export const handleOpenFile = ({ id, nodeId, windowTitle, windowIcon, src, isUnique, windowList, children, handleNewFile, windowActions, fileType, nodeType, handleUpdate }) => {
   if (windowTitle === 'Novo' || windowTitle === 'New') {
-    const newChildren = { ...children, placeholder }
-    nodeType === 'folder' ? handleUpdate(newChildren) : null;
+    nodeType === 'folder' ? handleUpdate(placeholder) : null;
     handleNewFile(placeholder, nodeId);
 
   } else {
