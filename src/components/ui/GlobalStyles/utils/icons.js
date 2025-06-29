@@ -41,4 +41,11 @@ export const iconVariants = {
   github: { WebkitMaskImage: "url('/icons/github-mark.svg')", maskImage: "url('/icons/github-mark.svg')" },
   linkedin: { WebkitMaskImage: "url('/icons/linkedin.svg')", maskImage: "url('/icons/linkedin.svg')" },
   calculator: { WebkitMaskImage: "url('/icons/calculator.svg')", maskImage: "url('/icons/calculator.svg')" },
+  'battery-100': { WebkitMaskImage: "url('/icons/battery_100.svg')", maskImage: "url('/icons/battery_100.svg')" },
+  'battery-75': { WebkitMaskImage: "url('/icons/battery_75.svg')", maskImage: "url('/icons/battery_75.svg')" },
+  'battery-50': { WebkitMaskImage: "url('/icons/battery_50.svg')", maskImage: "url('/icons/battery_50.svg')" },
+  'battery-25': { WebkitMaskImage: "url('/icons/battery_25.svg')", maskImage: "url('/icons/battery_25.svg')" },
+  'battery-0': { WebkitMaskImage: "url('/icons/battery_0.svg')", maskImage: "url('/icons/battery_0.svg')" },
+  'battery-charging': { WebkitMaskImage: "url('/icons/battery_charging.svg')", maskImage: "url('/icons/battery_charging.svg')" },
+  notepad: { WebkitMaskImage: "url('/icons/notepad.svg')", maskImage: "url('/icons/notepad.svg')" },
 };

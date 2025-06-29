@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { rootFolder } from '../../data/filesData';
 import set from 'lodash/set';
 
-const newFile = (node, fileToBeAdded) => {
-  const children = [...(node.children || []), fileToBeAdded];
+const newFile = (node, fileToBeAdded, index) => {
+  const children = [...(node.children || []), { ...fileToBeAdded, index }];
 
   if (children.length >= 2) {
     const lastIndex = children.length - 1;
@@ -14,22 +14,25 @@ const newFile = (node, fileToBeAdded) => {
   return children;
 };
 
-const updateChildrenById = (node, targetId, fileToBeAdded) => {
-  if (node.id === targetId) {
-    node.children = newFile(node, fileToBeAdded);
+const updateChildrenById = (node, targetId, fileToBeAdded, index) => {
+  if (node.id === targetId && node.index === (index - 1)) {
+
+    node.children = newFile(node, fileToBeAdded, index);
     return true;
   }
 
   if (Array.isArray(node.children)) {
     for (const child of node.children) {
 
-      const updated = updateChildrenById(child, targetId, fileToBeAdded);
+      const updated = updateChildrenById(child, targetId, fileToBeAdded, index);
       if (updated) return true;
     }
   }
 
   return false;
 }
+
+
 
 const toggleSort = (files, sortType) => {
 
@@ -47,6 +50,19 @@ const toggleSort = (files, sortType) => {
   return sortedFiles;
 };
 
+const handleNestedEntities = (obj, index = 0) => {
+  const children = obj.children.map((file) => {
+    if (file.children) {
+      file = { ...file, index: index + 1 };
+      return handleNestedEntities(file, index + 1);
+    }
+
+    return { ...file, index: index + 1 };
+  });
+
+  return { ...obj, children };
+};
+
 /*
 ||============================================================================================================================================||
 ||============================================================================================================================================||
@@ -54,13 +70,13 @@ const toggleSort = (files, sortType) => {
 const fileSlice = createSlice({
   name: 'file',
   initialState: {
-    filesList: rootFolder,
+    filesList: handleNestedEntities(rootFolder),
     sort: "asc",
   },
   reducers: {
     addFile: (state, action) => {
-      const { newFileData, nodeId } = action.payload;
-      updateChildrenById(state.filesList, nodeId, newFileData)
+      const { newFileData, nodeId, index } = action.payload;
+      updateChildrenById(state.filesList, nodeId, newFileData, index)
     },
     removeFile: (state, action) => {
       const removeById = (node, id) => {

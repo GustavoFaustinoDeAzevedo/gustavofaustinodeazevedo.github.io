@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '..';
 import useClickOutside from '../../../hooks/useClickOutside';
 import { useSelector } from 'react-redux';
+import BatteryStatus from '../../BatteryStatus/components/BatteryStatus';
 
 const Taskbar = ({
   windowList,
@@ -23,11 +24,9 @@ const Taskbar = ({
   const buttonRef = useRef(null);
   const actualVisibleMenu = useRef('');
 
-  const {handleChangeLanguage} = windowActions;
+  const { handleChangeLanguage } = windowActions;
 
-
-
-    const toggleMenuVisibility = (visibilityKey) => {
+  const toggleMenuVisibility = (visibilityKey) => {
     setMenuVisibility((prev) => {
       const isVisible = !prev[visibilityKey];
 
@@ -89,6 +88,7 @@ const Taskbar = ({
           onChangeLanguage={handleChangeLanguage}
         />
         <Clock />
+        <BatteryStatus />
       </section>
     </nav>
   );

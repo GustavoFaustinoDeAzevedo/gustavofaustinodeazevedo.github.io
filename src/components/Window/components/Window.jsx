@@ -1,8 +1,4 @@
-import {
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react';
+import { useRef, useMemo, useCallback } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -90,7 +86,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   const handleMaximize = () => updateWindowState({ maximized: true });
   const handleRestore = () => updateWindowState({ requestingRestore: true });
   const handleClose = () => updateWindowState({ requestingClose: true });
-  const handleUpdate = (children) => updateWindowState({ children: children });
+  const handleUpdate = (data) => updateWindowState(data);
 
   useClickOutside(windowRef, handleResetFocus, isFocused);
 
