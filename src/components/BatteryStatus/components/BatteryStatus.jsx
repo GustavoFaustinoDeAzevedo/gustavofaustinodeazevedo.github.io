@@ -17,7 +17,7 @@ const BatteryStatus = () => {
 
   const batteryLevel = charging
     ? 'charging'
-    : (Math.floor(level * 100) / 25) * 25;
+    : Math.floor((level * 100) / 25) * 25;
 
   const batteryStatusIconKey = batteryStatusIcon[batteryLevel] || 'battery-0';
 
