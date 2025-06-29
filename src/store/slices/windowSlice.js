@@ -66,6 +66,32 @@ const newFile = (node, fileToBeAdded) => {
   return children;
 };
 
+function findNode(obj, targetId) {
+  if (obj.id === targetId) return obj;
+
+  if (obj.children) {
+    for (let child of obj.children) {
+      const result = findNode(child, targetId);
+      if (result) return result;
+    }
+  }
+
+  return null;
+}
+
+function findPath(obj, targetId, path = []) {
+  if (obj.id === targetId) return [...path];
+
+  if (obj.children) {
+    for (let child of obj.children) {
+      const result = findPath(child, targetId, [...path, obj.id]);
+      if (result) return result;
+    }
+  }
+
+  return null;
+};
+
 // Redux slice for managing windows
 
 const windowSlice = createSlice({
@@ -87,24 +113,27 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { id, title, icon, src, children, isUnique, type } = action.payload;
-      // If isUnique is true, check if a window with the same base id is already open
-      if (isUnique) {
-        const existingWindow = state.openedWindowList.find(win => win.id.startsWith(`window#${id}#`));
+      const { id, title, icon, src, children, type, index } = action.payload;
+
+      if (type === 'folder') {
+        const existingWindow = state.openedWindowList.find(win => win.index === index && win.type === 'folder');
         if (existingWindow) {
-          // Focus the existing window instead of opening a new one
-          state.focusedWindow = existingWindow.id;
+          if (existingWindow.windowState.minimized) existingWindow.windowState.requestingRestore = true;
+
+          state.focusedWindow = existingWindow.id; // Focus the existing window instead of opening a new one
           return;
         }
       }
 
       state.history = updateHistory(state.history, title);
+
       // Generate a unique id for the new window
-      const finalId = `window#${id}#${new Date().getTime()}#${Math.random()}`;
+      const newId = `window#${id}#${new Date().getTime()}#${Math.random()}`;
 
       const newWindow = {
-        id: finalId,
+        id: newId,
         nodeId: id,
+        index: index,
         title,
         icon,
         zIndex: getNextZIndex(state),
@@ -138,7 +167,7 @@ const windowSlice = createSlice({
       };
 
       state.openedWindowList.push(newWindow);
-      state.focusedWindow = finalId;
+      state.focusedWindow = newId;
     },
 
     resetFocus: (state) => {
