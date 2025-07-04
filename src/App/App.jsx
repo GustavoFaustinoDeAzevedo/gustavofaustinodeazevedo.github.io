@@ -15,21 +15,21 @@ import { useDisableRightClick } from './hooks/useDisableRightClick';
 import { taskbarProps } from './hooks/taskbarProps';
 import createWindowList from '../components/Window/utils/createWindowList';
 
-import {
-  lightTheme,
-  darkTheme,
-} from '../components/ui/GlobalStyles/utils/themes';
 import { useItemsHandler } from './hooks/useItemsHandler';
 import { useHandleContextMenu } from './hooks/useHandleContextMenu';
 import { ThemeProvider } from 'styled-components';
 import { index } from 'mathjs';
+import PageMeta from '../components/PageMeta';
+import useChangeTheme from '../components/Settings/ChangeTheme/hooks/useChangeTheme';
+import useUserBrowserDarkMode from '../hooks/useUserBrowserDarkMode';
 
 gsap.registerPlugin(useGSAP);
 
 const App = () => {
   //Refs
-  const [darkMode, setDarkMode] = useState(true);
+  const { theme, isDarkMode, setDarkMode } = useChangeTheme();
   const desktopRef = useRef(null);
+  const isUserBrowserDarkMode = useUserBrowserDarkMode();
 
   //Setup
   // useDisableRightClick();
@@ -69,29 +69,14 @@ const App = () => {
 
   //JSX Render
 
-  function findPath(obj, targetId, targetIndex, path = []) {
-    if (obj.id === targetId && obj.index === targetIndex) return [...path];
-
-    if (obj.children) {
-      for (let child of obj.children) {
-        const result = findPath(child, targetId, targetIndex, [
-          ...path,
-          obj.title[language.toLowerCase()],
-        ]);
-        if (result) return result;
-      }
-    }
-
-    return null;
-  }
-  console.log(
-    [(findPath(newRootFolder, 'desktop', 3) ?? []).join('/'), 'Desktop'].join(
-      '/'
-    )
-  );
   return (
     <>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <PageMeta
+        focusedWindow={focusedWindow}
+        windowList={windowList}
+        isUserBrowserDarkMode={isUserBrowserDarkMode}
+      />
+      <ThemeProvider theme={theme}>
         {/* <GlobalStyle /> */}
         <div className="desktop" ref={desktopRef}>
           <Desktop

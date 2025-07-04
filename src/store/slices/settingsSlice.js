@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ChangeBackground } from '../../components/Settings/ChangeBackground/ChangeBackground';
 
+const navigatorLanguage = navigator.language || navigator.userLanguage || 'en-US';
+const defaultLanguage = navigatorLanguage.startsWith('pt') ? 'POR' : 'ENG';
+
+
+
 const settingsSlice = createSlice({
   name: 'settings',
   initialState: {
-    language: 'ENG',
+    language: defaultLanguage,
     desktopBackgroundColor: '#0d0d0d',
     desktopIconColor: '255, 255, 255',
     desktopBackgroundImage: 'none',

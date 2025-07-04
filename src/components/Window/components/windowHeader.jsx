@@ -4,22 +4,28 @@ import Icon from '../../ui/GlobalStyles/components/Icon';
 const WindowHeader = ({
   title = 'Untitled',
   headerRef = null,
-  onFocus = () => {},
   icon = '',
   language = 'ENG',
   isMaximized = false,
+  onFocus = () => {},
   onMinimize = () => {},
   onMaximize = () => {},
   onRestore = () => {},
   onClose = () => {},
 }) => {
-  const style = {
+  const stylePng = {
     color: 'var(--c-text)',
-    backgroundColor: 'var(--c-icon-bg)',
     maxWidth: '1rem',
     maxHeight: '1rem',
+    backgroundColor: 'transparent',
   };
 
+  const styleSvg = {
+    color: 'var(--c-text)',
+    maxWidth: '1rem',
+    maxHeight: '1rem',
+    backgroundColor: 'var(--c-icon-bg)',
+  };
   return (
     <div className="window-header">
       <span
@@ -31,7 +37,7 @@ const WindowHeader = ({
         aria-label={title}
         className="window-title"
       >
-        <Icon variant={icon} style={style} />
+        <Icon variant={icon} style={stylePng} />
         {title}
       </span>
       <div className="window-controls">
@@ -41,7 +47,7 @@ const WindowHeader = ({
           className="minimize"
           onClick={onMinimize}
         >
-          <Icon variant="minimize" style={style} />
+          <Icon variant="minimize" style={styleSvg} />
         </button>
         <button
           aria-label={
@@ -67,7 +73,7 @@ const WindowHeader = ({
         >
           <Icon
             variant={`${isMaximized ? 'restore' : 'maximize'}`}
-            style={style}
+            style={styleSvg}
           />
         </button>
         <button
@@ -76,7 +82,7 @@ const WindowHeader = ({
           className="close"
           onClick={onClose}
         >
-          <Icon variant="close" style={style} />
+          <Icon variant="close" style={styleSvg} />
         </button>
       </div>
     </div>

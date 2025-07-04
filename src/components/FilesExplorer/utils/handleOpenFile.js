@@ -4,8 +4,9 @@ export const handleOpenFile = ({ id, nodeId, windowTitle, windowIcon, src, isUni
   if (windowTitle === 'Novo' || windowTitle === 'New') {
     console.log('Creating new file with ID:', nodeId);
     handleNewFile(placeholder, nodeId, index);
+    console.log(handleWindowUpdate);
     nodeType === 'folder' ? handleWindowUpdate({ children: placeholder }) : null;
-
+    console.log(nodeType);
   } else {
     try {
       if (id === undefined || id === null) {

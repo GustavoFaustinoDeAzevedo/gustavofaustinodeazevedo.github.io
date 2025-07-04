@@ -17,7 +17,7 @@ const TaskbarItem = ({
 
   return (
     <li
-      key={`taskbar-icon-${index}-${id}`} 
+      key={`taskbar-icon-${index}-${id}`}
       className={`taskbar-item open 
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
@@ -25,7 +25,10 @@ const TaskbarItem = ({
       title={title}
       onClick={clickHandler}
     >
-      <Icon variant={icon} />
+      <Icon
+        variant={icon}
+        style={{ backgroundColor: 'transparent', width: '1.8rem' }}
+      />
     </li>
   );
 };
