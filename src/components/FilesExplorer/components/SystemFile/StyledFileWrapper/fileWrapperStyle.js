@@ -1,7 +1,7 @@
 export const fileWrapperStyle = {
-  padding: '0.3rem 0',
-  width: '5rem',
-  height: '4.5rem',
+  padding: '0.8rem 0',
+  width: '7rem',
+  height: '6rem',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -44,6 +44,6 @@ export const fileWrapperStyle__text = {
 export const fileWrapperStyle__icon = {
   fontSize: '2rem',
   marginBottom: '0.5rem',
-  backgroundColor: 'rgb(var(--c-rgb-desktop-bg-contrast))',
+  backgroundColor: 'transparent',
   transition: 'background-color 0.3s ease-in-out',
 }

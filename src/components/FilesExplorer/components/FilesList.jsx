@@ -16,6 +16,9 @@ const FilesList = ({
 }) => {
   if (children === undefined || children.length < 0) return;
   const { handleNewFile } = filesActions;
+  const typeToIcon = {
+    app: 'html-file',
+  };
   return (
     <div
       className={`${fileClassName}`}
@@ -26,15 +29,15 @@ const FilesList = ({
           { id, title, icon, type, windowMask, isUnique, children, index },
           windowIndex
         ) => {
-          const finalIcon = icon || placeholder.icon;
+          const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
           const iconTitle = language === 'POR' ? title?.por : title?.eng;
-          const windowTitle = windowMask
-            ? language === 'POR'
-              ? windowMask.title?.por
-              : windowMask.title?.eng
-            : iconTitle;
-          const windowIcon = windowMask?.icon || icon || 'window-icon';
-          const src = windowMask?.src || '';
+          const windowTitle =
+            windowMask?.title?.[language === 'POR' ? 'por' : 'eng'] ??
+            iconTitle;
+
+          const windowIcon =
+            windowMask?.icon ?? icon ?? typeToIcon[type] ?? 'window-icon';
+          const src = windowMask?.src ?? '';
 
           return (
             <SystemFile

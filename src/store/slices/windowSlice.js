@@ -114,9 +114,9 @@ const windowSlice = createSlice({
 
     openWindow: (state, action) => {
       const { id, title, icon, src, children, type, index } = action.payload;
-
+      console.log(id)
       if (type === 'folder') {
-        const existingWindow = state.openedWindowList.find(win => win.index === index && win.type === 'folder');
+        const existingWindow = state.openedWindowList.find(win => win.id === id && win.index === index && win.type === 'folder');
         if (existingWindow) {
           if (existingWindow.windowState.minimized) existingWindow.windowState.requestingRestore = true;
 

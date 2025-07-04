@@ -9,17 +9,17 @@ export const rootFolder =
         {
           id: 'guest', title: { eng: 'Guest', por: 'Convidado' }, icon: 'user', type: 'folder', children: [
             {
-              id: 'desktop', title: { eng: 'Desktop', por: 'Área de Trabalho' }, icon: 'desktop', type: 'folder', path: 'C:\\Users\\Guest\\Desktop', children: [
+              id: 'desktop', title: { eng: 'Desktop', por: 'Área de Trabalho' }, icon: 'desktop', type: 'folder', children: [
 
                 { id: 'about', title: { eng: 'About Me', por: 'Sobre Mim' }, icon: 'about', type: 'file' },
                 {
-                  id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'projects', type: 'folder',
+                  id: 'projects', title: { eng: 'Program Files (Work in Progress 1/25)', por: 'Arquivos de Programas (Em Desenvolvimento 1/25)' }, icon: 'folder', type: 'folder',
                   children: [
                     { id: 'calculator', title: { eng: 'Calculator', por: 'Calculadora' }, icon: 'calculator', type: 'app', },
                     { id: 'notepad', title: { eng: 'Notepad (Work in Progress', por: 'Bloco de Notas (Em Desenvolvimento)' }, icon: 'notepad', type: 'app' },
                     { id: 'todo', title: { eng: 'To-Do List', por: 'Lista de Tarefas' }, type: 'app' },
                     { id: 'weather', title: { eng: 'Weather App', por: 'Aplicativo de Clima' }, type: 'app' },
-                    { id: 'memory-game', title: { eng: 'Memory Game', por: 'Jogo da Memória', type: 'app' } },
+                    { id: 'memory-game', title: { eng: 'Memory Game', por: 'Jogo da Memória' }, type: 'app' },
                     { id: 'snake-game', title: { eng: 'Snake Game', por: 'Jogo da Cobra' }, type: 'app' },
                     { id: 'piano-app', title: { eng: 'Piano App', por: 'Aplicativo de Piano' }, type: 'app' },
                     { id: 'tetris-game', title: { eng: 'Tetris Game', por: 'Jogo Tetris' }, type: 'app' },
@@ -45,11 +45,11 @@ export const rootFolder =
                 },
                 { id: 'skills', title: { eng: 'Skills', por: 'Habilidades' }, icon: 'skills', type: 'file' },
                 { id: 'contact', title: { eng: 'Contact', por: 'Contato' }, icon: 'contact', type: 'app' },
-                { id: 'change-background', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'color-picker', isUnique: true, type: 'app' },
+                { id: 'change-background', title: { eng: 'Change Background', por: 'Alterar Fundo' }, icon: 'image-outline-icon', isUnique: true, type: 'app' },
                 { id: 'cmd', title: { eng: 'Command Prompt (Work in Progress)', por: 'Prompt de Comando (Em Desenvolvimento)' }, icon: 'command', type: 'app' },
                 { id: 'task-manager', title: { eng: 'Task Manager (Work in Progress)', por: 'Gerenciador de Tarefas (Em Desenvolvimento)' }, icon: 'task-manager', isUnique: true, type: 'app' },
                 { id: 'browser', title: { eng: 'Browser', por: 'Navegador' }, icon: 'browser', type: 'app' },
-                { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'github', windowMask: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: 'browser', type: 'app' } },
+                { id: 'github', title: { eng: 'Github', por: 'Github' }, icon: 'github', type: 'app', windowMask: { src: 'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io', title: { eng: 'Browser', por: 'Navegador' }, icon: 'browser' } },
                 //{ id: 'tests', title: { eng: 'Tests', por: 'Testes' }, icon: ' skills' },
 
                 { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle' },
@@ -61,7 +61,7 @@ export const rootFolder =
   ;
 
 export const placeholder = {
-  id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'window-icon', children: [
+  id: 'placeholder', title: { eng: 'placeholder', por: 'placeholder' }, icon: 'folder', children: [
     { id: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle' }
   ], type: 'folder'
 };
