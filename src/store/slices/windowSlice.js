@@ -201,7 +201,6 @@ const windowSlice = createSlice({
         requestingClose,
         requestingMinimize,
         requestingMaximize,
-
       } = action.payload;
 
       const winIndex = indexLocator(id, state);

@@ -28,6 +28,7 @@ const WindowContentWrapper = ({
       language={language}
       windowList={windowList}
       filesActions={filesActions}
+
     />
   ) : (
     <></>

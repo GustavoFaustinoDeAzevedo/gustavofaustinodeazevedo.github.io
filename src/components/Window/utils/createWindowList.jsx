@@ -26,7 +26,7 @@ const createWindowList = (
             isFocused={focusedWindow === windowParams.id}
           />
         )),
-    [windowList, focusedWindow]
+    [windowList, focusedWindow, language, desktopRef, windowActions, filesActions]
   );
 };
 
