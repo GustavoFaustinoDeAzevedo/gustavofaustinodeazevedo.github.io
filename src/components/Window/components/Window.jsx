@@ -85,6 +85,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   const handleMinimize = () => updateWindowState({ minimized: true });
   const handleMaximize = () => updateWindowState({ maximized: true });
   const handleRestore = () => updateWindowState({ requestingRestore: true });
+
   const handleClose = () => updateWindowState({ requestingClose: true });
   const handleUpdate = (data) => updateWindowState(data);
 
@@ -97,6 +98,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
       style={id === 'desktop' ? { zIndex: 0 } : { zIndex: zIndex }}
       onContextMenu={handleContextMenu}
       id={id}
+      onClick={isFocused ? null : handleFocusWindow}
     >
       <WindowHeader
         headerRef={headerRef}
@@ -108,7 +110,6 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
       />
 
       <WindowContentWrapper
-        handleFocusWindow={handleFocusWindow}
         isFocused={isFocused}
         isOpen={isOpen}
         id={id}

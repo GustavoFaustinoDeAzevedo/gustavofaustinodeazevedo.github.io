@@ -96,7 +96,6 @@ const useWindowLifecycle = ({
       windowRef,
       headerRef.current,
       desktopRef.current,
-      handleFocusWindow,
       (params) => updateWindowState(params),
       width,
       height,
