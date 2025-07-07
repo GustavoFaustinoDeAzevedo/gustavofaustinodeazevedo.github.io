@@ -1,2 +1,3 @@
 import AboutMe from "./components/AboutMe";
-export default AboutMe;
+import Skills from "./components/Skills";
+export { AboutMe, Skills };

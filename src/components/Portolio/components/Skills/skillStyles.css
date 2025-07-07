@@ -1,0 +1,30 @@
+.skills-list-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 740px;
+  min-width: 400px;
+  background-color: var(--c-background1);
+  border-radius: var(--border-radius);
+
+  & .skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: safe;
+    gap: 1rem;
+    padding: 1rem;
+
+
+
+    & .skill {
+      padding: 0.5rem 1rem;
+      background: var(--c-primary);
+      -webkit-user-select: none;
+      user-select: none;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+    }
+  }
+}

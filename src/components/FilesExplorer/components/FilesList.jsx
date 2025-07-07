@@ -1,6 +1,7 @@
 import SystemFile from './SystemFile/SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
 import { placeholder } from '../../../data/filesData';
+import { useMemo } from 'react';
 
 const FilesList = ({
   nodeId,
@@ -30,10 +31,8 @@ const FilesList = ({
           windowIndex
         ) => {
           const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
-          const iconTitle = language === 'POR' ? title?.por : title?.eng;
-          const windowTitle =
-            windowMask?.title?.[language === 'POR' ? 'por' : 'eng'] ??
-            iconTitle;
+          const iconTitle = language === 'por' ? title?.por : title?.eng;
+          const windowTitle = windowMask?.title ?? title;
 
           const windowIcon =
             windowMask?.icon ?? icon ?? typeToIcon[type] ?? 'window-icon';

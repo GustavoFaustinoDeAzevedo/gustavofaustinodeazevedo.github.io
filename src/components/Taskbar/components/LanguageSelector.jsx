@@ -48,28 +48,28 @@ const LanguageSelector = ({ language, onChangeLanguage }) => {
         ref={languageButtonRef}
         className="language-button"
         onClick={handleOpenClick}
-        aria-label={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
-        title={language !== 'POR' ? 'Select language' : 'Mudar idioma'}
+        aria-label={language !== 'por' ? 'Select language' : 'Mudar idioma'}
+        title={language !== 'por' ? 'Select language' : 'Mudar idioma'}
       >
-        {language === 'ENG' ? 'ENG' : 'POR'}
+        {language === 'por' ? 'POR' : 'ENG'}
       </button>
       <div className="language-list-container">
         <ul ref={languageSelectorRef} className="language-list">
           <li
             onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
-            data-lang={'ENG'}
-            className={language === 'ENG' ? 'enabled' : ''}
-            aria-label={language !== 'POR' ? 'English-US' : 'Inglês-US'}
+            data-lang={'eng'}
+            className={language === 'eng' ? 'enabled' : ''}
+            aria-label={language !== 'por' ? 'English-US' : 'Inglês-US'}
           >
-            {language !== 'POR' ? 'English-US' : 'Inglês-US'}
+            {language !== 'por' ? 'English-US' : 'Inglês-US'}
           </li>
           <li
             onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
-            data-lang={'POR'}
-            className={language === 'POR' ? 'enabled' : ''}
-            aria-label={language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}
+            data-lang={'por'}
+            className={language === 'por' ? 'enabled' : ''}
+            aria-label={language !== 'por' ? 'Portuguese-BR' : 'Português-BR'}
           >
-            {language !== 'POR' ? 'Portuguese-BR' : 'Português-BR'}
+            {language !== 'por' ? 'Portuguese-BR' : 'Português-BR'}
           </li>
         </ul>
       </div>

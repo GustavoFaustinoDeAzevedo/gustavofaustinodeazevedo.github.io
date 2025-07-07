@@ -65,7 +65,7 @@ const useWindowLifecycle = ({
     isRequestingClose,
     isOpen,
     children,
-    
+
   } = windowParams;
 
   const { handleFocusWindow, handleResetFocus, handleCloseWindow } = windowActions
@@ -96,6 +96,7 @@ const useWindowLifecycle = ({
       windowRef,
       headerRef.current,
       desktopRef.current,
+      handleFocusWindow,
       (params) => updateWindowState(params),
       width,
       height,

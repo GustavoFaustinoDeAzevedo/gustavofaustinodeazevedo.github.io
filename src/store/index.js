@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import windowReducer from './slices/windowSlice';
 import contextMenuReducer from './slices/contextMenuSlice';
-import languageReducer from './slices/settingsSlice';
 import filesReducer from './slices/filesSlice';
 import settingsReducer from './slices/settingsSlice'
 
@@ -16,7 +15,6 @@ const store = configureStore({
   reducer: {
     window: windowReducer,
     contextMenu: contextMenuReducer,
-    language: languageReducer,
     file: filesReducer,
     settings: settingsReducer
   },

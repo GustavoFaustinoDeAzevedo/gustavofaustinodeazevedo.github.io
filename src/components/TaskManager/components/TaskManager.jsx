@@ -3,7 +3,7 @@ import Button from '../../ui/Button';
 import { useCallback, useState } from 'react';
 import actions from '../../../store/actions';
 
-const TaskManager = ({ handleUpdateWindow }) => {
+const TaskManager = ({ handleUpdateWindow, language }) => {
   const taskList = useSelector((state) => state.window.openedWindowList);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -56,7 +56,9 @@ const TaskManager = ({ handleUpdateWindow }) => {
                     key={`task-cell-${index}`}
                     className="task-name-cell"
                   >
-                    <p className="task-name">{task.title || 'Untitled Task'}</p>
+                    <p className="task-name">
+                      {task.title[language] || 'Untitled Task'}
+                    </p>
                   </td>
                 </tr>
               ))
