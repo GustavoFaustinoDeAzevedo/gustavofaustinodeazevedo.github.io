@@ -30,7 +30,8 @@ const getNextZIndex = (state, getMaxZIndex = false) => {
  */
 const updateHistory = (history, id) => {
   try {
-    const filteredHistory = history.filter(item => item !== id);
+    const filteredHistory = history.filter(item => Object.entries(item)
+      .some(([key, val]) => ["por", "eng"].includes(key) && val !== id[key]));
     return [id, ...filteredHistory].slice(0, 10);
   } catch (error) {
     console.error('Error updating history:', error);
@@ -114,7 +115,6 @@ const windowSlice = createSlice({
 
     openWindow: (state, action) => {
       const { id, title, icon, src, children, type, index } = action.payload;
-      console.log(id)
       if (type === 'folder') {
         const existingWindow = state.openedWindowList.find(win => win.id === id && win.index === index && win.type === 'folder');
         if (existingWindow) {
