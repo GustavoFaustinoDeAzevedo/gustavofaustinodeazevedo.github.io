@@ -69,30 +69,30 @@ const getWindowContent = (
     about: () => <AboutMe language={language} />,
     skills: () => <Skills language={language} />,
     contact: () => <ContactSection language={language} />,
-    cmd: <CommandPromptSection />,
-    'task-manager': (
+    cmd: () => <CommandPromptSection />,
+    'task-manager': () => (
       <TaskManager
         handleUpdateWindow={windowActions?.handleUpdateWindow}
         language={language}
       />
     ),
-    browser: <BrowserSimulator />,
-    github: <BrowserSimulator src={src} />,
-    'background-color-picker': (
+    browser: () => <BrowserSimulator />,
+    github: () => <BrowserSimulator src={src} />,
+    'background-color-picker': () => (
       <ChangeBackground
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),
-    'change-background': (
+    'change-background': () => (
       <ChangeBackground
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),
-    tests: (
+    tests: () => (
       <Tests data-initial-dimension='{"width": "500px", "height": "400px"}' />
     ),
-    calculator: <Calculator />,
-    notepad: <Notepad windowId={id} />,
+    calculator: () => <Calculator />,
+    notepad: () => <Notepad windowId={id} />,
   };
   return map[contentId]?.();
 };
