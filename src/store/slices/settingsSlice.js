@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ChangeBackground } from '../../components/Settings/ChangeBackground/ChangeBackground';
 
 const navigatorLanguage = navigator.language || navigator.userLanguage || 'en-US';
-const defaultLanguage = navigatorLanguage.startsWith('pt') ? 'POR' : 'ENG';
+const defaultLanguage = navigatorLanguage.startsWith('pt') ? 'por' : 'eng';
 
 
 

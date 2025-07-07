@@ -45,10 +45,10 @@ const StartMenu = ({
     <div className="start-menu">
       <button
         ref={startButtonRef}
-        title={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
+        title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
         className="start-button"
         onClick={handleClick}
-        aria-label={language !== 'POR' ? 'Start Menu' : 'Menu Iniciar'}
+        aria-label={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
       >
         <i className="icon window-icon"></i>
       </button>
@@ -69,7 +69,7 @@ const StartMenu = ({
             <legend>History:</legend>
             <ul className="start-menu-history">
               {history.map((id) => {
-                return <li key={`history-${id}`}>{id}</li>;
+                return <li key={`history-${id[language]}`}>{id[language]}</li>;
               })}
             </ul>
           </fieldset>

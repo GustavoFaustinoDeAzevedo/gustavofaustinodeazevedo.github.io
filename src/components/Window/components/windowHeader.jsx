@@ -5,7 +5,7 @@ const WindowHeader = ({
   title = 'Untitled',
   headerRef = null,
   icon = '',
-  language = 'ENG',
+  language = 'eng',
   isMaximized = false,
   onFocus = () => {},
   onMinimize = () => {},
@@ -33,17 +33,17 @@ const WindowHeader = ({
         onClick={onFocus}
         onMouseDown={onFocus}
         ref={headerRef}
-        title={title}
-        aria-label={title}
+        title={title[language]}
+        aria-label={title[language]}
         className="window-title"
       >
         <Icon variant={icon} style={stylePng} />
-        {title}
+        {title[language]}
       </span>
       <div className="window-controls">
         <button
-          aria-label={language === 'POR' ? 'Minimizar' : 'Minimize'}
-          title={language === 'POR' ? 'Minimizar' : 'Minimize'}
+          aria-label={language === 'por' ? 'Minimizar' : 'Minimize'}
+          title={language === 'por' ? 'Minimizar' : 'Minimize'}
           className="minimize"
           onClick={onMinimize}
         >
@@ -51,7 +51,7 @@ const WindowHeader = ({
         </button>
         <button
           aria-label={
-            language === 'POR'
+            language === 'por'
               ? isMaximized
                 ? 'Restaurar'
                 : 'Maximizar'
@@ -60,7 +60,7 @@ const WindowHeader = ({
               : 'Maximize'
           }
           title={
-            language === 'POR'
+            language === 'por'
               ? isMaximized
                 ? 'Restaurar'
                 : 'Maximizar'
@@ -77,8 +77,8 @@ const WindowHeader = ({
           />
         </button>
         <button
-          aria-label={language === 'POR' ? 'Fechar' : 'Close'}
-          title={language === 'POR' ? 'Fechar' : 'Close'}
+          aria-label={language === 'por' ? 'Fechar' : 'Close'}
+          title={language === 'por' ? 'Fechar' : 'Close'}
           className="close"
           onClick={onClose}
         >

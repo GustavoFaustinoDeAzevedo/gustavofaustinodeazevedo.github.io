@@ -7,7 +7,7 @@ import Tests from '../../Tests';
 import FilesExplorer from '../../FilesExplorer';
 import Calculator from '../../Gadgets/Calculator';
 import Notepad from '../../Gadgets/Notepad';
-import AboutMe from '../../Portolio';
+import { AboutMe, Skills } from '../../Portolio';
 
 const SkillsSection = () => (
   <ul
@@ -98,11 +98,14 @@ const WindowContent = ({
 }) => {
   const contentMap = {
     about: <AboutMe language={language} />,
-    skills: <SkillsSection />,
+    skills: <Skills language={language} />,
     contact: <ContactSection />,
     cmd: <CommandPromptSection />,
     'task-manager': (
-      <TaskManager handleUpdateWindow={windowActions?.handleUpdateWindow} />
+      <TaskManager
+        handleUpdateWindow={windowActions?.handleUpdateWindow}
+        language={language}
+      />
     ),
     browser: <BrowserSimulator />,
     github: <BrowserSimulator src={src} />,

@@ -223,24 +223,7 @@
     }
   }
 
-  .skills-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: safe;
-    gap: 1rem;
-    padding: 1rem;
 
-
-    & li {
-      padding: 0.5rem 1rem;
-      background: var(--c-primary);
-      -webkit-user-select: none;
-      user-select: none;
-      border-radius: var(--border-radius);
-      font-size: 0.9rem;
-    }
-  }
 
   .project-grid {
     display: grid;

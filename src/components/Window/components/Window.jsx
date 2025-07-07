@@ -70,6 +70,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
     desktopRef,
     windowParams,
     windowActions,
+    handleFocusWindow,
     updateWindowState,
     animations: {
       openWindow,
@@ -106,7 +107,14 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
         onMaximize={handleMaximize}
         onRestore={handleRestore}
         onClose={handleClose}
-        {...{ id, title, icon, isOpen, isFocused, isMinimized, isMaximized }}
+        id={id}
+        title={title}
+        icon={icon}
+        isOpen={isOpen}
+        isFocused={isFocused}
+        isMinimized={isMinimized}
+        isMaximized={isMaximized}
+        language={language}
       />
 
       <WindowContentWrapper
