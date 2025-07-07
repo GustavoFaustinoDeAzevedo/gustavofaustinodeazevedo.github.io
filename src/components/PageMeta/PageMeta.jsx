@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { iconVariants } from '../ui/GlobalStyles/utils/icons';
 
 /**
@@ -12,9 +12,15 @@ import { iconVariants } from '../ui/GlobalStyles/utils/icons';
  * @param {boolean} props.isUserBrowserDarkMode - Indicates if the user's browser is in dark mode.
  * @returns {null} This component does not render anything to the DOM.
  */
-const PageMeta = ({ focusedWindow, windowList, isUserBrowserDarkMode }) => {
+const PageMeta = ({
+  focusedWindow,
+  windowList,
+  isUserBrowserDarkMode,
+  language,
+}) => {
   useEffect(() => {
     let iconName = 'icons/favicon.ico';
+    let computedTitle = 'GustavOS';
     if (focusedWindow) {
       if (windowList && windowList.length > 0) {
         const focusedWindowParams = windowList.find(
@@ -24,12 +30,17 @@ const PageMeta = ({ focusedWindow, windowList, isUserBrowserDarkMode }) => {
           if (focusedWindowParams.icon) {
             iconName = iconVariants[focusedWindowParams.icon].backgroundImage;
           }
-          document.title = focusedWindowParams.title;
+          if (
+            focusedWindowParams.title &&
+            language &&
+            focusedWindowParams.title[language]
+          ) {
+            computedTitle += '/' + focusedWindowParams.title[language];
+          }
         }
       }
-    } else {
-      document.title = 'GustavOS';
     }
+    document.title = computedTitle;
 
     let link = document.querySelector("link[rel='icon']");
 
@@ -42,7 +53,7 @@ const PageMeta = ({ focusedWindow, windowList, isUserBrowserDarkMode }) => {
     link.sizes = '16x16';
     link.href = iconName.replace(/url\('([^']*)'\)/g, '$1');
     document.head.appendChild(link);
-  }, [focusedWindow, windowList, isUserBrowserDarkMode]);
+  }, [focusedWindow, windowList, isUserBrowserDarkMode, language]);
 
   return null;
 };

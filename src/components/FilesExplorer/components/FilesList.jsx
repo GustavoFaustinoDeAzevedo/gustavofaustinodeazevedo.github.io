@@ -50,6 +50,7 @@ const FilesList = ({
                   id,
                   nodeId,
                   windowTitle,
+                  language,
                   windowIcon,
                   src,
                   isUnique,

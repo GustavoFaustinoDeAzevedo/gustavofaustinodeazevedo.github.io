@@ -75,6 +75,7 @@ const App = () => {
         focusedWindow={focusedWindow}
         windowList={windowList}
         isUserBrowserDarkMode={isUserBrowserDarkMode}
+        language={language}
       />
       <ThemeProvider theme={theme}>
         {/* <GlobalStyle /> */}
