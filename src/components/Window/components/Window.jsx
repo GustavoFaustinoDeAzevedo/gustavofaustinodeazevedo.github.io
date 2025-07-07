@@ -129,7 +129,6 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
         type={type}
         windowList={windowList}
         language={language}
-        handleUpdate={handleUpdate}
       />
     </div>
   );
