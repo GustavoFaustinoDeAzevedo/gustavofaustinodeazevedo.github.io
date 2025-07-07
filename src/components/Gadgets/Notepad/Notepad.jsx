@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Dropdown from '../../ui/Dropdown/Dropdow';
 
-const Notepad = ({windowKey}) => {
+const Notepad = ({ windowId }) => {
   const dropdownList = [
     { label: 'New Tab' },
     { label: 'New Window' },
@@ -27,7 +27,11 @@ const Notepad = ({windowKey}) => {
       <nav className="notepad__nav">
         <ul>
           <li>
-            <Dropdown dropdownList={dropdownList} dropdownTitle='File' windowKey={windowKey} />
+            <Dropdown
+              dropdownList={dropdownList}
+              dropdownTitle="File"
+              windowKey={windowId}
+            />
           </li>
         </ul>
       </nav>
