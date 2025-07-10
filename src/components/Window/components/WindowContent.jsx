@@ -3,8 +3,8 @@ import FilesExplorer from '../../FilesExplorer';
 import getWindowContent from '../utils/getWindowContent';
 
 const WindowContent = ({
-  id,
-  nodeId,
+  windowId,
+  currentNode,
   src,
   children,
   windowActions,
@@ -13,9 +13,9 @@ const WindowContent = ({
   windowList,
   filesActions,
 }) => {
-  const contentId = id.split('#')[1];
+  const contentId = windowId.split('#')[1];
   const windowContent = getWindowContent(contentId, {
-    id,
+    windowId: currentNode,
     language,
     src,
     type,
@@ -25,14 +25,15 @@ const WindowContent = ({
   return (
     windowContent || (
       <FilesExplorer.FilesList
-        nodeId={nodeId}
+        currentNode={currentNode}
         language={language}
         windowList={windowList}
+        openMode={null}
         children={children}
         filesActions={filesActions}
         windowActions={windowActions}
         handleWindowUpdate={(data) =>
-          windowActions?.handleUpdateWindow({ id, ...data })
+          windowActions?.handleUpdateWindow({ windowId, ...data })
         }
         nodeType={type}
         dataInitialDimension='{"width": "1000px", "height": "600px"}'

@@ -47,8 +47,8 @@ const useWindowLifecycle = ({
   createWindowDraggable,
 }) => {
   const {
-    id,
-    index,
+    windowId,
+    windowIndex,
     x,
     y,
     startX,
@@ -118,7 +118,7 @@ const useWindowLifecycle = ({
         startWidth: width,
         startHeight: height,
       });
-      handleFocusWindow(id);
+      handleFocusWindow(windowId);
     });
   }, [isMaximized]);
 
@@ -142,7 +142,7 @@ const useWindowLifecycle = ({
         });
         handleResetFocus;
       },
-      index * 55
+      windowIndex * 55
     );
   }, [isMinimized]);
 
@@ -153,7 +153,7 @@ const useWindowLifecycle = ({
       (!isMaximized && !isMinimized)
     )
       return;
-    handleFocusWindow(id);
+    handleFocusWindow(windowId);
     restoreWindow(
       windowRef,
       () => {
@@ -185,7 +185,7 @@ const useWindowLifecycle = ({
 
     closeWindow(windowRef, () => {
       handleCloseWindow({
-        id,
+        windowId,
         isRequestingClose: true,
       });
       handleResetFocus();

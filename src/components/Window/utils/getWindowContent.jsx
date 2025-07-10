@@ -63,7 +63,7 @@ const CommandPromptSection = () => (
 
 const getWindowContent = (
   contentId,
-  { id, language, src, type, windowActions }
+  { windowId, language, src, type, windowActions }
 ) => {
   const map = {
     about: () => <AboutMe language={language} />,
@@ -92,7 +92,7 @@ const getWindowContent = (
       <Tests data-initial-dimension='{"width": "500px", "height": "400px"}' />
     ),
     calculator: () => <Calculator />,
-    notepad: () => <Notepad windowId={id} />,
+    notepad: () => <Notepad windowId={windowId} />,
   };
   return map[contentId]?.();
 };

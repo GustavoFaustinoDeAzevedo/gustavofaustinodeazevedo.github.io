@@ -1,4 +1,11 @@
-import React, { use, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  use,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -18,7 +25,6 @@ import createWindowList from '../components/Window/utils/createWindowList';
 import { useItemsHandler } from './hooks/useItemsHandler';
 import { useHandleContextMenu } from './hooks/useHandleContextMenu';
 import { ThemeProvider } from 'styled-components';
-import { index } from 'mathjs';
 import PageMeta from '../components/PageMeta';
 import useChangeTheme from '../components/Settings/ChangeTheme/hooks/useChangeTheme';
 import useUserBrowserDarkMode from '../hooks/useUserBrowserDarkMode';
@@ -27,6 +33,9 @@ gsap.registerPlugin(useGSAP);
 
 const App = () => {
   //Refs
+  useEffect(() => {
+    
+  },[]);
   const { theme, isDarkMode, setDarkMode } = useChangeTheme();
   const desktopRef = useRef(null);
   const isUserBrowserDarkMode = useUserBrowserDarkMode();
@@ -82,7 +91,7 @@ const App = () => {
         <div className="desktop" ref={desktopRef}>
           <Desktop
             //onContextMenu={handleContextMenu}
-            nodeId={'desktop'}
+            currentNode={'desktop'}
             language={language}
             windowList={windowList}
             children={rootFolder.children[0].children[0].children[0].children} // C:\Users\Guest\Desktop

@@ -5,17 +5,17 @@ import {
   StyledFileWrapper__Text,
 } from './StyledFileWrapper';
 
-const SystemFile = React.memo(({ id, title, icon, onClick }) => {
+const SystemFile = React.memo(({ fileId, title, icon, onClick }) => {
   const dataInfo = useMemo(
     () =>
       JSON.stringify({
         title,
         icon,
-        id,
+        fileId,
         targetContextId: 'file',
         handler: onClick,
       }),
-    [title, icon, id, onClick]
+    [title, icon, fileId, onClick]
   );
   return (
     <StyledFileWrapper
@@ -24,7 +24,7 @@ const SystemFile = React.memo(({ id, title, icon, onClick }) => {
       onTouchStart={onClick}
       onDoubleClick={onClick}
       data-info={dataInfo}
-      id={id}
+      id={fileId}
     >
       <StyledFileWrapper__Icon
         variant={icon}

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Window from './Window';
 
 const WindowWrapper = ({
-  index,
+  windowIndex,
   windowParams,
   language,
   isFocused,
@@ -20,12 +20,12 @@ const WindowWrapper = ({
     handleChangeBackground,
   } = windowActions;
 
-  const { id, size, position, windowState, ...restParams } = windowParams;
+  const { windowId, size, position, windowState, ...restParams } = windowParams;
 
   const windowParamsObj = {
     ...restParams,
-    id,
-    index,
+    windowId,
+    windowIndex,
     language,
     isFocused,
     windowList,
@@ -47,16 +47,18 @@ const WindowWrapper = ({
     isRequestingMinimize: windowState.requestingMinimize,
   };
 
-  const windowActionsObj = {
-    handleContextMenu: () => {},
-    handleResetFocus: () => handleResetFocus(),
-    handleFocusWindow: () => handleFocusWindow(id),
-    handleCloseWindow: () => handleCloseWindow(id),
-    handleOpenWindow: (data) => handleOpenWindow(data),
-    handleUpdateWindow: (params) => handleUpdateWindow({ id, ...params }),
-    handleChangeBackground: (backgroundColor, iconColor, backgroundImage) =>
-      handleChangeBackground(backgroundColor, iconColor, backgroundImage),
-  };
+const createWindowActions = (windowId) => ({
+  handleContextMenu: () => {},
+  handleResetFocus,
+  handleFocusWindow: () => handleFocusWindow(windowId),
+  handleCloseWindow: () => handleCloseWindow(windowId),
+  handleOpenWindow,
+  handleUpdateWindow: (params) => handleUpdateWindow({ windowId, ...params }),
+  handleChangeBackground,
+});
+
+const windowActionsObj = createWindowActions(windowId);
+
 
   return (
     <Window

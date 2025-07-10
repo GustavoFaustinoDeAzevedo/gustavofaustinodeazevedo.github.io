@@ -11,6 +11,7 @@ const Desktop = ({ onContextMenu, windowActions, language, ...props }) => {
       <div className="background">
         <FilesExplorer.FilesList
           fileClassName={'desktop-files-wrapper related-background'}
+          openMode={'window'}
           windowActions={windowActions}
           handleUpdateWindow={updateWindowState}
           language={language}

@@ -10,7 +10,7 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState: {
     language: defaultLanguage,
-    desktopBackgroundColor: '#0d0d0d',
+    desktopBackgroundColor: '#040014',
     desktopIconColor: '255, 255, 255',
     desktopBackgroundImage: 'none',
   },
