@@ -1,8 +1,14 @@
-import Taskbar from './components/Taskbar';
-import TaskbarItems from './components/TaskbarItems';
-import StartMenu from './components/StartMenu';
-import Clock from './components/Clock';
-import LanguageSelector from './components/LanguageSelector';
+/**
+ * Entry point for Taskbar-related UI components.
+ * Default export is the Taskbar component.
+ * Named exports include subcomponents for StartMenu, TaskbarItems, Clock, and LanguageSelector.
+ */
 
-export { StartMenu, TaskbarItems, LanguageSelector, Clock };
-export default Taskbar;
+// re-export default Taskbar component
+export { default } from './components/Taskbar'
+
+// named exports for the rest of the utility components
+export { default as StartMenu } from './components/StartMenu'
+export { default as TaskbarItems } from './components/TaskbarItems'
+export { default as Clock } from './components/Clock'
+export { default as LanguageSelector } from './components/LanguageSelector'

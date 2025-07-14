@@ -1,4 +1,4 @@
-import { useRef, useMemo, useCallback } from 'react';
+import { useRef, useMemo, useCallback, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -16,8 +16,8 @@ gsap.registerPlugin(useGSAP);
 
 const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   const {
-    id,
-    nodeId,
+    windowId,
+    currentNode,
     zIndex,
     isOpen,
     title,
@@ -39,7 +39,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   } = windowActions;
 
   const { createRef } = useRefs();
-  const windowRef = createRef(id);
+  const windowRef = createRef(windowId);
   const headerRef = useRef(null);
   const {
     openWindow,
@@ -60,8 +60,8 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   );
 
   const updateWindowState = useCallback(
-    (updates) => handleUpdateWindow({ id, ...updates }),
-    [id, handleUpdateWindow]
+    (updates) => handleUpdateWindow({ windowId, ...updates }),
+    [windowId, handleUpdateWindow]
   );
 
   useWindowLifecycle({
@@ -96,9 +96,9 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
     <div
       ref={windowRef}
       className={`${className} parent`}
-      style={id === 'desktop' ? { zIndex: 0 } : { zIndex: zIndex }}
+      style={{zIndex}}
       onContextMenu={handleContextMenu}
-      id={id}
+      id={windowId}
       onClick={isFocused ? null : handleFocusWindow}
     >
       <WindowHeader
@@ -107,7 +107,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
         onMaximize={handleMaximize}
         onRestore={handleRestore}
         onClose={handleClose}
-        id={id}
+        windowId={windowId}
         title={title}
         icon={icon}
         isOpen={isOpen}
@@ -120,8 +120,8 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
       <WindowContentWrapper
         isFocused={isFocused}
         isOpen={isOpen}
-        id={id}
-        nodeId={nodeId}
+        windowId={windowId}
+        currentNode={currentNode}
         src={src}
         windowActions={windowActions}
         children={children}

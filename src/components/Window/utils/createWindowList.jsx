@@ -12,18 +12,18 @@ const createWindowList = (
   return useMemo(
     () =>
       windowList
-        .filter(({ id }) => id !== 'new' && id !== 'placeholder')
+        .filter(({ windowId }) => windowId !== 'new' && windowId !== 'placeholder')
         .map(({ ...windowParams }, index) => (
           <WindowWrapper
-            index={index}
-            key={windowParams.id}
+            windowIndex={index}
+            key={windowParams.windowId}
             windowParams={windowParams}
             language={language}
             windowList={windowList}
             desktopRef={desktopRef}
             filesActions={filesActions}
             windowActions={windowActions}
-            isFocused={focusedWindow === windowParams.id}
+            isFocused={focusedWindow === windowParams.windowId}
           />
         )),
     [windowList, focusedWindow, language, desktopRef, windowActions, filesActions]

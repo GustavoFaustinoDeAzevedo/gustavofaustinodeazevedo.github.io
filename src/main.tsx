@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux';
-import store from './store';
+import { store } from './store';
 import './styles/index.css';
 import { ErrorBoundary } from 'react-error-boundary';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -36,10 +36,10 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 
 root.render(
   <React.StrictMode>
-  <ErrorBoundary FallbackComponent={ErrorFallback}>
-    <Provider store={store}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Provider store={store}>
         <App />
-    </Provider>
-  </ErrorBoundary>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

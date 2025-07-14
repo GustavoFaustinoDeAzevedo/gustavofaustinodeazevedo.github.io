@@ -1,54 +1,33 @@
-import CustomColorPicker from './utils';
+import CustomColorPicker from './components';
 import Button from '../../ui/Button';
 import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export const ChangeBackground = ({ handleChangeBackground }) => {
+  const getCSSVariable = (variableName) =>
+    getComputedStyle(document.documentElement)
+      .getPropertyValue(variableName)
+      .trim();
+
+  // useSelector
   const desktopBackgroundColor = useSelector(
     (state) => state.settings.desktopBackgroundColor
   );
-  const desktopIconColor = useSelector(
-    (state) => state.settings.desktopIconColor
-  );
 
-  const defaultDesktopColor = useRef(
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--c-desktop-default-bg')
-      .trim()
-  );
-  const defaultIconColor = useRef(
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--c-rgb-desktop-default-bg-contrast')
-      .trim()
-  );
+  // useRef
+  const defaultDesktopColor = useRef(getCSSVariable('--c-desktop-default-bg'));
 
   const handleClick = () => {
-    handleChangeBackground(
-      defaultDesktopColor.current,
-      defaultIconColor.current
-    );
+    handleChangeBackground(defaultDesktopColor.current);
   };
-
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--c-desktop-bg',
-      desktopBackgroundColor
-    );
-    document.documentElement.style.setProperty(
-      '--c-rgb-desktop-bg-contrast',
-      desktopIconColor
-    );
-  }, [desktopBackgroundColor, desktopIconColor]);
 
   return (
     <div className="settings-change-background">
-      {/* <Accordion> */}
-      {/* <Panel> */}
       <h3>Pick a color to change the desktop background color</h3>
       <CustomColorPicker
         backgroundColor={desktopBackgroundColor}
-        iconColor={desktopIconColor}
         handleChangeBackground={handleChangeBackground}
+        defaultDesktopColor={defaultDesktopColor.current}
       />
       <Button onClick={handleClick} type="submit">
         Default Color
@@ -59,6 +38,8 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
         <h3></h3>
       </Panel>
        </Accordion>  */}
+      {/* Image option */}
+      {/* Color Effects */}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { placeholder } from '../../../data/filesData';
 import { useMemo } from 'react';
 
 const FilesList = ({
-  nodeId,
+  currentNode,
   language,
   windowList,
   children,
@@ -12,6 +12,7 @@ const FilesList = ({
   filesActions,
   dataInitialDimension,
   windowActions,
+  openMode,
   handleWindowUpdate = () => {},
   nodeType = 'desktop',
 }) => {
@@ -27,7 +28,7 @@ const FilesList = ({
     >
       {children.map(
         (
-          { id, title, icon, type, windowMask, isUnique, children, index },
+          { fileId, title, icon, type, windowMask, isUnique, children, nodeDepth },
           windowIndex
         ) => {
           const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
@@ -40,18 +41,19 @@ const FilesList = ({
 
           return (
             <SystemFile
-              key={`file-${id}-${windowIndex}`}
-              id={id}
+              key={`file-${fileId}-${windowIndex}`}
+              fileId={fileId}
               title={iconTitle}
               icon={finalIcon}
               language={language}
               onClick={() =>
                 handleOpenFile({
-                  id,
-                  nodeId,
+                  fileId,
+                  currentNode,
                   windowTitle,
                   language,
                   windowIcon,
+                  openMode,
                   src,
                   isUnique,
                   windowList,
@@ -61,7 +63,7 @@ const FilesList = ({
                   handleWindowUpdate,
                   fileType: type,
                   nodeType,
-                  index,
+                  nodeDepth,
                 })
               }
             />

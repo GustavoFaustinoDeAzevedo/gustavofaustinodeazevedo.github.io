@@ -4,8 +4,8 @@ const WindowContentWrapper = ({
   onFocus,
   isFocused,
   isOpen,
-  id,
-  nodeId,
+  windowId,
+  currentNode,
   children,
   windowActions,
   language,
@@ -18,8 +18,8 @@ const WindowContentWrapper = ({
   const handleFocus = isFocused ? null : onFocus;
   const windowContent = isOpen ? (
     <WindowContent
-      id={id}
-      nodeId={nodeId}
+      windowId={windowId}
+      currentNode={currentNode}
       src={src}
       children={children ?? {}}
       windowActions={windowActions}
@@ -28,7 +28,6 @@ const WindowContentWrapper = ({
       language={language}
       windowList={windowList}
       filesActions={filesActions}
-
     />
   ) : (
     <></>
