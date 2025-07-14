@@ -1,14 +1,20 @@
 import { useCallback, useMemo } from 'react';
 import FilesExplorer from '../FilesExplorer';
 
-const Desktop = ({ onContextMenu, windowActions, language, ...props }) => {
+const Desktop = ({
+  onContextMenu,
+  windowActions,
+  language,
+  backgroundColor,
+  ...props
+}) => {
   const updateWindowState = useCallback(
     (id, updates) => windowActions.handleUpdateWindow({ id, ...updates }),
     [windowActions]
   );
   return useMemo(
     () => (
-      <div className="background">
+      <div className="background" style={{ backgroundColor: backgroundColor }}>
         <FilesExplorer.FilesList
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
@@ -19,7 +25,7 @@ const Desktop = ({ onContextMenu, windowActions, language, ...props }) => {
         />
       </div>
     ),
-    [language, windowActions, updateWindowState, props]
+    [language, windowActions, updateWindowState, backgroundColor, props]
   );
 };
 
