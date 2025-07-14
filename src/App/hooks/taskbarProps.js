@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export const taskbarProps = ({ windowList,
+const taskbarProps = ({ windowList,
   history, focusedWindow, language, handleChangeLanguage, windowActions }) => {
 
   return useMemo(
@@ -17,3 +17,5 @@ export const taskbarProps = ({ windowList,
     [windowList, focusedWindow, history, language, handleChangeLanguage, windowActions]
   );
 };
+
+export default taskbarProps;

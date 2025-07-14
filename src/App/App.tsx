@@ -10,7 +10,7 @@ import Desktop from '../components/Desktop';
 import Taskbar from '../components/Taskbar';
 import PageMeta from '../components/PageMeta';
 
-import { taskbarProps } from '../app/hooks/taskbarProps';
+import taskbarProps from '../app/hooks/taskbarProps';
 import createWindowList from '../components/Window/utils/createWindowList';
 import { RefsProvider } from '../contexts/RefsContext';
 import { ThemeProvider } from 'styled-components';

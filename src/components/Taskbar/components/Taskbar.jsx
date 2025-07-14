@@ -11,7 +11,6 @@ const Taskbar = ({
   history,
   language,
   windowActions,
-  onChangeLanguage,
   onUpdateWindow,
   onUnfocus,
 }) => {
@@ -44,20 +43,20 @@ const Taskbar = ({
 
   const handleMinimize = (id) => {
     onUpdateWindow({
-      id,
+      windowId: id,
       minimized: true,
     });
   };
   const handleMaximize = (id) => {
     onUpdateWindow({
-      id: id,
+      windowId: id,
       maximized: true,
     });
   };
 
   const handleRestore = (id) => {
     onUpdateWindow({
-      id: id,
+      windowId: id,
       requestingRestore: true,
     });
   };
