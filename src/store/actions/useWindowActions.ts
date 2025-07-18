@@ -47,7 +47,7 @@ const useWindowActions = () => {
   };
 
   const handleResetFocus = () => {
-    dispatch(resetFocus());
+    dispatch(resetFocus(null));
   };
 
   return {

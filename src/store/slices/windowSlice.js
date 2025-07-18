@@ -89,8 +89,17 @@ const windowSlice = createSlice({
       }
     },
 
-    openWindow: (state, { payload }) => {
-      const { windowId, title, icon, src, children = [], type, nodeDepth } = payload;
+    openWindow: (state, action) => {
+      const { windowId, title, icon, src, children = [], type, nodeDepth, isUnique } = action.payload;
+
+      if (isUnique) {
+        const { eng, por } = title;
+        const foundSameWindow = state.openedWindowList.find(win => win.title.por === por && win.title.eng === eng);
+        if (foundSameWindow) {
+          state.focusedWindow = foundSameWindow.windowId;
+          return;
+        }
+      }
 
       state.history = updateHistory(state.history, title);
 
@@ -123,7 +132,7 @@ const windowSlice = createSlice({
         windowState: { ...baseState },
       };
 
-      state.openedWindowList.push(newWindow);
+      state.openedWindowList = [...state.openedWindowList, newWindow];
       state.focusedWindow = newId;
     },
 

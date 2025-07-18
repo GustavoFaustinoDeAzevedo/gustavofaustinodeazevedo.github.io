@@ -8,7 +8,7 @@ export type Language = 'eng' | 'por';
 // Shape of theme settings payload for background change
 export interface BackgroundPayload {
   backgroundColor?: string;
-  iconColor?: string;
+  backgroundEffect?: string;
   backgroundImage?: string;
 }
 
@@ -16,7 +16,7 @@ export interface BackgroundPayload {
 export interface SettingsState {
   language: Language;
   desktopBackgroundColor: string;
-  desktopIconColor: string;
+  desktopBackgroundEffect: string;
   desktopBackgroundImage: string;
 }
 
@@ -38,7 +38,7 @@ const defaultBackgroundColor = getComputedStyle(document.documentElement)
 const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundColor: defaultBackgroundColor,
-  desktopIconColor: '255, 255, 255',
+  desktopBackgroundEffect: 'diagonal',
   desktopBackgroundImage: 'none',
 };
 
@@ -60,17 +60,20 @@ export const settingsSlice = createSlice({
      * Only provided values will override current settings.
      */
     changeBackground: (state, action: PayloadAction<BackgroundPayload>) => {
-      const { backgroundColor, iconColor, backgroundImage } = action.payload;
+      const { backgroundColor, backgroundEffect, backgroundImage } =
+        action.payload;
 
-      if (backgroundColor !== undefined) {
-        state.desktopBackgroundColor = backgroundColor;
-      }
-      if (iconColor !== undefined) {
-        state.desktopIconColor = iconColor;
-      }
-      if (backgroundImage !== undefined) {
-        state.desktopBackgroundImage = backgroundImage;
-      }
+      Object.assign(state, {
+        ...(backgroundColor !== undefined && {
+          desktopBackgroundColor: backgroundColor,
+        }),
+        ...(backgroundEffect !== undefined && {
+          desktopBackgroundEffect: backgroundEffect,
+        }),
+        ...(backgroundImage !== undefined && {
+          desktopBackgroundImage: backgroundImage,
+        }),
+      });
     },
   },
 });
