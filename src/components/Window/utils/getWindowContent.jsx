@@ -1,6 +1,6 @@
 import Calculator from '../../Gadgets/Calculator';
 import Notepad from '../../Gadgets/Notepad';
-import { AboutMe, Skills } from '../../Portolio';
+import { AboutMe, Skills } from '../../Portfolio';
 import BrowserSimulator from '../../BrowserSimulator';
 import TaskManager from '../../TaskManager';
 import { ChangeBackground } from '../../Settings';
@@ -80,11 +80,13 @@ const getWindowContent = (
     github: () => <BrowserSimulator src={src} />,
     'background-color-picker': () => (
       <ChangeBackground
+      language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),
     'change-background': () => (
       <ChangeBackground
+        language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),

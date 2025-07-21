@@ -137,7 +137,7 @@
               width: 30rem;
               list-style: none;
               display: flex;
-              flex-wrap: wrap;
+              flex-direction: column;
               gap: 5px;
             }
           }

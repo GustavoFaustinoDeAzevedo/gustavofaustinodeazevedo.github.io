@@ -2,12 +2,16 @@ import CustomColorPicker from './components';
 import Button from '../../ui/Button';
 import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { changeBackgroundTextContent } from './data/changeBackgroundTextContent';
 
-export const ChangeBackground = ({ handleChangeBackground }) => {
+export const ChangeBackground = ({ handleChangeBackground, language }) => {
   const getCSSVariable = (variableName) =>
     getComputedStyle(document.documentElement)
       .getPropertyValue(variableName)
       .trim();
+
+  // useState
+  const [backgroundType, setBackgroundType] = useState('image');
 
   // useSelector
   const desktopBackgroundColor = useSelector(
@@ -21,58 +25,67 @@ export const ChangeBackground = ({ handleChangeBackground }) => {
     handleChangeBackground(defaultDesktopColor.current);
   };
 
-  return (
-    <div className="settings-change-background">
-      <div className="background-color-container">
-        <div className="color-picker-container">
-          <h3>Pick a color to change the desktop background color</h3>
-          <CustomColorPicker
-            backgroundColor={desktopBackgroundColor}
-            handleChangeBackground={handleChangeBackground}
-            defaultDesktopColor={defaultDesktopColor.current}
-          />
-          <Button onClick={handleClick} type="submit">
-            Default Color
-          </Button>
-        </div>
-        <div className="background-options-container">
-          <fieldset className="effect-picker-container">
-            <legend>Type</legend>
-            <div className="radio-container">
-              <label htmlFor="1">Image</label>
-              <input type="radio" id="1" name="btype" value="" />
-            </div>
+  //handlers
+  const handleChangeBackgroundType = () => {
+    setBackgroundType((prev) => (prev === 'image' ? 'color' : 'image'));
+  };
+  const choiceContent =
+    changeBackgroundTextContent[language].choices[backgroundType];
 
-            <div className="radio-container">
-              <label htmlFor="2">Color</label>
-              <input type="radio" id="2" name="btype" value="" />
-            </div>
-          </fieldset>
-          <fieldset className="effect-picker-container">
-            <legend>Effects</legend>
-            <div className="radio-container">
-              <label htmlFor="1">1</label>
-              <input type="radio" id="1" name="a" value="" />
-            </div>
-            <div className="radio-container">
-              <label htmlFor="2">2</label>
-              <input type="radio" id="2" name="a" value="" />
-            </div>
-            <div className="radio-container">
-              <label htmlFor="3">3</label>
-              <input type="radio" id="3" name="a" value="" />
-            </div>
-          </fieldset>
-        </div>
+  //jsx
+  const BackgroundControl = () => (
+    <main className="change-background__control-wrapper">
+      <CustomColorPicker
+        backgroundColor={desktopBackgroundColor}
+        handleChangeBackground={handleChangeBackground}
+        defaultDesktopColor={defaultDesktopColor.current}
+      />
+      <Button onClick={handleClick} type="submit">
+        {choiceContent.button}
+      </Button>
+    </main>
+  );
+  const InputChoices = ({ choicesObject }) => {
+    if (typeof choicesObject !== 'object')
+      return console.error('You must input an object to map the radio options');
+    return Object.values(choicesObject).map((choice) => (
+      <div className="change-background__option">
+        <label htmlFor={choice.id}>{choice.label}</label>
+        <input
+          type="radio"
+          id={choice.id}
+          name="btype"
+          value={choice.id}
+          checked={backgroundType === choice.id}
+          onChange={handleChangeBackgroundType}
+        />
       </div>
-      {/* </Panel> 
+    ));
+  };
 
-      <Panel>
-        <h3></h3>
-      </Panel>
-       </Accordion>  */}
-      {/* Image option */}
-      {/* Color Effects */}
+  return (
+    <div
+      className="change-background__container"
+      data-initial-dimension='{"width": "550px", "height": "500px"}'
+    >
+      <header>
+        <h3 className="change-background__title">{choiceContent.title}</h3>
+      </header>
+      <div className="change-background__wrapper">
+        <BackgroundControl />
+        <aside className="change-background__options-wrapper">
+          <fieldset className="change-background__options-list">
+            <legend>{changeBackgroundTextContent[language].legend}</legend>
+            <InputChoices
+              choicesObject={changeBackgroundTextContent[language].choices}
+            />
+          </fieldset>
+          <fieldset className="change-background__options-list">
+            <legend>{choiceContent.settings.legend}</legend>
+            <InputChoices choicesObject={choiceContent.settings.choices} />
+          </fieldset>
+        </aside>
+      </div>
     </div>
   );
 };
