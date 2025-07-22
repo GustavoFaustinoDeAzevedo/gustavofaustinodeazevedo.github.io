@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { changeBackgroundTextContent } from './data/changeBackgroundTextContent';
 
+import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
+
 export const ChangeBackground = ({ handleChangeBackground, language }) => {
   const getCSSVariable = (variableName) =>
     getComputedStyle(document.documentElement)
@@ -11,7 +13,7 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
       .trim();
 
   // useState
-  const [backgroundType, setBackgroundType] = useState('image');
+  const [backgroundDisplay, setBackgroundDisplay] = useState('image');
 
   // useSelector
   const desktopBackgroundColor = useSelector(
@@ -26,25 +28,45 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
   };
 
   //handlers
-  const handleChangeBackgroundType = () => {
-    setBackgroundType((prev) => (prev === 'image' ? 'color' : 'image'));
+  const handleChangeBackgroundDisplay = () => {
+    setBackgroundDisplay((prev) => (prev === 'image' ? 'color' : 'image'));
   };
-  const choiceContent =
-    changeBackgroundTextContent[language].choices[backgroundType];
+  useEffect(() => {
+    console.log(backgroundDisplay);
+  }, [backgroundDisplay]);
+  const { displayChoicesContent, displayChoicesRoot } =
+    useDisplayChoicesContent({
+      backgroundDisplay,
+      language,
+    });
 
   //jsx
-  const BackgroundControl = () => (
-    <main className="change-background__control-wrapper">
-      <CustomColorPicker
-        backgroundColor={desktopBackgroundColor}
-        handleChangeBackground={handleChangeBackground}
-        defaultDesktopColor={defaultDesktopColor.current}
-      />
-      <Button onClick={handleClick} type="submit">
-        {choiceContent.button}
-      </Button>
-    </main>
-  );
+  const BackgroundControl = () => {
+    return backgroundDisplay ? (
+      <main className="change-background__control-wrapper">
+        <CustomColorPicker
+          backgroundColor={desktopBackgroundColor}
+          handleChangeBackground={handleChangeBackground}
+          defaultDesktopColor={defaultDesktopColor.current}
+        />
+        <Button onClick={handleClick} type="submit">
+          {displayChoicesContent?.button}
+        </Button>
+      </main>
+    ) : (
+      <main className="change-background__control-wrapper">
+        <CustomColorPicker
+          backgroundColor={desktopBackgroundColor}
+          handleChangeBackground={handleChangeBackground}
+          defaultDesktopColor={defaultDesktopColor.current}
+        />
+        <Button onClick={handleClick} type="submit">
+          {displayChoicesContent?.button}
+        </Button>
+      </main>
+    );
+  };
+
   const InputChoices = ({ choicesObject }) => {
     if (typeof choicesObject !== 'object')
       return console.error('You must input an object to map the radio options');
@@ -56,8 +78,8 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
           id={choice.id}
           name="btype"
           value={choice.id}
-          checked={backgroundType === choice.id}
-          onChange={handleChangeBackgroundType}
+          checked={backgroundDisplay === choice.id}
+          onChange={handleChangeBackgroundDisplay}
         />
       </div>
     ));
@@ -69,20 +91,22 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
       data-initial-dimension='{"width": "550px", "height": "500px"}'
     >
       <header>
-        <h3 className="change-background__title">{choiceContent.title}</h3>
+        <h3 className="change-background__title">
+          {displayChoicesContent?.title}
+        </h3>
       </header>
       <div className="change-background__wrapper">
         <BackgroundControl />
         <aside className="change-background__options-wrapper">
           <fieldset className="change-background__options-list">
-            <legend>{changeBackgroundTextContent[language].legend}</legend>
-            <InputChoices
-              choicesObject={changeBackgroundTextContent[language].choices}
-            />
+            <legend>{displayChoicesRoot?.legend}</legend>
+            <InputChoices choicesObject={displayChoicesRoot?.choices} />
           </fieldset>
           <fieldset className="change-background__options-list">
-            <legend>{choiceContent.settings.legend}</legend>
-            <InputChoices choicesObject={choiceContent.settings.choices} />
+            <legend>{displayChoicesContent?.settings?.legend}</legend>
+            <InputChoices
+              choicesObject={displayChoicesContent?.settings?.choices}
+            />
           </fieldset>
         </aside>
       </div>
