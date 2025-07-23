@@ -137,7 +137,11 @@
       -12px 12px 0px rgba(0, 0, 0, 0.80),
       -15px 15px 0px rgba(0, 0, 0, 0.90),
       -18px 18px 0px rgba(0, 0, 0, 1.00);
+
+    --s-text-outline: 1px 1px 0 #000000b4, 1px 0px 0 #000000b4, 0px 1px 0 #000000b4;
   }
+
+
 
   * {
     margin: 0;

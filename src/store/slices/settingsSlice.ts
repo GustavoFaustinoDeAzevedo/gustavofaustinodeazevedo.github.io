@@ -8,6 +8,7 @@ export type Language = 'eng' | 'por';
 // Shape of theme settings payload for background change
 export interface BackgroundPayload {
   backgroundColor?: string;
+  backgroundColorContrast?: string;
   backgroundEffect?: string;
   backgroundImage?: string;
 }
@@ -16,6 +17,7 @@ export interface BackgroundPayload {
 export interface SettingsState {
   language: Language;
   desktopBackgroundColor: string;
+  desktopBackgroundColorContrast: string;
   desktopBackgroundEffect: string;
   desktopBackgroundImage: string;
 }
@@ -34,10 +36,13 @@ const defaultBackgroundColor = getComputedStyle(document.documentElement)
   .getPropertyValue('--c-desktop-default-bg')
   .trim();
 
+const defaultBackgroundColorContrast = '#ffffff';
+
 // 3. Initial state
 const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundColor: defaultBackgroundColor,
+  desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundEffect: 'diagonal',
   desktopBackgroundImage: 'none',
 };
@@ -60,12 +65,19 @@ export const settingsSlice = createSlice({
      * Only provided values will override current settings.
      */
     changeBackground: (state, action: PayloadAction<BackgroundPayload>) => {
-      const { backgroundColor, backgroundEffect, backgroundImage } =
-        action.payload;
+      const {
+        backgroundColor,
+        backgroundColorContrast,
+        backgroundEffect,
+        backgroundImage,
+      } = action.payload;
 
       Object.assign(state, {
         ...(backgroundColor !== undefined && {
           desktopBackgroundColor: backgroundColor,
+        }),
+        ...(backgroundColorContrast !== undefined && {
+          desktopBackgroundColorContrast: backgroundColorContrast,
         }),
         ...(backgroundEffect !== undefined && {
           desktopBackgroundEffect: backgroundEffect,

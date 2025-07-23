@@ -40,6 +40,9 @@ const App: React.FC = () => {
   const backgroundColor = useSelector(
     (state: RootState) => state.settings.desktopBackgroundColor
   );
+  const backgroundColorContrast = useSelector(
+    (state: RootState) => state.settings.desktopBackgroundColorContrast
+  );
   const contextMenu = useSelector((state: RootState) => state.contextMenu);
   const windowList = useSelector(
     (state: RootState) => state.window.openedWindowList
@@ -90,6 +93,7 @@ const App: React.FC = () => {
             language={language}
             windowList={windowList}
             backgroundColor={backgroundColor}
+            backgroundColorContrast={backgroundColorContrast}
             children={
               rootFolder.children?.[0]?.children?.[0]?.children?.[0]
                 ?.children ?? []
