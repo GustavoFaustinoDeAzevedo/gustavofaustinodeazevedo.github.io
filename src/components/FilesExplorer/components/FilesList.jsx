@@ -13,6 +13,7 @@ const FilesList = ({
   dataInitialDimension,
   windowActions,
   openMode,
+  backgroundColorContrast,
   handleWindowUpdate = () => {},
   nodeType = 'desktop',
 }) => {
@@ -21,6 +22,7 @@ const FilesList = ({
   const typeToIcon = {
     app: 'html-file',
   };
+
   return (
     <div
       className={`${fileClassName}`}
@@ -28,7 +30,16 @@ const FilesList = ({
     >
       {children.map(
         (
-          { fileId, title, icon, type, windowMask, isUnique, children, nodeDepth },
+          {
+            fileId,
+            title,
+            icon,
+            type,
+            windowMask,
+            isUnique,
+            children,
+            nodeDepth,
+          },
           windowIndex
         ) => {
           const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
@@ -43,6 +54,7 @@ const FilesList = ({
             <SystemFile
               key={`file-${fileId}-${windowIndex}`}
               fileId={fileId}
+              backgroundColorContrast={backgroundColorContrast}
               title={iconTitle}
               icon={finalIcon}
               language={language}

@@ -64,6 +64,7 @@
         word-wrap: break-word;
         font-size: 0.8rem;
         color: rgb(var(--c-rgb-desktop-bg-contrast));
+        text-shadow: var(--s-text-outline);
         -webkit-user-select: none;
         user-select: none;
         transition: color 0.3s ease-in-out;

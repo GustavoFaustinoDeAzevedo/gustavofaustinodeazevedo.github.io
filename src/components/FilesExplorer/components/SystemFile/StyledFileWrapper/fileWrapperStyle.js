@@ -1,12 +1,11 @@
 export const fileWrapperStyle = {
-  padding: '0.8rem 0',
+  padding: '0.2rem 0',
   width: '7rem',
   height: '6rem',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
-  color: 'var(--c-background1)',
   cursor: 'var(--cursor-pointer)',
   lineHeight: '1.2',
   borderRadius: '0.5rem',
@@ -16,7 +15,7 @@ export const fileWrapperStyle = {
   '&:hover, &:focus': {
     transition: 'all 0.2s',
     textShadow: '0px 0px 15px rgba(var(--c-rgb-desktop-bg-contrast))',
-    backgroundColor: 'rgba(var(--c-rgb-desktop-bg-contrast), 0.2)',
+    // backgroundColor: 'rgba(var(--c-rgb-desktop-bg-contrast), 0.2)',
     WebkitUserSelect: 'none',
     userSelect: 'none',
     WebkitTouchCallout: 'none',
@@ -35,15 +34,17 @@ export const fileWrapperStyle__text = {
   lineClamp: 2,
   wordWrap: 'break-word',
   fontSize: '0.8rem',
-  color: 'rgb(var(--c-rgb-desktop-bg-contrast))',
+  // textShadow: 'var(--s-text-outline)',
   WebkitUserSelect: 'none',
   userSelect: 'none',
   transition: 'color 0.3s ease-in-out',
+
 };
 
 export const fileWrapperStyle__icon = {
   fontSize: '2rem',
   marginBottom: '0.5rem',
   backgroundColor: 'transparent',
+  // filter: 'drop-shadow(2px 2px 0px #00000068)',
   transition: 'background-color 0.3s ease-in-out',
 }
