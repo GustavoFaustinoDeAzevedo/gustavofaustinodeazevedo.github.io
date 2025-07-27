@@ -27,7 +27,7 @@ const SystemFile = React.memo(
         onDoubleClick={onClick}
         data-info={dataInfo}
         id={fileId}
-        backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
+        // backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
       >
         <StyledFileWrapper__Icon
           variant={icon}
