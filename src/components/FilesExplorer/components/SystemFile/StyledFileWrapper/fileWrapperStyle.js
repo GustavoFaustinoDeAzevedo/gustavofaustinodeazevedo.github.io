@@ -1,6 +1,8 @@
+import { transform } from "typescript";
+
 export const fileWrapperStyle = {
   padding: '0.2rem 0',
-  width: '7rem',
+  width: '6rem',
   height: '6rem',
   display: 'flex',
   flexDirection: 'column',
@@ -8,12 +10,15 @@ export const fileWrapperStyle = {
   alignItems: 'center',
   cursor: 'var(--cursor-pointer)',
   lineHeight: '1.2',
+  filter: 'brightness(0.9)',
   borderRadius: '0.5rem',
-  transition: 'color 0.2s ease-in-out, background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out',
+  transition: 'color 0.2s ease-in-out, background-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, transform 0.4s ease, filter 0.5s ease',
   pointerEvents: 'initial',
 
   '&:hover, &:focus': {
     transition: 'all 0.2s',
+    transform: 'scale(1.1)',
+    filter: 'brightness(1.1) drop-shadow(0px 8px 2px #00000047)',
     textShadow: '0px 0px 15px rgba(var(--c-rgb-desktop-bg-contrast))',
     // backgroundColor: 'rgba(var(--c-rgb-desktop-bg-contrast), 0.2)',
     WebkitUserSelect: 'none',

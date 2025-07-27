@@ -1,12 +1,16 @@
 import { HexColorPicker } from 'react-colorful';
 import useMouseEvents from '../../../../hooks/useMouseEvents';
 import { useRef } from 'react';
+import Button from '../../../ui/Button';
 
 export const CustomColorPicker = ({
   backgroundColor,
   handleChangeBackground,
   defaultDesktopColor,
+  displayChoicesContent,
 }) => {
+  const colorRef = useRef(backgroundColor);
+  
   const getContrastYIQ = (color) => {
     const hexcolor = color.replace('#', '');
     const r = parseInt(hexcolor.substr(0, 2), 16);
@@ -16,7 +20,11 @@ export const CustomColorPicker = ({
     return yiq >= 128 ? '#000000' : '#ffffff';
   };
 
-  const colorRef = useRef(backgroundColor);
+  const handleButtonClick = () => {
+    colorRef.current = defaultDesktopColor;
+    handleChangeBackground(colorRef.current, getContrastYIQ(colorRef.current));
+  };
+
   useMouseEvents({
     onMouseUp: () =>
       handleChangeBackground(
@@ -25,9 +33,14 @@ export const CustomColorPicker = ({
       ),
   });
   return (
-    <HexColorPicker
-      color={backgroundColor || defaultDesktopColor}
-      onChange={(color) => (colorRef.current = color)}
-    />
+    <>
+      <HexColorPicker
+        color={backgroundColor || defaultDesktopColor}
+        onChange={(color) => (colorRef.current = color)}
+      />
+      <Button onClick={handleButtonClick} type="submit">
+        {displayChoicesContent?.button}
+      </Button>
+    </>
   );
 };

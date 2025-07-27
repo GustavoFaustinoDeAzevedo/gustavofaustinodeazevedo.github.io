@@ -22,18 +22,14 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
 
   // useRef
   const defaultDesktopColor = useRef(getCSSVariable('--c-desktop-default-bg'));
-
-  const handleClick = () => {
-    handleChangeBackground(defaultDesktopColor.current);
-  };
+  const defaultFilesColor = useRef(getCSSVariable('--c-desktop-default-bg'));
 
   //handlers
+
   const handleChangeBackgroundDisplay = () => {
     setBackgroundDisplay((prev) => (prev === 'image' ? 'color' : 'image'));
   };
-  useEffect(() => {
-    console.log(backgroundDisplay);
-  }, [backgroundDisplay]);
+
   const { displayChoicesContent, displayChoicesRoot } =
     useDisplayChoicesContent({
       backgroundDisplay,
@@ -48,10 +44,8 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
           backgroundColor={desktopBackgroundColor}
           handleChangeBackground={handleChangeBackground}
           defaultDesktopColor={defaultDesktopColor.current}
+          displayChoicesContent={displayChoicesContent}
         />
-        <Button onClick={handleClick} type="submit">
-          {displayChoicesContent?.button}
-        </Button>
       </main>
     ) : (
       <main className="change-background__control-wrapper">
@@ -59,10 +53,8 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
           backgroundColor={desktopBackgroundColor}
           handleChangeBackground={handleChangeBackground}
           defaultDesktopColor={defaultDesktopColor.current}
+          displayChoicesContent={displayChoicesContent}
         />
-        <Button onClick={handleClick} type="submit">
-          {displayChoicesContent?.button}
-        </Button>
       </main>
     );
   };

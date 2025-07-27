@@ -58,8 +58,8 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'projects',
                   title: {
-                    eng: 'Program Files (Work in Progress 1/25)',
-                    por: 'Arquivos de Programas (Em Desenvolvimento 1/25)',
+                    eng: 'Program Files (Work in Progress 1/25 [PAUSED])',
+                    por: 'Arquivos de Programas (Em Desenvolvimento 1/25 [PAUSED])',
                   },
                   icon: 'folder',
                   type: 'folder',
@@ -248,7 +248,7 @@ export const rootFolder: FileNode = {
                 },
                 {
                   fileId: 'change-background',
-                  title: { eng: 'Change Background', por: 'Alterar Fundo' },
+                  title: { eng: 'Change Background (UX and UI in progress)', por: 'Alterar Fundo (UX e UI em desenvolvimento)' },
                   icon: 'image-outline-icon',
                   type: 'app',
                   isUnique: true,
@@ -256,8 +256,8 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'cmd',
                   title: {
-                    eng: 'Command Prompt (Work in Progress)',
-                    por: 'Prompt de Comando (Em Desenvolvimento)',
+                    eng: 'Command Prompt (UX in Progress [PAUSED])',
+                    por: 'Prompt de Comando (UX em Desenvolvimento [PAUSADO])',
                   },
                   icon: 'command',
                   type: 'app',
@@ -265,8 +265,8 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'task-manager',
                   title: {
-                    eng: 'Task Manager (Work in Progress)',
-                    por: 'Gerenciador de Tarefas (Em Desenvolvimento)',
+                    eng: 'Task Manager (UI and UX in Progress [PAUSED])',
+                    por: 'Gerenciador de Tarefas (UI e UX em Desenvolvimento [PAUSADO])',
                   },
                   icon: 'task-manager',
                   type: 'app',
@@ -291,7 +291,7 @@ export const rootFolder: FileNode = {
                 },
                 {
                   fileId: 'new',
-                  title: { eng: 'New', por: 'Novo' },
+                  title: { eng: 'New File', por: 'Adicionar Arquivo' },
                   icon: 'plus-circle',
                 },
               ],

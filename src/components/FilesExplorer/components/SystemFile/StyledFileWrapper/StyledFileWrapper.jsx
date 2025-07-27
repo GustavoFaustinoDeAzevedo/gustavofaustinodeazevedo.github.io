@@ -16,6 +16,7 @@ export const StyledFileWrapper__Icon = styled(Icon)`
   ${fileWrapperStyle__icon};
   filter: ${(props) => props.backgroundColorContrast};
 `;
+
 export const StyledFileWrapper__Text = styled.p`
   ${fileWrapperStyle__text};
   color: ${(props) => props.backgroundColorContrast};
