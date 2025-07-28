@@ -88,7 +88,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
   const handleRestore = () => updateWindowState({ requestingRestore: true });
 
   const handleClose = () => updateWindowState({ requestingClose: true });
-  const handleUpdate = (data) => updateWindowState(data);
+
 
   useClickOutside(windowRef, handleResetFocus, isFocused);
 
@@ -96,7 +96,7 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
     <div
       ref={windowRef}
       className={`${className} parent`}
-      style={{zIndex}}
+      style={{ zIndex }}
       onContextMenu={handleContextMenu}
       id={windowId}
       onClick={isFocused ? null : handleFocusWindow}

@@ -1,4 +1,4 @@
-import FilesExplorer from '../../FilesExplorer';
+import { FilesList } from '../../FilesExplorer';
 
 import getWindowContent from '../utils/getWindowContent';
 
@@ -24,7 +24,7 @@ const WindowContent = ({
 
   return (
     windowContent || (
-      <FilesExplorer.FilesList
+      <FilesList
         currentNode={currentNode}
         language={language}
         windowList={windowList}

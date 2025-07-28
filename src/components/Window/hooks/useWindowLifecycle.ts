@@ -92,21 +92,23 @@ const useWindowLifecycle = ({
       startHeight: height,
     });
 
-    createWindowDraggable(
+    createWindowDraggable({
       windowRef,
-      headerRef.current,
-      desktopRef.current,
-      handleFocusWindow,
-      (params) => updateWindowState(params),
+      triggerElement: headerRef.current,
+      bounds: desktopRef.current,
+      onFocus: handleFocusWindow,
+      onUpdateWindow: (params) => updateWindowState(params),
       width,
       height,
+      isFocused
+    }
     );
   }, [isRequestingOpen]);
 
   useEffect(() => {
     if (!windowRef.current || !isMaximized || isRequestingRestore) return;
 
-    const { width, height } = getWindowInfo();
+    const { savedWidth, savedHeight } = getWindowInfo();
     maximizeWindow(windowRef, () => {
       updateWindowState({
         x: 0,
@@ -115,17 +117,17 @@ const useWindowLifecycle = ({
         startY: y,
         width: 0,
         height: 0,
-        startWidth: width,
-        startHeight: height,
+        startWidth: savedWidth,
+        startHeight: savedHeight,
       });
-      handleFocusWindow(windowId);
+      !isFocused && handleFocusWindow(windowId);
     });
   }, [isMaximized]);
 
   useEffect(() => {
     if (!windowRef.current || !isMinimized || isRequestingRestore) return;
 
-    const { width, height } = getWindowInfo();
+    const { savedWidth, savedHeight } = getWindowInfo();
     minimizeWindow(
       windowRef,
       () => {
@@ -136,8 +138,8 @@ const useWindowLifecycle = ({
           startY: y,
           width: startWidth,
           height: startHeight,
-          startWidth: width,
-          startHeight: height,
+          startWidth: savedWidth,
+          startHeight: savedHeight,
 
         });
         handleResetFocus;
@@ -153,7 +155,7 @@ const useWindowLifecycle = ({
       (!isMaximized && !isMinimized)
     )
       return;
-    handleFocusWindow(windowId);
+    !isFocused && handleFocusWindow(windowId);
     restoreWindow(
       windowRef,
       () => {
@@ -180,6 +182,22 @@ const useWindowLifecycle = ({
     );
   }, [isRequestingRestore]);
 
+  // useEffect(() => {
+  //   updateWindowState({
+  //     maximized: isMinimized && isMaximized,
+  //     minimized: false,
+  //     requestingRestore: false,
+  //     x: startX,
+  //     y: startY,
+  //     startX: x,
+  //     startY: y,
+  //     width: startWidth,
+  //     height: startHeight,
+  //     startWidth: width,
+  //     startHeight: height,
+  //   });
+  // }, [isRequestingUpdate]);
+
   useEffect(() => {
     if (!windowRef.current || !isOpen || !isRequestingClose) return;
 
@@ -191,6 +209,7 @@ const useWindowLifecycle = ({
       handleResetFocus();
     });
   }, [isRequestingClose]);
+
 };
 
 export default useWindowLifecycle;

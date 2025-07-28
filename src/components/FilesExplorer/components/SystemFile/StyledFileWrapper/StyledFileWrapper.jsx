@@ -8,16 +8,18 @@ import Icon from '../../../../ui/GlobalStyles/components/Icon';
 
 export const StyledFileWrapper = styled.div`
   ${fileWrapperStyle}, &:hover,&:focus {
-    background-color: ${(props) => props.backgroundColorContrast + '33'};
+    background-color: ${(props) => props.$backgroundColorContrast + '33'};
   }
 `;
 
 export const StyledFileWrapper__Icon = styled(Icon)`
   ${fileWrapperStyle__icon};
-  filter: ${(props) => props.backgroundColorContrast};
+  filter: ${(props) => props.$backgroundColorContrast};
 `;
 
 export const StyledFileWrapper__Text = styled.p`
   ${fileWrapperStyle__text};
-  color: ${(props) => props.backgroundColorContrast};
+  color: ${(props) => props.$backgroundColorContrast};
+  -webkit-line-clamp: ${(props) => props.$lines};
+  line-clamp: ${(props) => props.$lines};
 `;

@@ -15,7 +15,7 @@ gsap.registerPlugin(Draggable);
  * @param {number} height - Initial height of the window
  * @returns {void}
  */
-const createWindowDraggable = (windowRef, triggerElement, bounds, onFocus, onUpdateWindow, width, height) => {
+const createWindowDraggable = ({ windowRef, triggerElement, bounds, onFocus, onUpdateWindow, width, height, isFocused }) => {
 
   Draggable.create(windowRef.current, {
     trigger: triggerElement,
@@ -23,9 +23,9 @@ const createWindowDraggable = (windowRef, triggerElement, bounds, onFocus, onUpd
     zIndexBoost: false,
     bounds,
     inertia: true,
-    onPress: onFocus,
+    onPress: !isFocused ? onFocus : null,
     onDragStart:
-      onFocus,
+      !isFocused ? onFocus : null,
     onDragEnd: function () {
       const { startX, startY, x, y } = this;
       const finalWidth = this.target.getBoundingClientRect().width;
