@@ -1,7 +1,7 @@
 import { placeholder } from "../../../data/filesData";
 
 export const handleOpenFile = ({ fileId, currentNode, windowTitle, language, windowIcon, src, isUnique, openMode, windowList, children, handleNewFile, windowActions, fileType, nodeType, handleWindowUpdate, nodeDepth }) => {
-  if (windowTitle[language] === 'Novo' || windowTitle[language] === 'New') {
+  if (windowTitle[language] === 'Adicionar Arquivo' || windowTitle[language] === 'New File') {
     console.log('Creating new file with ID:', currentNode);
     handleNewFile(placeholder, currentNode, nodeDepth);
     console.log(handleWindowUpdate);

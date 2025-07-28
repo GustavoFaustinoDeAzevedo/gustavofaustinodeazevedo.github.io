@@ -4,9 +4,11 @@ import {
   StyledFileWrapper__Icon,
   StyledFileWrapper__Text,
 } from './StyledFileWrapper';
+import { useAutoLineClamp } from '../../hooks';
 
 const SystemFile = React.memo(
   ({ fileId, title, icon, onClick, backgroundColorContrast }) => {
+    const [ref, lines] = useAutoLineClamp(title, 2);
     const dataInfo = useMemo(
       () =>
         JSON.stringify({
@@ -31,12 +33,14 @@ const SystemFile = React.memo(
       >
         <StyledFileWrapper__Icon
           variant={icon}
-          backgroundColorContrast={`drop-shadow( 0px 0px 0.5px ${
-            backgroundColorContrast ?? '#3c3c3c' 
+          $backgroundColorContrast={`drop-shadow( 0px 0px 0.5px ${
+            backgroundColorContrast ?? '#3c3c3c'
           })`}
         />
         <StyledFileWrapper__Text
-          backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
+          ref={ref}
+          $backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
+          $line={lines}
         >
           {title}
         </StyledFileWrapper__Text>

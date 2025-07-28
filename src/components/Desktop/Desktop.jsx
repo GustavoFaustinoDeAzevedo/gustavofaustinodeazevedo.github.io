@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import FilesExplorer from '../FilesExplorer';
+import { FilesList } from '../FilesExplorer';
 
 const Desktop = ({
   onContextMenu,
@@ -15,7 +15,7 @@ const Desktop = ({
   return useMemo(
     () => (
       <div className="background" style={{ backgroundColor: backgroundColor }}>
-        <FilesExplorer.FilesList
+        <FilesList
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
           windowActions={windowActions}
