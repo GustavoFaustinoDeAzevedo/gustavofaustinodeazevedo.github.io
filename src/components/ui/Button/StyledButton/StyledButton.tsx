@@ -1,8 +1,14 @@
-// StyledButton.jsx
 import styled, { keyframes, css } from 'styled-components';
 import variantStyles from './buttonStyles';
 
-const buttonPressed = (variant) => keyframes`
+type VariantKey = keyof typeof variantStyles;
+
+interface StyledButtonProps {
+  variant?: VariantKey;
+  isAnimating?: boolean;
+}
+
+const buttonPressed = (variant: VariantKey) => keyframes`
   0% {
     outline: 1px double ${variantStyles[variant].backgroundColor};
   }
@@ -16,7 +22,7 @@ const buttonPressed = (variant) => keyframes`
 
 const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !['variant', 'isAnimating'].includes(prop),
-})`
+})<StyledButtonProps>`
   width: 110px;
   height: 30px;
   border: none;
@@ -39,11 +45,10 @@ const StyledButton = styled.button.withConfig({
   }
 
   ${({ isAnimating, variant = 'primary' }) =>
-    isAnimating
-      ? css`
-          animation: ${buttonPressed(variant)} 0.37s ease-out;
-        `
-      : ''}
+    isAnimating &&
+    css`
+      animation: ${buttonPressed(variant)} 0.37s ease-out;
+    `}
 `;
 
 export default StyledButton;

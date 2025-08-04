@@ -1,11 +1,14 @@
 import { useCallback, useMemo } from 'react';
 import { FilesList } from '../FilesExplorer';
+import { useSelector } from 'react-redux';
+import DesktopBackground from './components';
 
 const Desktop = ({
   onContextMenu,
   windowActions,
   language,
-  backgroundColor,
+  // backgroundColor,
+  // backgroundImage,
   ...props
 }) => {
   const updateWindowState = useCallback(
@@ -14,7 +17,8 @@ const Desktop = ({
   );
   return useMemo(
     () => (
-      <div className="background" style={{ backgroundColor: backgroundColor }}>
+      <div className="desktop-display">
+        <DesktopBackground />
         <FilesList
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
@@ -25,7 +29,7 @@ const Desktop = ({
         />
       </div>
     ),
-    [language, windowActions, updateWindowState, backgroundColor, props]
+    [language, windowActions, updateWindowState, props]
   );
 };
 

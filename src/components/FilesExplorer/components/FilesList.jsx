@@ -39,6 +39,7 @@ const FilesList = ({
             isUnique,
             children,
             nodeDepth,
+            initialDimensions,
           },
           windowIndex
         ) => {
@@ -75,6 +76,7 @@ const FilesList = ({
                   handleWindowUpdate,
                   fileType: type,
                   nodeType,
+                  initialDimensions,
                   nodeDepth,
                 })
               }

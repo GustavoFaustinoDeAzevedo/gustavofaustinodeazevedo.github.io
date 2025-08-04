@@ -5,21 +5,23 @@
 
 type LanguageTitle = { eng: string; por: string };
 
-interface WindowMask {
-  src: string;
-  title: LanguageTitle;
-  icon: string;
-}
-
 interface FileNode {
   fileId: string;
   title: LanguageTitle;
   icon?: string;
   type?: 'folder' | 'app' | 'text' | 'file';
+  initialDimensions?: {
+    width: string | '1000px';
+    height: string | '600px;';
+  };
   children?: FileNode[];
   nodeDepth?: number;
   isUnique?: boolean;
-  windowMask?: WindowMask;
+  windowMask?: {
+    src: string;
+    title: LanguageTitle;
+    icon: string;
+  };
 }
 
 // 2. Main objects
@@ -54,6 +56,7 @@ export const rootFolder: FileNode = {
                   title: { eng: 'About Me', por: 'Sobre Mim' },
                   icon: 'about',
                   type: 'text',
+                  initialDimensions: { width: '500px', height: '550px' },
                 },
                 {
                   fileId: 'projects',
@@ -69,6 +72,7 @@ export const rootFolder: FileNode = {
                       title: { eng: 'Calculator', por: 'Calculadora' },
                       icon: 'calculator',
                       type: 'app',
+                      initialDimensions: { width: '400px', height: '500px' },
                     },
                     {
                       fileId: 'notepad',
@@ -78,6 +82,7 @@ export const rootFolder: FileNode = {
                       },
                       icon: 'notepad',
                       type: 'app',
+                      initialDimensions: { width: '500px', height: '500px' },
                     },
                     {
                       fileId: 'todo',
@@ -229,7 +234,7 @@ export const rootFolder: FileNode = {
                     },
                     {
                       fileId: 'new',
-                      title: { eng: 'New', por: 'Novo' },
+                      title: { eng: 'New File', por: 'Adicionar Arquivo' },
                       icon: 'plus-circle',
                     },
                   ],
@@ -239,19 +244,25 @@ export const rootFolder: FileNode = {
                   title: { eng: 'Skills', por: 'Habilidades' },
                   icon: 'skills',
                   type: 'file',
+                  initialDimensions: { width: '750px', height: '540px' },
                 },
                 {
                   fileId: 'contact',
                   title: { eng: 'Contact', por: 'Contato' },
                   icon: 'contact',
                   type: 'app',
+                  initialDimensions: { width: '490px', height: '550px' },
                 },
                 {
                   fileId: 'change-background',
-                  title: { eng: 'Change Background (UX and UI in progress)', por: 'Alterar Fundo (UX e UI em desenvolvimento)' },
+                  title: {
+                    eng: 'Change Background (UX and UI in progress)',
+                    por: 'Alterar Fundo (UX e UI em desenvolvimento)',
+                  },
                   icon: 'image-outline-icon',
                   type: 'app',
                   isUnique: true,
+                  initialDimensions: { width: '550px', height: '500px' },
                 },
                 {
                   fileId: 'cmd',
@@ -261,6 +272,7 @@ export const rootFolder: FileNode = {
                   },
                   icon: 'command',
                   type: 'app',
+                  initialDimensions: { width: '580px', height: '330px' },
                 },
                 {
                   fileId: 'task-manager',
@@ -277,6 +289,7 @@ export const rootFolder: FileNode = {
                   title: { eng: 'Browser', por: 'Navegador' },
                   icon: 'browser',
                   type: 'app',
+                  initialDimensions: { width: '1000px', height: '600px' },
                 },
                 {
                   fileId: 'github',
@@ -288,6 +301,7 @@ export const rootFolder: FileNode = {
                     title: { eng: 'Browser', por: 'Navegador' },
                     icon: 'browser',
                   },
+                  initialDimensions: { width: '1000px', height: '600px' },
                 },
                 {
                   fileId: 'new',

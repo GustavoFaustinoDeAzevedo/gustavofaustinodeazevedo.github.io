@@ -3,14 +3,14 @@ import useMouseEvents from '../../../../hooks/useMouseEvents';
 import { useRef } from 'react';
 import Button from '../../../ui/Button';
 
-export const CustomColorPicker = ({
+const CustomColorPicker = ({
   backgroundColor,
   handleChangeBackground,
   defaultDesktopColor,
   displayChoicesContent,
 }) => {
   const colorRef = useRef(backgroundColor);
-  
+
   const getContrastYIQ = (color) => {
     const hexcolor = color.replace('#', '');
     const r = parseInt(hexcolor.substr(0, 2), 16);
@@ -22,15 +22,18 @@ export const CustomColorPicker = ({
 
   const handleButtonClick = () => {
     colorRef.current = defaultDesktopColor;
-    handleChangeBackground(colorRef.current, getContrastYIQ(colorRef.current));
+    handleChangeBackground({
+      backgroundColor: colorRef.current,
+      backgroundColorContrast: getContrastYIQ(colorRef.current),
+    });
   };
 
   useMouseEvents({
     onMouseUp: () =>
-      handleChangeBackground(
-        colorRef.current,
-        getContrastYIQ(colorRef.current)
-      ),
+      handleChangeBackground({
+        backgroundColor: colorRef.current,
+        backgroundColorContrast: getContrastYIQ(colorRef.current),
+      }),
   });
   return (
     <>
@@ -44,3 +47,5 @@ export const CustomColorPicker = ({
     </>
   );
 };
+
+export default CustomColorPicker;

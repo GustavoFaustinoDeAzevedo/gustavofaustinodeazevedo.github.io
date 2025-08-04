@@ -90,13 +90,14 @@ const windowSlice = createSlice({
     },
 
     openWindow: (state, action) => {
-      const { windowId, title, icon, src, children = [], type, nodeDepth, isUnique } = action.payload;
+      const { windowId, title, icon, src, children = [], type, nodeDepth, initialDimensions, isUnique } = action.payload;
 
       if (isUnique) {
         const { eng, por } = title;
         const foundSameWindow = state.openedWindowList.find(win => win.title.por === por && win.title.eng === eng);
         if (foundSameWindow) {
           state.focusedWindow = foundSameWindow.windowId;
+          foundSameWindow.windowState.requestingRestore = true;
           return;
         }
       }
@@ -106,10 +107,10 @@ const windowSlice = createSlice({
       const newId = `window#${windowId}#${Date.now()}#${Math.random()}`;
 
       const baseState = {
-        open: true,
+        open: false,
         maximized: false,
         minimized: false,
-        requestingOpen: false,
+        requestingOpen: true,
         requestingRestore: false,
         requestingClose: false,
         requestingMaximize: false,
@@ -127,8 +128,9 @@ const windowSlice = createSlice({
         content: '',
         src,
         children,
-        position: { startX: 0, startY: 0, x: 0, y: 0 },
-        size: { startWidth: 0, startHeight: 0, width: 0, height: 0 },
+        initialDimensions,
+        position: { lastX: 0, lastY: 0, x: 0, y: 0 },
+        size: { lastWidth: 0, lastHeight: 0, width: 0, height: 0 },
         windowState: { ...baseState },
       };
 
@@ -148,17 +150,18 @@ const windowSlice = createSlice({
       if (!action.payload?.windowId || action.payload.windowId === undefined) return;
 
       const {
+        open,
         windowId,
         currentNode,
         title,
         icon,
         nodeDepth,
-        startX,
-        startY,
+        lastX,
+        lastY,
         x,
         y,
-        startWidth,
-        startHeight,
+        lastWidth,
+        lastHeight,
         width,
         height,
         minimized,
@@ -177,6 +180,7 @@ const windowSlice = createSlice({
       const currentWindow = state.openedWindowList[winIndex];
 
       Object.assign(currentWindow, {
+        ...(open !== undefined && { windowState: { ...currentWindow.windowState, open } }),
         ...(title !== undefined && { title }),
         ...(icon !== undefined && { icon }),
         ...(children !== undefined && { children: currentWindow.currentNode !== currentNode ? newFile(currentWindow, children) : children }),
@@ -185,15 +189,15 @@ const windowSlice = createSlice({
       })
 
       Object.assign(currentWindow.position, {
-        ...(startX !== undefined && { startX }),
-        ...(startY !== undefined && { startY }),
+        ...(lastX !== undefined && { lastX }),
+        ...(lastY !== undefined && { lastY }),
         ...(x !== undefined && { x }),
         ...(y !== undefined && { y }),
       })
 
       Object.assign(currentWindow.size, {
-        ...(startWidth !== undefined && { startWidth }),
-        ...(startHeight !== undefined && { startHeight }),
+        ...(lastWidth !== undefined && { lastWidth }),
+        ...(lastHeight !== undefined && { lastHeight }),
         ...(width !== undefined && { width }),
         ...(height !== undefined && { height }),
       })

@@ -20,6 +20,7 @@ const WindowContent = ({
     src,
     type,
     windowActions,
+    children,
   });
 
   return (

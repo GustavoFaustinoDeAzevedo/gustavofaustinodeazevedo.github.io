@@ -7,20 +7,22 @@ import {
   resetFocus,
 } from '../slices/windowSlice';
 
-interface WindowChild {
-  fileId: string;
-  title: string;
-}
-
 interface WindowDataBase {
   windowId: string;
   title: string;
   icon?: string;
   src?: string;
-  children?: WindowChild[];
+  children?: {
+    fileId: string;
+    title: string;
+  };
   isUnique?: boolean;
   type?: string;
   nodeDepth?: number;
+  initialDimensions?: {
+    width: string;
+    height: string;
+  };
 }
 
 type WindowData = WindowDataBase & Record<string, unknown>;
@@ -47,7 +49,7 @@ const useWindowActions = () => {
   };
 
   const handleResetFocus = () => {
-    dispatch(resetFocus(null));
+    dispatch(resetFocus());
   };
 
   return {

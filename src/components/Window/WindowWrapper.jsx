@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import Window from './Window';
+import Window from './components/Window';
 
 const WindowWrapper = ({
   windowIndex,
@@ -33,11 +32,11 @@ const WindowWrapper = ({
     y: position.y,
     width: size.width,
     height: size.height,
-    startX: position.startX,
-    startY: position.startY,
+    lastX: position.lastX,
+    lastY: position.lastY,
     isOpen: windowState.open,
-    startWidth: size.startWidth,
-    startHeight: size.startHeight,
+    lastWidth: size.lastWidth,
+    lastHeight: size.lastHeight,
     isMinimized: windowState.minimized,
     isMaximized: windowState.maximized,
     isRequestingOpen: windowState.requestingOpen,
@@ -47,18 +46,17 @@ const WindowWrapper = ({
     isRequestingMinimize: windowState.requestingMinimize,
   };
 
-const createWindowActions = (windowId) => ({
-  handleContextMenu: () => {},
-  handleResetFocus,
-  handleFocusWindow: () => handleFocusWindow(windowId),
-  handleCloseWindow: () => handleCloseWindow(windowId),
-  handleOpenWindow,
-  handleUpdateWindow: (params) => handleUpdateWindow({ windowId, ...params }),
-  handleChangeBackground,
-});
+  const createWindowActions = (windowId) => ({
+    handleContextMenu: () => {},
+    handleResetFocus,
+    handleFocusWindow: () => handleFocusWindow(windowId),
+    handleCloseWindow: () => handleCloseWindow(windowId),
+    handleOpenWindow,
+    handleUpdateWindow: (params) => handleUpdateWindow({ windowId, ...params }),
+    handleChangeBackground,
+  });
 
-const windowActionsObj = createWindowActions(windowId);
-
+  const windowActionsObj = createWindowActions(windowId);
 
   return (
     <Window

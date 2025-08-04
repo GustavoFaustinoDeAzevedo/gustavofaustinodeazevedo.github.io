@@ -3,7 +3,7 @@ import { AppDispatch } from '../../store';
 import { changeBackground, changeLanguage } from '../slices/settingsSlice';
 import { Language } from '../slices/settingsSlice';
 
-type BackgroundPayload = [string?, string?, string?];
+type BackgroundPayload = Parameters<typeof changeBackground>[0];
 
 const useSettingsActions = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,18 +12,20 @@ const useSettingsActions = () => {
     dispatch(changeLanguage(newLang));
   };
 
-  const handleChangeBackground = (
-    ...[
-      backgroundColor,
-      backgroundColorContrast,
-      backgroundImage,
-    ]: BackgroundPayload
-  ) => {
+  const handleChangeBackground = ({
+    backgroundColor,
+    backgroundColorContrast,
+    backgroundEffect,
+    backgroundImage,
+    isBackgroundImage,
+  }: BackgroundPayload) => {
     dispatch(
       changeBackground({
         backgroundColor,
         backgroundColorContrast,
+        backgroundEffect,
         backgroundImage,
+        isBackgroundImage,
       })
     );
   };

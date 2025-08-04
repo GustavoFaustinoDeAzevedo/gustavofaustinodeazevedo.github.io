@@ -1,31 +1,52 @@
-import CustomColorPicker from './components';
-import Button from '../../ui/Button';
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { changeBackgroundTextContent } from './data/changeBackgroundTextContent';
 
 import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
+import BackgroundControl from './components/BackgroundControl';
+import DesktopBackground from '../../Desktop/components';
 
-export const ChangeBackground = ({ handleChangeBackground, language }) => {
+export const ChangeBackground = ({
+  handleChangeBackground,
+  handleUpdateWindowContent,
+  language,
+  content,
+}) => {
   const getCSSVariable = (variableName) =>
     getComputedStyle(document.documentElement)
       .getPropertyValue(variableName)
       .trim();
 
-  // useState
-  const [backgroundDisplay, setBackgroundDisplay] = useState('image');
-
   // useSelector
   const desktopBackgroundColor = useSelector(
     (state) => state.settings.desktopBackgroundColor
   );
+  const backgroundImage = useSelector(
+    (state) => state.settings.desktopBackgroundImage
+  );
+  const isBackgroundImage = useSelector(
+    (state) => state.settings.isBackgroundImage
+  );
+
+  // useState
+  const [backgroundDisplay, setBackgroundDisplay] = useState(
+    isBackgroundImage ? 'image' : 'color'
+  );
 
   // useRef
-  const defaultDesktopColor = useRef(getCSSVariable('--c-desktop-default-bg'));
-  const defaultFilesColor = useRef(getCSSVariable('--c-desktop-default-bg'));
+  const defaultDesktopColorRef = useRef(
+    getCSSVariable('--c-desktop-default-bg')
+  );
+  const defaultFilesColorRef = useRef(getCSSVariable('--c-desktop-default-bg'));
+
+  // useEffects
+  useEffect(() => {
+    handleChangeBackground({
+      isBackgroundImage: backgroundDisplay === 'image',
+    });
+  }, [backgroundDisplay]);
 
   //handlers
-
   const handleChangeBackgroundDisplay = () => {
     setBackgroundDisplay((prev) => (prev === 'image' ? 'color' : 'image'));
   };
@@ -35,29 +56,6 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
       backgroundDisplay,
       language,
     });
-
-  //jsx
-  const BackgroundControl = () => {
-    return backgroundDisplay ? (
-      <main className="change-background__control-wrapper">
-        <CustomColorPicker
-          backgroundColor={desktopBackgroundColor}
-          handleChangeBackground={handleChangeBackground}
-          defaultDesktopColor={defaultDesktopColor.current}
-          displayChoicesContent={displayChoicesContent}
-        />
-      </main>
-    ) : (
-      <main className="change-background__control-wrapper">
-        <CustomColorPicker
-          backgroundColor={desktopBackgroundColor}
-          handleChangeBackground={handleChangeBackground}
-          defaultDesktopColor={defaultDesktopColor.current}
-          displayChoicesContent={displayChoicesContent}
-        />
-      </main>
-    );
-  };
 
   const InputChoices = ({ choicesObject }) => {
     if (typeof choicesObject !== 'object')
@@ -77,6 +75,18 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
     ));
   };
 
+  const backgroundControlProps = {
+    handleChangeBackground,
+    handleUpdateWindowContent,
+    language,
+    content,
+    desktopBackgroundColor,
+    defaultDesktopColor: defaultDesktopColorRef.current,
+    displayChoicesContent,
+    backgroundDisplay,
+    backgroundImage,
+  };
+
   return (
     <div
       className="change-background__container"
@@ -88,18 +98,21 @@ export const ChangeBackground = ({ handleChangeBackground, language }) => {
         </h3>
       </header>
       <div className="change-background__wrapper">
-        <BackgroundControl />
-        <aside className="change-background__options-wrapper">
-          <fieldset className="change-background__options-list">
-            <legend>{displayChoicesRoot?.legend}</legend>
-            <InputChoices choicesObject={displayChoicesRoot?.choices} />
-          </fieldset>
-          <fieldset className="change-background__options-list">
-            <legend>{displayChoicesContent?.settings?.legend}</legend>
-            <InputChoices
-              choicesObject={displayChoicesContent?.settings?.choices}
-            />
-          </fieldset>
+        <DesktopBackground className={'change-background__preview'} />
+        <aside className="change-background__aside">
+          <div className="change-background__options-wrapper">
+            <fieldset className="change-background__options-list">
+              <legend>{displayChoicesRoot?.legend}</legend>
+              <InputChoices choicesObject={displayChoicesRoot?.choices} />
+            </fieldset>
+            <fieldset className="change-background__options-list">
+              <legend>{displayChoicesContent?.settings?.legend}</legend>
+              <InputChoices
+                choicesObject={displayChoicesContent?.settings?.choices}
+              />
+            </fieldset>
+            <BackgroundControl {...backgroundControlProps} />
+          </div>
         </aside>
       </div>
     </div>

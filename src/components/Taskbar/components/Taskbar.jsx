@@ -44,13 +44,13 @@ const Taskbar = ({
   const handleMinimize = (id) => {
     onUpdateWindow({
       windowId: id,
-      minimized: true,
+      requestingMinimize: true,
     });
   };
   const handleMaximize = (id) => {
     onUpdateWindow({
       windowId: id,
-      maximized: true,
+      requestingMaximize: true,
     });
   };
 

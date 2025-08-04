@@ -41,12 +41,12 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Image',
-        title: '',
+        title: 'Select an image to use as a custom background',
         settings: {
           legend: 'Effects',
           choices: ['1', '2', '3'],
         },
-        button: 'Default Color',
+        button: 'Or Select an Image File',
       },
       color: {
         id: 'color',
@@ -66,12 +66,12 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Imagem',
-        title: '',
+        title: 'Selecione uma imagem para usar como fundo personalizado',
         settings: {
           legend: 'Efeitos',
           choices: ['1', '2', '3'],
         },
-        button: 'Cor Padrão',
+        button: 'Ou Selecione um Arquivo de Imagem',
       },
       color: {
         id: 'color',

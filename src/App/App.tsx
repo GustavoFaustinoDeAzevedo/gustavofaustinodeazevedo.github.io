@@ -37,8 +37,11 @@ const App: React.FC = () => {
 
   // Redux selectors: grab settings, context menu, window data, and file tree
   const language = useSelector((state: RootState) => state.settings.language);
-  const backgroundColor = useSelector(
-    (state: RootState) => state.settings.desktopBackgroundColor
+  // const backgroundColor = useSelector(
+  //   (state: RootState) => state.settings.desktopBackgroundColor
+  // );
+  const backgroundImage = useSelector(
+    (state: RootState) => state.settings.desktopBackgroundImage
   );
   const backgroundColorContrast = useSelector(
     (state: RootState) => state.settings.desktopBackgroundColorContrast
@@ -92,7 +95,8 @@ const App: React.FC = () => {
             currentNode="desktop"
             language={language}
             windowList={windowList}
-            backgroundColor={backgroundColor}
+            // backgroundColor={backgroundColor}
+            backgroundImage={backgroundImage}
             backgroundColorContrast={backgroundColorContrast}
             children={
               rootFolder.children?.[0]?.children?.[0]?.children?.[0]

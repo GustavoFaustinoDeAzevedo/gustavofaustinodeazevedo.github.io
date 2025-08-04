@@ -13,7 +13,6 @@ const WindowContentWrapper = ({
   filesActions,
   src,
   type,
-  handleUpdate,
 }) => {
   const handleFocus = isFocused ? null : onFocus;
   const windowContent = isOpen ? (
@@ -23,7 +22,6 @@ const WindowContentWrapper = ({
       src={src}
       children={children ?? {}}
       windowActions={windowActions}
-      handleWindowUpdate={handleUpdate}
       type={type}
       language={language}
       windowList={windowList}
