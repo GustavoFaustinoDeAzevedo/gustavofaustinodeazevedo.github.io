@@ -90,15 +90,15 @@ export const ChangeBackground = ({
   return (
     <div
       className="change-background__container"
-      data-initial-dimension='{"width": "550px", "height": "500px"}'
+      data-initial-dimension='{"width": "750px", "height": "600px"}'
     >
-      <header>
-        <h3 className="change-background__title">
-          {displayChoicesContent?.title}
-        </h3>
-      </header>
       <div className="change-background__wrapper">
-        <DesktopBackground className={'change-background__preview'} />
+        <main className="change-background__main">
+          <h3 className="change-background__title">
+            {displayChoicesContent?.title}
+          </h3>
+          <DesktopBackground className={'change-background__preview'} />
+        </main>
         <aside className="change-background__aside">
           <div className="change-background__options-wrapper">
             <fieldset className="change-background__options-list">
@@ -107,9 +107,15 @@ export const ChangeBackground = ({
             </fieldset>
             <fieldset className="change-background__options-list">
               <legend>{displayChoicesContent?.settings?.legend}</legend>
-              <InputChoices
+              <select name="effects" id="effects">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              {/* <InputChoices
                 choicesObject={displayChoicesContent?.settings?.choices}
-              />
+              /> */}
             </fieldset>
             <BackgroundControl {...backgroundControlProps} />
           </div>

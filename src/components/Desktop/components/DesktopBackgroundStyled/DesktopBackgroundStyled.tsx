@@ -11,6 +11,7 @@ const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
     props.$isBackgroundImage && props.$backgroundImage
       ? `url(${props.$backgroundImage})`
       : 'none'};
+  background-color: ${(props) => props.$backgroundColor};
 `;
 
 export default DesktopBackgroundStyled;
