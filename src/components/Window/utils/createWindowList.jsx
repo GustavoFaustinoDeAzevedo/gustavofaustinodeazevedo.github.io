@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import WindowWrapper from '../../WindowWrapper';
-
+import WindowWrapper from '../WindowWrapper';
 const createWindowList = (
   desktopRef,
   windowList,
@@ -12,7 +11,9 @@ const createWindowList = (
   return useMemo(
     () =>
       windowList
-        .filter(({ windowId }) => windowId !== 'new' && windowId !== 'placeholder')
+        .filter(
+          ({ windowId }) => windowId !== 'new' && windowId !== 'placeholder'
+        )
         .map(({ ...windowParams }, index) => (
           <WindowWrapper
             windowIndex={index}
@@ -26,7 +27,14 @@ const createWindowList = (
             isFocused={focusedWindow === windowParams.windowId}
           />
         )),
-    [windowList, focusedWindow, language, desktopRef, windowActions, filesActions]
+    [
+      windowList,
+      focusedWindow,
+      language,
+      desktopRef,
+      windowActions,
+      filesActions,
+    ]
   );
 };
 

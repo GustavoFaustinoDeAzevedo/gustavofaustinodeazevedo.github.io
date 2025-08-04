@@ -1,2 +1,2 @@
-import { CustomColorPicker } from "./CustomColorPicker";
-export default CustomColorPicker;
+import BackgroundControl from "./BackgroundControl";
+export { BackgroundControl };

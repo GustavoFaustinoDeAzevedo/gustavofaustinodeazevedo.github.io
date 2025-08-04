@@ -1,18 +1,31 @@
 @layer components {
 
   /* Main container for the desktop layout */
-  .background {
+  .desktop-display {
 
     height: 100vh;
     width: 100vw;
     position: absolute;
-    background: var(--c-desktop-bg);
     overflow: hidden;
     top: 0;
     left: 0;
     z-index: 0;
 
-    /* Container for desktop icons */
+    .desktop-background {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+      background-attachment: fixed;
+      background-origin: content-box;
+      background-clip: content-box;
+
+      top: 0;
+      left: 0;
+      background-color: var(--c-desktop-bg);
+    }
 
   }
 }

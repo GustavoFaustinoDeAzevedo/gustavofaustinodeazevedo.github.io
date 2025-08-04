@@ -1,30 +1,13 @@
+/* ──────────────────────────────────────────────────────────────
+   useWindowLifecycle.ts
+   Hook responsável pelo ciclo de vida e animações de janelas
+   ────────────────────────────────────────────────────────────── */
 
-/**
- * Custom React hook to manage the lifecycle and animations of a window component.
- *
- * Handles opening, maximizing, minimizing, restoring, and closing window states,
- * as well as updating window position and dimensions, and managing focus/unfocus events.
- *
- * @param {Object} params - The parameters object.
- * @param {React.RefObject} params.windowRef - Ref to the window DOM element.
- * @param {React.RefObject} params.headerRef - Ref to the window header DOM element.
- * @param {React.RefObject} params.desktopRef - Ref to the desktop DOM element.
- * @param {Object} params.windowParams - Current state and parameters of the window.
- * @param {Function} params.updateWindowState - Function to update the window's state.
- * @param {Object} params.animations - Animation functions for window transitions.
- * @param {Function} params.animations.openWindow - Animation for opening the window.
- * @param {Function} params.animations.maximizeWindow - Animation for maximizing the window.
- * @param {Function} params.animations.restoreWindow - Animation for restoring the window.
- * @param {Function} params.animations.minimizeWindow - Animation for minimizing the window.
- * @param {Function} params.animations.closeWindow - Animation for closing the window.
- * @param {Function} params.getWindowInfo - Function to get current window dimensions.
- * @param {Function} params.createWindowDraggable - Function to make the window draggable.
- *
- * @returns {void}
- */
-import getRandomPosition from '../utils/getRandomPosition';
 import gsap from 'gsap';
-import { useEffect } from 'react';
+import getRandomPosition from '../utils/getRandomPosition';
+import useAnimationSafe from '../hooks/useAnimationSafe';
+import windowAnimations from '../utils/windowAnimations';
+import { UseWindowLifecycleProps } from '../types/hooks';
 
 const useWindowLifecycle = ({
   windowRef,
@@ -32,184 +15,175 @@ const useWindowLifecycle = ({
   desktopRef,
   windowParams,
   windowActions,
-  // handleFocusWindow,
-  // onUnfocus,
-  // onClose,
   updateWindowState,
-  animations: {
-    openWindow,
-    maximizeWindow,
-    restoreWindow,
-    minimizeWindow,
-    closeWindow,
-  },
   getWindowInfo,
   createWindowDraggable,
-}) => {
+}: UseWindowLifecycleProps): void => {
   const {
     windowId,
     windowIndex,
     x,
     y,
-    startX,
-    startY,
+    lastX,
+    lastY,
     width,
     height,
-    startWidth,
-    startHeight,
+    lastWidth,
+    lastHeight,
     isFocused,
     isMinimized,
     isMaximized,
     isRequestingOpen,
     isRequestingRestore,
+    isRequestingMaximize,
+    isRequestingMinimize,
     isRequestingClose,
+    initialDimensions,
     isOpen,
-    children,
-
   } = windowParams;
 
-  const { handleFocusWindow, handleResetFocus, handleCloseWindow } = windowActions
+  const { handleFocusWindow, handleResetFocus, handleCloseWindow } =
+    windowActions;
 
-  useEffect(() => {
-    if (!windowRef.current || !headerRef.current) return;
+  /* ─────────── Abertura ─────────── */
+  useAnimationSafe({
+    ref: windowRef,
+    trigger: isRequestingOpen,
+    dependencies: [headerRef.current],
+    animation: (element) => {
+      const { randomX, randomY } = getRandomPosition();
+      gsap.set(element, { x: randomX, y: randomY });
+      console.log(windowRef.current);
 
-    const { randomX, randomY } = getRandomPosition();
-    gsap.set(windowRef.current, { x: randomX, y: randomY });
+      const { width: initW, height: initH } = (initialDimensions as {
+        width: string;
+        height: string;
+      }) || {
+        width: '1000px',
+        height: '600px',
+      };
 
-    const childElement = windowRef.current.querySelector("[data-initial-dimension]");
-    const { width, height } = JSON.parse(childElement?.dataset?.initialDimension ?? '{"width": "350", "height": "450"}');
+      windowAnimations.openWindow(windowRef, initW, initH);
 
-    openWindow(windowRef, width, height);
-
-    updateWindowState({
-      x: randomX,
-      y: randomY,
-      startX: randomX,
-      startY: randomY,
-      width,
-      height,
-      startWidth: width,
-      startHeight: height,
-    });
-
-    createWindowDraggable({
-      windowRef,
-      triggerElement: headerRef.current,
-      bounds: desktopRef.current,
-      onFocus: handleFocusWindow,
-      onUpdateWindow: (params) => updateWindowState(params),
-      width,
-      height,
-      isFocused
-    }
-    );
-  }, [isRequestingOpen]);
-
-  useEffect(() => {
-    if (!windowRef.current || !isMaximized || isRequestingRestore) return;
-
-    const { savedWidth, savedHeight } = getWindowInfo();
-    maximizeWindow(windowRef, () => {
       updateWindowState({
-        x: 0,
-        y: 0,
-        startX: x,
-        startY: y,
-        width: 0,
-        height: 0,
-        startWidth: savedWidth,
-        startHeight: savedHeight,
+        x: randomX,
+        y: randomY,
+        lastX: randomX,
+        lastY: randomY,
+        width: initW,
+        height: initH,
+        lastWidth: initW,
+        lastHeight: initH,
+        requestingOpen: false,
+        open: true,
       });
-      !isFocused && handleFocusWindow(windowId);
-    });
-  }, [isMaximized]);
 
-  useEffect(() => {
-    if (!windowRef.current || !isMinimized || isRequestingRestore) return;
-
-    const { savedWidth, savedHeight } = getWindowInfo();
-    minimizeWindow(
-      windowRef,
-      () => {
-        updateWindowState({
-          x: startX,
-          y: startY,
-          startX: x,
-          startY: y,
-          width: startWidth,
-          height: startHeight,
-          startWidth: savedWidth,
-          startHeight: savedHeight,
-
-        });
-        handleResetFocus;
-      },
-      windowIndex * 55
-    );
-  }, [isMinimized]);
-
-  useEffect(() => {
-    if (
-      !windowRef.current ||
-      !isRequestingRestore ||
-      (!isMaximized && !isMinimized)
-    )
-      return;
-    !isFocused && handleFocusWindow(windowId);
-    restoreWindow(
-      windowRef,
-      () => {
-
-        updateWindowState({
-          maximized: isMinimized && isMaximized,
-          minimized: false,
-          requestingRestore: false,
-          x: startX,
-          y: startY,
-          startX: x,
-          startY: y,
-          width: startWidth,
-          height: startHeight,
-          startWidth: width,
-          startHeight: height,
-        });
-
-      },
-      startX,
-      startY,
-      startWidth,
-      startHeight
-    );
-  }, [isRequestingRestore]);
-
-  // useEffect(() => {
-  //   updateWindowState({
-  //     maximized: isMinimized && isMaximized,
-  //     minimized: false,
-  //     requestingRestore: false,
-  //     x: startX,
-  //     y: startY,
-  //     startX: x,
-  //     startY: y,
-  //     width: startWidth,
-  //     height: startHeight,
-  //     startWidth: width,
-  //     startHeight: height,
-  //   });
-  // }, [isRequestingUpdate]);
-
-  useEffect(() => {
-    if (!windowRef.current || !isOpen || !isRequestingClose) return;
-
-    closeWindow(windowRef, () => {
-      handleCloseWindow({
-        windowId,
-        isRequestingClose: true,
+      /* torna arrastável */
+      createWindowDraggable({
+        windowRef,
+        triggerElement: headerRef.current,
+        bounds: desktopRef.current,
+        onFocus: handleFocusWindow,
+        onUpdateWindow: (params) => updateWindowState(params),
+        width,
+        height,
+        isFocused,
       });
-      handleResetFocus();
-    });
-  }, [isRequestingClose]);
+    },
+  });
 
+  /* ─────────── Maximizar ─────────── */
+  useAnimationSafe({
+    ref: windowRef,
+    trigger: isRequestingMaximize && !isRequestingRestore,
+    animation: () => {
+      const { savedWidth = width, savedHeight = height } = getWindowInfo();
+      return windowAnimations.maximizeWindow(windowRef, () => {
+        updateWindowState({
+          x: 0,
+          y: 0,
+          lastX: x,
+          lastY: y,
+          width: '100%',
+          height: '100%',
+          lastWidth: savedWidth,
+          lastHeight: savedHeight,
+          requestingMaximize: false,
+          maximized: true,
+        });
+        !isFocused && handleFocusWindow(windowId);
+      });
+    },
+  });
+
+  /* ─────────── Minimizar ─────────── */
+  useAnimationSafe({
+    ref: windowRef,
+    trigger: isRequestingMinimize && !isRequestingRestore,
+    animation: () => {
+      const { savedWidth = width, savedHeight = height } = getWindowInfo();
+      return windowAnimations.minimizeWindow(
+        windowRef,
+        () => {
+          updateWindowState({
+            x: lastX,
+            y: lastY,
+            lastX: x,
+            lastY: y,
+            width: lastWidth,
+            height: lastHeight,
+            lastWidth: savedWidth,
+            lastHeight: savedHeight,
+            requestingMinimize: false,
+            minimized: true,
+          });
+          handleResetFocus();
+        },
+        windowIndex * 55
+      );
+    },
+  });
+
+  /* ─────────── Restaurar ─────────── */
+  useAnimationSafe({
+    ref: windowRef,
+    trigger: isRequestingRestore && (isMaximized || isMinimized),
+    animation: () =>
+      windowAnimations.restoreWindow(
+        windowRef,
+        () => {
+          updateWindowState({
+            maximized: isMinimized && isMaximized,
+            minimized: false,
+            requestingRestore: false,
+            x: lastX,
+            y: lastY,
+            lastX: x,
+            lastY: y,
+            width: lastWidth,
+            height: lastHeight,
+            lastWidth: width,
+            lastHeight: height,
+          });
+          !isFocused && handleFocusWindow(windowId);
+        },
+        lastX,
+        lastY,
+        lastWidth,
+        lastHeight
+      ),
+  });
+
+  /* ─────────── Fechar ───────────── */
+  useAnimationSafe({
+    ref: windowRef,
+    trigger: isRequestingClose && isOpen,
+    animation: () =>
+      windowAnimations.closeWindow(windowRef, () => {
+        handleCloseWindow({ windowId, requestingClose: true });
+        handleResetFocus();
+      }),
+  });
 };
 
 export default useWindowLifecycle;

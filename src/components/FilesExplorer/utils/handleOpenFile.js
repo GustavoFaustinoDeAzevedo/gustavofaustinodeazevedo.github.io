@@ -1,6 +1,6 @@
 import { placeholder } from "../../../data/filesData";
 
-export const handleOpenFile = ({ fileId, currentNode, windowTitle, language, windowIcon, src, isUnique, openMode, windowList, children, handleNewFile, windowActions, fileType, nodeType, handleWindowUpdate, nodeDepth }) => {
+export const handleOpenFile = ({ fileId, initialDimensions, currentNode, windowTitle, language, windowIcon, src, isUnique, openMode, windowList, children, handleNewFile, windowActions, fileType, nodeType, handleWindowUpdate, nodeDepth }) => {
   if (windowTitle[language] === 'Adicionar Arquivo' || windowTitle[language] === 'New File') {
     console.log('Creating new file with ID:', currentNode);
     handleNewFile(placeholder, currentNode, nodeDepth);
@@ -15,7 +15,7 @@ export const handleOpenFile = ({ fileId, currentNode, windowTitle, language, win
 
       if (openMode === 'window' || fileType === 'app') {
         //file will open on a new window
-        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, type: fileType, nodeDepth }));
+        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, type: fileType, initialDimensions, nodeDepth }));
       } else if (openMode === 'tab') {
         //file will open on a new tab
       } else {

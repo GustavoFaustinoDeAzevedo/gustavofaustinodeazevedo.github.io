@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// 1. Type definitions
+// Type definitions
 
 // Supported languages
 export type Language = 'eng' | 'por';
@@ -11,6 +11,7 @@ export interface BackgroundPayload {
   backgroundColorContrast?: string;
   backgroundEffect?: string;
   backgroundImage?: string;
+  isBackgroundImage?: boolean;
 }
 
 // State interface for the settings slice
@@ -20,9 +21,10 @@ export interface SettingsState {
   desktopBackgroundColorContrast: string;
   desktopBackgroundEffect: string;
   desktopBackgroundImage: string;
+  isBackgroundImage?: boolean;
 }
 
-// 2. Determine default language based on browser navigator
+// Determine default language based on browser navigator
 const navigatorLanguage =
   (typeof navigator !== 'undefined' && navigator.language) || 'en-US';
 
@@ -38,13 +40,14 @@ const defaultBackgroundColor = getComputedStyle(document.documentElement)
 
 const defaultBackgroundColorContrast = '#ffffff';
 
-// 3. Initial state
+// Initial state
 const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundEffect: 'diagonal',
   desktopBackgroundImage: 'none',
+  isBackgroundImage: false,
 };
 
 // 4. Slice creation
@@ -70,6 +73,7 @@ export const settingsSlice = createSlice({
         backgroundColorContrast,
         backgroundEffect,
         backgroundImage,
+        isBackgroundImage,
       } = action.payload;
 
       Object.assign(state, {
@@ -85,11 +89,13 @@ export const settingsSlice = createSlice({
         ...(backgroundImage !== undefined && {
           desktopBackgroundImage: backgroundImage,
         }),
+        ...(isBackgroundImage !== undefined && {
+          isBackgroundImage: isBackgroundImage,
+        }),
       });
     },
   },
 });
 
-// 5. Exports
 export const { changeLanguage, changeBackground } = settingsSlice.actions;
 export default settingsSlice.reducer;

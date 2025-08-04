@@ -63,7 +63,7 @@ const CommandPromptSection = () => (
 
 const getWindowContent = (
   contentId,
-  { windowId, language, src, type, windowActions }
+  { windowId, language, src, type, windowActions, children }
 ) => {
   const map = {
     about: () => <AboutMe language={language} />,
@@ -80,7 +80,7 @@ const getWindowContent = (
     github: () => <BrowserSimulator src={src} />,
     'background-color-picker': () => (
       <ChangeBackground
-      language={language}
+        language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),
@@ -88,6 +88,12 @@ const getWindowContent = (
       <ChangeBackground
         language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
+        handleUpdateWindowContent={(imagePreview) =>
+          windowActions?.handleUpdateWindow({
+            children: { ...children, imagePreview },
+          })
+        }
+        children={children}
       />
     ),
     tests: () => (
