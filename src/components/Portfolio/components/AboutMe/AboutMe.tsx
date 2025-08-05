@@ -1,6 +1,12 @@
 import aboutMeContent from './aboutMeContent';
 
-const AboutMe = ({language}) => (
+type LanguageOption = keyof typeof aboutMeContent;
+
+interface AboutMeProps {
+  language: LanguageOption;
+}
+
+const AboutMe: React.FC<AboutMeProps> = ({ language }) => (
   <main
     className="about-me"
     aria-label="About Me Section"
@@ -28,4 +34,5 @@ const AboutMe = ({language}) => (
     </div>
   </main>
 );
+
 export default AboutMe;

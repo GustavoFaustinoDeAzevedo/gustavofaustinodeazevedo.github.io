@@ -30,12 +30,12 @@ const StartMenu = ({
     }
   }, [menuVisibility]);
 
-  useClickOutside(
-    startMenuRef,
-    () => setMenuVisibility((prev) => (prev = !menuVisibility)),
-    menuVisibility,
-    startButtonRef
-  );
+  useClickOutside({
+    mainRef: startMenuRef,
+    onClickOutside: () => setMenuVisibility((prev) => (prev = !menuVisibility)),
+    isActive: menuVisibility,
+    extraRef: startButtonRef,
+  });
 
   const handleClick = () => {
     setMenuVisibility((prev) => (prev = !menuVisibility));
