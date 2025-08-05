@@ -1,13 +1,15 @@
-/* ──────────────────────────────────────────────────────────────
-   useWindowLifecycle.ts
-   Hook responsável pelo ciclo de vida e animações de janelas
-   ────────────────────────────────────────────────────────────── */
-
 import gsap from 'gsap';
 import getRandomPosition from '../utils/getRandomPosition';
 import useAnimationSafe from '../hooks/useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
 import { UseWindowLifecycleProps } from '../types/hooks';
+
+/** 
+ * @file useWindowLifecycle.ts
+ * @module useWindowLifecycle
+ * @description
+ *   Hook responsible for the lifecycle and animations of windows.
+*/
 
 const useWindowLifecycle = ({
   windowRef,

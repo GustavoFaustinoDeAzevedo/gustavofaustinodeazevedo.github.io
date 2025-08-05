@@ -26,15 +26,15 @@ const LanguageSelector = ({ language, onChangeLanguage }) => {
     }
   }, [languageSelectorVisibility]);
 
-  useClickOutside(
-    languageSelectorRef,
-    () =>
+  useClickOutside({
+    mainRef: languageSelectorRef,
+    onClickOutside: () =>
       setLanguageSelectorVisibility(
         (prev) => (prev = !languageSelectorVisibility)
       ),
-    languageSelectorVisibility,
-    languageButtonRef
-  );
+    isActive: languageSelectorVisibility,
+    extraRef: languageButtonRef,
+  });
 
   const handleOpenClick = () => {
     setLanguageSelectorVisibility(

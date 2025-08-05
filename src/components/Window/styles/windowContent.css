@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     background-size: 21px 21px;
     /* padding: 2rem; */
     overflow: hidden;
@@ -78,8 +78,9 @@
     & .about-me-text {
       color: #B0C4DE;
       max-width: 700px;
-      height: 130px;
-      /* max-height: 37cqh; */
+      min-width: 300px;
+      max-height: 130px;
+  
       overflow: auto;
       max-width: 80%;
     }
@@ -152,6 +153,7 @@
 
       & .about-me-text {
         overflow: visible !important;
+
         & p {
           font-size: 1rem;
         }
@@ -280,7 +282,7 @@
             visibility: visible;
           }
 
-         
+
           &::placeholder {
             visibility: hidden;
             opacity: 0.4;

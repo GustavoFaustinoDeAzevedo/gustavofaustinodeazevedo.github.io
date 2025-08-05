@@ -79,7 +79,11 @@ const Window = ({ windowParams, windowActions, desktopRef, filesActions }) => {
 
   // Click hook to handle focus
 
-  useClickOutside(windowRef, handleResetFocus, isFocused);
+  useClickOutside({
+    mainRef: windowRef,
+    onClickOutside: handleResetFocus,
+    isActive: isFocused,
+  });
 
   // Handlers for window actions
 
