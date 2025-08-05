@@ -34,9 +34,7 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
   : 'eng';
 
 // Determine default background color based on default color
-const defaultBackgroundColor = getComputedStyle(document.documentElement)
-  .getPropertyValue('--c-desktop-default-bg')
-  .trim();
+const defaultBackgroundColor = '#131021';
 
 const defaultBackgroundColorContrast = '#ffffff';
 
