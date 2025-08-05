@@ -22,16 +22,16 @@ export default function useAnimationSafe({
 }: Options) {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !trigger) {
+  const effect = () => {
+    const element = ref.current;
+    if (!element || !trigger) {
       debug && console.log('[useAnimationSafe] skipped');
       return;
     }
 
     debug && console.log('[useAnimationSafe] start');
     onStart?.();
-    const tween = animation(el);
+    const tween = animation(element);
     tweenRef.current = tween ?? null;
 
     if (tween?.eventCallback && onComplete) {
@@ -43,6 +43,7 @@ export default function useAnimationSafe({
       tweenRef.current?.kill();
       tweenRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trigger, ...dependencies]);
+  };
+
+  useEffect(effect, [trigger, ...dependencies]);
 }

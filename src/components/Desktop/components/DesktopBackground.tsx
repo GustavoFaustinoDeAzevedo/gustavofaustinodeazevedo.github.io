@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import DesktopBackgroundStyled from './DesktopBackgroundStyled/DesktopBackgroundStyled';
@@ -18,6 +18,16 @@ const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
     (state: RootState) => state.settings.isBackgroundImage
   );
 
+  const effect = () => {
+    console.log('DesktopBackground', {
+      backgroundColor,
+      backgroundImage,
+      isBackgroundImage,
+    });
+  };
+
+  useEffect(effect, [backgroundColor, backgroundImage, isBackgroundImage]);
+
   return (
     <DesktopBackgroundStyled
       $isBackgroundImage={isBackgroundImage}
@@ -29,4 +39,3 @@ const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
 };
 
 export default DesktopBackground;
-
