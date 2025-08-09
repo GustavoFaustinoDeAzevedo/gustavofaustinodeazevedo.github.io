@@ -4,12 +4,12 @@ import useAnimationSafe from '../hooks/useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
 import { UseWindowLifecycleProps } from '../types/hooks';
 
-/** 
+/**
  * @file useWindowLifecycle.ts
  * @module useWindowLifecycle
  * @description
  *   Hook responsible for the lifecycle and animations of windows.
-*/
+ */
 
 const useWindowLifecycle = ({
   windowRef,
@@ -55,7 +55,6 @@ const useWindowLifecycle = ({
     animation: (element) => {
       const { randomX, randomY } = getRandomPosition();
       gsap.set(element, { x: randomX, y: randomY });
-      console.log(windowRef.current);
 
       const { width: initW, height: initH } = (initialDimensions as {
         width: string;

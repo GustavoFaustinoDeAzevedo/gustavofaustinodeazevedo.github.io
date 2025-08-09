@@ -262,7 +262,7 @@ export const rootFolder: FileNode = {
                   icon: 'image-outline-icon',
                   type: 'app',
                   isUnique: true,
-                  initialDimensions: { width: '750px', height: '500px' },
+                  initialDimensions: { width: '1200px', height: '750px' },
                 },
                 {
                   fileId: 'cmd',

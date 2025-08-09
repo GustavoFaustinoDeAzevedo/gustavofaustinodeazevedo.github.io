@@ -106,13 +106,22 @@ export const ChangeBackground = ({
               <InputChoices choicesObject={displayChoicesRoot?.choices} />
             </fieldset>
             <fieldset className="change-background__options-list">
-              <legend>{displayChoicesContent?.settings?.legend}</legend>
-              <select name="effects" id="effects">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
+              <legend>
+                {displayChoicesContent?.settings?.effects?.legend}
+              </legend>
+              <label for="slider">Brilho:</label>
+              <input
+                type="range"
+                id="slider"
+                min="0"
+                max="100"
+
+                oninput="output.value = slider.value"
+              />
+              <output name="output" id="output">
+               
+              </output>
+
               {/* <InputChoices
                 choicesObject={displayChoicesContent?.settings?.choices}
               /> */}
