@@ -1,27 +1,28 @@
-type Settings = {
+type Effects = {
   legend: string;
   choices: string[];
 };
 
-type ImageChoice = {
-  id: string;
-  label: string;
-  title: string;
-  settings: Settings;
+type Picker = {
+  legend: string;
   button: string;
 };
 
-type ColorChoice = {
+type Settings = {
+  effects: Effects;
+  picker: Picker;
+};
+
+export type Choice = {
   id: string;
   label: string;
   title: string;
   settings: Settings;
-  button: string;
 };
 
 type Choices = {
-  image: ImageChoice;
-  color: ColorChoice;
+  image: Choice;
+  color: Choice;
 };
 
 type LanguageContent = {
@@ -41,22 +42,32 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Image',
-        title: 'Select an image to use as a custom background',
+        title: 'Background Preview',
         settings: {
-          legend: 'Effects',
-          choices: ['1', '2', '3'],
+          effects: {
+            legend: 'Effects',
+            choices: ['1', '2', '3'],
+          },
+          picker: {
+            legend: '',
+            button: 'Or Select an Image File',
+          },
         },
-        button: 'Or Select an Image File',
       },
       color: {
         id: 'color',
         label: 'Color',
-        title: 'Choose a color to change the desktop background theme',
+        title: 'Background Preview',
         settings: {
-          legend: 'Effects',
-          choices: ['1', '2', '3'],
+          effects: {
+            legend: 'Effects',
+            choices: ['1', '2', '3'],
+          },
+          picker: {
+            legend: 'Choose a Color',
+            button: 'Default Color',
+          },
         },
-        button: 'Default Color',
       },
     },
   },
@@ -66,23 +77,32 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Imagem',
-        title: 'Selecione uma imagem para usar como fundo personalizado',
+        title: 'Pré-Visualização de Fundo',
         settings: {
-          legend: 'Efeitos',
-          choices: ['1', '2', '3'],
+          effects: {
+            legend: 'Efeitos',
+            choices: ['1', '2', '3'],
+          },
+          picker: {
+            legend: '',
+            button: 'Ou Selecione um Arquivo de Imagem',
+          },
         },
-        button: 'Ou Selecione um Arquivo de Imagem',
       },
       color: {
         id: 'color',
         label: 'Cor',
-        title:
-          'Personalize a aparência da área de trabalho com a cor escolhida',
+        title: 'Pré-Visualização de Fundo',
         settings: {
-          legend: 'Efeitos',
-          choices: ['1', '2', '3'],
+          effects: {
+            legend: 'Efeitos',
+            choices: ['1', '2', '3'],
+          },
+          picker: {
+            legend: 'Escolha uma cor',
+            button: 'Cor Padrão',
+          },
         },
-        button: 'Cor Padrão',
       },
     },
   },

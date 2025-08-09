@@ -42,7 +42,7 @@ const CustomColorPicker = ({
         onChange={(color) => (colorRef.current = color)}
       />
       <Button onClick={handleButtonClick} type="submit">
-        {displayChoicesContent?.button}
+        {displayChoicesContent?.settings?.picker?.button}
       </Button>
     </>
   );

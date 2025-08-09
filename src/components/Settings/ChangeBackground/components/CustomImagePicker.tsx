@@ -41,7 +41,7 @@ const CustomImagePicker = ({
   return (
     <>
       <Button onClick={() => fileRef.current?.click()}>
-        {displayChoicesContent?.button}
+        {displayChoicesContent?.settings?.picker?.button}
       </Button>
       <input
         title={translations[language]}
@@ -51,7 +51,6 @@ const CustomImagePicker = ({
         accept="image/*"
         className="change-background__file-input"
       />
-      
     </>
   );
 };
