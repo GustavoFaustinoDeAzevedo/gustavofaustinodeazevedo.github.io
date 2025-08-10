@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { changeBackgroundTextContent } from './data/changeBackgroundTextContent';
+import { changeBackgroundTextContent } from './data/changeBackground.data';
 
 import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
 import BackgroundControl from './components/BackgroundControl';
@@ -57,11 +57,11 @@ export const ChangeBackground = ({
       language,
     });
 
-  const InputChoices = ({ choicesObject }) => {
+  const RadioMapper = ({ choicesObject }) => {
     if (typeof choicesObject !== 'object')
       return console.error('You must input an object to map the radio options');
     return Object.values(choicesObject).map((choice) => (
-      <div className="change-background__option">
+      <div className="change-background__display-option">
         <label htmlFor={choice.id}>{choice.label}</label>
         <input
           type="radio"
@@ -73,6 +73,54 @@ export const ChangeBackground = ({
         />
       </div>
     ));
+  };
+
+  const SliderMapper = ({ choicesObject }) => {
+    if (typeof choicesObject !== 'object')
+      return console.error('You must input an object to map the radio options');
+
+    return Object.values(choicesObject).map((filter) => {
+      const [sliderValue, setSliderValue] = useState(filter.default);
+      return (
+        <div className="change-background__filter-slider-container">
+          <label
+            for="slider"
+            className="change-background__filter-slider-label"
+          >
+            {filter.label}
+          </label>
+          {/* <div className="change-background__filter-slider-wrapper"> */}
+          <input
+            type="range"
+            id={filter.id}
+            key={'slider-' + filter.id}
+            min={filter.min}
+            max={filter.max}
+            step={filter.step}
+            defaultValue={filter.default}
+            value={sliderValue}
+            onChange={(e) => setSliderValue(e.target.value)}
+          />
+
+          <input
+            className="change-background__filter-input-number"
+            type="number"
+            value={
+              Number(filter.step) < 1
+                ? Number(sliderValue).toFixed(2)
+                : sliderValue
+            }
+            id={filter.id}
+            key={'number-' + filter.id}
+            min={filter.min}
+            max={filter.max}
+            step={filter.step}
+            defaultValue={filter.default}
+            onChange={(e) => setSliderValue(e.target.value)}
+          ></input>
+        </div>
+      );
+    });
   };
 
   const backgroundControlProps = {
@@ -103,30 +151,25 @@ export const ChangeBackground = ({
           <div className="change-background__options-wrapper">
             <fieldset className="change-background__options-list">
               <legend>{displayChoicesRoot?.legend}</legend>
-              <InputChoices choicesObject={displayChoicesRoot?.choices} />
+              <RadioMapper choicesObject={displayChoicesRoot?.choices} />
             </fieldset>
-            <fieldset className="change-background__options-list">
-              <legend>
-                {displayChoicesContent?.settings?.effects?.legend}
-              </legend>
-              <label for="slider">Brilho:</label>
-              <input
-                type="range"
-                id="slider"
-                min="0"
-                max="100"
-
-                oninput="output.value = slider.value"
+            <fieldset className="change-background__filters-list">
+              <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
+              <SliderMapper
+                choicesObject={
+                  displayChoicesRoot?.choices[backgroundDisplay].settings.filter
+                    .options
+                }
               />
-              <output name="output" id="output">
-               
-              </output>
 
               {/* <InputChoices
                 choicesObject={displayChoicesContent?.settings?.choices}
               /> */}
             </fieldset>
-            <BackgroundControl {...backgroundControlProps} />
+            <fieldset className="change-background__options-list">
+              <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
+              <BackgroundControl {...backgroundControlProps} />
+            </fieldset>
           </div>
         </aside>
       </div>
