@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { changeBackgroundTextContent } from '../data/changeBackgroundTextContent';
+import { changeBackgroundTextContent } from '../data/changeBackground.data';
 
 type Language = keyof typeof changeBackgroundTextContent;
-type RootType = typeof changeBackgroundTextContent[Language];
+type RootType = (typeof changeBackgroundTextContent)[Language];
 type DisplayType = keyof RootType['choices'];
 type ChoicesType = RootType['choices'][DisplayType];
 
@@ -15,8 +15,11 @@ const useDisplayChoicesContent = ({
   backgroundDisplay,
   language,
 }: UseDisplayChoicesContentProps) => {
-  const [displayChoicesRoot, setDisplayChoicesRoot] = useState<RootType | null>(null);
-  const [displayChoicesContent, setDisplayChoicesContent] = useState<ChoicesType | null>(null);
+  const [displayChoicesRoot, setDisplayChoicesRoot] = useState<RootType | null>(
+    null
+  );
+  const [displayChoicesContent, setDisplayChoicesContent] =
+    useState<ChoicesType | null>(null);
 
   useEffect(() => {
     const root = changeBackgroundTextContent[language];

@@ -1,6 +1,6 @@
 import CustomColorPicker from './CustomColorPicker';
 import CustomImagePicker from './CustomImagePicker';
-import { Choice } from '../data/changeBackgroundTextContent';
+import { Choice } from '../data/changeBackground.data';
 
 interface BackgroundControlProps {
   handleChangeBackground: (value: string) => void;
@@ -25,7 +25,7 @@ const BackgroundControl: React.FC<BackgroundControlProps> = ({
   backgroundDisplay,
 }) => {
   return backgroundDisplay === 'image' ? (
-    <div className="change-background__aside-picker">
+    <div className="change-background__picker-wrapper">
       <CustomImagePicker
         handleChangeBackground={handleChangeBackground}
         handleUpdateWindowContent={handleUpdateWindowContent}
@@ -35,8 +35,7 @@ const BackgroundControl: React.FC<BackgroundControlProps> = ({
       />
     </div>
   ) : (
-    <div className="change-background__aside-picker">
-      <p>{displayChoicesContent?.settings?.picker?.legend}</p>
+    <div className="change-background__picker-wrapper">
       <CustomColorPicker
         backgroundColor={desktopBackgroundColor}
         handleChangeBackground={handleChangeBackground}

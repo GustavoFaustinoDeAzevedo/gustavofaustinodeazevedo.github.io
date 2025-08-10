@@ -1,0 +1,68 @@
+import { FilterList } from "../types/changeBackground.data.types";
+
+export const filters: FilterList = {
+  brightness: {
+    id: 'brightness',
+    label: 'Brilho',
+    min: 0.5,
+    max: 1.5,
+    step: 0.05,
+    default: 1,
+  },
+  contrast: {
+    id: 'contrast',
+    label: 'Contraste',
+    min: 0.5,
+    max: 2,
+    step: 0.1,
+    default: 1,
+  },
+  saturate: {
+    id: 'saturate',
+    label: 'Saturação',
+    min: 0.5,
+    max: 2,
+    step: 0.1,
+    default: 1,
+  },
+  hueRotate: {
+    id: 'hueRotate',
+    label: 'Tonalidade',
+    min: 0,
+    max: 360,
+    step: 1,
+    default: 0,
+  },
+  grayscale: {
+    id: 'grayscale',
+    label: 'Monocromia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    default: 0,
+  },
+  sepia: {
+    id: 'sepia',
+    label: 'Sépia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    default: 0,
+  },
+  invert: {
+    id: 'invert',
+    label: 'Inversão',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    default: 0,
+  },
+  blur: {
+    id: 'blur',
+    label: 'Desfoque',
+    min: 0,
+    max: 10,
+    step: 0.5,
+    default: 0,
+  },
+};
