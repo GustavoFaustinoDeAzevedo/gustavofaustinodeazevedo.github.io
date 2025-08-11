@@ -57,47 +57,47 @@ export const ChangeBackground = ({
       language,
     });
 
-  const RadioMapper = ({ choicesObject }) => {
-    if (typeof choicesObject !== 'object')
+  const RadioMapper = ({ radioObjectData }) => {
+    if (typeof radioObjectData !== 'object')
       return console.error('You must input an object to map the radio options');
-    return Object.values(choicesObject).map((choice) => (
+    return Object.values(radioObjectData).map((object) => (
       <div className="change-background__display-option">
-        <label htmlFor={choice.id}>{choice.label}</label>
+        <label htmlFor={object.id}>{object.label}</label>
         <input
           type="radio"
-          id={choice.id}
+          id={object.id}
           name="btype"
-          value={choice.id}
-          checked={backgroundDisplay === choice.id}
+          value={object.id}
+          checked={backgroundDisplay === object.id}
           onChange={handleChangeBackgroundDisplay}
         />
       </div>
     ));
   };
 
-  const SliderMapper = ({ choicesObject }) => {
-    if (typeof choicesObject !== 'object')
+  const SliderMapper = ({ sliderObjectData }) => {
+    if (typeof sliderObjectData !== 'object')
       return console.error('You must input an object to map the radio options');
 
-    return Object.values(choicesObject).map((filter) => {
-      const [sliderValue, setSliderValue] = useState(filter.default);
+    return Object.values(sliderObjectData).map((object) => {
+      const [sliderValue, setSliderValue] = useState(object.default);
       return (
         <div className="change-background__filter-slider-container">
           <label
             for="slider"
             className="change-background__filter-slider-label"
           >
-            {filter.label}
+            {object.label}
           </label>
           {/* <div className="change-background__filter-slider-wrapper"> */}
           <input
             type="range"
-            id={filter.id}
-            key={'slider-' + filter.id}
-            min={filter.min}
-            max={filter.max}
-            step={filter.step}
-            defaultValue={filter.default}
+            id={object.id}
+            key={'slider-' + object.id}
+            min={object.min}
+            max={object.max}
+            step={object.step}
+            defaultValue={object.default}
             value={sliderValue}
             onChange={(e) => setSliderValue(e.target.value)}
           />
@@ -106,16 +106,16 @@ export const ChangeBackground = ({
             className="change-background__filter-input-number"
             type="number"
             value={
-              Number(filter.step) < 1
+              Number(object.step) < 1
                 ? Number(sliderValue).toFixed(2)
                 : sliderValue
             }
-            id={filter.id}
-            key={'number-' + filter.id}
-            min={filter.min}
-            max={filter.max}
-            step={filter.step}
-            defaultValue={filter.default}
+            id={object.id}
+            key={'number-' + object.id}
+            min={object.min}
+            max={object.max}
+            step={object.step}
+            defaultValue={object.default}
             onChange={(e) => setSliderValue(e.target.value)}
           ></input>
         </div>
@@ -151,12 +151,12 @@ export const ChangeBackground = ({
           <div className="change-background__options-wrapper">
             <fieldset className="change-background__options-list">
               <legend>{displayChoicesRoot?.legend}</legend>
-              <RadioMapper choicesObject={displayChoicesRoot?.choices} />
+              <RadioMapper radioObjectData={displayChoicesRoot?.choices} />
             </fieldset>
             <fieldset className="change-background__filters-list">
               <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
               <SliderMapper
-                choicesObject={
+                sliderObjectData={
                   displayChoicesRoot?.choices[backgroundDisplay].settings.filter
                     .options
                 }
