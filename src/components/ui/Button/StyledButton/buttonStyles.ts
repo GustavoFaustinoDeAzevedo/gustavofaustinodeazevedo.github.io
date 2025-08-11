@@ -23,6 +23,6 @@ const variantStyles = {
     backgroundColor: '#17a2b8',
     color: '#ffffff',
   },
-} as const;
+};
 
 export default variantStyles;
