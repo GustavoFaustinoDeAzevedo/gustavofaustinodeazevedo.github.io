@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import toggleOpenMenuAnimation from '../../../animations/elementTransitions';
 import gsap from 'gsap';
 import useClickOutside from '../../../hooks/useClickOutside';
 const StartMenu = ({
