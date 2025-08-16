@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import toggleOpenMenuAnimation from '../../../animations/elementTransitions';
 import gsap from 'gsap';
 import useClickOutside from '../../../hooks/useClickOutside';
 const StartMenu = ({
-  toggleMenuVisibility,
-  isVisible,
   history,
   language,
-  onClick,
 }) => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef(null);

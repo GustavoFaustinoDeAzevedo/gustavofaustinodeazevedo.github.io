@@ -58,7 +58,6 @@
         width: 5rem;
         text-align: center;
         display: -webkit-box;
-
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: 2;

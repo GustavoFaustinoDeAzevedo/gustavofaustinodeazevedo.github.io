@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import toggleOpenMenuAnimation from '../../../animations/elementTransitions';
 import useClickOutside from '../../../hooks/useClickOutside';
 import gsap from 'gsap';
 
