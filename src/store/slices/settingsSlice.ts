@@ -44,8 +44,8 @@ const initialState: SettingsState = {
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundEffect: 'diagonal',
-  desktopBackgroundImage: 'none',
-  isBackgroundImage: false,
+  desktopBackgroundImage: 'src/assets/images/pexels-catiamatos.jpg',
+  isBackgroundImage: true,
 };
 
 // 4. Slice creation

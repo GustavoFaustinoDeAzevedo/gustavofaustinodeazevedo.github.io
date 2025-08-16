@@ -24,7 +24,7 @@ const CustomColorPicker = ({
     colorRef.current = defaultDesktopColor;
     handleChangeBackground({
       backgroundColor: colorRef.current,
-      backgroundColorContrast: getContrastYIQ(colorRef.current),
+      // backgroundColorContrast: getContrastYIQ(colorRef.current),
     });
   };
 
@@ -32,7 +32,7 @@ const CustomColorPicker = ({
     onMouseUp: () =>
       handleChangeBackground({
         backgroundColor: colorRef.current,
-        backgroundColorContrast: getContrastYIQ(colorRef.current),
+        // backgroundColorContrast: getContrastYIQ(colorRef.current),
       }),
   });
   return (

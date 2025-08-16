@@ -1,22 +1,25 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import actions from '../store/actions';
+import { RootState } from '@/store';
+import actions from '@/store/actions';
 
-import Desktop from '../components/Desktop';
-import Taskbar from '../components/Taskbar';
-import PageMeta from '../components/PageMeta';
+import Desktop from '@/components/Desktop';
+import Taskbar from '@/components/Taskbar';
+import PageMeta from '@/components/PageMeta';
 
 import taskbarProps from './hooks/taskbarProps';
-import createWindowList from '../components/Window/utils/createWindowList';
-import { RefsProvider } from '../contexts/RefsContext';
+import createWindowList from '@/components/Window/utils/createWindowList';
+import { RefsProvider } from '@/contexts/RefsContext';
+
 import { ThemeProvider } from 'styled-components';
 
-import useChangeTheme from '../components/Settings/ChangeTheme/hooks/useChangeTheme';
-import useUserBrowserDarkMode from '../hooks/useUserBrowserDarkMode';
+import useChangeTheme from '@/components/Settings/ChangeTheme/hooks/useChangeTheme';
+import useUserBrowserDarkMode from '@/hooks/useUserBrowserDarkMode';
+
+import { Kernel } from '../kernel';
 
 gsap.registerPlugin(useGSAP);
 
@@ -76,6 +79,12 @@ const App: React.FC = () => {
     windowActions,
     filesActions
   );
+
+  const kernel = new Kernel();
+  kernel.boot();
+
+  kernel.createProcess('Calculadora');
+  kernel.createProcess('Editor de Texto');
 
   return (
     <>

@@ -19,7 +19,6 @@ export const StyledFileWrapper__Icon = styled(Icon)`
 
 export const StyledFileWrapper__Text = styled.p`
   ${fileWrapperStyle__text};
-  color: ${(props) => props.$backgroundColorContrast};
   -webkit-line-clamp: ${(props) => props.$lines};
   line-clamp: ${(props) => props.$lines};
 `;

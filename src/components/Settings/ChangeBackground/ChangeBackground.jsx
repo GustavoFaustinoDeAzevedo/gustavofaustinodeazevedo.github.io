@@ -84,7 +84,7 @@ export const ChangeBackground = ({
       return (
         <div className="change-background__filter-slider-container">
           <label
-            for="slider"
+            htmlFor="slider"
             className="change-background__filter-slider-label"
           >
             {object.label}
