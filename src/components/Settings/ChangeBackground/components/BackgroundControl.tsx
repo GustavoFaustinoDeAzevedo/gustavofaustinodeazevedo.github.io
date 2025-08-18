@@ -1,18 +1,6 @@
 import CustomColorPicker from './CustomColorPicker';
 import CustomImagePicker from './CustomImagePicker';
-import { Choice } from '../data/changeBackground.data';
-
-interface BackgroundControlProps {
-  handleChangeBackground: (value: string) => void;
-  handleUpdateWindowContent: (content: string) => void;
-  language: string;
-  backgroundImage: string;
-  desktopBackgroundColor: string;
-  defaultDesktopColor: string;
-  displayChoicesContent: Choice;
-  backgroundDisplay: 'image' | 'color';
-  colorTitle?: string;
-}
+import { BackgroundControlProps } from '../types/BackgroundControl.types';
 
 const BackgroundControl: React.FC<BackgroundControlProps> = ({
   handleChangeBackground,

@@ -47,3 +47,5 @@ export type BackgroundTextContent = {
   eng: LanguageContent;
   por: LanguageContent;
 };
+
+
