@@ -256,8 +256,8 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'change-background',
                   title: {
-                    eng: 'Change Background (UX and UI in progress [PAUSED])',
-                    por: 'Alterar Fundo (UX e UI em desenvolvimento [PAUSADO])',
+                    eng: 'Change Background (UX and UI in progress)',
+                    por: 'Alterar Fundo (UX e UI em desenvolvimento)',
                   },
                   icon: 'image-outline-icon',
                   type: 'app',
