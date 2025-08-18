@@ -33,9 +33,6 @@ const SystemFile = React.memo(
       >
         <StyledFileWrapper__Icon
           variant={icon}
-          $backgroundColorContrast={`drop-shadow( 0px 0px 0.5px ${
-            backgroundColorContrast ?? '#3c3c3c'
-          })`}
         />
         <StyledFileWrapper__Text
           ref={ref}

@@ -86,6 +86,29 @@ const App: React.FC = () => {
   kernel.createProcess('Calculadora');
   kernel.createProcess('Editor de Texto');
 
+  function isMobile() {
+    if (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Exemplo de uso
+  if (isMobile()) {
+    console.log('O usuário está usando um dispositivo móvel.');
+  } else {
+    console.log('O usuário está usando um desktop ou tablet.');
+  }
+
   return (
     <>
       {/* Populate head metadata based on window and theme */}
