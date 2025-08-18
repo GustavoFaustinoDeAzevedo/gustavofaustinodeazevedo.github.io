@@ -1,7 +1,11 @@
 import { use, useEffect, useRef, useState } from 'react';
-import DesktopBackground from '../../../Desktop/components';
 import Button from '../../../ui/Button';
-import styled from 'styled-components';
+import { BackgroundControlProps } from '../types/BackgroundControl.types';
+
+type Translations = {
+  eng: string;
+  por: string;
+};
 
 const CustomImagePicker = ({
   language,
@@ -9,12 +13,14 @@ const CustomImagePicker = ({
   handleUpdateWindowContent,
   displayChoicesContent,
   backgroundImage,
-}) => {
-  const translations = {
+}: BackgroundControlProps) => {
+  const translations: Translations = {
     eng: 'Custom Image Picker Component',
     por: 'Componente de Seletor de Imagem Personalizada',
   };
-  const [preview, setPreview] = useState<string | null>(backgroundImage);
+  const [preview, setPreview] = useState<string | null>(
+    backgroundImage ?? null
+  );
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleSelectImage = () => {
