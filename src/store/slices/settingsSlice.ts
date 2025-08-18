@@ -44,7 +44,7 @@ const initialState: SettingsState = {
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundEffect: 'diagonal',
-  desktopBackgroundImage: 'assets/images/netti_Nu_Nu-cat-6342145_640.jpg',
+  desktopBackgroundImage: '/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
 };
 
