@@ -1,6 +1,6 @@
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../../ui/Button';
-import { BackgroundControlProps } from '../types/BackgroundControl.types';
+import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 type Translations = {
   eng: string;
@@ -13,7 +13,7 @@ const CustomImagePicker = ({
   handleUpdateWindowContent,
   displayChoicesContent,
   backgroundImage,
-}: BackgroundControlProps) => {
+}: ChangeBackgroundProps) => {
   const translations: Translations = {
     eng: 'Custom Image Picker Component',
     por: 'Componente de Seletor de Imagem Personalizada',

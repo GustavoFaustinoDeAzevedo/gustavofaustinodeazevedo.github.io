@@ -1,35 +1,47 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import { changeBackgroundTextContent } from './data/changeBackground.data';
 
 import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
 import BackgroundControl from './components/BackgroundControl';
 import DesktopBackground from '../../Desktop/components';
+import {
+  BackgroundDisplay,
+  ChangeBackgroundProps,
+} from './types/changeBackground.types';
+
+type RadioOption = {
+  id: BackgroundDisplay;
+  label: string;
+};
+
+
 
 export const ChangeBackground = ({
   handleChangeBackground,
   handleUpdateWindowContent,
   language,
   content,
-}) => {
-  const getCSSVariable = (variableName) =>
+}: ChangeBackgroundProps) => {
+  const getCSSVariable = (variableName: string) =>
     getComputedStyle(document.documentElement)
       .getPropertyValue(variableName)
       .trim();
 
   // useSelector
   const desktopBackgroundColor = useSelector(
-    (state) => state.settings.desktopBackgroundColor
+    (state: RootState) => state.settings.desktopBackgroundColor
   );
   const backgroundImage = useSelector(
-    (state) => state.settings.desktopBackgroundImage
+    (state: RootState) => state.settings.desktopBackgroundImage
   );
   const isBackgroundImage = useSelector(
-    (state) => state.settings.isBackgroundImage
+    (state: RootState) => state.settings.isBackgroundImage
   );
 
   // useState
-  const [backgroundDisplay, setBackgroundDisplay] = useState(
+  const [backgroundDisplay, setBackgroundDisplay] = useState<BackgroundDisplay>(
     isBackgroundImage ? 'image' : 'color'
   );
 
@@ -57,7 +69,7 @@ export const ChangeBackground = ({
       language,
     });
 
-  const RadioMapper = ({ radioObjectData }) => {
+  const RadioMapper = ({ radioObjectData }: { [key: string]: any }) => {
     if (typeof radioObjectData !== 'object')
       return console.error('You must input an object to map the radio options');
     return Object.values(radioObjectData).map((object) => (
