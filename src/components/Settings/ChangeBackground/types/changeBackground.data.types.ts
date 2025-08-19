@@ -1,19 +1,31 @@
+import { Language } from '@/store/slices/settingsSlice';
+import { changeBackgroundTextContent } from '../data/changeBackground.data';
+
+type Range = {
+  min: string;
+  max: string;
+  default: string;
+};
+
 type FilterData = {
   id: string;
   label: string;
-  min: number;
-  max: number;
   step: number;
-  default: number;
+  range: Range;
 };
 
-export type FilterList = {
+type FilterList = {
   [key: string]: FilterData;
+};
+
+export type FilterListLanguage = {
+  por: FilterList;
+  eng: FilterList;
 };
 
 type Filter = {
   legend: string;
-  options: FilterList;
+  options: FilterListLanguage;
 };
 
 type Picker = {
@@ -33,7 +45,7 @@ export type Choice = {
   settings: Settings;
 };
 
-type Choices = {
+export type Choices = {
   image: Choice;
   color: Choice;
 };
@@ -48,4 +60,9 @@ export type BackgroundTextContent = {
   por: LanguageContent;
 };
 
+export type RootType = (typeof changeBackgroundTextContent)[Language];
 
+export type HandleChangeBackground = {
+  backgroundImage?: string;
+  isBackgroundImage?: boolean;
+};

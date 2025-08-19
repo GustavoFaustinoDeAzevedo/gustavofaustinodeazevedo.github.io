@@ -12,7 +12,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filter',
-            options: filters,
+            options: filters.eng,
           },
           picker: {
             legend: 'Image',
@@ -27,28 +27,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filter',
-            options: {
-              brightness: {
-                id: 'brightness',
-                label: 'Brightness',
-                range: { min: '0.5', max: '1.5', default: '1' },
-              },
-              contrast: {
-                id: 'contrast',
-                label: 'Contrast',
-                range: { min: '0.5', max: '2', default: '1' },
-              },
-              saturation: {
-                id: 'saturation',
-                label: 'Saturation',
-                range: { min: '0.5', max: '2', default: '1' },
-              },
-              hue: {
-                id: 'hue',
-                label: 'HUE',
-                range: { min: '0', max: '360' },
-              },
-            },
+            options: filters.eng,
           },
           picker: {
             legend: 'Color',
@@ -68,7 +47,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filtro',
-            options: ['Brilho', 'Contraste', 'Saturação', 'Tonalidade'],
+            options: filters.por,
           },
           picker: {
             legend: 'Imagem',
@@ -83,28 +62,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filtro',
-            options: {
-              brightness: {
-                id: 'brightness',
-                label: 'Brilho',
-                range: { min: '0.5', max: '1.5', default: '1' },
-              },
-              contrast: {
-                id: 'contrast',
-                label: 'Contraste',
-                range: { min: '0.5', max: '2', default: '1' },
-              },
-              saturation: {
-                id: 'saturation',
-                label: 'Saturação',
-                range: { min: '0.5', max: '2', default: '1' },
-              },
-              hue: {
-                id: 'hue',
-                label: 'Tonalidade',
-                range: { min: '0', max: '360', default: '0' },
-              },
-            },
+            options: filters.por,
           },
           picker: {
             legend: 'Cor',
