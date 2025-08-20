@@ -10,7 +10,7 @@ import Desktop from '@/components/Desktop';
 import Taskbar from '@/components/Taskbar';
 import PageMeta from '@/components/PageMeta';
 
-import taskbarProps from './hooks/taskbarProps';
+import { useTaskbarProps, useIsMobile } from './hooks';
 import createWindowList from '@/components/Window/utils/createWindowList';
 import { RefsProvider } from '@/contexts/RefsContext';
 
@@ -28,6 +28,7 @@ gsap.registerPlugin(useGSAP);
  * Sets up theme, Redux state selectors, action handlers, and renders
  * Desktop, window stack, and Taskbar inside ThemeProvider.
  */
+
 const App: React.FC = () => {
   // Apply custom theme hook
   const { theme } = useChangeTheme();
@@ -59,7 +60,7 @@ const App: React.FC = () => {
   const history = useSelector((state: RootState) => state.window.history);
   const rootFolder = useSelector((state: RootState) => state.file.filesList);
 
-  // Combine window- and settings-related action hooks
+  // Combine window and settings related action hooks
   const windowActions = {
     ...actions.useWindowActions(),
     ...actions.useSettingsActions(),
@@ -85,29 +86,6 @@ const App: React.FC = () => {
 
   kernel.createProcess('Calculadora');
   kernel.createProcess('Editor de Texto');
-
-  function isMobile() {
-    if (
-      navigator.userAgent.match(/Android/i) ||
-      navigator.userAgent.match(/webOS/i) ||
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i) ||
-      navigator.userAgent.match(/iPod/i) ||
-      navigator.userAgent.match(/BlackBerry/i) ||
-      navigator.userAgent.match(/Windows Phone/i)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  // Exemplo de uso
-  if (isMobile()) {
-    console.log('O usuário está usando um dispositivo móvel.');
-  } else {
-    console.log('O usuário está usando um desktop ou tablet.');
-  }
 
   return (
     <>
@@ -144,7 +122,7 @@ const App: React.FC = () => {
 
             {/* Render taskbar with dynamic props */}
             <Taskbar
-              {...taskbarProps({
+              {...useTaskbarProps({
                 windowList,
                 history,
                 focusedWindow,

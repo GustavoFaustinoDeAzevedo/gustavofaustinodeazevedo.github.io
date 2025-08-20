@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { contextMenuData } from '../../data/contextMenuData';
 import { useSelector } from 'react-redux';
 
-export const useItemsHandler = () => {
+const useItemsHandler = () => {
   const contextMenu = useSelector((state) => state.contextMenu);
 
   return useCallback(() => {
@@ -21,3 +21,5 @@ export const useItemsHandler = () => {
     return firstScope?.actions || contextMenuData[0]?.actions || [];
   }, [contextMenu]);
 };
+
+export default useItemsHandler;

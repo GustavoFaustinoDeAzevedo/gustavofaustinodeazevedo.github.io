@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import actions from '../../store/actions';
 
-export const useHandleContextMenu = () => {
+const useHandleContextMenu = () => {
   const contextMenuActions = actions.useContextMenuActions();
   const handleOpenContextMenu = contextMenuActions.handleOpenContextMenu;
   return useCallback((e) => {
@@ -15,3 +15,5 @@ export const useHandleContextMenu = () => {
     }
   }, []);
 };
+
+export default useHandleContextMenu;

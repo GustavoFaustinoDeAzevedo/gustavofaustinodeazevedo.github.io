@@ -12,18 +12,19 @@ export const fileWrapperStyle = {
   lineHeight: '1.2',
   filter: 'brightness(1)',
   borderRadius: '0.5rem',
-  transition: 'color 0.2s ease-in-out, background-color 0.3s ease-in-out, text-shadow 0.2s ease-in-out, transform 0.3s ease, filter 0.3s ease',
+  transition: 'backdrop-filter 0.3s ease-in-out, color 0.2s ease-in-out, background 0.3s ease-in-out, text-shadow 0.2s ease-in-out, transform 0.3s ease, filter 0.3s ease',
   pointerEvents: 'initial',
+  backdropFilter: 'blur(0px)',
 
 
   '&:hover, &:focus': {
     transition: 'all 0.3s',
-    background: 'rgba(36, 36, 36, 0.38)',
-    backgroundFilter: 'blur(20px)',
+    background: 'rgba(0, 0, 0, 0.43)',
+    backdropFilter: 'blur(2px)',
 
     '&>*': {
       transform: 'translateY(-10px)',
-      filter: 'brightness(1.2) drop-shadow(0px 10px 2px #00000068)',
+      filter: 'brightness(1.2) drop-shadow(0px 10px 2px #0000008a)',
       // backgroundColor: 'rgba(var(--c-rgb-desktop-bg-contrast), 0.2)',
       WebkitUserSelect: 'none',
       userSelect: 'none',
@@ -52,7 +53,7 @@ export const fileWrapperStyle__text = {
   fontSize: '0.8rem',
   // background: 'rgba(0, 0, 0, 0.4)',
   // textShadow: 'var(--s-text-outline)',
-  filter: 'brightness(1) drop-shadow(0px 0px 1px #000000b8)  drop-shadow(0px 0px 1px #000000b8) drop-shadow(0px 0px 1px #000000b8)',
+  filter: 'brightness(1) drop-shadow(0px 0px 1px #000000ff)  drop-shadow(0px 0px 1px #000000ff)',
   WebkitUserSelect: 'none',
   userSelect: 'none',
   transition: 'color 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease, filter 0.3s ease',
@@ -64,6 +65,6 @@ export const fileWrapperStyle__icon = {
   fontSize: '2rem',
   marginBottom: '0.5rem',
   backgroundColor: 'transparent',
-  filter: 'brightness(1) drop-shadow(0px 0px 1px #000000b8)  drop-shadow(0px 0px 1px #000000b8) drop-shadow(0px 0px 1px #000000b8)',
+  filter: 'brightness(1) drop-shadow(0px 0px 1px #000000ff)  drop-shadow(0px 0px 1px #000000ff)',
   transition: 'background-color 0.3s ease-in-out, transform 0.3s ease,filter 0.3s ease',
 }
