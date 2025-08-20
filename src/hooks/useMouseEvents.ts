@@ -6,11 +6,11 @@ type MouseEventHandlers = {
   onMouseMove?: (event: MouseEvent) => void;
 };
 
-function useMouseEvents({
+const useMouseEvents = ({
   onMouseDown,
   onMouseUp,
   onMouseMove,
-}: MouseEventHandlers) {
+}: MouseEventHandlers) => {
   useEffect(() => {
     if (onMouseDown) window.addEventListener('mousedown', onMouseDown);
     if (onMouseUp) window.addEventListener('mouseup', onMouseUp);
@@ -22,6 +22,6 @@ function useMouseEvents({
       if (onMouseMove) window.removeEventListener('mousemove', onMouseMove);
     };
   }, [onMouseDown, onMouseUp, onMouseMove]);
-}
+};
 
 export default useMouseEvents;

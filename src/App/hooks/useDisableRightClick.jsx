@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const useDisableRightClick = () => {
+const useDisableRightClick = () => {
   useEffect(() => {
     const disableRightClick = (e) => {
       if (!e.target.closest('.enable-context')) {
@@ -11,3 +11,5 @@ export const useDisableRightClick = () => {
     return () => document.removeEventListener('contextmenu', disableRightClick);
   }, []);
 };
+
+export default useDisableRightClick;
