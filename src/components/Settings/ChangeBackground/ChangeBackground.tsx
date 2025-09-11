@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from './data/changeBackground.data';
+import actions from '@/store/actions';
 
 import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
 import BackgroundControl from './components/BackgroundControl';
@@ -16,10 +17,7 @@ type RadioOption = {
   label: string;
 };
 
-
-
 export const ChangeBackground = ({
-  handleChangeBackground,
   handleUpdateWindowContent,
   language,
   content,
@@ -28,6 +26,9 @@ export const ChangeBackground = ({
     getComputedStyle(document.documentElement)
       .getPropertyValue(variableName)
       .trim();
+
+  const { handleChangeBackground, handleChangeLanguage } =
+    actions.useSettingsActions();
 
   // useSelector
   const desktopBackgroundColor = useSelector(

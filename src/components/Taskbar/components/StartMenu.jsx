@@ -64,7 +64,7 @@ const StartMenu = ({
           <fieldset className="history-container">
             <legend>History:</legend>
             <ul className="start-menu-history">
-              {history.map((id, index) => {
+              {history?.map((id, index) => {
                 return (
                   <li key={`history-${id[language] + '-' + index}`}>
                     {id[language]}

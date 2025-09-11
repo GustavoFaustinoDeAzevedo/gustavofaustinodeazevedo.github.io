@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { RootState } from '@/store';
-import actions from '@/store/actions';
 
 import Desktop from '@/components/Desktop';
 import Taskbar from '@/components/Taskbar';
@@ -19,7 +18,8 @@ import { ThemeProvider } from 'styled-components';
 import useChangeTheme from '@/components/Settings/ChangeTheme/hooks/useChangeTheme';
 import useUserBrowserDarkMode from '@/hooks/useUserBrowserDarkMode';
 
-import { Kernel } from '../kernel';
+import Kernel from '@/os';
+import actions from '@/store/actions';
 
 gsap.registerPlugin(useGSAP);
 
@@ -30,6 +30,8 @@ gsap.registerPlugin(useGSAP);
  */
 
 const App: React.FC = () => {
+  const isMobile = useIsMobile();
+
   // Apply custom theme hook
   const { theme } = useChangeTheme();
 
@@ -61,10 +63,6 @@ const App: React.FC = () => {
   const rootFolder = useSelector((state: RootState) => state.file.filesList);
 
   // Combine window and settings related action hooks
-  const windowActions = {
-    ...actions.useWindowActions(),
-    ...actions.useSettingsActions(),
-  };
 
   // Files and context menu actions
   const filesActions = actions.useFilesActions();
@@ -72,20 +70,14 @@ const App: React.FC = () => {
   const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
 
   // Build stack of window components based on current state
-  const windowsStack = createWindowList(
+  const windowsStack = createWindowList({
+    isMobile,
     desktopRef,
     windowList,
     focusedWindow,
     language,
-    windowActions,
-    filesActions
-  );
-
-  const kernel = new Kernel();
-  kernel.boot();
-
-  kernel.createProcess('Calculadora');
-  kernel.createProcess('Editor de Texto');
+    filesActions,
+  });
 
   return (
     <>
@@ -111,9 +103,10 @@ const App: React.FC = () => {
             children={
               rootFolder.children?.[0]?.children?.[0]?.children?.[0]
                 ?.children ?? []
-            }
+            } // temporário
             filesActions={filesActions}
-            windowActions={windowActions}
+            // settingsActions={settingsActions}
+            // windowActions={windowActions}
           />
 
           {/* Provide refs context for window positioning */}
@@ -121,17 +114,7 @@ const App: React.FC = () => {
             {windowsStack}
 
             {/* Render taskbar with dynamic props */}
-            <Taskbar
-              {...useTaskbarProps({
-                windowList,
-                history,
-                focusedWindow,
-                language,
-                handleChangeLanguage: windowActions.handleChangeLanguage,
-                windowActions,
-              })}
-              onChangeLanguage={windowActions.handleChangeLanguage}
-            />
+            <Taskbar  />
           </RefsProvider>
 
           {/* 

@@ -1,5 +1,5 @@
-import Calculator from '../../Gadgets/Calculator';
-import Notepad from '../../Gadgets/Notepad';
+import Calculator from '@apps/Calculator';
+import Notepad from '@apps/Notepad';
 import { AboutMe, Skills } from '../../Portfolio';
 import BrowserSimulator from '../../BrowserSimulator';
 import TaskManager from '../../TaskManager';

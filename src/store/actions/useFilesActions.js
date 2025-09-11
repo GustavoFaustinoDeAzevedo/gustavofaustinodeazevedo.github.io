@@ -1,12 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { addFile, removeFile, sortFiles } from '../slices/filesSlice';
+import { addFile, removeFile, sortFiles } from '../slices/file/filesSlice';
 
 
 const useFilesActions = () => {
   const dispatch = useDispatch();
 
   const handleNewFile = (newFileData, currentNode, nodeDepth) => {
-    console.log("Adding file to node:", currentNode, "at depth:", nodeDepth);
     dispatch(addFile({ newFileData, currentNode, nodeDepth }));
   };
 

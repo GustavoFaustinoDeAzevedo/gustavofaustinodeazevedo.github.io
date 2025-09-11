@@ -18,16 +18,6 @@ const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
     (state: RootState) => state.settings.isBackgroundImage
   );
 
-  const effect = () => {
-    console.log('DesktopBackground', {
-      backgroundColor,
-      backgroundImage,
-      isBackgroundImage,
-    });
-  };
-
-  useEffect(effect, [backgroundColor, backgroundImage, isBackgroundImage]);
-
   return (
     <DesktopBackgroundStyled
       $isBackgroundImage={isBackgroundImage}

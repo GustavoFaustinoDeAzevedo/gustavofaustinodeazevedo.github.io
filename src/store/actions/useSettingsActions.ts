@@ -1,38 +1,36 @@
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { changeBackground, changeLanguage } from '../slices/settingsSlice';
-import { Language } from '../slices/settingsSlice';
+import {
+  changeBackground,
+  changeLanguage,
+  changeDoubleCkick,
+} from '../slices/settings/settingsSlice';
+import { Language } from '../slices/settings';
+import { HandleChangeBackground } from '@/components/Settings/ChangeBackground/types/changeBackground.data.types';
 
-type BackgroundPayload = Parameters<typeof changeBackground>[0];
-
-const useSettingsActions = () => {
+const useSettingsActions = (): {
+  handleChangeLanguage: (newLang: Language) => void;
+  handleChangeBackground: (payload: HandleChangeBackground) => void;
+  handleChangeDoubleCkick: (payload: boolean) => void;
+} => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleChangeLanguage = (newLang: Language) => {
     dispatch(changeLanguage(newLang));
   };
 
-  const handleChangeBackground = ({
-    backgroundColor,
-    backgroundColorContrast,
-    backgroundEffect,
-    backgroundImage,
-    isBackgroundImage,
-  }: BackgroundPayload) => {
-    dispatch(
-      changeBackground({
-        backgroundColor,
-        backgroundColorContrast,
-        backgroundEffect,
-        backgroundImage,
-        isBackgroundImage,
-      })
-    );
+  const handleChangeBackground = (payload: HandleChangeBackground) => {
+    dispatch(changeBackground(payload));
+  };
+
+  const handleChangeDoubleCkick = (payload: boolean) => {
+    dispatch(changeDoubleCkick(payload));
   };
 
   return {
     handleChangeLanguage,
     handleChangeBackground,
+    handleChangeDoubleCkick,
   };
 };
 

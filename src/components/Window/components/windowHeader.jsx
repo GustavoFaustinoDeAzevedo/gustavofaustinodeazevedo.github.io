@@ -7,11 +7,11 @@ const WindowHeader = ({
   icon = '',
   language = 'eng',
   isMaximized = false,
-  onFocus = () => {},
-  onMinimize = () => {},
-  onMaximize = () => {},
-  onRestore = () => {},
-  onClose = () => {},
+  handleRequestFocus,
+  handleRequestMinimize,
+  handleRequestMaximize,
+  handleRequestRestore,
+  handleRequestClose,
 }) => {
   const stylePng = {
     color: 'var(--c-text)',
@@ -29,9 +29,9 @@ const WindowHeader = ({
   return (
     <div className="window-header">
       <span
-        onTouchStart={onFocus}
-        onClick={onFocus}
-        onMouseDown={onFocus}
+        onTouchStart={handleRequestFocus}
+        onClick={handleRequestFocus}
+        onMouseDown={handleRequestFocus}
         ref={headerRef}
         title={title[language]}
         aria-label={title[language]}
@@ -45,7 +45,7 @@ const WindowHeader = ({
           aria-label={language === 'por' ? 'Minimizar' : 'Minimize'}
           title={language === 'por' ? 'Minimizar' : 'Minimize'}
           className="minimize"
-          onClick={onMinimize}
+          onClick={handleRequestMinimize}
         >
           <Icon variant="minimize" style={styleSvg} />
         </button>
@@ -69,7 +69,7 @@ const WindowHeader = ({
               : 'Maximize'
           }
           className="maximize"
-          onClick={() => (isMaximized ? onRestore() : onMaximize())}
+          onClick={isMaximized ? handleRequestRestore : handleRequestMaximize}
         >
           <Icon
             variant={`${isMaximized ? 'restore' : 'maximize'}`}
@@ -80,7 +80,7 @@ const WindowHeader = ({
           aria-label={language === 'por' ? 'Fechar' : 'Close'}
           title={language === 'por' ? 'Fechar' : 'Close'}
           className="close"
-          onClick={onClose}
+          onClick={handleRequestClose}
         >
           <Icon variant="close" style={styleSvg} />
         </button>

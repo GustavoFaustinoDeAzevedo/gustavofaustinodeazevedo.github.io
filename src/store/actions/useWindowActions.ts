@@ -2,60 +2,45 @@ import { useDispatch } from 'react-redux';
 import {
   openWindow,
   closeWindow,
-  focusWindow,
+  // focusWindow,
   updateWindow,
   resetFocus,
-} from '../slices/windowSlice';
+} from '../slices/window/windowSlice';
+import { WindowNode } from '../slices/window/windowSlice.types';
 
-interface WindowDataBase {
-  windowId: string;
-  title: string;
-  icon?: string;
-  src?: string;
-  children?: {
-    fileId: string;
-    title: string;
-  };
-  isUnique?: boolean;
-  type?: string;
-  nodeDepth?: number;
-  initialDimensions?: {
-    width: string;
-    height: string;
-  };
-}
-
-type WindowData = WindowDataBase & Record<string, unknown>;
+export type WindowData = WindowNode & Record<string, unknown>;
 
 const useWindowActions = () => {
   const dispatch = useDispatch();
 
   const handleUpdateWindow = (windowData: WindowData) => {
+
     dispatch(updateWindow(windowData));
   };
 
   const handleOpenWindow = (windowData: WindowData) => {
     const data: WindowData =
       typeof windowData === 'string' ? JSON.parse(windowData) : windowData;
+
     dispatch(openWindow(data));
   };
 
-  const handleFocusWindow = (windowId: string) => {
-    dispatch(focusWindow(windowId));
-  };
+  // const handleFocusWindow = (windowId: string) => {
+  //   dispatch(focusWindow(windowId));
+  // };
 
   const handleCloseWindow = (windowId: string) => {
     dispatch(closeWindow(windowId));
   };
 
-  const handleResetFocus = () => {
-    dispatch(resetFocus());
+  const handleResetFocus = (windowId: string) => {
+    dispatch(resetFocus(windowId));
   };
 
   return {
     handleOpenWindow,
     handleCloseWindow,
-    handleFocusWindow,
+    // handleFocusWindow,
     handleResetFocus,
     handleUpdateWindow,
   };

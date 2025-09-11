@@ -1,3 +1,3 @@
-import Window from "./Window";
+import WindowManager from './WindowManager';
 
-export default Window;
+export default WindowManager;

@@ -1,4 +1,4 @@
-import { Language } from '@/store/slices/settingsSlice';
+import { Language } from '@/store/slices/settings/settingsSlice';
 import { Choice, HandleChangeBackground } from './changeBackground.data.types';
 
 export type BackgroundDisplay = 'image' | 'color';

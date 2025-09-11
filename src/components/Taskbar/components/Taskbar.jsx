@@ -3,17 +3,17 @@ import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '..';
 import useClickOutside from '../../../hooks/useClickOutside';
 import { useSelector } from 'react-redux';
 import BatteryStatus from '../../BatteryStatus/components/BatteryStatus';
+import actions from '../../../store/actions';
 
-const Taskbar = ({
-  windowList,
-  className,
-  focusedWindow,
-  history,
-  language,
-  windowActions,
-  onUpdateWindow,
-  onUnfocus,
-}) => {
+const Taskbar = ({}) => {
+  const { language, isDoubleClick } = useSelector((state) => state.settings);
+  const { openedWindowList, history, focusedWindow } = useSelector(
+    (state) => state.window
+  );
+
+  const windowActions = actions.useWindowActions();
+  const settingsActions = actions.useSettingsActions();
+
   const [menuVisibility, setMenuVisibility] = useState({
     languageMenu: false,
     startMenu: false,
@@ -22,8 +22,8 @@ const Taskbar = ({
   const menuRef = useRef([]);
   const buttonRef = useRef(null);
   const actualVisibleMenu = useRef('');
-
-  const { handleChangeLanguage } = windowActions;
+  const { handleUpdateWindow } = windowActions;
+  const { handleChangeLanguage, handleChangeDoubleCkick } = settingsActions;
 
   const toggleMenuVisibility = (visibilityKey) => {
     setMenuVisibility((prev) => {
@@ -42,22 +42,22 @@ const Taskbar = ({
   };
 
   const handleMinimize = (id) => {
-    onUpdateWindow({
+    handleUpdateWindow({
       windowId: id,
-      requestingMinimize: true,
+      isRequestingMinimize: true,
     });
   };
   const handleMaximize = (id) => {
-    onUpdateWindow({
+    handleUpdateWindow({
       windowId: id,
-      requestingMaximize: true,
+      isRequestingMaximize: true,
     });
   };
 
   const handleRestore = (id) => {
-    onUpdateWindow({
+    handleUpdateWindow({
       windowId: id,
-      requestingRestore: true,
+      isRequestingRestore: true,
     });
   };
 
@@ -71,13 +71,25 @@ const Taskbar = ({
         onClick={() => toggleMenuVisibility('startMenu')}
         history={history}
       />
+
       <TaskbarItems
         focusedWindow={focusedWindow}
-        openedWindowList={windowList}
+        openedWindowList={openedWindowList}
         onWindowMinimize={(id) => handleMinimize(id)}
         onWindowRestore={(id) => handleRestore(id)}
       />
       <section className="taskbar-right-section">
+        <label className="container">
+          {language === 'eng'
+            ? `Double Click To Open Files`
+            : `Duplo Clique Para Abrir Arquivos`}
+          <input
+            type="checkbox"
+            checked={isDoubleClick}
+            onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
+          />
+          <span className="checkmark"></span>
+        </label>
         <LanguageSelector
           languageButtonRef={(element) => (buttonRef.current = element)}
           windowRef={(element) => (menuRef.current = element)}
