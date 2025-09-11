@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 type UseClickOutsideParams = {
-  mainRef: React.RefObject<HTMLElement>;
+  mainRef: React.RefObject<HTMLElement | null>;
   onClickOutside: (event: MouseEvent | TouchEvent) => void;
   isActive?: boolean;
   extraRef?: React.RefObject<HTMLElement> | Element | null;
@@ -13,7 +13,7 @@ const useClickOutside = ({
   onClickOutside,
   isActive = true,
   extraRef = null,
-  ignoreSelectors = ['.context-menu.active']
+  ignoreSelectors = ['.context-menu.active'],
 }: UseClickOutsideParams) => {
   useEffect(() => {
     if (!isActive) return;
@@ -21,7 +21,7 @@ const useClickOutside = ({
     const handleClick = (event: MouseEvent | TouchEvent) => {
       const target = event.target as HTMLElement;
 
-      const isInIgnoredElement = ignoreSelectors.some(selector =>
+      const isInIgnoredElement = ignoreSelectors.some((selector) =>
         target.closest(selector)
       );
 

@@ -2,13 +2,14 @@ import gsap from 'gsap';
 import getRandomPosition from '../utils/getRandomPosition';
 import useAnimationSafe from '../hooks/useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
-import { UseWindowLifecycleProps } from '../types/hooks';
+import { UseWindowLifecycleProps } from '../types/hooks.types';
+import { useEffect } from 'react';
 
 /**
  * @file useWindowLifecycle.ts
  * @module useWindowLifecycle
  * @description
- *   Hook responsible for the lifecycle and animations of windows.
+ *   Hook responsável pelo ciclo de vida e animações das janelas.
  */
 
 const useWindowLifecycle = ({
@@ -16,8 +17,7 @@ const useWindowLifecycle = ({
   headerRef,
   desktopRef,
   windowParams,
-  windowActions,
-  updateWindowState,
+  windowHandlers,
   getWindowInfo,
   createWindowDraggable,
 }: UseWindowLifecycleProps): void => {
@@ -40,13 +40,19 @@ const useWindowLifecycle = ({
     isRequestingMaximize,
     isRequestingMinimize,
     isRequestingClose,
+    isRequestingFocus,
     initialDimensions,
-    isOpen,
+    isOpened,
   } = windowParams;
 
-  const { handleFocusWindow, handleResetFocus, handleCloseWindow } =
-    windowActions;
-
+  const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
+    windowHandlers;
+  /* ──────────── Foco ────────────── */
+  useEffect(() => {
+    if (isRequestingFocus) {
+      handleFocus();
+    }
+  }, [isRequestingFocus]);
   /* ─────────── Abertura ─────────── */
   useAnimationSafe({
     ref: windowRef,
@@ -75,8 +81,9 @@ const useWindowLifecycle = ({
         height: initH,
         lastWidth: initW,
         lastHeight: initH,
-        requestingOpen: false,
-        open: true,
+        isRequestingOpen: false,
+        isRequestingFocus: true,
+        opened: true,
       });
 
       /* torna arrastável */
@@ -84,7 +91,7 @@ const useWindowLifecycle = ({
         windowRef,
         triggerElement: headerRef.current,
         bounds: desktopRef.current,
-        onFocus: handleFocusWindow,
+        onFocus: () => handleFocus(),
         onUpdateWindow: (params) => updateWindowState(params),
         width,
         height,
@@ -109,10 +116,10 @@ const useWindowLifecycle = ({
           height: '100%',
           lastWidth: savedWidth,
           lastHeight: savedHeight,
-          requestingMaximize: false,
+          isRequestingMaximize: false,
+          isRequestingFocus: true,
           maximized: true,
         });
-        !isFocused && handleFocusWindow(windowId);
       });
     },
   });
@@ -135,7 +142,8 @@ const useWindowLifecycle = ({
             height: lastHeight,
             lastWidth: savedWidth,
             lastHeight: savedHeight,
-            requestingMinimize: false,
+            isRequestingMinimize: false,
+            isRequestingFocus: false,
             minimized: true,
           });
           handleResetFocus();
@@ -156,7 +164,8 @@ const useWindowLifecycle = ({
           updateWindowState({
             maximized: isMinimized && isMaximized,
             minimized: false,
-            requestingRestore: false,
+            isRequestingRestore: false,
+            isRequestingFocus: true,
             x: lastX,
             y: lastY,
             lastX: x,
@@ -166,7 +175,6 @@ const useWindowLifecycle = ({
             lastWidth: width,
             lastHeight: height,
           });
-          !isFocused && handleFocusWindow(windowId);
         },
         lastX,
         lastY,
@@ -178,10 +186,10 @@ const useWindowLifecycle = ({
   /* ─────────── Fechar ───────────── */
   useAnimationSafe({
     ref: windowRef,
-    trigger: isRequestingClose && isOpen,
+    trigger: isRequestingClose && isOpened,
     animation: () =>
       windowAnimations.closeWindow(windowRef, () => {
-        handleCloseWindow({ windowId, requestingClose: true });
+        handleClose();
         handleResetFocus();
       }),
   });

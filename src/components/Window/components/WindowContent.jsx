@@ -33,9 +33,7 @@ const WindowContent = ({
         children={children}
         filesActions={filesActions}
         windowActions={windowActions}
-        handleWindowUpdate={(data) =>
-          windowActions?.handleUpdateWindow({ windowId, ...data })
-        }
+        handleWindowUpdate={(data) => windowActions?.updateWindowState(data)}
         nodeType={type}
         dataInitialDimension='{"width": "1000px", "height": "600px"}'
         fileClassName="files-explorer"

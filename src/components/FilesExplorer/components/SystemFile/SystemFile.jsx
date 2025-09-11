@@ -5,10 +5,12 @@ import {
   StyledFileWrapper__Text,
 } from './StyledFileWrapper';
 import { useAutoLineClamp } from '../../hooks';
+import { useSelector } from 'react-redux';
 
 const SystemFile = React.memo(
   ({ fileId, title, icon, onClick, backgroundColorContrast }) => {
     const [ref, lines] = useAutoLineClamp(title, 2);
+    const { isDoubleClick } = useSelector((state) => state.settings);
     const dataInfo = useMemo(
       () =>
         JSON.stringify({
@@ -26,14 +28,13 @@ const SystemFile = React.memo(
         aria-label={title}
         title={title}
         onTouchStart={onClick}
-        onDoubleClick={onClick}
+        onDoubleClick={isDoubleClick ? onClick : undefined}
+        onClick={isDoubleClick ? undefined : onClick}
         data-info={dataInfo}
         id={fileId}
         // backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
       >
-        <StyledFileWrapper__Icon
-          variant={icon}
-        />
+        <StyledFileWrapper__Icon variant={icon} />
         <StyledFileWrapper__Text
           ref={ref}
           $backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}

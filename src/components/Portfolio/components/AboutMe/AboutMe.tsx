@@ -1,9 +1,9 @@
 import aboutMeContent from './aboutMeContent';
 
-type LanguageOption = keyof typeof aboutMeContent;
+export type AboutMeContent = keyof typeof aboutMeContent;
 
 interface AboutMeProps {
-  language: LanguageOption;
+  language: AboutMeContent;
 }
 
 const AboutMe: React.FC<AboutMeProps> = ({ language }) => (

@@ -2,16 +2,16 @@ import SystemFile from './SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
 import { placeholder } from '../../../data/filesData';
 import { useMemo } from 'react';
+import actions from '@/store/actions';
 
 const FilesList = ({
   currentNode,
   language,
-  windowList,
   children,
   fileClassName,
   filesActions,
   dataInitialDimension,
-  windowActions,
+  // windowActions,
   openMode,
   backgroundColorContrast,
   handleWindowUpdate = () => {},
@@ -43,6 +43,7 @@ const FilesList = ({
           },
           windowIndex
         ) => {
+          const windowActions = actions.useWindowActions();
           const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
           const iconTitle = language === 'por' ? title?.por : title?.eng;
           const windowTitle = windowMask?.title ?? title;
@@ -69,7 +70,6 @@ const FilesList = ({
                   openMode,
                   src,
                   isUnique,
-                  windowList,
                   children,
                   handleNewFile,
                   windowActions,

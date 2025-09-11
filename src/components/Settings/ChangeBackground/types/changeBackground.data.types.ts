@@ -1,4 +1,4 @@
-import { Language } from '@/store/slices/settingsSlice';
+import { Language } from '@/store/slices/settings/settingsSlice';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 
 type Range = {
@@ -60,7 +60,8 @@ export type BackgroundTextContent = {
   por: LanguageContent;
 };
 
-export type RootType = (typeof changeBackgroundTextContent)[Language];
+type LanguageKey = keyof typeof changeBackgroundTextContent;
+export type RootType = (typeof changeBackgroundTextContent)[LanguageKey];
 
 export type HandleChangeBackground = {
   backgroundImage?: string;

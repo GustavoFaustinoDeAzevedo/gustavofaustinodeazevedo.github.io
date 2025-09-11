@@ -38,7 +38,7 @@ const PageMeta: React.FC<PageMetaProps> = ({
 
     // If there's a focused window, update title and icon accordingly
     if (focusedWindow !== null) {
-      const target = windowList.find((win) => win.id === focusedWindow)
+      const target = windowList?.find((win) => win.id === focusedWindow)
       if (target) {
         if (target.icon) {
           iconName = iconVariants[target.icon].backgroundImage

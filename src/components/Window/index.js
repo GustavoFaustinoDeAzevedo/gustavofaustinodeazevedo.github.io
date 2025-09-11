@@ -1,2 +1,2 @@
-import WindowWrapper from "./WindowWrapper";
-export default WindowWrapper;
+import WindowManager from "./components";
+export default WindowManager;

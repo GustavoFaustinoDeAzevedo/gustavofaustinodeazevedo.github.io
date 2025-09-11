@@ -7,10 +7,10 @@ const TaskbarItems = ({
   onWindowMinimize,
   onWindowRestore,
 }) => {
-  const renderedItems = useMemo(
-    () => (
+  const renderedItems = useMemo(() => {
+    return (
       <ul className="taskbar-items">
-        {openedWindowList?.[0]?.windowState.open &&
+        {openedWindowList?.[0]?.windowState.status.opened &&
           openedWindowList
             .filter(
               ({ windowId }) =>
@@ -24,7 +24,7 @@ const TaskbarItems = ({
                   key={windowId}
                   id={windowId}
                   title={title}
-                  isMinimized={windowState.minimized}
+                  isMinimized={windowState.status.minimized}
                   icon={icon}
                   index={index}
                   focusedWindow={focusedWindow}
@@ -34,9 +34,8 @@ const TaskbarItems = ({
               );
             })}
       </ul>
-    ),
-    [openedWindowList, focusedWindow, onWindowMinimize, onWindowRestore]
-  );
+    );
+  }, [openedWindowList, focusedWindow, onWindowMinimize, onWindowRestore]);
 
   return renderedItems;
 };

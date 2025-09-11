@@ -1,5 +1,5 @@
 
-const getWindowClass = ({ isFocused, isMinimized, isOpen, isMaximized }) => {
+const getWindowClass = ({ isFocused, isMinimized, isOpened, isMaximized }) => {
   // console.log(isOpen);
   return `window ${isFocused ? 'focus' : ''}  ${isMaximized ? 'maximized' : ''}`;
 };
