@@ -152,6 +152,11 @@
       border: none !important;
       resize: none !important;
 
+      & .window__content {
+        max-width: 100vw !important;
+        max-height: calc(90vh - var(--taskbar-height)) !important;
+      }
+
     }
   }
 }
