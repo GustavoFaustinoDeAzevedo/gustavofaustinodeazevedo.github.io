@@ -43,6 +43,7 @@ const useWindowLifecycle = ({
     isRequestingFocus,
     initialDimensions,
     isOpened,
+    isMobile,
   } = windowParams;
 
   const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
@@ -73,16 +74,17 @@ const useWindowLifecycle = ({
       windowAnimations.openWindow(windowRef, initW, initH);
 
       updateWindowState({
-        x: randomX,
-        y: randomY,
-        lastX: randomX,
-        lastY: randomY,
-        width: initW,
-        height: initH,
-        lastWidth: initW,
-        lastHeight: initH,
+        x: isMobile ? '0px' : randomX,
+        y: isMobile ? '0px' : randomY,
+        lastX: isMobile ? '0px' : randomX,
+        lastY: isMobile ? '0px' : randomY,
+        width: isMobile ? '100%' : initW,
+        height: isMobile ? '100%' : initH,
+        lastWidth: isMobile ? '100%' : initW,
+        lastHeight: isMobile ? '100%' : initH,
         isRequestingOpen: false,
         isRequestingFocus: true,
+        isRequestingMaximize: isMobile,
         opened: true,
       });
 

@@ -9,6 +9,7 @@ import createWindowDraggable from '../utils/createWindowDraggable';
 import getWindowClass from '../utils/getWindowClass';
 import useRefs from '../../../contexts/useRefs';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
+import { useIsMobile } from '@/App/hooks';
 
 gsap.registerPlugin(useGSAP);
 
@@ -19,6 +20,7 @@ const Window = ({
   desktopRef,
   filesActions,
 }) => {
+  const isMobile = useIsMobile();
   const {
     windowId,
     currentNode,
@@ -65,6 +67,7 @@ const Window = ({
     isMinimized,
     isMaximized,
     language,
+    isMobile,
   };
 
   const windowContentWrapperProps = {
@@ -99,6 +102,7 @@ const Window = ({
     windowParams,
     windowHandlers,
     updateWindowState,
+    isMobile,
     getWindowInfo,
     createWindowDraggable,
   });

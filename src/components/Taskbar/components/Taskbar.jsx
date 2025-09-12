@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { StartMenu, TaskbarItems, LanguageSelector, Clock } from '..';
-import useClickOutside from '../../../hooks/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 import { useSelector } from 'react-redux';
-import BatteryStatus from '../../BatteryStatus/components/BatteryStatus';
-import actions from '../../../store/actions';
+import BatteryStatus from '@/components/BatteryStatus/components/BatteryStatus';
+import actions from '@/store/actions';
+import { useIsMobile } from '@/App/hooks';
 
-const Taskbar = ({}) => {
+const Taskbar = ({ isMobile }) => {
   const { language, isDoubleClick } = useSelector((state) => state.settings);
   const { openedWindowList, history, focusedWindow } = useSelector(
     (state) => state.window
@@ -22,6 +23,7 @@ const Taskbar = ({}) => {
   const menuRef = useRef([]);
   const buttonRef = useRef(null);
   const actualVisibleMenu = useRef('');
+
   const { handleUpdateWindow } = windowActions;
   const { handleChangeLanguage, handleChangeDoubleCkick } = settingsActions;
 
@@ -63,15 +65,16 @@ const Taskbar = ({}) => {
 
   return (
     <nav className="taskbar">
-      <StartMenu
-        language={language}
-        startButtonRef={(element) => (buttonRef.current = element)}
-        isVisible={menuVisibility.startMenu}
-        windowRef={(element) => (menuRef.current = element)}
-        onClick={() => toggleMenuVisibility('startMenu')}
-        history={history}
-      />
-
+      {!isMobile && (
+        <StartMenu
+          language={language}
+          startButtonRef={(element) => (buttonRef.current = element)}
+          isVisible={menuVisibility.startMenu}
+          windowRef={(element) => (menuRef.current = element)}
+          onClick={() => toggleMenuVisibility('startMenu')}
+          history={history}
+        />
+      )}
       <TaskbarItems
         focusedWindow={focusedWindow}
         openedWindowList={openedWindowList}
@@ -79,17 +82,19 @@ const Taskbar = ({}) => {
         onWindowRestore={(id) => handleRestore(id)}
       />
       <section className="taskbar-right-section">
-        <label className="container">
-          {language === 'eng'
-            ? `Double Click To Open Files`
-            : `Duplo Clique Para Abrir Arquivos`}
-          <input
-            type="checkbox"
-            checked={isDoubleClick}
-            onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
-          />
-          <span className="checkmark"></span>
-        </label>
+        {!isMobile && (
+          <label className="container">
+            {language === 'eng'
+              ? `Double Click To Open Files`
+              : `Duplo Clique Para Abrir Arquivos`}
+            <input
+              type="checkbox"
+              checked={isDoubleClick}
+              onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
+            />
+            <span className="checkmark"></span>
+          </label>
+        )}
         <LanguageSelector
           languageButtonRef={(element) => (buttonRef.current = element)}
           windowRef={(element) => (menuRef.current = element)}
