@@ -19,8 +19,9 @@ const Window = ({
   windowHandlers,
   desktopRef,
   filesActions,
+  isMobile
 }) => {
-  const isMobile = useIsMobile();
+
   const {
     windowId,
     currentNode,

@@ -7,6 +7,7 @@ const Desktop = ({
   onContextMenu,
   windowActions,
   language,
+  isMobile,
   // backgroundColor,
   // backgroundImage,
   ...props
@@ -25,6 +26,7 @@ const Desktop = ({
           windowActions={windowActions}
           handleUpdateWindow={updateWindowState}
           language={language}
+          isMobile={isMobile}
           {...props}
         />
       </div>

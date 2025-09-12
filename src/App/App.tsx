@@ -31,7 +31,6 @@ gsap.registerPlugin(useGSAP);
 
 const App: React.FC = () => {
   const isMobile = useIsMobile();
-  console.log(isMobile);
 
   // Apply custom theme hook
   const { theme } = useChangeTheme();
@@ -98,6 +97,7 @@ const App: React.FC = () => {
             currentNode="desktop"
             language={language}
             windowList={windowList}
+            isMobile={isMobile}
             // backgroundColor={backgroundColor}
             backgroundImage={backgroundImage}
             backgroundColorContrast={backgroundColorContrast}

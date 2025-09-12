@@ -12,15 +12,8 @@ const TaskbarItem = ({
   title,
 }) => {
   const handleClick = () => {
-    console.log(`TaskbarItem: clickHandler called for window ${id}`);
     return isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
   };
-
-  console.log(
-    `TaskbarItem: rendering window ${id}, minimized: ${isMinimized}, focused: ${
-      focusedWindow === id
-    }`
-  );
 
   return (
     <li
