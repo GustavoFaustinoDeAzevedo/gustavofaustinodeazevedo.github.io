@@ -93,7 +93,7 @@
     @media screen {
       @media (max-width: 600px) {
         & h2 {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
           font-weight: 600;
           text-shadow: 0 1px 2px #0000004c;
           margin-top: 2rem;
@@ -101,7 +101,7 @@
         }
 
         & h3 {
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: 500;
           /* padding-bottom: 2rem; */
           margin-bottom: 1rem;
@@ -113,7 +113,7 @@
           overflow: auto !important;
 
           & p {
-            font-size: 0.8rem !important;
+            font-size: 0.7rem !important;
           }
 
 
@@ -170,7 +170,7 @@
   @container (max-width: 699px) {
     .about-me {
       width: 100%;
-      min-width: none;
+      min-width: 0px;
       max-width: fit-content;
 
 
