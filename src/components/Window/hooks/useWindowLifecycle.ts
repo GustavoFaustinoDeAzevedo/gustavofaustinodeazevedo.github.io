@@ -90,7 +90,7 @@ const useWindowLifecycle = ({
       });
 
       /* torna arrastável */
-      isMobile &&
+      !isMobile &&
         createWindowDraggable({
           windowRef,
           triggerElement: headerRef.current,
