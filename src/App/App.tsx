@@ -31,6 +31,7 @@ gsap.registerPlugin(useGSAP);
 
 const App: React.FC = () => {
   const isMobile = useIsMobile();
+  console.log(isMobile);
 
   // Apply custom theme hook
   const { theme } = useChangeTheme();
@@ -114,7 +115,7 @@ const App: React.FC = () => {
             {windowsStack}
 
             {/* Render taskbar with dynamic props */}
-            <Taskbar  />
+            <Taskbar isMobile={isMobile} />
           </RefsProvider>
 
           {/* 
