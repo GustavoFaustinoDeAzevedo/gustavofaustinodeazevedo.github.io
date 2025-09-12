@@ -29,10 +29,7 @@ const createWindowList = ({
         windowActions={windowActions}
       />
     ));
-  }, [
-    windowList,
-
-  ]);
+  }, [windowList, language]);
 };
 
 export default createWindowList;

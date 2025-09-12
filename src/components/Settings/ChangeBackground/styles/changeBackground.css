@@ -31,11 +31,13 @@
           min-height: 240px;
           width: 100%;
           height: 100%;
-          background-size: cover;
+          background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
           border: 1px solid var(--c-border);
         }
+
+        @media screen and (max-width: 600px) {}
       }
 
       & .change-background__aside {
@@ -47,6 +49,8 @@
         background-color: var(--c-background1);
         border-left: 1px solid var(--c-border);
         padding: 2rem 0;
+
+
 
 
         & .change-background__picker-wrapper {
@@ -159,6 +163,57 @@
             }
           }
         }
+      }
+
+
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .change-background__main {
+        max-height: fit-content;
+      }
+
+      .change-background__preview {
+        max-height: fit-content;
+        max-width: fit-content;
+      }
+
+      .change-background__wrapper {
+        flex-direction: column !important;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+
+      }
+
+      .change-background__aside {
+        font-size: 0.9rem;
+        width: 100% !important;
+        border: none !important;
+        border-top: 1px solid var(--c-border) !important;
+        padding: 0.5rem 0 !important;
+        max-height: fit-content;
+        max-width: 100vw;
+        overflow: auto;
+      }
+
+      & .change-background__picker-wrapper {
+        width: 80% !important;
+        flex-direction: row !important;
+
+        gap: 2rem !important;
+      }
+
+      & .change-background__filters-list {
+        max-height: 100px;
+        ;
+      }
+
+      button {
+        width: 8rem !important;
+        height: 6rem !important;
+        border-radius: 50px !important;
       }
     }
   }
