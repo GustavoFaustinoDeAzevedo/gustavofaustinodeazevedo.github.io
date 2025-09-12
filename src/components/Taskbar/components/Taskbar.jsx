@@ -96,6 +96,7 @@ const Taskbar = ({ isMobile }) => {
           </label>
         )}
         <LanguageSelector
+          isMobile={isMobile}
           languageButtonRef={(element) => (buttonRef.current = element)}
           windowRef={(element) => (menuRef.current = element)}
           language={language}

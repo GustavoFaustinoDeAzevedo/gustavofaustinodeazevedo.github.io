@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../../hooks/useClickOutside';
 import gsap from 'gsap';
 
-const LanguageSelector = ({ language, onChangeLanguage }) => {
+const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
   const languageSelectorRef = useRef(null);
   const languageButtonRef = useRef(null);
   const [languageSelectorVisibility, setLanguageSelectorVisibility] =
@@ -12,18 +12,18 @@ const LanguageSelector = ({ language, onChangeLanguage }) => {
     if (!languageSelectorRef.current) return;
     if (languageSelectorVisibility) {
       gsap.to(languageSelectorRef.current, {
-        y: '0',
+        y: '0px',
         ease: 'power2.out',
         duration: '0.2',
       });
     } else {
       gsap.to(languageSelectorRef.current, {
-        y: '100%',
+        y: isMobile ? '-100%' : '100%',
         ease: 'power2.in',
         duration: '0.2',
       });
     }
-  }, [languageSelectorVisibility]);
+  }, [languageSelectorVisibility, isMobile]);
 
   useClickOutside({
     mainRef: languageSelectorRef,
@@ -41,34 +41,57 @@ const LanguageSelector = ({ language, onChangeLanguage }) => {
     );
   };
 
+  const languageList = {
+    eng: {
+      enabled: { eng: 'enabled' },
+      title: 'Select language',
+      item: {
+        eng: 'English-US',
+        por: 'Portuguese-BR',
+      },
+    },
+    por: {
+      enabled: { por: 'enabled' },
+      title: 'Mudar idioma',
+      item: {
+        eng: 'Inglês-US',
+        por: 'Português-BR',
+      },
+    },
+  };
+
   return (
-    <section className="language">
+    <section className="language-selector__container">
       <button
         ref={languageButtonRef}
-        className="language-button"
+        className="language-selector__button"
         onClick={handleOpenClick}
-        aria-label={language !== 'por' ? 'Select language' : 'Mudar idioma'}
-        title={language !== 'por' ? 'Select language' : 'Mudar idioma'}
+        aria-label={languageList[language].title}
+        title={languageList[language].title}
       >
-        {language === 'por' ? 'POR' : 'ENG'}
+        {language.toUpperCase()}
       </button>
-      <div className="language-list-container">
-        <ul ref={languageSelectorRef} className="language-list">
+      <div className="language-selector__wrapper">
+        <ul ref={languageSelectorRef} className="language-selector__list">
           <li
             onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
             data-lang={'eng'}
-            className={language === 'eng' ? 'enabled' : ''}
-            aria-label={language !== 'por' ? 'English-US' : 'Inglês-US'}
+            className={`${
+              languageList.eng.enabled[language] || ''
+            } language-selector__item`}
+            aria-label={languageList[language].item.eng}
           >
-            {language !== 'por' ? 'English-US' : 'Inglês-US'}
+            {languageList[language].item.eng}
           </li>
           <li
             onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
             data-lang={'por'}
-            className={language === 'por' ? 'enabled' : ''}
-            aria-label={language !== 'por' ? 'Portuguese-BR' : 'Português-BR'}
+            className={`${
+              languageList.por.enabled[language] || ''
+            } language-selector__item`}
+            aria-label={languageList[language].item.por}
           >
-            {language !== 'por' ? 'Portuguese-BR' : 'Português-BR'}
+            {languageList[language].item.por}
           </li>
         </ul>
       </div>

@@ -246,7 +246,7 @@
     box-shadow: 0 2px 8px #0000001a;
   }
 
-  .window-content {
+  .window__content {
 
     & .contact-form {
       display: flex;

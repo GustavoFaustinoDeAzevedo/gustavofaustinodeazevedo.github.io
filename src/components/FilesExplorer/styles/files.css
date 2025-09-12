@@ -17,6 +17,14 @@
     z-index: 1;
     pointer-events: none;
 
+    @media screen {
+      @media (max-width: 600px) {
+        top: initial;
+        bottom: 0;
+      }
+
+    }
+
     &>.file {
       padding: 0.3rem 0;
       width: 5rem;
