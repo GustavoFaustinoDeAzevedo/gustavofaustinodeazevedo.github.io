@@ -80,7 +80,7 @@
       max-width: 700px;
       min-width: 300px;
       max-height: 130px;
-  
+
       overflow: auto;
       max-width: 80%;
     }
@@ -110,7 +110,13 @@
         & .about-me-text {
           bottom: 15% !important;
           height: max-content !important;
-          overflow: visible !important;
+          overflow: auto !important;
+
+          & p {
+            font-size: 0.8rem !important;
+          }
+
+
         }
       }
 
@@ -248,7 +254,6 @@
       gap: 2rem;
       padding: 4rem;
       width: 100%;
-      max-width: 600px;
 
       & .input-container {
         position: relative;
@@ -268,8 +273,6 @@
 
         & input, & textarea {
           width: 100%;
-          min-width: 300px;
-          max-width: 600px;
           padding: 1rem;
           background-color: var(--c-background-focus);
           border: 1px solid var(--c-background-focus);
@@ -297,8 +300,6 @@
             outline: none;
             background-color: var(--c-background);
           }
-
-
         }
       }
 
@@ -320,10 +321,27 @@
         cursor: pointer;
         transition: background-color 0.3s;
         color: inherit;
-
+        width: 100%;
 
         &:hover {
           background: var(--c-accent-hover);
+        }
+      }
+    }
+  }
+
+  @media screen {
+    @media (min-width: 600px) {
+      & .contact-form {
+        max-width: 600px;
+
+        & input, & textarea {
+          min-width: 300px;
+          max-width: 600px;
+        }
+
+        & button {
+          width: initial;
         }
       }
     }

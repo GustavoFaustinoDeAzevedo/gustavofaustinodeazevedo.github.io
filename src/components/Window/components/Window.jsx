@@ -19,9 +19,8 @@ const Window = ({
   windowHandlers,
   desktopRef,
   filesActions,
-  isMobile
+  isMobile,
 }) => {
-
   const {
     windowId,
     currentNode,
@@ -39,7 +38,9 @@ const Window = ({
     windowRef,
     headerRef,
   } = windowParams;
-
+  useEffect(() => {
+    console.log(language);
+  }, [language]);
   const {
     updateWindowState,
     handleClose,

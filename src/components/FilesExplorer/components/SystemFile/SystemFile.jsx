@@ -22,7 +22,6 @@ const SystemFile = React.memo(
         }),
       [title, icon, fileId, onClick]
     );
-    console.log(isMobile)
     return (
       <StyledFileWrapper
         aria-label={title}

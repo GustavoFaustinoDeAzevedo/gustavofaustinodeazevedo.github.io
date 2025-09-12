@@ -249,7 +249,7 @@ export const rootFolder: FileNode = {
                   title: { eng: 'Contact', por: 'Contato' },
                   icon: 'contact',
                   type: 'app',
-                  initialDimensions: { width: '490px', height: '550px' },
+                  initialDimensions: { width: '490px', height: '600px' },
                 },
                 {
                   fileId: 'change-background',
