@@ -62,7 +62,12 @@ const useWindowLifecycle = ({
     dependencies: [headerRef.current],
     animation: (element) => {
       const { randomX, randomY } = getRandomPosition();
-      gsap.set(element, { x: randomX, y: randomY });
+      if (!element) return;
+      gsap.set(element, {
+        x: isMobile ? '0rem' : randomX,
+        y: isMobile ? 'var(--taskbar-height)' : randomY,
+        transformOrigin: isMobile ? 'top' : 'default',
+      });
 
       const { width: initW, height: initH } = (initialDimensions as {
         width: string;
@@ -72,17 +77,17 @@ const useWindowLifecycle = ({
         height: '600px',
       };
 
-      windowAnimations.openWindow(windowRef, initW, initH);
+      windowAnimations.openWindow(windowRef, initW, initH, () => {}, isMobile);
 
       updateWindowState({
-        x: isMobile ? '0px' : randomX,
-        y: isMobile ? '0px' : randomY,
-        lastX: isMobile ? '0px' : randomX,
-        lastY: isMobile ? '0px' : randomY,
-        width: isMobile ? '100vw' : initW,
-        height: isMobile ? '100vh' : initH,
-        lastWidth: isMobile ? '100vw' : initW,
-        lastHeight: isMobile ? '100vh' : initH,
+        x:  randomX,
+        y: randomY,
+        lastX:  randomX,
+        lastY:randomY,
+        width: initW,
+        height: initH,
+        lastWidth: initW,
+        lastHeight:  initH,
         isRequestingOpen: false,
         isRequestingFocus: true,
         isRequestingMaximize: isMobile,
@@ -152,7 +157,9 @@ const useWindowLifecycle = ({
           });
           handleResetFocus();
         },
-        windowIndex * 55
+        windowIndex + 1,
+        null,
+        isMobile
       );
     },
   });
@@ -183,7 +190,8 @@ const useWindowLifecycle = ({
         lastX,
         lastY,
         lastWidth,
-        lastHeight
+        lastHeight,
+        isMobile
       ),
   });
 

@@ -27,7 +27,7 @@ const WindowHeader = ({
     backgroundColor: 'var(--c-icon-bg)',
   };
   return (
-    <div className="window-header">
+    <div className="window__header">
       <span
         onTouchStart={handleRequestFocus}
         onClick={handleRequestFocus}
@@ -35,16 +35,16 @@ const WindowHeader = ({
         ref={headerRef}
         title={title[language]}
         aria-label={title[language]}
-        className="window-title"
+        className="window__header-title"
       >
         <Icon variant={icon} style={stylePng} />
         {title[language]}
       </span>
-      <div className="window-controls">
+      <div className="window__header-controls">
         <button
           aria-label={language === 'por' ? 'Minimizar' : 'Minimize'}
           title={language === 'por' ? 'Minimizar' : 'Minimize'}
-          className="minimize"
+          className="window__header-controls-minimize"
           onClick={handleRequestMinimize}
         >
           <Icon variant="minimize" style={styleSvg} />
@@ -68,7 +68,7 @@ const WindowHeader = ({
               ? 'Restore'
               : 'Maximize'
           }
-          className="maximize"
+          className="window__header-controls-maximize"
           onClick={isMaximized ? handleRequestRestore : handleRequestMaximize}
         >
           <Icon
@@ -79,7 +79,7 @@ const WindowHeader = ({
         <button
           aria-label={language === 'por' ? 'Fechar' : 'Close'}
           title={language === 'por' ? 'Fechar' : 'Close'}
-          className="close"
+          className="window__header-controls-close"
           onClick={handleRequestClose}
         >
           <Icon variant="close" style={styleSvg} />

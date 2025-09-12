@@ -41,21 +41,6 @@
       border-color: var(--c-border);
     }
 
-    @media screen {
-      @media (max-width: 600px) {
-        &.open {
-          width: 100% !important;
-          height: calc(100vh - var(--taskbar-height)) !important;
-          top: 0 !important;
-          left: 0 !important;
-          border-radius: 0;
-          border: none !important;
-          transform: translate3d(0, 0, 0) !important;
-          resize: none !important;
-        }
-      }
-    }
-
     &.minimized {
       display: none;
     }
@@ -69,7 +54,7 @@
       opacity: 0;
     }
 
-    & .window-header {
+    & .window__header {
       height: var(--window-header-height);
       background: var(--c-header-inactive);
       min-width: max-content;
@@ -93,7 +78,7 @@
         background: var(--c-header-active);
       }
 
-      & .window-title {
+      & .window__header-title {
         flex-grow: 1;
         cursor: move;
         margin-left: 1rem;
@@ -103,7 +88,7 @@
         gap: 1rem;
       }
 
-      & .window-controls {
+      & .window__header-controls {
         display: flex;
         align-items: center;
         flex-grow: 0;
@@ -130,7 +115,7 @@
             max-height: 14px;
           }
 
-          &.close:hover {
+          &.window__header-close:hover {
             background-color: #ef4444;
             color: #ffffff;
           }
@@ -144,15 +129,29 @@
       }
     }
 
-    & .window-content {
+    & .window__content {
       flex: 1;
-      min-height: fit-content;
+      height: 100%;
       background-color: var(--c-secondary-background);
       background-image: var(--pattern-1);
       min-width: -webkit-fill-available;
       min-width: fit-content;
       position: relative;
       container-type: inline-size;
+    }
+
+
+  }
+
+  @media screen and (max-width: 600px) {
+    .window {
+      max-height: calc(100vh - var(--taskbar-height)) !important;
+      top: var(--taskbar-height) !important;
+      left: 0 !important;
+      border-radius: 0;
+      border: none !important;
+      resize: none !important;
+
     }
   }
 }

@@ -30,6 +30,6 @@ const WindowContentWrapper = ({
     <></>
   );
 
-  return <div className="window-content">{windowContent}</div>;
+  return <div className="window__content">{windowContent}</div>;
 };
 export default WindowContentWrapper;

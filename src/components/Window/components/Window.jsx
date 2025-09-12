@@ -126,9 +126,10 @@ const Window = ({
       id={windowId}
       onClick={isFocused ? null : handleRequestFocus}
     >
-      <WindowHeader {...windowHeaderProps} />
 
-      <WindowContentWrapper {...windowContentWrapperProps} />
+        <WindowHeader {...windowHeaderProps} />
+
+        <WindowContentWrapper {...windowContentWrapperProps} />
     </div>
   );
 };

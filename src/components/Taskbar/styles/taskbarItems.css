@@ -17,7 +17,7 @@
         display: flex;
         align-items: center;
         color: #ffffff;
-        
+
         border-radius: 0.5rem;
         cursor: var(--cursor-pointer);
         transition: background-color 0.2s;
@@ -30,7 +30,7 @@
           background-color: #ffffff1a;
 
           &>* {
-            
+
             transition: all 0.2s;
             transform: scale(0.8);
           }
@@ -51,6 +51,14 @@
               transform: scale(0.8);
             }
           }
+        }
+      }
+    }
+
+    @media screen {
+      @media (max-width: 600px) {
+        & .taskbar-items {
+          margin: 0;
         }
       }
     }

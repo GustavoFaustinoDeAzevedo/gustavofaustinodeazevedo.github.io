@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 const windowAnimations = {
 
-  openWindow: (windowRef, width, height, handler = () => { }) => {
+  openWindow: (windowRef, width, height, handler = () => { }, isMobile) => {
     if (!windowRef?.current) return;
     gsap.fromTo(windowRef.current, { scale: 0.8, opacity: 0 }, {
       scale: 1,
@@ -50,7 +50,7 @@ const windowAnimations = {
     });
   },
 
-  minimizeWindow: (windowRef, handler = () => { }, x, y) => {
+  minimizeWindow: (windowRef, handler = () => { }, x, y, isMobile = false) => {
 
     if (!windowRef?.current) return;
 
@@ -60,28 +60,27 @@ const windowAnimations = {
       handler();
       return;
     }
-
-    const { width } = windowRef.current.getBoundingClientRect();
+    const { width, height } = windowRef.current.getBoundingClientRect();
 
     gsap.to(windowRef.current, {
-
-      x: x,
+      x: isMobile ? 0 : x * 55,
       y: '100vh',
-      minWidth: '150px',
+      minWidth: isMobile ? width : '150px',
       minHeight: '150px',
-      width: 0,
-      height: 0,
-      scale: 0,
+      width: isMobile ? width : '0',
+      height: isMobile ? height : 0,
+      scale: isMobile ? 1 : 0,
+
       duration: 0.4,
       display: 'none',
-      ease: 'expo.inOut',
+      ease: isMobile ? 'power2.in' : 'expo.inOut',
       onComplete: () => {
         handler();
       },
     });
   },
 
-  restoreWindow: (windowRef, handler = () => { }, x, y, width, height) => {
+  restoreWindow: (windowRef, handler = () => { }, x, y, width, height, isMobile = false) => {
 
     if (!windowRef?.current) return;
     return gsap.to(windowRef.current, {
@@ -89,12 +88,11 @@ const windowAnimations = {
       y: y,
       width: width,
       height: height,
-
       scale: 1,
       opacity: 1,
       display: 'flex',
       duration: 0.4,
-      ease: 'expo.inOut',
+      ease: isMobile ? 'power2.in' : 'expo.inOut',
       onComplete: () => {
         handler();
         gsap.set(windowRef.current, {

@@ -2,7 +2,6 @@
 
   /* Main container for the desktop layout */
   .desktop-display {
-
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -26,6 +25,16 @@
       top: 0;
       left: 0;
       background-color: var(--c-desktop-bg);
+
+      @media screen {
+        @media (max-width: 600px) {
+          /* background-size: contain; */
+          background-size: cover;
+          background-position: top;
+          background-attachment: scroll;
+
+        }     
+      }
     }
 
   }
