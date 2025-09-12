@@ -168,29 +168,36 @@
   }
 
   @container (max-width: 699px) {
+    .about-me {
+      width: 100%;
+      min-width: none;
+      max-width: fit-content;
 
-    & .about-me-wrapper {
-      opacity: 1;
-      gap: 0;
 
-      transform: scale(1);
+      & .about-me-wrapper {
+        margin-top: 0;
+        opacity: 1;
+        gap: 0;
 
-      & .about-me-image {
-        width: max-content;
+        transform: scale(1);
 
-        & img {
-          width: 10rem;
+        & .about-me-image {
+          width: max-content;
+
+          & img {
+            width: 10rem;
+          }
         }
-      }
 
-      & .about-me-title {
+        & .about-me-title {
 
-        & h2 {
-          font-size: 2rem;
-        }
+          & h2 {
+            font-size: 2rem;
+          }
 
-        & h3 {
-          font-size: 1rem;
+          & h3 {
+            font-size: 1rem;
+          }
         }
       }
     }
