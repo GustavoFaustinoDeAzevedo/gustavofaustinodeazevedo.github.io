@@ -18,6 +18,7 @@ const useWindowLifecycle = ({
   desktopRef,
   windowParams,
   windowHandlers,
+  isMobile,
   getWindowInfo,
   createWindowDraggable,
 }: UseWindowLifecycleProps): void => {
@@ -43,11 +44,11 @@ const useWindowLifecycle = ({
     isRequestingFocus,
     initialDimensions,
     isOpened,
-    isMobile,
   } = windowParams;
 
   const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
     windowHandlers;
+
   /* ──────────── Foco ────────────── */
   useEffect(() => {
     if (isRequestingFocus) {
@@ -89,16 +90,17 @@ const useWindowLifecycle = ({
       });
 
       /* torna arrastável */
-      createWindowDraggable({
-        windowRef,
-        triggerElement: headerRef.current,
-        bounds: desktopRef.current,
-        onFocus: () => handleFocus(),
-        onUpdateWindow: (params) => updateWindowState(params),
-        width,
-        height,
-        isFocused,
-      });
+      isMobile &&
+        createWindowDraggable({
+          windowRef,
+          triggerElement: headerRef.current,
+          bounds: desktopRef.current,
+          onFocus: () => handleFocus(),
+          onUpdateWindow: (params) => updateWindowState(params),
+          width,
+          height,
+          isFocused,
+        });
     },
   });
 

@@ -16,6 +16,7 @@ const FilesList = ({
   backgroundColorContrast,
   handleWindowUpdate = () => {},
   nodeType = 'desktop',
+  isMobile,
 }) => {
   if (children === undefined || children.length < 0) return;
   const { handleNewFile } = filesActions;
@@ -60,6 +61,7 @@ const FilesList = ({
               title={iconTitle}
               icon={finalIcon}
               language={language}
+              isMobile={isMobile}
               onClick={() =>
                 handleOpenFile({
                   fileId,

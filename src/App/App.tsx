@@ -97,6 +97,7 @@ const App: React.FC = () => {
             currentNode="desktop"
             language={language}
             windowList={windowList}
+            isMobile={isMobile}
             // backgroundColor={backgroundColor}
             backgroundImage={backgroundImage}
             backgroundColorContrast={backgroundColorContrast}
@@ -114,7 +115,7 @@ const App: React.FC = () => {
             {windowsStack}
 
             {/* Render taskbar with dynamic props */}
-            <Taskbar  />
+            <Taskbar isMobile={isMobile} />
           </RefsProvider>
 
           {/* 

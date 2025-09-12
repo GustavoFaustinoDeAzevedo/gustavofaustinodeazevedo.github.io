@@ -101,6 +101,7 @@ const WindowManager = ({
   return (
     <Window
       className={className}
+      isMobile={isMobile}
       desktopRef={desktopRef}
       windowParams={windowParams}
       windowHandlers={windowHandlers}

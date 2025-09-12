@@ -8,7 +8,7 @@ import { useAutoLineClamp } from '../../hooks';
 import { useSelector } from 'react-redux';
 
 const SystemFile = React.memo(
-  ({ fileId, title, icon, onClick, backgroundColorContrast }) => {
+  ({ fileId, title, icon, onClick, isMobile, backgroundColorContrast }) => {
     const [ref, lines] = useAutoLineClamp(title, 2);
     const { isDoubleClick } = useSelector((state) => state.settings);
     const dataInfo = useMemo(
@@ -22,14 +22,14 @@ const SystemFile = React.memo(
         }),
       [title, icon, fileId, onClick]
     );
-
+    console.log(isMobile)
     return (
       <StyledFileWrapper
         aria-label={title}
         title={title}
-        onTouchStart={onClick}
-        onDoubleClick={isDoubleClick ? onClick : undefined}
-        onClick={isDoubleClick ? undefined : onClick}
+        onTouch={onClick}
+        onDoubleClick={isDoubleClick && !isMobile ? onClick : undefined}
+        onMouseUp={isDoubleClick && !isMobile ? undefined : onClick}
         data-info={dataInfo}
         id={fileId}
         // backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}
