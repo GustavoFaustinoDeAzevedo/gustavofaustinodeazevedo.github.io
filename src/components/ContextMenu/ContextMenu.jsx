@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClickOutside from '../../hooks/useClickOutside';
-import { rootFolder } from '../../data/filesData';
-import actions from '../../store/actions';
+import useClickOutside from '@/hooks/useClickOutside';
+import { rootFolder } from '@/data/filesData';
+import actions from '@/store/actions';
 
 const ContextMenu = ({ position, items, target, onClose, language }) => {
   const menuRef = useRef(null);

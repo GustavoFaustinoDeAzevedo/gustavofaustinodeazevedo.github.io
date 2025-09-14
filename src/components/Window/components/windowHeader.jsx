@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../ui/GlobalStyles/components/Icon';
+import Icon from '@/components/ui/GlobalStyles/components/Icon';
 
 const WindowHeader = ({
   title = 'Untitled',
@@ -27,7 +27,7 @@ const WindowHeader = ({
     backgroundColor: 'var(--c-icon-bg)',
   };
   return (
-    <div className="window__header" >
+    <div className="window__header">
       <span
         onTouchStart={handleRequestFocus}
         onClick={handleRequestFocus}

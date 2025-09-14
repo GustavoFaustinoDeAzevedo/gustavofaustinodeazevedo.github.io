@@ -1,6 +1,11 @@
 import Calculator from '@/apps/Calculator';
 import Notepad from '@/apps/Notepad';
-import { AboutMe, MySkills, SendMessage } from '@/components/Portfolio';
+import {
+  AboutMe,
+  MySkills,
+  SendMessage,
+  ContactCard,
+} from '@/components/Portfolio';
 import BrowserSimulator from '@/components/BrowserSimulator';
 import TaskManager from '@/components/TaskManager';
 import { ChangeBackground } from '@/components/Settings';
@@ -23,7 +28,7 @@ const getWindowContent = (
     about: () => <AboutMe language={language} />,
     skills: () => <MySkills language={language} />,
     sendMessage: () => <SendMessage language={language} />,
-    contact: () => <div className="contact-card"></div>,
+    contact: () => <ContactCard language={language} />,
     cmd: () => <CommandPromptSection />,
     'task-manager': () => (
       <TaskManager

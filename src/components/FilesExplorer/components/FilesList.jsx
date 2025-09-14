@@ -1,6 +1,6 @@
 import SystemFile from './SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
-import { placeholder } from '../../../data/filesData';
+import { placeholder } from '@/data/filesData';
 import { useMemo } from 'react';
 import actions from '@/store/actions';
 

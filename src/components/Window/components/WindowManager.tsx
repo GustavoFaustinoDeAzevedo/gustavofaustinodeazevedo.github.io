@@ -1,17 +1,13 @@
 import Window from './Window';
 import useFilesActions from '@/store/actions/useFilesActions';
 import useSettingsActions from '@/store/actions/useSettingsActions';
-import { HandleChangeBackground } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
 import { Ref, useCallback, useMemo, useRef } from 'react';
 import actions from '@/store/actions';
 import createWindowHandlers from '../utils/createWindowHandlers';
 import flattenWindowParams from '../utils/flattenWindowParams';
 import useRefs from '@/contexts/useRefs';
-import useWindowLifecycle from '../hooks/useWindowLifecycle';
-import createWindowDraggable from '../utils/createWindowDraggable';
-import useClickOutside from '@/hooks/useClickOutside';
-import getWindowClass from '../utils/getWindowClass';
+
 
 type WindowActions = ReturnType<typeof useWindowActions>;
 type FilesActions = ReturnType<typeof useFilesActions>;
@@ -88,19 +84,9 @@ const WindowManager = ({
     windowRawParams
   );
 
-  //classe memoizada para a janela
-
-  const { isFocused, isMinimized, isOpened, isMaximized, zIndex } =
-    windowParams;
-
-  const className = useMemo(
-    () => getWindowClass({ isFocused, isMinimized, isOpened, isMaximized }),
-    [isFocused, isMinimized, isOpened, isMaximized]
-  );
-
   return (
     <Window
-      className={className}
+      // className={className}
       isMobile={isMobile}
       desktopRef={desktopRef}
       windowParams={windowParams}

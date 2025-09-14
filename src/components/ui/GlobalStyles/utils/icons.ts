@@ -1,0 +1,106 @@
+type CSSProperties = React.CSSProperties;
+export type IconVariantStyle = Partial<
+  Pick<CSSProperties, 'backgroundImage' | 'maskImage' | 'WebkitMaskImage'>
+>;
+
+export const iconBaseStyle: CSSProperties = {
+  width: '2.5rem',
+  height: '2.5rem',
+  backgroundRepeat: 'no-repeat',
+  display: 'inline-block',
+  backgroundSize: 'contain',
+  backgroundPosition: 'center',
+};
+
+export const iconVariants: Record<string, IconVariantStyle> = {
+  about: { backgroundImage: "url('/icons/about-me-icon.png')" },
+  skills: { backgroundImage: "url('/icons/solution-strategy-icon.png')" },
+  folder: { backgroundImage: "url('/icons/file-manager-icon.png')" },
+  contact: { backgroundImage: "url('/icons/email-envelop-open-icon.png')" },
+  'window-icon': { backgroundImage: "url('/icons/window_icon.svg')" },
+  minimize: {
+    maskImage: "url('/icons/minus.svg')",
+    WebkitMaskImage: "url('/icons/minus.svg')",
+  },
+  maximize: {
+    maskImage: "url('/icons/arrows_pointing_out.svg')",
+    WebkitMaskImage: "url('/icons/arrows_pointing_out.svg')",
+  },
+  restore: {
+    maskImage: "url('/icons/arrows_pointing_in.svg')",
+    WebkitMaskImage: "url('/icons/arrows_pointing_in.svg')",
+  },
+  close: {
+    maskImage: "url('/icons/not_icon.svg')",
+    WebkitMaskImage: "url('/icons/not_icon.svg')",
+  },
+  sort: { backgroundImage: "url('/icons/sort.svg')" },
+  refresh: { backgroundImage: "url('/icons/refresh.svg')" },
+  new: { backgroundImage: "url('/icons/new.svg')" },
+  download: {
+    maskImage: "url('/icons/arrow_down_tray.svg')",
+    WebkitMaskImage: "url('/icons/arrow_down_tray.svg')",
+  },
+  resize: {
+    maskImage: "url('/icons/resize_corner.svg')",
+    WebkitMaskImage: "url('/icons/resize_corner.svg')",
+  },
+  view: { backgroundImage: "url('/icons/squares.svg')" },
+  'plus-circle': {
+    backgroundImage: "url('/icons/mathematics-sign-plus-outline-icon.png')",
+  },
+  'new-file': { backgroundImage: "url('/icons/new_file.svg')" },
+  search: { backgroundImage: "url('/icons/search-line-icon.png')" },
+  paint: { backgroundImage: "url('/icons/paint_brush_solid.svg')" },
+  'image-outline-icon': {
+    backgroundImage: "url('/icons/image-outline-icon.png')",
+  },
+  command: { backgroundImage: "url('/icons/cmd-terminal-icon.png')" },
+  'task-manager': { backgroundImage: "url('/icons/control-panel-icon.png')" },
+  browser: { backgroundImage: "url('/icons/internet-web-browser-icon.png')" },
+  'arrow-left': { backgroundImage: "url('/icons/chevron_left.svg')" },
+  'arrow-right': { backgroundImage: "url('/icons/chevron_right.svg')" },
+  'arrow-up': { backgroundImage: "url('/icons/chevron_up.svg')" },
+  'arrow-down': { backgroundImage: "url('/icons/chevron_down.svg')" },
+  github: { backgroundImage: "url('/icons/github-mark-white.png')" },
+  linkedin: { backgroundImage: "url('/icons/linkedin-app-icon.png')" },
+  calculator: { backgroundImage: "url('/icons/calc-icon.png')" },
+  'battery-100': {
+    maskImage: "url('/icons/battery_100.svg')",
+    WebkitMaskImage: "url('/icons/battery_100.svg')",
+  },
+  'battery-75': {
+    maskImage: "url('/icons/battery_75.svg')",
+    WebkitMaskImage: "url('/icons/battery_75.svg')",
+  },
+  'battery-50': {
+    maskImage: "url('/icons/battery_50.svg')",
+    WebkitMaskImage: "url('/icons/battery_50.svg')",
+  },
+  'battery-25': {
+    maskImage: "url('/icons/battery_25.svg')",
+    WebkitMaskImage: "url('/icons/battery_25.svg')",
+  },
+  'battery-0': {
+    maskImage: "url('/icons/battery_0.svg')",
+    WebkitMaskImage: "url('/icons/battery_0.svg')",
+  },
+  'battery-charging': {
+    maskImage: "url('/icons/battery_charging.svg')",
+    WebkitMaskImage: "url('/icons/battery_charging.svg')",
+  },
+  notepad: { backgroundImage: "url('/icons/notebook-pen-icon.png')" },
+  'html-file': { backgroundImage: "url('/icons/html-file-outline-icon.png')" },
+  'business-card-icon': {
+    backgroundImage: "url('/icons/business-card-icon.png')",
+  },
+  email: {
+    backgroundImage: "url('/icons/attherate-icon.png')",
+  },
+  whatsapp: {
+    backgroundImage: "url('/icons/wa-whatsapp-icon.png')",
+  },
+  phone: {
+    backgroundImage: "url('/icons/smartphone-mobile-icon.png')",
+  },
+};
