@@ -1,249 +1,4 @@
 @layer components {
-  .about-me {
-    min-width: 400px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-size: 21px 21px;
-    /* padding: 2rem; */
-    overflow: hidden;
-
-
-    & hr {
-      width: 50%;
-      max-width: 440px;
-      border: none;
-      border-top: 1px outset #666666;
-    }
-
-    & h2, & h3 {
-      width: 95cqw;
-      transition: font-size 0.5s ease;
-    }
-
-    & h2 {
-      color: #EAEAEA;
-    }
-
-    & h3 {
-      color: #A9A9A9;
-    }
-
-    & img {
-      object-fit: contain;
-      object-position: center;
-      width: 100%;
-      max-width: 12rem;
-      border-radius: 50%;
-      transition: all 0.5s ease;
-    }
-
-    & p {
-      transition: font-size 0.5s ease;
-      font-size: 0.8rem;
-      text-align: justify;
-      display: inline-block;
-    }
-
-    & .about-me-wrapper {
-      display: flex;
-      flex-direction: column;
-      /* justify-content: stretch; */
-      align-items: center;
-      gap: 30px;
-      margin-top: 2rem;
-      min-height: 520px;
-      transition: all 0.3s ease;
-    }
-
-    & .about-me-image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    & .about-me-title {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      text-align: center;
-      width: max-content;
-    }
-
-    & .about-me-text {
-      color: #B0C4DE;
-      max-width: 700px;
-      min-width: 300px;
-      max-height: 130px;
-
-      overflow: auto;
-      max-width: 80%;
-    }
-
-
-    & .about-me-image, & .about-me-title, & .about-me-text {
-      transition: all 0.3s ease;
-    }
-
-    @media screen {
-      @media (max-width: 600px) {
-        & h2 {
-          font-size: 1.3rem;
-          font-weight: 600;
-          text-shadow: 0 1px 2px #0000004c;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-        }
-
-        & h3 {
-          font-size: 0.9rem;
-          font-weight: 500;
-          /* padding-bottom: 2rem; */
-          margin-bottom: 1rem;
-        }
-
-        & .about-me-text {
-          bottom: 15% !important;
-          height: max-content !important;
-          overflow: auto !important;
-
-          & p {
-            font-size: 0.7rem !important;
-          }
-
-
-        }
-      }
-
-      @media (min-width: 600px) {
-        & h2 {
-          font-size: 2.5rem;
-          font-weight: 600;
-          margin-bottom: 1rem;
-        }
-
-        & h3 {
-          font-size: 1.2rem;
-          font-weight: 500;
-          margin-bottom: 1rem;
-        }
-
-
-      }
-    }
-  }
-
-  @container (min-width: 700px) {
-    .about-me {
-      opacity: 1;
-      transform: scale(1);
-
-      & h3 {
-        font-size: 1.2rem;
-        font-weight: 500;
-        margin-bottom: 1rem;
-      }
-
-
-      & .about-me-image {
-        width: max-content;
-
-      }
-
-
-
-      & .about-me-text {
-        overflow: visible !important;
-
-        & p {
-          font-size: 1rem;
-        }
-      }
-    }
-  }
-
-  @container (max-width: 699px) {
-    .about-me {
-      width: 100%;
-      min-width: 0px;
-      max-width: fit-content;
-
-
-      & .about-me-wrapper {
-        margin-top: 0;
-        opacity: 1;
-        gap: 0;
-
-        transform: scale(1);
-
-        & .about-me-image {
-          width: max-content;
-
-          & img {
-            width: 10rem;
-          }
-        }
-
-        & .about-me-title {
-
-          & h2 {
-            font-size: 2rem;
-          }
-
-          & h3 {
-            font-size: 1rem;
-          }
-        }
-
-        & .about-me-text {
-          min-width: none;
-        }
-      }
-    }
-  }
-
-  @container (min-height: 50px) {
-
-    .about-me {
-      opacity: 1;
-      transform: scale(1);
-
-      & .about-me-image {
-        transform: translate(-50%, -70%);
-        width: max-content;
-
-        & img {
-          width: 11rem;
-        }
-      }
-
-      & .about-me-title {
-
-        transform: translate(-50%, -50%);
-
-
-        & h2 {
-          font-size: 2rem;
-        }
-
-        & h3 {
-          font-size: 1rem;
-        }
-      }
-
-      & .about-me-text {
-        transform: translate(-50%, 200%);
-      }
-    }
-  }
-
-
-
   .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -263,7 +18,8 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      padding: 3rem;
+      padding: 2rem 3rem 4rem 3rem;
+      ;
       width: 100%;
 
       & .input-container {
@@ -319,11 +75,12 @@
         max-height: 50vh;
         resize: vertical;
         color: inherit;
-
+        margin-bottom: 2rem;
       }
 
       & button {
-        justify-self: start;
+
+        width: 100% !important;
         /* padding: */
         background: var(--c-accent);
         border: none;
@@ -332,7 +89,7 @@
         cursor: pointer;
         transition: background-color 0.3s;
         color: inherit;
-        width: 100%;
+
 
         &:hover {
           background: var(--c-accent-hover);
@@ -343,16 +100,24 @@
 
   @media screen {
     @media (min-width: 600px) {
-      & .contact-form {
+      .contact-form {
         max-width: 600px;
 
-        & input, & textarea {
+        h2 {
           min-width: 300px;
           max-width: 600px;
         }
 
+        & input, & textarea {
+          min-width: 300px;
+          max-width: 600px;
+          margin-bottom: 0rem !important;
+        }
+
         & button {
-          width: initial;
+          justify-self: right;
+          align-self: flex-end !important;
+          max-width: 150px;
         }
       }
     }

@@ -1,37 +1,40 @@
 import Button from '@/components/ui/Button';
 import AnimatedInput from '@/components/Window/components/AnimatedInput';
 
-const ContactSection = ({ language }) => (
+const SendMessage = ({ language }) => (
   <form
     className="contact-form"
-    aria-label="Contact Form"
+    aria-label={language === 'eng' ? 'Contact form' : 'Formulário de contato'}
     action="https://formspree.io/f/mnqelzyz"
     method="POST"
     target="placeholder"
-    data-initial-dimension='{"width": "490px", "height": "550px"}'
   >
-    <p>
+    <h2 className="txt-weight-600 txt-center margin-bottom-1">
       {language === 'eng'
         ? 'Use the form below to contact me'
         : 'Use o formulário abaixo para entrar em contato comigo'}
-    </p>
+    </h2>
     <AnimatedInput
       id="name"
       type="input"
       name="Name"
       required
-      ariaLabel="Name input"
+      ariaLabel={language === 'eng' ? 'Name input' : 'Inserir Nome'}
       inputPlaceholder="Ex: Charlie Lima"
     >
-      Name
+      {language === 'eng' ? 'Name' : 'Nome'}
     </AnimatedInput>
     <AnimatedInput
       id="email"
       type="email"
       name="message"
       required
-      ariaLabel="Email input"
-      inputPlaceholder="example@email.com"
+      ariaLabel={language === 'eng' ? 'Email input' : 'Inserir Email'}
+      inputPlaceholder={
+        language === 'eng'
+          ? 'Ex: charlielima@example.com'
+          : 'Ex: charlielima@examplo.com'
+      }
     >
       Email
     </AnimatedInput>
@@ -40,16 +43,20 @@ const ContactSection = ({ language }) => (
       type="text"
       name="message"
       required
-      ariaLabel="Message input"
-      inputPlaceholder="Your text here..."
+      ariaLabel={language === 'eng' ? 'Message input' : 'Inserir Mensagem'}
+      inputPlaceholder={
+        language === 'eng'
+          ? 'Ex: I would like to work with you'
+          : 'Ex: Eu gostaria de trabalhar com você'
+      }
       textArea
     >
-      Message
+      {language === 'eng' ? 'Message' : 'Mensagem'}
     </AnimatedInput>
     <Button type="submit" ariaLabel="Submit Button" variant={'primary'}>
-      Send Message
+      {language === 'eng' ? 'Submit' : 'Enviar'}
     </Button>
   </form>
 );
 
-export default ContactSection;
+export default SendMessage;

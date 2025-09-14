@@ -11,7 +11,7 @@
     max-width: 100%;
     max-height: calc(100dvh - var(--taskbar-height));
     display: none;
-    flex-direction: column;
+
     overflow: hidden;
     resize: both;
     transition: margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -29,6 +29,7 @@
 
     &.open, &.focus:not(.minimized) {
       display: flex;
+      flex-direction: column;
     }
 
     &.focus:not(.minimized):not(.maximized) {
@@ -55,7 +56,9 @@
     }
 
     & .window__header {
+      min-height: var(--window-header-height);
       height: var(--window-header-height);
+
       background: var(--c-header-inactive);
       min-width: max-content;
       display: flex;
@@ -115,7 +118,7 @@
             max-height: 14px;
           }
 
-          &.window__header-close:hover {
+          &.window__header-controls-close:hover {
             background-color: #ef4444;
             color: #ffffff;
           }
@@ -130,8 +133,11 @@
     }
 
     & .window__content {
-      flex: 1;
+      min-height: min-content;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: var(--c-secondary-background);
       background-image: var(--pattern-1);
       min-width: -webkit-fill-available;

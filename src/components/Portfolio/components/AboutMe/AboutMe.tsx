@@ -1,12 +1,6 @@
-import aboutMeContent from './aboutMeContent';
+import aboutMeData, { AboutMeData } from './aboutMe.data';
 
-export type AboutMeContent = keyof typeof aboutMeContent;
-
-interface AboutMeProps {
-  language: AboutMeContent;
-}
-
-const AboutMe: React.FC<AboutMeProps> = ({ language }) => (
+const AboutMe = ({ language }: { language: keyof AboutMeData }) => (
   <main
     className="about-me"
     aria-label="About Me Section"
@@ -24,12 +18,12 @@ const AboutMe: React.FC<AboutMeProps> = ({ language }) => (
         />
       </section>
       <section className="about-me-title">
-        <h2>{aboutMeContent[language].title}</h2>
-        <h3>{aboutMeContent[language].subtitle}</h3>
+        <h2>{aboutMeData[language].title}</h2>
+        <h3>{aboutMeData[language].subtitle}</h3>
         <hr />
       </section>
       <section className="about-me-text">
-        <p>{aboutMeContent[language].text}</p>
+        <p>{aboutMeData[language].text}</p>
       </section>
     </div>
   </main>

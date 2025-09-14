@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import useClickOutside from '../../../hooks/useClickOutside';
-const StartMenu = ({
-  history,
-  language,
-}) => {
+const StartMenu = ({ history, language }) => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef(null);
   const [menuVisibility, setMenuVisibility] = useState(false);

@@ -70,12 +70,7 @@ export interface CreateWindowDraggableOptions {
   triggerElement: HTMLElement | null;
   bounds: HTMLElement | null;
   onFocus: (id: string) => void;
-  onUpdateWindow: (params: {
-    x: number;
-    y: number;
-    width: NumOrStr;
-    height: NumOrStr;
-  }) => void;
+  updateWindowState: (params: Record<string, any>) => void;
   width: NumOrStr;
   height: NumOrStr;
   isFocused: boolean;

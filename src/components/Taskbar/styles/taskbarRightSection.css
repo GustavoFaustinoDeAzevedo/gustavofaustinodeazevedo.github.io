@@ -94,9 +94,10 @@
         }
 
         & .language-selector__wrapper {
+
           position: absolute;
           overflow: hidden;
-          top: calc(-7rem+4px);
+          top: calc(4px - 7rem);
           left: -3rem;
           pointer-events: none;
 
@@ -108,9 +109,7 @@
             width: max-content;
             border: 2px var(--border-style) var(--c-border);
             border-bottom: none;
-            background-color: #1818186f;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+            background-color: #181818;
             border-radius: 5px 5px 0 0;
             list-style: none;
             z-index: 999;

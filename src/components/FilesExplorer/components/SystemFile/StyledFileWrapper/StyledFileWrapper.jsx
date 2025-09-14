@@ -4,7 +4,7 @@ import {
   fileWrapperStyle__text,
   fileWrapperStyle__icon,
 } from './fileWrapperStyle';
-import Icon from '../../../../ui/GlobalStyles/components/Icon';
+import Icon from '@/components/ui/GlobalStyles/components/Icon';
 
 export const StyledFileWrapper = styled.div`
   ${fileWrapperStyle}, &:hover,&:focus {

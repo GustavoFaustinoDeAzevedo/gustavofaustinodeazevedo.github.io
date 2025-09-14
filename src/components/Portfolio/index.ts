@@ -1,4 +1,4 @@
 import AboutMe from './components/AboutMe';
-import Skills from './components/Skills';
-import ContactSection from './components/ContactSection';
-export { AboutMe, Skills, ContactSection };
+import MySkills from './components/MySkills';
+import SendMessage from './components/SendMessage';
+export { AboutMe, MySkills, SendMessage };
