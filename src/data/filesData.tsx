@@ -247,6 +247,13 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'contact',
                   title: { eng: 'Contact', por: 'Contato' },
+                  icon: 'business-card-icon',
+                  type: 'app',
+                  initialDimensions: { width: '490px', height: '600px' },
+                },
+                {
+                  fileId: 'sendMessage',
+                  title: { eng: 'Send Message', por: 'Enviar Mensagem' },
                   icon: 'contact',
                   type: 'app',
                   initialDimensions: { width: '490px', height: '600px' },

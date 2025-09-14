@@ -1,6 +1,22 @@
-const skillsContent = {
+export interface Skills {
+  technical: {
+    title: string;
+    items: string[];
+  };
+  soft: {
+    title: string;
+    items: string[];
+  };
+}
+
+export interface MySkillsData {
+  por: Skills;
+  eng: Skills;
+}
+
+const mySkillsData: MySkillsData = {
   por: {
-    tecnica: {
+    technical: {
       title: 'Habilidades Técnicas',
       items: [
         'HTML5 & CSS3',
@@ -13,7 +29,7 @@ const skillsContent = {
         'Inglês Avançado',
       ],
     },
-    interpessoal: {
+    soft: {
       title: 'Habilidades Interpessoais',
       items: [
         'Pensamento crítico e resolução de problemas',
@@ -53,5 +69,4 @@ const skillsContent = {
   },
 };
 
-
-export default skillsContent;
+export default mySkillsData;

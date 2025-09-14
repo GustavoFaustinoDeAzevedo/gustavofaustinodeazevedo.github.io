@@ -80,14 +80,14 @@ const useWindowLifecycle = ({
       windowAnimations.openWindow(windowRef, initW, initH, () => {}, isMobile);
 
       updateWindowState({
-        x:  randomX,
+        x: randomX,
         y: randomY,
-        lastX:  randomX,
-        lastY:randomY,
+        lastX: randomX,
+        lastY: randomY,
         width: initW,
         height: initH,
         lastWidth: initW,
-        lastHeight:  initH,
+        lastHeight: initH,
         isRequestingOpen: false,
         isRequestingFocus: true,
         isRequestingMaximize: isMobile,
@@ -101,7 +101,7 @@ const useWindowLifecycle = ({
           triggerElement: headerRef.current,
           bounds: desktopRef.current,
           onFocus: () => handleFocus(),
-          onUpdateWindow: (params) => updateWindowState(params),
+          updateWindowState,
           width,
           height,
           isFocused,

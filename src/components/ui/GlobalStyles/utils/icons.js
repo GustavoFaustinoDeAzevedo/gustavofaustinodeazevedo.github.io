@@ -46,4 +46,5 @@ export const iconVariants = {
   'battery-charging': { maskImage: "url('/icons/battery_charging.svg')", WebkitMaskImage: "url('/icons/battery_charging.svg')" },
   notepad: { backgroundImage: "url('/icons/notebook-pen-icon.png')" },
   'html-file': { backgroundImage: "url('/icons/html-file-outline-icon.png')" },
+  'business-card-icon': { backgroundImage: "url('/icons/business-card-icon.png')" },
 };

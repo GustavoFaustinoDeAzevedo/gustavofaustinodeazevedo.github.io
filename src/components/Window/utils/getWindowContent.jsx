@@ -1,12 +1,12 @@
-import Calculator from '@apps/Calculator';
-import Notepad from '@apps/Notepad';
-import { AboutMe, Skills, ContactSection } from '../../Portfolio';
-import BrowserSimulator from '../../BrowserSimulator';
-import TaskManager from '../../TaskManager';
-import { ChangeBackground } from '../../Settings';
-import Tests from '../../Tests';
+import Calculator from '@/apps/Calculator';
+import Notepad from '@/apps/Notepad';
+import { AboutMe, MySkills, SendMessage } from '@/components/Portfolio';
+import BrowserSimulator from '@/components/BrowserSimulator';
+import TaskManager from '@/components/TaskManager';
+import { ChangeBackground } from '@/components/Settings';
+import Tests from '@/components/Tests';
 import AnimatedInput from '../components/AnimatedInput';
-import Button from '../../ui/Button';
+import Button from '@/components/ui/Button';
 
 const CommandPromptSection = () => (
   <textarea
@@ -21,8 +21,9 @@ const getWindowContent = (
 ) => {
   const map = {
     about: () => <AboutMe language={language} />,
-    skills: () => <Skills language={language} />,
-    contact: () => <ContactSection language={language} />,
+    skills: () => <MySkills language={language} />,
+    sendMessage: () => <SendMessage language={language} />,
+    contact: () => <div className="contact-card"></div>,
     cmd: () => <CommandPromptSection />,
     'task-manager': () => (
       <TaskManager

@@ -9,7 +9,7 @@
     "checkJs": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -1,5 +1,4 @@
 @import './base.css';
-@import './utilities.css';
 @import '../components/Desktop/style.css';
 @import '../components/TaskManager/styles/index.css';
 @import '../components/Window/styles/index.css';
@@ -8,4 +7,6 @@
 @import '../components/ContextMenu/style.css';
 @import '../components/ConsoleCommand/style.css';
 @import '../components/Settings/index.css';
+@import '../components/Portfolio/index.css';
 @import '../apps/index.css';
+@import './utilities.css';

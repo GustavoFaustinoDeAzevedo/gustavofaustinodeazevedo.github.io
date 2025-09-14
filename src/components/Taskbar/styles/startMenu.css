@@ -44,6 +44,8 @@
         bottom: 3rem;
         left: -1px;
         pointer-events: none;
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
 
         & .start-menu-content {
           transform: translateY(100%);
@@ -53,15 +55,14 @@
           justify-content: center;
           gap: 10px;
           width: max-content;
-          background: var(--c-secondary-background);
+          background: #181818;
+
           border: 1px var(--border-style) var(--c-border);
           border-bottom: none;
           border-radius: 5px 5px 0 0;
-          box-shadow: 0 8px 8px 0 rgba(31, 38, 135, 0.37);
           list-style: none;
           z-index: 999;
           pointer-events: initial;
-
 
           & .input-container {
             position: relative;
