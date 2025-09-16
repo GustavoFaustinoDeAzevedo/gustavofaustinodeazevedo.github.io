@@ -174,7 +174,7 @@
         @media (max-width: 600px) {}
 
         @media (min-width: 600px) {
-          padding-top: 4.5rem;
+          padding-top: 2rem;
         }
       }
 
@@ -193,39 +193,37 @@
           }
         }
 
-        & .about-me-title {
+        @media screen {
+          @media (max-width: 600px) {
 
-
-          @media screen {
-            @media (max-width: 600px) {
-
-              & h2 {
-                font-size: 1.3rem;
-              }
-
-              & h3 {
-                font-size: 0.9rem;
-              }
+            & h2 {
+              font-size: 1.3rem;
             }
 
-            @media (min-width: 600px) {
-              & h2 {
-                font-size: 1.5rem;
-                margin-bottom: 0;
-              }
-
-              & h3 {
-                font-size: 1.1rem;
-                margin-top: 0;
-              }
-
-              & hr {
-                margin-bottom: 1rem;
-              }
+            & h3 {
+              font-size: 0.9rem;
             }
           }
 
+          @media (min-width: 600px) {
+            & .about-me-image {
+              margin-bottom: 2rem;
+            }
 
+            & h2 {
+              font-size: 1.5rem;
+              margin-bottom: 0;
+            }
+
+            & h3 {
+              font-size: 1.1rem;
+              margin-top: 0;
+            }
+
+            & hr {
+              margin-bottom: 1rem;
+            }
+          }
         }
 
         & .about-me-text {

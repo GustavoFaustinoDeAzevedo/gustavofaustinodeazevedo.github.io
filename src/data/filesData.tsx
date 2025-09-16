@@ -246,7 +246,7 @@ export const rootFolder: FileNode = {
                 },
                 {
                   fileId: 'contact',
-                  title: { eng: 'Contact', por: 'Contato' },
+                  title: { eng: 'Contact Info', por: 'Informações de Contato' },
                   icon: 'business-card-icon',
                   type: 'app',
                   initialDimensions: { width: '490px', height: '600px' },
@@ -261,8 +261,8 @@ export const rootFolder: FileNode = {
                 {
                   fileId: 'change-background',
                   title: {
-                    eng: 'Change Background (UX and UI in progress)',
-                    por: 'Alterar Fundo (UX e UI em desenvolvimento)',
+                    eng: 'Change Background (unfinished)',
+                    por: 'Alterar Fundo (incompleto)',
                   },
                   icon: 'image-outline-icon',
                   type: 'app',

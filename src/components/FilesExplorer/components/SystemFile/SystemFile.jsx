@@ -26,7 +26,6 @@ const SystemFile = React.memo(
       <StyledFileWrapper
         aria-label={title}
         title={title}
-        onTouch={onClick}
         onDoubleClick={isDoubleClick && !isMobile ? onClick : undefined}
         onMouseUp={isDoubleClick && !isMobile ? undefined : onClick}
         data-info={dataInfo}

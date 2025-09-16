@@ -6,7 +6,6 @@ import WindowHeader from './windowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '../../../hooks/useClickOutside';
 import createWindowDraggable from '../utils/createWindowDraggable';
-import getWindowClass from '../utils/getWindowClass';
 import useRefs from '../../../contexts/useRefs';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import { useIsMobile } from '@/App/hooks';
@@ -14,7 +13,7 @@ import { useIsMobile } from '@/App/hooks';
 gsap.registerPlugin(useGSAP);
 
 const Window = ({
-  className,
+  // className,
   windowParams,
   windowHandlers,
   desktopRef,
@@ -120,7 +119,9 @@ const Window = ({
   return (
     <div
       ref={windowRef}
-      className={`${className} parent`}
+      className={`window ${isFocused ? 'focus' : ''}  ${
+        isMaximized ? 'maximized' : ''
+      } parent`}
       style={{ zIndex }}
       // onContextMenu={handleContextMenu}
       id={windowId}

@@ -1,5 +1,5 @@
-import useRefs from '../../../contexts/useRefs';
-import Icon from '../../ui/GlobalStyles/components/Icon';
+import useRefs from '@/contexts/useRefs';
+import Icon from '@/components/ui/GlobalStyles/components/Icon';
 
 const TaskbarItem = ({
   id,

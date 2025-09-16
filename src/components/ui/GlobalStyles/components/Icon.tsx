@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { iconVariants, iconBaseStyle } from '../utils/icons';
 
+interface IconProps {
+  variant?: keyof typeof iconVariants;
+}
+
 const Icon = styled.i.withConfig({
   shouldForwardProp: (prop) => prop !== 'variant',
-})(({ variant = '' }) => ({
+})<IconProps>(({ variant = '' }) => ({
   ...iconBaseStyle,
   ...iconVariants[variant],
   backgroundColor: 'currentColor',
