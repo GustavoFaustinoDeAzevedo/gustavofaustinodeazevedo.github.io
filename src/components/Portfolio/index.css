@@ -1,3 +1,3 @@
 @import './components/AboutMe/aboutMe.styles.css';
 @import './components/MySkills/mySkills.styles.css';
-/* @import './components/ContactSection/contactSection.styles.css'; */
+@import './components/ContactCard/contactCard.styles.css';

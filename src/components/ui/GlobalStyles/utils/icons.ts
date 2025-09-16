@@ -62,8 +62,14 @@ export const iconVariants: Record<string, IconVariantStyle> = {
   'arrow-right': { backgroundImage: "url('/icons/chevron_right.svg')" },
   'arrow-up': { backgroundImage: "url('/icons/chevron_up.svg')" },
   'arrow-down': { backgroundImage: "url('/icons/chevron_down.svg')" },
-  github: { backgroundImage: "url('/icons/github-mark-white.png')" },
-  linkedin: { backgroundImage: "url('/icons/linkedin-app-icon.png')" },
+  github: {
+    maskImage: "url('/icons/github-icon.svg')",
+    WebkitMaskImage: "url('/icons/github-icon.svg')",
+  },
+  linkedin: {
+    maskImage: "url('/icons/linkedin-square-icon.svg')",
+    WebkitMaskImage: "url('/icons/linkedin-square-icon.svg')",
+  },
   calculator: { backgroundImage: "url('/icons/calc-icon.png')" },
   'battery-100': {
     maskImage: "url('/icons/battery_100.svg')",
@@ -95,12 +101,15 @@ export const iconVariants: Record<string, IconVariantStyle> = {
     backgroundImage: "url('/icons/business-card-icon.png')",
   },
   email: {
-    backgroundImage: "url('/icons/attherate-icon.png')",
+    maskImage: "url('/icons/at-the-rate-icon.svg')",
+    WebkitMaskImage: "url('/icons/at-the-rate-icon.svg')",
   },
   whatsapp: {
-    backgroundImage: "url('/icons/wa-whatsapp-icon.png')",
+    maskImage: "url('/icons/wa-whatsapp-icon.svg')",
+    WebkitMaskImage: "url('/icons/wa-whatsapp-icon.svg')",
   },
   phone: {
-    backgroundImage: "url('/icons/smartphone-mobile-icon.png')",
+    maskImage: "url('/icons/mobile-phone-icon.svg')",
+    WebkitMaskImage: "url('/icons/mobile-phone-icon.svg')",
   },
 };

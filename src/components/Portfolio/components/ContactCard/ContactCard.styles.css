@@ -1,0 +1,124 @@
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  gap: 1rem;
+  padding: 1.5rem;
+  height: 100%;
+  width: 100%;
+  background-color: var(--c-background1);
+  border: 2px solid #00bfff30;
+  border-radius: var(--border-radius);
+
+
+
+  & hr {
+    border: none;
+    border-top: 2px solid #00bfff30;
+    margin: 0.5rem 0;
+  }
+
+  & .contact-card__wrapper-left {
+
+
+    & .contact-card__title {
+      font-size: 1.3rem;
+    }
+
+
+    & .contact-card__profile {
+      font-size: 0.8rem;
+      white-space: nowrap;
+
+      & .contact-card__profile-name {
+        color: #CCCCCC;
+      }
+
+      & .contact-card__profile-address {
+        color: #AAAAAA;
+      }
+    }
+  }
+
+
+  & .contact-card__wrapper-right {
+    height: 100%;
+
+    & .contact-card__list {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 1rem;
+
+      & .contact-card__item-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        transform: translateY(0);
+        filter: none;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          filter: brightness(1.2) drop-shadow(0 5px 0 #000000);
+          transform: translateY(-5px);
+        }
+
+        & .contact-card__link-icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          background-color: #FFFFFF;
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-size: contain;
+          -webkit-mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+
+          mask-position: center;
+          border-radius: 5px;
+
+        }
+
+        & .contact-card__link-text {
+          color: #00BFFF;
+
+
+        }
+      }
+    }
+  }
+
+  @container (min-width: 700px) {
+    max-width: 700px;
+    max-height: 300px;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+
+    & .contact-card__wrapper-left {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      & .contact-card__title {
+        font-size: 1.5rem;
+
+      }
+
+      & hr {
+        display: none;
+      }
+
+      & .contact-card__profile {}
+    }
+
+    & .contact-card__list {
+      border-left: 2px solid #00bfff30;
+      padding: 1rem;
+    }
+  }
+
+}
