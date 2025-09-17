@@ -32,7 +32,7 @@ const useBatteryStatus = () => {
           battery.removeEventListener('chargingchange', handleCharging);
         };
       } else {
-        // Fallback for browsers that do not support levelchange or chargingchange events
+
         interval = setInterval(updateBattery, 10000);
         return () => clearInterval(interval);
       }
@@ -42,12 +42,10 @@ const useBatteryStatus = () => {
       navigator.getBattery().then((batt) => {
         const cleanup = setupBattery(batt);
         if (cleanup) {
-          // cleanup function for event listeners or interval
           return cleanup;
         }
       });
     } else {
-      // Fallback cleanup for browsers without getBattery
       return () => {
         if (interval) clearInterval(interval);
       };
