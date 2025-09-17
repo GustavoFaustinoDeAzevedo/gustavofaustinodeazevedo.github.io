@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import BatteryStatus from '@/components/BatteryStatus/components/BatteryStatus';
 import actions from '@/store/actions';
 import { useIsMobile } from '@/App/hooks';
+import TaskbarRightSection from './TaskbarRightSection';
 
 const Taskbar = ({ isMobile }) => {
   const { language, isDoubleClick } = useSelector((state) => state.settings);
@@ -81,32 +82,17 @@ const Taskbar = ({ isMobile }) => {
         onWindowMinimize={(id) => handleMinimize(id)}
         onWindowRestore={(id) => handleRestore(id)}
       />
-      <section className="taskbar-right-section">
-        {!isMobile && (
-          <label className="container">
-            {language === 'eng'
-              ? `Double Click To Open Files`
-              : `Duplo Clique Para Abrir Arquivos`}
-            <input
-              type="checkbox"
-              checked={isDoubleClick}
-              onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
-            />
-            <span className="checkmark"></span>
-          </label>
-        )}
-        <LanguageSelector
-          isMobile={isMobile}
-          languageButtonRef={(element) => (buttonRef.current = element)}
-          windowRef={(element) => (menuRef.current = element)}
-          language={language}
-          isVisible={menuVisibility.languageMenu}
-          onClick={() => toggleMenuVisibility('languageMenu')}
-          onChangeLanguage={handleChangeLanguage}
-        />
-        <Clock />
-        <BatteryStatus />
-      </section>
+      <TaskbarRightSection
+        handleChangeDoubleCkick={handleChangeDoubleCkick}
+        isMobile={isMobile}
+        menuRef={menuRef}
+        buttonRef={buttonRef}
+        menuVisibility={menuVisibility}
+        toggleMenuVisibility={toggleMenuVisibility}
+        language={language}
+        handleChangeLanguage={handleChangeLanguage}
+        isDoubleClick={isDoubleClick}
+      />
     </nav>
   );
 };
