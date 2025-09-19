@@ -1,4 +1,4 @@
-import { FilterData } from '../types/changeBackground.data.types';
+import { FilterData } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import React, { useMemo } from 'react';
 
 type SliderItemProps = {

@@ -167,7 +167,7 @@ const useWindowLifecycle = ({
   /* ─────────── Restaurar ─────────── */
   useAnimationSafe({
     ref: windowRef,
-    trigger: isRequestingRestore && (isMaximized || isMinimized),
+    trigger: isRequestingRestore ,
     animation: () =>
       windowAnimations.restoreWindow(
         windowRef,

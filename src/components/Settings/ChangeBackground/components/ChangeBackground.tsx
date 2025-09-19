@@ -9,7 +9,7 @@ import {
   BackgroundDisplay,
   ChangeBackgroundProps,
 } from '../types/changeBackground.types';
-import SliderMapper from './SliderMapper';
+import { Slider } from '@/components/ui';
 import { Language } from '@/store/slices/settings';
 
 type RadioOption = {
@@ -117,7 +117,7 @@ const ChangeBackground = ({
             </fieldset>
             <fieldset className="change-background__filters-list">
               <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
-              <SliderMapper
+              <Slider
                 sliderContainerClass={
                   'change-background__filter-slider-container'
                 }

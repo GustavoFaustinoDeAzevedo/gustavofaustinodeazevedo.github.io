@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FilterList } from '../types/changeBackground.data.types';
+import { FilterList } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import SliderItem from './SliderItem';
 
 type SliderMapData = {

@@ -37,9 +37,6 @@ const Window = ({
     windowRef,
     headerRef,
   } = windowParams;
-  useEffect(() => {
-    console.log(language);
-  }, [language]);
   const {
     updateWindowState,
     handleClose,
