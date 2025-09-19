@@ -232,7 +232,6 @@ const windowSlice = createSlice({
       //   ...(nodeDepth !== undefined && { nodeDepth }),
       //   ...(content !== undefined && { content }),
       // });
-      console.log(lastHeight, height, lastWidth, width, lastX, x, lastY, y);
       state.openedWindowList[winIndex].position = updateStateIfDefined(
         currentWindow.position,
         {

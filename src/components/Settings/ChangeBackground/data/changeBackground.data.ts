@@ -1,5 +1,6 @@
 import { BackgroundTextContent } from '../types/changeBackground.data.types';
-import { filters } from './filters.data';
+import { colorFilters } from './colorFilters.data';
+import { imageFilters } from './imageFilters.data';
 
 export const changeBackgroundTextContent: BackgroundTextContent = {
   eng: {
@@ -12,7 +13,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filter',
-            options: filters.eng,
+            options: imageFilters.eng,
           },
           picker: {
             legend: 'Image',
@@ -27,7 +28,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filter',
-            options: filters.eng,
+            options: colorFilters.eng,
           },
           picker: {
             legend: 'Color',
@@ -47,7 +48,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filtro',
-            options: filters.por,
+            options: imageFilters.por,
           },
           picker: {
             legend: 'Imagem',
@@ -62,7 +63,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           filter: {
             legend: 'Filtro',
-            options: filters.por,
+            options: colorFilters.por,
           },
           picker: {
             legend: 'Cor',

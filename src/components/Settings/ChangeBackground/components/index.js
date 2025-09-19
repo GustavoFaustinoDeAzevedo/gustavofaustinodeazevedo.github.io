@@ -1,2 +1,1 @@
-import BackgroundControl from "./BackgroundControl";
-export { BackgroundControl };
+export { default as ChangeBackground } from "./ChangeBackground";

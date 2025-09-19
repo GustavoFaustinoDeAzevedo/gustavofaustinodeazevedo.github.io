@@ -97,4 +97,4 @@ const Taskbar = ({ isMobile }) => {
   );
 };
 
-export default Taskbar;
+export default React.memo(Taskbar);

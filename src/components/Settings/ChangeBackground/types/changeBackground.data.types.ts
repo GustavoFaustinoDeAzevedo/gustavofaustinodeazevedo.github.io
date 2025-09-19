@@ -1,20 +1,18 @@
 import { Language } from '@/store/slices/settings/settingsSlice';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 
-type Range = {
-  min: string;
-  max: string;
-  default: string;
-};
+type Range = {};
 
-type FilterData = {
+export type FilterData = {
   id: string;
   label: string;
   step: number;
-  range: Range;
+  min: number;
+  max: number;
+  default: number;
 };
 
-type FilterList = {
+export type FilterList = {
   [key: string]: FilterData;
 };
 
@@ -25,7 +23,7 @@ export type FilterListLanguage = {
 
 type Filter = {
   legend: string;
-  options: FilterListLanguage;
+  options: FilterList;
 };
 
 type Picker = {

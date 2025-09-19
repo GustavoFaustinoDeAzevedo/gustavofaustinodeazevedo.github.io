@@ -1,6 +1,6 @@
-import { FilterList } from '../types/changeBackground.data.types';
+import { FilterListLanguage } from '../types/changeBackground.data.types';
 
-export const filters: FilterList = {
+export const imageFilters: FilterListLanguage = {
   por: {
     brightness: {
       id: 'brightness',
@@ -27,7 +27,7 @@ export const filters: FilterList = {
       default: 1,
     },
     hueRotate: {
-      id: 'hueRotate',
+      id: 'hue-rotate',
       label: 'Tonalidade',
       min: 0,
       max: 360,
@@ -93,7 +93,7 @@ export const filters: FilterList = {
       default: 1,
     },
     hueRotate: {
-      id: 'hueRotate',
+      id: 'hue-rotate',
       label: 'HUE',
       min: 0,
       max: 360,
