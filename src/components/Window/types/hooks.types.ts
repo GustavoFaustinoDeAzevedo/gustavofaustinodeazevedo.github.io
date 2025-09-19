@@ -82,7 +82,7 @@ export interface UseWindowLifecycleProps {
   desktopRef: RefObject<HTMLElement | null>;
   windowParams: WindowParams;
   windowHandlers: WindowHandlers;
-
+  isMobile: boolean;
   updateWindowState: (updates: Partial<WindowParams>) => void;
   animations: typeof windowAnimations;
   getWindowInfo: () => { savedWidth?: number; savedHeight?: number };

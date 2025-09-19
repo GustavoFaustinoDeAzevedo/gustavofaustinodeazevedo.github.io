@@ -20,6 +20,7 @@ const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
+  backgroundFilter: {},
   desktopBackgroundEffect: 'diagonal',
   desktopBackgroundImage: '/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,

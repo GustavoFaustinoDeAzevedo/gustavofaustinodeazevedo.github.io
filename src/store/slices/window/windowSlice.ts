@@ -63,10 +63,16 @@ const windowSlice = createSlice({
         );
         if (
           foundSameWindow &&
+          foundSameWindow.position &&
+          foundSameWindow.size &&
           foundSameWindow.windowId !== undefined &&
           foundSameWindow.windowState
         ) {
           state.focusedWindow = foundSameWindow.windowId;
+          foundSameWindow.position.lastX = foundSameWindow.position.x;
+          foundSameWindow.position.lastY = foundSameWindow.position.y;
+          foundSameWindow.size.lastWidth = foundSameWindow.size.width;
+          foundSameWindow.size.lastHeight = foundSameWindow.size.height;
           foundSameWindow.windowState.requests.restore = true;
           return;
         }
@@ -232,7 +238,6 @@ const windowSlice = createSlice({
       //   ...(nodeDepth !== undefined && { nodeDepth }),
       //   ...(content !== undefined && { content }),
       // });
-      console.log(lastHeight, height, lastWidth, width, lastX, x, lastY, y);
       state.openedWindowList[winIndex].position = updateStateIfDefined(
         currentWindow.position,
         {

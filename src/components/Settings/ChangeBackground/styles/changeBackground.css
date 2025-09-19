@@ -169,13 +169,10 @@
 
       .change-background__main {
         max-height: fit-content;
-      }
-
-      .change-background__main {
-        padding: 1rem !important;
+        padding: 0rem !important;
 
         & .change-background__title {
-          height: 2rem !important;
+          height: 1rem !important;
         }
 
         .change-background__preview {
@@ -206,7 +203,7 @@
 
         & .change-background__picker-wrapper {
           height: max-content !important;
-          
+
           gap: 1rem !important;
         }
 

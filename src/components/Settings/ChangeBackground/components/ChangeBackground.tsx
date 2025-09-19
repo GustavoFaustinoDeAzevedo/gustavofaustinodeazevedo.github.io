@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { changeBackgroundTextContent } from './data/changeBackground.data';
+import { changeBackgroundTextContent } from '../data/changeBackground.data';
 import actions from '@/store/actions';
-
-import useDisplayChoicesContent from './hooks/useDisplayChoicesContent';
-import BackgroundControl from './components/BackgroundControl';
-import DesktopBackground from '../../Desktop/components';
+import BackgroundControl from './BackgroundControl';
+import DesktopBackground from '@/components/Desktop/components';
 import {
   BackgroundDisplay,
   ChangeBackgroundProps,
-} from './types/changeBackground.types';
+} from '../types/changeBackground.types';
+import { Slider } from '@/components/ui';
+import { Language } from '@/store/slices/settings';
 
 type RadioOption = {
   id: BackgroundDisplay;
   label: string;
 };
 
-export const ChangeBackground = ({
+const ChangeBackground = ({
   handleUpdateWindowContent,
   language,
   content,
@@ -64,17 +64,14 @@ export const ChangeBackground = ({
     setBackgroundDisplay((prev) => (prev === 'image' ? 'color' : 'image'));
   };
 
-  const { displayChoicesContent, displayChoicesRoot } =
-    useDisplayChoicesContent({
-      backgroundDisplay,
-      language,
-    });
+  const displayChoicesRoot = changeBackgroundTextContent[language as Language];
+  const displayChoicesContent = displayChoicesRoot.choices[backgroundDisplay];
 
   const RadioMapper = ({ radioObjectData }: { [key: string]: any }) => {
     if (typeof radioObjectData !== 'object')
       return console.error('You must input an object to map the radio options');
-    return Object.values(radioObjectData).map((object) => (
-      <div className="change-background__display-option">
+    return Object.values(radioObjectData).map((object, index) => (
+      <div key={`radio-${index}`} className="change-background__display-option">
         <label htmlFor={object.id}>{object.label}</label>
         <input
           type="radio"
@@ -86,54 +83,6 @@ export const ChangeBackground = ({
         />
       </div>
     ));
-  };
-
-  const SliderMapper = ({ sliderObjectData }) => {
-    if (typeof sliderObjectData !== 'object')
-      return console.error('You must input an object to map the radio options');
-
-    return Object.values(sliderObjectData).map((object) => {
-      const [sliderValue, setSliderValue] = useState(object.default);
-      return (
-        <div className="change-background__filter-slider-container">
-          <label
-            htmlFor="slider"
-            className="change-background__filter-slider-label"
-          >
-            {object.label}
-          </label>
-          {/* <div className="change-background__filter-slider-wrapper"> */}
-          <input
-            type="range"
-            id={object.id}
-            key={'slider-' + object.id}
-            min={object.min}
-            max={object.max}
-            step={object.step}
-            defaultValue={object.default}
-            value={sliderValue}
-            onChange={(e) => setSliderValue(e.target.value)}
-          />
-
-          <input
-            className="change-background__filter-input-number"
-            type="number"
-            value={
-              Number(object.step) < 1
-                ? Number(sliderValue).toFixed(2)
-                : sliderValue
-            }
-            id={object.id}
-            key={'number-' + object.id}
-            min={object.min}
-            max={object.max}
-            step={object.step}
-            defaultValue={object.default}
-            onChange={(e) => setSliderValue(e.target.value)}
-          ></input>
-        </div>
-      );
-    });
   };
 
   const backgroundControlProps = {
@@ -158,7 +107,7 @@ export const ChangeBackground = ({
           <h3 className="change-background__title">
             {displayChoicesContent?.title}
           </h3>
-          <DesktopBackground className={'change-background__preview'} />
+          <DesktopBackground className={'change-background__preview'!} />
         </main>
         <aside className="change-background__aside">
           <div className="change-background__options-wrapper">
@@ -168,16 +117,17 @@ export const ChangeBackground = ({
             </fieldset>
             <fieldset className="change-background__filters-list">
               <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
-              <SliderMapper
+              <Slider
+                sliderContainerClass={
+                  'change-background__filter-slider-container'
+                }
+                sliderLabelClass={'change-background__filter-slider-label'}
+                inputNumberClass={'change-background__filter-input-number'}
                 sliderObjectData={
-                  displayChoicesRoot?.choices[backgroundDisplay].settings.filter
-                    .options
+                  displayChoicesRoot?.choices[backgroundDisplay]?.settings
+                    ?.filter?.options || {}
                 }
               />
-
-              {/* <InputChoices
-                choicesObject={displayChoicesContent?.settings?.choices}
-              /> */}
             </fieldset>
             <fieldset className="change-background__options-list">
               <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
@@ -189,3 +139,5 @@ export const ChangeBackground = ({
     </div>
   );
 };
+
+export default React.memo(ChangeBackground);

@@ -1,2 +1,1 @@
-import { ChangeBackground } from "./ChangeBackground";
-export default ChangeBackground;
+export { ChangeBackground } from "./components";
