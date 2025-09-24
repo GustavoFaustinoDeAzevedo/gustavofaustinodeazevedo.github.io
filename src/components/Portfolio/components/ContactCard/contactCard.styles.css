@@ -67,6 +67,7 @@
         }
 
         & .contact-card__link-icon {
+          flex-shrink: 0;
           width: 1.5rem;
           height: 1.5rem;
           background-color: #FFFFFF;
@@ -120,5 +121,4 @@
       padding: 1rem;
     }
   }
-
 }
