@@ -1,50 +1,47 @@
 import { useState } from 'react';
-import { FilterList } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import SliderItem from './SliderItem';
 
 type SliderMapData = {
-  sliderObjectData: FilterList;
-  sliderContainerClass: string;
-  sliderLabelClass: string;
-  inputNumberClass: string;
+  sliderObjectData: Record<string, any>;
+  sliderInitialValues: Record<string, number>;
+  sliderContainerClass?: string;
+  sliderLabelClass?: string;
+  inputNumberClass?: string;
+  handleParentValues: any;
 };
 
 const SliderMapper = ({
   sliderObjectData,
   sliderContainerClass,
   sliderLabelClass,
+  sliderInitialValues,
   inputNumberClass,
+  handleParentValues,
 }: SliderMapData) => {
-  const [sliderValues, setSliderValues] = useState<Record<string, number>>(
-    () => {
-      const initialValues: Record<string, number> = {};
-      Object.values(sliderObjectData).forEach((item) => {
-        console.log(item);
-        initialValues[item.id] = item.default ?? 0;
-      });
-      console.log(initialValues);
-      return initialValues;
-    }
-  );
+  // const [sliderValues, setSliderValues] =
+  //   useState<Record<string, number>>(sliderInitialValues);
 
-  const handleSliderChange = (id: string, value: number) => {
-    setSliderValues((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
+  // const handleSliderChange = (key: string, value: number) => {
+  //   setSliderValues((prev) => ({
+  //     ...prev,
+  //     [key]: value,
+  //   }));
+  //   parentValuesHandler(sliderValues);
+  // };
 
   return (
     <>
-      {Object.values(sliderObjectData).map((sliderData, index) => (
+      {Object.keys(sliderObjectData).map((key, index) => (
         <SliderItem
-          key={`slider-item-${sliderData.id}-${index}`}
-          sliderData={sliderData}
-          sliderValue={sliderValues[sliderData.id]}
-          onSliderChange={handleSliderChange}
-          sliderContainerClass={sliderContainerClass}
-          sliderLabelClass={sliderLabelClass}
-          inputNumberClass={inputNumberClass}
+          key={`slider-item-${sliderObjectData[key].id}-${index}`}
+          sliderData={sliderObjectData[key]}
+          sliderValue={sliderInitialValues[key]} //{sliderValues[sliderData.id]}
+          onSliderChange={({ key, value }: { key: string; value: number }) =>
+            handleParentValues({ key, value })
+          }
+          sliderContainerClass={sliderContainerClass ?? ''}
+          sliderLabelClass={sliderLabelClass ?? ''}
+          inputNumberClass={inputNumberClass ?? ''}
           index={index}
         />
       ))}

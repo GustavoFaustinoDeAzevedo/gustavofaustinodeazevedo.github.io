@@ -10,9 +10,9 @@ const BackgroundControl = ({
   desktopBackgroundColor,
   defaultDesktopColor,
   displayChoicesContent,
-  backgroundDisplay,
+  backgroundPreviewDisplay,
 }: ChangeBackgroundProps) => {
-  return backgroundDisplay === 'image' ? (
+  return backgroundPreviewDisplay === 'image' ? (
     <div className="change-background__picker-wrapper">
       <CustomImagePicker
         handleChangeBackground={handleChangeBackground}

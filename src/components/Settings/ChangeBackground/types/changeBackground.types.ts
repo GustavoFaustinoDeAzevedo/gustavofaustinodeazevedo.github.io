@@ -1,7 +1,7 @@
-import { Language } from '@/store/slices/settings/settingsSlice';
+import { Language } from '@/store/slices/settings/settingsSlice.types';
 import { Choice, HandleChangeBackground } from './changeBackground.data.types';
 
-export type BackgroundDisplay = 'image' | 'color';
+export type BackgroundPreviewDisplay = 'image' | 'color';
 
 export interface ChangeBackgroundProps {
   handleChangeBackground: (value: HandleChangeBackground) => void;
@@ -12,11 +12,11 @@ export interface ChangeBackgroundProps {
   desktopBackgroundColor?: string;
   defaultDesktopColor?: string;
   displayChoicesContent?: Choice;
-  backgroundDisplay?: string;
+  backgroundPreviewDisplay?: string;
   colorTitle?: string;
 }
 
 export interface UseDisplayChoicesContentProps {
-  backgroundDisplay: BackgroundDisplay;
+  backgroundPreviewDisplay: BackgroundPreviewDisplay;
   language: Language;
 }

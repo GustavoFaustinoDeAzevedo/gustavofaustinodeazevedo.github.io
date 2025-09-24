@@ -27,7 +27,7 @@ export const imageFilters: FilterListLanguage = {
       default: 1,
     },
     hueRotate: {
-      id: 'hue-rotate',
+      id: 'hueRotate',
       label: 'Tonalidade',
       min: 0,
       max: 360,
@@ -93,7 +93,7 @@ export const imageFilters: FilterListLanguage = {
       default: 1,
     },
     hueRotate: {
-      id: 'hue-rotate',
+      id: 'hueRotate',
       label: 'HUE',
       min: 0,
       max: 360,
