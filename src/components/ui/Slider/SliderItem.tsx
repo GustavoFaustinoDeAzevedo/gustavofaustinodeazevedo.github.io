@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 type SliderItemProps = {
   sliderData: FilterData;
   sliderValue: number;
-  onSliderChange: (id: string, value: number) => void;
+  onSliderChange: ({ key, value }: { key: string; value: number }) => void;
   sliderContainerClass: string;
   sliderLabelClass: string;
   inputNumberClass: string;
@@ -33,7 +33,9 @@ const SliderItem = ({
         max={sliderData?.max}
         step={sliderData?.step}
         value={sliderValue}
-        onChange={(e) => onSliderChange(sliderData.id, e.target.valueAsNumber)}
+        onChange={(e) =>
+          onSliderChange({ key: sliderData.id, value: e.target.valueAsNumber })
+        }
       />
       <input
         title={sliderData?.label}
@@ -51,7 +53,7 @@ const SliderItem = ({
         onChange={(e) => {
           const value = e.target.valueAsNumber;
           if (!isNaN(value)) {
-            onSliderChange(sliderData.id, value);
+            onSliderChange({ key: sliderData.id, value });
           }
         }}
       />

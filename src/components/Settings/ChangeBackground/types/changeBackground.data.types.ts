@@ -1,4 +1,3 @@
-import { Language } from '@/store/slices/settings/settingsSlice';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 
 type Range = {};
@@ -20,8 +19,7 @@ export type FilterListLanguage = {
   por: FilterList;
   eng: FilterList;
 };
-
-type Filter = {
+export type Filter = {
   legend: string;
   options: FilterList;
 };

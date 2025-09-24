@@ -15,12 +15,22 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
 const defaultBackgroundColor = '#131021';
 
 const defaultBackgroundColorContrast = '#ffffff';
+const defaultFilterValues = {
+  brightness: 1,
+  contrast: 1,
+  saturate: 1,
+  grayscale: 0,
+  hueRotate: 0,
+  blur: 0,
+  invert: 0,
+  sepia: 0,
+};
 
 const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
-  backgroundFilter: {},
+  desktopBackgroundFilter: defaultFilterValues,
   desktopBackgroundEffect: 'diagonal',
   desktopBackgroundImage: '/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
