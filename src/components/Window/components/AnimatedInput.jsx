@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
 const AnimatedInput = ({
-  inputClass,
+  inputClass = '',
   id,
   type,
   name,
   required,
   ariaLabel,
   inputPlaceholder,
-  children,
+  label,
   textArea = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -37,7 +37,7 @@ const AnimatedInput = ({
   return (
     <div className="input-container">
       <label ref={placeholderRef} className="placeholder" htmlFor={name}>
-        {children}
+        {label}
       </label>
       {(!textArea && (
         <input

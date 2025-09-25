@@ -87,7 +87,7 @@
           width: 100%;
           /* padding: 0; */
 
-          & .change-background__options-list {
+          & .change-background__options-field {
             width: 100%;
             /* border: none; */
             border: none;
@@ -107,7 +107,7 @@
             }
           }
 
-          & .change-background__filters-list {
+          & .change-background__filters-field {
             width: 100%;
             height: 150px;
             border: none;
@@ -133,7 +133,8 @@
               align-items: center;
 
               & .change-background__filter-slider-label {
-                width: 6rem
+                width: 6rem;
+
               }
 
               & .change-background__filter-slider-wrapper {
@@ -158,6 +159,20 @@
                 }
               }
             }
+          }
+
+          & .change-background__picker-field {
+            width: 100%;
+            height: 150px;
+            border: none;
+            border-top: 1px solid;
+            border-color: var(--c-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+            gap: 0.2rem;
+            padding: 0.5rem 2rem;
           }
         }
       }
