@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
@@ -81,17 +81,7 @@ const ChangeBackground = ({
     getCSSVariable('--c-desktop-default-bg')
   );
 
-  // useEffects - //TODO tirar useEffect pra usar em um botão de salvar
-  // useEffect(() => {
-  //   handleChangeBackground({
-  //     isBackgroundImage: backgroundDisplay === 'image',
-  //   });
-  // }, [backgroundDisplay]);
-
-  //handlers
   const handleChangeBackgroundState = (key: string, value: any) => {
-    if (key === 'isBackgroundPreviewImage')
-      value = !backgroundPreviewConfig.isBackgroundPreviewImage;
     setBackgroundPreviewConfig((prev) => ({
       ...prev,
       [key]: value,
@@ -105,26 +95,28 @@ const ChangeBackground = ({
 
   // functions
 
-  const parentValuesHandler = ({
-    key,
-    value,
+  const parentValuesHandler = useCallback(
+    ({ key, value }: { key: string; value: number }) =>
+      setBackgroundPreviewConfig((prev) => {
+        if (prev.filters[key as keyof FilterValues] === value) return prev;
+        return {
+          ...prev,
+          filters: {
+            ...prev.filters,
+            [key]: value,
+          },
+        };
+      }),
+    []
+  );
+
+  const RadioMapper = ({
+    radioObjectData,
+    handleRadioState,
+    checkString,
   }: {
-    key: string;
-    value: number;
-  }) =>
-    setBackgroundPreviewConfig((prev) => ({
-      ...prev,
-      filters: {
-        ...prev.filters,
-        [key]: value,
-      },
-    }));
-
-  // useEffect(() => {
-  //   console.log(backgroundPreviewConfig);
-  // }, [backgroundPreviewConfig]);
-
-  const RadioMapper = ({ radioObjectData }: { [key: string]: any }) => {
+    [key: string]: any;
+  }) => {
     if (typeof radioObjectData !== 'object')
       return console.error('You must input an object to map the radio options');
     return Object.values(radioObjectData).map((object, index) => (
@@ -135,8 +127,11 @@ const ChangeBackground = ({
           id={object.id}
           name="btype"
           value={object.id}
-          checked={backgroundPreviewConfig.display === object.id}
-          onChange={() => handleChangeBackgroundState('display', object.id)}
+          checked={checkString === object.id}
+          onChange={() => {
+            handleRadioState('display', object.id);
+            handleRadioState('isBackgroundPreviewImage', object.id === 'image');
+          }}
         />
       </div>
     ));
@@ -171,13 +166,17 @@ const ChangeBackground = ({
         </main>
         <aside className="change-background__aside">
           <div className="change-background__options-wrapper">
-            <fieldset className="change-background__options-list">
+            <fieldset className="change-background__options-field">
               <legend>{displayChoicesRoot?.legend}</legend>
-              <RadioMapper radioObjectData={displayChoicesRoot?.choices} />
+              <RadioMapper
+                radioObjectData={displayChoicesRoot?.choices}
+                handleRadioState={handleChangeBackgroundState}
+                checkString={backgroundPreviewConfig.display}
+              />
             </fieldset>
-            <fieldset className="change-background__filters-list">
+            <fieldset className="change-background__filters-field">
               <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
-              <Slider //TODO resolver a questão do handler do slider, preciso mudar o state dele e passar para esse componente
+              <Slider
                 sliderContainerClass={
                   'change-background__filter-slider-container'
                 }
@@ -190,7 +189,7 @@ const ChangeBackground = ({
                 sliderInitialValues={backgroundPreviewConfig.filters}
               />
             </fieldset>
-            <fieldset className="change-background__options-list">
+            <fieldset className="change-background__picker-field">
               <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
               <BackgroundControl {...backgroundControlProps} />
             </fieldset>
