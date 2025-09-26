@@ -23,4 +23,11 @@ export default defineConfig({
       allow: [path.resolve(__dirname, '.')],
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
 });

@@ -1,28 +1,24 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 import actions from '@/store/actions';
 import BackgroundControl from './BackgroundControl';
-import DesktopBackground from '@/components/Desktop/components';
+
 import {
   BackgroundPreviewDisplay,
   ChangeBackgroundProps,
 } from '../types/changeBackground.types';
-import { Slider } from '@/components/ui';
+import { Slider, Radio } from '@/components/ui';
 import { FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
-import { boolean } from 'mathjs';
-import {
-  Filter,
-  FilterData,
-  FilterList,
-} from '../types/changeBackground.data.types';
 
-type RadioOption = {
-  id: BackgroundPreviewDisplay;
-  label: string;
-};
 
 export interface BackgroundPreviewConfig {
   isBackgroundPreviewImage: boolean;
@@ -81,22 +77,32 @@ const ChangeBackground = ({
     getCSSVariable('--c-desktop-default-bg')
   );
 
-  const handleChangeBackgroundState = (key: string, value: any) => {
-    setBackgroundPreviewConfig((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
-
   // consts
-  const displayChoicesRoot = changeBackgroundTextContent[language as Language];
+  const displayChoicesRoot = useMemo(
+    () => changeBackgroundTextContent[language as Language],
+    [language]
+  );
   const displayChoicesContent =
     displayChoicesRoot.choices[backgroundPreviewConfig?.display];
 
   // functions
 
-  const parentValuesHandler = useCallback(
-    ({ key, value }: { key: string; value: number }) =>
+  const handleChangeBackgroundState = useCallback(
+    (key: string, value: any) => {
+      console.log(key, value);
+      setBackgroundPreviewConfig((prev) => {
+        if (prev[key as keyof BackgroundPreviewConfig] === value) return prev;
+        return {
+          ...prev,
+          [key]: value,
+        };
+      });
+    },
+    [setBackgroundPreviewConfig, backgroundPreviewConfig]
+  );
+
+  const filtersValuesHandler = useCallback(
+    (key: keyof FilterValues, value: number | string) =>
       setBackgroundPreviewConfig((prev) => {
         if (prev.filters[key as keyof FilterValues] === value) return prev;
         return {
@@ -107,38 +113,16 @@ const ChangeBackground = ({
           },
         };
       }),
-    []
+    [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
   );
 
-  const RadioMapper = ({
-    radioObjectData,
-    handleRadioState,
-    checkString,
-  }: {
-    [key: string]: any;
-  }) => {
-    if (typeof radioObjectData !== 'object')
-      return console.error('You must input an object to map the radio options');
-    return Object.values(radioObjectData).map((object, index) => (
-      <div key={`radio-${index}`} className="change-background__display-option">
-        <label htmlFor={object.id}>{object.label}</label>
-        <input
-          type="radio"
-          id={object.id}
-          name="btype"
-          value={object.id}
-          checked={checkString === object.id}
-          onChange={() => {
-            handleRadioState('display', object.id);
-            handleRadioState('isBackgroundPreviewImage', object.id === 'image');
-          }}
-        />
-      </div>
-    ));
+  const handleRadioState = (option: BackgroundPreviewDisplay) => {
+    handleChangeBackgroundState('display', option);
+    handleChangeBackgroundState('isBackgroundPreviewImage', option === 'image');
   };
 
   const backgroundControlProps = {
-    handleChangeBackground,
+    handleChangeBackgroundState,
     handleUpdateWindowContent,
     language,
     content,
@@ -166,29 +150,30 @@ const ChangeBackground = ({
         </main>
         <aside className="change-background__aside">
           <div className="change-background__options-wrapper">
-            <fieldset className="change-background__options-field">
-              <legend>{displayChoicesRoot?.legend}</legend>
-              <RadioMapper
-                radioObjectData={displayChoicesRoot?.choices}
-                handleRadioState={handleChangeBackgroundState}
-                checkString={backgroundPreviewConfig.display}
-              />
-            </fieldset>
-            <fieldset className="change-background__filters-field">
-              <legend>{displayChoicesContent?.settings?.filter?.legend}</legend>
-              <Slider
-                sliderContainerClass={
-                  'change-background__filter-slider-container'
-                }
-                handleParentValues={parentValuesHandler}
-                sliderLabelClass={'change-background__filter-slider-label'}
-                inputNumberClass={'change-background__filter-input-number'}
-                sliderObjectData={
-                  displayChoicesContent?.settings?.filter?.options || {}
-                }
-                sliderInitialValues={backgroundPreviewConfig.filters}
-              />
-            </fieldset>
+            <Radio
+              fieldsetClassName={'change-background__options-field'}
+              legendClassName={'change-background__display-legend'}
+              radioClassName={'change-background__display-option'}
+              options={displayChoicesRoot?.choices}
+              onChange={handleRadioState as any}
+              name="backgroundDisplay"
+              fieldsetLegend={displayChoicesContent?.label}
+              selectedValue={backgroundPreviewConfig.display}
+            />
+            <Slider
+              sliderContainerClass={
+                'change-background__filter-slider-container'
+              }
+              sliderValuesHandler={filtersValuesHandler} //parentValuesHandler}
+              sliderLabelClass={'change-background__filter-slider-label'}
+              fieldsetClass={'change-background__filters-field'}
+              fieldsetLegend={displayChoicesContent?.settings?.filter?.legend}
+              inputNumberClass={'change-background__filter-input-number'}
+              sliderObjectData={
+                displayChoicesContent?.settings?.filter?.options || {}
+              }
+              sliderInitialValues={backgroundPreviewConfig.filters}
+            />
             <fieldset className="change-background__picker-field">
               <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
               <BackgroundControl {...backgroundControlProps} />
