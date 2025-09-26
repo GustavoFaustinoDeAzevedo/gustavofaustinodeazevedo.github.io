@@ -38,6 +38,7 @@ export type Choice = {
   id: string;
   label: string;
   title: string;
+  value: string;
   settings: Settings;
 };
 

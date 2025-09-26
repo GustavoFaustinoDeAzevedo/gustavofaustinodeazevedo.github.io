@@ -3,11 +3,11 @@ import CustomImagePicker from './CustomImagePicker';
 import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 const BackgroundControl = ({
-  handleChangeBackground,
+  handleChangeBackgroundState,
   handleUpdateWindowContent,
   language,
-  backgroundImage,
-  desktopBackgroundColor,
+  backgroundPreviewImage,
+  backgroundPreviewColor,
   defaultDesktopColor,
   displayChoicesContent,
   backgroundPreviewDisplay,
@@ -15,18 +15,18 @@ const BackgroundControl = ({
   return backgroundPreviewDisplay === 'image' ? (
     <div className="change-background__picker-wrapper">
       <CustomImagePicker
-        handleChangeBackground={handleChangeBackground}
+        handleChangeBackgroundState={handleChangeBackgroundState}
         handleUpdateWindowContent={handleUpdateWindowContent}
         language={language}
         displayChoicesContent={displayChoicesContent}
-        backgroundImage={backgroundImage}
+        backgroundPreviewImage={backgroundPreviewImage}
       />
     </div>
   ) : (
     <div className="change-background__picker-wrapper">
       <CustomColorPicker
-        backgroundColor={desktopBackgroundColor}
-        handleChangeBackground={handleChangeBackground}
+        backgroundColor={backgroundPreviewColor}
+        handleChangeBackground={handleChangeBackgroundState}
         defaultDesktopColor={defaultDesktopColor}
         displayChoicesContent={displayChoicesContent}
       />

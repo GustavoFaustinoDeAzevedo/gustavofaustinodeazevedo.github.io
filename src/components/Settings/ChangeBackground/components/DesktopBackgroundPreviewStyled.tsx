@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { FilterValues } from '@/store/slices/settings';
+import { e } from 'mathjs';
+import React from 'react';
 
 interface DesktopBackgroundPreviewStyledProps {
   $isBackgroundImage?: boolean;
@@ -11,17 +13,27 @@ interface DesktopBackgroundPreviewStyledProps {
 const DesktopBackgroundPreviewStyled = styled.img<DesktopBackgroundPreviewStyledProps>`
   background: ${(props) =>
     props.$isBackgroundImage && props.$backgroundImage
-      ? `url(${props.$backgroundImage})`
+      ? `${props.$backgroundColor} url(${props.$backgroundImage}) no-repeat center/cover`
       : props.$backgroundColor};
 
-  filter: blur(${(props) => props.$filters?.blur}px)
-    brightness(${(props) => props.$filters?.brightness})
-    contrast(${(props) => props.$filters?.contrast})
-    grayscale(${(props) => props.$filters?.grayscale})
-    hue-rotate(${(props) => props.$filters?.hueRotate}deg)
-    invert(${(props) => props.$filters?.invert})
-    saturate(${(props) => props.$filters?.saturate})
-    sepia(${(props) => props.$filters?.sepia});
+  filter: ${(props) => {
+    const f = props.$filters;
+    const filters = [];
+
+    if (props.$isBackgroundImage && props.$backgroundImage) {
+      filters.push(
+        `blur(${f?.blur}px)`,
+        `contrast(${f?.contrast})`,
+        `grayscale(${f?.grayscale})`,
+        `hue-rotate(${f?.hueRotate}deg)`,
+        `invert(${f?.invert})`,
+        `saturate(${f?.saturate})`,
+        `sepia(${f?.sepia})`
+      );
+    }
+    filters.push(`brightness(${f?.brightness})`);
+    return filters.join(' ');
+  }};
 `;
 
-export default DesktopBackgroundPreviewStyled;
+export default React.memo(DesktopBackgroundPreviewStyled);

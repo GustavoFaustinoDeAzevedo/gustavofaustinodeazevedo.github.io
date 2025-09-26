@@ -9,6 +9,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Image',
+        value: 'image',
         title: 'Background Preview',
         settings: {
           filter: {
@@ -24,6 +25,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       color: {
         id: 'color',
         label: 'Color',
+        value: 'color',
         title: 'Background Preview',
         settings: {
           filter: {
@@ -44,6 +46,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       image: {
         id: 'image',
         label: 'Imagem',
+        value: 'image',
         title: 'Pré-Visualização de Fundo',
         settings: {
           filter: {
@@ -59,6 +62,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
       color: {
         id: 'color',
         label: 'Cor',
+        value: 'color',
         title: 'Pré-Visualização de Fundo',
         settings: {
           filter: {

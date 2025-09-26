@@ -1,3 +1,4 @@
+import React from 'react';
 import { Filter } from '../types/changeBackground.data.types';
 import { BackgroundPreviewConfig } from './ChangeBackground';
 import DesktopBackgroundPreviewStyled from './DesktopBackgroundPreviewStyled';
@@ -11,7 +12,6 @@ const DesktopBackgroundPreview = ({
   className,
   backgroundPreviewConfig,
 }: DesktopBackgroundPreviewProps) => {
-  console.log(backgroundPreviewConfig);
   return (
     <DesktopBackgroundPreviewStyled
       $isBackgroundImage={backgroundPreviewConfig.isBackgroundPreviewImage}

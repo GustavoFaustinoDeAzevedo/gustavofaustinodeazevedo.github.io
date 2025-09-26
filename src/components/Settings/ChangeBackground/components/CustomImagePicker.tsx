@@ -9,17 +9,17 @@ type Translations = {
 
 const CustomImagePicker = ({
   language,
-  handleChangeBackground,
+  handleChangeBackgroundState,
   handleUpdateWindowContent,
   displayChoicesContent,
-  backgroundImage,
+  backgroundPreviewImage,
 }: ChangeBackgroundProps) => {
   const translations: Translations = {
     eng: 'Custom Image Picker Component',
     por: 'Componente de Seletor de Imagem Personalizada',
   };
   const [preview, setPreview] = useState<string | null>(
-    backgroundImage ?? null
+    backgroundPreviewImage ?? null
   );
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -33,9 +33,7 @@ const CustomImagePicker = ({
 
   useEffect(() => {
     if (preview) {
-      handleChangeBackground({
-        backgroundImage: preview,
-      });
+      handleChangeBackgroundState('image', preview);
     }
     return () => {
       if (preview) {

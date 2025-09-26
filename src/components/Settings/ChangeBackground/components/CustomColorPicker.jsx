@@ -22,18 +22,20 @@ const CustomColorPicker = ({
 
   const handleButtonClick = () => {
     colorRef.current = defaultDesktopColor;
-    handleChangeBackground({
-      backgroundColor: colorRef.current,
+    handleChangeBackground(
+      'color',
+      colorRef.current
       // backgroundColorContrast: getContrastYIQ(colorRef.current),
-    });
+    );
   };
 
   useMouseEvents({
     onMouseUp: () =>
-      handleChangeBackground({
-        backgroundColor: colorRef.current,
+      handleChangeBackground(
+        'color',
+        colorRef.current
         // backgroundColorContrast: getContrastYIQ(colorRef.current),
-      }),
+      ),
   });
   return (
     <>

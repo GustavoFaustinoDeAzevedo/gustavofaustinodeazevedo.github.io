@@ -4,12 +4,12 @@ import { Choice, HandleChangeBackground } from './changeBackground.data.types';
 export type BackgroundPreviewDisplay = 'image' | 'color';
 
 export interface ChangeBackgroundProps {
-  handleChangeBackground: (value: HandleChangeBackground) => void;
+  handleChangeBackgroundState: (key: string, value: string) => void;
   handleUpdateWindowContent: (content: string) => void;
   language: Language;
   content?: {};
-  backgroundImage?: string;
-  desktopBackgroundColor?: string;
+  backgroundPreviewImage?: string;
+  backgroundPreviewColor?: string;
   defaultDesktopColor?: string;
   displayChoicesContent?: Choice;
   backgroundPreviewDisplay?: string;

@@ -1,4 +1,4 @@
-import React, { use, useCallback, useMemo, useState } from 'react';
+import { useRef } from 'react';
 import SliderItem from './SliderItem';
 
 type SliderMapData = {
@@ -7,44 +7,41 @@ type SliderMapData = {
   sliderContainerClass?: string;
   sliderLabelClass?: string;
   inputNumberClass?: string;
-  handleParentValues: any;
+  fieldsetClass?: string;
+  fieldsetLegendClassName?: string;
+  fieldsetLegend?: string;
+  sliderValuesHandler: any;
 };
 
 const SliderMapper = ({
+  fieldsetClass,
+  fieldsetLegendClassName,
+  fieldsetLegend,
   sliderObjectData,
   sliderContainerClass,
   sliderLabelClass,
   sliderInitialValues,
   inputNumberClass,
-  handleParentValues,
+  sliderValuesHandler,
 }: SliderMapData) => {
-  const handleSliderChange = useCallback(
-    ({ key, value }: { key: string; value: number }) =>
-      handleParentValues({ key, value }),
-    []
-  );
-
   return (
-    <>
-      {Object.keys(sliderObjectData).map((key, index) => {
-        const sliderValue = useMemo(
-          () => sliderInitialValues[key],
-          [sliderInitialValues[key]]
-        );
-        return (
-          <SliderItem
-            key={`slider-item-${sliderObjectData[key].id}-${index}`}
-            sliderData={sliderObjectData[key]}
-            sliderValue={sliderValue}
-            onSliderChange={handleSliderChange}
-            sliderContainerClass={sliderContainerClass ?? ''}
-            sliderLabelClass={sliderLabelClass ?? ''}
-            inputNumberClass={inputNumberClass ?? ''}
-            index={index}
-          />
-        );
-      })}
-    </>
+    <fieldset className={fieldsetClass ?? 'border-none'}>
+      {fieldsetLegend && (
+        <legend className={fieldsetLegendClassName}>{fieldsetLegend}</legend>
+      )}
+      {Object.keys(sliderObjectData).map((key, index) => (
+        <SliderItem
+          key={`slider-item-${sliderObjectData[key].id}--${index}`}
+          sliderData={sliderObjectData[key]}
+          sliderValue={sliderInitialValues[key]}
+          sliderValuesHandler={sliderValuesHandler}
+          sliderContainerClass={sliderContainerClass ?? ''}
+          sliderLabelClass={sliderLabelClass ?? ''}
+          inputNumberClass={inputNumberClass ?? ''}
+          index={key}
+        />
+      ))}
+    </fieldset>
   );
 };
 
