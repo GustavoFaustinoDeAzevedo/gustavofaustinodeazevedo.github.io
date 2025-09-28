@@ -23,13 +23,16 @@ const buttonPressed = (variant: VariantKey) => keyframes`
 const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !['variant', 'isAnimating'].includes(prop),
 })<StyledButtonProps>`
-  width: 110px;
+  padding: 3px 10px;
+  min-width: fit-content;
+  max-width: 8rem;
   height: 30px;
   border: none;
   text-align: center;
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-weight: 500;
+  box-shadow: 0 0 4px 2px inset #00000040;
+  font-weight: bold;
   transition: filter 0.3s ease;
   user-select: none;
 
@@ -38,7 +41,7 @@ const StyledButton = styled.button.withConfig({
   color: ${({ variant = 'primary' }) => variantStyles[variant].color};
 
   &:hover {
-    filter: brightness(1.4);
+    filter: brightness(1.2);
   }
   &:active {
     filter: brightness(0.6);

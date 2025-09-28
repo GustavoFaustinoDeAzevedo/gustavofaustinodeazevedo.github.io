@@ -1,3 +1,4 @@
+import { FilterValues } from '@/store/slices/settings';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 
 type Range = {};
@@ -61,6 +62,9 @@ type LanguageKey = keyof typeof changeBackgroundTextContent;
 export type RootType = (typeof changeBackgroundTextContent)[LanguageKey];
 
 export type HandleChangeBackground = {
-  backgroundImage?: string;
+  desktopBackgroundColor?: string;
+  desktopBackgroundImage?: string;
+  desktopBackgroundEffect?: string;
+  desktopBackgroundFilter?: FilterValues;
   isBackgroundImage?: boolean;
 };

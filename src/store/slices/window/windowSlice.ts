@@ -184,32 +184,6 @@ const windowSlice = createSlice({
 
       const currentWindowState = currentWindow.windowState;
 
-      // const requests = {
-      //   open: requestingOpen,
-      //   restore: requestingRestore,
-      //   close: requestingClose,
-      //   minimized: requestingMinimize,
-      //   maximized: requestingMaximize,
-      //   focused: requestingFocus,
-      // };
-
-      // const statusKeys = ['open', 'focused', 'maximized', 'minimized'];
-
-      // if (
-      //   currentWindow.windowState &&
-      //   Object.keys(currentWindowStatus).some(Boolean)
-      // ) {
-      //   Object.keys(requests).forEach((key) => {
-      //     if (
-      //       typeof currentWindowRequests[key] === 'boolean' &&
-      //       statusKeys.includes(key) &&
-      //       currentWindowRequests[key] === currentWindowStatus[key]
-      //     ) {
-      //       currentWindowRequests[key] = !currentWindowStatus[key];
-      //     }
-      //   });
-      // }
-
       if (focused) focusWindow(state, windowId);
 
       state.openedWindowList[winIndex] = updateStateIfDefined(currentWindow, {
@@ -224,20 +198,6 @@ const windowSlice = createSlice({
         content,
       });
 
-      // Object.assign(currentWindow, {
-      //   ...(content !== undefined && { content }),
-      //   ...(title !== undefined && { title }),
-      //   ...(icon !== undefined && { icon }),
-      //   ...(children !== undefined && {
-      //     children:
-      // currentWindow.currentNode !== currentNode
-      //   ? newFile(currentWindow, children)
-      //   : children,
-      //   }),
-      //   ...(currentNode !== undefined && { currentNode }),
-      //   ...(nodeDepth !== undefined && { nodeDepth }),
-      //   ...(content !== undefined && { content }),
-      // });
       state.openedWindowList[winIndex].position = updateStateIfDefined(
         currentWindow.position,
         {

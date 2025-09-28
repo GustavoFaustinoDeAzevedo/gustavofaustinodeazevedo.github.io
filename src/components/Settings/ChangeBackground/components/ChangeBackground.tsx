@@ -15,10 +15,9 @@ import {
   BackgroundPreviewDisplay,
   ChangeBackgroundProps,
 } from '../types/changeBackground.types';
-import { Slider, Radio } from '@/components/ui';
+import { Slider, Radio, Button } from '@/components/ui';
 import { FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
-
 
 export interface BackgroundPreviewConfig {
   isBackgroundPreviewImage: boolean;
@@ -121,6 +120,18 @@ const ChangeBackground = ({
     handleChangeBackgroundState('isBackgroundPreviewImage', option === 'image');
   };
 
+  const handleApplyChanges = () => {
+    handleChangeBackground({
+      desktopBackgroundColor: backgroundPreviewConfig.color,
+      desktopBackgroundImage: backgroundPreviewConfig.image,
+      isBackgroundImage: backgroundPreviewConfig.display === 'image',
+      desktopBackgroundEffect: backgroundPreviewConfig.effect,
+      desktopBackgroundFilter: backgroundPreviewConfig.filters,
+    });
+  };
+
+  // Props
+
   const backgroundControlProps = {
     handleChangeBackgroundState,
     handleUpdateWindowContent,
@@ -134,10 +145,7 @@ const ChangeBackground = ({
   };
 
   return (
-    <div
-      className="change-background__container"
-      data-initial-dimension='{"width": "750px", "height": "600px"}'
-    >
+    <div className="change-background__container">
       <div className="change-background__wrapper">
         <main className="change-background__main">
           <h3 className="change-background__title">
@@ -178,6 +186,13 @@ const ChangeBackground = ({
               <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
               <BackgroundControl {...backgroundControlProps} />
             </fieldset>
+            <Button
+              onClick={handleApplyChanges}
+              className={'border-radius-0'}
+              variant="success"
+            >
+              {language === 'eng' ? 'Save' : 'Salvar'}
+            </Button>
           </div>
         </aside>
       </div>

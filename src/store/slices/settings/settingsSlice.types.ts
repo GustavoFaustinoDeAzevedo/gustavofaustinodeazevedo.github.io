@@ -3,10 +3,11 @@ export type Language = 'eng' | 'por';
 
 // Formato do payload das configurações de tema para alteração de fundo
 export interface BackgroundPayload {
-  backgroundColor?: string;
-  backgroundColorContrast?: string;
-  backgroundEffect?: string;
-  backgroundImage?: string;
+  desktopBackgroundColor?: string;
+  desktopBackgroundColorContrast?: string;
+  desktopBackgroundEffect?: string;
+  desktopBackgroundFilter?: FilterValues;
+  desktopBackgroundImage?: string;
   isBackgroundImage?: boolean;
 }
 

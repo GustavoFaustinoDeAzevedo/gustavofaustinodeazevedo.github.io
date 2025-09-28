@@ -1,0 +1,49 @@
+// Fontes e tamanhos
+@use '../base/tokens' as *;
+
+@mixin generate-utilities(
+  $map,
+  $property,
+  $prefix,
+  $variants: (),
+  $breakpoints: (),
+  $dark: false
+) {
+  @each $name, $value in $map {
+    .#{$prefix}-#{$name} {
+      #{$property}: $value;
+    }
+
+    // Variantes (hover, focus, etc.)
+    @each $variant, $pseudo in $variants {
+      .#{$variant}\:#{$prefix}-#{$name}#{$pseudo} {
+        #{$property}: $value;
+      }
+    }
+
+    // Breakpoints (sm, md, lg)
+    @each $bp, $query in $breakpoints {
+      @media #{$query} {
+        .#{$bp}\:#{$prefix}-#{$name} {
+          #{$property}: $value;
+        }
+      }
+    }
+
+    // Dark mode
+    @if $dark == true {
+      .dark & {
+        .dark\:#{$prefix}-#{$name} {
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+}
+
+@mixin export-css-variables($map, $prefix: null) {
+  @each $key, $value in $map {
+    $var-name: if($prefix != null, '--#{$prefix}-#{$key}', '--#{$key}');
+    #{$var-name}: #{$value};
+  }
+}

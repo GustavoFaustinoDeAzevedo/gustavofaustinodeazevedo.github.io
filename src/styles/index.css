@@ -10,3 +10,4 @@
 @import '../components/Portfolio/index.css';
 @import '../apps/index.css';
 @import './utilities.scss';
+@import '../scss/main.scss';

@@ -5,21 +5,20 @@ import {
   changeLanguage,
   changeDoubleCkick,
 } from '../slices/settings/settingsSlice';
-import { Language } from '../slices/settings';
-import { HandleChangeBackground } from '@/components/Settings/ChangeBackground/types/changeBackground.data.types';
+import { BackgroundPayload, Language } from '../slices/settings';
 
 const useSettingsActions = (): {
-  handleChangeLanguage: (newLang: Language) => void;
-  handleChangeBackground: (payload: HandleChangeBackground) => void;
+  handleChangeLanguage: (payload: Language) => void;
+  handleChangeBackground: (payload: BackgroundPayload) => void;
   handleChangeDoubleCkick: (payload: boolean) => void;
 } => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleChangeLanguage = (newLang: Language) => {
-    dispatch(changeLanguage(newLang));
+  const handleChangeLanguage = (payload: Language) => {
+    dispatch(changeLanguage(payload));
   };
 
-  const handleChangeBackground = (payload: HandleChangeBackground) => {
+  const handleChangeBackground = (payload: BackgroundPayload) => {
     dispatch(changeBackground(payload));
   };
 

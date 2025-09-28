@@ -15,6 +15,7 @@ const Button = ({
     | 'warning'
     | 'info',
   title = '',
+  className = '',
 }: {
   buttonRef?: React.Ref<HTMLButtonElement>;
   children?: React.ReactNode;
@@ -23,6 +24,7 @@ const Button = ({
   ariaLabel?: string;
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
   title?: string;
+  className?: string;
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const internalButtonRef = buttonRef ?? useRef(null);
@@ -34,6 +36,7 @@ const Button = ({
 
   return (
     <StyledButton
+      className={className}
       title={title}
       onClick={onClick}
       type={type}

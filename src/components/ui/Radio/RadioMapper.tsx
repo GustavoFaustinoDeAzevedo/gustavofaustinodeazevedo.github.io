@@ -41,7 +41,7 @@ const RadioMapper = ({
         <label
           key={option.id}
           htmlFor={option.id}
-          className="flex items-center gap-2"
+          className="flex items-center gap-1"
         >
           <input
             type="radio"
