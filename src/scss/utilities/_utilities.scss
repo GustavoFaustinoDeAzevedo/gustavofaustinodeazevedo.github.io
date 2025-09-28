@@ -1,0 +1,13 @@
+@import '../base/tokens';
+@import '../base/mixins';
+
+@each $prefix, $map in $tokens {
+  @include generate-utilities(
+    $map,
+    $prefix,
+    $prefix,
+    $variants,
+    $breakpoints,
+    true
+  );
+}

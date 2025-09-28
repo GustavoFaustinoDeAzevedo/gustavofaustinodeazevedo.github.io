@@ -4,6 +4,7 @@ import {
   Language,
   BackgroundPayload,
 } from './settingsSlice.types';
+import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
 
 const navigatorLanguage =
   (typeof navigator !== 'undefined' && navigator.language) || 'en-US';
@@ -37,7 +38,7 @@ const initialState: SettingsState = {
   isDoubleClick: true,
 };
 
-// 4. Slice creation
+// 4. Criação do slice
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
@@ -47,28 +48,32 @@ export const settingsSlice = createSlice({
     },
     changeBackground: (state, action: PayloadAction<BackgroundPayload>) => {
       const {
-        backgroundColor,
-        backgroundColorContrast,
-        backgroundEffect,
-        backgroundImage,
+        desktopBackgroundColor,
+        desktopBackgroundColorContrast,
+        desktopBackgroundEffect,
+        desktopBackgroundImage,
+        desktopBackgroundFilter,
         isBackgroundImage,
       } = action.payload;
 
       Object.assign(state, {
-        ...(backgroundColor !== undefined && {
-          desktopBackgroundColor: backgroundColor,
+        ...(desktopBackgroundColor !== undefined && {
+          desktopBackgroundColor: desktopBackgroundColor,
         }),
-        ...(backgroundColorContrast !== undefined && {
-          desktopBackgroundColorContrast: backgroundColorContrast,
+        ...(desktopBackgroundColorContrast !== undefined && {
+          desktopBackgroundColorContrast: desktopBackgroundColorContrast,
         }),
-        ...(backgroundEffect !== undefined && {
-          desktopBackgroundEffect: backgroundEffect,
+        ...(desktopBackgroundEffect !== undefined && {
+          desktopBackgroundEffect: desktopBackgroundEffect,
         }),
-        ...(backgroundImage !== undefined && {
-          desktopBackgroundImage: backgroundImage,
+        ...(desktopBackgroundImage !== undefined && {
+          desktopBackgroundImage: desktopBackgroundImage,
         }),
         ...(isBackgroundImage !== undefined && {
           isBackgroundImage: isBackgroundImage,
+        }),
+        ...(desktopBackgroundFilter !== undefined && {
+          desktopBackgroundFilter: desktopBackgroundFilter,
         }),
       });
     },

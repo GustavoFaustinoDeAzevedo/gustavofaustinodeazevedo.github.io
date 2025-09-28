@@ -8,21 +8,21 @@ interface DesktopBackgroundProps {
 }
 
 const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
-  const backgroundColor = useSelector(
-    (state: RootState) => state.settings.desktopBackgroundColor
-  );
-  const backgroundImage = useSelector(
-    (state: RootState) => state.settings.desktopBackgroundImage
-  );
-  const isBackgroundImage = useSelector(
-    (state: RootState) => state.settings.isBackgroundImage
-  );
+  const {
+    desktopBackgroundColor,
+    desktopBackgroundImage,
+    desktopBackgroundEffect,
+    desktopBackgroundFilter,
+    isBackgroundImage,
+  } = useSelector((state: RootState) => state.settings);
 
   return (
     <DesktopBackgroundStyled
       $isBackgroundImage={isBackgroundImage}
-      $backgroundColor={backgroundColor}
-      $backgroundImage={backgroundImage}
+      $backgroundColor={desktopBackgroundColor}
+      $backgroundImage={desktopBackgroundImage}
+      $filters={desktopBackgroundFilter}
+      $effect={desktopBackgroundEffect}
       className={className || 'desktop-background'}
     />
   );

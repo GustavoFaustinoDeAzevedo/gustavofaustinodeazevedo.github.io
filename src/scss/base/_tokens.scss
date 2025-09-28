@@ -1,0 +1,239 @@
+// Cores
+$colors: (
+  primary: #007bff,
+  secondary: #6c757d,
+  success: #28a745,
+  danger: #dc3545,
+  warning: #ffc107,
+  info: #17a2b8,
+  light: #f8f9fa,
+  dark: #121212,
+  muted: #6c757d,
+);
+
+// Tipografia
+$fluid-font-sizes: (
+  xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8rem),
+  sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem),
+  base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem),
+  lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem),
+  xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem),
+  2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem),
+  3xl: clamp(2rem, 1.8rem + 1vw, 2.5rem),
+);
+
+$font-weights: (
+  thin: 100,
+  light: 300,
+  normal: 400,
+  medium: 500,
+  bold: 700,
+  black: 900,
+);
+$font-styles: (
+  normal: normal,
+  italic: italic,
+  oblique: oblique,
+);
+$font-families: (
+  sans: 'Inter, sans-serif',
+  serif: 'Georgia, serif',
+  mono: 'Courier New, monospace',
+);
+$line-heights: (
+  tight: 1,
+  normal: 1.5,
+  relaxed: 1.75,
+);
+$letter-spacing: (
+  tight: -0.05em,
+  normal: 0,
+  wide: 0.05em,
+);
+$text-aligns: (
+  left: left,
+  center: center,
+  right: right,
+  justify: justify,
+);
+$text-transforms: (
+  uppercase: uppercase,
+  lowercase: lowercase,
+  capitalize: capitalize,
+);
+$text-decorations: (
+  none: none,
+  underline: underline,
+  line-through: line-through,
+);
+
+// Espaçamento
+$spacing: (
+  0: 0px,
+  4: 4px,
+  8: 8px,
+  16: 16px,
+  24: 24px,
+  32: 32px,
+  64: 64px,
+);
+
+// Bordas
+$border-radius: (
+  none: 0,
+  sm: 4px,
+  md: 8px,
+  lg: 16px,
+  pill: 50px,
+  full: 9999px,
+);
+
+$border-widths: (
+  none: 0,
+  thin: 1px,
+  medium: 2px,
+  thick: 4px,
+);
+$border-styles: (
+  solid: solid,
+  dashed: dashed,
+  dotted: dotted,
+  double: double,
+);
+$border-colors: (
+  none: transparent,
+  primary: #007bff,
+  secondary: #6c757d,
+  success: #28a745,
+  warning: #ffc107,
+  info: #17a2b8,
+  danger: #dc3545,
+  dark: #121212,
+  light: #f8f9fa,
+  muted: #6c757d,
+);
+
+// Z-index
+$z-index: (
+  base: 1,
+  dropdown: 1000,
+  modal: 1050,
+  tooltip: 1100,
+);
+
+// Opacidade
+$opacity: (
+  0: 0,
+  10: 0.1,
+  25: 0.25,
+  50: 0.5,
+  75: 0.75,
+  90: 0.9,
+  100: 1,
+);
+
+// Sombra
+$box-shadows: (
+  none: none,
+  sm: 0 1px 2px rgba(0, 0, 0, 0.05),
+  md: 0 4px 6px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px rgba(0, 0, 0, 0.15),
+  xl: 0 20px 25px rgba(0, 0, 0, 0.2),
+  inner: inset 0 2px 4px rgba(0, 0, 0, 0.06),
+);
+
+// Transição
+$transitions: (
+  none: none,
+  fast: all 150ms ease-in-out,
+  normal: all 300ms ease,
+  slow: all 500ms ease-out,
+);
+
+// Transformações
+$transforms: (
+  scale-sm: scale(0.95),
+  scale-md: scale(1),
+  scale-lg: scale(1.05),
+  rotate-90: rotate(90deg),
+  rotate-180: rotate(180deg),
+  flip-x: scaleX(-1),
+  flip-y: scaleY(-1),
+);
+
+// Proporções
+$aspect-ratios: (
+  square: '1 / 1',
+  video: '16 / 9',
+  portrait: '3 / 4',
+  landscape: '4 / 3',
+  golden: '1.618 / 1',
+);
+
+// Animações
+$animations: (
+  fade-in: fadeIn 0.3s ease-in-out,
+  fade-out: fadeOut 0.3s ease-in-out,
+  slide-up: slideUp 0.4s ease,
+  slide-down: slideDown 0.4s ease,
+  slide-left: slideLeft 0.4s ease,
+  slide-right: slideRight 0.4s ease,
+  scale-up: scaleUp 0.4s ease,
+  scale-down: scaleDown 0.4s ease,
+  grow: grow 0.4s ease,
+  shrink: shrink 0.4s ease,
+  float: float 2s ease-in-out infinite,
+  float-reverse: floatReverse 2s ease-in-out infinite,
+  pulse: pulse 1s infinite,
+  bounce: bounce 0.6s infinite,
+  shake: shake 0.8s infinite,
+  spin: spin 1s infinite linear,
+  blink: blink 1s infinite linear,
+  spin-reverse: spinReverse 1s infinite linear,
+  flip: flip 1s infinite linear,
+  flip-reverse: flipReverse 1s infinite linear,
+);
+
+// Variantes
+$variants: (
+  hover: ':hover',
+  focus: ':focus',
+  active: ':active',
+  visited: ':visited',
+  disabled: ':disabled',
+);
+
+// Breakpoints
+$breakpoints: (
+  sm: '(min-width: 640px)',
+  md: '(min-width: 768px)',
+  lg: '(min-width: 1024px)',
+);
+
+// Mapa mestre
+$tokens: (
+  text: $colors,
+  bg: $colors,
+  font: $font-weights,
+  font-style: $font-styles,
+  font-family: $font-families,
+  text-align: $text-aligns,
+  text-transform: $text-transforms,
+  decoration: $text-decorations,
+  text-size: $fluid-font-sizes,
+  leading: $line-heights,
+  tracking: $letter-spacing,
+  m: $spacing,
+  p: $spacing,
+  rounded: $border-radius,
+  border: $border-widths,
+  border-style: $border-styles,
+  border-color: $colors,
+  z: $z-index,
+  opacity: $opacity,
+  shadow: $box-shadows,
+  transition: $transitions,
+  transform: $transforms,
+  aspect: $aspect-ratios,
+  animate: $animations,
+);
