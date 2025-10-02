@@ -4,14 +4,13 @@ import { placeholder } from '@/data/filesData';
 import { useMemo } from 'react';
 import actions from '@/store/actions';
 
-const FilesList = ({
+const ListFiles = ({
   currentNode,
   language,
   children,
   fileClassName,
   filesActions,
   dataInitialDimension,
-  // windowActions,
   openMode,
   backgroundColorContrast,
   handleWindowUpdate = () => {},
@@ -38,6 +37,7 @@ const FilesList = ({
             type,
             windowMask,
             isUnique,
+            initialStates,
             children,
             nodeDepth,
             initialDimensions,
@@ -72,6 +72,7 @@ const FilesList = ({
                   openMode,
                   src,
                   isUnique,
+                  initialStates,
                   children,
                   handleNewFile,
                   windowActions,
@@ -90,4 +91,4 @@ const FilesList = ({
   );
 };
 
-export default FilesList;
+export default ListFiles;

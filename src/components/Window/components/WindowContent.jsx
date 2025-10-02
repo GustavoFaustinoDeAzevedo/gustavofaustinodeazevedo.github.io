@@ -1,4 +1,4 @@
-import { FilesList } from '../../FilesExplorer';
+import { ListFiles } from '@/components/FilesExplorer';
 
 import getWindowContent from '../utils/getWindowContent';
 
@@ -13,6 +13,10 @@ const WindowContent = ({
   windowList,
   filesActions,
 }) => {
+  //A windowId tem o formato: window#contentId#[randomString] para que cada janela possa ser uma janela única.
+  //O contentId representa a ID do conteúdo da janela que será renderizado.
+  //O randomString representa uma string aleatória que é criada de acordo com a data, hora e minuto atual usada para identificar a janela.
+  //O calculo pode ser encontrado em file:scr/store/settings/settingsSlice.ts
   const contentId = windowId.split('#')[1];
   const windowContent = getWindowContent(contentId, {
     windowId: currentNode,
@@ -25,7 +29,7 @@ const WindowContent = ({
 
   return (
     windowContent || (
-      <FilesList
+      <ListFiles
         currentNode={currentNode}
         language={language}
         windowList={windowList}

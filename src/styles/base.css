@@ -1,6 +1,5 @@
 @layer base {
   :root {
-
     --c-hover: #f0f0f033;
     --c-rgb-hover: 240, 240, 240;
 
@@ -50,7 +49,7 @@
 
     --c-secondary-background: #121212;
 
-    --c-border: #292929;
+    --c-border: #393939;
 
     --c-hover: #323233;
 
@@ -73,6 +72,8 @@
     --c-header-inactive: #2d2d2d;
 
     --c-primary: #1565c0;
+    --c-primary-hover-dark: #134c97;
+    --c-primary-hover-light: #4d90f9;
     --c-secondary: #6c757d;
 
     --c-icon-bg: #f0f0f0;
@@ -214,23 +215,18 @@
   /* Track */
   ::-webkit-scrollbar-track {
     visibility: hidden;
+
   }
 
   /* Handle */
-  /* ::-webkit-scrollbar-thumb {
-    background-color: var(--c-background4);
-    border-radius: 10px;
-    transition: background-color 0.4s ease;
-  } */
-
   ::-webkit-scrollbar-thumb {
-    background: #444444;
-    /* Azul secundário para combinar */
-    border-radius: 10px;
+    background: var(--c-primary) !important;
+    border-radius: 0px !important;
+    transition: background-color 0.4s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #666666;
+    background-color: var(--c-primary-hover-dark) !important;
     /* Um azul um pouco mais escuro no hover */
   }
 

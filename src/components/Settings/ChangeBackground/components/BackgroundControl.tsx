@@ -25,6 +25,7 @@ const BackgroundControl = ({
   ) : (
     <div className="change-background__picker-wrapper">
       <CustomColorPicker
+        language={language}
         backgroundColor={backgroundPreviewColor}
         handleChangeBackground={handleChangeBackgroundState}
         defaultDesktopColor={defaultDesktopColor}

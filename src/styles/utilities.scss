@@ -334,12 +334,30 @@
     }
   }
 
+  $justify-selfs: flex-start, flex-end, center, space-between, space-around,
+    space-evenly, stretch, start, end, left, right;
+
+  @each $justify-self in $justify-selfs {
+    .justify-self-#{$justify-self} {
+      justify-self: #{$justify-self};
+    }
+  }
+
   $flex-aligns: flex-start, flex-end, center, space-between, space-around,
     stretch;
 
   @each $flex-align in $flex-aligns {
     .flex-#{$flex-align} {
       align-items: #{$flex-align};
+    }
+  }
+
+  $align-selfs: flex-start, flex-end, center, space-between, space-around,
+    stretch, start, end;
+
+  @each $align-self in $align-selfs {
+    .align-self-#{$align-self} {
+      align-self: #{$align-self};
     }
   }
 

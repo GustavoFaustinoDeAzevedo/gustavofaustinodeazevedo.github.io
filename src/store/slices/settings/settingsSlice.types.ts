@@ -25,6 +25,7 @@ export type FilterValues = {
 //interface de estado para o slice de configurações
 export interface SettingsState {
   language: Language;
+  desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;
   desktopBackgroundEffect: string;

@@ -1,13 +1,4 @@
-import useDisableRightClick from './useDisableRightClick';
-import useHandleContextMenu from './useHandleContextMenu';
-import useIsMobile from '../../hooks/useIsMobile';
-import useItemsHandler from './useItemsHandler';
-import useTaskbarProps from './useTaskbarProps';
-
-export {
-  useDisableRightClick,
-  useHandleContextMenu,
-  useIsMobile,
-  useItemsHandler,
-  useTaskbarProps,
-};
+export { default as useDisableRightClick } from './useDisableRightClick';
+export { default as useHandleContextMenu } from './useHandleContextMenu';
+export { default as useItemsHandler } from './useItemsHandler';
+export { default as useTaskbarProps } from './useTaskbarProps';

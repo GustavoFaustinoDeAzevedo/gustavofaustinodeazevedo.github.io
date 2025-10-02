@@ -12,13 +12,14 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         value: 'image',
         title: 'Background Preview',
         settings: {
+          title: 'Customize Background',
           filter: {
             legend: 'Filter',
             options: imageFilters.eng,
           },
           picker: {
             legend: 'Image',
-            button: 'Or Select an Image File',
+            button: 'Upload Image',
           },
         },
       },
@@ -28,6 +29,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         value: 'color',
         title: 'Background Preview',
         settings: {
+          title: 'Customize Background',
           filter: {
             legend: 'Filter',
             options: colorFilters.eng,
@@ -49,13 +51,14 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         value: 'image',
         title: 'Pré-Visualização de Fundo',
         settings: {
+          title: 'Personalizar Fundo',
           filter: {
             legend: 'Filtro',
             options: imageFilters.por,
           },
           picker: {
             legend: 'Imagem',
-            button: 'Ou Selecione um Arquivo de Imagem',
+            button: 'Carregar Imagem',
           },
         },
       },
@@ -65,6 +68,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         value: 'color',
         title: 'Pré-Visualização de Fundo',
         settings: {
+          title: 'Personalizar Fundo',
           filter: {
             legend: 'Filtro',
             options: colorFilters.por,

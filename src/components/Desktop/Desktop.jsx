@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { FilesList } from '../FilesExplorer';
+import { ListFiles } from '../FilesExplorer';
 import { useSelector } from 'react-redux';
 import DesktopBackground from './components';
 
@@ -20,7 +20,7 @@ const Desktop = ({
     () => (
       <div className="desktop-display">
         <DesktopBackground />
-        <FilesList
+        <ListFiles
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
           windowActions={windowActions}

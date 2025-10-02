@@ -13,7 +13,7 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
   ? 'por'
   : 'eng';
 
-const defaultBackgroundColor = '#131021';
+const defaultBackgroundColor = '#1d1d1d';
 
 const defaultBackgroundColorContrast = '#ffffff';
 const defaultFilterValues = {
@@ -29,6 +29,7 @@ const defaultFilterValues = {
 
 const initialState: SettingsState = {
   language: defaultLanguage,
+  desktopBackgroundDefaultColor: defaultBackgroundColor,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundFilter: defaultFilterValues,
@@ -38,7 +39,7 @@ const initialState: SettingsState = {
   isDoubleClick: true,
 };
 
-// 4. Criação do slice
+// Criação do slice
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,

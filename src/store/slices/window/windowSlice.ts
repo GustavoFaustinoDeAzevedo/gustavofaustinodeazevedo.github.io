@@ -52,6 +52,7 @@ const windowSlice = createSlice({
         type,
         nodeDepth,
         isUnique,
+        isRequestingMaximize = false,
         content,
         initialDimensions,
       }: WindowData = action.payload;
@@ -95,7 +96,7 @@ const windowSlice = createSlice({
           restore: false,
           focus: true,
           close: false,
-          maximize: false,
+          maximize: isRequestingMaximize,
           minimize: false,
         },
       };

@@ -1,5 +1,6 @@
 import { FilterValues } from '@/store/slices/settings';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
+import { Title } from '../../../../store/slices/window/windowSlice.types';
 
 type Range = {};
 
@@ -32,6 +33,7 @@ type Picker = {
 
 type Settings = {
   filter: Filter;
+  title: string;
   picker: Picker;
 };
 

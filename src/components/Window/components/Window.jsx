@@ -4,11 +4,11 @@ import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
-import useClickOutside from '../../../hooks/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 import createWindowDraggable from '../utils/createWindowDraggable';
-import useRefs from '../../../contexts/useRefs';
+import useRefs from '@/contexts/useRefs';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
-import { useIsMobile } from '@/App/hooks';
+import { useIsMobile } from '@/hooks';
 
 gsap.registerPlugin(useGSAP);
 
@@ -20,6 +20,8 @@ const Window = ({
   filesActions,
   isMobile,
 }) => {
+  //props vindos do pai =====================================================================
+
   const {
     windowId,
     currentNode,
@@ -48,7 +50,7 @@ const Window = ({
     handleRequestFocus,
   } = windowHandlers;
 
-  //props para a janela
+  //encapsulamento de props ====================================================
 
   const windowHeaderProps = {
     headerRef,
@@ -81,7 +83,7 @@ const Window = ({
     language,
   };
 
-  //Função para obter dimensões da janela
+  //Função para obter dimensões da janela ======================================
 
   const getWindowInfo = useCallback(() => {
     const rect = windowRef.current?.getBoundingClientRect();
@@ -91,7 +93,7 @@ const Window = ({
     };
   }, [windowRef]);
 
-  //Gerenciamento do ciclo de vida da janela
+  //Gerenciamento do ciclo de vida da janela ===================================
 
   useWindowLifecycle({
     windowRef,
@@ -105,13 +107,15 @@ const Window = ({
     createWindowDraggable,
   });
 
-  //hook para lidar com o foco ao clicar fora da janela
+  //hook para lidar com o foco ao clicar fora da janela ========================
 
   useClickOutside({
     mainRef: windowRef,
     onClickOutside: handleResetFocus,
     isActive: windowParams.isFocused,
   });
+
+  //JSX ========================================================================
 
   return (
     <div

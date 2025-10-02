@@ -56,6 +56,7 @@ export interface WindowNode {
   size?: Size;
   windowState?: WindowState;
   isUnique?: boolean;
+  isRequestingFullScreen?: boolean;
   initialDimensions?: Size;
 }
 

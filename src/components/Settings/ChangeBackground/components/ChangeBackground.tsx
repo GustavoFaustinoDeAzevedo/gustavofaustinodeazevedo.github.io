@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
@@ -33,17 +27,13 @@ const ChangeBackground = ({
   language,
   content,
 }: ChangeBackgroundProps) => {
-  const getCSSVariable = (variableName: string) =>
-    getComputedStyle(document.documentElement)
-      .getPropertyValue(variableName)
-      .trim();
+  // Valores armazenados no redux ==========================================
 
-  const { handleChangeBackground, handleChangeLanguage } =
-    actions.useSettingsActions();
-
-  // useSelector
   const storedDesktopBackgroundColor = useSelector(
     (state: RootState) => state.settings.desktopBackgroundColor
+  );
+  const storedDesktopBackgroundDefaultColor = useSelector(
+    (state: RootState) => state.settings.desktopBackgroundDefaultColor
   );
   const storedDesktopBackgroundImage = useSelector(
     (state: RootState) => state.settings.desktopBackgroundImage
@@ -60,7 +50,8 @@ const ChangeBackground = ({
     (state: RootState) => state.settings.desktopBackgroundFilter
   );
 
-  // useState
+  // useState ==============================================================
+
   const [backgroundPreviewConfig, setBackgroundPreviewConfig] =
     useState<BackgroundPreviewConfig>({
       isBackgroundPreviewImage: storedIsBackgroundImage,
@@ -71,12 +62,8 @@ const ChangeBackground = ({
       filters: storedDesktopBackgroundFilters,
     });
 
-  // useRef
-  const defaultDesktopColorRef = useRef(
-    getCSSVariable('--c-desktop-default-bg')
-  );
+  // constantes =============================================================
 
-  // consts
   const displayChoicesRoot = useMemo(
     () => changeBackgroundTextContent[language as Language],
     [language]
@@ -84,11 +71,10 @@ const ChangeBackground = ({
   const displayChoicesContent =
     displayChoicesRoot.choices[backgroundPreviewConfig?.display];
 
-  // functions
+  // funções ===============================================================
 
   const handleChangeBackgroundState = useCallback(
     (key: string, value: any) => {
-      console.log(key, value);
       setBackgroundPreviewConfig((prev) => {
         if (prev[key as keyof BackgroundPreviewConfig] === value) return prev;
         return {
@@ -115,6 +101,10 @@ const ChangeBackground = ({
     [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
   );
 
+  // handlers ================================================================
+
+  const { handleChangeBackground } = actions.useSettingsActions();
+
   const handleRadioState = (option: BackgroundPreviewDisplay) => {
     handleChangeBackgroundState('display', option);
     handleChangeBackgroundState('isBackgroundPreviewImage', option === 'image');
@@ -130,19 +120,43 @@ const ChangeBackground = ({
     });
   };
 
-  // Props
+  // Props ==================================================================
 
   const backgroundControlProps = {
     handleChangeBackgroundState,
     handleUpdateWindowContent,
     language,
     content,
-    defaultDesktopColor: defaultDesktopColorRef.current,
+    defaultDesktopColor: storedDesktopBackgroundDefaultColor,
     displayChoicesContent,
     backgroundPreviewColor: backgroundPreviewConfig.color,
     backgroundPreviewDisplay: backgroundPreviewConfig.display,
     backgroundPreviewImage: backgroundPreviewConfig.image,
   };
+
+  const sliderProps = {
+    sliderContainerClass: 'change-background__filter-slider-container',
+    sliderValuesHandler: filtersValuesHandler,
+    sliderLabelClass: 'change-background__filter-slider-label',
+    fieldsetClass: 'change-background__filter-field',
+    fieldsetLegend: displayChoicesContent?.settings?.filter?.legend,
+    inputNumberClass: 'change-background__filter-input-number',
+    sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
+    sliderInitialValues: backgroundPreviewConfig.filters,
+  };
+
+  const radioProps = {
+    fieldsetClassName: 'change-background__options-field',
+    legendClassName: 'change-background__display-legend',
+    radioClassName: 'change-background__display-option',
+    options: displayChoicesRoot?.choices,
+    onChange: handleRadioState as any,
+    name: 'backgroundDisplay',
+    fieldsetLegend: displayChoicesContent?.label,
+    selectedValue: backgroundPreviewConfig.display,
+  };
+
+  // JSX ====================================================================
 
   return (
     <div className="change-background__container">
@@ -157,43 +171,26 @@ const ChangeBackground = ({
           />
         </main>
         <aside className="change-background__aside">
-          <div className="change-background__options-wrapper">
-            <Radio
-              fieldsetClassName={'change-background__options-field'}
-              legendClassName={'change-background__display-legend'}
-              radioClassName={'change-background__display-option'}
-              options={displayChoicesRoot?.choices}
-              onChange={handleRadioState as any}
-              name="backgroundDisplay"
-              fieldsetLegend={displayChoicesContent?.label}
-              selectedValue={backgroundPreviewConfig.display}
-            />
-            <Slider
-              sliderContainerClass={
-                'change-background__filter-slider-container'
-              }
-              sliderValuesHandler={filtersValuesHandler} //parentValuesHandler}
-              sliderLabelClass={'change-background__filter-slider-label'}
-              fieldsetClass={'change-background__filters-field'}
-              fieldsetLegend={displayChoicesContent?.settings?.filter?.legend}
-              inputNumberClass={'change-background__filter-input-number'}
-              sliderObjectData={
-                displayChoicesContent?.settings?.filter?.options || {}
-              }
-              sliderInitialValues={backgroundPreviewConfig.filters}
-            />
+          <header className="change-background__aside-header">
+            <h3>{displayChoicesContent?.settings?.title}</h3>
+          </header>
+          <main className="change-background__aside-main">
+            <Radio {...radioProps} />
+            <Slider {...sliderProps} />
             <fieldset className="change-background__picker-field">
               <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
               <BackgroundControl {...backgroundControlProps} />
             </fieldset>
+          </main>
+          <footer className="change-background__aside-footer">
             <Button
               onClick={handleApplyChanges}
-              className={'border-radius-0'}
-              variant="success"
+              className={'change-background__save-button'}
+              variant="primary"
             >
               {language === 'eng' ? 'Save' : 'Salvar'}
             </Button>
-          </div>
+          </footer>
         </aside>
       </div>
     </div>

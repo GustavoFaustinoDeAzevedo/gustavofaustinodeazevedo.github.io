@@ -1,7 +1,7 @@
 import actions from "@/store/actions";
-import { placeholder } from "../../../data/filesData";
+import { placeholder } from "@/data/filesData";
 
-export const handleOpenFile = ({ fileId, initialDimensions, currentNode, windowTitle, language, windowIcon, src, isUnique, openMode, children, handleNewFile, windowActions, fileType, nodeType, handleWindowUpdate, nodeDepth }) => {
+export const handleOpenFile = ({ fileId, initialDimensions, currentNode, windowTitle, language, windowIcon, src, isUnique, initialStates, openMode, children, handleNewFile, windowActions, fileType, nodeType, handleWindowUpdate, nodeDepth }) => {
 
   if (windowTitle[language] === 'Adicionar Arquivo' || windowTitle[language] === 'New File') {
     handleNewFile(placeholder, currentNode, nodeDepth);
@@ -14,11 +14,12 @@ export const handleOpenFile = ({ fileId, initialDimensions, currentNode, windowT
       }
 
       if (openMode === 'window' || fileType === 'app') {
-        //file will open on a new window
-        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, type: fileType, initialDimensions, nodeDepth }));
+        //Abrir uma nova janela
+        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, isRequestingMaximize: initialStates.maximized, type: fileType, initialDimensions, nodeDepth }));
       } else if (openMode === 'tab') {
         //file will open on a new tab
-      } else {
+      }
+      else {
         windowActions.handleUpdateWindow({ currentNode: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, type: fileType, nodeDepth })
       }
 

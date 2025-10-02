@@ -9,7 +9,7 @@ import Desktop from '@/components/Desktop';
 import Taskbar from '@/components/Taskbar';
 import PageMeta from '@/components/PageMeta';
 
-import { useIsMobile } from './hooks';
+import { useIsMobile } from '@/hooks';
 import createWindowList from '@/components/Window/utils/createWindowList';
 import { RefsProvider } from '@/contexts/RefsContext';
 
@@ -66,7 +66,6 @@ const App = () => {
 
       <ThemeProvider theme={theme}>
         <div className="desktop" ref={desktopRef}>
-
           <Desktop
             currentNode="desktop"
             language={language}

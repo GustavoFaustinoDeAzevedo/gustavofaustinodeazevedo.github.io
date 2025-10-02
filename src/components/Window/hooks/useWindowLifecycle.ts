@@ -78,7 +78,7 @@ const useWindowLifecycle = ({
       };
 
       windowAnimations.openWindow(windowRef, initW, initH, () => {}, isMobile);
-
+      console.log(isRequestingMaximize);
       updateWindowState({
         x: randomX,
         y: randomY,
@@ -90,7 +90,7 @@ const useWindowLifecycle = ({
         lastHeight: initH,
         isRequestingOpen: false,
         isRequestingFocus: true,
-        isRequestingMaximize: isMobile,
+        isRequestingMaximize: isRequestingMaximize || isMobile,
         opened: true,
       });
 
@@ -167,7 +167,7 @@ const useWindowLifecycle = ({
   /* ─────────── Restaurar ─────────── */
   useAnimationSafe({
     ref: windowRef,
-    trigger: isRequestingRestore ,
+    trigger: isRequestingRestore,
     animation: () =>
       windowAnimations.restoreWindow(
         windowRef,
