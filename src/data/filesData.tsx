@@ -8,6 +8,7 @@ interface FileNode {
   title: LanguageTitle;
   icon?: string;
   type?: 'folder' | 'app' | 'text' | 'file';
+  initialStates?: Record<string, boolean>;
   initialDimensions?: {
     width: string | '1000px';
     height: string | '600px;';
@@ -267,7 +268,8 @@ export const rootFolder: FileNode = {
                   icon: 'image-outline-icon',
                   type: 'app',
                   isUnique: true,
-                  initialDimensions: { width: '1200px', height: '750px' },
+                  initialStates: { maximized: true },
+                  initialDimensions: { width: '1200px', height: '800px' },
                 },
                 // {
                 //   fileId: 'cmd',

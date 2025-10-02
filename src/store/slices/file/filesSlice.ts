@@ -32,8 +32,8 @@ const newFile = (
 };
 
 /**
- * Recursively searches for a node matching the targetId and correct parent depth,
- * and adds a new file to its children.
+ *Procurar recursivamente um nó que corresponda à profundidade do pai e ao targetId,
+ *e adiciona um novo arquivo a seus filhos.
  */
 const updateChildrenById = (
   node: FileNode,
@@ -41,13 +41,13 @@ const updateChildrenById = (
   fileToBeAdded: FileNode,
   nodeDepth: number
 ): boolean => {
-  // If we found the target node, add the new file
+  // Se encontrarmos o nó de destino, adicione o novo arquivo
   if (node.fileId === targetId && node.nodeDepth === nodeDepth - 1) {
     node.children = newFile(node, fileToBeAdded, nodeDepth);
     return true;
   }
 
-  // Otherwise, traverse into children
+  // Caso contrário, segue para próximo nó filho
   if (Array.isArray(node.children)) {
     for (const child of node.children) {
       if (updateChildrenById(child, targetId, fileToBeAdded, nodeDepth)) {
@@ -60,7 +60,7 @@ const updateChildrenById = (
 };
 
 /**
- * Sorts the files alphabetically by fileId but keeps the last element always at the end.
+ * Ordena os arquivos em ordem alfabética por FileId, mas mantém o último elemento sempre no final.
  */
 const toggleSort = (files: FileNode[], sortType: SortType): FileNode[] => {
   if (files.length === 0) return [];
@@ -79,7 +79,7 @@ const toggleSort = (files: FileNode[], sortType: SortType): FileNode[] => {
 };
 
 /**
- * Recursively assigns nodeDepth to each node based on its depth in the tree.
+ * Atribui recursivamente nodeDepth para cada nó com base em sua profundidade na árvore.
  */
 const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
   const children = obj.children?.map((file) => {
@@ -92,7 +92,7 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
   return { ...obj, nodeDepth, children };
 };
 
-// 3. Slice definition
+// Slice definition
 
 const initialState: FileState = {
   filesList: handleNestedEntities(rootFolder),

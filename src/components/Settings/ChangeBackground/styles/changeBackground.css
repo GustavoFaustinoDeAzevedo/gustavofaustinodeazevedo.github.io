@@ -47,49 +47,23 @@
         flex-direction: column;
         background-color: var(--c-background1);
         border-left: 1px solid var(--c-border);
-        padding: 2rem 0;
+        padding: 0;
 
-
-        & .change-background__picker-wrapper {
+        & .change-background__aside-header {
           width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-direction: column;
-          gap: 2rem;
-          padding: 0.5rem 0;
-
-
-          & .react-colorful__saturation {
-            border-radius: var(--border-radius) !important;
-          }
-
-          & .react-colorful__hue {
-            border-radius: 0 !important;
-          }
-
-          & .react-colorful__hue-pointer {
-            width: 1rem !important;
-            height: inherit;
-            border-radius: 0 !important;
-          }
-
-          & .change-background__file-input {
-            display: none;
-
-          }
-
+          padding: 2rem 0;
+          text-align: center;
+          font-weight: bold;
         }
 
-        & .change-background__options-wrapper {
+        & .change-background__aside-main {
+          flex-grow: 2;
           display: flex;
           flex-direction: column;
           width: 100%;
-          /* padding: 0; */
 
           & .change-background__options-field {
             width: 100%;
-            /* border: none; */
             border: none;
             border-top: 1px solid;
             border-color: var(--c-border);
@@ -107,7 +81,7 @@
             }
           }
 
-          & .change-background__filters-field {
+          & .change-background__filter-field {
             width: 100%;
             height: 150px;
             border: none;
@@ -120,10 +94,7 @@
             gap: 0.2rem;
             padding: 0.5rem 2rem;
 
-            & .change-background__picker-wrapper {
-              height: 100%;
 
-            }
 
             & .change-background__filter-slider-container {
               width: 100%;
@@ -162,8 +133,8 @@
           }
 
           & .change-background__picker-field {
+
             width: 100%;
-            height: 150px;
             border: none;
             border-top: 1px solid;
             border-color: var(--c-border);
@@ -173,6 +144,92 @@
             overflow-y: scroll;
             gap: 0.2rem;
             padding: 0.5rem 2rem;
+
+            & .change-background__picker-wrapper {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-direction: column;
+              gap: 2rem;
+              padding: 0.5rem 0;
+
+              & .change-background__color-input-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                & .change-background__color-code-selector-wrapper {
+                  position: relative;
+                  display: inline-block;
+
+                  &::after {
+                    content: '˅';
+                    position: absolute;
+                    right: 4px;
+                    top: 1px;
+                    pointer-events: none;
+                    color: var(--c-text);
+                    font-size: 1rem;
+
+                  }
+
+                  & .change-background__color-code-selector {
+                    position: relative;
+                    font-family: 'Courier New', Courier, monospace;
+                    background-color: var(--c-background2);
+                    color: var(--c-text);
+                    appearance: none;
+                    width: 3rem;
+                  }
+
+                }
+
+                & .change-background__color-input {
+                  position: relative;
+                  width: 9rem;
+                  font-family: 'Courier New', Courier, monospace;
+                  text-align: left;
+                  background-color: var(--c-background2);
+                  color: var(--c-text);
+                }
+              }
+
+              & .react-colorful__saturation {
+                border-radius: var(--border-radius) !important;
+              }
+
+              & .react-colorful__hue {
+                border-radius: 0 !important;
+              }
+
+              & .react-colorful__hue-pointer {
+                width: 1rem !important;
+                height: inherit;
+                border-radius: 0 !important;
+              }
+
+              & .change-background__file-input {
+                display: none;
+
+              }
+
+            }
+          }
+        }
+
+        & .change-background__aside-footer {
+          position: sticky;
+          bottom: 0;
+          width: 100%;
+
+          & .change-background__save-button {
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            min-width: 100% !important;
+            height: 3rem !important;
+            font-size: medium;
           }
         }
       }

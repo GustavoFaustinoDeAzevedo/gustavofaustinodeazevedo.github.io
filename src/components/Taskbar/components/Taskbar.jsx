@@ -4,7 +4,7 @@ import useClickOutside from '@/hooks/useClickOutside';
 import { useSelector } from 'react-redux';
 import BatteryStatus from '@/components/BatteryStatus/components/BatteryStatus';
 import actions from '@/store/actions';
-import { useIsMobile } from '@/App/hooks';
+import { useIsMobile } from '@/hooks';
 import TaskbarRightSection from './TaskbarRightSection';
 
 const Taskbar = ({ isMobile }) => {

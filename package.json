@@ -23,6 +23,7 @@
     "@gsap/react": "^2.1.2",
     "@reduxjs/toolkit": "^2.6.1",
     "@xstate/react": "^5.0.3",
+    "colord": "^2.9.3",
     "gsap": "^3.13.0",
     "interactjs": "^1.10.26",
     "lodash": "^4.17.21",
