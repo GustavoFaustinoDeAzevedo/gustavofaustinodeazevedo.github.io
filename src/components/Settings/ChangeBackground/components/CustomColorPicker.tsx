@@ -13,7 +13,7 @@ type CustomColorPickerProps = {
 };
 
 type ColorCodeTypes = {
-  [key: string]: () => string;
+  [key: string]: (color: string) => string;
 };
 
 const CustomColorPicker = ({
@@ -24,22 +24,45 @@ const CustomColorPicker = ({
   displayChoicesContent,
 }: CustomColorPickerProps) => {
   const [colorCodeType, setColorCodeType] = useState('rgb');
-  const [outputColor, setOutputColor] = useState(backgroundColor);
   const [colorHex, setColorHex] = useState(backgroundColor);
   const inputRef = useRef(backgroundColor);
+  const colorCodeTypeList = ['rgb', 'hex', 'hsl'];
 
-  const colorCodeTypes: ColorCodeTypes = {
-    rgb: () => {
-      const rgb = colord(colorHex as string).toRgb();
+  const cleanColorCode = (colorArray: string[]) => {
+    return colorArray.map((value) => {
+      const num = Number(value);
+      return Number.isInteger(num) && num >= 0 ? num : 0;
+    });
+  };
+
+  const colorCodeTypeOutput: ColorCodeTypes = {
+    rgb: (color: string) => {
+      const rgb = colord(color).toRgb();
       return `${rgb.r}, ${rgb.g}, ${rgb.b}`;
     },
-    hsl: () => {
-      const hsl = colord(colorHex as string).toHsl();
-      colord(colorHex as string).toHsl();
+    hsl: (color: string) => {
+      const hsl = colord(color).toHsl();
+      colord(color as string).toHsl();
       return `${hsl.h}, ${hsl.s}%, ${hsl.l}%`;
     },
-    hex: () => {
-      return colorHex as string;
+    hex: (color: string) => {
+      return color as string;
+    },
+  };
+
+  const colorCodeTypeInput: ColorCodeTypes = {
+    rgb: (color: string) => {
+      const rgb = color.split(', ');
+      const cleanRgb = cleanColorCode(rgb);
+      return `rgb(${cleanRgb[0]}, ${cleanRgb[1]}, ${cleanRgb[2]})`;
+    },
+    hsl: (color: string) => {
+      const hsl = color.split(', ');
+      const cleanHsl = cleanColorCode(hsl);
+      return `hsl(${cleanHsl[0]}, ${cleanHsl[1]}%, ${cleanHsl[2]}%)`;
+    },
+    hex: (color: string) => {
+      return color as string;
     },
   };
 
@@ -61,22 +84,30 @@ const CustomColorPicker = ({
   };
 
   const handleInputChange = (e: any) => {
-    const hexValue =
-      e.target.name === 'hex' ? e.target.value : colord(e.target.value).toHex();
-    setColorHex(e.target.value);
-    handleChangeBackground('color', hexValue);
+    if (colorCodeType === 'hex') {
+      setColorHex(e.target.value);
+      handleChangeBackground('color', e.target.value);
+      return;
+    }
+    const inputColor = colorCodeTypeInput[colorCodeType](e.target.value);
+    const inputColorHex = colord(inputColor).toHex();
+    setColorHex(inputColor);
+    handleChangeBackground('color', inputColorHex);
   };
 
-  useMouseEvents({
-    onMouseUp: () => {
-      handleChangeBackground('color', colorHex);
-    },
-  });
+  // useMouseEvents({
+  //   onMouseUp: () => {
+  //     handleChangeBackground('color', colorHex);
+  //   },
+  // });
   return (
     <>
       <HexColorPicker
         color={backgroundColor || defaultDesktopColor}
         onChange={handleChangeColor}
+        onMouseUp={() => {
+          handleChangeBackground('color', colorHex);
+        }}
       />
       <div className="change-background__color-input-wrapper">
         <div className="change-background__color-code-selector-wrapper">
@@ -90,7 +121,7 @@ const CustomColorPicker = ({
             onChange={handleColorCodeTypeChange}
             className="change-background__color-code-selector"
           >
-            {Object.keys(colorCodeTypes).map((colorCodeType) => (
+            {colorCodeTypeList.map((colorCodeType) => (
               <option key={colorCodeType} value={colorCodeType}>
                 {colorCodeType.toUpperCase()}
               </option>
@@ -98,11 +129,12 @@ const CustomColorPicker = ({
           </select>
         </div>
         <input
+          autoComplete="off"
           type="text"
           name="inputColor"
           id="inputColor"
           placeholder={language === 'eng' ? 'Color Code' : 'Código de Cor'}
-          value={colorCodeTypes[colorCodeType]()}
+          value={colorCodeTypeOutput[colorCodeType](colorHex as string)}
           ref={inputRef as any}
           onChange={handleInputChange}
           className="change-background__color-input"
