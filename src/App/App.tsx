@@ -9,14 +9,14 @@ import Desktop from '@/components/Desktop';
 import Taskbar from '@/components/Taskbar';
 import PageMeta from '@/components/PageMeta';
 
-import { useIsMobile } from '@/hooks';
+import { useIsMobile } from '@/shared/hooks';
 import createWindowList from '@/components/Window/utils/createWindowList';
 import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';
 
 import useChangeTheme from '@/components/Settings/ChangeTheme/hooks/useChangeTheme';
-import useUserBrowserDarkMode from '@/hooks/useUserBrowserDarkMode';
+import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
 
 import actions from '@/store/actions';
 

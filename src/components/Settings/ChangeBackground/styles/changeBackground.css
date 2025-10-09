@@ -186,13 +186,20 @@
 
                 }
 
-                & .change-background__color-input {
-                  position: relative;
-                  width: 9rem;
-                  font-family: 'Courier New', Courier, monospace;
-                  text-align: left;
-                  background-color: var(--c-background2);
-                  color: var(--c-text);
+                & .change-background__color-input-wrapper {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  gap: 1rem;
+
+                  & .change-background__color-input {
+                    position: relative;
+                    width: 3rem;
+                    font-family: 'Courier New', Courier, monospace;
+                    text-align: left;
+                    background-color: var(--c-background2);
+                    color: var(--c-text);
+                  }
                 }
               }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import useClickOutside from '../../../hooks/useClickOutside';
+import useClickOutside from '../../../shared/hooks/useClickOutside';
 const StartMenu = ({ history, language }) => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef(null);

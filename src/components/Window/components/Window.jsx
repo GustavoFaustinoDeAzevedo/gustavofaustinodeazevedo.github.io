@@ -4,11 +4,11 @@ import { useGSAP } from '@gsap/react';
 
 import WindowHeader from './windowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '@/shared/hooks/useClickOutside';
 import createWindowDraggable from '../utils/createWindowDraggable';
 import useRefs from '@/contexts/useRefs';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
-import { useIsMobile } from '@/hooks';
+import { useIsMobile } from '@/shared/hooks';
 
 gsap.registerPlugin(useGSAP);
 
