@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClickOutside from '../../../hooks/useClickOutside';
+import useClickOutside from '../../../shared/hooks/useClickOutside';
 import gsap from 'gsap';
 
 const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
