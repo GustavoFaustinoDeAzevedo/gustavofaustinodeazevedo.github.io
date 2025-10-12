@@ -1,2 +1,2 @@
-import { ChangeBackground } from "./ChangeBackground";
-export { ChangeBackground };
+
+export { ChangeBackground } from "./ChangeBackground";

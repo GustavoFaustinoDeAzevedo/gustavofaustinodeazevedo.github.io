@@ -94,8 +94,6 @@
             gap: 0.2rem;
             padding: 0.5rem 2rem;
 
-
-
             & .change-background__filter-slider-container {
               width: 100%;
               font-family: 'Courier New', Courier, monospace;
@@ -156,35 +154,10 @@
 
               & .change-background__color-input-wrapper {
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
                 gap: 1rem;
-
-                & .change-background__color-code-selector-wrapper {
-                  position: relative;
-                  display: inline-block;
-
-                  &::after {
-                    content: '˅';
-                    position: absolute;
-                    right: 4px;
-                    top: 1px;
-                    pointer-events: none;
-                    color: var(--c-text);
-                    font-size: 1rem;
-
-                  }
-
-                  & .change-background__color-code-selector {
-                    position: relative;
-                    font-family: 'Courier New', Courier, monospace;
-                    background-color: var(--c-background2);
-                    color: var(--c-text);
-                    appearance: none;
-                    width: 3rem;
-                  }
-
-                }
 
                 & .change-background__color-input-wrapper {
                   display: flex;
@@ -194,12 +167,65 @@
 
                   & .change-background__color-input {
                     position: relative;
-                    width: 3rem;
+                    width: 3.3rem;
                     font-family: 'Courier New', Courier, monospace;
                     text-align: left;
-                    background-color: var(--c-background2);
-                    color: var(--c-text);
+                    background-color: var(--c-background1);
+                    padding-left: 0.3rem;
+                    font-weight: bold;
+                    transition: all 0.1s ease-in-out;
+                    border-radius: 2px;
+                    outline-style: none;
+
+                    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                      opacity: 1;
+                    }
+
+                    &.r {
+                      color: #FF6347;
+
+
+                      &:focus {
+
+                        border-color: #FF6347;
+                      }
+
+                      &::placeholder {
+                        color: #FF6347ae;
+
+                      }
+                    }
+
+                    &.g {
+                      color: #0f0;
+
+
+                      &:focus {
+                        border-color: #0f0;
+                      }
+
+                      &::placeholder {
+                        color: #00ff00ae;
+
+                      }
+                    }
+
+                    &.b {
+                      color: #8FE3FF;
+
+
+                      &:focus {
+                        border-color: #8FE3FF;
+                      }
+
+                      &::placeholder {
+                        color: #8FE3FFae;
+
+                      }
+                    }
                   }
+
+
                 }
               }
 

@@ -44,6 +44,6 @@
 @mixin export-css-variables($map, $prefix: null) {
   @each $key, $value in $map {
     $var-name: if($prefix != null, '--#{$prefix}-#{$key}', '--#{$key}');
-    #{$var-name}: #{$value};
+    #{$var-name}: #{$value} !important;
   }
 }

@@ -14,7 +14,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           title: 'Customize Background',
           filter: {
-            legend: 'Filter',
+            legend: 'Filter', 
             options: imageFilters.eng,
           },
           picker: {
