@@ -1,0 +1,395 @@
+:root {
+  --text-primary: #007bff !important;
+  --text-secondary: #6c757d !important;
+  --text-success: #28a745 !important;
+  --text-danger: #dc3545 !important;
+  --text-warning: #ffc107 !important;
+  --text-info: #17a2b8 !important;
+  --text-light: #f8f9fa !important;
+  --text-dark: #121212 !important;
+  --text-muted: #6c757d !important;
+  --bg-primary: #007bff !important;
+  --bg-secondary: #6c757d !important;
+  --bg-success: #28a745 !important;
+  --bg-danger: #dc3545 !important;
+  --bg-warning: #ffc107 !important;
+  --bg-info: #17a2b8 !important;
+  --bg-light: #f8f9fa !important;
+  --bg-dark: #121212 !important;
+  --bg-muted: #6c757d !important;
+  --font-thin: 100 !important;
+  --font-light: 300 !important;
+  --font-normal: 400 !important;
+  --font-medium: 500 !important;
+  --font-bold: 700 !important;
+  --font-black: 900 !important;
+  --font-style-normal: normal !important;
+  --font-style-italic: italic !important;
+  --font-style-oblique: oblique !important;
+  --font-family-sans: Inter, sans-serif !important;
+  --font-family-serif: Georgia, serif !important;
+  --font-family-mono: Courier New, monospace !important;
+  --text-align-left: left !important;
+  --text-align-center: center !important;
+  --text-align-right: right !important;
+  --text-align-justify: justify !important;
+  --text-transform-uppercase: uppercase !important;
+  --text-transform-lowercase: lowercase !important;
+  --text-transform-capitalize: capitalize !important;
+  --decoration-none: none !important;
+  --decoration-underline: underline !important;
+  --decoration-line-through: line-through !important;
+  --text-size-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8rem) !important;
+  --text-size-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem) !important;
+  --text-size-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem) !important;
+  --text-size-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem) !important;
+  --text-size-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem) !important;
+  --text-size-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem) !important;
+  --text-size-3xl: clamp(2rem, 1.8rem + 1vw, 2.5rem) !important;
+  --leading-tight: 1 !important;
+  --leading-normal: 1.5 !important;
+  --leading-relaxed: 1.75 !important;
+  --tracking-tight: -0.05em !important;
+  --tracking-normal: 0 !important;
+  --tracking-wide: 0.05em !important;
+  --m-0: 0px !important;
+  --m-4: 4px !important;
+  --m-8: 8px !important;
+  --m-16: 16px !important;
+  --m-24: 24px !important;
+  --m-32: 32px !important;
+  --m-64: 64px !important;
+  --p-0: 0px !important;
+  --p-4: 4px !important;
+  --p-8: 8px !important;
+  --p-16: 16px !important;
+  --p-24: 24px !important;
+  --p-32: 32px !important;
+  --p-64: 64px !important;
+  --rounded-none: 0 !important;
+  --rounded-sm: 4px !important;
+  --rounded-md: 8px !important;
+  --rounded-lg: 16px !important;
+  --rounded-pill: 50px !important;
+  --rounded-full: 9999px !important;
+  --border-none: 0 !important;
+  --border-thin: 1px !important;
+  --border-medium: 2px !important;
+  --border-thick: 4px !important;
+  --border-style-solid: solid !important;
+  --border-style-dashed: dashed !important;
+  --border-style-dotted: dotted !important;
+  --border-style-double: double !important;
+  --border-color-primary: #007bff !important;
+  --border-color-secondary: #6c757d !important;
+  --border-color-success: #28a745 !important;
+  --border-color-danger: #dc3545 !important;
+  --border-color-warning: #ffc107 !important;
+  --border-color-info: #17a2b8 !important;
+  --border-color-light: #f8f9fa !important;
+  --border-color-dark: #121212 !important;
+  --border-color-muted: #6c757d !important;
+  --z-base: 1 !important;
+  --z-dropdown: 1000 !important;
+  --z-modal: 1050 !important;
+  --z-tooltip: 1100 !important;
+  --opacity-0: 0 !important;
+  --opacity-10: 0.1 !important;
+  --opacity-25: 0.25 !important;
+  --opacity-50: 0.5 !important;
+  --opacity-75: 0.75 !important;
+  --opacity-90: 0.9 !important;
+  --opacity-100: 1 !important;
+  --shadow-none: none !important;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15) !important;
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2) !important;
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+  --transition-none: none !important;
+  --transition-fast: all 150ms ease-in-out !important;
+  --transition-normal: all 300ms ease !important;
+  --transition-slow: all 500ms ease-out !important;
+  --transform-scale-sm: scale(0.95) !important;
+  --transform-scale-md: scale(1) !important;
+  --transform-scale-lg: scale(1.05) !important;
+  --transform-rotate-90: rotate(90deg) !important;
+  --transform-rotate-180: rotate(180deg) !important;
+  --transform-flip-x: scaleX(-1) !important;
+  --transform-flip-y: scaleY(-1) !important;
+  --aspect-square: 1 / 1 !important;
+  --aspect-video: 16 / 9 !important;
+  --aspect-portrait: 3 / 4 !important;
+  --aspect-landscape: 4 / 3 !important;
+  --aspect-golden: 1.618 / 1 !important;
+  --animate-fade-in: fadeIn 0.3s ease-in-out !important;
+  --animate-fade-out: fadeOut 0.3s ease-in-out !important;
+  --animate-slide-up: slideUp 0.4s ease !important;
+  --animate-slide-down: slideDown 0.4s ease !important;
+  --animate-slide-left: slideLeft 0.4s ease !important;
+  --animate-slide-right: slideRight 0.4s ease !important;
+  --animate-scale-up: scaleUp 0.4s ease !important;
+  --animate-scale-down: scaleDown 0.4s ease !important;
+  --animate-grow: grow 0.4s ease !important;
+  --animate-shrink: shrink 0.4s ease !important;
+  --animate-float: float 2s ease-in-out infinite !important;
+  --animate-float-reverse: floatReverse 2s ease-in-out infinite !important;
+  --animate-pulse: pulse 1s infinite !important;
+  --animate-bounce: bounce 0.6s infinite !important;
+  --animate-shake: shake 0.8s infinite !important;
+  --animate-spin: spin 1s infinite linear !important;
+  --animate-blink: blink 1s infinite linear !important;
+  --animate-spin-reverse: spinReverse 1s infinite linear !important;
+  --animate-flip: flip 1s infinite linear !important;
+  --animate-flip-reverse: flipReverse 1s infinite linear !important;
+}
+
+.dark {
+  --color-primary: #0d6efd !important;
+  --color-light: #e0e0e0 !important;
+  --color-dark: #000000 !important;
+}
+
+.high-contrast {
+  --color-primary: #000 !important;
+  --color-secondary: #fff !important;
+  --color-danger: #ff0000 !important;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleUp {
+  0%, 50% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes scaleDown {
+  0%, 50% {
+    transform: scale(1.05);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes grow {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shrink {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    animation-name: scaleUp;
+  }
+
+  50% {
+    animation-name: scaleDown;
+  }
+
+  100% {
+    animation-name: scaleUp;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flip {
+  0%, 100% {
+    transform: rotateY(0);
+  }
+
+  50% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes flipReverse {
+  0%, 100% {
+    transform: rotateY(180deg);
+  }
+
+  50% {
+    transform: rotateY(0);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

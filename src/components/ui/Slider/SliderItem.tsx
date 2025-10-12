@@ -1,14 +1,23 @@
-import { FilterData } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import React, { useCallback } from 'react';
 
+export type SliderData = {
+  id: string;
+  label: string;
+  step: number;
+  min: number;
+  max: number;
+  default: number;
+};
+
 type SliderItemProps = {
-  sliderData: FilterData;
+  sliderData: SliderData;
   sliderValue: number;
   sliderValuesHandler: any;
-  sliderContainerClass: string;
-  sliderLabelClass: string;
-  inputNumberClass: string;
+  sliderContainerClass?: string;
+  sliderLabelClass?: string;
+  inputNumberClass?: string;
   index: string;
+  inputNumberActive?: boolean[] | boolean | any;
 };
 
 const SliderItem = React.memo(
@@ -20,17 +29,25 @@ const SliderItem = React.memo(
     sliderLabelClass,
     inputNumberClass,
     index,
+    inputNumberActive = true,
   }: SliderItemProps) => {
     if (!sliderData) return null;
-    const displayValue = sliderValue.toFixed(sliderData?.step < 1 ? 2 : 0);
+    if (sliderValue === undefined || isNaN(sliderValue)) return null;
+    console.log(sliderValue);
+    const displayValue = Number(sliderValue).toFixed(
+      sliderData?.step < 1 ? 2 : 0
+    );
     const handlerOnChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) =>
         sliderValuesHandler(index, e.target.valueAsNumber),
       [index, sliderValuesHandler]
     );
     return (
-      <div className={sliderContainerClass}>
-        <label htmlFor="slider" className={sliderLabelClass}>
+      <div className={sliderContainerClass ?? 'flex flex-space-between gap-1'}>
+        <label
+          htmlFor="slider"
+          className={sliderLabelClass ?? 'inline-block font-courier'}
+        >
           {sliderData.label}
         </label>
         <input
@@ -44,18 +61,20 @@ const SliderItem = React.memo(
           value={sliderValue}
           onChange={handlerOnChange}
         />
-        <input
-          title={sliderData.label}
-          id={sliderData.id}
-          key={`number-${sliderData.id}-${index}`}
-          className={inputNumberClass}
-          type="number"
-          value={displayValue}
-          min={sliderData.min}
-          max={sliderData.max}
-          step={sliderData.step}
-          onChange={handlerOnChange}
-        />
+        {inputNumberActive && (
+          <input
+            title={sliderData.label}
+            id={sliderData.id}
+            key={`number-${sliderData.id}-${index}`}
+            className={inputNumberClass ?? 'w-16 text-center font-courier'}
+            type="number"
+            value={displayValue}
+            min={sliderData.min}
+            max={sliderData.max}
+            step={sliderData.step}
+            onChange={handlerOnChange}
+          />
+        )}
       </div>
     );
   }

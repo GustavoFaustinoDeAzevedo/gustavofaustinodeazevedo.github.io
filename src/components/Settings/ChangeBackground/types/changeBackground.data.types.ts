@@ -1,20 +1,9 @@
 import { FilterValues } from '@/store/slices/settings';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
-import { Title } from '../../../../store/slices/window/windowSlice.types';
-
-type Range = {};
-
-export type FilterData = {
-  id: string;
-  label: string;
-  step: number;
-  min: number;
-  max: number;
-  default: number;
-};
+import { SliderData } from '@/components/ui/Slider/SliderItem';
 
 export type FilterList = {
-  [key: string]: FilterData;
+  [key: string]: SliderData;
 };
 
 export type FilterListLanguage = {

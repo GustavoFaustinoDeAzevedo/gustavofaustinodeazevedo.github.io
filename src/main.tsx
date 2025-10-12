@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import './styles/index.css';
 import { ErrorBoundary } from 'react-error-boundary';
+import '@/scss/main.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 

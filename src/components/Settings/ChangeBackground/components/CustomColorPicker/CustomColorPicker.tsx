@@ -3,12 +3,13 @@ import { colord } from 'colord';
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
 import InputRGB from './InputRGB';
-import InputHSL from './InputHSL';
+import InputHEX from './InputHEX';
+import { Language } from '@/store/slices/settings';
 
 type ColorTypes = 'rgb' | 'hex' | 'hsl';
 
 type CustomColorPickerProps = {
-  language: string;
+  language: Language;
   backgroundColor?: string;
   handleChangeBackground?: (type: string, value: string) => void;
   defaultDesktopColor?: string;
@@ -22,15 +23,30 @@ const CustomColorPicker = ({
   defaultDesktopColor,
   displayChoicesContent,
 }: CustomColorPickerProps) => {
+  const hexToRgb = (hex: string | null | undefined): string | null => {
+    if (!hex) return null;
+
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return null;
+
+    return result
+      .slice(1)
+      .map((c) => parseInt(c, 16))
+      .join(', ');
+  };
   const [colorCodeType, setColorCodeType] = useState<ColorTypes>('rgb');
   const [rawInput, setRawInput] = useState(backgroundColor || '');
   const [inputColor, setInputColor] = useState(backgroundColor || '');
+  const [inputColorRGB, setInputColorRGB] = useState(
+    hexToRgb(backgroundColor as string) || ''
+  );
   const [error, setError] = useState('');
   const colorTypesLength = {
     rgb: 11,
     hex: 7,
     hsl: 13,
   };
+
   const placeholder =
     colorCodeType === 'hex'
       ? '#RRGGBB'
@@ -61,9 +77,9 @@ const CustomColorPicker = ({
 
     const formatted = parts
       .map((p, i) => {
-        if (p === ',' && !raw.endsWith(',')) return ', ';
+        if (p === ',' && raw.endsWith(', ')) return '';
+        if (p === ',') return ', ';
         if (raw === ',') return '000, 000, 000';
-        if (p === ',' && parts[i - 1] === ',') return '';
         if (p.length < 3 && i < parts.length - 1 && !p.includes(','))
           return p.padStart(3, '0');
         if (p.length > 3) return `${p.slice(0, 3)}, ${p.slice(3)}`;
@@ -124,61 +140,40 @@ const CustomColorPicker = ({
     setRawInput(converted);
   };
 
+  const rgbToHex = (r: number, g: number, b: number) => {
+    return '#' + [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');
+  };
+
   return (
     <>
-      <HexColorPicker
+      {/* <HexColorPicker
         color={inputColor}
         onChange={handleChangeColor}
         onMouseUp={() => handleChangeBackground?.('color', inputColor)}
-      />
+      /> */}
 
       <div className="change-background__color-input-wrapper">
-        <div className="change-background__color-code-selector-wrapper">
-          <select
-            name="colorCodeType"
-            id="colorCodeType"
-            title={
-              language === 'eng' ? 'Color Code Type' : 'Tipo de Código de Cor'
-            }
-            value={colorCodeType}
-            onChange={handleColorCodeTypeChange}
-            className="change-background__color-code-selector"
+        <div className="change-background__color-code-selector-wrapper flex flex-column gap-2 ">
+          <InputRGB
+            language={language}
+            setInputColor={setInputColorRGB}
+            inputColor={inputColorRGB}
+          />
+          <div className='flex gap-2 flex-space-evenly flex-align-baseline'>
+          <InputHEX
+            inputColor={inputColor}
+            language={language}
+            setInputColor={setInputColor}
+          />
+          <Button
+            onClick={() => handleChangeColor(defaultDesktopColor || '')}
+            type="submit"
           >
-            {['rgb', 'hex', 'hsl'].map((type) => (
-              <option key={type} value={type}>
-                {type.toUpperCase()}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {colorCodeType === 'rgb' && <InputRGB />}
-        {colorCodeType === 'hsl' && <InputHSL />}
-        {colorCodeType === 'hex' && (
-          <div className="change-background__color-input-wrapper">
-            <input
-              key={colorCodeType}
-              autoComplete="off"
-              type="text"
-              name="inputColor"
-              id="inputColor"
-              value={rawInput}
-              onChange={handleInputChange}
-              // onFocus={handleFocus}
-              onBlur={handleBlur}
-              placeholder={placeholder}
-              className="change-background__color-input"
-            />
+            {displayChoicesContent?.settings?.picker?.button}
+          </Button>
           </div>
-        )}
+        </div>
       </div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <Button
-        onClick={() => handleChangeColor(defaultDesktopColor || '')}
-        type="submit"
-      >
-        {displayChoicesContent?.settings?.picker?.button}
-      </Button>
     </>
   );
 };

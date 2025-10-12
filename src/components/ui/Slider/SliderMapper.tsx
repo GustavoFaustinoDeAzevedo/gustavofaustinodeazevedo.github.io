@@ -1,9 +1,9 @@
-import { useRef } from 'react';
 import SliderItem from './SliderItem';
 
 type SliderMapData = {
   sliderObjectData: Record<string, any>;
-  sliderInitialValues: Record<string, number>;
+  sliderInitialValues: Record<string, number> | number[] | any;
+
   sliderContainerClass?: string;
   sliderLabelClass?: string;
   inputNumberClass?: string;
@@ -11,6 +11,7 @@ type SliderMapData = {
   fieldsetLegendClassName?: string;
   fieldsetLegend?: string;
   sliderValuesHandler: any;
+  inputNumberActive?: boolean[] | boolean | any;
 };
 
 const SliderMapper = ({
@@ -23,9 +24,10 @@ const SliderMapper = ({
   sliderInitialValues,
   inputNumberClass,
   sliderValuesHandler,
+  inputNumberActive,
 }: SliderMapData) => {
   return (
-    <fieldset className={fieldsetClass ?? 'border-none'}>
+    <fieldset className={fieldsetClass ?? 'border-none flex-column gap-2'}>
       {fieldsetLegend && (
         <legend className={fieldsetLegendClassName}>{fieldsetLegend}</legend>
       )}
@@ -35,10 +37,11 @@ const SliderMapper = ({
           sliderData={sliderObjectData[key]}
           sliderValue={sliderInitialValues[key]}
           sliderValuesHandler={sliderValuesHandler}
-          sliderContainerClass={sliderContainerClass ?? ''}
-          sliderLabelClass={sliderLabelClass ?? ''}
-          inputNumberClass={inputNumberClass ?? ''}
+          sliderContainerClass={sliderContainerClass}
+          sliderLabelClass={sliderLabelClass}
+          inputNumberClass={inputNumberClass}
           index={key}
+          inputNumberActive={inputNumberActive}
         />
       ))}
     </fieldset>

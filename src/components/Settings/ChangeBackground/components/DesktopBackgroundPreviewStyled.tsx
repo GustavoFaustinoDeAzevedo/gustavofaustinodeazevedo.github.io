@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { FilterValues } from '@/store/slices/settings';
-import { e } from 'mathjs';
 import React from 'react';
 
 interface DesktopBackgroundPreviewStyledProps {
