@@ -9,6 +9,8 @@ type SliderMapData = {
   inputNumberClass?: string;
   fieldsetClass?: string;
   fieldsetLegendClassName?: string;
+  sliderClass?: string;
+  accentColors?: string[];
   fieldsetLegend?: string;
   sliderValuesHandler: any;
   inputNumberActive?: boolean[] | boolean | any;
@@ -20,8 +22,10 @@ const SliderMapper = ({
   fieldsetLegend,
   sliderObjectData,
   sliderContainerClass,
+  accentColors,
   sliderLabelClass,
   sliderInitialValues,
+  sliderClass,
   inputNumberClass,
   sliderValuesHandler,
   inputNumberActive,
@@ -31,13 +35,17 @@ const SliderMapper = ({
       {fieldsetLegend && (
         <legend className={fieldsetLegendClassName}>{fieldsetLegend}</legend>
       )}
-      {Object.keys(sliderObjectData).map((key, index) => (
+      {Object.keys(sliderObjectData).map((key: string, index: number) => (
         <SliderItem
           key={`slider-item-${sliderObjectData[key].id}--${index}`}
           sliderData={sliderObjectData[key]}
           sliderValue={sliderInitialValues[key]}
           sliderValuesHandler={sliderValuesHandler}
           sliderContainerClass={sliderContainerClass}
+          sliderClass={sliderClass}
+          accentColor={
+            accentColors?.[index] ?? sliderObjectData[key].accentColor ?? []
+          }
           sliderLabelClass={sliderLabelClass}
           inputNumberClass={inputNumberClass}
           index={key}

@@ -85,7 +85,20 @@ const InputRGB = ({
       <Slider
         sliderObjectData={colorsData}
         sliderInitialValues={rgb}
+        sliderClass="change-background__color-slider"
         sliderValuesHandler={handleSliderInput}
+        accentColors={[
+          `linear-gradient(to right, 
+          rgb(0,${g}, ${b}),
+             
+          rgb(255,${g}, ${b}))`,
+          `linear-gradient(to right, 
+          rgb(${r},0, ${b}),
+          rgb(${r},255, ${b}))`,
+          `linear-gradient(to right, 
+          rgb(${r},${g}, 0),
+          rgb(${r},${g}, 255))`,
+        ]}
         inputNumberActive={false}
       />
       <div className="flex flex-row gap-2 flex-space-evenly ">

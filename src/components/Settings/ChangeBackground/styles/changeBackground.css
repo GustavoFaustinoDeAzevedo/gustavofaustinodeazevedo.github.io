@@ -153,76 +153,110 @@
               padding: 0.5rem 0;
 
               & .change-background__color-input-wrapper {
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
                 gap: 1rem;
 
-                & .change-background__color-input-wrapper {
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  gap: 1rem;
+                & .change-background__color-slider {
+                  position: relative;
+                  appearance: none;
+                  outline: none;
+                  height: 0.8rem;
+                }
 
-                  & .change-background__color-input {
-                    position: relative;
-                    width: 3.3rem;
-                    font-family: 'Courier New', Courier, monospace;
-                    text-align: left;
-                    background-color: var(--c-background1);
-                    padding-left: 0.3rem;
-                    font-weight: bold;
-                    transition: all 0.1s ease-in-out;
-                    border-radius: 2px;
-                    outline-style: none;
+                input[type="range"]::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  width: 0.6rem;
+                  height: 1.1rem;
+                  border: 1px solid #000;
+                  outline: 1px solid #fff;
+                  border-radius: 0;
+                  cursor: pointer;
 
-                    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
-                      opacity: 1;
+                }
+
+                input[type="range"]::-moz-range-thumb {
+                  width: 0.6rem;
+                  height: 1.1rem;
+                  border: 1px solid #000;
+                  outline: 1px solid #fff;
+                  cursor: pointer;
+                }
+
+                input[type="range"]::-ms-thumb {
+                  width: 0.6rem;
+                  height: 1.1rem;
+                  border: 1px solid #000;
+                  outline: 1px solid #fff;
+                  cursor: pointer;
+                }
+
+                & .change-background__color-input {
+                  position: relative;
+                  width: 3.3rem;
+                  font-family: 'Courier New', Courier, monospace;
+                  text-align: left;
+                  background-color: var(--c-background1);
+                  padding-left: 0.3rem;
+                  font-weight: bold;
+                  transition: all 0.1s ease-in-out;
+                  border-radius: 2px;
+                  outline-style: none;
+
+
+
+                  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                    opacity: 1;
+                  }
+
+
+
+                  &.r {
+                    color: #FF6347;
+
+
+                    &:focus {
+
+                      border-color: #FF6347;
                     }
 
-                    &.r {
-                      color: #FF6347;
+                    &::placeholder {
+                      color: #FF6347ae;
+
+                    }
+                  }
+
+                  &.g {
+                    color: #0f0;
 
 
-                      &:focus {
-
-                        border-color: #FF6347;
-                      }
-
-                      &::placeholder {
-                        color: #FF6347ae;
-
-                      }
+                    &:focus {
+                      border-color: #0f0;
                     }
 
-                    &.g {
-                      color: #0f0;
+                    &::placeholder {
+                      color: #00ff00ae;
+
+                    }
+                  }
+
+                  &.b {
+                    color: #8FE3FF;
 
 
-                      &:focus {
-                        border-color: #0f0;
-                      }
-
-                      &::placeholder {
-                        color: #00ff00ae;
-
-                      }
+                    &:focus {
+                      border-color: #8FE3FF;
                     }
 
-                    &.b {
-                      color: #8FE3FF;
+                    &::placeholder {
+                      color: #8FE3FFae;
 
-
-                      &:focus {
-                        border-color: #8FE3FF;
-                      }
-
-                      &::placeholder {
-                        color: #8FE3FFae;
-
-                      }
                     }
+
                   }
 
 

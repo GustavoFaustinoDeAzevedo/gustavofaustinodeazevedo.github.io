@@ -14,8 +14,10 @@ type SliderItemProps = {
   sliderValue: number;
   sliderValuesHandler: any;
   sliderContainerClass?: string;
+  accentColor?: string;
   sliderLabelClass?: string;
   inputNumberClass?: string;
+  sliderClass?: string;
   index: string;
   inputNumberActive?: boolean[] | boolean | any;
 };
@@ -26,8 +28,10 @@ const SliderItem = React.memo(
     sliderValue,
     sliderValuesHandler,
     sliderContainerClass,
+    accentColor,
     sliderLabelClass,
     inputNumberClass,
+    sliderClass,
     index,
     inputNumberActive = true,
   }: SliderItemProps) => {
@@ -43,7 +47,12 @@ const SliderItem = React.memo(
       [index, sliderValuesHandler]
     );
     return (
-      <div className={sliderContainerClass ?? 'flex flex-space-between gap-1'}>
+      <div
+        className={
+          sliderContainerClass ??
+          'flex flex-space-between gap-1 flex-align-center'
+        }
+      >
         <label
           htmlFor="slider"
           className={sliderLabelClass ?? 'inline-block font-courier'}
@@ -53,6 +62,8 @@ const SliderItem = React.memo(
         <input
           title={sliderData.label}
           type="range"
+          className={sliderClass}
+          style={{ background: accentColor }}
           key={`slider-${sliderData.id}-${index}`}
           id={`slider-${sliderData.id}-${index}`}
           min={sliderData.min}
