@@ -12,7 +12,11 @@ interface DesktopBackgroundPreviewStyledProps {
 const DesktopBackgroundPreviewStyled = styled.img<DesktopBackgroundPreviewStyledProps>`
   background: ${(props) =>
     props.$isBackgroundImage && props.$backgroundImage
-      ? `${props.$backgroundColor} url(${props.$backgroundImage}) no-repeat center/cover`
+      ? `${
+          props.$backgroundColor?.includes('#')
+            ? props.$backgroundColor
+            : `#${props.$backgroundColor}`
+        } url(${props.$backgroundImage}) no-repeat center/cover`
       : props.$backgroundColor};
 
   filter: ${(props) => {

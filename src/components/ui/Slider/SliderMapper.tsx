@@ -12,6 +12,8 @@ type SliderMapData = {
   sliderClass?: string;
   accentColors?: string[];
   fieldsetLegend?: string;
+  onMouseUp?: any;
+  onTouchEnd?: any;
   sliderValuesHandler: any;
   inputNumberActive?: boolean[] | boolean | any;
 };
@@ -22,6 +24,8 @@ const SliderMapper = ({
   fieldsetLegend,
   sliderObjectData,
   sliderContainerClass,
+  onMouseUp,
+  onTouchEnd,
   accentColors,
   sliderLabelClass,
   sliderInitialValues,
@@ -43,6 +47,8 @@ const SliderMapper = ({
           sliderValuesHandler={sliderValuesHandler}
           sliderContainerClass={sliderContainerClass}
           sliderClass={sliderClass}
+          onMouseUp={onMouseUp}
+          onTouchEnd={onTouchEnd}
           accentColor={
             accentColors?.[index] ?? sliderObjectData[key].accentColor ?? []
           }
