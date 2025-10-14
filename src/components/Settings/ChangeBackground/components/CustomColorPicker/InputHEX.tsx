@@ -1,25 +1,42 @@
 import { Language } from '@/store/slices/settings';
+import React, { use, useCallback } from 'react';
 
 const InputHEX = ({
   language,
   inputColor,
-  setInputColor,
+  handleChangeColor,
 }: {
   language: Language;
   inputColor: string;
-  setInputColor: any;
+  handleChangeColor: any;
 }) => {
+  const hexRegex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputColor(e.target.value.toUpperCase());
+    const value = e.target.value.toUpperCase();
+    handleChangeColor(value);
   };
 
-  const handleBlur = () => {
-    setInputColor(inputColor.toUpperCase());
-  };
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      const value = e.target.value.toUpperCase();
+
+      if (hexRegex.test(value)) {
+        // valor válido (#RGB ou #RRGGBB)
+        handleChangeColor(value);
+        return;
+      }
+
+      // tenta validar apenas os 3 primeiros caracteres
+      const sliced = value.slice(0, 3);
+      handleChangeColor(hexRegex.test(sliced) ? sliced : '000');
+    },
+    [handleChangeColor]
+  );
 
   return (
     <div className="change-background__color-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
-      <i className="txt-bold font-courier">#</i>
+      <div className="txt-bold font-courier">#</div>
       <input
         key={'hex'}
         autoComplete="off"
@@ -28,14 +45,14 @@ const InputHEX = ({
         id="inputColor"
         maxLength={6}
         title={language === 'eng' ? 'Hex Color' : 'Cor em Hexadecimal'}
-        value={inputColor.toUpperCase()}
+        value={inputColor.toUpperCase().replace('#', '')}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={'RRGGBB'}
-        className="change-background__color-input width-4 txt-color-info margin-left-1"
+        className="change-background__color-input width-4 txt-color-info "
       />
     </div>
   );
 };
 
-export default InputHEX;
+export default React.memo(InputHEX) as typeof InputHEX;

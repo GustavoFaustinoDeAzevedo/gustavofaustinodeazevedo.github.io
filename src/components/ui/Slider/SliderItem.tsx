@@ -17,6 +17,8 @@ type SliderItemProps = {
   accentColor?: string;
   sliderLabelClass?: string;
   inputNumberClass?: string;
+  onMouseUp?: any;
+  onTouchEnd?: any;
   sliderClass?: string;
   index: string;
   inputNumberActive?: boolean[] | boolean | any;
@@ -31,13 +33,14 @@ const SliderItem = React.memo(
     accentColor,
     sliderLabelClass,
     inputNumberClass,
+    onMouseUp,
+    onTouchEnd,
     sliderClass,
     index,
     inputNumberActive = true,
   }: SliderItemProps) => {
     if (!sliderData) return null;
     if (sliderValue === undefined || isNaN(sliderValue)) return null;
-    console.log(sliderValue);
     const displayValue = Number(sliderValue).toFixed(
       sliderData?.step < 1 ? 2 : 0
     );
@@ -66,6 +69,10 @@ const SliderItem = React.memo(
           style={{ background: accentColor }}
           key={`slider-${sliderData.id}-${index}`}
           id={`slider-${sliderData.id}-${index}`}
+          onMouseUp={onMouseUp ?? null}
+          onTouchEnd={onTouchEnd ?? null}
+          aria-valuemin={sliderData.min}
+          aria-valuemax={sliderData.max}
           min={sliderData.min}
           max={sliderData.max}
           step={sliderData.step}
