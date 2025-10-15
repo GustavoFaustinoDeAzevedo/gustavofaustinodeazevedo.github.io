@@ -1,26 +1,35 @@
 import { Language } from '@/store/slices/settings';
 import { memo, useEffect, useState } from 'react';
 
-const InputHEX = ({
-  language,
-  inputColor,
-  handleChangeColor,
-}: {
+type InputHEXProps = {
   language: Language;
   inputColor: string;
-  handleChangeColor: any;
-}) => {
-  const [hex, setHex] = useState(inputColor);
-  const hexRegex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i;
+  handleChangeColor: (hex: string) => void;
+};
 
-  useEffect(() => setHex(inputColor), [inputColor]);
+const InputHEX = ({ language, inputColor, handleChangeColor }: InputHEXProps) => {
+  const [hex, setHex] = useState(formatHex(inputColor));
+  const hexRegex = /^#([0-9A-F]{3}|[0-9A-F]{6})$/i;
+
+  function formatHex(value: string) {
+    const cleaned = value.replace(/[^0-9A-F]/gi, '').toUpperCase();
+    return `#${cleaned}`;
+  }
+
+  useEffect(() => {
+    const formatted = formatHex(inputColor);
+    if (formatted !== hex) {
+      setHex(formatted);
+    }
+  }, [inputColor]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toUpperCase();
-    setHex(value);
-    if (hexRegex.test(value)) {
-      // valor válido (#RGB ou #RRGGBB)
-      handleChangeColor(value);
+    const raw = e.target.value;
+    const formatted = formatHex(raw);
+    setHex(formatted);
+
+    if (hexRegex.test(formatted)) {
+      handleChangeColor(formatted);
     }
   };
 
@@ -28,21 +37,19 @@ const InputHEX = ({
     <div className="change-background__color-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
       <div className="txt-bold font-courier">#</div>
       <input
-        key={'hex'}
         autoComplete="off"
         type="text"
         name="inputColor"
         id="inputColor"
         maxLength={6}
         title={language === 'eng' ? 'Hex Color' : 'Cor em Hexadecimal'}
-        value={hex.toUpperCase().replace('#', '')}
+        value={hex.replace('#', '')}
         onChange={handleChange}
-        // onBlur={handleBlur}
-        placeholder={'RRGGBB'}
-        className="change-background__color-input width-4 txt-color-info "
+        placeholder="RRGGBB"
+        className="change-background__color-input width-4 txt-color-info"
       />
     </div>
   );
 };
 
-export default memo(InputHEX) as typeof InputHEX;
+export default memo(InputHEX);

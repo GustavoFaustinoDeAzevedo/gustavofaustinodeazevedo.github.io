@@ -6,11 +6,28 @@ import {
 } from './StyledFileWrapper';
 import { useAutoLineClamp } from '../../hooks';
 import { useSelector } from 'react-redux';
+import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
 
 const SystemFile = React.memo(
   ({ fileId, title, icon, onClick, isMobile, backgroundColorContrast }) => {
     const [ref, lines] = useAutoLineClamp(title, 2);
+    const { isBlocked, trigger } = useDelayBlock(1000);
     const { isDoubleClick } = useSelector((state) => state.settings);
+
+    const handleSingleClick = () => {
+      trigger(() => {
+        if (!isDoubleClick || isMobile) {
+          onClick?.();
+        }
+      });
+    };
+
+    const handleDoubleClick = () => {
+      if (isDoubleClick && !isMobile) {
+        onClick?.();
+      }
+    };
+
     const dataInfo = useMemo(
       () =>
         JSON.stringify({
@@ -26,8 +43,8 @@ const SystemFile = React.memo(
       <StyledFileWrapper
         aria-label={title}
         title={title}
-        onDoubleClick={isDoubleClick && !isMobile ? onClick : undefined}
-        onMouseUp={isDoubleClick && !isMobile ? undefined : onClick}
+        onDoubleClick={handleDoubleClick}
+        onMouseUp={handleSingleClick}
         data-info={dataInfo}
         id={fileId}
         // backgroundColorContrast={backgroundColorContrast ?? '#ffffffff'}

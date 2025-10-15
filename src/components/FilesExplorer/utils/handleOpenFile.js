@@ -15,7 +15,7 @@ export const handleOpenFile = ({ fileId, initialDimensions, currentNode, windowT
 
       if (openMode === 'window' || fileType === 'app') {
         //Abrir uma nova janela
-        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, isRequestingMaximize: initialStates.maximized, type: fileType, initialDimensions, nodeDepth }));
+        windowActions.handleOpenWindow(JSON.stringify({ windowId: fileId, title: windowTitle, icon: windowIcon, src, children, isUnique, isRequestingMaximize: initialStates?.maximized, type: fileType, initialDimensions, nodeDepth }));
       } else if (openMode === 'tab') {
         //file will open on a new tab
       }
