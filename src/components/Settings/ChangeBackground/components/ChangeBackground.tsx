@@ -20,6 +20,7 @@ export interface BackgroundPreviewConfig {
   image: string;
   effect: string;
   filters: FilterValues;
+  gradient?: string;
 }
 
 const ChangeBackground = ({
