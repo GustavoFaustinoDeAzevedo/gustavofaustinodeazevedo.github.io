@@ -1,144 +1,87 @@
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Slider } from '@/components/ui';
 import { Language } from '@/store/slices/settings';
-import { re } from 'mathjs';
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+
+type RGB = { r: number; g: number; b: number };
+
+const hexToRgb = (hex: string): RGB => {
+  const shortRegex = /^#?([0-9A-F])([0-9A-F])([0-9A-F])$/i;
+  const longRegex = /^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;
+  const result = longRegex.exec(hex) || shortRegex.exec(hex);
+
+  if (!result) return { r: 0, g: 0, b: 0 };
+
+  const parse = (val: string) =>
+    parseInt(val.length === 1 ? val + val : val, 16);
+
+  return {
+    r: parse(result[1]),
+    g: parse(result[2]),
+    b: parse(result[3]),
+  };
+};
+
+const rgbToHex = ({ r, g, b }: RGB): string =>
+  [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');
 
 const InputRGB = ({
   language,
   handleChangeColor,
   inputColor,
-  setInputColor,
 }: {
   language: Language;
   handleChangeColor: (hex: string) => void;
   inputColor: string;
-  setInputColor: (color: string) => void;
 }) => {
-  console.log(inputColor, 'inputColor');
+  const [rgb, setRgb] = useState<RGB>(() => hexToRgb(inputColor));
 
-  // Converte RGB para HEX
-  const rgbToHex = (r: number, g: number, b: number) => {
-    return [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');
-  };
-
-  // Converte HEX inicial para objeto RGB =================================
-  const initialRgb = useCallback(() => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(inputColor);
-    if (!result) return { r: 0, g: 0, b: 0 };
-    return {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    };
-  }, [inputColor]);
-
-  // Estado local para os valores RGB e HEX ===============================
-  const [rgb, setRgb] = useState(initialRgb);
-  const { r, g, b } = useMemo(() => rgb, [rgb]);
-  const hexColor = useMemo(() => rgbToHex(r, g, b), [r, g, b]);
-
-  // sempre que inputColor mudar, atualiza o estado dos sliders
+  // Atualiza RGB quando inputColor muda externamente
   useEffect(() => {
-    const shortRegex = /^#?([0-9A-F])([0-9A-F])([0-9A-F])$/i;
-    const longRegex = /^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;
-
-    let result = longRegex.exec(inputColor) || shortRegex.exec(inputColor);
-    if (!result) return;
-
-    const newRgb = {
-      r: parseInt(
-        result[1].length === 1 ? result[1] + result[1] : result[1],
-        16
-      ),
-      g: parseInt(
-        result[2].length === 1 ? result[2] + result[2] : result[2],
-        16
-      ),
-      b: parseInt(
-        result[3].length === 1 ? result[3] + result[3] : result[3],
-        16
-      ),
-    };
-
-    setRgb(newRgb);
+    setRgb(hexToRgb(inputColor));
   }, [inputColor]);
 
-  // Atualiza estado e notifica o pai =====================================
-  const handleSliderInput = useCallback(
-    (key: keyof typeof rgb, newValue: number) => {
+  const updateChannel = useCallback(
+    (channel: keyof RGB, value: number) => {
       setRgb((prev) => {
-        const updated = { ...prev, [key]: newValue };
-        if (
-          updated.r >= 0 &&
-          updated.r <= 255 &&
-          updated.g >= 0 &&
-          updated.g <= 255 &&
-          updated.b >= 0 &&
-          updated.b <= 255
-        ) {
-          setInputColor(hexColor);
-          setRgb((prev) => ({ ...prev, [key]: newValue }));
-        }
+        const updated = { ...prev, [channel]: value };
+       
         return updated;
       });
     },
     [handleChangeColor]
   );
 
-  const handleSliderCommit = useCallback(() => {
-    handleChangeColor(rgbToHex(rgb.r, rgb.g, rgb.b));
-  }, [rgb, handleChangeColor]);
+  const colorsData = useMemo(() => {
+    const labels = {
+      r: language === 'eng' ? 'Red' : 'Vermelho',
+      g: language === 'eng' ? 'Green' : 'Verde',
+      b: language === 'eng' ? 'Blue' : 'Azul',
+    };
 
-  // Dados dos sliders e inputs memoizados =============================
-  const colorsData = useMemo(
-    () => ({
-      r: {
-        id: 'r',
-        label: language === 'eng' ? 'Red' : 'Vermelho',
+    return (['r', 'g', 'b'] as (keyof RGB)[]).reduce((acc, key) => {
+      acc[key] = {
+        id: key,
+        label: labels[key],
         min: 0,
         max: 255,
         step: 1,
-        value: r,
+        value: rgb[key],
         handler: (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = Number(e.target.value);
-          if (value >= 0 && value <= 255) {
-            setRgb((prev) => ({ ...prev, r: value }));
-            handleChangeColor(rgbToHex(value, g, b));
+          if (!isNaN(value) && value >= 0 && value <= 255) {
+            updateChannel(key, value);
           }
         },
-      },
-      g: {
-        id: 'g',
-        label: language === 'eng' ? 'Green' : 'Verde',
-        min: 0,
-        max: 255,
-        step: 1,
-        value: g,
-        handler: (e: React.ChangeEvent<HTMLInputElement>) => {
-          const value = Number(e.target.value);
-          if (value >= 0 && value <= 255) {
-            setRgb((prev) => ({ ...prev, g: value }));
-            handleChangeColor(rgbToHex(r, value, b));
-          }
-        },
-      },
-      b: {
-        id: 'b',
-        label: language === 'eng' ? 'Blue' : 'Azul',
-        min: 0,
-        max: 255,
-        step: 1,
-        value: b,
-        handler: (e: React.ChangeEvent<HTMLInputElement>) => {
-          const value = Number(e.target.value);
-          if (value >= 0 && value <= 255) {
-            setRgb((prev) => ({ ...prev, b: value }));
-            handleChangeColor(rgbToHex(r, g, value));
-          }
-        },
-      },
-    }),
-    [r, g, b, language]
+      };
+      return acc;
+    }, {} as Record<keyof RGB, any>);
+  }, [rgb, language, updateChannel]);
+
+  const handleSliderInput = useCallback(
+    (key: keyof RGB, value: number) => {
+      updateChannel(key, value);
+    },
+    [updateChannel]
   );
 
   return (
@@ -148,12 +91,12 @@ const InputRGB = ({
         sliderInitialValues={rgb}
         sliderClass="change-background__color-slider"
         sliderValuesHandler={handleSliderInput}
-        onMouseUp={handleSliderCommit}
-        onTouchEnd={handleSliderCommit}
+        onMouseUp={() => handleChangeColor(rgbToHex(rgb))}
+        onTouchEnd={() => handleChangeColor(rgbToHex(rgb))}
         accentColors={[
-          `linear-gradient(to right, rgb(0,${g},${b}), rgb(255,${g},${b}))`,
-          `linear-gradient(to right, rgb(${r},0,${b}), rgb(${r},255,${b}))`,
-          `linear-gradient(to right, rgb(${r},${g},0), rgb(${r},${g},255))`,
+          `linear-gradient(to right, rgb(0,${rgb.g},${rgb.b}), rgb(255,${rgb.g},${rgb.b}))`,
+          `linear-gradient(to right, rgb(${rgb.r},0,${rgb.b}), rgb(${rgb.r},255,${rgb.b}))`,
+          `linear-gradient(to right, rgb(${rgb.r},${rgb.g},0), rgb(${rgb.r},${rgb.g},255))`,
         ]}
         inputNumberActive={false}
       />
@@ -161,17 +104,13 @@ const InputRGB = ({
       <div className="flex flex-row gap-2 flex-space-evenly">
         {Object.values(colorsData).map((value) => (
           <input
+            key={value.id}
             type="number"
             min={0}
             max={255}
-            key={value.id}
             value={value.value}
             onChange={value.handler}
-            onWheel={(e) => e.preventDefault()}
-            onMouseUp={() => {
-              handleChangeColor(rgbToHex(r, g, b));
-            }}
-            onBlur={() => handleChangeColor(rgbToHex(r, g, b))}
+            onBlur={() => handleChangeColor(rgbToHex(rgb))}
             className={`change-background__color-input ${value.id}`}
             title={value.label}
             placeholder={value.id.toUpperCase()}
@@ -182,4 +121,4 @@ const InputRGB = ({
   );
 };
 
-export default React.memo(InputRGB) as typeof InputRGB;
+export default React.memo(InputRGB);

@@ -9,15 +9,19 @@ interface DesktopBackgroundPreviewStyledProps {
   $filters?: FilterValues;
 }
 
+const backgroundColor = (color: string) => {
+  console.log(color);
+  if (color?.includes('#')) {
+    return color;
+  }
+  return `#${color}`;
+};
+
 const DesktopBackgroundPreviewStyled = styled.img<DesktopBackgroundPreviewStyledProps>`
   background: ${(props) =>
     props.$isBackgroundImage && props.$backgroundImage
-      ? `${
-          props.$backgroundColor?.includes('#')
-            ? props.$backgroundColor
-            : `#${props.$backgroundColor}`
-        } url(${props.$backgroundImage}) no-repeat center/cover`
-      : props.$backgroundColor};
+      ? `url(${props.$backgroundImage}) no-repeat center/cover`
+      : `${backgroundColor(props.$backgroundColor || '#000')}`};
 
   filter: ${(props) => {
     const f = props.$filters;

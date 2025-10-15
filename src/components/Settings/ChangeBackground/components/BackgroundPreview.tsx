@@ -13,13 +13,20 @@ const DesktopBackgroundPreview = ({
   backgroundPreviewConfig,
 }: DesktopBackgroundPreviewProps) => {
   return (
-    <DesktopBackgroundPreviewStyled
-      $isBackgroundImage={backgroundPreviewConfig.isBackgroundPreviewImage}
-      $backgroundColor={backgroundPreviewConfig.color}
-      $backgroundImage={backgroundPreviewConfig.image}
-      $filters={backgroundPreviewConfig.filters}
-      className={className || 'desktop-background'}
-    />
+    <>
+      <DesktopBackgroundPreviewStyled
+        $isBackgroundImage={backgroundPreviewConfig.isBackgroundPreviewImage}
+        $backgroundColor={backgroundPreviewConfig.color}
+        $backgroundImage={backgroundPreviewConfig.image}
+        $filters={backgroundPreviewConfig.filters}
+        className={className || 'desktop-background'}
+      />
+      <DesktopBackgroundPreviewStyled
+        $isBackgroundImage={false}
+        className="desktop-background"
+        $backgroundColor={backgroundPreviewConfig.gradient}
+      />
+    </>
   );
 };
 
