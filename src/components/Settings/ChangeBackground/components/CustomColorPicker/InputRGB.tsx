@@ -110,7 +110,9 @@ const InputRGB = ({
             max={255}
             value={value.value}
             onChange={value.handler}
-            onBlur={() => handleChangeColor(rgbToHex(rgb))}
+            onMouseUp={() => handleChangeColor(rgbToHex(rgb))}
+            onTouchEnd={() => handleChangeColor(rgbToHex(rgb))}
+            onKeyUp={() => handleChangeColor(rgbToHex(rgb))}
             className={`change-background__color-input ${value.id}`}
             title={value.label}
             placeholder={value.id.toUpperCase()}

@@ -9,14 +9,14 @@ export const useMathInput = (initial = '') => {
     const validCharsRegex = /^([a-zA-Z]+|\d+(\.\d+)?|\.\d+|[-+*/^() ])*$/;
     if (!validCharsRegex.test(testString)) return false;
 
-    // Prevents consecutive duplicate operators
+    //Evita operadores duplicados consecutivos
     if (/[-+*/^]{2,}/.test(testString)) return false;
 
-    // Prevents two consecutive decimal points in the same number
+    //Evita duas casas decimais consecutivas no mesmo número
     const numbers = testString.split(/[^0-9.]+/);
     if (numbers.some(num => (num.match(/\./g) || []).length > 1)) return false;
 
-    // Checks for balanced parentheses
+    //Verifica parênteses
     const open = (testString.match(/\(/g) || []).length;
     const close = (testString.match(/\)/g) || []).length;
     if (close > open) return false;

@@ -78,7 +78,6 @@ const Calculator = () => {
           if (value === '0' && (prev === '' || /^0+$/.test(prev))) {
             return '';
           } else if (prev === '' && prefixSymbolsRegex.current.test(value)) {
-            console.log(prefixSymbolsRegex.current.test(value));
             return '0' + '' + value;
           } else {
             return String(prev) + String(value);
