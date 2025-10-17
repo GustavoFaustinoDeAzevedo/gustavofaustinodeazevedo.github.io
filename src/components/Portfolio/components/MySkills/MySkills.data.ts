@@ -21,6 +21,7 @@ const mySkillsData: MySkillsData = {
       items: [
         'HTML5 & CSS3',
         'JavaScript',
+        'TypeScript',
         'React.js',
         'Design Responsivo',
         'Desempenho de Páginas Web',
@@ -33,7 +34,6 @@ const mySkillsData: MySkillsData = {
       title: 'Habilidades Interpessoais',
       items: [
         'Pensamento crítico e resolução de problemas',
-        'Comunicação eficaz',
         'Colaboração e trabalho em equipe',
         'Adaptabilidade e Aprendizado Contínuo',
         'Proatividade',
@@ -47,6 +47,7 @@ const mySkillsData: MySkillsData = {
       items: [
         'HTML5 & CSS3',
         'JavaScript',
+        'TypeScript',
         'React.js',
         'Responsive Design',
         'Web Performance',
@@ -59,7 +60,6 @@ const mySkillsData: MySkillsData = {
       title: 'Soft Skills',
       items: [
         'Critical Thinking and Problem Solving',
-        'Effective Communication',
         'Collaboration and Teamwork',
         'Adaptability and Continuous Learning',
         'Proactivity',

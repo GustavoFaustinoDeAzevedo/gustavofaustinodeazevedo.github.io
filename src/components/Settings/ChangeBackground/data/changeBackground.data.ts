@@ -1,5 +1,5 @@
 import { BackgroundTextContent } from '../types/changeBackground.data.types';
-import { colorFilters } from './colorFilters.data';
+import { colorGradients } from './colorFilters.data';
 import { imageFilters } from './imageFilters.data';
 
 export const changeBackgroundTextContent: BackgroundTextContent = {
@@ -14,7 +14,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           title: 'Customize Background',
           filter: {
-            legend: 'Filter', 
+            legend: 'Filters',
             options: imageFilters.eng,
           },
           picker: {
@@ -31,11 +31,11 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           title: 'Customize Background',
           filter: {
-            legend: 'Filter',
-            options: colorFilters.eng,
+            legend: 'Gradient',
+            options: colorGradients.eng,
           },
           picker: {
-            legend: 'Color',
+            legend: 'Choose a Color',
             button: 'Default Color',
           },
         },
@@ -53,7 +53,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           title: 'Personalizar Fundo',
           filter: {
-            legend: 'Filtro',
+            legend: 'Filtros',
             options: imageFilters.por,
           },
           picker: {
@@ -70,11 +70,11 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         settings: {
           title: 'Personalizar Fundo',
           filter: {
-            legend: 'Filtro',
-            options: colorFilters.por,
+            legend: 'Gradiente',
+            options: colorGradients.por,
           },
           picker: {
-            legend: 'Cor',
+            legend: 'Escolha uma Cor',
             button: 'Cor Padrão',
           },
         },
