@@ -12,26 +12,31 @@ const BackgroundControl = ({
   displayChoicesContent,
   backgroundPreviewDisplay,
 }: ChangeBackgroundProps) => {
-  return backgroundPreviewDisplay === 'image' ? (
-    <div className="change-background__picker-wrapper">
-      <CustomImagePicker
-        handleChangeBackgroundState={handleChangeBackgroundState}
-        handleUpdateWindowContent={handleUpdateWindowContent}
-        language={language}
-        displayChoicesContent={displayChoicesContent}
-        backgroundPreviewImage={backgroundPreviewImage}
-      />
-    </div>
-  ) : (
-    <div className="change-background__picker-wrapper">
-      <CustomColorPicker
-        language={language}
-        backgroundColor={backgroundPreviewColor}
-        handleChangeBackground={handleChangeBackgroundState}
-        defaultDesktopColor={defaultDesktopColor}
-        displayChoicesContent={displayChoicesContent}
-      />
-    </div>
+  return (
+    <fieldset className="change-background__picker-field">
+      <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
+      {backgroundPreviewDisplay === 'image' ? (
+        <div className="change-background__picker-wrapper">
+          <CustomImagePicker
+            handleChangeBackgroundState={handleChangeBackgroundState}
+            handleUpdateWindowContent={handleUpdateWindowContent}
+            language={language}
+            displayChoicesContent={displayChoicesContent}
+            backgroundPreviewImage={backgroundPreviewImage}
+          />
+        </div>
+      ) : (
+        <div className="change-background__picker-wrapper">
+          <CustomColorPicker
+            language={language}
+            backgroundColor={backgroundPreviewColor}
+            handleChangeBackground={handleChangeBackgroundState}
+            defaultDesktopColor={defaultDesktopColor}
+            displayChoicesContent={displayChoicesContent}
+          />
+        </div>
+      )}
+    </fieldset>
   );
 };
 

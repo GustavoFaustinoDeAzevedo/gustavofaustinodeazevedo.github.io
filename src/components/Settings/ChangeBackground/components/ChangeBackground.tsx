@@ -135,12 +135,20 @@ const ChangeBackground = ({
     backgroundPreviewImage: backgroundPreviewConfig.image,
   };
 
+  //TODO: refatorar props para separar entre imagem e cor mantendo mais organizado
+
   const sliderProps = {
     sliderContainerClass: 'change-background__filter-slider-container',
     sliderValuesHandler: filtersValuesHandler,
     sliderLabelClass: 'change-background__filter-slider-label',
-    fieldsetClass: 'change-background__filter-field',
-    fieldsetLegend: displayChoicesContent?.settings?.filter?.legend,
+    fieldsetClass:
+      backgroundPreviewConfig.display === 'image'
+        ? 'change-background__filter-field'
+        : undefined,
+    fieldsetLegend:
+      backgroundPreviewConfig.display === 'image'
+        ? displayChoicesContent?.settings?.filter?.legend
+        : undefined,
     inputNumberClass: 'change-background__filter-input-number',
     sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
     sliderInitialValues: backgroundPreviewConfig.filters,
@@ -177,11 +185,41 @@ const ChangeBackground = ({
           </header>
           <main className="change-background__aside-main">
             <Radio {...radioProps} />
-            <Slider {...sliderProps} />
-            <fieldset className="change-background__picker-field">
-              <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
-              <BackgroundControl {...backgroundControlProps} />
-            </fieldset>
+            {backgroundPreviewConfig.display === 'image' ? (
+              <Slider {...sliderProps} />
+            ) : (
+              <fieldset className="change-background__filter-field">
+                <legend>
+                  {displayChoicesContent?.settings?.filter?.legend}
+                </legend>
+                <select
+                  title={
+                    language === 'por'
+                      ? 'Estilo de Gradiente'
+                      : 'Gradient Style'
+                  }
+                  className="change-background__gradient-select"
+                  onChange={(e) =>
+                    handleChangeBackgroundState('effect', e.target.value)
+                  }
+                  value={backgroundPreviewConfig.effect}
+                >
+                  {Object.values(
+                    displayChoicesContent?.settings?.filter?.options
+                  ).map((option) => (
+                    <option
+                      key={option.id}
+                      value={option.label}
+                      selected={option.id === backgroundPreviewConfig.effect}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <Slider {...sliderProps} />
+              </fieldset>
+            )}
+            <BackgroundControl {...backgroundControlProps} />
           </main>
           <footer className="change-background__aside-footer">
             <Button
