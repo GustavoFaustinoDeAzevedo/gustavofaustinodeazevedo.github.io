@@ -1,0 +1,24 @@
+/* Cores de fundo */
+.bg-primary    { background-color: var(--bg-primary) !important; }
+.bg-secondary  { background-color: var(--bg-secondary) !important; }
+.bg-success    { background-color: var(--bg-success) !important; }
+.bg-danger     { background-color: var(--bg-danger) !important; }
+.bg-warning    { background-color: var(--bg-warning) !important; }
+.bg-info       { background-color: var(--bg-info) !important; }
+.bg-light      { background-color: var(--bg-light) !important; }
+.bg-dark       { background-color: var(--bg-dark) !important; }
+.bg-muted      { background-color: var(--bg-muted) !important; }
+.bg-transparent{ background-color: transparent !important; }
+.bg-black      { background-color: #000000 !important; }
+.bg-white      { background-color: #ffffff !important; }
+
+/* Cores de texto */
+.text-primary    { color: var(--text-primary) !important; }
+.text-secondary  { color: var(--text-secondary) !important; }
+.text-success    { color: var(--text-success) !important; }
+.text-danger     { color: var(--text-danger) !important; }
+.text-warning    { color: var(--text-warning) !important; }
+.text-info       { color: var(--text-info) !important; }
+.text-light      { color: var(--text-light) !important; }
+.text-dark       { color: var(--text-dark) !important; }
+.text-muted      { color: var(--text-muted) !important; }

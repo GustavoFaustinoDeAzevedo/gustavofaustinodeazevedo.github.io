@@ -5,7 +5,7 @@ export type Language = 'eng' | 'por';
 export interface BackgroundPayload {
   desktopBackgroundColor?: string;
   desktopBackgroundColorContrast?: string;
-  desktopBackgroundEffect?: string;
+  desktopBackgroundEffect?: EffectValues;
   desktopBackgroundFilter?: FilterValues;
   desktopBackgroundImage?: string;
   isBackgroundImage?: boolean;
@@ -22,13 +22,18 @@ export type FilterValues = {
   sepia: number;
 };
 
+export type EffectValues = {
+  type: string;
+  value: number;
+};
+
 //interface de estado para o slice de configurações
 export interface SettingsState {
   language: Language;
   desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;
-  desktopBackgroundEffect: string;
+  desktopBackgroundEffect: EffectValues;
   desktopBackgroundFilter: FilterValues;
   desktopBackgroundImage: string;
   isBackgroundImage: boolean;

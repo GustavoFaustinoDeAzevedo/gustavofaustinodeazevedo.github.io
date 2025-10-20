@@ -1,0 +1,15 @@
+/* Interações */
+.hover-opacity-75:hover   { opacity: var(--opacity-75); }
+.hover-opacity-100:hover  { opacity: var(--opacity-100); }
+
+.hover-scale-up:hover     { transform: var(--transform-scale-lg); }
+.hover-scale-down:hover   { transform: var(--transform-scale-sm); }
+
+.hover-shadow-md:hover    { box-shadow: var(--shadow-md); }
+.hover-shadow-lg:hover    { box-shadow: var(--shadow-lg); }
+
+.focus-outline            { outline: 2px solid var(--color-primary); }
+.focus-outline-none:focus { outline: none !important; }
+
+.active-scale-down:active { transform: var(--transform-scale-sm); }
+.active-opacity-50:active { opacity: var(--opacity-50); }

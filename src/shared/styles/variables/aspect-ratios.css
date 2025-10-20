@@ -1,0 +1,8 @@
+:root {
+  /* Proporções */
+  --aspect-square: 1 / 1 !important;
+  --aspect-video: 16 / 9 !important;
+  --aspect-portrait: 3 / 4 !important;
+  --aspect-landscape: 4 / 3 !important;
+  --aspect-golden: 1.618 / 1 !important;
+}

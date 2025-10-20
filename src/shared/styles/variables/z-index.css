@@ -1,0 +1,7 @@
+:root {
+  /* Camadas */
+  --z-base: 1 !important;
+  --z-dropdown: 1000 !important;
+  --z-modal: 1050 !important;
+  --z-tooltip: 1100 !important;
+}

@@ -10,7 +10,7 @@ import {
   ChangeBackgroundProps,
 } from '../types/changeBackground.types';
 import { Slider, Radio, Button } from '@/components/ui';
-import { FilterValues, Language } from '@/store/slices/settings';
+import { EffectValues, FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
 
 export interface BackgroundPreviewConfig {
@@ -18,9 +18,8 @@ export interface BackgroundPreviewConfig {
   display: BackgroundPreviewDisplay;
   color: string;
   image: string;
-  effect: string;
+  effect: EffectValues;
   filters: FilterValues;
-  gradient?: string;
 }
 
 const ChangeBackground = ({
@@ -136,8 +135,18 @@ const ChangeBackground = ({
   };
 
   //TODO: refatorar props para separar entre imagem e cor mantendo mais organizado
+  const radioProps = {
+    fieldsetClassName: 'change-background__options-field',
+    legendClassName: 'change-background__display-legend',
+    radioClassName: 'change-background__display-option',
+    options: displayChoicesRoot?.choices,
+    onChange: handleRadioState as any,
+    name: 'backgroundDisplay',
+    fieldsetLegend: displayChoicesContent?.label,
+    selectedValue: backgroundPreviewConfig.display,
+  };
 
-  const sliderProps = {
+  const sliderFiltersProps = {
     sliderContainerClass: 'change-background__filter-slider-container',
     sliderValuesHandler: filtersValuesHandler,
     sliderLabelClass: 'change-background__filter-slider-label',
@@ -154,15 +163,25 @@ const ChangeBackground = ({
     sliderInitialValues: backgroundPreviewConfig.filters,
   };
 
-  const radioProps = {
-    fieldsetClassName: 'change-background__options-field',
-    legendClassName: 'change-background__display-legend',
-    radioClassName: 'change-background__display-option',
-    options: displayChoicesRoot?.choices,
-    onChange: handleRadioState as any,
-    name: 'backgroundDisplay',
-    fieldsetLegend: displayChoicesContent?.label,
-    selectedValue: backgroundPreviewConfig.display,
+  const sliderEffectsProps = {
+    sliderContainerClass: 'change-background__effect-slider-container',
+    sliderValuesHandler: ({ key, value }: { key: string; value: number }) =>
+      handleChangeBackgroundState(key, value),
+    sliderLabelClass: 'change-background__effect-slider-label',
+    fieldsetClass: 'border-none',
+    fieldsetLegend: null,
+    inputNumberClass: 'change-background__effect-input-number',
+    sliderObjectData: {
+      Linear: {
+        id: 'Linear',
+        label: '100%',
+        min: 1,
+        max: 200,
+        step: 1,
+        value: 2,
+      },
+    },
+    sliderInitialValues: backgroundPreviewConfig.effect.value,
   };
 
   // JSX ====================================================================
@@ -186,7 +205,7 @@ const ChangeBackground = ({
           <main className="change-background__aside-main">
             <Radio {...radioProps} />
             {backgroundPreviewConfig.display === 'image' ? (
-              <Slider {...sliderProps} />
+              <Slider {...sliderFiltersProps} />
             ) : (
               <fieldset className="change-background__filter-field">
                 <legend>
@@ -198,11 +217,11 @@ const ChangeBackground = ({
                       ? 'Estilo de Gradiente'
                       : 'Gradient Style'
                   }
-                  className="change-background__gradient-select"
+                  className="font-courier border-radius-3px bg-dark txt-color-light"
                   onChange={(e) =>
                     handleChangeBackgroundState('effect', e.target.value)
                   }
-                  value={backgroundPreviewConfig.effect}
+                  value={backgroundPreviewConfig.effect.type}
                 >
                   {Object.values(
                     displayChoicesContent?.settings?.filter?.options
@@ -210,13 +229,15 @@ const ChangeBackground = ({
                     <option
                       key={option.id}
                       value={option.label}
-                      selected={option.id === backgroundPreviewConfig.effect}
+                      selected={
+                        option.id === backgroundPreviewConfig.effect.type
+                      }
                     >
                       {option.label}
                     </option>
                   ))}
                 </select>
-                <Slider {...sliderProps} />
+                <Slider {...sliderEffectsProps} />
               </fieldset>
             )}
             <BackgroundControl {...backgroundControlProps} />

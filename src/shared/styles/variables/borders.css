@@ -1,0 +1,32 @@
+:root {
+  /* Espessura da borda */
+  --border-none: 0 !important;
+  --border-thin: 1px !important;
+  --border-medium: 2px !important;
+  --border-thick: 4px !important;
+
+  /* Estilo da borda */
+  --border-style-solid: solid !important;
+  --border-style-dashed: dashed !important;
+  --border-style-dotted: dotted !important;
+  --border-style-double: double !important;
+
+  /* Cores da borda */
+  --border-color-primary: #007bff !important;
+  --border-color-secondary: #6c757d !important;
+  --border-color-success: #28a745 !important;
+  --border-color-danger: #dc3545 !important;
+  --border-color-warning: #ffc107 !important;
+  --border-color-info: #17a2b8 !important;
+  --border-color-light: #f8f9fa !important;
+  --border-color-dark: #121212 !important;
+  --border-color-muted: #6c757d !important;
+
+  /* Arredondamento */
+  --rounded-none: 0 !important;
+  --rounded-sm: 4px !important;
+  --rounded-md: 8px !important;
+  --rounded-lg: 16px !important;
+  --rounded-pill: 50px !important;
+  --rounded-full: 9999px !important;
+}

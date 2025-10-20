@@ -1,0 +1,14 @@
+/* Transições */
+.transition-none    { transition: var(--transition-none); }
+.transition-fast    { transition: var(--transition-fast); }
+.transition-normal  { transition: var(--transition-normal); }
+.transition-slow    { transition: var(--transition-slow); }
+
+.duration-100       { transition-duration: 100ms !important; }
+.duration-300       { transition-duration: 300ms !important; }
+.duration-500       { transition-duration: 500ms !important; }
+
+.ease-in            { transition-timing-function: ease-in !important; }
+.ease-out           { transition-timing-function: ease-out !important; }
+.ease-in-out        { transition-timing-function: ease-in-out !important; }
+.linear             { transition-timing-function: linear !important; }

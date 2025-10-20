@@ -1,0 +1,36 @@
+/* Tipografia utilitária */
+.text-left      { text-align: var(--text-align-left); }
+.text-center    { text-align: var(--text-align-center); }
+.text-right     { text-align: var(--text-align-right); }
+.text-justify   { text-align: var(--text-align-justify); }
+
+.uppercase      { text-transform: var(--text-transform-uppercase); }
+.lowercase      { text-transform: var(--text-transform-lowercase); }
+.capitalize     { text-transform: var(--text-transform-capitalize); }
+
+.underline      { text-decoration: var(--decoration-underline); }
+.line-through   { text-decoration: var(--decoration-line-through); }
+.no-decoration  { text-decoration: var(--decoration-none); }
+
+.leading-tight     { line-height: var(--leading-tight); }
+.leading-normal    { line-height: var(--leading-normal); }
+.leading-relaxed   { line-height: var(--leading-relaxed); }
+
+.tracking-tight    { letter-spacing: var(--tracking-tight); }
+.tracking-normal   { letter-spacing: var(--tracking-normal); }
+.tracking-wide     { letter-spacing: var(--tracking-wide); }
+
+.font-thin     { font-weight: var(--font-thin); }
+.font-light    { font-weight: var(--font-light); }
+.font-normal   { font-weight: var(--font-normal); }
+.font-medium   { font-weight: var(--font-medium); }
+.font-bold     { font-weight: var(--font-bold); }
+.font-black    { font-weight: var(--font-black); }
+
+.font-sans     { font-family: var(--font-family-sans); }
+.font-serif    { font-family: var(--font-family-serif); }
+.font-mono     { font-family: var(--font-family-mono); }
+
+.italic        { font-style: var(--font-style-italic); }
+.oblique       { font-style: var(--font-style-oblique); }
+.normal-style  { font-style: var(--font-style-normal); }

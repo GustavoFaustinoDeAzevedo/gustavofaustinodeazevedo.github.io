@@ -1,0 +1,12 @@
+:root {
+  /* Escalas */
+  --transform-scale-sm: scale(0.95) !important;
+  --transform-scale-md: scale(1) !important;
+  --transform-scale-lg: scale(1.05) !important;
+
+  /* Rotação e espelhamento */
+  --transform-rotate-90: rotate(90deg) !important;
+  --transform-rotate-180: rotate(180deg) !important;
+  --transform-flip-x: scaleX(-1) !important;
+  --transform-flip-y: scaleY(-1) !important;
+}

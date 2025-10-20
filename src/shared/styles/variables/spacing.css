@@ -1,0 +1,19 @@
+:root {
+  /* Margens */
+  --m-0: 0px !important;
+  --m-4: 4px !important;
+  --m-8: 8px !important;
+  --m-16: 16px !important;
+  --m-24: 24px !important;
+  --m-32: 32px !important;
+  --m-64: 64px !important;
+
+  /* Espaçamentos internos */
+  --p-0: 0px !important;
+  --p-4: 4px !important;
+  --p-8: 8px !important;
+  --p-16: 16px !important;
+  --p-24: 24px !important;
+  --p-32: 32px !important;
+  --p-64: 64px !important;
+}
