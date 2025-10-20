@@ -1,0 +1,18 @@
+/* Responsividade com media queries */
+@media (max-width: 600px) {
+  .sm-hidden     { display: none !important; }
+  .sm-block      { display: block !important; }
+  .sm-text-center{ text-align: center !important; }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .md-hidden     { display: none !important; }
+  .md-flex       { display: flex !important; }
+  .md-text-left  { text-align: left !important; }
+}
+
+@media (min-width: 1025px) {
+  .lg-hidden     { display: none !important; }
+  .lg-grid       { display: grid !important; }
+  .lg-text-right { text-align: right !important; }
+}

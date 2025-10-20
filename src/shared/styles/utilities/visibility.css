@@ -1,0 +1,10 @@
+/* Visibilidade */
+.visible        { visibility: visible !important; }
+.invisible      { visibility: hidden !important; }
+.opacity-0      { opacity: var(--opacity-0); }
+.opacity-10     { opacity: var(--opacity-10); }
+.opacity-25     { opacity: var(--opacity-25); }
+.opacity-50     { opacity: var(--opacity-50); }
+.opacity-75     { opacity: var(--opacity-75); }
+.opacity-90     { opacity: var(--opacity-90); }
+.opacity-100    { opacity: var(--opacity-100); }

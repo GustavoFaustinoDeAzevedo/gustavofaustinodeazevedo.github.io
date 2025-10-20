@@ -1,0 +1,21 @@
+/* Classes utilitárias de animação */
+.animate-fade-in        { animation: var(--animate-fade-in); }
+.animate-fade-out       { animation: var(--animate-fade-out); }
+.animate-slide-up       { animation: var(--animate-slide-up); }
+.animate-slide-down     { animation: var(--animate-slide-down); }
+.animate-slide-left     { animation: var(--animate-slide-left); }
+.animate-slide-right    { animation: var(--animate-slide-right); }
+.animate-scale-up       { animation: var(--animate-scale-up); }
+.animate-scale-down     { animation: var(--animate-scale-down); }
+.animate-grow           { animation: var(--animate-grow); }
+.animate-shrink         { animation: var(--animate-shrink); }
+.animate-float          { animation: var(--animate-float); }
+.animate-float-reverse  { animation: var(--animate-float-reverse); }
+.animate-pulse          { animation: var(--animate-pulse); }
+.animate-bounce         { animation: var(--animate-bounce); }
+.animate-shake          { animation: var(--animate-shake); }
+.animate-spin           { animation: var(--animate-spin); }
+.animate-blink          { animation: var(--animate-blink); }
+.animate-spin-reverse   { animation: var(--animate-spin-reverse); }
+.animate-flip           { animation: var(--animate-flip); }
+.animate-flip-reverse   { animation: var(--animate-flip-reverse); }

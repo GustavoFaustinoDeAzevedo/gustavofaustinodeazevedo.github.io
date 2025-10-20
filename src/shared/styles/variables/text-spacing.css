@@ -1,0 +1,11 @@
+:root {
+  /* Espaçamento entre linhas */
+  --leading-tight: 1 !important;
+  --leading-normal: 1.5 !important;
+  --leading-relaxed: 1.75 !important;
+
+  /* Espaçamento entre letras */
+  --tracking-tight: -0.05em !important;
+  --tracking-normal: 0 !important;
+  --tracking-wide: 0.05em !important;
+}

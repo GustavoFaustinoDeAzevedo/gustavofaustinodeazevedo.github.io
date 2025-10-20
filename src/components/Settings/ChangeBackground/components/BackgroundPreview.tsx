@@ -21,11 +21,13 @@ const DesktopBackgroundPreview = ({
         $filters={backgroundPreviewConfig.filters}
         className={className || 'desktop-background'}
       />
-      <DesktopBackgroundPreviewStyled
-        $isBackgroundImage={false}
-        className="desktop-background"
-        $backgroundColor={backgroundPreviewConfig.gradient}
-      />
+      {backgroundPreviewConfig.effect.type !== 'none' && (
+        <DesktopBackgroundPreviewStyled
+          $isBackgroundImage={false}
+          className="desktop-background__gradient"
+          $backgroundColor={backgroundPreviewConfig.effect.type}
+        />
+      )}
     </>
   );
 };

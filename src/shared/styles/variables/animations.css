@@ -1,0 +1,22 @@
+:root {
+  --animate-fade-in: fadeIn 0.3s ease-in-out !important;
+  --animate-fade-out: fadeOut 0.3s ease-in-out !important;
+  --animate-slide-up: slideUp 0.4s ease !important;
+  --animate-slide-down: slideDown 0.4s ease !important;
+  --animate-slide-left: slideLeft 0.4s ease !important;
+  --animate-slide-right: slideRight 0.4s ease !important;
+  --animate-scale-up: scaleUp 0.4s ease !important;
+  --animate-scale-down: scaleDown 0.4s ease !important;
+  --animate-grow: grow 0.4s ease !important;
+  --animate-shrink: shrink 0.4s ease !important;
+  --animate-float: float 2s ease-in-out infinite !important;
+  --animate-float-reverse: floatReverse 2s ease-in-out infinite !important;
+  --animate-pulse: pulse 1s infinite !important;
+  --animate-bounce: bounce 0.6s infinite !important;
+  --animate-shake: shake 0.8s infinite !important;
+  --animate-spin: spin 1s infinite linear !important;
+  --animate-blink: blink 1s infinite linear !important;
+  --animate-spin-reverse: spinReverse 1s infinite linear !important;
+  --animate-flip: flip 1s infinite linear !important;
+  --animate-flip-reverse: flipReverse 1s infinite linear !important;
+}

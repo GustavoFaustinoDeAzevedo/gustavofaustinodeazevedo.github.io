@@ -1,0 +1,23 @@
+:root {
+  /* Cores de texto */
+  --text-primary: #007bff !important;
+  --text-secondary: #6c757d !important;
+  --text-success: #28a745 !important;
+  --text-danger: #dc3545 !important;
+  --text-warning: #ffc107 !important;
+  --text-info: #17a2b8 !important;
+  --text-light: #f8f9fa !important;
+  --text-dark: #121212 !important;
+  --text-muted: #6c757d !important;
+
+  /* Cores de fundo */
+  --bg-primary: #007bff !important;
+  --bg-secondary: #6c757d !important;
+  --bg-success: #28a745 !important;
+  --bg-danger: #dc3545 !important;
+  --bg-warning: #ffc107 !important;
+  --bg-info: #17a2b8 !important;
+  --bg-light: #f8f9fa !important;
+  --bg-dark: #121212 !important;
+  --bg-muted: #6c757d !important;
+}

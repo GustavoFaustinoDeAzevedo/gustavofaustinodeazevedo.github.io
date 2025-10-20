@@ -1,0 +1,7 @@
+:root {
+  /* Transições */
+  --transition-none: none !important;
+  --transition-fast: all 150ms ease-in-out !important;
+  --transition-normal: all 300ms ease !important;
+  --transition-slow: all 500ms ease-out !important;
+}

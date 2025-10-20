@@ -89,7 +89,7 @@ const InputRGB = ({
       <Slider
         sliderObjectData={colorsData}
         sliderInitialValues={rgb}
-        sliderClass="change-background__color-slider"
+        sliderClass="change-background__color-slider border-radius-1px "
         sliderValuesHandler={handleSliderInput}
         onMouseUp={() => handleChangeColor(rgbToHex(rgb))}
         onTouchEnd={() => handleChangeColor(rgbToHex(rgb))}

@@ -1,0 +1,48 @@
+/* Bordas */
+.border-none     { border-width: var(--border-none); }
+.border-thin     { border-width: var(--border-thin); }
+.border-medium   { border-width: var(--border-medium); }
+.border-thick    { border-width: var(--border-thick); }
+
+.border-solid    { border-style: var(--border-style-solid); }
+.border-dashed   { border-style: var(--border-style-dashed); }
+.border-dotted   { border-style: var(--border-style-dotted); }
+.border-double   { border-style: var(--border-style-double); }
+
+.border-primary    { border-color: var(--border-color-primary); }
+.border-secondary  { border-color: var(--border-color-secondary); }
+.border-success    { border-color: var(--border-color-success); }
+.border-danger     { border-color: var(--border-color-danger); }
+.border-warning    { border-color: var(--border-color-warning); }
+.border-info       { border-color: var(--border-color-info); }
+.border-light      { border-color: var(--border-color-light); }
+.border-dark       { border-color: var(--border-color-dark); }
+.border-muted      { border-color: var(--border-color-muted); }
+
+/* Arredondamento */
+.rounded-none   { border-radius: var(--rounded-none); }
+.rounded-sm     { border-radius: var(--rounded-sm); }
+.rounded-md     { border-radius: var(--rounded-md); }
+.rounded-lg     { border-radius: var(--rounded-lg); }
+.rounded-pill   { border-radius: var(--rounded-pill); }
+.rounded-full   { border-radius: var(--rounded-full); }
+
+/* Bordas */
+.border { border: var(--border-thin) var(--border-style-solid) var(--border-color-primary); }
+.border-top { border-top: var(--border-thin) var(--border-style-solid) var(--border-color-primary); }
+.border-bottom { border-bottom: var(--border-thin) var(--border-style-solid) var(--border-color-primary); }
+.border-left { border-left: var(--border-thin) var(--border-style-solid) var(--border-color-primary); }
+.border-right { border-right: var(--border-thin) var(--border-style-solid) var(--border-color-primary); }
+
+/* Bordas arredondadas */
+.rounded { border-radius: var(--rounded-md); }
+.rounded-top { border-top-left-radius: var(--rounded-md); border-top-right-radius: var(--rounded-md); }
+.rounded-bottom { border-bottom-left-radius: var(--rounded-md); border-bottom-right-radius: var(--rounded-md); }
+.rounded-left { border-top-left-radius: var(--rounded-md); border-bottom-left-radius: var(--rounded-md); }
+.rounded-right { border-top-right-radius: var(--rounded-md); border-bottom-right-radius: var(--rounded-md); }
+.rounded-full { border-radius: var(--rounded-full); }
+.rounded-top-full { border-top-left-radius: var(--rounded-full); border-top-right-radius: var(--rounded-full); }
+.rounded-bottom-full { border-bottom-left-radius: var(--rounded-full); border-bottom-right-radius: var(--rounded-full); }
+.rounded-left-full { border-top-left-radius: var(--rounded-full); border-bottom-left-radius: var(--rounded-full); }
+.rounded-right-full { border-top-right-radius: var(--rounded-full); border-bottom-right-radius: var(--rounded-full); }
+

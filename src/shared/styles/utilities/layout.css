@@ -1,0 +1,38 @@
+
+/* Layout e posicionamento */
+.width-full     { width: 100% !important; }
+.height-full    { height: 100% !important; }
+
+.width-100      { width: 100px !important; }
+.width-200      { width: 200px !important; }
+.width-300      { width: 300px !important; }
+.width-400      { width: 400px !important; }
+.width-500      { width: 500px !important; }
+.width-600      { width: 600px !important; }
+.width-700      { width: 700px !important; }
+.width-800      { width: 800px !important; }
+.width-900      { width: 900px !important; }
+.width-1000     { width: 1000px !important; }
+
+
+.height-100     { height: 100px !important; }
+.height-200     { height: 200px !important; }
+.height-300     { height: 300px !important; }
+.height-400     { height: 400px !important; }
+.height-500     { height: 500px !important; }
+.height-600     { height: 600px !important; }
+.height-700     { height: 700px !important; }
+.height-800     { height: 800px !important; }
+.height-900     { height: 900px !important; }
+.height-1000    { height: 1000px !important; }
+
+.aspect-square     { aspect-ratio: var(--aspect-square); }
+.aspect-video      { aspect-ratio: var(--aspect-video); }
+.aspect-portrait   { aspect-ratio: var(--aspect-portrait); }
+.aspect-landscape  { aspect-ratio: var(--aspect-landscape); }
+.aspect-golden     { aspect-ratio: var(--aspect-golden); }
+
+.z-base       { z-index: var(--z-base); }
+.z-dropdown   { z-index: var(--z-dropdown); }
+.z-modal      { z-index: var(--z-modal); }
+.z-tooltip    { z-index: var(--z-tooltip); }

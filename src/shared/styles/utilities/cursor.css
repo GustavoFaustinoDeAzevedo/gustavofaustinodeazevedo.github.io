@@ -1,0 +1,14 @@
+/* Cursor */
+.cursor-pointer       { cursor: pointer !important; }
+.cursor-default       { cursor: default !important; }
+.cursor-text          { cursor: text !important; }
+.cursor-move          { cursor: move !important; }
+.cursor-not-allowed   { cursor: not-allowed !important; }
+.cursor-wait          { cursor: wait !important; }
+.cursor-help          { cursor: help !important; }
+.cursor-crosshair     { cursor: crosshair !important; }
+.cursor-grab          { cursor: grab !important; }
+.cursor-grabbing      { cursor: grabbing !important; }
+.cursor-zoom-in       { cursor: zoom-in !important; }
+.cursor-zoom-out      { cursor: zoom-out !important; }
+.cursor-none          { cursor: none !important; }
