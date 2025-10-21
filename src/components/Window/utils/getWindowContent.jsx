@@ -8,7 +8,7 @@ import {
 } from '@/components/Portfolio';
 import BrowserSimulator from '@/components/BrowserSimulator';
 import TaskManager from '@/components/TaskManager';
-import { ChangeBackground } from '@/components/Settings';
+import { ChangeBackgroundMenu } from '@/components/Settings';
 import Tests from '@/components/Tests';
 import AnimatedInput from '../components/AnimatedInput';
 import Button from '@/components/ui/Button';
@@ -39,13 +39,13 @@ const getWindowContent = (
     browser: () => <BrowserSimulator />,
     github: () => <BrowserSimulator src={src} />,
     'background-color-picker': () => (
-      <ChangeBackground
+      <ChangeBackgroundMenu
         language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
       />
     ),
     'change-background': () => (
-      <ChangeBackground
+      <ChangeBackgroundMenu
         language={language}
         handleChangeBackground={windowActions?.handleChangeBackground}
         handleUpdateWindowContent={(imagePreview) =>
