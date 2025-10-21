@@ -1,6 +1,6 @@
 import React from 'react';
 import { Filter } from '../types/changeBackground.data.types';
-import { BackgroundPreviewConfig } from './ChangeBackground';
+import { BackgroundPreviewConfig } from './ChangeBackgroundMenu';
 import DesktopBackgroundPreviewStyled from './DesktopBackgroundPreviewStyled';
 
 export interface DesktopBackgroundPreviewProps {

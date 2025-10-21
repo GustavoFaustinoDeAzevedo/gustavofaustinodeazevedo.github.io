@@ -22,7 +22,7 @@ export interface BackgroundPreviewConfig {
   filters: FilterValues;
 }
 
-const ChangeBackground = ({
+const ChangeBackgroundMenu = ({
   handleUpdateWindowContent,
   language,
   content,
@@ -62,6 +62,8 @@ const ChangeBackground = ({
       filters: storedDesktopBackgroundFilters,
     });
 
+  const [effectsSlider, setEffectsSlider] = useState<string>('none');
+
   // constantes =============================================================
 
   const displayChoicesRoot = useMemo(
@@ -99,6 +101,21 @@ const ChangeBackground = ({
         };
       }),
     [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
+  );
+
+  const effectValuesHandler = useCallback(
+    (key: keyof EffectValues, value: number | string) =>
+      setBackgroundPreviewConfig((prev) => {
+        if (prev.effect[key as keyof EffectValues] === value) return prev;
+        return {
+          ...prev,
+          effect: {
+            ...prev.effect,
+            [key]: value,
+          },
+        };
+      }),
+    [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
   );
 
   // handlers ================================================================
@@ -165,23 +182,13 @@ const ChangeBackground = ({
 
   const sliderEffectsProps = {
     sliderContainerClass: 'change-background__effect-slider-container',
-    sliderValuesHandler: ({ key, value }: { key: string; value: number }) =>
-      handleChangeBackgroundState(key, value),
+    sliderValuesHandler: effectValuesHandler,
     sliderLabelClass: 'change-background__effect-slider-label',
     fieldsetClass: 'border-none',
-    fieldsetLegend: null,
+    fieldsetLegend: '',
     inputNumberClass: 'change-background__effect-input-number',
-    sliderObjectData: {
-      Linear: {
-        id: 'Linear',
-        label: '100%',
-        min: 1,
-        max: 200,
-        step: 1,
-        value: 2,
-      },
-    },
-    sliderInitialValues: backgroundPreviewConfig.effect.value,
+    sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
+    sliderInitialValues: backgroundPreviewConfig.effect,
   };
 
   // JSX ====================================================================
@@ -218,21 +225,15 @@ const ChangeBackground = ({
                       : 'Gradient Style'
                   }
                   className="font-courier border-radius-3px bg-dark txt-color-light"
-                  onChange={(e) =>
-                    handleChangeBackgroundState('effect', e.target.value)
-                  }
+                  onChange={(e) => {
+                    handleChangeBackgroundState('effect', e.target.value);
+                  }}
                   value={backgroundPreviewConfig.effect.type}
                 >
                   {Object.values(
                     displayChoicesContent?.settings?.filter?.options
                   ).map((option) => (
-                    <option
-                      key={option.id}
-                      value={option.label}
-                      selected={
-                        option.id === backgroundPreviewConfig.effect.type
-                      }
-                    >
+                    <option key={option.id} value={option.label}>
                       {option.label}
                     </option>
                   ))}
@@ -257,4 +258,4 @@ const ChangeBackground = ({
   );
 };
 
-export default React.memo(ChangeBackground);
+export default React.memo(ChangeBackgroundMenu);

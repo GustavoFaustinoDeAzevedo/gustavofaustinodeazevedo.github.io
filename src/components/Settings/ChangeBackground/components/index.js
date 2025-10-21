@@ -1,1 +1,1 @@
-export { default as ChangeBackground } from "./ChangeBackground";
+export { default as ChangeBackgroundMenu } from "./ChangeBackgroundMenu";
