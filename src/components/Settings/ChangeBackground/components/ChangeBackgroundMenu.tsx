@@ -262,7 +262,7 @@ const ChangeBackgroundMenu = ({
               //         ? 'Estilo de Gradiente'
               //         : 'Gradient Style'
               //     }
-              //     className="font-courier border-radius-3px bg-dark txt-color-light"
+              //     className="font-courier border-radius-3px bg-dark text-color-light"
               //     onChange={handleSelector}
               //     value={backgroundPreviewConfig?.effect?.active}
               //   >

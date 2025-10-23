@@ -257,7 +257,7 @@ export const rootFolder: FileNode = {
                   title: { eng: 'Send Message', por: 'Enviar Mensagem' },
                   icon: 'contact',
                   type: 'app',
-                  initialDimensions: { width: '490px', height: '600px' },
+                  initialDimensions: { width: '490px', height: '620px' },
                 },
                 {
                   fileId: 'change-background',
