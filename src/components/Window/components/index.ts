@@ -1,3 +1,2 @@
-import WindowManager from './WindowManager';
-
-export default WindowManager;
+export { default } from './WindowManager';
+export { default as WindowManager } from './WindowManager';

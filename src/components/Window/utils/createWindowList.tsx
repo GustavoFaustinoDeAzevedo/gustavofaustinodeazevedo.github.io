@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import WindowManager from '@/components/Window';
-import { CreateWindowListProps } from '../../../App/types/App.types';
+import { CreateWindowListProps } from '@/App/types/App.types';
 
 const createWindowList = ({
   isMobile,

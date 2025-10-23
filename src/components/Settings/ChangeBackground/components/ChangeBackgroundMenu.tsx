@@ -1,4 +1,12 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+//TODO: Adicionar opções para gradiente assim como a visualização
+
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
@@ -10,7 +18,12 @@ import {
   ChangeBackgroundProps,
 } from '../types/changeBackground.types';
 import { Slider, Radio, Button } from '@/components/ui';
-import { EffectValues, FilterValues, Language } from '@/store/slices/settings';
+import {
+  EffectValue,
+  EffectValues,
+  FilterValues,
+  Language,
+} from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
 
 export interface BackgroundPreviewConfig {
@@ -62,8 +75,6 @@ const ChangeBackgroundMenu = ({
       filters: storedDesktopBackgroundFilters,
     });
 
-  const [effectsSlider, setEffectsSlider] = useState<string>('none');
-
   // constantes =============================================================
 
   const displayChoicesRoot = useMemo(
@@ -88,8 +99,8 @@ const ChangeBackgroundMenu = ({
     [setBackgroundPreviewConfig, backgroundPreviewConfig]
   );
 
-  const filtersValuesHandler = useCallback(
-    (key: keyof FilterValues, value: number | string) =>
+  const handleFilterValue = useCallback(
+    (key: keyof FilterValues, value: number | string) => {
       setBackgroundPreviewConfig((prev) => {
         if (prev.filters[key as keyof FilterValues] === value) return prev;
         return {
@@ -99,22 +110,28 @@ const ChangeBackgroundMenu = ({
             [key]: value,
           },
         };
-      }),
+      });
+    },
     [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
   );
 
-  const effectValuesHandler = useCallback(
-    (key: keyof EffectValues, value: number | string) =>
+  const handleEffectValue = useCallback(
+    (key: keyof EffectValues, value: number | string) => {
       setBackgroundPreviewConfig((prev) => {
-        if (prev.effect[key as keyof EffectValues] === value) return prev;
+        if (prev.effect.gradient[key as keyof EffectValue] === value)
+          return prev;
         return {
           ...prev,
           effect: {
             ...prev.effect,
-            [key]: value,
+            gradient: {
+              ...prev.effect.gradient,
+              [key]: value,
+            },
           },
         };
-      }),
+      });
+    },
     [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
   );
 
@@ -137,6 +154,13 @@ const ChangeBackgroundMenu = ({
     });
   };
 
+  const handleSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    handleChangeBackgroundState('effect', {
+      ...backgroundPreviewConfig?.effect,
+      active: e.target.value,
+    });
+  };
+
   // Props ==================================================================
 
   const backgroundControlProps = {
@@ -151,9 +175,8 @@ const ChangeBackgroundMenu = ({
     backgroundPreviewImage: backgroundPreviewConfig.image,
   };
 
-  //TODO: refatorar props para separar entre imagem e cor mantendo mais organizado
   const radioProps = {
-    fieldsetClassName: 'change-background__options-field',
+    fieldsetClassName: 'change-background__options-field border-muted',
     legendClassName: 'change-background__display-legend',
     radioClassName: 'change-background__display-option',
     options: displayChoicesRoot?.choices,
@@ -164,17 +187,16 @@ const ChangeBackgroundMenu = ({
   };
 
   const sliderFiltersProps = {
-    sliderContainerClass: 'change-background__filter-slider-container',
-    sliderValuesHandler: filtersValuesHandler,
+    sliderContainerClass:
+      'change-background__filter-slider-container border-none p-1 gap-1',
+    sliderValuesHandler: handleFilterValue,
     sliderLabelClass: 'change-background__filter-slider-label',
     fieldsetClass:
-      backgroundPreviewConfig.display === 'image'
-        ? 'change-background__filter-field'
-        : undefined,
-    fieldsetLegend:
-      backgroundPreviewConfig.display === 'image'
-        ? displayChoicesContent?.settings?.filter?.legend
-        : undefined,
+      backgroundPreviewConfig.display === 'image' ? 'border-none' : undefined,
+    // fieldsetLegend:
+    //   backgroundPreviewConfig.display === 'image'
+    //     ? displayChoicesContent?.settings?.filter?.legend
+    //     : undefined,
     inputNumberClass: 'change-background__filter-input-number',
     sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
     sliderInitialValues: backgroundPreviewConfig.filters,
@@ -182,19 +204,22 @@ const ChangeBackgroundMenu = ({
 
   const sliderEffectsProps = {
     sliderContainerClass: 'change-background__effect-slider-container',
-    sliderValuesHandler: effectValuesHandler,
+    sliderValuesHandler: handleEffectValue,
     sliderLabelClass: 'change-background__effect-slider-label',
     fieldsetClass: 'border-none',
     fieldsetLegend: '',
     inputNumberClass: 'change-background__effect-input-number',
     sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
-    sliderInitialValues: backgroundPreviewConfig.effect,
+    sliderInitialValues: backgroundPreviewConfig?.effect?.gradient,
+    ignoredList: ['conic', 'radial', 'linear'].filter(
+      (item) => item !== backgroundPreviewConfig?.effect?.active
+    ),
   };
 
   // JSX ====================================================================
 
   return (
-    <div className="change-background__container">
+    <div className="change-background__container ">
       <div className="change-background__wrapper">
         <main className="change-background__main">
           <h3 className="change-background__title">
@@ -202,48 +227,61 @@ const ChangeBackgroundMenu = ({
           </h3>
           <DesktopBackgroundPreview
             backgroundPreviewConfig={backgroundPreviewConfig}
-            className={'change-background__preview'}
+            className={'change-background__preview border-muted'}
           />
         </main>
-        <aside className="change-background__aside">
+        <aside className="change-background__aside border-muted">
           <header className="change-background__aside-header">
             <h3>{displayChoicesContent?.settings?.title}</h3>
           </header>
-          <main className="change-background__aside-main">
+          <main className="change-background__aside-main ">
             <Radio {...radioProps} />
             {backgroundPreviewConfig.display === 'image' ? (
-              <Slider {...sliderFiltersProps} />
-            ) : (
-              <fieldset className="change-background__filter-field">
-                <legend>
+              <fieldset className="change-background__filter-field border-muted">
+                <legend className="margin-left-2">
                   {displayChoicesContent?.settings?.filter?.legend}
                 </legend>
-                <select
-                  title={
-                    language === 'por'
-                      ? 'Estilo de Gradiente'
-                      : 'Gradient Style'
-                  }
-                  className="font-courier border-radius-3px bg-dark txt-color-light"
-                  onChange={(e) => {
-                    handleChangeBackgroundState('effect', e.target.value);
-                  }}
-                  value={backgroundPreviewConfig.effect.type}
-                >
-                  {Object.values(
-                    displayChoicesContent?.settings?.filter?.options
-                  ).map((option) => (
-                    <option key={option.id} value={option.label}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <Slider {...sliderEffectsProps} />
+                <div className="change-background__filter-content-wrapper border-muted overflow-y-scroll ">
+                  <Slider {...sliderFiltersProps} />
+                </div>
               </fieldset>
+            ) : (
+              ''
+              // <fieldset className="change-background__filter-field border-muted">
+              //   <legend>
+              //     {displayChoicesContent?.settings?.filter?.legend}
+              //   </legend>
+              //   <select
+              //     aria-label={
+              //       language === 'por'
+              //         ? 'Estilo de Gradiente'
+              //         : 'Gradient Style'
+              //     }
+              //     title={
+              //       language === 'por'
+              //         ? 'Estilo de Gradiente'
+              //         : 'Gradient Style'
+              //     }
+              //     className="font-courier border-radius-3px bg-dark txt-color-light"
+              //     onChange={handleSelector}
+              //     value={backgroundPreviewConfig?.effect?.active}
+              //   >
+              //     {Object.values(
+              //       displayChoicesContent?.settings?.filter?.options || {}
+              //     ).map((option) => (
+              //       <option key={option.id} value={option.id}>
+              //         {option.label}
+              //       </option>
+              //     ))}
+              //   </select>
+              //   {backgroundPreviewConfig?.effect?.active !== 'none' && (
+              //     <Slider {...sliderEffectsProps} />
+              //   )}
+              // </fieldset>
             )}
             <BackgroundControl {...backgroundControlProps} />
           </main>
-          <footer className="change-background__aside-footer">
+          <footer className="change-background__aside-footer border-muted">
             <Button
               onClick={handleApplyChanges}
               className={'change-background__save-button'}

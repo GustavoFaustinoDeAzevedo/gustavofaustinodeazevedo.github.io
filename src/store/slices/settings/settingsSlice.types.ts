@@ -22,9 +22,15 @@ export type FilterValues = {
   sepia: number;
 };
 
+export type EffectValue = {
+  linear: number;
+  radial: number;
+  conic: number;
+};
+
 export type EffectValues = {
-  type: string;
-  value: number;
+  active: string;
+  gradient: EffectValue;
 };
 
 //interface de estado para o slice de configurações

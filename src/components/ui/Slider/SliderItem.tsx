@@ -39,6 +39,7 @@ const SliderItem = React.memo(
     index,
     inputNumberActive = true,
   }: SliderItemProps) => {
+
     if (!sliderData) return null;
     if (sliderValue === undefined || isNaN(sliderValue)) return null;
     const displayValue = Number(sliderValue).toFixed(

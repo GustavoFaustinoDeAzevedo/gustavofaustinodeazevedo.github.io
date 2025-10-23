@@ -16,6 +16,7 @@ type SliderMapData = {
   onTouchEnd?: any;
   sliderValuesHandler: any;
   inputNumberActive?: boolean[] | boolean | any;
+  ignoredList?: string[];
 };
 
 const SliderMapper = ({
@@ -33,31 +34,39 @@ const SliderMapper = ({
   inputNumberClass,
   sliderValuesHandler,
   inputNumberActive,
+  ignoredList,
 }: SliderMapData) => {
+  console.log(JSON.stringify(sliderInitialValues), sliderObjectData);
+  if (sliderObjectData === undefined || sliderInitialValues === undefined)
+    return;
+
   return (
     <fieldset className={fieldsetClass ?? 'border-none flex-column gap-2'}>
       {fieldsetLegend && (
         <legend className={fieldsetLegendClassName}>{fieldsetLegend}</legend>
       )}
-      {Object.keys(sliderObjectData).map((key: string, index: number) => (
-        <SliderItem
-          key={`slider-item-${sliderObjectData[key].id}--${index}`}
-          sliderData={sliderObjectData[key]}
-          sliderValue={sliderInitialValues[key]}
-          sliderValuesHandler={sliderValuesHandler}
-          sliderContainerClass={sliderContainerClass}
-          sliderClass={sliderClass}
-          onMouseUp={onMouseUp}
-          onTouchEnd={onTouchEnd}
-          accentColor={
-            accentColors?.[index] ?? sliderObjectData[key].accentColor ?? []
-          }
-          sliderLabelClass={sliderLabelClass}
-          inputNumberClass={inputNumberClass}
-          index={key}
-          inputNumberActive={inputNumberActive}
-        />
-      ))}
+      {Object.keys(sliderObjectData).map(
+        (key: string, index: number) =>
+          typeof sliderInitialValues[key] === 'number' && !ignoredList?.includes(key) && (
+            <SliderItem
+              key={`slider-item-${sliderObjectData[key].id}--${index}`}
+              sliderData={sliderObjectData[key]}
+              sliderValue={sliderInitialValues[key]}
+              sliderValuesHandler={sliderValuesHandler}
+              sliderContainerClass={sliderContainerClass}
+              sliderClass={sliderClass}
+              onMouseUp={onMouseUp}
+              onTouchEnd={onTouchEnd}
+              accentColor={
+                accentColors?.[index] ?? sliderObjectData[key].accentColor ?? []
+              }
+              sliderLabelClass={sliderLabelClass}
+              inputNumberClass={inputNumberClass}
+              index={key}
+              inputNumberActive={inputNumberActive}
+            />
+          )
+      )}
     </fieldset>
   );
 };

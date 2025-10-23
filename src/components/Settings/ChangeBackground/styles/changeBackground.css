@@ -70,7 +70,7 @@
             display: flex;
             justify-content: center;
             gap: 4rem;
-            padding: 0.5rem 2rem;
+            padding: 1rem 2rem;
 
 
             & .change-background__display-option {
@@ -83,48 +83,56 @@
 
           & .change-background__filter-field {
             width: 100%;
-            height: 150px;
+            max-height: 200px;
             border: none;
             border-top: 1px solid;
-            border-color: var(--c-border);
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-y: scroll;
             gap: 0.2rem;
-            padding: 0.5rem 2rem;
+            padding: 0.5rem 0rem;
 
-            & .change-background__filter-slider-container {
+            & .change-background__filter-content-wrapper {
               width: 100%;
-              font-family: 'Courier New', Courier, monospace;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
+              max-height: 100px;
+              overflow-y: scroll;
 
-              & .change-background__filter-slider-label {
-                width: 6rem;
 
-              }
-
-              & .change-background__filter-slider-wrapper {
-                flex: 2;
+              & .change-background__filter-slider-container {
                 width: 100%;
+                font-family: 'Courier New', Courier, monospace;
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                justify-content: right;
-                gap: 1rem;
-              }
+
+                & .change-background__filter-slider-label {
+                  width: 6rem;
+
+                }
+
+                & .change-background__filter-slider-wrapper {
+                  flex: 2;
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: right;
+                  gap: 1rem;
+                }
 
 
-              & .change-background__filter-input-number {
-                box-sizing: content-box;
-                width: 3rem;
-                text-align: right;
-                background-color: var(--c-background2);
-                color: var(--c-text);
+                & .change-background__filter-input-number {
+                  box-sizing: content-box;
+                  width: 3.1rem;
+                  font-size: 1rem;
+                  text-align: left;
+                  background-color: var(--bg-dark);
+                  border-radius: 2px;
+                  color: var(--c-text);
+                  border: none !important;
 
-                &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
-                  opacity: 1;
+                  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                    opacity: 1;
+                  }
                 }
               }
             }
@@ -135,7 +143,6 @@
             width: 100%;
             border: none;
             border-top: 1px solid;
-            border-color: var(--c-border);
             display: flex;
             flex-direction: column;
             align-items: center;
