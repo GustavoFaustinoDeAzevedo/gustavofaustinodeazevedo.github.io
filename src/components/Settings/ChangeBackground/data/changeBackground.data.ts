@@ -18,7 +18,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
             options: imageFilters.eng,
           },
           picker: {
-            legend: 'Image',
+            legend: 'Choose an Image',
             button: 'Upload Image',
           },
         },
@@ -57,7 +57,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
             options: imageFilters.por,
           },
           picker: {
-            legend: 'Imagem',
+            legend: 'Escolha uma Imagem',
             button: 'Carregar Imagem',
           },
         },

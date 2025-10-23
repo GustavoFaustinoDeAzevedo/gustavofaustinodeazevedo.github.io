@@ -20,7 +20,7 @@ const CommandPromptSection = () => (
   ></textarea>
 );
 
-const getWindowContent = (
+const displayWindowContent = (
   contentId,
   { windowId, language, src, type, windowActions, children }
 ) => {
@@ -65,4 +65,4 @@ const getWindowContent = (
   return map[contentId]?.();
 };
 
-export default getWindowContent;
+export default displayWindowContent;

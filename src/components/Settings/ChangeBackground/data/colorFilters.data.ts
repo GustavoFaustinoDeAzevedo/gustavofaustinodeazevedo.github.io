@@ -11,24 +11,24 @@ export const colorGradients: FilterListLanguage = {
       step: 0,
       default: 0,
     },
-    repeatedLinearGradient: {
-      id: 'repeatedLinearGradient',
+    linear: {
+      id: 'linear',
       label: 'Linear',
       min: 0,
       max: 360,
       step: 15,
       default: 0,
     },
-    repeatedConicGradient: {
-      id: 'repeatedConicGradient',
+    conic: {
+      id: 'conic',
       label: 'Cônico',
       min: 5,
       max: 100,
       step: 5,
       default: 5,
     },
-    repeatedRadialGradient: {
-      id: 'repeatedRadialGradient',
+    radial: {
+      id: 'radial',
       label: 'Radial',
       min: 5,
       max: 100,
@@ -45,24 +45,24 @@ export const colorGradients: FilterListLanguage = {
       step: 0,
       default: 0,
     },
-    repeatedLinearGradient: {
-      id: 'repeatedLinearGradient',
+    linear: {
+      id: 'linear',
       label: 'Linear',
       min: 0,
       max: 360,
       step: 15,
       default: 0,
     },
-    repeatedConicGradient: {
-      id: 'repeatedConicGradient',
+    conic: {
+      id: 'conic',
       label: 'Conic',
       min: 5,
       max: 100,
       step: 5,
       default: 5,
     },
-    repeatedRadialGradient: {
-      id: 'repeatedRadialGradient',
+    radial: {
+      id: 'radial',
       label: 'Radial',
       min: 5,
       max: 100,

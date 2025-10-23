@@ -1,7 +1,19 @@
 import { useCallback, useMemo } from 'react';
 import { ListFiles } from '../FilesExplorer';
-import { useSelector } from 'react-redux';
 import DesktopBackground from './components';
+
+type DesktopProps = {
+  onContextMenu: (event: React.MouseEvent<HTMLDivElement>) => void;
+  windowActions: any;
+  language: string;
+  isMobile: boolean;
+  currentNode?: string;
+  windowList?: any;
+  backgroundImage?: string;
+  backgroundColorContrast?: string;
+  children: any;
+  filesActions: any;
+};
 
 const Desktop = ({
   onContextMenu,
@@ -11,7 +23,7 @@ const Desktop = ({
   // backgroundColor,
   // backgroundImage,
   ...props
-}) => {
+}: DesktopProps) => {
   const updateWindowState = useCallback(
     (id, updates) => windowActions.handleUpdateWindow({ id, ...updates }),
     [windowActions]

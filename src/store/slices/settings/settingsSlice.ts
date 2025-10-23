@@ -27,13 +27,22 @@ const defaultFilterValues = {
   sepia: 0,
 };
 
+const defaultEffectValues = {
+  active: 'none',
+  gradient: {
+    linear: 0,
+    conic: 5,
+    radial: 0,
+  },
+};
+
 const initialState: SettingsState = {
   language: defaultLanguage,
   desktopBackgroundDefaultColor: defaultBackgroundColor,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundFilter: defaultFilterValues,
-  desktopBackgroundEffect: { type: 'none', value: 0 },
+  desktopBackgroundEffect: defaultEffectValues,
   desktopBackgroundImage: '/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
   isDoubleClick: true,

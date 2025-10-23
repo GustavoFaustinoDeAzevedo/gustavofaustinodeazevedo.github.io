@@ -13,7 +13,7 @@ const BackgroundControl = ({
   backgroundPreviewDisplay,
 }: ChangeBackgroundProps) => {
   return (
-    <fieldset className="change-background__picker-field">
+    <fieldset className="change-background__picker-field border-muted">
       <legend>{displayChoicesContent?.settings?.picker?.legend}</legend>
       {backgroundPreviewDisplay === 'image' ? (
         <div className="change-background__picker-wrapper">

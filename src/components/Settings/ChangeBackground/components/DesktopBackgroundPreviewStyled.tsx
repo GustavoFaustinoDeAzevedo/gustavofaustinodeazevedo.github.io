@@ -7,39 +7,65 @@ interface DesktopBackgroundPreviewStyledProps {
   $backgroundImage?: string;
   $backgroundColor?: string;
   $filters?: FilterValues;
+  $backgroundGradient?: 'linear' | 'radial' | 'conic';
+  $backgroundGradientValues?: {
+    deg?: number;
+    opacity: string;
+    color: string[];
+  };
 }
 
-const backgroundColor = (color: string) => {
-  console.log(color);
-  if (color?.includes('#')) {
-    return color;
+const buildGradient = (
+  type: 'linear' | 'radial' | 'conic',
+  { deg = 0, color }: { deg?: number; color: string[] }
+) => {
+  const rgbaStart = `${color[0]}`;
+  const rgbaEnd = `${color[1]}`;
+
+  switch (type) {
+    case 'linear':
+      return `linear-gradient(${deg}deg, ${color[0]} 0%, ${color[1]} 100%)`;
+    case 'radial':
+      return `repeating-radial-gradient(${color[0]} 0%, ${color[1]} 100%)`;
+    case 'conic':
+      return `repeating-conic-gradient(${color[0]} 0%, ${color[1]} 100%)`;
+    default:
+      return '';
   }
-  return `#${color}`;
 };
 
-const DesktopBackgroundPreviewStyled = styled.img<DesktopBackgroundPreviewStyledProps>`
-  background: ${(props) =>
-    props.$isBackgroundImage && props.$backgroundImage
-      ? `url(${props.$backgroundImage}) no-repeat center/cover`
-      : `${backgroundColor(props.$backgroundColor || '#000')}`};
+const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyledProps>`
+  background: ${({
+    $isBackgroundImage,
+    $backgroundImage,
+    $backgroundColor,
+    $backgroundGradient,
+    $backgroundGradientValues,
+  }) =>
+    $isBackgroundImage && $backgroundImage
+      ? `url(${$backgroundImage}) no-repeat center/cover`
+      : $backgroundGradient && $backgroundGradientValues
+      ? buildGradient($backgroundGradient, $backgroundGradientValues)
+      : $backgroundColor};
 
-  filter: ${(props) => {
-    const f = props.$filters;
-    const filters = [];
+  filter: ${({ $filters, $isBackgroundImage, $backgroundImage }) => {
+    const f = $filters || ({} as FilterValues);
+    const baseFilters = [`brightness(${f.brightness})`];
 
-    if (props.$isBackgroundImage && props.$backgroundImage) {
-      filters.push(
-        `blur(${f?.blur}px)`,
-        `contrast(${f?.contrast})`,
-        `grayscale(${f?.grayscale})`,
-        `hue-rotate(${f?.hueRotate}deg)`,
-        `invert(${f?.invert})`,
-        `saturate(${f?.saturate})`,
-        `sepia(${f?.sepia})`
-      );
-    }
-    filters.push(`brightness(${f?.brightness})`);
-    return filters.join(' ');
+    const imageFilters =
+      $isBackgroundImage && $backgroundImage
+        ? [
+            `blur(${f.blur}px)`,
+            `contrast(${f.contrast})`,
+            `grayscale(${f.grayscale})`,
+            `hue-rotate(${f.hueRotate}deg)`,
+            `invert(${f.invert})`,
+            `saturate(${f.saturate})`,
+            `sepia(${f.sepia})`,
+          ]
+        : [];
+
+    return [...imageFilters, ...baseFilters].join(' ');
   }};
 `;
 

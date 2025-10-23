@@ -1,7 +1,6 @@
-import React from 'react';
-import { Filter } from '../types/changeBackground.data.types';
 import { BackgroundPreviewConfig } from './ChangeBackgroundMenu';
 import DesktopBackgroundPreviewStyled from './DesktopBackgroundPreviewStyled';
+import { EffectValue } from '../../../../store/slices/settings/settingsSlice.types';
 
 export interface DesktopBackgroundPreviewProps {
   className?: string;
@@ -12,6 +11,9 @@ const DesktopBackgroundPreview = ({
   className,
   backgroundPreviewConfig,
 }: DesktopBackgroundPreviewProps) => {
+  const effectList = backgroundPreviewConfig.effect;
+  const activeEffect = effectList.active;
+  const effectValue = effectList.gradient[activeEffect as keyof EffectValue];
   return (
     <>
       <DesktopBackgroundPreviewStyled
@@ -19,13 +21,14 @@ const DesktopBackgroundPreview = ({
         $backgroundColor={backgroundPreviewConfig.color}
         $backgroundImage={backgroundPreviewConfig.image}
         $filters={backgroundPreviewConfig.filters}
-        className={className || 'desktop-background'}
+        className={className || 'desktop-background '}
       />
-      {backgroundPreviewConfig.effect.type !== 'none' && (
+      {activeEffect !== 'none' && (
         <DesktopBackgroundPreviewStyled
           $isBackgroundImage={false}
-          className="desktop-background__gradient"
-          $backgroundColor={backgroundPreviewConfig.effect.type}
+          className="desktop-background__gradient "
+          $backgroundGradient={activeEffect as 'linear' | 'radial' | 'conic'}
+          $backgroundGradientValue={effectValue}
         />
       )}
     </>
