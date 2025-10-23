@@ -145,7 +145,7 @@
       min-width: -webkit-fill-available;
       min-width: fit-content;
       position: relative;
-      container-type: inline-size;
+      container-type: size;
     }
 
 

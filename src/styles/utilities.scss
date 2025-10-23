@@ -28,7 +28,7 @@
   @for $i from 1 through 9 {
     $step: $i * 100;
 
-    .txt-weight-#{$i} {
+    .text-weight-#{$i} {
       font-weight: #{$step};
     }
   }
@@ -145,7 +145,7 @@
   @for $i from 0 through 10 {
     $step: 1 + $i * 0.2;
 
-    .txt-size-#{$i} {
+    .text-size-#{$i} {
       font-size: #{$step}rem;
     }
 
@@ -168,7 +168,7 @@
   $text-aligns: left, center, right, justify;
 
   @each $text-align in $text-aligns {
-    .txt-align-#{$text-align} {
+    .text-align-#{$text-align} {
       text-align: #{$text-align};
     }
   }
@@ -176,7 +176,7 @@
   $text-transforms: uppercase, lowercase, capitalize;
 
   @each $text-transform in $text-transforms {
-    .txt-#{$text-transform} {
+    .text-#{$text-transform} {
       text-transform: #{$text-transform};
     }
   }
@@ -184,7 +184,7 @@
   $text-decorations: none, line-through, underline;
 
   @each $text-decoration in $text-decorations {
-    .txt-#{$text-decoration} {
+    .text-#{$text-decoration} {
       text-decoration: #{$text-decoration};
     }
   }
@@ -199,107 +199,107 @@
     white-space: normal;
   }
 
-  .txt-color-primary {
+  .text-color-primary {
     color: var(--c-primary);
   }
 
-  .txt-color-secondary {
+  .text-color-secondary {
     color: var(--c-secondary);
   }
 
-  .txt-color-accent {
+  .text-color-accent {
     color: var(--c-accent);
   }
 
-  .txt-color-error {
+  .text-color-error {
     color: var(--c-error);
   }
 
-  .txt-color-success {
+  .text-color-success {
     color: var(--c-success);
   }
 
-  .txt-color-warning {
+  .text-color-warning {
     color: var(--c-warning);
   }
 
-  .txt-color-info {
+  .text-color-info {
     color: var(--c-info);
   }
 
-  .txt-bold {
+  .text-bold {
     font-weight: bold;
   }
 
-  .txt-regular {
+  .text-regular {
     font-weight: normal;
   }
 
-  .txt-italic {
+  .text-italic {
     font-style: italic;
   }
 
-  .txt-normal {
+  .text-normal {
     font-style: normal;
   }
 
-  .txt-decoration-none {
+  .text-decoration-none {
     text-decoration: none;
   }
 
-  .txt-linethrough {
+  .text-linethrough {
     text-decoration: line-through;
   }
 
-  .txt-underline {
+  .text-underline {
     text-decoration: underline;
   }
 
-  .txt-nowrap {
+  .text-nowrap {
     white-space: nowrap;
   }
 
-  .txt-wrap {
+  .text-wrap {
     white-space: normal;
   }
 
-  .txt-overflow-ellipsis {
+  .text-overflow-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .txt-overflow-clip {
+  .text-overflow-clip {
     overflow: hidden;
     text-overflow: clip;
     white-space: nowrap;
   }
 
-  .txt-overflow-wrap {
+  .text-overflow-wrap {
     overflow: hidden;
     text-overflow: wrap;
     white-space: normal;
   }
 
-  .txt-overflow-scroll {
+  .text-overflow-scroll {
     overflow: scroll;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-auto {
+  .text-overflow-auto {
     overflow: auto;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-visible {
+  .text-overflow-visible {
     overflow: visible;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-hidden {
+  .text-overflow-hidden {
     overflow: hidden;
     text-overflow: clip;
     white-space: normal;

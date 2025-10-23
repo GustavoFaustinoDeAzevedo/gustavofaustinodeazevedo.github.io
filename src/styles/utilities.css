@@ -79,83 +79,83 @@
     background-color: var(--bg-light) !important;
   }
 
-  .txt-color-primary {
+  .text-color-primary {
     color: var(--text-primary) !important;
   }
 
-  .txt-color-secondary {
+  .text-color-secondary {
     color: var(--text-secondary) !important;
   }
 
-  .txt-color-danger {
+  .text-color-danger {
     color: var(--text-danger) !important;
   }
 
-  .txt-color-success {
+  .text-color-success {
     color: var(--text-success) !important;
   }
 
-  .txt-color-info {
+  .text-color-info {
     color: var(--text-info) !important;
   }
 
-  .txt-color-warning {
+  .text-color-warning {
     color: var(--text-warning) !important;
   }
 
-  .txt-color-accent {
+  .text-color-accent {
     color: var(--text-accent) !important;
   }
 
-  .txt-color-error {
+  .text-color-error {
     color: var(--text-error) !important;
   }
 
-  .txt-color-muted {
+  .text-color-muted {
     color: var(--text-muted) !important;
   }
 
-  .txt-color-dark {
+  .text-color-dark {
     color: var(--text-dark) !important;
   }
 
-  .txt-color-light {
+  .text-color-light {
     color: var(--text-light) !important;
   }
 
-  .txt-3xl {
+  .text-3xl {
     font-size: var(--text-size-3xl);
   }
 
-  .txt-2xl {
+  .text-2xl {
     font-size: var(--text-size-2xl);
   }
 
-  .txt-xl {
+  .text-xl {
     font-size: var(--text-size-xl);
   }
 
-  .txt-lg {
+  .text-lg {
     font-size: var(--text-size-lg);
   }
 
-  .txt-m {
+  .text-m {
     font-size: var(--text-size-base);
   }
 
-  .txt-s {
+  .text-s {
     font-size: var(--text-size-sm);
   }
 
-  .txt-xs {
+  .text-xs {
     font-size: var(--text-size-xs);
   }
 
-  .txt-2xs {
+  .text-2xs {
     font-size: var(--text-size-2xs);
   }
 
-  .txt-3xs {
+  .text-3xs {
     font-size: var(--text-size-3xs);
   }
 
@@ -197,39 +197,39 @@
     display: inline !important;
   }
 
-  .txt-weight-1 {
+  .text-weight-1 {
     font-weight: 100 !important;
   }
 
-  .txt-weight-2 {
+  .text-weight-2 {
     font-weight: 200 !important;
   }
 
-  .txt-weight-3 {
+  .text-weight-3 {
     font-weight: 300 !important;
   }
 
-  .txt-weight-4 {
+  .text-weight-4 {
     font-weight: 400 !important;
   }
 
-  .txt-weight-5 {
+  .text-weight-5 {
     font-weight: 500 !important;
   }
 
-  .txt-weight-6 {
+  .text-weight-6 {
     font-weight: 600 !important;
   }
 
-  .txt-weight-7 {
+  .text-weight-7 {
     font-weight: 700 !important;
   }
 
-  .txt-weight-8 {
+  .text-weight-8 {
     font-weight: 800 !important;
   }
 
-  .txt-weight-9 {
+  .text-weight-9 {
     font-weight: 900 !important;
   }
 
@@ -1435,7 +1435,7 @@
   }
 
 
-  .txt-size-0 {
+  .text-size-0 {
     font-size: 1rem;
   }
 
@@ -1443,7 +1443,7 @@
     gap: 0rem;
   }
 
-  .txt-size-1 {
+  .text-size-1 {
     font-size: 1.2rem;
   }
 
@@ -1451,7 +1451,7 @@
     gap: 1rem;
   }
 
-  .txt-size-2 {
+  .text-size-2 {
     font-size: 1.4rem;
   }
 
@@ -1459,7 +1459,7 @@
     gap: 2rem;
   }
 
-  .txt-size-3 {
+  .text-size-3 {
     font-size: 1.6rem;
   }
 
@@ -1467,7 +1467,7 @@
     gap: 3rem;
   }
 
-  .txt-size-4 {
+  .text-size-4 {
     font-size: 1.8rem;
   }
 
@@ -1475,7 +1475,7 @@
     gap: 4rem;
   }
 
-  .txt-size-5 {
+  .text-size-5 {
     font-size: 2rem;
   }
 
@@ -1483,7 +1483,7 @@
     gap: 5rem;
   }
 
-  .txt-size-6 {
+  .text-size-6 {
     font-size: 2.2rem;
   }
 
@@ -1491,7 +1491,7 @@
     gap: 6rem;
   }
 
-  .txt-size-7 {
+  .text-size-7 {
     font-size: 2.4rem;
   }
 
@@ -1499,7 +1499,7 @@
     gap: 7rem;
   }
 
-  .txt-size-8 {
+  .text-size-8 {
     font-size: 2.6rem;
   }
 
@@ -1507,7 +1507,7 @@
     gap: 8rem;
   }
 
-  .txt-size-9 {
+  .text-size-9 {
     font-size: 2.8rem;
   }
 
@@ -1515,7 +1515,7 @@
     gap: 9rem;
   }
 
-  .txt-size-10 {
+  .text-size-10 {
     font-size: 3rem;
   }
 
@@ -1672,27 +1672,27 @@
   }
 
 
-  .txt-uppercase {
+  .text-uppercase {
     text-transform: uppercase;
   }
 
-  .txt-lowercase {
+  .text-lowercase {
     text-transform: lowercase;
   }
 
-  .txt-capitalize {
+  .text-capitalize {
     text-transform: capitalize;
   }
 
-  .txt-none {
+  .text-none {
     text-decoration: none;
   }
 
-  .txt-line-through {
+  .text-line-through {
     text-decoration: line-through;
   }
 
-  .txt-underline {
+  .text-underline {
     text-decoration: underline;
   }
 
@@ -1876,107 +1876,107 @@
 
 
 
-  .txt-color-primary {
+  .text-color-primary {
     color: var(--c-primary);
   }
 
-  .txt-color-secondary {
+  .text-color-secondary {
     color: var(--c-secondary);
   }
 
-  .txt-color-accent {
+  .text-color-accent {
     color: var(--c-accent);
   }
 
-  .txt-color-error {
+  .text-color-error {
     color: var(--c-error);
   }
 
-  .txt-color-success {
+  .text-color-success {
     color: var(--c-success);
   }
 
-  .txt-color-warning {
+  .text-color-warning {
     color: var(--c-warning);
   }
 
-  .txt-color-info {
+  .text-color-info {
     color: var(--c-info);
   }
 
-  .txt-bold {
+  .text-bold {
     font-weight: bold;
   }
 
-  .txt-regular {
+  .text-regular {
     font-weight: normal;
   }
 
-  .txt-italic {
+  .text-italic {
     font-style: italic;
   }
 
-  .txt-normal {
+  .text-normal {
     font-style: normal;
   }
 
-  .txt-decoration-none {
+  .text-decoration-none {
     text-decoration: none;
   }
 
-  .txt-linethrough {
+  .text-linethrough {
     text-decoration: line-through;
   }
 
-  .txt-underline {
+  .text-underline {
     text-decoration: underline;
   }
 
-  .txt-nowrap {
+  .text-nowrap {
     white-space: nowrap;
   }
 
-  .txt-wrap {
+  .text-wrap {
     white-space: normal;
   }
 
-  .txt-overflow-ellipsis {
+  .text-overflow-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .txt-overflow-clip {
+  .text-overflow-clip {
     overflow: hidden;
     text-overflow: clip;
     white-space: nowrap;
   }
 
-  .txt-overflow-wrap {
+  .text-overflow-wrap {
     overflow: hidden;
     text-overflow: wrap;
     white-space: normal;
   }
 
-  .txt-overflow-scroll {
+  .text-overflow-scroll {
     overflow: scroll;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-auto {
+  .text-overflow-auto {
     overflow: auto;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-visible {
+  .text-overflow-visible {
     overflow: visible;
     text-overflow: clip;
     white-space: normal;
   }
 
-  .txt-overflow-hidden {
+  .text-overflow-hidden {
     overflow: hidden;
     text-overflow: clip;
     white-space: normal;

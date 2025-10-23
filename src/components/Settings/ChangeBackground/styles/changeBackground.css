@@ -58,11 +58,13 @@
 
         & .change-background__aside-main {
           flex-grow: 2;
-          display: flex;
-          flex-direction: column;
+          /* display: flex;
+          flex-direction: column; */
           width: 100%;
 
           & .change-background__options-field {
+            position: sticky;
+            bottom: 0;
             width: 100%;
             border: none;
             border-top: 1px solid;
@@ -83,18 +85,20 @@
 
           & .change-background__filter-field {
             width: 100%;
-            max-height: 200px;
+            height: 50cqb;
+            /* max-height: 200px; */
             border: none;
             border-top: 1px solid;
             display: flex;
             flex-direction: column;
+
             align-items: center;
             gap: 0.2rem;
             padding: 0.5rem 0rem;
 
             & .change-background__filter-content-wrapper {
               width: 100%;
-              max-height: 100px;
+              max-height: fit-content;
               overflow-y: scroll;
 
 
@@ -139,7 +143,9 @@
           }
 
           & .change-background__picker-field {
-
+            background-color: var(--c-background1);
+            position: sticky;
+            bottom: 3rem;
             width: 100%;
             border: none;
             border-top: 1px solid;
@@ -148,7 +154,7 @@
             align-items: center;
             overflow-y: scroll;
             gap: 0.2rem;
-            padding: 0.5rem 2rem;
+            padding: 1rem 2rem;
 
             & .change-background__picker-wrapper {
               width: 100%;

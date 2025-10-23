@@ -7,7 +7,11 @@ type InputHEXProps = {
   handleChangeColor: (hex: string) => void;
 };
 
-const InputHEX = ({ language, inputColor, handleChangeColor }: InputHEXProps) => {
+const InputHEX = ({
+  language,
+  inputColor,
+  handleChangeColor,
+}: InputHEXProps) => {
   const [hex, setHex] = useState(formatHex(inputColor));
   const hexRegex = /^#([0-9A-F]{3}|[0-9A-F]{6})$/i;
 
@@ -35,7 +39,7 @@ const InputHEX = ({ language, inputColor, handleChangeColor }: InputHEXProps) =>
 
   return (
     <div className="change-background__color-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
-      <div className="txt-bold font-courier">#</div>
+      <div className="text-bold font-courier">#</div>
       <input
         autoComplete="off"
         type="text"
@@ -46,7 +50,7 @@ const InputHEX = ({ language, inputColor, handleChangeColor }: InputHEXProps) =>
         value={hex.replace('#', '')}
         onChange={handleChange}
         placeholder="RRGGBB"
-        className="change-background__color-input width-4 txt-color-info"
+        className="change-background__color-input width-4 text-color-info"
       />
     </div>
   );

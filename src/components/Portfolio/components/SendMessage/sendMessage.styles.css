@@ -1,0 +1,136 @@
+.send-message {
+  position: relative;
+  width: 100cqi;
+  height: 100cqb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .send-message__form {
+    width: 100%;
+    height: 100%;
+
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 3rem 4rem 3rem;
+
+    & .input-container {
+      position: relative;
+      min-width: 400px;
+      width: 100%;
+      height: fit-content;
+
+      & .placeholder {
+        position: absolute;
+        left: 1rem;
+        top: 0.8rem;
+        font-size: 1rem;
+        color: var(--c-text);
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      & input, & textarea {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--c-background-focus);
+        border: 1px solid var(--c-background-focus);
+        border-radius: var(--border-radius);
+        color: var(--c-text);
+        font-family: inherit;
+
+        &::placeholder {
+          color: #ffffff;
+          visibility: visible;
+        }
+
+
+        &::placeholder {
+          visibility: hidden;
+          opacity: 0.4;
+        }
+
+        &:focus::placeholder {
+          visibility: visible;
+        }
+
+
+        &:focus {
+          outline: none;
+          background-color: var(--c-background);
+        }
+      }
+    }
+
+    & h2 {
+      min-width: 400px;
+    }
+
+    & textarea {
+      min-height: 150px;
+      max-height: 50vh;
+      resize: vertical;
+      color: inherit;
+      margin-bottom: 1rem;
+    }
+
+    & button {
+      width: 100% !important;
+      min-height: 2.5rem;
+      background: var(--c-accent);
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: inherit;
+
+
+      &:hover {
+        background: var(--c-accent-hover);
+      }
+    }
+  }
+
+  @media screen {
+    @media (max-width: 600px) {
+      & .send-message__form {
+
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 600px;
+
+        & .input-container {
+          min-width: 300px !important;
+          max-width: 600px !important;
+        }
+
+        input, textarea, button {
+          border-radius: 0 !important;
+          width: 100% !important;
+        }
+
+        h2 {
+          min-width: 300px !important;
+        }
+
+
+        button {
+          position: sticky;
+          bottom: 0;
+          min-width: 100% !important;
+
+        }
+
+        & input, & textarea {
+          margin-bottom: 0rem !important;
+        }
+
+
+      }
+    }
+  }
+}
