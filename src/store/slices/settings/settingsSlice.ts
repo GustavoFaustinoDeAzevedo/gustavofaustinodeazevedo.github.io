@@ -14,7 +14,7 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
   ? 'por'
   : 'eng';
 
-const defaultBackgroundColor = '#1d1d1d';
+const defaultBackgroundColor = '#1c1c1c';
 
 const defaultBackgroundColorContrast = '#ffffff';
 const defaultFilterPreset = 'original';
@@ -56,7 +56,8 @@ const isMobile = checkIsMobile();
 const viewportWidth = window.innerWidth;
 const viewportHeight = window.innerHeight;
 
-export const desktopBackgroundInitialImage = `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
+export const desktopBackgroundInitialImage =
+  'images/Wallpapers/pexels-rpnickson-2559941.jpg'; // `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
 
 const initialState: SettingsState = {
   language: defaultLanguage,
