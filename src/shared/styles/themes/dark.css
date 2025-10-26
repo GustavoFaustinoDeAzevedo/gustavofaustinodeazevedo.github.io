@@ -1,17 +1,17 @@
 .dark {
   /* Cores para modo escuro */
-  --color-primary: #0d6efd !important;
-  --color-secondary: #6c757d !important;
-  --color-success: #198754 !important;
-  --color-danger: #dc3545 !important;
-  --color-warning: #ffc107 !important;
-  --color-info: #0dcaf0 !important;
-  --color-light: #e0e0e0 !important;
-  --color-dark: #000000 !important;
-  --color-muted: #adb5bd !important;
+  --color-primary: #0d6efd;
+  --color-secondary: #6c757d;
+  --color-success: #198754;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #0dcaf0;
+  --color-light: #e0e0e0;
+  --color-dark: #000000;
+  --color-muted: #adb5bd;
 
   /* Fundo alternativo escuro */
-  --bg-body: #121212 !important;
-  --bg-surface: #1e1e1e !important;
-  --text-body: #f8f9fa !important;
+  --bg-body: #121212;
+  --bg-surface: #1e1e1e;
+  --text-body: #f8f9fa;
 }

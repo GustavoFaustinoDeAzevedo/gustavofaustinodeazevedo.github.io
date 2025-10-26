@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+
+import './app.styles.css';
 
 import { RootState } from '@/store';
 
@@ -19,11 +21,15 @@ import useChangeTheme from '@/components/Settings/ChangeTheme/hooks/useChangeThe
 import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
 
 import actions from '@/store/actions';
+import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
+import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 
 gsap.registerPlugin(useGSAP);
 
 const App = () => {
+  const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
   const isMobile = useIsMobile();
+  const loaded = useBackgroundImageLoad(desktopBackgroundInitialImage);
   const { theme } = useChangeTheme();
   const desktopRef = useRef<HTMLDivElement | null>(null);
   const isUserBrowserDarkMode = useUserBrowserDarkMode();
@@ -57,34 +63,54 @@ const App = () => {
 
   return (
     <>
-      <PageMeta
-        focusedWindow={focusedWindow}
-        windowList={windowList}
-        isUserBrowserDarkMode={isUserBrowserDarkMode}
-        language={language}
-      />
+      {!loaded && (
+        <div className="loading-screen flex justify-end items-end padding-4">
+          <p className="animate-spin text-3xl z-tooltip">💿</p>
+        </div>
+      )}
+      {loaded && (
+        <>
+          {isLoadingAnimation && (
+            <>
+              <div
+                className="loading-screen__ending-layer-1"
+                onAnimationEnd={() => setIsLoadingAnimation(false)}
+              ></div>
 
-      <ThemeProvider theme={theme}>
-        <div className="desktop" ref={desktopRef}>
-          <Desktop
-            currentNode="desktop"
-            language={language}
+              {/* <div
+                className="loading-screen__ending-layer-2"
+                onAnimationEnd={() => setIsLoadingAnimation(false)}
+              ></div> */}
+            </>
+          )}
+          <PageMeta
+            focusedWindow={focusedWindow}
             windowList={windowList}
-            isMobile={isMobile}
-            backgroundImage={backgroundImage}
-            backgroundColorContrast={backgroundColorContrast}
-            children={
-              rootFolder.children?.[0]?.children?.[0]?.children?.[0]
-                ?.children ?? []
-            } // temporário
-            filesActions={filesActions}
+            isUserBrowserDarkMode={isUserBrowserDarkMode}
+            language={language}
           />
-          <RefsProvider>
-            {windowsStack}
-            <Taskbar isMobile={isMobile} />
-          </RefsProvider>
 
-          {/* 
+          <ThemeProvider theme={theme}>
+            <div className="desktop" ref={desktopRef}>
+              <Desktop
+                currentNode="desktop"
+                language={language}
+                windowList={windowList}
+                isMobile={isMobile}
+                backgroundImage={backgroundImage}
+                backgroundColorContrast={backgroundColorContrast}
+                children={
+                  rootFolder.children?.[0]?.children?.[0]?.children?.[0]
+                    ?.children ?? []
+                } // temporário
+                filesActions={filesActions}
+              />
+              <RefsProvider>
+                {windowsStack}
+                <Taskbar isMobile={isMobile} />
+              </RefsProvider>
+
+              {/* 
             // Uncomment to enable custom context menu
             {contextMenu.visible && (
               <ContextMenu
@@ -95,8 +121,10 @@ const App = () => {
               />
             )}
           */}
-        </div>
-      </ThemeProvider>
+            </div>
+          </ThemeProvider>
+        </>
+      )}
     </>
   );
 };
