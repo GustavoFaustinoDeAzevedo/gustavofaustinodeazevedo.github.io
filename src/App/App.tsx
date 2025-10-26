@@ -29,7 +29,7 @@ gsap.registerPlugin(useGSAP);
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
   const isMobile = useIsMobile();
-  const loaded = useBackgroundImageLoad(desktopBackgroundInitialImage);
+  const loaded = useBackgroundImageLoad(desktopBackgroundInitialImage, 'images/Wallpapers/pexels-rpnickson-2559941.jpg', 15000);
   const { theme } = useChangeTheme();
   const desktopRef = useRef<HTMLDivElement | null>(null);
   const isUserBrowserDarkMode = useUserBrowserDarkMode();
