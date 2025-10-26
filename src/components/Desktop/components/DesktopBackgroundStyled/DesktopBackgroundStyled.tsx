@@ -16,7 +16,7 @@ const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
       : props.$backgroundColor};
 
   filter: ${(props) => {
-    const f = props.$filters;
+    const f = props?.$filters?.values;
     const filters = [];
 
     if (props.$isBackgroundImage && props.$backgroundImage) {
@@ -24,9 +24,9 @@ const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
         `blur(${f?.blur}px)`,
         `contrast(${f?.contrast})`,
         `grayscale(${f?.grayscale})`,
-        `hue-rotate(${f?.hueRotate}deg)`,
+        `hue-rotate(${f?.hue}deg)`,
         `invert(${f?.invert})`,
-        `saturate(${f?.saturate})`,
+        `saturate(${f?.saturation})`,
         `sepia(${f?.sepia})`
       );
     }

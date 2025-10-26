@@ -1,7 +1,7 @@
 @layer components {
   .change-background__container {
-    width: 100%;
-    height: 100%;
+    width: 100cqi;
+    height: 100cqb;
     display: flex;
     flex-direction: column;
 
@@ -51,20 +51,14 @@
 
         & .change-background__aside-header {
           width: 100%;
-          padding: 2rem 0;
+          padding: 2rem 0 0 0;
           text-align: center;
           font-weight: bold;
-        }
-
-        & .change-background__aside-main {
-          flex-grow: 2;
-          /* display: flex;
-          flex-direction: column; */
-          width: 100%;
 
           & .change-background__options-field {
-            position: sticky;
-            bottom: 0;
+            margin-top: 1.5rem;
+            text-align: left;
+            font-weight: normal;
             width: 100%;
             border: none;
             border-top: 1px solid;
@@ -82,21 +76,32 @@
               justify-content: left;
             }
           }
+        }
+
+        & .change-background__aside-main {
+          min-height: 30cqb;
+          position: relative;
+          flex-grow: 2;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
 
           & .change-background__filter-field {
             width: 100%;
-            height: 50cqb;
-            /* max-height: 200px; */
+            /* height: 50cqb; */
+            height: 100cqb;
+            max-height: 40cqb;
             border: none;
             border-top: 1px solid;
             display: flex;
             flex-direction: column;
-
+            overflow: hidden;
             align-items: center;
             gap: 0.2rem;
             padding: 0.5rem 0rem;
 
             & .change-background__filter-content-wrapper {
+              flex-grow: 2;
               width: 100%;
               max-height: fit-content;
               overflow-y: scroll;
@@ -144,8 +149,6 @@
 
           & .change-background__picker-field {
             background-color: var(--c-background1);
-            position: sticky;
-            bottom: 3rem;
             width: 100%;
             border: none;
             border-top: 1px solid;
@@ -154,7 +157,7 @@
             align-items: center;
             overflow-y: scroll;
             gap: 0.2rem;
-            padding: 1rem 2rem;
+            padding: 2rem;
 
             & .change-background__picker-wrapper {
               width: 100%;

@@ -12,14 +12,17 @@ export interface BackgroundPayload {
 }
 
 export type FilterValues = {
-  blur: number;
-  brightness: number;
-  contrast: number;
-  grayscale: number;
-  hueRotate: number;
-  invert: number;
-  saturate: number;
-  sepia: number;
+  preset: string;
+  values: {
+    blur: number;
+    brightness: number;
+    contrast: number;
+    grayscale: number;
+    hue: number;
+    invert: number;
+    saturation: number;
+    sepia: number;
+  };
 };
 
 export type EffectValue = {
@@ -36,6 +39,7 @@ export type EffectValues = {
 //interface de estado para o slice de configurações
 export interface SettingsState {
   language: Language;
+  isMobile: boolean;
   desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;

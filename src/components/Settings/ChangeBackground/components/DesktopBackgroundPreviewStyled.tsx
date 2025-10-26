@@ -6,7 +6,7 @@ interface DesktopBackgroundPreviewStyledProps {
   $isBackgroundImage?: boolean;
   $backgroundImage?: string;
   $backgroundColor?: string;
-  $filters?: FilterValues;
+  $filters?: FilterValues['values'];
   $backgroundGradient?: 'linear' | 'radial' | 'conic';
   $backgroundGradientValues?: {
     deg?: number;
@@ -49,7 +49,7 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
       : $backgroundColor};
 
   filter: ${({ $filters, $isBackgroundImage, $backgroundImage }) => {
-    const f = $filters || ({} as FilterValues);
+    const f = $filters || ({} as FilterValues['values']);
     const baseFilters = [`brightness(${f.brightness})`];
 
     const imageFilters =
@@ -58,9 +58,9 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
             `blur(${f.blur}px)`,
             `contrast(${f.contrast})`,
             `grayscale(${f.grayscale})`,
-            `hue-rotate(${f.hueRotate}deg)`,
+            `hue-rotate(${f.hue}deg)`,
             `invert(${f.invert})`,
-            `saturate(${f.saturate})`,
+            `saturate(${f.saturation})`,
             `sepia(${f.sepia})`,
           ]
         : [];

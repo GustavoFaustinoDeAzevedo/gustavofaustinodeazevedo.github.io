@@ -1,16 +1,16 @@
 .high-contrast {
   /* Cores para acessibilidade */
-  --color-primary: #000000 !important;
-  --color-secondary: #ffffff !important;
-  --color-success: #00ff00 !important;
-  --color-danger: #ff0000 !important;
-  --color-warning: #ffff00 !important;
-  --color-info: #00ffff !important;
-  --color-light: #ffffff !important;
-  --color-dark: #000000 !important;
-  --color-muted: #cccccc !important;
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-success: #00ff00;
+  --color-danger: #ff0000;
+  --color-warning: #ffff00;
+  --color-info: #00ffff;
+  --color-light: #ffffff;
+  --color-dark: #000000;
+  --color-muted: #cccccc;
 
   /* Fundo e texto */
-  --bg-body: #ffffff !important;
-  --text-body: #000000 !important;
+  --bg-body: #ffffff;
+  --text-body: #000000;
 }

@@ -1,15 +1,10 @@
 //TODO: Adicionar opções para gradiente assim como a visualização
 
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
+import { presetList } from '../data/imageFilters.data';
 import actions from '@/store/actions';
 import BackgroundControl from './BackgroundControl';
 
@@ -88,6 +83,10 @@ const ChangeBackgroundMenu = ({
 
   const handleChangeBackgroundState = useCallback(
     (key: string, value: any) => {
+      console.log(
+        value,
+        '==============================================================================='
+      );
       setBackgroundPreviewConfig((prev) => {
         if (prev[key as keyof BackgroundPreviewConfig] === value) return prev;
         return {
@@ -107,7 +106,10 @@ const ChangeBackgroundMenu = ({
           ...prev,
           filters: {
             ...prev.filters,
-            [key]: value,
+            values: {
+              ...prev.filters.values,
+              [key]: value,
+            },
           },
         };
       });
@@ -153,6 +155,26 @@ const ChangeBackgroundMenu = ({
       desktopBackgroundFilter: backgroundPreviewConfig.filters,
     });
   };
+  console.log(
+    backgroundPreviewConfig,
+    '===================================================================================='
+  );
+
+  const handleFilterSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedPreset = presetList[language as Language].find(
+      (preset) => preset.id === e.target.value
+    );
+    console.log(
+      backgroundPreviewConfig,
+      '===================================================================================='
+    );
+    if (selectedPreset) {
+      handleChangeBackgroundState('filters', {
+        preset: selectedPreset.id,
+        values: selectedPreset.values,
+      });
+    }
+  };
 
   const handleSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleChangeBackgroundState('effect', {
@@ -182,7 +204,7 @@ const ChangeBackgroundMenu = ({
     options: displayChoicesRoot?.choices,
     onChange: handleRadioState as any,
     name: 'backgroundDisplay',
-    fieldsetLegend: displayChoicesContent?.label,
+    fieldsetLegend: displayChoicesRoot?.legend,
     selectedValue: backgroundPreviewConfig.display,
   };
 
@@ -199,7 +221,7 @@ const ChangeBackgroundMenu = ({
     //     : undefined,
     inputNumberClass: 'change-background__filter-input-number',
     sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
-    sliderInitialValues: backgroundPreviewConfig.filters,
+    sliderInitialValues: backgroundPreviewConfig.filters.values,
   };
 
   const sliderEffectsProps = {
@@ -233,15 +255,56 @@ const ChangeBackgroundMenu = ({
         <aside className="change-background__aside border-muted">
           <header className="change-background__aside-header">
             <h3>{displayChoicesContent?.settings?.title}</h3>
+            <Radio {...radioProps} />
           </header>
           <main className="change-background__aside-main ">
-            <Radio {...radioProps} />
             {backgroundPreviewConfig.display === 'image' ? (
               <fieldset className="change-background__filter-field border-muted">
-                <legend className="margin-left-2">
+                <legend className="margin-left-2 ">
                   {displayChoicesContent?.settings?.filter?.legend}
                 </legend>
-                <div className="change-background__filter-content-wrapper border-muted overflow-y-scroll ">
+                <label
+                  htmlFor="filterSelector"
+                  className="flex gap-1 margin-bottom-1"
+                  area-label={
+                    language === 'por'
+                      ? 'Filtros Predefinidos'
+                      : 'Preset Filters'
+                  }
+                  title={
+                    language === 'por'
+                      ? 'Filtros Predefinidos'
+                      : 'Preset Filters'
+                  }
+                >
+                  <p className="font-courier ">
+                    {language === 'por' ? 'Predefinidos:' : 'Presets:'}
+                  </p>
+                  <select
+                    id="filterSelector"
+                    name="filterSelector"
+                    aria-label={
+                      language === 'por'
+                        ? 'Estilo de Gradiente'
+                        : 'Gradient Style'
+                    }
+                    title={
+                      language === 'por'
+                        ? 'Estilo de Gradiente'
+                        : 'Gradient Style'
+                    }
+                    className="font-courier border-radius-3px bg-dark text-color-light"
+                    onChange={handleFilterSelector}
+                    value={backgroundPreviewConfig?.filters?.preset}
+                  >
+                    {Object.values(presetList[language] || {}).map((preset) => (
+                      <option key={preset.id} value={preset.id}>
+                        {preset.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div className="change-background__filter-content-wrapper  overflow-y-scroll bg-dark ">
                   <Slider {...sliderFiltersProps} />
                 </div>
               </fieldset>
@@ -277,7 +340,7 @@ const ChangeBackgroundMenu = ({
               //   {backgroundPreviewConfig?.effect?.active !== 'none' && (
               //     <Slider {...sliderEffectsProps} />
               //   )}
-              // </fieldset>
+              // </fieldset> //TODO Adicionar default pra opção de filtro, além de tentar colocar opção de imagem aleatória ou não
             )}
             <BackgroundControl {...backgroundControlProps} />
           </main>

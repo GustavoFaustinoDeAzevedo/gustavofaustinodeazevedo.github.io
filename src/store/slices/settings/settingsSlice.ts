@@ -4,6 +4,7 @@ import {
   Language,
   BackgroundPayload,
 } from './settingsSlice.types';
+import { useIsMobile } from '@/shared';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
 
 const navigatorLanguage =
@@ -16,15 +17,21 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
 const defaultBackgroundColor = '#1d1d1d';
 
 const defaultBackgroundColorContrast = '#ffffff';
+const defaultFilterPreset = 'original';
 const defaultFilterValues = {
   brightness: 1,
   contrast: 1,
-  saturate: 1,
+  saturation: 1,
   grayscale: 0,
-  hueRotate: 0,
+  hue: 0,
   blur: 0,
   invert: 0,
   sepia: 0,
+};
+
+const defaultFilter = {
+  preset: defaultFilterPreset,
+  values: defaultFilterValues,
 };
 
 const defaultEffectValues = {
@@ -36,14 +43,30 @@ const defaultEffectValues = {
   },
 };
 
+const checkIsMobile = (): boolean => {
+  const screenCheck: boolean = window.matchMedia('(max-width: 768px)').matches;
+  const userAgentCheck: boolean =
+    /android|iphone|ipad|ipod|blackberry|windows phone/i.test(
+      navigator.userAgent
+    );
+  return screenCheck || userAgentCheck;
+};
+const isMobile = checkIsMobile();
+
+const viewportWidth = window.innerWidth;
+const viewportHeight = window.innerHeight;
+
+export const desktopBackgroundInitialImage = `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
+
 const initialState: SettingsState = {
   language: defaultLanguage,
+  isMobile: isMobile,
   desktopBackgroundDefaultColor: defaultBackgroundColor,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
-  desktopBackgroundFilter: defaultFilterValues,
+  desktopBackgroundFilter: defaultFilter,
   desktopBackgroundEffect: defaultEffectValues,
-  desktopBackgroundImage: '/images/netti_Nu_Nu-cat-6342145_640.jpg',
+  desktopBackgroundImage: desktopBackgroundInitialImage, //'/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
   isDoubleClick: true,
 };

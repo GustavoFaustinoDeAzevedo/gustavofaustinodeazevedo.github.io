@@ -20,17 +20,17 @@ const DesktopBackgroundPreview = ({
         $isBackgroundImage={backgroundPreviewConfig.isBackgroundPreviewImage}
         $backgroundColor={backgroundPreviewConfig.color}
         $backgroundImage={backgroundPreviewConfig.image}
-        $filters={backgroundPreviewConfig.filters}
+        $filters={backgroundPreviewConfig.filters.values}
         className={className || 'desktop-background '}
       />
-      {activeEffect !== 'none' && (
+      {/* {activeEffect !== 'none' && (
         <DesktopBackgroundPreviewStyled
           $isBackgroundImage={false}
           className="desktop-background__gradient "
           $backgroundGradient={activeEffect as 'linear' | 'radial' | 'conic'}
-          $backgroundGradientValue={effectValue}
+          // $backgroundGradientValue={effectValue}
         />
-      )}
+      )} */}
     </>
   );
 };

@@ -25,4 +25,5 @@
 @import './utilities/accessibility.css';
 @import './utilities/borders.css';
 @import './utilities/shadows.css';
-@import './utilities/colors.css'
+@import './utilities/colors.css';
+@import './utilities/loading-animations.css';

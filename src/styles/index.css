@@ -10,4 +10,5 @@
 @import '../components/Portfolio/index.css';
 @import '../apps/index.css';
 @import './utilities.css';
-@import '../scss/main.css';
+/* @import '../scss/main.css'; */
+@import '../shared/styles/main.css';
