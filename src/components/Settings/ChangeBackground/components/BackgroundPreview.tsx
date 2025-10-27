@@ -15,7 +15,7 @@ const DesktopBackgroundPreview = ({
   const activeEffect = effectList.active;
   const effectValue = effectList.gradient[activeEffect as keyof EffectValue];
   return (
-    <>
+    <div className={`${className}-container`}>
       <DesktopBackgroundPreviewStyled
         $isBackgroundImage={backgroundPreviewConfig.isBackgroundPreviewImage}
         $backgroundColor={backgroundPreviewConfig.color}
@@ -23,15 +23,8 @@ const DesktopBackgroundPreview = ({
         $filters={backgroundPreviewConfig.filters.values}
         className={className || 'desktop-background '}
       />
-      {/* {activeEffect !== 'none' && (
-        <DesktopBackgroundPreviewStyled
-          $isBackgroundImage={false}
-          className="desktop-background__gradient "
-          $backgroundGradient={activeEffect as 'linear' | 'radial' | 'conic'}
-          // $backgroundGradientValue={effectValue}
-        />
-      )} */}
-    </>
+      <div className={`${className}-layer-1`}></div>
+    </div>
   );
 };
 

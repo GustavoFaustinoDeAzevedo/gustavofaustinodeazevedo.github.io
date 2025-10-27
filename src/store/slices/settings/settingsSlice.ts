@@ -14,7 +14,7 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
   ? 'por'
   : 'eng';
 
-const defaultBackgroundColor = '#1c1c1c';
+const defaultBackgroundColor = '#013232';
 
 const defaultBackgroundColorContrast = '#ffffff';
 const defaultFilterPreset = 'original';

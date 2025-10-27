@@ -1,23 +1,15 @@
 .loading-screen {
   /* background-image: linear-gradient(#151515 2px, transparent 2px), linear-gradient(to right, #151515 2px, transparent 2px);
   background-size: 4rem 4rem; */
-  background-image: radial-gradient(#1c1c1c 10px, transparent 10px), radial-gradient(#1c1c1c 10px, transparent 10px);
+  background-image: radial-gradient(#111111 10px, transparent 10px), radial-gradient(#111111 10px, transparent 10px);
   background-size: 37px 37px;
   background-position: 0 0, 18.5px 18.5px;
-  background-color: #202020;
+  background-color: #101010;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & .loading-screen__icon {
-    background: conic-gradient(#2d0387);
-
-    & p {
-      filter: drop-shadow(0px 0px 3px #000000ff);
-    }
-  }
 
 }
 
@@ -31,43 +23,13 @@
   width: 100vw;
   height: 100vh;
   /* background-color: #101010; */
-  background-image: radial-gradient(#1c1c1c 10px, transparent 10px), radial-gradient(#1c1c1c 10px, transparent 10px);
+  background-image: radial-gradient(#111111 10px, transparent 10px), radial-gradient(#111111 10px, transparent 10px);
   background-size: 37px 37px;
   background-position: 0 0, 18.5px 18.5px;
-  background-color: #202020;
-
+  background-color: #101010;
   overflow: hidden;
-  /* animation-delay: 2s; */
-  animation: translateBackgroundFade 2s ease-out forwards 0.5s;
-  /* 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100vw;
-    height: 50vh;
-    background-image: repeating-conic-gradient(#101010 0% 25%, #151515 0% 50%);
-    background-position: 0 0, 32px 32px;
-    background-size: 64px 64px;
-    background-color: #464646;
-    animation: translateBackgroundX 3s ease-out forwards;
+  animation: translateBackgroundFade 0.5s ease-out forwards 0.5s;
 
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50vw;
-    height: 100vh;
-    background-image: repeating-conic-gradient(#101010 0% 25%, #151515 0% 50%);
-    background-position: 0 0, 32px 32px;
-    background-size: 64px 64px;
-    background-color: #464646;
-    animation: translateBackgroundY 3s ease-out forwards;
-  } */
 }
 
 .loading-screen__ending-layer-2 {

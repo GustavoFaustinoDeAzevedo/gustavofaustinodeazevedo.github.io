@@ -247,9 +247,10 @@ const ChangeBackgroundMenu = ({
           <h3 className="change-background__title">
             {displayChoicesContent?.title}
           </h3>
+
           <DesktopBackgroundPreview
             backgroundPreviewConfig={backgroundPreviewConfig}
-            className={'change-background__preview border-muted'}
+            className={'change-background__preview'}
           />
         </main>
         <aside className="change-background__aside border-muted">
