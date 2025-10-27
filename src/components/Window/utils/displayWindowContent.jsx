@@ -9,7 +9,6 @@ import {
 import BrowserSimulator from '@/components/BrowserSimulator';
 import TaskManager from '@/components/TaskManager';
 import { ChangeBackgroundMenu } from '@/components/Settings';
-import Tests from '@/components/Tests';
 import AnimatedInput from '../components/AnimatedInput';
 import Button from '@/components/ui/Button';
 
@@ -55,9 +54,6 @@ const displayWindowContent = (
         }
         children={children}
       />
-    ),
-    tests: () => (
-      <Tests data-initial-dimension='{"width": "500px", "height": "400px"}' />
     ),
     calculator: () => <Calculator />,
     notepad: () => <Notepad windowId={windowId} />,

@@ -2,12 +2,11 @@ import Window from './Window';
 import useFilesActions from '@/store/actions/useFilesActions';
 import useSettingsActions from '@/store/actions/useSettingsActions';
 import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
-import { Ref, useCallback, useMemo, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import actions from '@/store/actions';
 import createWindowHandlers from '../utils/createWindowHandlers';
 import flattenWindowParams from '../utils/flattenWindowParams';
 import useRefs from '@/contexts/useRefs';
-
 
 type WindowActions = ReturnType<typeof useWindowActions>;
 type FilesActions = ReturnType<typeof useFilesActions>;

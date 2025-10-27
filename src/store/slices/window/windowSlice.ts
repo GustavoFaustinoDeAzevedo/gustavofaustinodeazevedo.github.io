@@ -16,6 +16,7 @@ import {
   newFile,
 } from './windowSlice.utils';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
+import { Language } from '../settings/settingsSlice.types';
 
 const windowSlice = createSlice({
   name: 'window',
@@ -70,10 +71,6 @@ const windowSlice = createSlice({
           foundSameWindow.windowState
         ) {
           state.focusedWindow = foundSameWindow.windowId;
-          foundSameWindow.position.lastX = foundSameWindow.position.x;
-          foundSameWindow.position.lastY = foundSameWindow.position.y;
-          foundSameWindow.size.lastWidth = foundSameWindow.size.width;
-          foundSameWindow.size.lastHeight = foundSameWindow.size.height;
           foundSameWindow.windowState.requests.restore = true;
           return;
         }
@@ -96,7 +93,10 @@ const windowSlice = createSlice({
           restore: false,
           focus: true,
           close: false,
-          maximize: isRequestingMaximize,
+          maximize:
+            typeof isRequestingMaximize === 'boolean'
+              ? isRequestingMaximize
+              : false,
           minimize: false,
         },
       };

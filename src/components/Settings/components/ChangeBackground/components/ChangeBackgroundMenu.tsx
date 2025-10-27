@@ -10,7 +10,6 @@ import BackgroundControl from './BackgroundControl';
 
 import {
   BackgroundPreviewDisplay,
-  ChangeBackgroundProps,
 } from '../types/changeBackground.types';
 import { Slider, Radio, Button } from '@/components/ui';
 import {
@@ -31,10 +30,8 @@ export interface BackgroundPreviewConfig {
 }
 
 const ChangeBackgroundMenu = ({
-  handleUpdateWindowContent,
   language,
-  content,
-}: ChangeBackgroundProps) => {
+}: { language: Language }) => {
   // Valores armazenados no redux ==========================================
 
   const storedDesktopBackgroundColor = useSelector(
@@ -187,9 +184,7 @@ const ChangeBackgroundMenu = ({
 
   const backgroundControlProps = {
     handleChangeBackgroundState,
-    handleUpdateWindowContent,
     language,
-    content,
     defaultDesktopColor: storedDesktopBackgroundDefaultColor,
     displayChoicesContent,
     backgroundPreviewColor: backgroundPreviewConfig.color,

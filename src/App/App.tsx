@@ -17,7 +17,6 @@ import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';
 
-import useChangeTheme from '@/components/Settings/ChangeTheme/hooks/useChangeTheme';
 import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
 
 import actions from '@/store/actions';
@@ -29,8 +28,11 @@ gsap.registerPlugin(useGSAP);
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
   const isMobile = useIsMobile();
-  const loaded = useBackgroundImageLoad(desktopBackgroundInitialImage, 'images/Wallpapers/pexels-rpnickson-2559941.jpg', 15000);
-  const { theme } = useChangeTheme();
+  const loaded = useBackgroundImageLoad(
+    desktopBackgroundInitialImage,
+    'images/Wallpapers/pexels-rpnickson-2559941.jpg',
+    15000
+  );
   const desktopRef = useRef<HTMLDivElement | null>(null);
   const isUserBrowserDarkMode = useUserBrowserDarkMode();
   const language = useSelector((state: RootState) => state.settings.language);
@@ -46,6 +48,7 @@ const App = () => {
   const focusedWindow = useSelector(
     (state: RootState) => state.window.focusedWindow
   );
+  const windowActions = actions.useWindowActions();
   const rootFolder = useSelector((state: RootState) => state.file.filesList);
 
   const filesActions = actions.useFilesActions();
@@ -57,6 +60,7 @@ const App = () => {
     desktopRef,
     windowList,
     focusedWindow,
+    windowActions,
     language,
     filesActions,
   });
@@ -90,27 +94,26 @@ const App = () => {
             language={language}
           />
 
-          <ThemeProvider theme={theme}>
-            <div className="desktop" ref={desktopRef}>
-              <Desktop
-                currentNode="desktop"
-                language={language}
-                windowList={windowList}
-                isMobile={isMobile}
-                backgroundImage={backgroundImage}
-                backgroundColorContrast={backgroundColorContrast}
-                children={
-                  rootFolder.children?.[0]?.children?.[0]?.children?.[0]
-                    ?.children ?? []
-                } // temporário
-                filesActions={filesActions}
-              />
-              <RefsProvider>
-                {windowsStack}
-                <Taskbar isMobile={isMobile} />
-              </RefsProvider>
+          <div className="desktop" ref={desktopRef}>
+            <Desktop
+              currentNode="desktop"
+              language={language}
+              windowList={windowList}
+              isMobile={isMobile}
+              backgroundImage={backgroundImage}
+              backgroundColorContrast={backgroundColorContrast}
+              children={
+                rootFolder.children?.[0]?.children?.[0]?.children?.[0]
+                  ?.children ?? []
+              } // temporário
+              filesActions={filesActions}
+            />
+            <RefsProvider>
+              {windowsStack}
+              <Taskbar isMobile={isMobile} />
+            </RefsProvider>
 
-              {/* 
+            {/* 
             // Uncomment to enable custom context menu
             {contextMenu.visible && (
               <ContextMenu
@@ -121,8 +124,7 @@ const App = () => {
               />
             )}
           */}
-            </div>
-          </ThemeProvider>
+          </div>
         </>
       )}
     </>

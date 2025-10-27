@@ -36,11 +36,9 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 }
 
 root.render(
-  <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Provider store={store}>
         <App />
       </Provider>
     </ErrorBoundary>
-  </React.StrictMode>
 );
