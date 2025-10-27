@@ -1,4 +1,4 @@
-export const ConsoleCommand = ({children}) => {
+export const ConsoleCommand = ({ language, children }) => {
   return <text className="console-command">{children}</text>;
 };
 

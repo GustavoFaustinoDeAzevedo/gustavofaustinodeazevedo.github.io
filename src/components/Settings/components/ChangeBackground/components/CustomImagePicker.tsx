@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Button from '../../../ui/Button';
+import Button from '@/components/ui/Button';
 import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 type Translations = {
@@ -10,7 +10,6 @@ type Translations = {
 const CustomImagePicker = ({
   language,
   handleChangeBackgroundState,
-  handleUpdateWindowContent,
   displayChoicesContent,
   backgroundPreviewImage,
 }: ChangeBackgroundProps) => {

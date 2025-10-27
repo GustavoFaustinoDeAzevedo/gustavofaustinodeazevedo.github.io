@@ -1,6 +1,8 @@
 import { ListFiles } from '@/components/FilesExplorer';
 
-import displayWindowContent from '../utils/displayWindowContent';
+// import displayWindowContent from '../utils/displayWindowContent';
+
+import { returnWindowContent } from '@/store/slices/window/windowSlice.data';
 
 const WindowContent = ({
   windowId,
@@ -18,7 +20,7 @@ const WindowContent = ({
   //O randomString representa uma string aleatória que é criada de acordo com a data, hora e minuto atual usada para identificar a janela.
   //O calculo pode ser encontrado em file:scr/store/settings/settingsSlice.ts
   const contentId = windowId.split('#')[1];
-  const windowContent = displayWindowContent(contentId, {
+  const windowContent = returnWindowContent(contentId, {
     windowId: currentNode,
     language,
     src,

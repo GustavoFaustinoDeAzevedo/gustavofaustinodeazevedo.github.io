@@ -34,6 +34,9 @@ const buildGradient = (
   }
 };
 
+const temporaryGradient = (backgroundColor: string) =>
+  `linear-gradient(50deg,${backgroundColor}30 0%, ${backgroundColor}60 33%, ${backgroundColor}90 66%,  ${backgroundColor} 100%)`;
+
 const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyledProps>`
   background: ${({
     $isBackgroundImage,
@@ -46,7 +49,7 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
       ? `url(${$backgroundImage}) no-repeat center/cover`
       : $backgroundGradient && $backgroundGradientValues
       ? buildGradient($backgroundGradient, $backgroundGradientValues)
-      : $backgroundColor};
+      : temporaryGradient($backgroundColor || '#000000')};
 
   filter: ${({ $filters, $isBackgroundImage, $backgroundImage }) => {
     const f = $filters || ({} as FilterValues['values']);

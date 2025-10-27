@@ -5,7 +5,6 @@ export type BackgroundPreviewDisplay = 'image' | 'color';
 
 export interface ChangeBackgroundProps {
   handleChangeBackgroundState: (key: string, value: string) => void;
-  handleUpdateWindowContent: (content: string) => void;
   language: Language;
   content?: {};
   backgroundPreviewImage?: string;

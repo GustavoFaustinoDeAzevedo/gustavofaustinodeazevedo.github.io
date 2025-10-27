@@ -1,6 +1,15 @@
-import React, { useRef, useMemo, useCallback, useEffect } from 'react';
+import React, {
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+  use,
+  useState,
+} from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+
+import { ErrorBoundary } from 'react-error-boundary';
 
 import WindowHeader from './windowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
@@ -9,8 +18,18 @@ import createWindowDraggable from '../utils/createWindowDraggable';
 import useRefs from '@/contexts/useRefs';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import { useIsMobile } from '@/shared/hooks';
+import { UseWindowLifecycleProps } from '../types/hooks.types';
 
 gsap.registerPlugin(useGSAP);
+
+type WindowProps = {
+  // className?: string;
+  windowParams: any;
+  windowHandlers: any;
+  desktopRef: React.RefObject<HTMLDivElement | null>;
+  filesActions: any;
+  isMobile: boolean;
+};
 
 const Window = ({
   // className,
@@ -19,7 +38,8 @@ const Window = ({
   desktopRef,
   filesActions,
   isMobile,
-}) => {
+}: WindowProps) => {
+  const [errorOcurred, setErrorOcurred] = useState(false);
   //props vindos do pai =====================================================================
 
   const {
@@ -93,6 +113,13 @@ const Window = ({
     };
   }, [windowRef]);
 
+  //Função para verificar erros no conteúdo da janela=========================
+
+  const ErrorFallback = () => {
+    setErrorOcurred(true);
+    return null;
+  };
+
   //Gerenciamento do ciclo de vida da janela ===================================
 
   useWindowLifecycle({
@@ -105,7 +132,7 @@ const Window = ({
     isMobile,
     getWindowInfo,
     createWindowDraggable,
-  });
+  } as UseWindowLifecycleProps);
 
   //hook para lidar com o foco ao clicar fora da janela ========================
 
@@ -118,19 +145,23 @@ const Window = ({
   //JSX ========================================================================
 
   return (
-    <div
-      ref={windowRef}
-      className={`window ${isFocused ? 'focus' : ''}  ${
-        isMaximized ? 'maximized' : ''
-      } parent`}
-      style={{ zIndex }}
-      // onContextMenu={handleContextMenu}
-      id={windowId}
-      onClick={isFocused ? null : handleRequestFocus}
-    >
-      <WindowHeader {...windowHeaderProps} />
-      <WindowContentWrapper {...windowContentWrapperProps} />
-    </div>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <div
+        ref={windowRef}
+        className={`window ${isFocused ? 'focus' : ''}  ${
+          isMaximized ? 'maximized' : ''
+        } parent`}
+        style={{ zIndex }}
+        // onContextMenu={handleContextMenu}
+        id={windowId}
+        onClick={isFocused ? null : handleRequestFocus}
+      >
+        <WindowHeader {...windowHeaderProps} />
+        {!errorOcurred && (
+          <WindowContentWrapper {...(windowContentWrapperProps as any)} />
+        )}
+      </div>
+    </ErrorBoundary>
   );
 };
 

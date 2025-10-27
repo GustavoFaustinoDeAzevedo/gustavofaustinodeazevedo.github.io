@@ -33,12 +33,12 @@ const WindowHeader = ({
         onClick={handleRequestFocus}
         onMouseDown={handleRequestFocus}
         ref={headerRef}
-        title={title[language]}
-        aria-label={title[language]}
+        title={title[language] || 'Untitled'}
+        aria-label={title[language] || 'Untitled'}
         className="window__header-title"
       >
-        <Icon variant={icon} style={stylePng} />
-        {title[language]}
+        <Icon variant={icon || 'default'} style={stylePng} />
+        {title[language] || 'Untitled'}
       </span>
       <div className="window__header-controls">
         <button

@@ -94,17 +94,24 @@ export const findNode = (obj: FileNode, targetId: string): FileNode | null => {
   return null;
 };
 
-export const findPath = (obj, targetId, path = []) => {
-  if (obj.windowId === targetId) return [...path];
+export const findPath = (
+  obj: FileNode,
+  targetId: string,
+  path: string[] = []
+): string[] | undefined => {
+  if (obj.windowId === targetId) return path;
 
   if (obj.children) {
     for (let child of obj.children) {
-      const result = findPath(child, targetId, [...path, obj.windowId]);
+      const result = findPath(child, targetId, [
+        ...(path as any),
+        obj.windowId as any,
+      ]);
       if (result) return result;
     }
   }
 
-  return null;
+  return undefined;
 };
 
 export const focusWindow = (state: WindowSliceState, windowId: string) => {
@@ -120,3 +127,22 @@ export const focusWindow = (state: WindowSliceState, windowId: string) => {
     foundWindow.windowState.requests.focus = false;
   }
 };
+
+// export const returnWindowContent = ({
+//   windowId,
+//   language,
+//   src,
+//   type,
+//   windowActions,
+//   children,
+// }: {
+//   windowId?: string;
+//   language: Language;
+//   src?: string;
+//   type?: string;
+//   windowActions?: any;
+//   children?: any;
+// }) => {
+
+//   return map[contentId]?.()
+// };

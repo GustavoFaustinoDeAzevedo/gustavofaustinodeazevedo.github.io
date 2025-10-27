@@ -4,7 +4,6 @@ import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 const BackgroundControl = ({
   handleChangeBackgroundState,
-  handleUpdateWindowContent,
   language,
   backgroundPreviewImage,
   backgroundPreviewColor,
@@ -19,7 +18,6 @@ const BackgroundControl = ({
         <div className="change-background__picker-wrapper">
           <CustomImagePicker
             handleChangeBackgroundState={handleChangeBackgroundState}
-            handleUpdateWindowContent={handleUpdateWindowContent}
             language={language}
             displayChoicesContent={displayChoicesContent}
             backgroundPreviewImage={backgroundPreviewImage}
