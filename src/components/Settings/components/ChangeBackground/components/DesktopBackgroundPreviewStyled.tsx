@@ -38,11 +38,17 @@ const temporaryGradient = (
   backgroundColor: string,
   gradientEffect?: string
 ) => {
+  const gradientStops = [
+    `${backgroundColor}99 0%`,
+    `${backgroundColor}b3 40%`,
+    `${backgroundColor}e6 75%`,
+    `${backgroundColor} 100%`,
+  ];
   switch (gradientEffect) {
     case 'normal':
-      return `linear-gradient(50deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+      return `linear-gradient(50deg,${gradientStops.join(', ')} )`;
     case 'invert':
-      return `linear-gradient(230deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+      return `linear-gradient(230deg,${gradientStops.join(', ')})`;
     default:
       return `${backgroundColor}`;
   }
