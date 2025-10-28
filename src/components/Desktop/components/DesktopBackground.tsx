@@ -22,6 +22,7 @@ const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
       $backgroundColor={desktopBackgroundColor}
       $backgroundImage={desktopBackgroundImage}
       $filters={desktopBackgroundFilter}
+      $effect={desktopBackgroundEffect}
       
       // $effect={desktopBackgroundEffect}
       className={className || 'desktop-background'}

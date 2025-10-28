@@ -5,7 +5,7 @@ export type Language = 'eng' | 'por';
 export interface BackgroundPayload {
   desktopBackgroundColor?: string;
   desktopBackgroundColorContrast?: string;
-  desktopBackgroundEffect?: EffectValues;
+  desktopBackgroundEffect?: string;
   desktopBackgroundFilter?: FilterValues;
   desktopBackgroundImage?: string;
   isBackgroundImage?: boolean;
@@ -43,7 +43,7 @@ export interface SettingsState {
   desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;
-  desktopBackgroundEffect: EffectValues;
+  desktopBackgroundEffect: string;
   desktopBackgroundFilter: FilterValues;
   desktopBackgroundImage: string;
   isBackgroundImage: boolean;

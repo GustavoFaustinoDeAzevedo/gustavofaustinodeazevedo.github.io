@@ -9,14 +9,25 @@ interface DesktopBackgroundProps {
   $effect?: string;
 }
 
-const temporaryGradient = (backgroundColor: string) =>
-  `linear-gradient(50deg,${backgroundColor}30 0%, ${backgroundColor}60 33%, ${backgroundColor}90 66%,  ${backgroundColor} 100%)`;
+const temporaryGradient = (
+  backgroundColor: string,
+  gradientEffect?: string
+) => {
+  switch (gradientEffect) {
+    case 'normal':
+      return `linear-gradient(50deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+    case 'invert':
+      return `linear-gradient(230deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+    default:
+      return `${backgroundColor}`;
+  }
+};
 
 const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
   background: ${(props) =>
     props.$isBackgroundImage && props.$backgroundImage
       ? `${props.$backgroundColor} url(${props.$backgroundImage}) no-repeat center/cover`
-      : temporaryGradient(props.$backgroundColor || '#000000')};
+      : temporaryGradient(props.$backgroundColor || '#000000', props.$effect)};
 
   filter: ${(props) => {
     const f = props?.$filters?.values;

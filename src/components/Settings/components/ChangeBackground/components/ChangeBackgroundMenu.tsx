@@ -8,9 +8,7 @@ import { presetList } from '../data/imageFilters.data';
 import actions from '@/store/actions';
 import BackgroundControl from './BackgroundControl';
 
-import {
-  BackgroundPreviewDisplay,
-} from '../types/changeBackground.types';
+import { BackgroundPreviewDisplay } from '../types/changeBackground.types';
 import { Slider, Radio, Button } from '@/components/ui';
 import {
   EffectValue,
@@ -25,13 +23,11 @@ export interface BackgroundPreviewConfig {
   display: BackgroundPreviewDisplay;
   color: string;
   image: string;
-  effect: EffectValues;
+  effect: string;
   filters: FilterValues;
 }
 
-const ChangeBackgroundMenu = ({
-  language,
-}: { language: Language }) => {
+const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
   // Valores armazenados no redux ==========================================
 
   const storedDesktopBackgroundColor = useSelector(
@@ -80,10 +76,6 @@ const ChangeBackgroundMenu = ({
 
   const handleChangeBackgroundState = useCallback(
     (key: string, value: any) => {
-      console.log(
-        value,
-        '==============================================================================='
-      );
       setBackgroundPreviewConfig((prev) => {
         if (prev[key as keyof BackgroundPreviewConfig] === value) return prev;
         return {
@@ -114,26 +106,6 @@ const ChangeBackgroundMenu = ({
     [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
   );
 
-  const handleEffectValue = useCallback(
-    (key: keyof EffectValues, value: number | string) => {
-      setBackgroundPreviewConfig((prev) => {
-        if (prev.effect.gradient[key as keyof EffectValue] === value)
-          return prev;
-        return {
-          ...prev,
-          effect: {
-            ...prev.effect,
-            gradient: {
-              ...prev.effect.gradient,
-              [key]: value,
-            },
-          },
-        };
-      });
-    },
-    [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
-  );
-
   // handlers ================================================================
 
   const { handleChangeBackground } = actions.useSettingsActions();
@@ -143,6 +115,10 @@ const ChangeBackgroundMenu = ({
     handleChangeBackgroundState('isBackgroundPreviewImage', option === 'image');
   };
 
+  const handleGradientRadioState = (effect: string) => {
+    handleChangeBackgroundState('effect', effect);
+  };
+  console.log(backgroundPreviewConfig);
   const handleApplyChanges = () => {
     handleChangeBackground({
       desktopBackgroundColor: backgroundPreviewConfig.color,
@@ -152,18 +128,10 @@ const ChangeBackgroundMenu = ({
       desktopBackgroundFilter: backgroundPreviewConfig.filters,
     });
   };
-  console.log(
-    backgroundPreviewConfig,
-    '===================================================================================='
-  );
 
   const handleFilterSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedPreset = presetList[language as Language].find(
       (preset) => preset.id === e.target.value
-    );
-    console.log(
-      backgroundPreviewConfig,
-      '===================================================================================='
     );
     if (selectedPreset) {
       handleChangeBackgroundState('filters', {
@@ -171,13 +139,6 @@ const ChangeBackgroundMenu = ({
         values: selectedPreset.values,
       });
     }
-  };
-
-  const handleSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleChangeBackgroundState('effect', {
-      ...backgroundPreviewConfig?.effect,
-      active: e.target.value,
-    });
   };
 
   // Props ==================================================================
@@ -193,9 +154,9 @@ const ChangeBackgroundMenu = ({
   };
 
   const radioProps = {
-    fieldsetClassName: 'change-background__options-field border-muted',
-    legendClassName: 'change-background__display-legend',
-    radioClassName: 'change-background__display-option',
+    fieldsetClassName: 'change-background__options-field border-muted ',
+    legendClassName: 'change-background__display-legend ',
+    radioClassName: 'change-background__display-option  cursor-pointer',
     options: displayChoicesRoot?.choices,
     onChange: handleRadioState as any,
     name: 'backgroundDisplay',
@@ -219,18 +180,14 @@ const ChangeBackgroundMenu = ({
     sliderInitialValues: backgroundPreviewConfig.filters.values,
   };
 
-  const sliderEffectsProps = {
-    sliderContainerClass: 'change-background__effect-slider-container',
-    sliderValuesHandler: handleEffectValue,
-    sliderLabelClass: 'change-background__effect-slider-label',
-    fieldsetClass: 'border-none',
-    fieldsetLegend: '',
-    inputNumberClass: 'change-background__effect-input-number',
-    sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
-    sliderInitialValues: backgroundPreviewConfig?.effect?.gradient,
-    ignoredList: ['conic', 'radial', 'linear'].filter(
-      (item) => item !== backgroundPreviewConfig?.effect?.active
-    ),
+  const radioGradientProps = {
+    fieldsetClassName: 'change-background__gradient-field-radio font-courier',
+    legendClassName: 'change-background__display-legend ',
+    radioClassName: 'change-background__display-option  cursor-pointer',
+    options: displayChoicesRoot?.choices?.color?.settings?.filter?.options,
+    onChange: handleGradientRadioState as any,
+    name: 'backgroundGradient',
+    selectedValue: backgroundPreviewConfig.effect,
   };
 
   // JSX ====================================================================
@@ -300,43 +257,17 @@ const ChangeBackgroundMenu = ({
                     ))}
                   </select>
                 </label>
-                <div className="change-background__filter-content-wrapper  overflow-y-scroll bg-dark ">
+                <div className="change-background__filter-content-wrapper">
                   <Slider {...sliderFiltersProps} />
                 </div>
               </fieldset>
             ) : (
-              ''
-              // <fieldset className="change-background__filter-field border-muted">
-              //   <legend>
-              //     {displayChoicesContent?.settings?.filter?.legend}
-              //   </legend>
-              //   <select
-              //     aria-label={
-              //       language === 'por'
-              //         ? 'Estilo de Gradiente'
-              //         : 'Gradient Style'
-              //     }
-              //     title={
-              //       language === 'por'
-              //         ? 'Estilo de Gradiente'
-              //         : 'Gradient Style'
-              //     }
-              //     className="font-courier border-radius-3px bg-dark text-color-light"
-              //     onChange={handleSelector}
-              //     value={backgroundPreviewConfig?.effect?.active}
-              //   >
-              //     {Object.values(
-              //       displayChoicesContent?.settings?.filter?.options || {}
-              //     ).map((option) => (
-              //       <option key={option.id} value={option.id}>
-              //         {option.label}
-              //       </option>
-              //     ))}
-              //   </select>
-              //   {backgroundPreviewConfig?.effect?.active !== 'none' && (
-              //     <Slider {...sliderEffectsProps} />
-              //   )}
-              // </fieldset> //TODO Adicionar default pra opção de filtro, além de tentar colocar opção de imagem aleatória ou não
+              <fieldset className="change-background__gradient-field border-muted">
+                <legend className="margin-left-2 ">
+                  {displayChoicesContent?.settings?.filter?.legend}
+                </legend>
+                <Radio {...radioGradientProps} />
+              </fieldset> //TODO Adicionar default pra opção de filtro, além de tentar colocar opção de imagem aleatória ou não
             )}
             <BackgroundControl {...backgroundControlProps} />
           </main>

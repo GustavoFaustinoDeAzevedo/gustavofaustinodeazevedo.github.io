@@ -87,12 +87,10 @@
             width: 100%;
             border: none;
             border-top: 1px solid;
-            border-color: var(--c-border);
             display: flex;
             justify-content: center;
             gap: 4rem;
             padding: 1rem 2rem;
-
 
             & .change-background__display-option {
               font-family: 'Courier New', Courier, monospace;
@@ -170,6 +168,26 @@
                 }
               }
             }
+          }
+
+          & .change-background__gradient-field {
+            border: none;
+            border-top: 1px solid;
+            text-align: left;
+            font-weight: normal;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+
+            & .change-background__gradient-field-radio {
+              border: none;
+              display: flex;
+              gap: 2rem;
+              padding: 1rem 2rem;
+              justify-content: center;
+            }
+
           }
 
           & .change-background__picker-field {

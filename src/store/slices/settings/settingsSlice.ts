@@ -66,7 +66,7 @@ const initialState: SettingsState = {
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundFilter: defaultFilter,
-  desktopBackgroundEffect: defaultEffectValues,
+  desktopBackgroundEffect: 'normal',
   desktopBackgroundImage: desktopBackgroundInitialImage, //'/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
   isDoubleClick: true,

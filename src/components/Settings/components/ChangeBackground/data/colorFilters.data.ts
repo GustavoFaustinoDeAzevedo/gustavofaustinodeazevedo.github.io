@@ -1,73 +1,38 @@
-import { repeat } from 'lodash';
 import { FilterListLanguage } from '../types/changeBackground.data.types';
 
-export const colorGradients: FilterListLanguage = {
+export const colorGradients = {
   por: {
     none: {
       id: 'none',
       label: 'Nenhum',
-      min: 0,
-      max: 0,
-      step: 0,
-      default: 0,
+      value: 'none',
     },
-    linear: {
-      id: 'linear',
-      label: 'Linear',
-      min: 0,
-      max: 360,
-      step: 15,
-      default: 0,
+    normal: {
+      id: 'normal',
+      label: 'Normal',
+      value: 'normal',
     },
-    conic: {
-      id: 'conic',
-      label: 'Cônico',
-      min: 5,
-      max: 100,
-      step: 5,
-      default: 5,
-    },
-    radial: {
-      id: 'radial',
-      label: 'Radial',
-      min: 5,
-      max: 100,
-      step: 5,
-      default: 5,
+    invert: {
+      id: 'invert',
+      label: 'Inverter',
+      value: 'invert',
     },
   },
   eng: {
     none: {
       id: 'none',
       label: 'None',
-      min: 0,
-      max: 0,
-      step: 0,
-      default: 0,
+      value: 'none',
     },
-    linear: {
-      id: 'linear',
-      label: 'Linear',
-      min: 0,
-      max: 360,
-      step: 15,
-      default: 0,
+    normal: {
+      id: 'normal',
+      label: 'Normal',
+      value: 'normal',
     },
-    conic: {
-      id: 'conic',
-      label: 'Conic',
-      min: 5,
-      max: 100,
-      step: 5,
-      default: 5,
-    },
-    radial: {
-      id: 'radial',
-      label: 'Radial',
-      min: 5,
-      max: 100,
-      step: 5,
-      default: 5,
+    invert: {
+      id: 'invert',
+      label: 'Invert',
+      value: 'invert',
     },
   },
 };
