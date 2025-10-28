@@ -7,7 +7,7 @@ interface DesktopBackgroundPreviewStyledProps {
   $backgroundImage?: string;
   $backgroundColor?: string;
   $filters?: FilterValues['values'];
-  $backgroundGradient?: 'linear' | 'radial' | 'conic';
+  $backgroundGradient?: any;
   $backgroundGradientValues?: {
     deg?: number;
     opacity: string;
@@ -34,9 +34,19 @@ const buildGradient = (
   }
 };
 
-const temporaryGradient = (backgroundColor: string) =>
-  `linear-gradient(50deg,${backgroundColor}30 0%, ${backgroundColor}60 33%, ${backgroundColor}90 66%,  ${backgroundColor} 100%)`;
-
+const temporaryGradient = (
+  backgroundColor: string,
+  gradientEffect?: string
+) => {
+  switch (gradientEffect) {
+    case 'normal':
+      return `linear-gradient(50deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+    case 'invert':
+      return `linear-gradient(230deg,${backgroundColor}99 0%, ${backgroundColor}bf 33%, ${backgroundColor}e6 66%,  ${backgroundColor} 100%)`;
+    default:
+      return `${backgroundColor}`;
+  }
+};
 const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyledProps>`
   background: ${({
     $isBackgroundImage,
@@ -49,7 +59,7 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
       ? `url(${$backgroundImage}) no-repeat center/cover`
       : $backgroundGradient && $backgroundGradientValues
       ? buildGradient($backgroundGradient, $backgroundGradientValues)
-      : temporaryGradient($backgroundColor || '#000000')};
+      : temporaryGradient($backgroundColor || '#000000', $backgroundGradient)};
 
   filter: ${({ $filters, $isBackgroundImage, $backgroundImage }) => {
     const f = $filters || ({} as FilterValues['values']);

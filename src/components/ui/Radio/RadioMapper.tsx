@@ -15,6 +15,7 @@ export interface RadioMapperProps {
   legendClassName?: string;
   fieldsetLegend?: string;
   radioClassName?: string;
+  radioLabelClassName?: string;
 }
 
 const RadioMapper = ({
@@ -26,6 +27,7 @@ const RadioMapper = ({
   legendClassName,
   fieldsetLegend,
   radioClassName,
+  radioLabelClassName,
 }: RadioMapperProps) => {
   return (
     <fieldset
@@ -41,13 +43,16 @@ const RadioMapper = ({
         <label
           key={option.id}
           htmlFor={option.id}
-          className="flex items-center gap-1"
+          className={`${
+            radioLabelClassName ??
+            ' font-courier flex items-center justify-center  gap-1  cursor-pointer'
+          }`}
         >
           <input
             type="radio"
             id={option.id}
             name={name}
-            className={radioClassName ?? ''}
+            className={radioClassName ?? ' cursor-pointer'}
             value={selectedValue}
             checked={selectedValue === option.value}
             onChange={() => onChange(option.value)}
