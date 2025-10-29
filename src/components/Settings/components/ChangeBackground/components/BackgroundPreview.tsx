@@ -10,7 +10,6 @@ const DesktopBackgroundPreview = ({
   className,
   backgroundPreviewConfig,
 }: DesktopBackgroundPreviewProps) => {
-
   return (
     <div className={`${className}-container`}>
       <DesktopBackgroundPreviewStyled
@@ -18,7 +17,14 @@ const DesktopBackgroundPreview = ({
         $backgroundColor={backgroundPreviewConfig.color}
         $backgroundImage={backgroundPreviewConfig.image}
         $filters={backgroundPreviewConfig.filters.values}
-        $backgroundGradient={backgroundPreviewConfig.effect}
+        $isGradientEnabled={
+          typeof backgroundPreviewConfig.effect.active === 'string' &&
+          backgroundPreviewConfig.effect.active.trim().length > 0 &&
+          backgroundPreviewConfig.effect.active !== undefined
+        }
+        $backgroundGradient={backgroundPreviewConfig.effect.active}
+        $backgroundGradientAngle={backgroundPreviewConfig.effect.angle}
+        $isGradientMirrored={backgroundPreviewConfig.effect.mirrored}
         className={className || 'desktop-background '}
       />
       <div className={`${className}-layer-1`}></div>

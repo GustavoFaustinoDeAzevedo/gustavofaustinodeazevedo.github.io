@@ -1,7 +1,6 @@
 export interface RadioOption {
   id: string;
   label: string;
-  title: string;
   value: string;
   [key: string]: any;
 }

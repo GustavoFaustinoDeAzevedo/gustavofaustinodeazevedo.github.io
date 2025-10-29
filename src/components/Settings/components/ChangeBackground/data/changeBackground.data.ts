@@ -30,7 +30,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         title: 'Background Preview',
         settings: {
           title: 'Customize Background',
-          filter: {
+          effect: {
             legend: 'Gradient',
             options: colorGradients.eng,
           },
@@ -69,7 +69,7 @@ export const changeBackgroundTextContent: BackgroundTextContent = {
         title: 'Pré-Visualização de Fundo',
         settings: {
           title: 'Personalizar Fundo',
-          filter: {
+          effect: {
             legend: 'Gradiente',
             options: colorGradients.por,
           },

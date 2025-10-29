@@ -34,13 +34,10 @@ const defaultFilter = {
   values: defaultFilterValues,
 };
 
-const defaultEffectValues = {
-  active: 'none',
-  gradient: {
-    linear: 0,
-    conic: 5,
-    radial: 0,
-  },
+const defaultEffect = {
+  active: 'linear',
+  mirrored: true,
+  angle: 45,
 };
 
 const checkIsMobile = (): boolean => {
@@ -66,7 +63,7 @@ const initialState: SettingsState = {
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
   desktopBackgroundFilter: defaultFilter,
-  desktopBackgroundEffect: 'normal',
+  desktopBackgroundEffect: defaultEffect,
   desktopBackgroundImage: desktopBackgroundInitialImage, //'/images/netti_Nu_Nu-cat-6342145_640.jpg',
   isBackgroundImage: true,
   isDoubleClick: true,

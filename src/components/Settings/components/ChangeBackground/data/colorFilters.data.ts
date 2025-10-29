@@ -1,38 +1,47 @@
-import { FilterListLanguage } from '../types/changeBackground.data.types';
+export type GradientValues = {
+  id: string;
+  label: string;
+  value: string;
+};
 
-export const colorGradients = {
+export type ColorGradientsList = {
+  [lang: string]: Record<string, GradientValues>;
+};
+
+export const colorGradients: ColorGradientsList = {
   por: {
-    none: {
-      id: 'none',
-      label: 'Nenhum',
-      value: 'none',
+    linear: {
+      id: 'linear',
+      label: 'Contínuo',
+      value: 'linear',
+
     },
-    normal: {
-      id: 'normal',
-      label: 'Normal',
-      value: 'normal',
+    radial: {
+      id: 'radial',
+      label: 'Circular',
+      value: 'radial',
     },
-    invert: {
-      id: 'invert',
-      label: 'Inverter',
-      value: 'invert',
+    conic: {
+      id: 'conic',
+      label: 'Cônico',
+      value: 'conic',
     },
   },
   eng: {
-    none: {
-      id: 'none',
-      label: 'None',
-      value: 'none',
+    linear: {
+      id: 'linear',
+      label: 'Continuous',
+      value: 'linear',
     },
-    normal: {
-      id: 'normal',
-      label: 'Normal',
-      value: 'normal',
+    radial: {
+      id: 'radial',
+      label: 'Circular',
+      value: 'radial',
     },
-    invert: {
-      id: 'invert',
-      label: 'Invert',
-      value: 'invert',
+    conic: {
+      id: 'conic',
+      label: 'Conic',
+      value: 'conic',
     },
   },
 };

@@ -1,9 +1,14 @@
-import { FilterValues } from '@/store/slices/settings';
+import { EffectValues, FilterValues } from '@/store/slices/settings';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 import { SliderData } from '@/components/ui/Slider/SliderItem';
+import { ColorGradientsList, GradientValues } from '../data/colorFilters.data';
 
 export type FilterList = {
   [key: string]: SliderData;
+};
+
+export type EffectList = {
+  [key: string]: GradientValues;
 };
 
 export type FilterListLanguage = {
@@ -15,18 +20,32 @@ export type Filter = {
   options: FilterList;
 };
 
+export type Effect = {
+  legend: string;
+  options: EffectList;
+};
+
 type Picker = {
   legend: string;
   button: string;
 };
 
 type Settings = {
-  filter: Filter;
+  effect?: Effect;
+  filter?: Filter;
   title: string;
   picker: Picker;
 };
 
-export type Choice = {
+export type ImageChoice = {
+  id: string;
+  label: string;
+  title: string;
+  value: string;
+  settings: Settings;
+};
+
+export type ColorChoice = {
   id: string;
   label: string;
   title: string;
@@ -35,8 +54,8 @@ export type Choice = {
 };
 
 export type Choices = {
-  image: Choice;
-  color: Choice;
+  image: ImageChoice;
+  color: ColorChoice;
 };
 
 type LanguageContent = {
@@ -55,7 +74,7 @@ export type RootType = (typeof changeBackgroundTextContent)[LanguageKey];
 export type HandleChangeBackground = {
   desktopBackgroundColor?: string;
   desktopBackgroundImage?: string;
-  desktopBackgroundEffect?: string;
+  desktopBackgroundEffect?: GradientValues;
   desktopBackgroundFilter?: FilterValues;
   isBackgroundImage?: boolean;
 };

@@ -7,65 +7,81 @@ interface DesktopBackgroundPreviewStyledProps {
   $backgroundImage?: string;
   $backgroundColor?: string;
   $filters?: FilterValues['values'];
-  $backgroundGradient?: any;
-  $backgroundGradientValues?: {
-    deg?: number;
-    opacity: string;
-    color: string[];
-  };
+  $isGradientEnabled?: boolean;
+  $backgroundGradient?: string;
+  $backgroundGradientAngle?: number;
+  $isGradientMirrored?: boolean;
 }
 
-const buildGradient = (
-  type: 'linear' | 'radial' | 'conic',
-  { deg = 0, color }: { deg?: number; color: string[] }
-) => {
-  const rgbaStart = `${color[0]}`;
-  const rgbaEnd = `${color[1]}`;
+function generateAlphaStops(
+  count = 100,
+  minAlpha = 153,
+  maxAlpha = 255,
+  mirrored = false
+) {
+  const length = mirrored ? Math.floor(count / 2) : count;
+  const fadeOut = Array.from({ length }, (_, i) => {
+    const alpha = Math.round(maxAlpha - (maxAlpha - minAlpha) * (i / length));
+    return alpha.toString(16).padStart(2, '0');
+  });
 
-  switch (type) {
-    case 'linear':
-      return `linear-gradient(${deg}deg, ${color[0]} 0%, ${color[1]} 100%)`;
-    case 'radial':
-      return `repeating-radial-gradient(${color[0]} 0%, ${color[1]} 100%)`;
-    case 'conic':
-      return `repeating-conic-gradient(${color[0]} 0%, ${color[1]} 100%)`;
-    default:
-      return '';
-  }
+  if (!mirrored) return fadeOut;
+  const fadeIn = [...fadeOut].reverse();
+  return [...fadeOut, ...fadeIn];
+}
+
+const gradientTypes = (key: string) => {
+  const gradientFunctions = {
+    linear: (stops: string[], deg: number | undefined) =>
+      `linear-gradient(${deg}deg,${stops.join(', ')} )`,
+    radial: (stops: string[], _: number | undefined) =>
+      `repeating-radial-gradient(${stops.join(', ')})`,
+    conic: (stops: string[], deg: number | undefined) =>
+      `conic-gradient(${stops.join(` ${deg}deg, `)})`,
+  };
+  return gradientFunctions[key as keyof typeof gradientFunctions];
 };
 
 const temporaryGradient = (
   backgroundColor: string,
-  gradientEffect?: string
+  gradientEffect?: string,
+  deg?: number,
+  mirrored?: boolean
 ) => {
-  const gradientStops = [
-    `${backgroundColor}99 0%`,
-    `${backgroundColor}b3 40%`,
-    `${backgroundColor}e6 75%`,
-    `${backgroundColor} 100%`,
-  ];
-  switch (gradientEffect) {
-    case 'normal':
-      return `linear-gradient(50deg,${gradientStops.join(', ')} )`;
-    case 'invert':
-      return `linear-gradient(230deg,${gradientStops.join(', ')})`;
-    default:
-      return `${backgroundColor}`;
-  }
+  const gradientAlphaStops = generateAlphaStops(100, 255, 0, mirrored);
+  const stops = gradientAlphaStops.map(
+    (alpha, i) =>
+      `${backgroundColor}${alpha} ${Math.round(
+        (i / (gradientAlphaStops.length - 1)) * 100
+      )}%`
+  );
+  const gradient = gradientTypes(gradientEffect as string);
+  console.log(gradient(stops, deg));
+  return gradient(stops, deg);
 };
+
 const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyledProps>`
   background: ${({
     $isBackgroundImage,
     $backgroundImage,
     $backgroundColor,
+    $isGradientEnabled,
     $backgroundGradient,
-    $backgroundGradientValues,
-  }) =>
-    $isBackgroundImage && $backgroundImage
+    $backgroundGradientAngle,
+    $isGradientMirrored,
+  }) => {
+    console.log($isGradientEnabled);
+    return $isBackgroundImage && $backgroundImage
       ? `url(${$backgroundImage}) no-repeat center/cover`
-      : $backgroundGradient && $backgroundGradientValues
-      ? buildGradient($backgroundGradient, $backgroundGradientValues)
-      : temporaryGradient($backgroundColor || '#000000', $backgroundGradient)};
+      : $isGradientEnabled
+      ? temporaryGradient(
+          $backgroundColor || '#000000',
+          $backgroundGradient,
+          $backgroundGradientAngle,
+          $isGradientMirrored
+        )
+      : $backgroundColor;
+  }};
 
   filter: ${({ $filters, $isBackgroundImage, $backgroundImage }) => {
     const f = $filters || ({} as FilterValues['values']);

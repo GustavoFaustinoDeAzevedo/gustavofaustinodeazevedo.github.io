@@ -5,7 +5,7 @@ export type Language = 'eng' | 'por';
 export interface BackgroundPayload {
   desktopBackgroundColor?: string;
   desktopBackgroundColorContrast?: string;
-  desktopBackgroundEffect?: string;
+  desktopBackgroundEffect?: EffectValues;
   desktopBackgroundFilter?: FilterValues;
   desktopBackgroundImage?: string;
   isBackgroundImage?: boolean;
@@ -25,15 +25,10 @@ export type FilterValues = {
   };
 };
 
-export type EffectValue = {
-  linear: number;
-  radial: number;
-  conic: number;
-};
-
 export type EffectValues = {
   active: string;
-  gradient: EffectValue;
+  mirrored: boolean;
+  angle: number;
 };
 
 //interface de estado para o slice de configurações
@@ -43,7 +38,7 @@ export interface SettingsState {
   desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;
-  desktopBackgroundEffect: string;
+  desktopBackgroundEffect: EffectValues;
   desktopBackgroundFilter: FilterValues;
   desktopBackgroundImage: string;
   isBackgroundImage: boolean;
