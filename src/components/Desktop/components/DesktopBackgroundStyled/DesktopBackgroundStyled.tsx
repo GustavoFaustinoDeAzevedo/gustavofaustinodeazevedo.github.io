@@ -9,21 +9,43 @@ interface DesktopBackgroundProps {
   $effect?: string;
 }
 
+function generateSoftCenterAlphaStops(
+  count = 100,
+  minAlpha = 153,
+  maxAlpha = 255,
+  mirrored = false
+) {
+  const length = mirrored ? Math.floor(count / 2) : count;
+  const fadeOut = Array.from({ length }, (_, i) => {
+    const alpha = Math.round(maxAlpha - (maxAlpha - minAlpha) * (i / length));
+    return alpha.toString(16).padStart(2, '0');
+  });
+
+  if (!mirrored) return fadeOut;
+  const fadeIn = [...fadeOut].reverse();
+  return [...fadeOut, ...fadeIn];
+}
+
+const alphaStops = generateSoftCenterAlphaStops();
+const alphaStopsInverted = generateSoftCenterAlphaStops(100, 255, 0);
+
 const temporaryGradient = (
   backgroundColor: string,
   gradientEffect?: string
 ) => {
-  const gradientStops = [
-    `${backgroundColor}99 0%`,
-    `${backgroundColor}b3 40%`,
-    `${backgroundColor}e6 75%`,
-    `${backgroundColor} 100%`,
-  ];
+  const gradientAlphaStops =
+    gradientEffect === 'invert' ? alphaStopsInverted : alphaStops;
+  const stops = gradientAlphaStops.map(
+    (alpha, i) =>
+      `${backgroundColor}${alpha} ${Math.round(
+        (i / (gradientAlphaStops.length - 1)) * 100
+      )}%`
+  );
   switch (gradientEffect) {
-    case 'normal':
-      return `linear-gradient(50deg,${gradientStops.join(', ')} )`;
-    case 'invert':
-      return `linear-gradient(230deg,${gradientStops.join(', ')})`;
+    case 'linear':
+      return `linear-gradient(50deg,${stops.join(', ')} )`;
+    case 'radial':
+      return `linear-gradient(230deg,${stops.join(', ')})`;
     default:
       return `${backgroundColor}`;
   }

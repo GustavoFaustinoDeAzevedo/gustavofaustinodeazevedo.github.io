@@ -36,7 +36,6 @@ const SliderMapper = ({
   inputNumberActive,
   ignoredList,
 }: SliderMapData) => {
-  console.log(JSON.stringify(sliderInitialValues), sliderObjectData);
   if (sliderObjectData === undefined || sliderInitialValues === undefined)
     return;
 
@@ -47,7 +46,8 @@ const SliderMapper = ({
       )}
       {Object.keys(sliderObjectData).map(
         (key: string, index: number) =>
-          typeof sliderInitialValues[key] === 'number' && !ignoredList?.includes(key) && (
+          typeof sliderInitialValues[key] === 'number' &&
+          !ignoredList?.includes(key) && (
             <SliderItem
               key={`slider-item-${sliderObjectData[key].id}--${index}`}
               sliderData={sliderObjectData[key]}

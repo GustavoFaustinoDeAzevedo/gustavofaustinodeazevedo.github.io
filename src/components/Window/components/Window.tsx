@@ -115,7 +115,8 @@ const Window = ({
 
   //Função para verificar erros no conteúdo da janela=========================
 
-  const ErrorFallback = () => {
+  const ErrorFallback = ({ error, resetErrorBoundary }: any) => {
+    console.log(error.message);
     setErrorOcurred(true);
     return null;
   };
