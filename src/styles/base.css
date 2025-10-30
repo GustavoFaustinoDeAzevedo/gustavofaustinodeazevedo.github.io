@@ -154,10 +154,6 @@
       -1px 0px 0px #000000,
   }
 
-  *:disabled {
-    cursor: var(--cursor-not-allowed) !important;
-  }
-
   html, body {
     height: 100%;
     overflow: hidden;
