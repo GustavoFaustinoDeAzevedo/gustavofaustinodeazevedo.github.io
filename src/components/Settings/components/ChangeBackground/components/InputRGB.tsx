@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Slider } from '@/components/ui';
+import { SliderGroup } from '@/components/ui';
 import { Language } from '@/store/slices/settings';
 
 type RGB = { r: number; g: number; b: number };
@@ -44,7 +44,7 @@ const InputRGB = ({
     (channel: keyof RGB, value: number) => {
       setRgb((prev) => {
         const updated = { ...prev, [channel]: value };
-       
+
         return updated;
       });
     },
@@ -86,7 +86,7 @@ const InputRGB = ({
 
   return (
     <div className="change-background__color-input-wrapper">
-      <Slider
+      <SliderGroup
         sliderObjectData={colorsData}
         sliderInitialValues={rgb}
         sliderClass="change-background__color-slider border-radius-1px "

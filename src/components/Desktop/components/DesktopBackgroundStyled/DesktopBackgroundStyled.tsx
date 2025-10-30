@@ -1,4 +1,4 @@
-import { FilterValues } from '@/store/slices/settings';
+import { EffectValues, FilterValues } from '@/store/slices/settings';
 import styled from 'styled-components';
 
 interface DesktopBackgroundProps {
@@ -6,10 +6,10 @@ interface DesktopBackgroundProps {
   $backgroundImage?: string;
   $backgroundColor?: string;
   $filters?: FilterValues;
-  $effect?: string;
+  $effect?: EffectValues;
 }
 
-function generateSoftCenterAlphaStops(
+function generateAlphaStops(
   count = 100,
   minAlpha = 153,
   maxAlpha = 255,
@@ -26,36 +26,65 @@ function generateSoftCenterAlphaStops(
   return [...fadeOut, ...fadeIn];
 }
 
-const alphaStops = generateSoftCenterAlphaStops();
-const alphaStopsInverted = generateSoftCenterAlphaStops(100, 255, 0);
+const gradientTypes = (key: string) => {
+  const gradientFunctions = {
+    linear: (stops: string[], deg: number | undefined) =>
+      `linear-gradient(${deg}deg,${stops.join(', ')} )`,
+    radial: (stops: string[], _: number | undefined) =>
+      `radial-gradient(circle at center,${stops.join(', ')})`,
+    conic: (stops: string[], deg: number | undefined) =>
+      `conic-gradient(${stops.join(` ${deg}deg, `)})`,
+  };
+  return gradientFunctions[key as keyof typeof gradientFunctions];
+};
 
 const temporaryGradient = (
   backgroundColor: string,
-  gradientEffect?: string
+  gradientEffect?: string,
+  deg?: number,
+  mirrored?: boolean,
+  inverted?: boolean
 ) => {
-  const gradientAlphaStops =
-    gradientEffect === 'invert' ? alphaStopsInverted : alphaStops;
+  const minAlpha = inverted ? 255 : 0;
+  const maxAlpha = inverted ? 0 : 255;
+  const gradientAlphaStops = generateAlphaStops(
+    100,
+    minAlpha,
+    maxAlpha,
+    mirrored
+  );
   const stops = gradientAlphaStops.map(
     (alpha, i) =>
       `${backgroundColor}${alpha} ${Math.round(
         (i / (gradientAlphaStops.length - 1)) * 100
       )}%`
   );
-  switch (gradientEffect) {
-    case 'linear':
-      return `linear-gradient(50deg,${stops.join(', ')} )`;
-    case 'radial':
-      return `linear-gradient(230deg,${stops.join(', ')})`;
-    default:
-      return `${backgroundColor}`;
-  }
+  const gradient = gradientTypes(gradientEffect as string);
+  return gradient(stops, deg);
 };
 
 const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
-  background: ${(props) =>
-    props.$isBackgroundImage && props.$backgroundImage
-      ? `${props.$backgroundColor} url(${props.$backgroundImage}) no-repeat center/cover`
-      : temporaryGradient(props.$backgroundColor || '#000000', props.$effect)};
+  background: ${({
+    $isBackgroundImage,
+    $backgroundImage,
+    $backgroundColor,
+    $effect,
+  }) => {
+    const { active, angle, inverted, mirrored } = $effect || {};
+    const isGradientEnabled = !active?.includes('_disabled');
+
+    return $isBackgroundImage && $backgroundImage
+      ? `url(${$backgroundImage}) no-repeat center/cover`
+      : isGradientEnabled
+      ? temporaryGradient(
+          $backgroundColor || '#000000',
+          active,
+          angle,
+          mirrored,
+          inverted
+        )
+      : $backgroundColor;
+  }};
 
   filter: ${(props) => {
     const f = props?.$filters?.values;

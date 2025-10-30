@@ -20,10 +20,12 @@ const DesktopBackgroundPreview = ({
         $isGradientEnabled={
           typeof backgroundPreviewConfig.effect.active === 'string' &&
           backgroundPreviewConfig.effect.active.trim().length > 0 &&
-          backgroundPreviewConfig.effect.active !== undefined
+          backgroundPreviewConfig.effect.active !== undefined &&
+          !backgroundPreviewConfig.effect.active.includes('_disabled')
         }
         $backgroundGradient={backgroundPreviewConfig.effect.active}
         $backgroundGradientAngle={backgroundPreviewConfig.effect.angle}
+        $isGradientInverted={backgroundPreviewConfig.effect.inverted}
         $isGradientMirrored={backgroundPreviewConfig.effect.mirrored}
         className={className || 'desktop-background '}
       />

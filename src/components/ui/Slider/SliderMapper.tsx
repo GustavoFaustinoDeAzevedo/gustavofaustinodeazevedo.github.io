@@ -1,8 +1,9 @@
-import SliderItem from './SliderItem';
+import SliderItem, { SliderData } from './SliderItem';
 
 type SliderMapData = {
-  sliderObjectData: Record<string, any>;
+  sliderObjectData: Record<string, SliderData>;
   sliderInitialValues: Record<string, number> | number[] | any;
+  sliderValuesHandler: any;
 
   sliderContainerClass?: string;
   sliderLabelClass?: string;
@@ -14,7 +15,6 @@ type SliderMapData = {
   fieldsetLegend?: string;
   onMouseUp?: any;
   onTouchEnd?: any;
-  sliderValuesHandler: any;
   inputNumberActive?: boolean[] | boolean | any;
   ignoredList?: string[];
 };
@@ -46,19 +46,28 @@ const SliderMapper = ({
       )}
       {Object.keys(sliderObjectData).map(
         (key: string, index: number) =>
-          typeof sliderInitialValues[key] === 'number' &&
+          typeof sliderInitialValues[
+            key as keyof typeof sliderInitialValues
+          ] === 'number' &&
           !ignoredList?.includes(key) && (
             <SliderItem
               key={`slider-item-${sliderObjectData[key].id}--${index}`}
               sliderData={sliderObjectData[key]}
-              sliderValue={sliderInitialValues[key]}
+              sliderValue={
+                typeof sliderInitialValues === 'number'
+                  ? sliderInitialValues
+                  : sliderInitialValues[key as keyof typeof sliderInitialValues]
+              }
               sliderValuesHandler={sliderValuesHandler}
               sliderContainerClass={sliderContainerClass}
               sliderClass={sliderClass}
               onMouseUp={onMouseUp}
               onTouchEnd={onTouchEnd}
               accentColor={
-                accentColors?.[index] ?? sliderObjectData[key].accentColor ?? []
+                accentColors?.[index] ??
+                (Array.isArray(sliderObjectData[key].accentColor)
+                  ? ''
+                  : sliderObjectData[key].accentColor)
               }
               sliderLabelClass={sliderLabelClass}
               inputNumberClass={inputNumberClass}

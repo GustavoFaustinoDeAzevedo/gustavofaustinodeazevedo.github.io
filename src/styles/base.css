@@ -147,11 +147,15 @@
   *::after {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     text-shadow: 0 1px 0px #000000,
       0 -1px 0px #000000,
       1px 0px 0px #000000,
       -1px 0px 0px #000000,
+  }
+
+  *:disabled {
+    cursor: var(--cursor-not-allowed) !important;
   }
 
   html, body {

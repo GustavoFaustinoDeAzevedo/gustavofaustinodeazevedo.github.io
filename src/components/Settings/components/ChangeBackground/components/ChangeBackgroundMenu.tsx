@@ -9,7 +9,7 @@ import actions from '@/store/actions';
 import BackgroundControl from './BackgroundControl';
 
 import { BackgroundPreviewDisplay } from '../types/changeBackground.types';
-import { Slider, Radio, Button } from '@/components/ui';
+import { SliderGroup, Slider, Radio, Button } from '@/components/ui';
 import { EffectValues, FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
 
@@ -120,6 +120,23 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
     },
     [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
   );
+
+  const handleGradientToggle = () => {
+    if (!backgroundPreviewConfig.effect.active.includes('_disabled')) {
+      handleEffectValue(
+        'active',
+        `${backgroundPreviewConfig.effect.active}_disabled`
+      );
+    } else {
+      handleEffectValue(
+        'active',
+        backgroundPreviewConfig.effect.active.replace('_disabled', '')
+      );
+    }
+  };
+
+  const handleAngleValue = (_: string, value: number) =>
+    handleEffectValue('angle', value);
 
   const handleRadioState = (option: BackgroundPreviewDisplay) => {
     handleChangeBackgroundState('display', option);
@@ -262,15 +279,120 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
                   </select>
                 </label>
                 <div className="change-background__filter-content-wrapper">
-                  <Slider {...sliderFiltersProps} />
+                  <SliderGroup {...sliderFiltersProps} />
                 </div>
               </fieldset>
             ) : (
               <fieldset className="change-background__gradient-field border-muted">
-                <legend className="margin-left-2 ">
-                  {displayChoicesContent?.settings?.filter?.legend}
+                <legend>
+                  {displayChoicesContent?.settings?.effect?.legend}
                 </legend>
-                <Radio {...radioGradientProps} />
+                <div className="flex gap-1 items-center">
+                  <label
+                    htmlFor="temporaryCheckboxId"
+                    className="font-courier text-m width-6 cursor-pointer"
+                  >
+                    {!backgroundPreviewConfig.effect.active.includes(
+                      '_disabled'
+                    )
+                      ? language === 'por'
+                        ? 'Ativo'
+                        : 'Active'
+                      : language === 'por'
+                      ? 'Inativo'
+                      : 'Inactive'}
+                  </label>
+                  <label className="switch">
+                    <input
+                      id="temporaryCheckboxId"
+                      type="checkbox"
+                      onChange={handleGradientToggle}
+                      checked={
+                        !backgroundPreviewConfig.effect.active.includes(
+                          '_disabled'
+                        )
+                      }
+                    />
+                    <span className="toggle round"></span>
+                  </label>
+                </div>
+                <div className="flex">
+                  <fieldset className="change-background__gradient-field-checkbox font-courier">
+                    <label className="flex gap-1">
+                      <input
+                        type="checkbox"
+                        disabled={backgroundPreviewConfig.effect.active.includes(
+                          '_disabled'
+                        )}
+                        onChange={(e) =>
+                          handleEffectValue('inverted', e.target.checked)
+                        }
+                        checked={backgroundPreviewConfig.effect.inverted}
+                      />
+                      <p
+                        className={
+                          backgroundPreviewConfig.effect.active.includes(
+                            '_disabled'
+                          )
+                            ? 'cursor-not-allowed'
+                            : 'cursor-pointer'
+                        }
+                      >
+                        Invert
+                      </p>
+                    </label>
+                    <label className="flex gap-1">
+                      <input
+                        type="checkbox"
+                        disabled={backgroundPreviewConfig.effect.active.includes(
+                          '_disabled'
+                        )}
+                        onChange={(e) =>
+                          handleEffectValue('mirrored', e.target.checked)
+                        }
+                        checked={backgroundPreviewConfig.effect.mirrored}
+                      />
+                      <p
+                        className={
+                          backgroundPreviewConfig.effect.active.includes(
+                            '_disabled'
+                          )
+                            ? 'cursor-not-allowed'
+                            : 'cursor-pointer'
+                        }
+                      >
+                        Mirrored
+                      </p>
+                    </label>
+                  </fieldset>
+                  <Radio {...radioGradientProps} />
+                </div>
+                <Slider
+                  sliderLabelClass={
+                    backgroundPreviewConfig.effect.active.includes(
+                      '_disabled'
+                    ) || backgroundPreviewConfig.effect.active === 'radial'
+                      ? 'cursor-not-allowed'
+                      : 'cursor-pointer'
+                  }
+                  sliderContainerClass={'flex gap-1 justify-center border-none'}
+                  inputNumberClass={'change-background__gradient-field-angle'}
+                  sliderValue={backgroundPreviewConfig.effect.angle}
+                  sliderData={{
+                    id: 'angle',
+                    label: 'Angle',
+                    min: 0,
+                    max: 360,
+                    step: 1,
+                    default: 0,
+                  }}
+                  sliderValuesHandler={handleAngleValue}
+                  disabled={
+                    backgroundPreviewConfig.effect.active.includes(
+                      '_disabled'
+                    ) || backgroundPreviewConfig.effect.active === 'radial'
+                  }
+                />
               </fieldset>
             )}
             <BackgroundControl {...backgroundControlProps} />

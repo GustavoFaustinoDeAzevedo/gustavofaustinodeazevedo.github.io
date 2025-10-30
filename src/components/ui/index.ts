@@ -1,7 +1,8 @@
 import Button from './Button';
-import Slider from './Slider';
+import SliderGroup from './Slider';
+import Slider from './Slider/SliderItem';
 import Radio from './Radio';
 
-export { Button, Slider, Radio };
+export { Button, SliderGroup, Slider, Radio };
 
-export default { Button, Slider, Radio };
+export default { Button, SliderGroup, Slider, Radio };
