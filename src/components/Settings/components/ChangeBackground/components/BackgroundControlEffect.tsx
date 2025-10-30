@@ -135,7 +135,7 @@ const BackgroundControlEffect = ({
         sliderValue={backgroundPreviewConfig.effect.angle}
         sliderData={{
           id: 'angle',
-          label: 'Angle',
+          label: language === 'por' ? 'Ângulo' : 'Angle',
           min: 0,
           max: 360,
           step: 1,
