@@ -14,17 +14,17 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
   ? 'por'
   : 'eng';
 
-const defaultBackgroundColor = '#013232';
+const defaultBackgroundColor = '#13538A';
 
 const defaultBackgroundColorContrast = '#ffffff';
 const defaultFilterPreset = 'original';
 const defaultFilterValues = {
-  brightness: 1,
+  brightness: 0.9,
   contrast: 1,
-  saturation: 1,
+  saturation: 0.9,
   grayscale: 0,
   hue: 0,
-  blur: 0,
+  blur: 0.5,
   invert: 0,
   sepia: 0,
 };
@@ -37,7 +37,7 @@ const defaultFilter = {
 const defaultEffect = {
   active: 'linear',
   mirrored: true,
-  inverted: false,
+  inverted: true,
   angle: 0,
 };
 
@@ -55,7 +55,7 @@ const viewportWidth = window.innerWidth;
 const viewportHeight = window.innerHeight;
 
 export const desktopBackgroundInitialImage =
-  'images/Wallpapers/pexels-rpnickson-2559941.jpg'; // `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
+  'images/Wallpapers/winluk06-tree-6147402.jpg'; // `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
 
 const initialState: SettingsState = {
   language: defaultLanguage,
