@@ -10,6 +10,7 @@ interface DesktopBackgroundPreviewStyledProps {
   $isGradientEnabled?: boolean;
   $backgroundGradient?: string;
   $backgroundGradientAngle?: number;
+  $isGradientInverted?: boolean;
   $isGradientMirrored?: boolean;
 }
 
@@ -35,7 +36,7 @@ const gradientTypes = (key: string) => {
     linear: (stops: string[], deg: number | undefined) =>
       `linear-gradient(${deg}deg,${stops.join(', ')} )`,
     radial: (stops: string[], _: number | undefined) =>
-      `repeating-radial-gradient(${stops.join(', ')})`,
+      `radial-gradient(circle at center,${stops.join(', ')})`,
     conic: (stops: string[], deg: number | undefined) =>
       `conic-gradient(${stops.join(` ${deg}deg, `)})`,
   };
@@ -46,9 +47,17 @@ const temporaryGradient = (
   backgroundColor: string,
   gradientEffect?: string,
   deg?: number,
-  mirrored?: boolean
+  mirrored?: boolean,
+  inverted?: boolean
 ) => {
-  const gradientAlphaStops = generateAlphaStops(100, 255, 0, mirrored);
+  const minAlpha = inverted ? 255 : 0;
+  const maxAlpha = inverted ? 0 : 255;
+  const gradientAlphaStops = generateAlphaStops(
+    100,
+    minAlpha,
+    maxAlpha,
+    mirrored
+  );
   const stops = gradientAlphaStops.map(
     (alpha, i) =>
       `${backgroundColor}${alpha} ${Math.round(
@@ -56,7 +65,6 @@ const temporaryGradient = (
       )}%`
   );
   const gradient = gradientTypes(gradientEffect as string);
-  console.log(gradient(stops, deg));
   return gradient(stops, deg);
 };
 
@@ -68,9 +76,9 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
     $isGradientEnabled,
     $backgroundGradient,
     $backgroundGradientAngle,
+    $isGradientInverted,
     $isGradientMirrored,
   }) => {
-    console.log($isGradientEnabled);
     return $isBackgroundImage && $backgroundImage
       ? `url(${$backgroundImage}) no-repeat center/cover`
       : $isGradientEnabled
@@ -78,7 +86,8 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
           $backgroundColor || '#000000',
           $backgroundGradient,
           $backgroundGradientAngle,
-          $isGradientMirrored
+          $isGradientMirrored,
+          $isGradientInverted
         )
       : $backgroundColor;
   }};

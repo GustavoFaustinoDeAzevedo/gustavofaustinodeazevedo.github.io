@@ -37,7 +37,8 @@ const defaultFilter = {
 const defaultEffect = {
   active: 'linear',
   mirrored: true,
-  angle: 45,
+  inverted: false,
+  angle: 0,
 };
 
 const checkIsMobile = (): boolean => {

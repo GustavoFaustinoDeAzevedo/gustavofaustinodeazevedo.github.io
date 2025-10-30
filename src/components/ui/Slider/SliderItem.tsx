@@ -7,6 +7,7 @@ export type SliderData = {
   min: number;
   max: number;
   default: number;
+  accentColor?: string;
 };
 
 type SliderItemProps = {
@@ -20,8 +21,9 @@ type SliderItemProps = {
   onMouseUp?: any;
   onTouchEnd?: any;
   sliderClass?: string;
-  index: string;
+  index?: string;
   inputNumberActive?: boolean[] | boolean | any;
+  disabled?: boolean;
 };
 
 const SliderItem = React.memo(
@@ -38,6 +40,7 @@ const SliderItem = React.memo(
     sliderClass,
     index,
     inputNumberActive = true,
+    disabled = false,
   }: SliderItemProps) => {
 
     if (!sliderData) return null;
@@ -79,6 +82,7 @@ const SliderItem = React.memo(
           step={sliderData.step}
           value={sliderValue}
           onChange={handlerOnChange}
+          disabled={disabled}
         />
         {inputNumberActive && (
           <input
@@ -92,6 +96,7 @@ const SliderItem = React.memo(
             max={sliderData.max}
             step={sliderData.step}
             onChange={handlerOnChange}
+            disabled={disabled}
           />
         )}
       </div>

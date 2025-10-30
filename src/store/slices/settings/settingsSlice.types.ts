@@ -28,6 +28,7 @@ export type FilterValues = {
 export type EffectValues = {
   active: string;
   mirrored: boolean;
+  inverted: boolean;
   angle: number;
 };
 
