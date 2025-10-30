@@ -1,17 +1,17 @@
-//TODO: Separar em componentes menores para organização do código
-
 import React, { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
 import { presetList } from '../data/imageFilters.data';
 import actions from '@/store/actions';
-import BackgroundControl from './BackgroundControl';
+import BackgroundControlPicker from './BackgroundControlPicker';
 
 import { BackgroundPreviewDisplay } from '../types/changeBackground.types';
-import { SliderGroup, Slider, Radio, Button } from '@/components/ui';
+import { Radio, Button } from '@/components/ui';
 import { EffectValues, FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
+import BackgroundControlFilter from './BackgroundControlFilter';
+import BackgroundControlEffect from './BackgroundControlEffect';
 
 export interface BackgroundPreviewConfig {
   isBackgroundPreviewImage: boolean;
@@ -67,8 +67,6 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
   const displayChoicesContent =
     displayChoicesRoot.choices[backgroundPreviewConfig?.display];
 
-  // funções ===============================================================
-
   // handlers ================================================================
 
   const { handleChangeBackground } = actions.useSettingsActions();
@@ -86,58 +84,6 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
     [setBackgroundPreviewConfig, backgroundPreviewConfig]
   );
 
-  const handleFilterValue = useCallback(
-    (key: keyof FilterValues, value: number | string) => {
-      setBackgroundPreviewConfig((prev) => {
-        if (prev.filters[key as keyof FilterValues] === value) return prev;
-        return {
-          ...prev,
-          filters: {
-            ...prev.filters,
-            values: {
-              ...prev.filters.values,
-              [key]: value,
-            },
-          },
-        };
-      });
-    },
-    [setBackgroundPreviewConfig, backgroundPreviewConfig.filters]
-  );
-
-  const handleEffectValue = useCallback(
-    (key: keyof EffectValues, value: string | boolean | number) => {
-      setBackgroundPreviewConfig((prev) => {
-        if (prev.effect[key as keyof EffectValues] === value) return prev;
-        return {
-          ...prev,
-          effect: {
-            ...prev.effect,
-            [key]: value,
-          },
-        };
-      });
-    },
-    [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
-  );
-
-  const handleGradientToggle = () => {
-    if (!backgroundPreviewConfig.effect.active.includes('_disabled')) {
-      handleEffectValue(
-        'active',
-        `${backgroundPreviewConfig.effect.active}_disabled`
-      );
-    } else {
-      handleEffectValue(
-        'active',
-        backgroundPreviewConfig.effect.active.replace('_disabled', '')
-      );
-    }
-  };
-
-  const handleAngleValue = (_: string, value: number) =>
-    handleEffectValue('angle', value);
-
   const handleRadioState = (option: BackgroundPreviewDisplay) => {
     handleChangeBackgroundState('display', option);
     handleChangeBackgroundState('isBackgroundPreviewImage', option === 'image');
@@ -153,18 +99,6 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
     });
   };
 
-  const handleFilterSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedPreset = presetList[language as Language].find(
-      (preset) => preset.id === e.target.value
-    );
-    if (selectedPreset) {
-      handleChangeBackgroundState('filters', {
-        preset: selectedPreset.id,
-        values: selectedPreset.values,
-      });
-    }
-  };
-
   // Props ==================================================================
 
   const backgroundControlProps = {
@@ -177,7 +111,7 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
     backgroundPreviewImage: backgroundPreviewConfig.image,
   };
 
-  const radioProps = {
+  const radioDisplayProps = {
     fieldsetClassName: 'change-background__options-field border-muted ',
     legendClassName: 'change-background__display-legend ',
     radioClassName: 'change-background__display-option  cursor-pointer',
@@ -188,30 +122,40 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
     selectedValue: backgroundPreviewConfig.display,
   };
 
-  const sliderFiltersProps = {
-    sliderContainerClass:
-      'change-background__filter-slider-container border-none p-1 gap-1',
-    sliderValuesHandler: handleFilterValue,
-    sliderLabelClass: 'change-background__filter-slider-label',
-    fieldsetClass:
-      backgroundPreviewConfig.display === 'image' ? 'border-none' : undefined,
-    inputNumberClass: 'change-background__filter-input-number',
-    sliderObjectData: displayChoicesContent?.settings?.filter?.options || {},
-    sliderInitialValues: backgroundPreviewConfig.filters.values,
-  };
-
-  const radioGradientProps = {
-    fieldsetClassName: 'change-background__gradient-field-radio font-courier',
-    legendClassName: 'change-background__display-legend ',
-    radioClassName: 'change-background__display-option  cursor-pointer',
-    options:
-      displayChoicesRoot?.choices?.color?.settings?.effect?.options || {},
-    onChange: (value: string) => handleEffectValue('active', value) as any,
-    name: 'backgroundGradient',
-    selectedValue: backgroundPreviewConfig.effect.active,
-  };
-
   // JSX ====================================================================
+
+  const BackgroundControl = useMemo(() => {
+    return (
+      <>
+        {backgroundPreviewConfig.display === 'image' ? (
+          <BackgroundControlFilter
+            language={language}
+            backgroundPreviewConfig={backgroundPreviewConfig}
+            displayChoicesContent={displayChoicesContent}
+            presetList={presetList}
+            handleChangeBackgroundState={handleChangeBackgroundState}
+            setBackgroundPreviewConfig={setBackgroundPreviewConfig}
+          />
+        ) : (
+          <BackgroundControlEffect
+            language={language}
+            backgroundPreviewConfig={backgroundPreviewConfig}
+            displayChoicesContent={displayChoicesContent}
+            setBackgroundPreviewConfig={setBackgroundPreviewConfig}
+            displayChoicesRoot={displayChoicesRoot}
+          />
+        )}
+        <BackgroundControlPicker {...backgroundControlProps} />
+      </>
+    );
+  }, [
+    language,
+    backgroundPreviewConfig,
+    displayChoicesContent,
+    handleChangeBackgroundState,
+    setBackgroundPreviewConfig,
+    displayChoicesRoot,
+  ]);
 
   return (
     <div className="change-background__container ">
@@ -229,173 +173,10 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
         <aside className="change-background__aside border-muted">
           <header className="change-background__aside-header">
             <h3>{displayChoicesContent?.settings?.title}</h3>
-            <Radio {...radioProps} />
+            <Radio {...radioDisplayProps} />
           </header>
           <main className="change-background__aside-main ">
-            {backgroundPreviewConfig.display === 'image' ? (
-              <fieldset className="change-background__filter-field border-muted">
-                <legend className="margin-left-2 ">
-                  {displayChoicesContent?.settings?.filter?.legend}
-                </legend>
-                <label
-                  htmlFor="filterSelector"
-                  className="flex gap-1 margin-bottom-1"
-                  area-label={
-                    language === 'por'
-                      ? 'Filtros Predefinidos'
-                      : 'Preset Filters'
-                  }
-                  title={
-                    language === 'por'
-                      ? 'Filtros Predefinidos'
-                      : 'Preset Filters'
-                  }
-                >
-                  <p className="font-courier ">
-                    {language === 'por' ? 'Predefinidos:' : 'Presets:'}
-                  </p>
-                  <select
-                    id="filterSelector"
-                    name="filterSelector"
-                    aria-label={
-                      language === 'por'
-                        ? 'Estilo de Gradiente'
-                        : 'Gradient Style'
-                    }
-                    title={
-                      language === 'por'
-                        ? 'Estilo de Gradiente'
-                        : 'Gradient Style'
-                    }
-                    className="font-courier border-radius-3px bg-dark text-color-light"
-                    onChange={handleFilterSelector}
-                    value={backgroundPreviewConfig?.filters?.preset}
-                  >
-                    {Object.values(presetList[language] || {}).map((preset) => (
-                      <option key={preset.id} value={preset.id}>
-                        {preset.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <div className="change-background__filter-content-wrapper">
-                  <SliderGroup {...sliderFiltersProps} />
-                </div>
-              </fieldset>
-            ) : (
-              <fieldset className="change-background__gradient-field border-muted">
-                <legend>
-                  {displayChoicesContent?.settings?.effect?.legend}
-                </legend>
-                <div className="flex gap-1 items-center">
-                  <label
-                    htmlFor="temporaryCheckboxId"
-                    className="font-courier text-m width-6 cursor-pointer"
-                  >
-                    {!backgroundPreviewConfig.effect.active.includes(
-                      '_disabled'
-                    )
-                      ? language === 'por'
-                        ? 'Ativo'
-                        : 'Active'
-                      : language === 'por'
-                      ? 'Inativo'
-                      : 'Inactive'}
-                  </label>
-                  <label className="switch">
-                    <input
-                      id="temporaryCheckboxId"
-                      type="checkbox"
-                      onChange={handleGradientToggle}
-                      checked={
-                        !backgroundPreviewConfig.effect.active.includes(
-                          '_disabled'
-                        )
-                      }
-                    />
-                    <span className="toggle round"></span>
-                  </label>
-                </div>
-                <div className="flex">
-                  <fieldset className="change-background__gradient-field-checkbox font-courier">
-                    <label className="flex gap-1">
-                      <input
-                        type="checkbox"
-                        disabled={backgroundPreviewConfig.effect.active.includes(
-                          '_disabled'
-                        )}
-                        onChange={(e) =>
-                          handleEffectValue('inverted', e.target.checked)
-                        }
-                        checked={backgroundPreviewConfig.effect.inverted}
-                      />
-                      <p
-                        className={
-                          backgroundPreviewConfig.effect.active.includes(
-                            '_disabled'
-                          )
-                            ? 'cursor-not-allowed'
-                            : 'cursor-pointer'
-                        }
-                      >
-                        {language === 'por' ? 'Invertido' : 'Inverted'}
-                      </p>
-                    </label>
-                    <label className="flex gap-1">
-                      <input
-                        type="checkbox"
-                        disabled={backgroundPreviewConfig.effect.active.includes(
-                          '_disabled'
-                        )}
-                        onChange={(e) =>
-                          handleEffectValue('mirrored', e.target.checked)
-                        }
-                        checked={backgroundPreviewConfig.effect.mirrored}
-                      />
-                      <p
-                        className={
-                          backgroundPreviewConfig.effect.active.includes(
-                            '_disabled'
-                          )
-                            ? 'cursor-not-allowed'
-                            : 'cursor-pointer'
-                        }
-                      >
-                        {language === 'por' ? 'Espelhado' : 'Mirrored'}
-                      </p>
-                    </label>
-                  </fieldset>
-                  <Radio {...radioGradientProps} />
-                </div>
-                <Slider
-                  sliderLabelClass={
-                    backgroundPreviewConfig.effect.active.includes(
-                      '_disabled'
-                    ) || backgroundPreviewConfig.effect.active === 'radial'
-                      ? 'cursor-not-allowed'
-                      : 'cursor-pointer'
-                  }
-                  sliderContainerClass={'flex gap-1 justify-center border-none'}
-                  inputNumberClass={'change-background__gradient-field-angle'}
-                  sliderValue={backgroundPreviewConfig.effect.angle}
-                  sliderData={{
-                    id: 'angle',
-                    label: 'Angle',
-                    min: 0,
-                    max: 360,
-                    step: 1,
-                    default: 0,
-                  }}
-                  sliderValuesHandler={handleAngleValue}
-                  disabled={
-                    backgroundPreviewConfig.effect.active.includes(
-                      '_disabled'
-                    ) || backgroundPreviewConfig.effect.active === 'radial'
-                  }
-                />
-              </fieldset>
-            )}
-            <BackgroundControl {...backgroundControlProps} />
+            {BackgroundControl}
           </main>
           <footer className="change-background__aside-footer border-muted">
             <Button

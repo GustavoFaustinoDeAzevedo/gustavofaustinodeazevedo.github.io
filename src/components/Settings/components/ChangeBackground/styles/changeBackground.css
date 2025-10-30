@@ -171,6 +171,9 @@
           }
 
           & .change-background__gradient-field {
+            display: flex;
+            justify-content: left;
+            align-items: center;
             border: none;
             padding: 1rem 2rem;
             border-top: 1px solid;
@@ -178,8 +181,6 @@
             flex-direction: column;
             font-weight: normal;
             width: 100%;
-            display: flex;
-            justify-content: left;
 
             & .change-background__gradient-field-checkbox {
               border: none;

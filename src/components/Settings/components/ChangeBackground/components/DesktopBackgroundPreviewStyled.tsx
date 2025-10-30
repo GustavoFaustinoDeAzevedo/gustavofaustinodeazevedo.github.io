@@ -80,7 +80,9 @@ const DesktopBackgroundPreviewStyled = styled.div<DesktopBackgroundPreviewStyled
     $isGradientMirrored,
   }) => {
     return $isBackgroundImage && $backgroundImage
-      ? `url(${$backgroundImage}) no-repeat center/cover`
+      ? `url(${$backgroundImage}) repeat center/cover ${
+          $backgroundColor || '#000000'
+        }`
       : $isGradientEnabled
       ? temporaryGradient(
           $backgroundColor || '#000000',

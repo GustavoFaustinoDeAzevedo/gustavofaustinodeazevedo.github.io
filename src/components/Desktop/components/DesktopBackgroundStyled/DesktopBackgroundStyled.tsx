@@ -74,7 +74,9 @@ const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
     const isGradientEnabled = !active?.includes('_disabled');
 
     return $isBackgroundImage && $backgroundImage
-      ? `url(${$backgroundImage}) no-repeat center/cover`
+      ? `url(${$backgroundImage}) repeat center/cover ${
+          $backgroundColor || '#000000'
+        }`
       : isGradientEnabled
       ? temporaryGradient(
           $backgroundColor || '#000000',
@@ -83,7 +85,7 @@ const DesktopBackgroundStyled = styled.div<DesktopBackgroundProps>`
           mirrored,
           inverted
         )
-      : $backgroundColor;
+      : $backgroundColor || '#000000';
   }};
 
   filter: ${(props) => {
