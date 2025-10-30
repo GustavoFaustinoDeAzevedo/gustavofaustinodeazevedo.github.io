@@ -338,7 +338,7 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
                             : 'cursor-pointer'
                         }
                       >
-                        Invert
+                        {language === 'por' ? 'Invertido' : 'Inverted'}
                       </p>
                     </label>
                     <label className="flex gap-1">
@@ -361,7 +361,7 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
                             : 'cursor-pointer'
                         }
                       >
-                        Mirrored
+                        {language === 'por' ? 'Espelhado' : 'Mirrored'}
                       </p>
                     </label>
                   </fieldset>
