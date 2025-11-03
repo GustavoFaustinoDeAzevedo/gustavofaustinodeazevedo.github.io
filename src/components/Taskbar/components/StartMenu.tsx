@@ -3,12 +3,14 @@ import gsap from 'gsap';
 import useClickOutside from '@/shared/hooks/useClickOutside';
 import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
+import Icon from '@/components/ui/GlobalStyles/components/Icon';
+
 const StartMenu = ({
   history,
   language,
 }: {
   history: Title[];
-  language: string;
+  language: Language;
 }) => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef<HTMLElement | null>(null);
@@ -47,29 +49,31 @@ const StartMenu = ({
       <button
         ref={startButtonRef as React.RefObject<HTMLButtonElement>}
         title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
-        className="start-button"
+        className="start-menu__toggler"
         onClick={handleClick}
         aria-label={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
         type="button"
       >
-        <i className="icon window-icon"></i>
+        <Icon className="start-menu__toggler-icon" variant="menu-hamburguer" />
       </button>
 
-      <section className="start-menu-container">
-        <div ref={startMenuRef} className="start-menu-content">
-          <div className="input-container">
-            <img className="icon search" alt="🔍"></img>
+      <section className="start-menu__container">
+        <div ref={startMenuRef} className="start-menu__content">
+          <div className="start-menu__search-file-input-container">
+            <Icon className="start-menu__search-file-icon" variant="search" />
             <input
-              className="start-menu-search-file-input"
+              className="start-menu__search-file-input"
               tabIndex={-1}
               type="text"
               aria-label="Start menu search file input"
             />
           </div>
-          <section className="search-content">{/* Search Content */}</section>
-          <fieldset className="history-container">
+          <section className="start-menu__search-content">
+            {/* Search Content */}
+          </section>
+          <fieldset className="start-menu__history-container">
             <legend>History:</legend>
-            <ul className="start-menu-history">
+            <ul className="start-menu__history">
               {history?.map((value: Title, index: number) => {
                 const key =
                   value[language as keyof typeof value] || String(index);

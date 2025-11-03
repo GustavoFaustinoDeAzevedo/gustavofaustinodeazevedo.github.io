@@ -4,7 +4,6 @@ import LanguageSelector from './LanguageSelector';
 type TaskbarRightSectionProps = {
   handleChangeDoubleCkick: (value: boolean) => void;
   isMobile: boolean;
-  toggleMenuVisibility: (menuKey: string) => void;
   language: 'eng' | 'por';
   handleChangeLanguage: (lang: 'eng' | 'por') => void;
   isDoubleClick: boolean;
@@ -13,7 +12,6 @@ type TaskbarRightSectionProps = {
 const TaskbarRightSection = ({
   handleChangeDoubleCkick,
   isMobile,
-  toggleMenuVisibility,
   language,
   handleChangeLanguage,
   isDoubleClick,
