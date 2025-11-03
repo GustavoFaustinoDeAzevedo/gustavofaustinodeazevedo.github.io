@@ -1,16 +1,26 @@
 import React, { useMemo } from 'react';
 import TaskbarItem from './TaskbarItem';
+import { WindowNode } from '@/store/slices/window';
+
+interface TaskbarItemProps {
+  language: string;
+  focusedWindow: string;
+  onWindowMinimize: (id: string) => void;
+  onWindowRestore: (id: string) => void;
+  openedWindowList: WindowNode[];
+}
 
 const TaskbarItems = ({
+  language,
   focusedWindow,
   openedWindowList,
   onWindowMinimize,
   onWindowRestore,
-}) => {
+}: TaskbarItemProps) => {
   const renderedItems = useMemo(() => {
     return (
       <ul className="taskbar-items">
-        {openedWindowList?.[0]?.windowState.status.opened &&
+        {openedWindowList?.[0]?.windowState?.status.opened &&
           openedWindowList
             .filter(
               ({ windowId }) =>
@@ -22,10 +32,10 @@ const TaskbarItems = ({
               return (
                 <TaskbarItem
                   key={windowId}
-                  id={windowId}
-                  title={title}
-                  isMinimized={windowState.status.minimized}
-                  icon={icon}
+                  id={windowId ?? ''}
+                  title={title?.[language] ?? ''}
+                  isMinimized={windowState?.status.minimized ?? false}
+                  icon={icon ?? 'html-file'}
                   index={index}
                   focusedWindow={focusedWindow}
                   onWindowMinimize={onWindowMinimize}

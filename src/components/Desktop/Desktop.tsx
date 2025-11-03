@@ -7,10 +7,7 @@ type DesktopProps = {
   windowActions: any;
   language: string;
   isMobile: boolean;
-  currentNode?: string;
   windowList?: any;
-  backgroundImage?: string;
-  backgroundColorContrast?: string;
   children: any;
   filesActions: any;
 };
@@ -20,12 +17,11 @@ const Desktop = ({
   windowActions,
   language,
   isMobile,
-  // backgroundColor,
-  // backgroundImage,
   ...props
 }: DesktopProps) => {
   const updateWindowState = useCallback(
-    (id, updates) => windowActions.handleUpdateWindow({ id, ...updates }),
+    (id: string, updates: any) =>
+      windowActions.handleUpdateWindow({ id, ...updates }),
     [windowActions]
   );
   return useMemo(
@@ -35,11 +31,10 @@ const Desktop = ({
         <ListFiles
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
-          windowActions={windowActions}
-          handleUpdateWindow={updateWindowState}
+          handleWindowUpdate={updateWindowState as any}
           language={language}
           isMobile={isMobile}
-          {...props}
+          {...(props as any)}
         />
       </div>
     ),

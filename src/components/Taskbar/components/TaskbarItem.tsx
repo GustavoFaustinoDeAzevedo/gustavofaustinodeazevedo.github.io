@@ -1,5 +1,15 @@
-import useRefs from '@/contexts/useRefs';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
+
+interface TaskbarItemProps {
+  id: string;
+  isMinimized: boolean;
+  icon: string;
+  index: number;
+  focusedWindow: string;
+  onWindowMinimize: (id: string) => void;
+  onWindowRestore: (id: string) => void;
+  title: string;
+}
 
 const TaskbarItem = ({
   id,
@@ -10,7 +20,7 @@ const TaskbarItem = ({
   onWindowMinimize,
   onWindowRestore,
   title,
-}) => {
+}: TaskbarItemProps) => {
   const handleClick = () => {
     return isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
   };

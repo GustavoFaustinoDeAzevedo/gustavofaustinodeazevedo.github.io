@@ -112,4 +112,8 @@ export const iconVariants: Record<string, IconVariantStyle> = {
     maskImage: "url('/icons/mobile-phone-icon.svg')",
     WebkitMaskImage: "url('/icons/mobile-phone-icon.svg')",
   },
+  'menu-hamburguer': {
+    maskImage: "url('/icons/three-horizontal-lines-icon.svg')",
+    WebkitMaskImage: "url('/icons/three-horizontal-lines-icon.svg')",
+  },
 };

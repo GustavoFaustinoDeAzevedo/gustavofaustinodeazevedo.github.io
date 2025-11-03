@@ -1,7 +1,7 @@
 @layer components {
   .taskbar {
     & .start-menu {
-      & .start-button {
+      & .start-menu__toggler {
         width: 40px;
         height: 40px;
         display: flex;
@@ -14,20 +14,26 @@
         cursor: var(--cursor-pointer);
         border-radius: 0.5rem;
         transition: background-color 0.2s;
-        color: #ffffff;
 
-        /* Icon inside the start button */
-        &>* {
-          width: 40px;
-          height: 40px;
+        & .start-menu__toggler-icon {
+          flex-shrink: 0;
+          width: 1.7rem !important;
+          height: 1.8rem !important;
+          background-color: #0dcaf0 !important;
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-size: contain;
+          -webkit-mask-position: center;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+
+          mask-position: center;
+          border-radius: 5px;
         }
 
-        /* Hover effect for start button */
         &:hover {
           background-color: #ffffff43;
         }
 
-        /* Active (pressed) effect for start button */
         &:active {
           background-color: #ffffff1a;
 
@@ -36,9 +42,11 @@
             transform: scale(0.8);
           }
         }
+
+
       }
 
-      & .start-menu-container {
+      & .start-menu__container {
         position: absolute;
         overflow: hidden;
         bottom: 3rem;
@@ -47,7 +55,7 @@
         -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
 
-        & .start-menu-content {
+        & .start-menu__content {
           transform: translateY(100%);
           padding: 30px;
           display: flex;
@@ -64,31 +72,30 @@
           z-index: 999;
           pointer-events: initial;
 
-          & .input-container {
+          & .start-menu__search-file-input-container {
             position: relative;
             display: inline-block;
 
-
-            & .icon {
+            & .start-menu__search-file-icon {
               position: absolute;
-              width: 20px !important;
-              height: 20px !important;
+              width: 1.2rem !important;
+              height: 1.2rem !important;
               left: 10px;
               top: 50%;
               transform: translateY(-50%);
               pointer-events: none;
-              background-color: var(--c-text);
-
               transition: all 0.2s;
-
+              background-color: transparent !important;
+              filter: grayscale(0.5) brightness(100%);
             }
 
-            & .icon:has(~.start-menu-search-file-input:focus) {
-              filter: brightness(175%);
+
+            & .start-menu__search-file-icon:has(~.start-menu__search-file-input:focus) {
+              filter: grayscale(0) brightness(200%);
               background-color: var(--c-primary);
             }
 
-            & .start-menu-search-file-input {
+            & .start-menu__search-file-input {
               width: 100%;
               padding: 0.5rem 3rem;
               background-color: var(--c-background-focus);
@@ -98,6 +105,8 @@
               color: var(--c-text);
               font-family: inherit;
               transition: background-color 0.2s, opacity 0.2s;
+
+
 
               &::placeholder {
                 color: #ffffff;
@@ -123,7 +132,7 @@
             }
           }
 
-          & .search-content {
+          & .start-menu__search-content {
             height: 12rem;
             width: 30rem;
             display: flex;
@@ -131,11 +140,11 @@
             gap: 5px;
           }
 
-          & .history-container {
+          & .start-menu__history-container {
             border: 1px solid var(--color-four);
             color: var(--c-text);
 
-            & .start-menu-history {
+            & .start-menu__history {
               height: 12rem;
               width: 30rem;
               list-style: none;
