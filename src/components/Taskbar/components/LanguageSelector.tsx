@@ -1,10 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClickOutside from '../../../shared/hooks/useClickOutside';
 import gsap from 'gsap';
+import { Language } from '@/store/slices/settings';
 
-const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
+const LanguageSelector = ({
+  language,
+  onChangeLanguage,
+  isMobile,
+}: {
+  language: Language;
+  onChangeLanguage: (lang: Language) => void;
+  isMobile: boolean;
+}) => {
   const languageSelectorRef = useRef(null);
-  const languageButtonRef = useRef(null);
+  const languageButtonRef = useRef<HTMLElement>(null);
   const [languageSelectorVisibility, setLanguageSelectorVisibility] =
     useState(false);
 
@@ -32,7 +41,7 @@ const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
         (prev) => (prev = !languageSelectorVisibility)
       ),
     isActive: languageSelectorVisibility,
-    extraRef: languageButtonRef,
+    extraRef: languageButtonRef as React.RefObject<HTMLElement>,
   });
 
   const handleOpenClick = () => {
@@ -40,6 +49,9 @@ const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
       (prev) => (prev = !languageSelectorVisibility)
     );
   };
+
+  const handleChangeLanguage = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChangeLanguage((e.target as HTMLInputElement).dataset.lang as Language);
 
   const languageList = {
     eng: {
@@ -63,7 +75,7 @@ const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
   return (
     <section className="language-selector__container">
       <button
-        ref={languageButtonRef}
+        ref={languageButtonRef as React.RefObject<HTMLButtonElement>}
         className="language-selector__button"
         onClick={handleOpenClick}
         aria-label={languageList[language].title}
@@ -74,20 +86,24 @@ const LanguageSelector = ({ language, onChangeLanguage, isMobile }) => {
       <div className="language-selector__wrapper">
         <ul ref={languageSelectorRef} className="language-selector__list">
           <li
-            onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
+            onClick={handleChangeLanguage as any}
             data-lang={'eng'}
             className={`${
-              languageList.eng.enabled[language] || ''
+              (languageList?.eng?.enabled as { [key in Language]: string })[
+                language
+              ] || ''
             } language-selector__item`}
             aria-label={languageList[language].item.eng}
           >
             {languageList[language].item.eng}
           </li>
           <li
-            onClick={(e) => onChangeLanguage(e.target.dataset.lang)}
+            onClick={handleChangeLanguage as any}
             data-lang={'por'}
             className={`${
-              languageList.por.enabled[language] || ''
+              (languageList?.por?.enabled as { [key in Language]: string })[
+                language
+              ] || ''
             } language-selector__item`}
             aria-label={languageList[language].item.por}
           >

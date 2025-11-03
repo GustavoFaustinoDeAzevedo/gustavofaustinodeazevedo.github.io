@@ -6,11 +6,14 @@ import BatteryStatus from '@/components/BatteryStatus/components/BatteryStatus';
 import actions from '@/store/actions';
 import { useIsMobile } from '@/shared/hooks';
 import TaskbarRightSection from './TaskbarRightSection';
+import { RootState } from '@/store';
 
-const Taskbar = ({ isMobile }) => {
-  const { language, isDoubleClick } = useSelector((state) => state.settings);
+const Taskbar = ({ isMobile }: { isMobile: boolean }) => {
+  const { language, isDoubleClick } = useSelector(
+    (state: RootState) => state.settings
+  );
   const { openedWindowList, history, focusedWindow } = useSelector(
-    (state) => state.window
+    (state: RootState) => state.window
   );
 
   const windowActions = actions.useWindowActions();
@@ -21,16 +24,14 @@ const Taskbar = ({ isMobile }) => {
     startMenu: false,
   });
 
-  const menuRef = useRef([]);
-  const buttonRef = useRef(null);
-  const actualVisibleMenu = useRef('');
+  const actualVisibleMenu = useRef<string | null>('');
 
   const { handleUpdateWindow } = windowActions;
   const { handleChangeLanguage, handleChangeDoubleCkick } = settingsActions;
 
-  const toggleMenuVisibility = (visibilityKey) => {
+  const toggleMenuVisibility = (visibilityKey: string) => {
     setMenuVisibility((prev) => {
-      const isVisible = !prev[visibilityKey];
+      const isVisible = !prev[visibilityKey as keyof typeof prev];
 
       if (isVisible) {
         actualVisibleMenu.current = visibilityKey;
@@ -44,20 +45,20 @@ const Taskbar = ({ isMobile }) => {
     });
   };
 
-  const handleMinimize = (id) => {
+  const handleMinimize = (id: string) => {
     handleUpdateWindow({
       windowId: id,
       isRequestingMinimize: true,
     });
   };
-  const handleMaximize = (id) => {
+  const handleMaximize = (id: string) => {
     handleUpdateWindow({
       windowId: id,
       isRequestingMaximize: true,
     });
   };
 
-  const handleRestore = (id) => {
+  const handleRestore = (id: string) => {
     handleUpdateWindow({
       windowId: id,
       isRequestingRestore: true,
@@ -66,28 +67,16 @@ const Taskbar = ({ isMobile }) => {
 
   return (
     <nav className="taskbar">
-      {!isMobile && (
-        <StartMenu
-          language={language}
-          startButtonRef={(element) => (buttonRef.current = element)}
-          isVisible={menuVisibility.startMenu}
-          windowRef={(element) => (menuRef.current = element)}
-          onClick={() => toggleMenuVisibility('startMenu')}
-          history={history}
-        />
-      )}
+      {!isMobile && <StartMenu language={language} history={history} />}
       <TaskbarItems
         focusedWindow={focusedWindow}
         openedWindowList={openedWindowList}
-        onWindowMinimize={(id) => handleMinimize(id)}
-        onWindowRestore={(id) => handleRestore(id)}
+        onWindowMinimize={(id: string) => handleMinimize(id)}
+        onWindowRestore={(id: string) => handleRestore(id)}
       />
       <TaskbarRightSection
         handleChangeDoubleCkick={handleChangeDoubleCkick}
         isMobile={isMobile}
-        menuRef={menuRef}
-        buttonRef={buttonRef}
-        menuVisibility={menuVisibility}
         toggleMenuVisibility={toggleMenuVisibility}
         language={language}
         handleChangeLanguage={handleChangeLanguage}
