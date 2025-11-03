@@ -1,9 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import useClickOutside from '../../../shared/hooks/useClickOutside';
-const StartMenu = ({ history, language }) => {
+import useClickOutside from '@/shared/hooks/useClickOutside';
+import { Language } from '@/store/slices/settings';
+import { Title } from '@/store/slices/window';
+const StartMenu = ({
+  history,
+  language,
+}: {
+  history: Title[];
+  language: string;
+}) => {
   const startMenuRef = useRef(null);
-  const startButtonRef = useRef(null);
+  const startButtonRef = useRef<HTMLElement | null>(null);
   const [menuVisibility, setMenuVisibility] = useState(false);
 
   useEffect(() => {
@@ -27,7 +35,7 @@ const StartMenu = ({ history, language }) => {
     mainRef: startMenuRef,
     onClickOutside: () => setMenuVisibility((prev) => (prev = !menuVisibility)),
     isActive: menuVisibility,
-    extraRef: startButtonRef,
+    extraRef: startButtonRef as React.RefObject<HTMLElement>,
   });
 
   const handleClick = () => {
@@ -37,11 +45,12 @@ const StartMenu = ({ history, language }) => {
   return (
     <div className="start-menu">
       <button
-        ref={startButtonRef}
+        ref={startButtonRef as React.RefObject<HTMLButtonElement>}
         title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
         className="start-button"
         onClick={handleClick}
         aria-label={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
+        type="button"
       >
         <i className="icon window-icon"></i>
       </button>
@@ -49,10 +58,10 @@ const StartMenu = ({ history, language }) => {
       <section className="start-menu-container">
         <div ref={startMenuRef} className="start-menu-content">
           <div className="input-container">
-            <img className="icon search"></img>
+            <img className="icon search" alt="🔍"></img>
             <input
               className="start-menu-search-file-input"
-              tabIndex="-1"
+              tabIndex={-1}
               type="text"
               aria-label="Start menu search file input"
             />
@@ -61,10 +70,12 @@ const StartMenu = ({ history, language }) => {
           <fieldset className="history-container">
             <legend>History:</legend>
             <ul className="start-menu-history">
-              {history?.map((id, index) => {
+              {history?.map((value: Title, index: number) => {
+                const key =
+                  value[language as keyof typeof value] || String(index);
                 return (
-                  <li key={`history-${id[language] + '-' + index}`}>
-                    {id[language]}
+                  <li key={key as string}>
+                    {value[language as keyof typeof value] as string}
                   </li>
                 );
               })}
