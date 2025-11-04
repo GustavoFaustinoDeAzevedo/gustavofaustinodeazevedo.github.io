@@ -8,7 +8,7 @@ import {
 } from '../slices/window/windowSlice';
 import { WindowNode } from '../slices/window/windowSlice.types';
 
-export type WindowData = WindowNode & Record<string, unknown>;
+export type WindowData = WindowNode &   Record<string, unknown>;
 
 const useWindowActions = () => {
   const dispatch = useDispatch();

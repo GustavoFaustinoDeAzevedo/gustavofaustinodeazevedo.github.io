@@ -8,12 +8,15 @@
         align-items: center;
         justify-content: center;
         background-color: #1818186f;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
+
         border: none;
         cursor: var(--cursor-pointer);
         border-radius: 0.5rem;
         transition: background-color 0.2s;
+
+        &.visible {
+          background-color: #ffffff1a;
+        }
 
         & .start-menu__toggler-icon {
           flex-shrink: 0;
@@ -42,34 +45,32 @@
             transform: scale(0.8);
           }
         }
-
-
       }
 
       & .start-menu__container {
         position: absolute;
         overflow: hidden;
         bottom: 3rem;
-        left: -1px;
+        left: 0.5rem;
         pointer-events: none;
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
+        z-index: -1;
 
         & .start-menu__content {
+          position: relative;
           transform: translateY(100%);
-          padding: 30px;
+          padding: 1rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
           gap: 10px;
           width: max-content;
-          background: #181818;
-
-          border: 1px var(--border-style) var(--c-border);
+          -webkit-backdrop-filter: var(--taskbar-backdrop-filter);
+          backdrop-filter: var(--taskbar-backdrop-filter);
+          background: var(--taskbar-color);
+          border: var(--taskbar-border);
           border-bottom: none;
-          border-radius: 5px 5px 0 0;
+          border-radius: var(--border-radius);
           list-style: none;
-          z-index: 999;
           pointer-events: initial;
 
           & .start-menu__search-file-input-container {
@@ -141,16 +142,53 @@
           }
 
           & .start-menu__history-container {
-            border: 1px solid var(--color-four);
+            border: none;
             color: var(--c-text);
+            overflow: hidden;
+            padding-top: 1rem;
 
             & .start-menu__history {
-              height: 12rem;
+              height: 13rem;
               width: 30rem;
               list-style: none;
               display: flex;
               flex-direction: column;
+              overflow-y: auto;
               gap: 5px;
+
+              & .start-menu__history-item {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.5rem 1rem;
+                line-height: 2rem;
+                background-color: var(--color-two);
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                cursor: pointer;
+                transition: background-color 0.2s ease-in-out;
+
+                &:hover {
+                  background-color: #ffffff1a;
+                }
+
+                & .start-menu__history-item-icon {
+                  flex-shrink: 0;
+                  width: 2rem !important;
+                  height: 2rem !important;
+                  background-color: transparent !important;
+                  -webkit-mask-repeat: no-repeat;
+                  -webkit-mask-size: contain;
+                  -webkit-mask-position: center;
+                  mask-repeat: no-repeat;
+                  mask-size: contain;
+                  mask-position: center;
+                  border-radius: 5px;
+                }
+              }
             }
           }
         }

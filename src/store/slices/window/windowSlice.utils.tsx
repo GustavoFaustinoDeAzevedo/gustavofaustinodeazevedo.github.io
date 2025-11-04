@@ -1,5 +1,6 @@
 import { Title, WindowSliceState } from './windowSlice.types';
 import { FileNode } from '../file';
+import { WindowData } from '@/store/actions/useWindowActions';
 
 /**
  * Retorna o próximo zIndex para uma janela com base no estado atual.
@@ -24,7 +25,10 @@ export const getNextZIndex = (state: WindowSliceState, getMaxZIndex = false) =>
  * @param {Title} windowId - O windowId a ser adicionado ao histórico.
  * @returns {Title[]} - O histórico atualizado.
  */
-export const updateHistory = (history: Title[], windowId: Title): Title[] => {
+export const updateHistory = (
+  history: Title[],
+  windowId: Title,
+): Title[] => {
   try {
     const filteredHistory = history.filter((item) =>
       Object.entries(item).some(

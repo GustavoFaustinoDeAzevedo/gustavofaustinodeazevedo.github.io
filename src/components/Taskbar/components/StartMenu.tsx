@@ -4,6 +4,7 @@ import useClickOutside from '@/shared/hooks/useClickOutside';
 import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import actions from '@/store/actions';
 
 const StartMenu = ({
   history,
@@ -15,6 +16,8 @@ const StartMenu = ({
   const startMenuRef = useRef(null);
   const startButtonRef = useRef<HTMLElement | null>(null);
   const [menuVisibility, setMenuVisibility] = useState(false);
+
+  const { handleOpenWindow } = actions.useWindowActions();
 
   useEffect(() => {
     if (!startMenuRef.current) return;
@@ -49,7 +52,7 @@ const StartMenu = ({
       <button
         ref={startButtonRef as React.RefObject<HTMLButtonElement>}
         title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
-        className="start-menu__toggler"
+        className={`start-menu__toggler ${menuVisibility ? 'visible' : ''}`}
         onClick={handleClick}
         aria-label={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
         type="button"
@@ -59,7 +62,7 @@ const StartMenu = ({
 
       <section className="start-menu__container">
         <div ref={startMenuRef} className="start-menu__content">
-          <div className="start-menu__search-file-input-container">
+          {/* <div className="start-menu__search-file-input-container">
             <Icon className="start-menu__search-file-icon" variant="search" />
             <input
               className="start-menu__search-file-input"
@@ -67,19 +70,27 @@ const StartMenu = ({
               type="text"
               aria-label="Start menu search file input"
             />
-          </div>
+          </div> */}
           <section className="start-menu__search-content">
             {/* Search Content */}
           </section>
           <fieldset className="start-menu__history-container">
-            <legend>History:</legend>
+            <legend>{language !== 'por' ? 'History' : 'Histórico'}</legend>
             <ul className="start-menu__history">
               {history?.map((value: Title, index: number) => {
                 const key =
                   value[language as keyof typeof value] || String(index);
                 return (
-                  <li key={key as string}>
-                    {value[language as keyof typeof value] as string}
+                  <li
+                    className="start-menu__history-item"
+                    key={key as string}
+                    onClick={() => handleOpenWindow(value.reopenProps || value)}
+                  >
+                    <Icon
+                      className="start-menu__history-item-icon"
+                      variant={value.icon}
+                    />
+                    <p>{value[language as keyof typeof value] as string}</p>
                   </li>
                 );
               })}

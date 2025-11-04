@@ -78,7 +78,7 @@
         cursor: var(--cursor-pointer);
         position: relative;
 
-        & .language-selector__button {
+        & .language-selector__toggler {
           font-size: small;
           background-color: none;
           background: none;
@@ -87,6 +87,10 @@
           padding: 0.5rem;
           border-radius: 0.5rem;
           transition: background-color 0.2s;
+
+          &.visible {
+            background-color: #ffffff1a;
+          }
 
           &:hover {
             background-color: #ffffff33;
@@ -97,20 +101,23 @@
 
           position: absolute;
           overflow: hidden;
-          top: calc(4px - 7rem);
-          left: -3rem;
+          top: calc(5px - 7rem);
+          right: -7.5rem;
           pointer-events: none;
 
 
           & .language-selector__list {
             transform: translateY(100%);
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             width: max-content;
-            border: 2px var(--border-style) var(--c-border);
+            -webkit-backdrop-filter: var(--taskbar-backdrop-filter);
+            backdrop-filter: var(--taskbar-backdrop-filter);
+            background: var(--taskbar-color);
+            border: var(--taskbar-border);
             border-bottom: none;
-            background-color: #181818;
-            border-radius: 5px 5px 0 0;
+            opacity: inherit;
+            border-radius: var(--border-radius);
             list-style: none;
             z-index: 999;
             cursor: var(--cursor-pointer);
@@ -118,7 +125,7 @@
 
 
             & .language-selector__item {
-              width: 100%;
+              width: 200px;
               padding: 0.5rem 1rem;
               line-height: 2rem;
               background-color: var(--color-two);

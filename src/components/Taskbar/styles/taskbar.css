@@ -1,3 +1,10 @@
+:root {
+  --taskbar-height: 40px;
+  --taskbar-color: #181818ed;
+  --taskbar-backdrop-filter: blur(10px);
+  --taskbar-border-color: 2px solid #292929;
+}
+
 @layer components {
   .taskbar {
     position: absolute;
@@ -5,10 +12,8 @@
     left: 0;
     right: 0;
     height: var(--taskbar-height);
-    border-top: 2px solid #292929;
-    background: #181818;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    border-top: var(--taskbar-border);
+    background: var(--taskbar-color);
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -26,8 +31,6 @@
     @media (max-width: 600px) {
       .taskbar {
         top: 0;
-        background: #181818;
-
       }
     }
   }

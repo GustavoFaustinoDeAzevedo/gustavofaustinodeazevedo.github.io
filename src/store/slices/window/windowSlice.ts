@@ -77,7 +77,11 @@ const windowSlice = createSlice({
       }
 
       if (!title) return; //temporario para evitar erros
-      state.history = updateHistory(state.history, title);
+      state.history = updateHistory(state.history, {
+        icon,
+        reopenProps: action.payload,
+        ...title,
+      });
 
       const newId = `window#${windowId}#${Date.now()}#${Math.random()}`;
 

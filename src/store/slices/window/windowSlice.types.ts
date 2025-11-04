@@ -1,5 +1,6 @@
 //Tipos principais
 
+import { WindowData } from '@/store/actions/useWindowActions';
 import { FileNode } from '../file';
 
 export type WindowRequestType =
@@ -38,7 +39,8 @@ export interface Title {
   por: string;
   eng: string;
   icon?: string | any;
-  [key: string]: string;
+  reopenProps?: WindowData;
+  [key: string]: any;
 }
 
 export interface WindowNode {
