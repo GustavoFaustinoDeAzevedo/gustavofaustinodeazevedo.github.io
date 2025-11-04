@@ -55,7 +55,7 @@
         pointer-events: none;
         z-index: -1;
 
-        & .start-menu__content {
+        & .start-menu__wrapper {
           position: relative;
           transform: translateY(100%);
           padding: 1rem;
@@ -73,21 +73,23 @@
           list-style: none;
           pointer-events: initial;
 
-          & .start-menu__search-file-input-container {
+          & .start-menu__header {
+            width: 100%;
             position: relative;
             display: inline-block;
+            padding: 1.5rem;
 
             & .start-menu__search-file-icon {
               position: absolute;
               width: 1.2rem !important;
               height: 1.2rem !important;
-              left: 10px;
+              left: 2.5rem;
               top: 50%;
               transform: translateY(-50%);
               pointer-events: none;
               transition: all 0.2s;
               background-color: transparent !important;
-              filter: grayscale(0.5) brightness(100%);
+              filter: grayscale(0.5) brightness(150%);
             }
 
 
@@ -111,17 +113,14 @@
 
               &::placeholder {
                 color: #ffffff;
-                visibility: visible;
+                opacity: 1;
               }
 
 
-              &::placeholder {
-                visibility: hidden;
-                opacity: 0.4;
-              }
 
               &:focus::placeholder {
                 visibility: visible;
+                opacity: 0.4;
               }
 
 
@@ -133,21 +132,14 @@
             }
           }
 
-          & .start-menu__search-content {
-            height: 12rem;
-            width: 30rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-          }
-
-          & .start-menu__history-container {
+          & .start-menu__fieldset {
             border: none;
             color: var(--c-text);
             overflow: hidden;
+            padding: 0 2rem;
             padding-top: 1rem;
 
-            & .start-menu__history {
+            & .start-menu__list {
               height: 13rem;
               width: 30rem;
               list-style: none;
@@ -156,7 +148,7 @@
               overflow-y: auto;
               gap: 5px;
 
-              & .start-menu__history-item {
+              & .start-menu__list-item {
                 width: 100%;
                 display: flex;
                 align-items: center;
@@ -175,7 +167,7 @@
                   background-color: #ffffff1a;
                 }
 
-                & .start-menu__history-item-icon {
+                & .start-menu__list-item-icon {
                   flex-shrink: 0;
                   width: 2rem !important;
                   height: 2rem !important;

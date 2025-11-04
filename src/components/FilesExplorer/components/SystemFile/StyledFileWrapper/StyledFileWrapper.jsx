@@ -8,13 +8,13 @@ import Icon from '@/components/ui/GlobalStyles/components/Icon';
 
 export const StyledFileWrapper = styled.div`
   ${fileWrapperStyle}, &:hover,&:focus {
-    background-color: ${(props) => props.$backgroundColorContrast + '33'};
+    background-color: var(--color-light);
   }
 `;
 
 export const StyledFileWrapper__Icon = styled(Icon)`
   ${fileWrapperStyle__icon};
-  filter: ${(props) => props.$backgroundColorContrast};
+  filter: var(--color-light);
 `;
 
 export const StyledFileWrapper__Text = styled.p`

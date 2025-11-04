@@ -1,44 +1,29 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { ListFiles } from '../FilesExplorer';
 import DesktopBackground from './components';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
-type DesktopProps = {
-  onContextMenu: (event: React.MouseEvent<HTMLDivElement>) => void;
-  windowActions: any;
-  language: string;
-  isMobile: boolean;
-  windowList?: any;
-  children: any;
-  filesActions: any;
-};
+const Desktop = () => {
+  const rootFolder = useSelector((state: RootState) => state.file.filesList);
+  const { language } = useSelector((state: RootState) => state.settings);
+  const children =
+    rootFolder.children?.[0]?.children?.[0]?.children?.[0]?.children ?? [];
 
-const Desktop = ({
-  onContextMenu,
-  windowActions,
-  language,
-  isMobile,
-  ...props
-}: DesktopProps) => {
-  const updateWindowState = useCallback(
-    (id: string, updates: any) =>
-      windowActions.handleUpdateWindow({ id, ...updates }),
-    [windowActions]
-  );
   return useMemo(
     () => (
       <div className="desktop-display">
         <DesktopBackground />
         <ListFiles
+          currentNode={'desktop'}
           fileClassName={'desktop-files-wrapper related-background'}
           openMode={'window'}
-          handleWindowUpdate={updateWindowState as any}
           language={language}
-          isMobile={isMobile}
-          {...(props as any)}
+          children={children}
         />
       </div>
     ),
-    [language, windowActions, updateWindowState, props]
+    [language]
   );
 };
 

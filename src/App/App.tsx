@@ -12,7 +12,7 @@ import Taskbar from '@/components/Taskbar';
 import PageMeta from '@/components/PageMeta';
 
 import { useIsMobile } from '@/shared/hooks';
-import createWindowList from '@/components/Window/utils/createWindowList';
+import WindowList from '@/components/Window/components/WindowList';
 import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';
@@ -36,34 +36,9 @@ const App = () => {
   const desktopRef = useRef<HTMLDivElement | null>(null);
   const isUserBrowserDarkMode = useUserBrowserDarkMode();
   const language = useSelector((state: RootState) => state.settings.language);
-  const backgroundImage = useSelector(
-    (state: RootState) => state.settings.desktopBackgroundImage
-  );
-  const backgroundColorContrast = useSelector(
-    (state: RootState) => state.settings.desktopBackgroundColorContrast
-  );
-  const windowList = useSelector(
-    (state: RootState) => state.window.openedWindowList
-  );
-  const focusedWindow = useSelector(
-    (state: RootState) => state.window.focusedWindow
-  );
-  const windowActions = actions.useWindowActions();
-  const rootFolder = useSelector((state: RootState) => state.file.filesList);
 
-  const filesActions = actions.useFilesActions();
   const contextMenuActions = actions.useContextMenuActions();
-  const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
-
-  const windowsStack = createWindowList({
-    isMobile,
-    desktopRef,
-    windowList,
-    focusedWindow,
-    windowActions,
-    language,
-    filesActions,
-  });
+  // const handleHideContextMenu = contextMenuActions.handleHideContextMenu;
 
   return (
     <>
@@ -87,30 +62,18 @@ const App = () => {
               ></div> */}
             </>
           )}
-          <PageMeta
+          {/* <PageMeta
             focusedWindow={focusedWindow}
             windowList={windowList}
             isUserBrowserDarkMode={isUserBrowserDarkMode}
             language={language}
-          />
+          /> */}
 
           <div className="desktop" ref={desktopRef}>
-            <Desktop
-              currentNode="desktop"
-              language={language}
-              windowList={windowList}
-              isMobile={isMobile}
-              backgroundImage={backgroundImage}
-              backgroundColorContrast={backgroundColorContrast}
-              children={
-                rootFolder.children?.[0]?.children?.[0]?.children?.[0]
-                  ?.children ?? []
-              } // temporário
-              filesActions={filesActions}
-            />
+            <Desktop />
             <RefsProvider>
-              {windowsStack}
-              <Taskbar isMobile={isMobile} />
+              <WindowList desktopRef={desktopRef} />
+              <Taskbar />
             </RefsProvider>
 
             {/* 

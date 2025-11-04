@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import useClickOutside from '@/shared/hooks/useClickOutside';
 import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
 import actions from '@/store/actions';
+import { ListFiles } from '@/components/FilesExplorer';
+import { useIsMobile } from '@/shared';
 
 const StartMenu = ({
   history,
@@ -60,44 +62,73 @@ const StartMenu = ({
         <Icon className="start-menu__toggler-icon" variant="menu-hamburguer" />
       </button>
 
-      <section className="start-menu__container">
-        <div ref={startMenuRef} className="start-menu__content">
-          {/* <div className="start-menu__search-file-input-container">
+      <aside className="start-menu__container">
+        <div ref={startMenuRef} className="start-menu__wrapper">
+          <header className="start-menu__header">
             <Icon className="start-menu__search-file-icon" variant="search" />
             <input
               className="start-menu__search-file-input"
               tabIndex={-1}
               type="text"
-              aria-label="Start menu search file input"
+              aria-label={
+                language !== 'por'
+                  ? 'Start menu search apps input'
+                  : 'Busca na menu de aplicativos'
+              }
+              placeholder={
+                language !== 'por'
+                  ? 'Search for apps and documents'
+                  : 'Pesquisar por aplicativos e documentos'
+              }
             />
-          </div> */}
-          <section className="start-menu__search-content">
-            {/* Search Content */}
-          </section>
-          <fieldset className="start-menu__history-container">
-            <legend>{language !== 'por' ? 'History' : 'Histórico'}</legend>
-            <ul className="start-menu__history">
-              {history?.map((value: Title, index: number) => {
-                const key =
-                  value[language as keyof typeof value] || String(index);
-                return (
-                  <li
-                    className="start-menu__history-item"
-                    key={key as string}
-                    onClick={() => handleOpenWindow(value.reopenProps || value)}
-                  >
-                    <Icon
-                      className="start-menu__history-item-icon"
-                      variant={value.icon}
-                    />
-                    <p>{value[language as keyof typeof value] as string}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </fieldset>
+          </header>
+          <main>
+            <fieldset className="start-menu__fieldset">
+              <legend>{language !== 'por' ? 'Apps' : 'Aplicativos'}</legend>
+              <ListFiles
+                fileClassName={'desktop-files-wrapper related-background'}
+                openMode={'window'}
+                language={language}
+              />
+              <ul className="start-menu__list">
+                <li className="start-menu__list-item">
+                  <Icon
+                    className="start-menu__list-item-icon"
+                    variant="notepad"
+                  />
+                  <p>{language !== 'por' ? 'Notepad' : 'Bloco de Notas'}</p>
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset className="start-menu__fieldset">
+              <legend>{language !== 'por' ? 'History' : 'Histórico'}</legend>
+              <ul className="start-menu__list">
+                {history?.map((value: Title, index: number) => {
+                  const key =
+                    value[language as keyof typeof value] || String(index);
+                  return (
+                    <li
+                      className="start-menu__list-item"
+                      key={key as string}
+                      onClick={() =>
+                        handleOpenWindow(value.reopenProps || value)
+                      }
+                    >
+                      <Icon
+                        className="start-menu__list-item-icon"
+                        variant={value.icon}
+                      />
+                      <p>{value[language as keyof typeof value] as string}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </fieldset>
+          </main>
+          <footer></footer>
         </div>
-      </section>
+      </aside>
     </div>
   );
 };

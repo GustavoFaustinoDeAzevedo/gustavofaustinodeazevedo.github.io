@@ -8,26 +8,21 @@ const ListFiles = ({
   currentNode,
   language,
   children,
+  className = '',
   fileClassName,
-  filesActions,
-  dataInitialDimension,
   openMode,
-  backgroundColorContrast,
-  handleWindowUpdate = () => {},
   nodeType = 'desktop',
-  isMobile,
+  filters = [],
 }) => {
   if (children === undefined || children.length < 0) return;
-  const { handleNewFile } = filesActions;
+  const windowActions = actions.useWindowActions();
+  const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
     app: 'html-file',
   };
 
   return (
-    <div
-      className={`${fileClassName}`}
-      data-initial-dimension={dataInitialDimension}
-    >
+    <div className={`${fileClassName ?? className}`}>
       {children.map(
         (
           {
@@ -44,6 +39,11 @@ const ListFiles = ({
           },
           windowIndex
         ) => {
+          if (
+            filters.length > 0 &&
+            (!filters.includes(type) || !filters.includes(title[language]))
+          )
+            return null;
           const windowActions = actions.useWindowActions();
           const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
           const iconTitle = language === 'por' ? title?.por : title?.eng;
@@ -57,11 +57,9 @@ const ListFiles = ({
             <SystemFile
               key={`file-${fileId}-${windowIndex}`}
               fileId={fileId}
-              backgroundColorContrast={backgroundColorContrast}
               title={iconTitle}
               icon={finalIcon}
               language={language}
-              isMobile={isMobile}
               onClick={() =>
                 handleOpenFile({
                   fileId,
@@ -74,13 +72,12 @@ const ListFiles = ({
                   isUnique,
                   initialStates,
                   children,
-                  handleNewFile,
-                  windowActions,
-                  handleWindowUpdate,
                   fileType: type,
                   nodeType,
                   initialDimensions,
                   nodeDepth,
+                  handleUpdateWindow,
+                  handleOpenWindow,
                 })
               }
             />
