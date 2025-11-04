@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import actions from '@/store/actions';
 import TaskbarRightSection from './TaskbarRightSection';
 import { RootState } from '@/store';
+import { useIsMobile } from '@/shared';
 
-const Taskbar = ({ isMobile }: { isMobile: boolean }) => {
+const Taskbar = () => {
   const { language, isDoubleClick } = useSelector(
     (state: RootState) => state.settings
   );
@@ -18,6 +19,8 @@ const Taskbar = ({ isMobile }: { isMobile: boolean }) => {
 
   const { handleUpdateWindow } = windowActions;
   const { handleChangeLanguage, handleChangeDoubleCkick } = settingsActions;
+
+  const isMobile = useIsMobile();
 
   const handleWindow = (id: string, request: string, value?: boolean) => {
     handleUpdateWindow({

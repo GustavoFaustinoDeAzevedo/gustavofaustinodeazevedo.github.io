@@ -1,3 +1,5 @@
+import { Process } from '@/os/models';
+import { FileEntry } from '@/os/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import type { Process } from '@/os/components/process';
 // import { type MemoryManager, type FileEntry } from '@/os';

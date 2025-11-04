@@ -1,9 +1,4 @@
-import useFilesActions from '@/store/actions/useFilesActions';
-import useSettingsActions from '@/store/actions/useSettingsActions';
-import useWindowActions, {
-  WindowDataBase,
-} from '@/store/actions/useWindowActions';
-import { WindowState } from '@/store/slices/window';
+import { WindowNode, WindowState } from '@/store/slices/window';
 
 type Size = {
   width: number;
@@ -22,12 +17,6 @@ export type WindowParams = {
 };
 
 export type CreateWindowListProps = {
-  isMobile: boolean;
   desktopRef: React.RefObject<HTMLDivElement | null>;
-  windowList: WindowParams[];
-  focusedWindow: string | null;
   language: string;
-  windowActions: ReturnType<typeof useWindowActions>;
-  settingsActions: ReturnType<typeof useSettingsActions>;
-  filesActions: ReturnType<typeof useFilesActions>;
 };
