@@ -83,7 +83,7 @@
     --spacing-unit: 1rem;
     --border-radius: 0.5rem;
     --taskbar-height: 3rem;
-    --window-header-height: 32px;
+    --window-header-height: 3rem;
     --border-style: solid;
 
     --input-required-border: #ff0000;
@@ -147,7 +147,7 @@
   *::after {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     text-shadow: 0 1px 0px #000000,
       0 -1px 0px #000000,
       1px 0px 0px #000000,

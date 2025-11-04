@@ -85,6 +85,7 @@
 
       & .window__header-title {
         flex-grow: 1;
+        height: 100%;
         cursor: move;
         margin-left: 1rem;
         display: flex;
@@ -111,6 +112,10 @@
           justify-content: center;
           transition: all 0.2s;
 
+          & button:nth-child(2) {
+            padding: 0;
+          }
+
           &:hover {
             background-color: #5ba6cf7c;
           }
@@ -119,6 +124,7 @@
             max-width: 14px;
             max-height: 14px;
           }
+
 
           &.window__header-controls-close:hover {
             background-color: #ef4444;
@@ -160,6 +166,12 @@
       border-radius: 0;
       border: none !important;
       resize: none !important;
+
+      & .window__header {
+        border-radius: 0;
+        min-height: calc(var(--window-header-height)/2);
+        height: calc(var(--window-header-height)/2);
+      }
 
 
       & .window__content {

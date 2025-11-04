@@ -76,7 +76,9 @@ const LanguageSelector = ({
     <section className="language-selector__container">
       <button
         ref={languageButtonRef as React.RefObject<HTMLButtonElement>}
-        className="language-selector__button"
+        className={`language-selector__toggler ${
+          languageSelectorVisibility ? 'visible' : ''
+        }`}
         onClick={handleOpenClick}
         aria-label={languageList[language].title}
         title={languageList[language].title}

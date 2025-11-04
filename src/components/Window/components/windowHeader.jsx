@@ -13,6 +13,7 @@ const WindowHeader = ({
   handleRequestRestore,
   handleRequestClose,
 }) => {
+  
   const stylePng = {
     color: 'var(--c-text)',
     maxWidth: '1rem',
@@ -22,10 +23,15 @@ const WindowHeader = ({
 
   const styleSvg = {
     color: 'var(--c-text)',
-    maxWidth: '1rem',
-    maxHeight: '1rem',
+    width: '1.1rem',
+    height: '1.1rem',
     backgroundColor: 'var(--c-icon-bg)',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+
   };
+
   return (
     <div className="window__header">
       <span
