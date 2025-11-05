@@ -1,6 +1,6 @@
 @layer components {
   .taskbar {
-    & .taskbar-items {
+    & .taskbar__window-list {
       flex: 1;
       display: flex;
       gap: 0.5rem;
@@ -11,7 +11,7 @@
         display: hidden;
       }
 
-      & .taskbar-item {
+      & .taskbar__window {
         height: 40px;
         padding: 0 0.5rem;
         display: flex;
@@ -57,7 +57,7 @@
 
     @media screen {
       @media (max-width: 600px) {
-        & .taskbar-items {
+        & .taskbar__window-list {
           margin: 0;
         }
       }

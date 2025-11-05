@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
-import { FileNode } from './filesSlice.type';
+import { FileNode, FileState } from './filesSlice.type';
 
 // 1. Type definitions
 

@@ -28,7 +28,7 @@ const TaskbarItem = ({
   return (
     <li
       key={`taskbar-icon-${index}-${id}`}
-      className={`taskbar-item open 
+      className={`taskbar__window open 
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
       `}

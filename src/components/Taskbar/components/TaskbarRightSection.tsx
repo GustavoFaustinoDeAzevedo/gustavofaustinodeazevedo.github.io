@@ -1,45 +1,49 @@
+import React, { use, useMemo } from 'react';
 import Clock from './Clock';
 import LanguageSelector from './LanguageSelector';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import actions from '@/store/actions';
 
-type TaskbarRightSectionProps = {
-  handleChangeDoubleCkick: (value: boolean) => void;
-  isMobile: boolean;
-  language: 'eng' | 'por';
-  handleChangeLanguage: (lang: 'eng' | 'por') => void;
-  isDoubleClick: boolean;
-};
-
-const TaskbarRightSection = ({
-  handleChangeDoubleCkick,
-  isMobile,
-  language,
-  handleChangeLanguage,
-  isDoubleClick,
-}: TaskbarRightSectionProps) => {
-  return (
-    <section className="taskbar-right-section">
-      {!isMobile && (
-        <label className="container">
-          {language === 'eng'
-            ? `Double Click To Open Files`
-            : `Duplo Clique Para Abrir Arquivos`}
-          <input
-            type="checkbox"
-            checked={isDoubleClick}
-            onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
-          />
-          <span className="checkmark"></span>
-        </label>
-      )}
-      <LanguageSelector
-        isMobile={isMobile}
-        language={language}
-        onChangeLanguage={handleChangeLanguage}
-      />
-      <Clock />
-      {/* <BatteryStatus /> */}
-    </section>
+const TaskbarRightSection = () => {
+  const settingsActions = actions.useSettingsActions();
+  const { handleChangeLanguage, handleChangeDoubleCkick } = settingsActions;
+  const { language, isDoubleClick, isMobile } = useSelector(
+    (state: RootState) => state.settings
+  );
+  return useMemo(
+    () => (
+      <section className="taskbar__right-section">
+        {!isMobile && (
+          <label className="container">
+            {language === 'eng'
+              ? `Double Click To Open Files`
+              : `Duplo Clique Para Abrir Arquivos`}
+            <input
+              type="checkbox"
+              checked={isDoubleClick}
+              onChange={() => handleChangeDoubleCkick(!isDoubleClick)}
+            />
+            <span className="checkmark"></span>
+          </label>
+        )}
+        <LanguageSelector
+          isMobile={isMobile}
+          language={language}
+          onChangeLanguage={handleChangeLanguage}
+        />
+        <Clock />
+        {/* <BatteryStatus /> */}
+      </section>
+    ),
+    [
+      isMobile,
+      language,
+      isDoubleClick,
+      handleChangeDoubleCkick,
+      handleChangeLanguage,
+    ]
   );
 };
 
-export default TaskbarRightSection;
+export default React.memo(TaskbarRightSection);
