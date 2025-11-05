@@ -20,10 +20,10 @@ const TaskbarItems = () => {
   };
 
   const handleWindowMinimize = (windowId: string) => {
-    handleWindow(windowId, 'isRequestMinimize', true);
+    handleWindow(windowId, 'isRequestingMinimize', true);
   };
   const handleWindowRestore = (windowId: string) => {
-    handleWindow(windowId, 'isRequestMinimize', true);
+    handleWindow(windowId, 'isRequestingRestore', true);
   };
   return useMemo(
     () => (
@@ -46,8 +46,8 @@ const TaskbarItems = () => {
                   icon={icon ?? 'html-file'}
                   index={index}
                   focusedWindow={focusedWindow ?? ''}
-                  onWindowMinimize={handleWindowMinimize}
-                  onWindowRestore={handleWindowRestore}
+                  handleWindowMinimize={handleWindowMinimize}
+                  handleWindowRestore={handleWindowRestore}
                 />
               );
             })}

@@ -6,8 +6,8 @@ interface TaskbarItemProps {
   icon: string;
   index: number;
   focusedWindow: string;
-  onWindowMinimize: (id: string) => void;
-  onWindowRestore: (id: string) => void;
+  handleWindowMinimize: (id: string) => void;
+  handleWindowRestore: (id: string) => void;
   title: string;
 }
 
@@ -17,12 +17,12 @@ const TaskbarItem = ({
   icon,
   index,
   focusedWindow,
-  onWindowMinimize,
-  onWindowRestore,
+  handleWindowMinimize,
+  handleWindowRestore,
   title,
 }: TaskbarItemProps) => {
   const handleClick = () => {
-    return isMinimized ? onWindowRestore(id) : onWindowMinimize(id);
+    return isMinimized ? handleWindowRestore(id) : handleWindowMinimize(id);
   };
 
   return (
