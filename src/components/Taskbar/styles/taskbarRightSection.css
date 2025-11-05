@@ -1,6 +1,7 @@
 @layer components {
   .taskbar {
-    & .taskbar-right-section {
+    & .taskbar__right-section {
+
       display: flex;
       align-items: center;
       color: #ffffff;

@@ -11,7 +11,7 @@ interface FileProps {
   src: string;
   initialStates?: any;
   openMode?: string;
-  fileType: string;
+  type: string;
   nodeType: string;
   handleNewFile: any;
   windowActions: any;
@@ -21,7 +21,6 @@ interface FileProps {
   isUnique?: boolean;
   handleOpenWindow: any;
   handleUpdateWindow: any;
-  handleFocusWindow: any;
 }
 
 export const handleOpenFile = ({
@@ -35,19 +34,18 @@ export const handleOpenFile = ({
   initialStates,
   openMode,
   children,
-  fileType,
+  type,
   nodeType,
   nodeDepth,
   handleUpdateWindow,
   handleOpenWindow,
 }: FileProps) => {
-
   try {
     if (fileId === undefined || fileId === null) {
       throw new Error(`Invalid file ID: ${fileId}`);
     }
 
-    if (openMode === 'window' || fileType === 'app') {
+    if (openMode === 'window' || type === 'app') {
       //Abrir uma nova janela
       handleOpenWindow({
         windowId: fileId,
@@ -57,7 +55,7 @@ export const handleOpenFile = ({
         children,
         isUnique,
         isRequestingMaximize: initialStates?.maximized,
-        type: fileType,
+        type,
         initialDimensions,
         nodeDepth,
       });
@@ -71,7 +69,7 @@ export const handleOpenFile = ({
         src,
         children,
         isUnique,
-        type: fileType,
+        type,
         nodeDepth,
       });
     }

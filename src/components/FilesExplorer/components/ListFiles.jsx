@@ -8,8 +8,8 @@ const ListFiles = ({
   currentNode,
   language,
   children,
-  className = '',
-  fileClassName,
+  className,
+  fileClassName = '',
   openMode,
   nodeType = 'desktop',
   filters = [],
@@ -22,7 +22,7 @@ const ListFiles = ({
   };
 
   return (
-    <div className={`${fileClassName ?? className}`}>
+    <div className={`${className ?? fileClassName}`}>
       {children.map(
         (
           {
