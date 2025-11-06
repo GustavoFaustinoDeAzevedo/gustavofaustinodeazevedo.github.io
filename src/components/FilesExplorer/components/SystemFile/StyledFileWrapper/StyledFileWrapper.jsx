@@ -6,15 +6,15 @@ import {
 } from './fileWrapperStyle';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
 
-export const StyledFileWrapper = styled.div`
+export const StyledFileWrapper = styled.li`
   ${fileWrapperStyle}, &:hover,&:focus {
-    background-color: var(--color-light);
+    background: #0000003a;
   }
 `;
 
 export const StyledFileWrapper__Icon = styled(Icon)`
   ${fileWrapperStyle__icon};
-  filter: var(--color-light);
+  filter: #0000005B;
 `;
 
 export const StyledFileWrapper__Text = styled.p`

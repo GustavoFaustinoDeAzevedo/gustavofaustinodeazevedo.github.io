@@ -1,6 +1,6 @@
 @layer components {
 
-  .files-explorer {
+  .files__container {
     width: 100%;
     padding: 1rem;
     display: grid;
@@ -29,7 +29,7 @@
       pointer-events: initial;
       gap: 0.5rem;
 
-      &>.icon {
+      &>.file__icon {
         width: 5rem !important;
         height: 5rem !important;
         display: flex;

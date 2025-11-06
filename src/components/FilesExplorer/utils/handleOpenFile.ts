@@ -8,14 +8,14 @@ interface FileProps {
   currentNode: string;
   windowTitle: { eng: string; por: string };
   windowIcon?: string;
-  src: string;
-  initialStates?: any;
+  src?: string;
+  initialStates?: {
+    maximized?: boolean;
+    minimized?: boolean;
+  };
   openMode?: string;
   type: string;
   nodeType: string;
-  handleNewFile: any;
-  windowActions: any;
-  handleWindowUpdate: any;
   nodeDepth: number;
   children?: FileNode[];
   isUnique?: boolean;
@@ -30,7 +30,7 @@ export const handleOpenFile = ({
   windowTitle,
   windowIcon,
   src,
-  isUnique,
+  isUnique = false,
   initialStates,
   openMode,
   children,

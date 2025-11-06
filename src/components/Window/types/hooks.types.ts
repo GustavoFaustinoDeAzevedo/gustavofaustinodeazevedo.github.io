@@ -86,5 +86,4 @@ export interface UseWindowLifecycleProps {
   updateWindowState: (updates: Partial<WindowParams>) => void;
   animations: typeof windowAnimations;
   getWindowInfo: () => { savedWidth?: number; savedHeight?: number };
-  createWindowDraggable: (options: CreateWindowDraggableOptions) => void;
 }

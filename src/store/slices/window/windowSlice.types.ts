@@ -58,6 +58,10 @@ export interface WindowNode {
   size?: Size;
   windowState?: WindowState;
   isUnique?: boolean;
+  isFocused?: boolean;
+  isMaximized?: boolean;
+  isMinimized?: boolean;
+  isOpened?: boolean;
   isRequestingFullScreen?: boolean;
   isRequestingMaximize?: boolean;
   isRequestingMinimize?: boolean;

@@ -9,12 +9,13 @@ import { useSelector } from 'react-redux';
 import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
 import { useIsMobile } from '@/shared';
 
-const SystemFile = React.memo(({ fileId, title, icon, onClick }) => {
+//file variants = default | smallDefault | largeDefault | horizontal | vertical | verticalSmall | verticalLarge | horizontalSmall | horizontalLarge | onlyIcon | onlyText  
+
+const SystemFile = ({ fileId, title, icon, onClick, className = '', fileVariant = 'default' }) => {
   const [ref, lines] = useAutoLineClamp(title, 2);
   const { isBlocked, trigger } = useDelayBlock(1000);
   const { isDoubleClick } = useSelector((state) => state.settings);
   const isMobile = useIsMobile();
-  
 
   const handleSingleClick = () => {
     trigger(() => {
@@ -47,18 +48,16 @@ const SystemFile = React.memo(({ fileId, title, icon, onClick }) => {
       title={title}
       onDoubleClick={handleDoubleClick}
       onMouseUp={handleSingleClick}
+      className={className}
       data-info={dataInfo}
       id={fileId}
     >
       <StyledFileWrapper__Icon variant={icon} />
-      <StyledFileWrapper__Text
-        ref={ref}
-        $line={lines}
-      >
+      <StyledFileWrapper__Text ref={ref} $line={lines}>
         {title}
       </StyledFileWrapper__Text>
     </StyledFileWrapper>
   );
-});
+};
 
-export default SystemFile;
+export default React.memo(SystemFile);

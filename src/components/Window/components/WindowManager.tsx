@@ -31,6 +31,7 @@ const WindowManager = ({
   desktopRef,
   filesActions,
 }: WindowManagerProps) => {
+  
   const { windowId = '' } = windowRawParams;
 
   //Refs para janela e header

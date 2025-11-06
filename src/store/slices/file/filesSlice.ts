@@ -1,16 +1,10 @@
-// store/slices/fileSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
 import { FileNode, FileState } from './filesSlice.type';
 
-// 1. Type definitions
-
-// 2. Utility functions converted to TS
-
 /**
- * Adds a new file into node.children, ensuring that the most recently
- * added file is placed second to last when there are two or more children.
+ * Adiciona um novo arquivo em node.children, garantindo que o mais recente
+ * o arquivo adicionado é colocado em penúltimo lugar quando há dois ou mais filhos.
  */
 const newFile = (
   node: FileNode,
@@ -41,7 +35,7 @@ const updateChildrenById = (
   fileToBeAdded: FileNode,
   nodeDepth: number
 ): boolean => {
-  // Se encontrarmos o nó de destino, adicione o novo arquivo
+  // Se encontrarmos o nó de destino, adiciona o novo arquivo
   if (node.fileId === targetId && node.nodeDepth === nodeDepth - 1) {
     node.children = newFile(node, fileToBeAdded, nodeDepth);
     return true;
@@ -62,7 +56,7 @@ const updateChildrenById = (
 /**
  * Ordena os arquivos em ordem alfabética por FileId, mas mantém o último elemento sempre no final.
  */
-const toggleSort = (files: FileNode[], sortType: SortType): FileNode[] => {
+const toggleSort = (files: FileNode[], sortType: string): FileNode[] => {
   if (files.length === 0) return [];
 
   const sorted = [...files];
@@ -92,7 +86,7 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
   return { ...obj, nodeDepth, children };
 };
 
-// Slice definition
+// Slice 
 
 const initialState: FileState = {
   filesList: handleNestedEntities(rootFolder),

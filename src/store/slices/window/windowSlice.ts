@@ -197,7 +197,7 @@ const windowSlice = createSlice({
         currentNode,
         nodeDepth,
         children:
-          currentWindow.currentNode !== currentNode
+          currentWindow[currentNode] !== currentNode
             ? newFile(currentWindow, children)
             : children,
         content,
