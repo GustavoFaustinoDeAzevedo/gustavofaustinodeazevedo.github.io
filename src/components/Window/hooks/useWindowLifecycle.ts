@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import getRandomPosition from '../utils/getRandomPosition';
 import useAnimationSafe from '../hooks/useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
+import createWindowDraggable from '../utils/createWindowDraggable';
 import { UseWindowLifecycleProps } from '../types/hooks.types';
 import { useEffect } from 'react';
 
@@ -20,7 +21,6 @@ const useWindowLifecycle = ({
   windowHandlers,
   isMobile,
   getWindowInfo,
-  createWindowDraggable,
 }: UseWindowLifecycleProps): void => {
   const {
     windowId,
@@ -78,7 +78,6 @@ const useWindowLifecycle = ({
       };
 
       windowAnimations.openWindow(windowRef, initW, initH, () => {}, isMobile);
-      console.log(isRequestingMaximize);
       updateWindowState({
         x: randomX,
         y: randomY,

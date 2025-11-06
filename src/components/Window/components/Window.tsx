@@ -1,7 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -10,23 +7,19 @@ import { ErrorBoundary } from 'react-error-boundary';
 import WindowHeader from './windowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '@/shared/hooks/useClickOutside';
-import createWindowDraggable from '../utils/createWindowDraggable';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import { UseWindowLifecycleProps } from '../types/hooks.types';
 
 gsap.registerPlugin(useGSAP);
 
 type WindowProps = {
-  // className?: string;
   windowParams: any;
   windowHandlers: any;
   desktopRef: React.RefObject<HTMLDivElement | null>;
   filesActions: any;
   isMobile: boolean;
 };
-
 const Window = ({
-  // className,
   windowParams,
   windowHandlers,
   desktopRef,
@@ -44,18 +37,17 @@ const Window = ({
     title,
     icon,
     children,
-    isFocused,
     isMinimized,
     isMaximized,
     language,
     type,
     src,
+    isFocused,
     windowRef,
     headerRef,
   } = windowParams;
   const {
     updateWindowState,
-    handleClose,
     handleRequestClose,
     handleRequestMinimize,
     handleRequestMaximize,
@@ -77,7 +69,7 @@ const Window = ({
     title,
     icon,
     isOpened,
-    isFocused,
+    isFocused: isFocused,
     isMinimized,
     isMaximized,
     language,
@@ -85,7 +77,7 @@ const Window = ({
   };
 
   const windowContentWrapperProps = {
-    isFocused,
+    isFocused: isFocused,
     isOpened,
     windowId,
     currentNode,
@@ -126,7 +118,6 @@ const Window = ({
     updateWindowState,
     isMobile,
     getWindowInfo,
-    createWindowDraggable,
   } as UseWindowLifecycleProps);
 
   //hook para lidar com o foco ao clicar fora da janela ========================
@@ -134,7 +125,7 @@ const Window = ({
   useClickOutside({
     mainRef: windowRef,
     onClickOutside: handleResetFocus,
-    isActive: windowParams.isFocused,
+    isActive: isFocused,
   });
 
   //JSX ========================================================================

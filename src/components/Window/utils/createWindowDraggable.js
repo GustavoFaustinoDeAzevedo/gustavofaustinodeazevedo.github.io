@@ -6,18 +6,21 @@ gsap.registerPlugin(Draggable);
 
 
 const createWindowDraggable = ({ windowRef, triggerElement, bounds, onFocus, updateWindowState, width, height, isFocused }) => {
-
   Draggable.create(windowRef.current, {
     trigger: triggerElement,
     type: 'x,y',
     zIndexBoost: false,
     bounds,
     inertia: true,
+    onDragStart: function () {
+      const { x, y } = this;
+      updateWindowState({ isRequestingFocus: true, startX: x, startY: y, startWidth: width, startHeight: height });
+    },
     onDragEnd: function () {
-      const { startX, startY, x, y } = this;
+      const { x, y } = this;
       const finalWidth = this.target.getBoundingClientRect().width;
       const finalHeight = this.target.getBoundingClientRect().height;
-      updateWindowState({ isRequestingFocus: true, startX, startY, x, y, width: finalWidth, height: finalHeight, startWidth: width, startHeight: height });
+      updateWindowState({ x, y, width: finalWidth, height: finalHeight });
     }
   });
 };

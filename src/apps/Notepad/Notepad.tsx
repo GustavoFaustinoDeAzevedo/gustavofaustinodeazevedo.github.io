@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import Dropdown from '@/components/ui/Dropdown/Dropdow';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
-const Notepad = ({ windowId }) => {
+const Notepad = ({ windowId }: { windowId: string }) => {
+  const content = useSelector(
+    (state: RootState) => state.file.filesList.content
+  );
   const dropdownList = [
     { label: 'New Tab' },
     { label: 'New Window' },
@@ -18,7 +23,7 @@ const Notepad = ({ windowId }) => {
     { label: 'Close Window' },
     { label: 'Close All' },
   ];
-  const [text, setText] = useState('');
+  const [text, setText] = useState(content);
   const handleTextChange = (e) => {
     setText(e.target.value);
   };

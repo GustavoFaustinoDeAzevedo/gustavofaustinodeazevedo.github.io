@@ -11,17 +11,18 @@ import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
 import actions from '@/store/actions';
-import { ListFiles } from '@/components/FilesExplorer';
+import { ListFiles, SystemFile } from '@/components/FilesExplorer';
 import { useIsMobile } from '@/shared';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import handleOpenFile from '@/components/FilesExplorer/utils/handleOpenFile';
 
 const StartMenu = () => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef<HTMLElement | null>(null);
   const [menuVisibility, setMenuVisibility] = useState(false);
 
-  const { handleOpenWindow } = actions.useWindowActions();
+  const { handleOpenWindow, handleUpdateWindow } = actions.useWindowActions();
 
   const { history } = useSelector((state: RootState) => state.window);
   const { language } = useSelector((state: RootState) => state.settings);
@@ -102,6 +103,36 @@ const StartMenu = () => {
                   children={[]}
                 />
                 <ul className="start-menu__list">
+                  {/* <SystemFile
+                    key={`file-${'calculator'}-${'dddddd'}`}
+                    className={'start-menu__list-item'}
+                    fileId={'calculator'}
+                    title={language !== 'por' ? 'Calculator' : 'Calculadora'}
+                    icon={'calculator'}
+                    onClick={() =>
+                      handleOpenFile({
+                        fileId: 'calculator',
+                        currentNode: '',
+                        windowTitle: {
+                          eng: 'Calculator',
+                          por: 'Calculadora',
+                        },
+                        windowIcon: 'calculator',
+                        openMode: 'window',
+                        initialStates: {
+                          maximized: false,
+                          minimized: false,
+                        },
+                        children: [],
+                        type: 'app',
+                        nodeType: '',
+                        initialDimensions: undefined,
+                        nodeDepth: 0,
+                        handleUpdateWindow,
+                        handleOpenWindow,
+                      })
+                    }
+                  /> */}
                   <li className="start-menu__list-item">
                     <Icon
                       className="start-menu__list-item-icon"

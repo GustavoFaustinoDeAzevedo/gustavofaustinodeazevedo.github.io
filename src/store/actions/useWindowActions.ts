@@ -21,10 +21,6 @@ const useWindowActions = () => {
     dispatch(openWindow(windowData));
   };
 
-  // const handleFocusWindow = (windowId: string) => {
-  //   dispatch(focusWindow(windowId));
-  // };
-
   const handleCloseWindow = (windowId: string) => {
     dispatch(closeWindow(windowId));
   };

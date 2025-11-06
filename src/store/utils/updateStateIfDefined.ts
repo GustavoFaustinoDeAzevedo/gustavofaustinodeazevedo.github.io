@@ -2,7 +2,6 @@ const updateStateIfDefined = <T extends Record<string, unknown>>(
   state: T,
   updates: Partial<T>
 ): T => {
-  console.log(state);
   return {
     ...state,
     ...(Object.fromEntries(

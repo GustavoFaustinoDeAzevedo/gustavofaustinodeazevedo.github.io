@@ -19,8 +19,8 @@ export const fileWrapperStyle = {
 
   '&:hover, &:focus': {
     transition: 'all 0.3s',
-    background: 'rgba(0, 0, 0, 0.43)',
-    backdropFilter: 'blur(2px)',
+    background: 'rgba(0, 0, 0, 0.8)',
+    backdropFilter: 'blur(8px)',
 
     '&>*': {
       transform: 'translateY(-10px)',

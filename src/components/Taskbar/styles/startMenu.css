@@ -180,6 +180,18 @@
                   mask-position: center;
                   border-radius: 5px;
                 }
+
+                & .tests {
+                  background-color: transparent !important;
+
+                  &>*:hover,
+                  &>*:active,
+                  &>*:focus {
+                    background-color: transparent !important;
+                  }
+
+
+                }
               }
             }
           }

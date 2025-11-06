@@ -16,7 +16,7 @@ const Desktop = () => {
         <DesktopBackground />
         <ListFiles
           currentNode={'desktop'}
-          fileClassName={'desktop-files-wrapper related-background'}
+          className={'desktop-files__wrapper'}
           openMode={'window'}
           language={language}
           children={children}
