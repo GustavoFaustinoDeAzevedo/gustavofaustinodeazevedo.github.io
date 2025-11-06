@@ -9,9 +9,14 @@ import { useSelector } from 'react-redux';
 import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
 import { useIsMobile } from '@/shared';
 
-//file variants = default | smallDefault | largeDefault | horizontal | vertical | verticalSmall | verticalLarge | horizontalSmall | horizontalLarge | onlyIcon | onlyText  
-
-const SystemFile = ({ fileId, title, icon, onClick, className = '', fileVariant = 'default' }) => {
+const SystemFile = ({
+  fileId,
+  title,
+  icon,
+  onClick,
+  className = '',
+  variant = 'default',
+}) => {
   const [ref, lines] = useAutoLineClamp(title, 2);
   const { isBlocked, trigger } = useDelayBlock(1000);
   const { isDoubleClick } = useSelector((state) => state.settings);
@@ -49,6 +54,7 @@ const SystemFile = ({ fileId, title, icon, onClick, className = '', fileVariant 
       onDoubleClick={handleDoubleClick}
       onMouseUp={handleSingleClick}
       className={className}
+      $variant={variant}
       data-info={dataInfo}
       id={fileId}
     >
