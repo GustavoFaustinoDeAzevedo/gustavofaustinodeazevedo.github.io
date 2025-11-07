@@ -1,11 +1,11 @@
 const variantStyles = {
   primary: {
-    backgroundColor: 'var(--c-primary)',
-    color: 'var(--c-text)',
+    backgroundColor: 'var(--color-primary)',
+    color: 'var(--color-text)',
   },
   secondary: {
-    backgroundColor: 'var(--c-secondary)',
-    color: 'var(--c-text)',
+    backgroundColor: 'var(--color-secondary)',
+    color: 'var(--color-text)',
   },
   success: {
     backgroundColor: '#28a745',

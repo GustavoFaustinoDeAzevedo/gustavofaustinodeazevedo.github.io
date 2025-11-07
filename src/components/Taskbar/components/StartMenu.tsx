@@ -1,31 +1,47 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import useClickOutside from '@/shared/hooks/useClickOutside';
-import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
 import Icon from '@/components/ui/GlobalStyles/components/Icon';
 import actions from '@/store/actions';
-import { ListFiles, SystemFile } from '@/components/FilesExplorer';
-import { useIsMobile } from '@/shared';
+import { ListFiles } from '@/components/FilesExplorer';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
-import handleOpenFile from '@/components/FilesExplorer/utils/handleOpenFile';
+import { StylesConfig } from '@/components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
 
 const StartMenu = () => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef<HTMLElement | null>(null);
   const [menuVisibility, setMenuVisibility] = useState(false);
 
-  const { handleOpenWindow, handleUpdateWindow } = actions.useWindowActions();
+  const { handleOpenWindow } = actions.useWindowActions();
 
   const { history } = useSelector((state: RootState) => state.window);
   const { language } = useSelector((state: RootState) => state.settings);
+  const { instaledApps } = useSelector((state: RootState) => state.file);
+
+  const stylesConfig: StylesConfig = useMemo(
+    () => ({
+      $direction: 'horizontal',
+      $size: '',
+      $fontSize: '0.8rem',
+      $fontWeight: 'normal',
+      $iconSize: '2rem',
+      $color: 'var(--color-text)',
+      $backgroundColor: { default: 'transparent', hover: '#ffffff1a' },
+      $borderRadius: '0rem',
+      $togglers: {
+        enableFilter: false,
+        enableShadow: false,
+        enableBorder: true,
+        enableTextShadow: true,
+        enableBorderRadius: true,
+        enableTransform: false,
+        enableSmoothTransition: true,
+      },
+    }),
+    []
+  );
 
   useEffect(() => {
     if (!startMenuRef.current) return;
@@ -92,55 +108,18 @@ const StartMenu = () => {
                 }
               />
             </header>
-            <main>
+            <main className="flex flex-column gap-2">
               <fieldset className="start-menu__fieldset">
                 <legend>{language !== 'por' ? 'Apps' : 'Aplicativos'}</legend>
                 <ListFiles
                   currentNode={''}
-                  className={'desktop-files-wrapper related-background'}
+                  className={'start-menu__list'}
                   openMode={'window'}
                   language={language}
-                  children={[]}
+                  children={instaledApps}
+                  doubleClickToOpen={false}
+                  stylesConfig={stylesConfig}
                 />
-                <ul className="start-menu__list">
-                  {/* <SystemFile
-                    key={`file-${'calculator'}-${'dddddd'}`}
-                    className={'start-menu__list-item'}
-                    fileId={'calculator'}
-                    title={language !== 'por' ? 'Calculator' : 'Calculadora'}
-                    icon={'calculator'}
-                    onClick={() =>
-                      handleOpenFile({
-                        fileId: 'calculator',
-                        currentNode: '',
-                        windowTitle: {
-                          eng: 'Calculator',
-                          por: 'Calculadora',
-                        },
-                        windowIcon: 'calculator',
-                        openMode: 'window',
-                        initialStates: {
-                          maximized: false,
-                          minimized: false,
-                        },
-                        children: [],
-                        type: 'app',
-                        nodeType: '',
-                        initialDimensions: undefined,
-                        nodeDepth: 0,
-                        handleUpdateWindow,
-                        handleOpenWindow,
-                      })
-                    }
-                  /> */}
-                  <li className="start-menu__list-item">
-                    <Icon
-                      className="start-menu__list-item-icon"
-                      variant="notepad"
-                    />
-                    <p>{language !== 'por' ? 'Notepad' : 'Bloco de Notas'}</p>
-                  </li>
-                </ul>
               </fieldset>
 
               <fieldset className="start-menu__fieldset">

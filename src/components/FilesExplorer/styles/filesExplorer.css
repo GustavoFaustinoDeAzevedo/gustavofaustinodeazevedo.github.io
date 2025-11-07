@@ -21,7 +21,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: var(--c-icon-bg);
+      color: var(--color-icon-bg);
       cursor: var(--cursor-pointer);
       line-height: 1.2;
       border-radius: 0.5rem;
@@ -41,7 +41,7 @@
 
       &:hover, &:focus {
         transition: all 0.2s;
-        background-color: var(--c-hover);
+        background-color: var(--color-hover);
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;

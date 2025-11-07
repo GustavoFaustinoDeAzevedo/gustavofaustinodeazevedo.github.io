@@ -12,8 +12,8 @@
     max-width: 750px;
     /* min-width: 400px; */
     max-height: 500px;
-    background-color: var(--c-background1);
-    border: 1px solid var(--c-border);
+    background-color: var(--color-background-1);
+    border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     overflow: auto;
 
@@ -25,7 +25,7 @@
 
       & .skills-list__title {
         font-weight: bold;
-        border-bottom: 1px solid var(--c-border);
+        border-bottom: 1px solid var(--color-border);
         padding-bottom: 0.5rem;
       }
 
@@ -39,7 +39,7 @@
 
         & .skills-list__skill {
           padding: 0.5rem 0.5rem;
-          background: var(--c-primary);
+          background: var(--color-primary);
           -webkit-user-select: none;
           user-select: none;
           border-radius: var(--border-radius);

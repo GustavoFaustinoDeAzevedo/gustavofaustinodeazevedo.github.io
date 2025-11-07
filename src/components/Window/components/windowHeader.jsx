@@ -13,23 +13,21 @@ const WindowHeader = ({
   handleRequestRestore,
   handleRequestClose,
 }) => {
-  
   const stylePng = {
-    color: 'var(--c-text)',
+    color: 'var(--color-text)',
     maxWidth: '1rem',
     maxHeight: '1rem',
     backgroundColor: 'transparent',
   };
 
   const styleSvg = {
-    color: 'var(--c-text)',
+    color: 'var(--color-text)',
     width: '1.1rem',
     height: '1.1rem',
-    backgroundColor: 'var(--c-icon-bg)',
+    backgroundColor: 'var(--color-icon-bg)',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-
   };
 
   return (

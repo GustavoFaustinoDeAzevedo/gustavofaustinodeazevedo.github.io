@@ -24,7 +24,7 @@
 
       top: 0;
       left: 0;
-      background-color: var(--c-desktop-bg);
+      background-color: var(--color-desktop-bg);
 
       @media screen {
         @media (max-width: 600px) {
@@ -33,7 +33,7 @@
           background-position: top;
           background-attachment: scroll;
 
-        }     
+        }
       }
     }
 

@@ -18,7 +18,7 @@ const StyledDropdown = styled.ul.withConfig({
   width: 100%;
   max-width: 200px;
   height: auto;
-  border: 1px var(--border-style) var(--c-border);
+  border: 1px var(--border-style) var(--color-border);
   text-align: left;
   border-radius: 5px;
   cursor: pointer;
@@ -28,8 +28,8 @@ const StyledDropdown = styled.ul.withConfig({
   transition: filter 300ms ease;
   user-select: none;
 
-  background-color: var(--c-background1);
-  color: var(--c-text);
+  background-color: var(--color-background-1);
+  color: var(--color-text);
 
   ${({ isAnimating }) =>
     isAnimating &&

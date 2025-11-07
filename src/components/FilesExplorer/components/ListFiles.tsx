@@ -1,24 +1,48 @@
 import SystemFile from './SystemFile';
 import handleOpenFile from '../utils/handleOpenFile';
-import { placeholder } from '@/data/filesData';
-import { useMemo } from 'react';
 import actions from '@/store/actions';
+import { FileNode } from '@/store/slices/file';
+import { Language } from '@/store/slices/settings';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { useIsMobile } from '@/shared';
+import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
+
+type ListFilesProps = {
+  currentNode: string;
+  language: Language;
+  children: FileNode[];
+  className?: string;
+  stylesConfig?: StylesConfig;
+  openMode?: string;
+  nodeType?: string;
+  filters?: string[];
+  doubleClickToOpen?: boolean;
+};
 
 const ListFiles = ({
   currentNode,
   language,
   children,
   className = '',
+  stylesConfig,
   openMode,
   nodeType = 'desktop',
   filters = [],
-}) => {
+  doubleClickToOpen,
+}: ListFilesProps) => {
   if (children === undefined || children.length < 0) return;
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
     app: 'html-file',
   };
+
+  const isDoubleClick =
+    doubleClickToOpen ??
+    useSelector((state: RootState) => state?.settings.isDoubleClick);
+
+  const isMobile = useIsMobile();
 
   return (
     <ul className={className ?? 'files-container'}>
@@ -40,16 +64,23 @@ const ListFiles = ({
         ) => {
           if (
             filters.length > 0 &&
-            (!filters.includes(type) || !filters.includes(title[language]))
+            (!filters.includes(type as string) ||
+              !filters.includes(title[language]))
           )
             return null;
-          const windowActions = actions.useWindowActions();
-          const finalIcon = icon ?? typeToIcon[type] ?? 'window-icon';
+
+          const finalIcon =
+            icon ??
+            typeToIcon[type as keyof typeof typeToIcon] ??
+            'window-icon';
           const iconTitle = language === 'por' ? title?.por : title?.eng;
           const windowTitle = windowMask?.title ?? title;
 
           const windowIcon =
-            windowMask?.icon ?? icon ?? typeToIcon[type] ?? 'window-icon';
+            windowMask?.icon ??
+            icon ??
+            typeToIcon[type as keyof typeof typeToIcon] ??
+            'window-icon';
           const src = windowMask?.src ?? '';
 
           return (
@@ -58,20 +89,21 @@ const ListFiles = ({
               fileId={fileId}
               title={iconTitle}
               icon={finalIcon}
-              language={language}
+              stylesConfig={stylesConfig}
+              isDoubleClick={isDoubleClick}
+              isMobile={isMobile}
               onClick={() =>
                 handleOpenFile({
                   fileId,
                   currentNode,
                   windowTitle,
-                  language,
                   windowIcon,
                   openMode,
                   src,
                   isUnique,
                   initialStates,
                   children,
-                  fileType: type,
+                  type,
                   nodeType,
                   initialDimensions,
                   nodeDepth,

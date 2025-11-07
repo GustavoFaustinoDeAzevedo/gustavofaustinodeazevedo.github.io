@@ -3,7 +3,7 @@
 
 type LanguageTitle = { eng: string; por: string };
 
-interface FileNode {
+export interface FileNode {
   fileId: string;
   title: LanguageTitle;
   icon?: string;
@@ -281,13 +281,13 @@ export const rootFolder: FileNode = {
                 //   type: 'app',
                 //   initialDimensions: { width: '580px', height: '330px' },
                 // },
-                {
-                  fileId: 'calculator',
-                  title: { eng: 'Calculator', por: 'Calculadora' },
-                  icon: 'calculator',
-                  type: 'app',
-                  initialDimensions: { width: '400px', height: '500px' },
-                },
+                // {
+                //   fileId: 'calculator',
+                //   title: { eng: 'Calculator', por: 'Calculadora' },
+                //   icon: 'calculator',
+                //   type: 'app',
+                //   initialDimensions: { width: '400px', height: '500px' },
+                // },
                 // {
                 //   fileId: 'task-manager',
                 //   title: {

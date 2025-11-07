@@ -21,14 +21,14 @@ const AnimatedInput = ({
       gsap.to(placeholderRef.current, {
         y: '-1.4rem',
         fontSize: '0.8rem',
-        color: 'var(--c-text3)',
+        color: 'var(--color-text3)',
         duration: 0.2,
       });
     } else {
       gsap.to(placeholderRef.current, {
         y: 0,
         fontSize: '1rem',
-        color: 'var(--c-text)',
+        color: 'var(--color-text)',
         duration: 0.2,
       });
     }

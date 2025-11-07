@@ -12,8 +12,8 @@
       height: 100%;
       width: 100%;
       padding: 1rem;
-      background-color: var(--c-background1);
-      color: var(--c-text);
+      background-color: var(--color-background-1);
+      color: var(--color-text);
       resize: none;
       border: none;
 

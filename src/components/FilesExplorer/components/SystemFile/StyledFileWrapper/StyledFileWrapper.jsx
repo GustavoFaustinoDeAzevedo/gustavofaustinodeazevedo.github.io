@@ -3,18 +3,13 @@ import Icon from '@/components/ui/GlobalStyles/components/Icon';
 import { fileParts } from './fileWrapperStyle';
 
 export const StyledFileWrapper = styled.li`
-  ${fileParts({}).wrapper}, &:hover,&:focus {
-    background: #0000003a;
-  }
+  ${(props) => fileParts(props).wrapper}
 `;
 
 export const StyledFileWrapper__Icon = styled(Icon)`
-  ${fileParts({}).icon};
-  filter: #0000005b;
+  ${(props) => fileParts(props).icon};
 `;
 
 export const StyledFileWrapper__Text = styled.p`
-  ${fileParts({}).text};
-  -webkit-line-clamp: ${(props) => props.$lines};
-  line-clamp: ${(props) => props.$lines};
+  ${(props) => fileParts(props).text};
 `;

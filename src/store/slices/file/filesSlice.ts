@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
 import { FileNode, FileState } from './filesSlice.type';
+import instaledAppsData from '@/data/instaledAppsData';
 
 /**
  * Adiciona um novo arquivo em node.children, garantindo que o mais recente
@@ -86,9 +87,10 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
   return { ...obj, nodeDepth, children };
 };
 
-// Slice 
+// Slice
 
 const initialState: FileState = {
+  instaledApps: instaledAppsData,
   filesList: handleNestedEntities(rootFolder),
   rootPath: 'root/',
   defaultPath: 'root/users/guests/desktop',
