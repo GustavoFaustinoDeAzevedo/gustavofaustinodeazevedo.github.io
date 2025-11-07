@@ -23,7 +23,7 @@
     user-select: none;
 
     & .icon {
-      background-color: var(--c-icon-bg);
+      background-color: var(--color-icon-bg);
     }
 
   }

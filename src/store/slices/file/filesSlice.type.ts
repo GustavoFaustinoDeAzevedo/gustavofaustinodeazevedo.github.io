@@ -1,3 +1,5 @@
+import { Size } from '../window';
+
 type SortType = 'asc' | 'desc'; // provisório
 
 // Estrutura básica de um arquivo/nó na árvore
@@ -18,10 +20,13 @@ export interface FileNode {
     icon: string;
   };
   children?: FileNode[];
+  initialDimensions?: { width: string | '1000px'; height: string | '600px' };
+  initialStates?: { maximized?: boolean; minimized?: boolean };
 }
 
 // Estado do slice de arquivos
 export interface FileState {
+  instaledApps: FileNode[];
   filesList: FileNode;
   rootPath: string;
   defaultPath: string;

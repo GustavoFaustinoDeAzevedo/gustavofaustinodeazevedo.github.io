@@ -1,21 +1,24 @@
 @layer base {
   :root {
-    --c-hover: #f0f0f033;
-    --c-rgb-hover: 240, 240, 240;
+    --color-hover: #f0f0f033;
+    --color-rgb-hover: 240, 240, 240;
 
-    --c-background: #121212;
-    --c-background-hover: #323233;
-    --c-background1: #191919;
-    --c-background2: #232323;
-    --c-background2-t: #1f1f1f80;
-    --c-background3: #333333;
-    --c-background4: #5d5d5d;
-    --c-background5: #666666;
+    --color-background: #121212;
+    --color-background-hover: #323233;
+    --color-background-1: #191919;
+    --color-background-2: #232323;
+    --color-background-2-t: #1f1f1f80;
+    --color-background-3: #333333;
+    --color-background-4: #5d5d5d;
+    --color-background-5: #666666;
+    --color-background-6: #808080;
+    --color-background-7: #a0a0a0;
+    --color-background-8: #c0c0c0;
 
-    --c-desktop-bg: #131021;
-    --c-desktop-default-bg: #131021;
-    --c-rgb-desktop-bg-contrast: 255, 255, 255;
-    --c-rgb-desktop-default-bg-contrast: 255, 255, 255;
+    --color-desktop-bg: #131021;
+    --color-desktop-default-bg: #131021;
+    --color-rgb-desktop-bg-contrast: 255, 255, 255;
+    --color-rgb-desktop-default-bg-contrast: 255, 255, 255;
 
     /* Blue tone palette */
     /* Very light blue */
@@ -39,44 +42,44 @@
     /* Cores de texto */
     --text-color: #fdfdfd;
 
-    --c-text: #fdfdfd;
-    --c-text1: #E0E0E0;
-    --c-text2: #bdbdbd;
-    --c-text3: #35db7a;
-    --c-text4: #ff8679;
+    --color-text: #fdfdfd;
+    --color-text1: #E0E0E0;
+    --color-text2: #bdbdbd;
+    --color-text3: #35db7a;
+    --color-text4: #ff8679;
 
-    --c-text-secondary: #A0A0A0;
+    --color-text-secondary: #A0A0A0;
 
-    --c-secondary-background: #121212;
+    --color-secondary-background: #121212;
 
-    --c-border: #393939;
+    --color-border: #393939;
 
-    --c-hover: #323233;
-
-
-
-    --c-error: #f48771;
-
-    --c-success: #4caf50;
-
-    --c-warning: #ffcc00;
-
-    --c-accent: #005f99;
-    --c-accent-hover: #007acc;
+    --color-hover: #323233;
 
 
-    --c-accent-focus: #0090ff;
-    --c-background-focus: #3c3c3c;
 
-    --c-header-active: #0a0a0a;
-    --c-header-inactive: #2d2d2d;
+    --color-error: #f48771;
 
-    --c-primary: #1565c0;
-    --c-primary-hover-dark: #134c97;
-    --c-primary-hover-light: #4d90f9;
-    --c-secondary: #6c757d;
+    --color-success: #4caf50;
 
-    --c-icon-bg: #f0f0f0;
+    --color-warning: #ffcc00;
+
+    --color-accent: #005f99;
+    --color-accent-hover: #007acc;
+
+
+    --color-accent-focus: #0090ff;
+    --color-background-focus: #3c3c3c;
+
+    --color-header-active: #0a0a0a;
+    --color-header-inactive: #2d2d2d;
+
+    --color-primary: #1565c0;
+    --color-primary-hover-dark: #134c97;
+    --color-primary-hover-light: #4d90f9;
+    --color-secondary: #6c757d;
+
+    --color-icon-bg: #f0f0f0;
 
     --patern-1: none;
 
@@ -209,7 +212,7 @@
 
 
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
   }
 
   /* Track */
@@ -220,13 +223,13 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--c-primary) !important;
+    background: var(--color-background-4) !important;
     border-radius: 0px !important;
     transition: background-color 0.4s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--c-primary-hover-dark) !important;
+    background-color: var(--color-background-6) !important;
     /* Um azul um pouco mais escuro no hover */
   }
 
@@ -237,7 +240,7 @@
 
   /* Handle on hover */
   /* ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--c-background5);
+    background-color: var(--color-background-5);
   } */
 
 

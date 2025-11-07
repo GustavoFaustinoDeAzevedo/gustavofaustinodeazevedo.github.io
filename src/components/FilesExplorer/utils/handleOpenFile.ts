@@ -1,10 +1,8 @@
-import actions from '@/store/actions';
 import { FileNode } from '@/store/slices/file';
-import { Size } from '@/store/slices/window';
 
 interface FileProps {
   fileId: string;
-  initialDimensions?: Size;
+  initialDimensions?: { width: string | '1000px'; height: string | '600px' };
   currentNode: string;
   windowTitle: { eng: string; por: string };
   windowIcon?: string;
@@ -14,9 +12,9 @@ interface FileProps {
     minimized?: boolean;
   };
   openMode?: string;
-  type: string;
+  type?: string;
   nodeType: string;
-  nodeDepth: number;
+  nodeDepth?: number;
   children?: FileNode[];
   isUnique?: boolean;
   handleOpenWindow: any;

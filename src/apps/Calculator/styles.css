@@ -11,15 +11,15 @@
       height: 25%;
       padding: 0 20px;
       text-align: right;
-      background-color: var(--c-header-active);
-      color: var(--c-text);
+      background-color: var(--color-header-active);
+      color: var(--color-text);
       border: none;
       transition: font-size 0.2s;
-      
+
     }
 
-    & .calculator-visor::placeholder{
-      color: var(--c-text);
+    & .calculator-visor::placeholder {
+      color: var(--color-text);
     }
 
     & .calculator-keys-container {
@@ -32,7 +32,7 @@
         display: grid;
         gap: 2px;
         grid-template-columns: repeat(4, minmax(80px, 1fr));
-        background-color: var(--c-background1);
+        background-color: var(--color-background-1);
 
         & .calculator-key {
           width: 100%;
@@ -49,26 +49,26 @@
           }
 
           &.main-key {
-            background-color: var(--c-background3);
+            background-color: var(--color-background-3);
 
             &:hover {
-              background-color: var(--c-background2);
+              background-color: var(--color-background-2);
             }
 
             &:active {
-              background-color: var(--c-background3);
+              background-color: var(--color-background-3);
             }
           }
 
           &.operation {
-            background-color: var(--c-background2);
+            background-color: var(--color-background-2);
 
             &:hover {
-              background-color: var(--c-background3);
+              background-color: var(--color-background-3);
             }
 
             &:active {
-              background-color: var(--c-background2);
+              background-color: var(--color-background-2);
             }
           }
 
@@ -77,14 +77,14 @@
           }
 
           &.result {
-            background-color: var(--c-accent);
+            background-color: var(--color-accent);
 
             &:hover {
-              background-color: var(--c-accent-hover);
+              background-color: var(--color-accent-hover);
             }
 
             &:active {
-              background-color: var(--c-accent);
+              background-color: var(--color-accent);
             }
           }
         }

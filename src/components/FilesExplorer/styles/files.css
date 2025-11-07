@@ -33,7 +33,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: var(--c-background1);
+      color: var(--color-background-1);
       cursor: var(--cursor-pointer);
       line-height: 1.2;
       border-radius: 0.5rem;
@@ -56,7 +56,7 @@
         width: 100%;
         font-size: 2rem;
         margin-bottom: 0.5rem;
-        background-color: rgb(var(--c-rgb-desktop-bg-contrast));
+        background-color: rgb(var(--color-rgb-desktop-bg-contrast));
         transition: background-color 0.3s ease-in-out;
         /* filter: invert(1); */
       }
@@ -72,7 +72,7 @@
         line-clamp: 2;
         word-wrap: break-word;
         font-size: 0.8rem;
-        color: rgb(var(--c-rgb-desktop-bg-contrast));
+        color: rgb(var(--color-rgb-desktop-bg-contrast));
         text-shadow: var(--s-text-outline);
         -webkit-user-select: none;
         user-select: none;

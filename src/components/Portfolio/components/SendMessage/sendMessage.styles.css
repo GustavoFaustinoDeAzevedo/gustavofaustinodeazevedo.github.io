@@ -27,7 +27,7 @@
         left: 1rem;
         top: 0.8rem;
         font-size: 1rem;
-        color: var(--c-text);
+        color: var(--color-text);
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
@@ -36,10 +36,10 @@
       & input, & textarea {
         width: 100%;
         padding: 1rem;
-        background-color: var(--c-background-focus);
-        border: 1px solid var(--c-background-focus);
+        background-color: var(--color-background-focus);
+        border: 1px solid var(--color-background-focus);
         border-radius: var(--border-radius);
-        color: var(--c-text);
+        color: var(--color-text);
         font-family: inherit;
 
         &::placeholder {
@@ -60,7 +60,7 @@
 
         &:focus {
           outline: none;
-          background-color: var(--c-background);
+          background-color: var(--color-background);
         }
       }
     }
@@ -80,7 +80,7 @@
     & button {
       width: 100% !important;
       min-height: 2.5rem;
-      background: var(--c-accent);
+      background: var(--color-accent);
       border: none;
       border-radius: var(--border-radius);
       font-weight: 500;
@@ -90,7 +90,7 @@
 
 
       &:hover {
-        background: var(--c-accent-hover);
+        background: var(--color-accent-hover);
       }
     }
   }

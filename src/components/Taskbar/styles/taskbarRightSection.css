@@ -144,7 +144,7 @@
 
               &.enabled {
                 background-color: var(--color-four);
-                border-left: 2px solid var(--c-primary);
+                border-left: 2px solid var(--color-primary);
               }
             }
           }

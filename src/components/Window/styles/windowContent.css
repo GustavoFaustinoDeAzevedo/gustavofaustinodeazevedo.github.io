@@ -21,7 +21,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: var(--c-background);
+    background-color: var(--color-background);
     position: relative;
     overflow: hidden;
 
@@ -30,7 +30,7 @@
       height: 50px;
       padding: 0.6rem;
       gap: 0.5rem;
-      background-color: var(--c-background2);
+      background-color: var(--color-background-2);
       display: flex;
       align-items: center;
       top: 0;
@@ -49,13 +49,13 @@
           border-radius: 50%;
 
           background-color: none !important;
-          fill: var(--c-text);
+          fill: var(--color-text);
           border: none;
           cursor: pointer;
           transition: background-color 0.3s;
 
           &:hover {
-            background-color: var(--c-accent-hover);
+            background-color: var(--color-accent-hover);
           }
         }
       }
@@ -66,8 +66,8 @@
         padding: 0.4rem 1rem;
         border: none;
         border-radius: var(--border-radius);
-        background-color: var(--c-background-focus);
-        color: var(--c-text);
+        background-color: var(--color-background-focus);
+        color: var(--color-text);
         font-family: inherit;
         font-size: 0.8rem;
 
@@ -78,7 +78,7 @@
 
         &:focus {
           outline: none;
-          background-color: var(--c-background);
+          background-color: var(--color-background);
         }
       }
 

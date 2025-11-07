@@ -3,11 +3,11 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    background: var(--c-background2);
+    background: var(--color-background-2);
     border-radius: var(--border-radius);
     border: 1px solid #ffffff00;
     box-shadow: 0 16px 32px #0000000c;
-    color: var(--c-text);
+    color: var(--color-text);
     min-width: max-content;
     min-height: 10%;
     max-width: 100%;
@@ -37,11 +37,11 @@
     &.focus:not(.minimized):not(.maximized) {
       box-shadow: 0px 16px 12px 8px #0000002e;
       transition: margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      border-color: var(--c-header-active);
+      border-color: var(--color-header-active);
     }
 
     &:not(.focus):not(.minimized):not(.maximized) {
-      border-color: var(--c-border);
+      border-color: var(--color-border);
     }
 
     &.minimized {
@@ -61,7 +61,7 @@
       min-height: var(--window-header-height);
       height: var(--window-header-height);
 
-      background: var(--c-header-inactive);
+      background: var(--color-header-inactive);
       min-width: max-content;
       display: flex;
       align-items: center;
@@ -71,7 +71,7 @@
       transition: background-color 0.2s ease;
 
       & .icon {
-        background-color: var(--c-icon-bg) !important;
+        background-color: var(--color-icon-bg) !important;
       }
 
       .maximized & {
@@ -80,7 +80,7 @@
 
       .focus:not(.minimized) & {
         transition: background-color 0.2s ease;
-        background: var(--c-header-active);
+        background: var(--color-header-active);
       }
 
       & .window__header-title {
@@ -146,7 +146,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: var(--c-secondary-background);
+      background-color: var(--color-secondary-background);
       background-image: var(--pattern-1);
       min-width: -webkit-fill-available;
       min-width: fit-content;
