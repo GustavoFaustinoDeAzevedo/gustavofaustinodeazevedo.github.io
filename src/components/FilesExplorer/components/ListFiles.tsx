@@ -9,6 +9,7 @@ import { useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 
 type ListFilesProps = {
+  handleGlobalClick?: () => void;
   currentNode: string;
   language: Language;
   children: FileNode[];
@@ -21,6 +22,7 @@ type ListFilesProps = {
 };
 
 const ListFiles = ({
+  handleGlobalClick,
   currentNode,
   language,
   children,
@@ -92,7 +94,8 @@ const ListFiles = ({
               stylesConfig={stylesConfig}
               isDoubleClick={isDoubleClick}
               isMobile={isMobile}
-              onClick={() =>
+              onClick={() => {
+                handleGlobalClick?.();
                 handleOpenFile({
                   fileId,
                   currentNode,
@@ -109,8 +112,8 @@ const ListFiles = ({
                   nodeDepth,
                   handleUpdateWindow,
                   handleOpenWindow,
-                })
-              }
+                });
+              }}
             />
           );
         }

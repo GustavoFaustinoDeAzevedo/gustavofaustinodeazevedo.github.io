@@ -26,7 +26,7 @@ const windowSlice = createSlice({
     history: [],
   } as WindowSliceState,
   reducers: {
-    focusWindow: (state, action) => {
+    generalFocus: (state, action) => {
       const windowId = action.payload;
       state.focusedWindow = windowId;
       const foundWindow = state.openedWindowList.find(
@@ -248,7 +248,7 @@ const windowSlice = createSlice({
 });
 
 export const {
-  // focusWindow,
+  generalFocus,
   openWindow,
   resetFocus,
   closeWindow,

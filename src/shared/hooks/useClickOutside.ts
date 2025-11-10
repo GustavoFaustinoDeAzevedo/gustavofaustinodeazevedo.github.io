@@ -38,16 +38,15 @@ const useClickOutside = ({
       ) {
         return;
       }
-
       onClickOutside(event);
     };
 
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('touchstart', handleClick);
+    document.addEventListener('pointerdown', handleClick, { capture: true });
 
     return () => {
-      document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('touchstart', handleClick);
+      document.removeEventListener('pointerdown', handleClick, {
+        capture: true,
+      });
     };
   }, [mainRef, extraRef, onClickOutside, isActive, ignoreSelectors]);
 };

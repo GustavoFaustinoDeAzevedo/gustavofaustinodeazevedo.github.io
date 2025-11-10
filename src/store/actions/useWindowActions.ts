@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import {
   openWindow,
   closeWindow,
-  // focusWindow,
+  generalFocus,
   updateWindow,
   resetFocus,
 } from '../slices/window/windowSlice';
@@ -25,6 +25,10 @@ const useWindowActions = () => {
     dispatch(closeWindow(windowId));
   };
 
+  const handleGeneralFocus = (windowId: string) => {
+    dispatch(generalFocus(windowId));
+  };
+
   const handleResetFocus = (windowId: string) => {
     dispatch(resetFocus(windowId));
   };
@@ -32,7 +36,7 @@ const useWindowActions = () => {
   return {
     handleOpenWindow,
     handleCloseWindow,
-    // handleFocusWindow,
+    handleGeneralFocus,
     handleResetFocus,
     handleUpdateWindow,
   };

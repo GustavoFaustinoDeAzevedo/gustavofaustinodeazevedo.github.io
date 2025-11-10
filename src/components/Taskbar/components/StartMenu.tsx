@@ -8,6 +8,7 @@ import { ListFiles } from '@/components/FilesExplorer';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { StylesConfig } from '@/components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
+import { WindowData } from '@/store/actions/useWindowActions';
 
 const StartMenu = () => {
   const startMenuRef = useRef(null);
@@ -62,13 +63,20 @@ const StartMenu = () => {
 
   useClickOutside({
     mainRef: startMenuRef,
-    onClickOutside: () => setMenuVisibility((prev) => (prev = !menuVisibility)),
+    onClickOutside: () => {
+      setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
+    },
     isActive: menuVisibility,
     extraRef: startButtonRef as React.RefObject<HTMLElement>,
   });
 
-  const handleClick = () => {
-    setMenuVisibility((prev) => (prev = !menuVisibility));
+  const handleToggleVisibility = () => {
+    setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
+  };
+
+  const handleOpenHistoryApp = (appProps: WindowData) => {
+    handleOpenWindow(appProps);
+    setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
   };
 
   return useMemo(
@@ -78,7 +86,7 @@ const StartMenu = () => {
           ref={startButtonRef as React.RefObject<HTMLButtonElement>}
           title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
           className={`start-menu__toggler ${menuVisibility ? 'visible' : ''}`}
-          onClick={handleClick}
+          onClick={handleToggleVisibility}
           aria-label={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
           type="button"
         >
@@ -112,6 +120,7 @@ const StartMenu = () => {
               <fieldset className="start-menu__fieldset">
                 <legend>{language !== 'por' ? 'Apps' : 'Aplicativos'}</legend>
                 <ListFiles
+                  handleGlobalClick={handleToggleVisibility}
                   currentNode={''}
                   className={'start-menu__list'}
                   openMode={'window'}
@@ -133,7 +142,7 @@ const StartMenu = () => {
                         className="start-menu__list-item"
                         key={key as string}
                         onClick={() =>
-                          handleOpenWindow(value.reopenProps || value)
+                          handleOpenHistoryApp(value.reopenProps as WindowData)
                         }
                       >
                         <Icon
@@ -158,7 +167,10 @@ const StartMenu = () => {
       menuVisibility,
       startButtonRef,
       startMenuRef,
-      handleClick,
+      stylesConfig,
+      instaledApps,
+      handleToggleVisibility,
+      handleOpenHistoryApp,
     ]
   );
 };
