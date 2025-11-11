@@ -1,10 +1,5 @@
 /**
- * Verifica se um determinado caractere foi excedido em uma string
- * 
- * @param str  
- * @param char 
- * @param limit 
- * @returns boolean
+ * Verifica se excedeu o numero de characteres em uma string baseado em um char especifico
  */
 
 const exceedsCharLimit = (str: string, char: string, limit: number) => {

@@ -14,6 +14,7 @@ const StartMenu = () => {
   const startMenuRef = useRef(null);
   const startButtonRef = useRef<HTMLElement | null>(null);
   const [menuVisibility, setMenuVisibility] = useState(false);
+  const [searchAppValue, setSearchAppValue] = useState('');
 
   const { handleOpenWindow } = actions.useWindowActions();
 
@@ -79,6 +80,10 @@ const StartMenu = () => {
     setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
   };
 
+  const handleSearchAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchAppValue(e.target.value);
+  };
+
   return useMemo(
     () => (
       <div className="start-menu">
@@ -106,19 +111,28 @@ const StartMenu = () => {
                 type="text"
                 aria-label={
                   language !== 'por'
-                    ? 'Start menu search apps input'
-                    : 'Busca na menu de aplicativos'
+                    ? 'Search for apps and documents'
+                    : 'Pesquisar por aplicativos e documentos'
                 }
                 placeholder={
                   language !== 'por'
                     ? 'Search for apps and documents'
                     : 'Pesquisar por aplicativos e documentos'
                 }
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                role="search"
+                value={searchAppValue}
+                onChange={handleSearchAppChange}
               />
             </header>
-            <main className="flex flex-column gap-2">
+            <main className="flex flex-column gap-2 margin-bottom-5">
               <fieldset className="start-menu__fieldset">
-                <legend>{language !== 'por' ? 'Apps' : 'Aplicativos'}</legend>
+                <legend className="text-xs text-bold">
+                  {language !== 'por' ? 'Apps' : 'Aplicativos'}
+                </legend>
                 <ListFiles
                   handleGlobalClick={handleToggleVisibility}
                   currentNode={''}
@@ -128,11 +142,14 @@ const StartMenu = () => {
                   children={instaledApps}
                   doubleClickToOpen={false}
                   stylesConfig={stylesConfig}
+                  filters={searchAppValue}
                 />
               </fieldset>
 
               <fieldset className="start-menu__fieldset">
-                <legend>{language !== 'por' ? 'History' : 'Histórico'}</legend>
+                <legend className="text-xs text-bold">
+                  {language !== 'por' ? 'History' : 'Histórico'}
+                </legend>
                 <ul className="start-menu__list">
                   {history?.map((value: Title, index: number) => {
                     const key =
@@ -156,7 +173,28 @@ const StartMenu = () => {
                 </ul>
               </fieldset>
             </main>
-            <footer></footer>
+            <footer className="start-menu__footer">
+              <button
+                title="Placeholder"
+                aria-label="Placeholder"
+                type="button"
+                className="start-menu__footer-button"
+              >
+                <Icon
+                  className="start-menu__footer-button-icon"
+                  customPicture="/icons/about-me-icon.png"
+                ></Icon>
+                <p className="text-color-light text-xs">Placeholder</p>
+              </button>
+              <button
+                title="config"
+                aria-label="config"
+                type="button"
+                className="start-menu__footer-button"
+              >
+                Placeholder
+              </button>
+            </footer>
           </div>
         </aside>
       </div>
