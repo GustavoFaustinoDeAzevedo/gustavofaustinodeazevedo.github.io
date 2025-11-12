@@ -46,7 +46,10 @@ const SystemFile = ({
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
 
-  const handleSingleClick = () => {
+  const handleSingleClick = (e: React.MouseEvent) => {
+    if (isDoubleClick && !isMobile) {
+      (e.currentTarget as HTMLElement | null)?.focus();
+    }
     trigger(() => {
       if (!isDoubleClick || isMobile) {
         onClick?.();
@@ -54,16 +57,28 @@ const SystemFile = ({
     });
   };
 
-  const handleDoubleClick = () => {
+  const handleDoubleClick = (e: React.MouseEvent) => {
     if (isDoubleClick && !isMobile) {
+      (e.currentTarget as HTMLElement | null)?.blur();
       onClick?.();
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      onClick?.();
+    }
+  };
+
+  // TODO Adicionar a opção de selecionar vários arquivos, tenho que trocar o sistema padrão de focus por um
+  // personalizado que permite selecionar vários arquivos ao mesmo tempo.
+
   return (
     <StyledFileWrapper
+      tabIndex={0}
       aria-label={title}
       title={title}
+      onKeyDown={handleKeyDown}
       onDoubleClick={handleDoubleClick}
       onMouseUp={handleSingleClick}
       id={fileId}
