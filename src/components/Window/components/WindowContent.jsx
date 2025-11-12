@@ -4,6 +4,11 @@ import { ListFiles } from '@/components/FilesExplorer';
 
 import { returnWindowContent } from '@/store/slices/window/windowSlice.data';
 
+/** O windowId tem o formato: window#contentId#[randomString] para que cada janela possa ser uma janela única.
+ * O contentId representa a ID do conteúdo da janela que será renderizado.
+ * O randomString representa uma string aleatória que é criada de acordo com a data, hora e minuto atual usada para identificar a janela.
+ * O calculo pode ser encontrado em file:scr/store/settings/settingsSlice.ts
+ */
 const WindowContent = ({
   windowId,
   currentNode,
@@ -15,10 +20,6 @@ const WindowContent = ({
   windowList,
   filesActions,
 }) => {
-  //A windowId tem o formato: window#contentId#[randomString] para que cada janela possa ser uma janela única.
-  //O contentId representa a ID do conteúdo da janela que será renderizado.
-  //O randomString representa uma string aleatória que é criada de acordo com a data, hora e minuto atual usada para identificar a janela.
-  //O calculo pode ser encontrado em file:scr/store/settings/settingsSlice.ts
   const contentId = windowId.split('#')[1];
   const windowContent = returnWindowContent(contentId, {
     windowId: currentNode,
@@ -28,6 +29,8 @@ const WindowContent = ({
     windowActions,
     children,
   });
+
+  const updateWindowHandler = (data) => windowActions?.updateWindowState(data);
 
   return (
     windowContent || (
@@ -39,7 +42,7 @@ const WindowContent = ({
         children={children}
         filesActions={filesActions}
         windowActions={windowActions}
-        handleWindowUpdate={(data) => windowActions?.updateWindowState(data)}
+        handleWindowUpdate={updateWindowHandler}
         nodeType={type}
         dataInitialDimension='{"width": "1000px", "height": "600px"}'
         fileClassName="files-explorer"

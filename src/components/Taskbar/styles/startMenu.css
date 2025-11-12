@@ -161,7 +161,6 @@
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
-                cursor: pointer;
                 transition: background-color 0.2s ease-in-out;
 
                 &:hover {
@@ -229,7 +228,7 @@
               }
 
               &:active {
-                background-color:  #ffffff10;
+                background-color: #ffffff10;
               }
 
               & .start-menu__footer-button-icon {

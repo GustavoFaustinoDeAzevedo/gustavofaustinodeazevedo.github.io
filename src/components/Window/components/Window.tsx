@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -128,6 +128,12 @@ const Window = ({
     isActive: isFocused,
   });
 
+  //handler para lidar com o focus da janela ===================================
+
+  const handleFocus = useCallback(() => {
+    return isFocused ? null : handleRequestFocus;
+  }, [isFocused, handleRequestFocus]);
+
   //JSX ========================================================================
 
   return (
@@ -140,7 +146,7 @@ const Window = ({
         style={{ zIndex }}
         // onContextMenu={handleContextMenu}
         id={windowId}
-        onClick={isFocused ? null : handleRequestFocus}
+        onClick={handleFocus}
       >
         <WindowHeader {...windowHeaderProps} />
         {!errorOcurred && (

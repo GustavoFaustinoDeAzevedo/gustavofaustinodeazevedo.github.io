@@ -54,9 +54,14 @@ export const fileParts = ({
       pointerEvents: 'initial',
       backdropFilter: $togglers?.enableFilter && 'blur(0px)',
 
-      '&:hover, &:focus': {
-        transition: $togglers?.enableSmoothTransition && 'all 0.3s',
+      '&:focus': {
         background: $backgroundColor?.hover,
+        backdropFilter: $togglers?.enableFilter && 'blur(8px) brightness(1.5)',
+      },
+
+      '&:hover': {
+        background: $backgroundColor?.hover,
+        transition: $togglers?.enableSmoothTransition && 'all 0.3s',
         backdropFilter: $togglers?.enableFilter && 'blur(8px)',
 
         '&>*': {

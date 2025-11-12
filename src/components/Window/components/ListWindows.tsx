@@ -1,12 +1,10 @@
-import { useMemo } from 'react';
-import WindowManager from '@/components/Window';
-import { CreateWindowListProps } from '@/App/types/App.types';
+import WindowManager from './WindowManager';
 import actions from '@/store/actions';
 import { useIsMobile } from '@/shared';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 
-const CreateWindowList = ({
+const ListWindows = ({
   desktopRef,
 }: {
   desktopRef: React.RefObject<HTMLDivElement | null>;
@@ -41,4 +39,4 @@ const CreateWindowList = ({
   ));
 };
 
-export default CreateWindowList;
+export default ListWindows;

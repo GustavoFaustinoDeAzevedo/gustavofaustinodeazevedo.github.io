@@ -101,8 +101,8 @@ const StartMenu = () => {
           />
         </button>
 
-        <aside className="start-menu__container">
-          <div ref={startMenuRef} className="start-menu__wrapper">
+        <div className="start-menu__container">
+          <aside ref={startMenuRef} className="start-menu__wrapper">
             <header className="start-menu__header">
               <Icon className="start-menu__search-file-icon" variant="search" />
               <input
@@ -195,8 +195,8 @@ const StartMenu = () => {
                 Placeholder
               </button>
             </footer>
-          </div>
-        </aside>
+          </aside>
+        </div>
       </div>
     ),
     [

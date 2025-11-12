@@ -7,7 +7,7 @@ import './app.styles.css';
 import Desktop from '@/components/Desktop';
 import Taskbar from '@/components/Taskbar';
 
-import WindowList from '@/components/Window/components/WindowList';
+import ListWindows from '@/components/Window';
 import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';
@@ -52,7 +52,7 @@ const App = () => {
           <div className="desktop" ref={desktopRef}>
             <Desktop />
             <RefsProvider>
-              <WindowList desktopRef={desktopRef} />
+              <ListWindows desktopRef={desktopRef} />
               <Taskbar />
             </RefsProvider>
 

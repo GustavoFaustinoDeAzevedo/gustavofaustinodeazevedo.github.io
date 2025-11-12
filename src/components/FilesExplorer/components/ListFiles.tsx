@@ -1,5 +1,5 @@
 import SystemFile from './SystemFile';
-import handleOpenFile from '../utils/handleOpenFile';
+import handleOpenFile, { HandleOpenFileProps } from '../utils/handleOpenFile';
 import actions from '@/store/actions';
 import { FileNode } from '@/store/slices/file';
 import { Language } from '@/store/slices/settings';
@@ -81,6 +81,7 @@ const ListFiles = ({
           },
           windowIndex
         ) => {
+          if (fileId === undefined || fileId === null) return null;
           const finalIcon =
             icon ??
             typeToIcon[type as keyof typeof typeToIcon] ??
@@ -95,6 +96,27 @@ const ListFiles = ({
             'window-icon';
           const src = windowMask?.src ?? '';
 
+          const handleClick = () => {
+            handleGlobalClick?.();
+            handleOpenFile({
+              fileId,
+              currentNode,
+              windowTitle,
+              windowIcon,
+              openMode,
+              src,
+              isUnique,
+              initialStates,
+              children,
+              type,
+              nodeType,
+              initialDimensions,
+              nodeDepth,
+              handleUpdateWindow,
+              handleOpenWindow,
+            });
+          };
+
           return (
             <SystemFile
               key={`file-${fileId}-${windowIndex}`}
@@ -104,26 +126,7 @@ const ListFiles = ({
               stylesConfig={stylesConfig}
               isDoubleClick={isDoubleClick}
               isMobile={isMobile}
-              onClick={() => {
-                handleGlobalClick?.();
-                handleOpenFile({
-                  fileId,
-                  currentNode,
-                  windowTitle,
-                  windowIcon,
-                  openMode,
-                  src,
-                  isUnique,
-                  initialStates,
-                  children,
-                  type,
-                  nodeType,
-                  initialDimensions,
-                  nodeDepth,
-                  handleUpdateWindow,
-                  handleOpenWindow,
-                });
-              }}
+              onClick={handleClick}
             />
           );
         }

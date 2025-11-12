@@ -1,6 +1,6 @@
 import { FileNode } from '@/store/slices/file';
 
-interface FileProps {
+export interface HandleOpenFileProps {
   fileId: string;
   initialDimensions?: { width: string | '1000px'; height: string | '600px' };
   currentNode: string;
@@ -37,14 +37,13 @@ export const handleOpenFile = ({
   nodeDepth,
   handleUpdateWindow,
   handleOpenWindow,
-}: FileProps) => {
+}: HandleOpenFileProps) => {
   try {
     if (fileId === undefined || fileId === null) {
       throw new Error(`Invalid file ID: ${fileId}`);
     }
 
     if (openMode === 'window' || type === 'app') {
-      //Abrir uma nova janela
       handleOpenWindow({
         windowId: fileId,
         title: windowTitle,
@@ -58,7 +57,7 @@ export const handleOpenFile = ({
         nodeDepth,
       });
     } else if (openMode === 'tab') {
-      //file will open on a new tab
+      // TODO: implementar opção de abertura de tabs
     } else {
       handleUpdateWindow({
         currentNode: fileId,
