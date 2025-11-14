@@ -54,9 +54,10 @@ const CustomColorPicker = ({
         <InputRGB
           language={language}
           inputColor={inputColor}
+          className={'change-background__color-main'}
           handleChangeColor={handleChangeColor}
         />
-        <div className="flex gap-2 flex-space-evenly flex-align-baseline">
+        <div className="change-background__color-footer">
           <div className="flex flex-row gap-1">
             <p className="font-courier">HEX</p>
             <InputHEX

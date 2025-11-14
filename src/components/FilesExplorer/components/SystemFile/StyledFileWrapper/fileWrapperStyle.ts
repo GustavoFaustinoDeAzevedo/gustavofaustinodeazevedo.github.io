@@ -57,6 +57,15 @@ export const fileParts = ({
       '&:focus': {
         background: $backgroundColor?.hover,
         backdropFilter: $togglers?.enableFilter && 'blur(8px) brightness(1.5)',
+
+        '&>*': {
+          transform: $togglers?.enableTransform && 'translateY(-5px)',
+          filter:
+            $togglers?.enableFilter &&
+            `brightness(1.1) ${
+              $togglers.enableShadow && 'drop-shadow(0px 5px 1px #0000008a)'
+            }`,
+        },
       },
 
       '&:hover': {
