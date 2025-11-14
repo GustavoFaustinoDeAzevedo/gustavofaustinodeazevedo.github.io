@@ -26,10 +26,12 @@ const rgbToHex = ({ r, g, b }: RGB): string =>
 
 const InputRGB = ({
   language,
+  className,
   handleChangeColor,
   inputColor,
 }: {
   language: Language;
+  className?: string;
   handleChangeColor: (hex: string) => void;
   inputColor: string;
 }) => {
@@ -85,7 +87,7 @@ const InputRGB = ({
   );
 
   return (
-    <div className="change-background__color-input-wrapper">
+    <div className={className}>
       <SliderGroup
         sliderObjectData={colorsData}
         sliderInitialValues={rgb}
@@ -101,7 +103,7 @@ const InputRGB = ({
         inputNumberActive={false}
       />
 
-      <div className="flex flex-row gap-2 flex-space-evenly">
+      <div className=" flex flex-row gap-2 flex-space-evenly">
         {Object.values(colorsData).map((value) => (
           <input
             key={value.id}
@@ -113,7 +115,7 @@ const InputRGB = ({
             onMouseUp={() => handleChangeColor(rgbToHex(rgb))}
             onTouchEnd={() => handleChangeColor(rgbToHex(rgb))}
             onKeyUp={() => handleChangeColor(rgbToHex(rgb))}
-            className={`change-background__color-input ${value.id}`}
+            className={`${className}-input ${value.id}`}
             title={value.label}
             placeholder={value.id.toUpperCase()}
           />

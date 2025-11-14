@@ -287,7 +287,7 @@
                   cursor: pointer;
                 }
 
-                & .change-background__color-input {
+                & .change-background__color-main-input {
                   position: relative;
                   width: 3.3rem;
                   font-family: 'Courier New', Courier, monospace;
@@ -351,22 +351,7 @@
 
                   }
 
-
                 }
-              }
-
-              & .react-colorful__saturation {
-                border-radius: var(--border-radius) !important;
-              }
-
-              & .react-colorful__hue {
-                border-radius: 0 !important;
-              }
-
-              & .react-colorful__hue-pointer {
-                width: 1rem !important;
-                height: inherit;
-                border-radius: 0 !important;
               }
 
               & .change-background__file-input {
@@ -403,16 +388,7 @@
         padding: 0rem !important;
 
         & .change-background__title {
-          height: 1rem !important;
-        }
-
-        & .change-background__preview {
-
-          max-height: fit-content;
-          max-width: fit-content;
-
-
-
+          color: transparent;
         }
       }
 
@@ -422,36 +398,274 @@
         width: 100%;
         height: 100%;
 
-      }
-
-      .change-background__aside {
-        font-size: 0.9rem;
-        width: 100% !important;
-
-        border: none !important;
-        border-top: 1px solid var(--color-border) !important;
-        padding: 0.5rem 0 !important;
-        max-height: fit-content;
-        max-width: 100vw;
-        overflow: auto;
-
-
-        & .change-background__picker-wrapper {
-          height: max-content !important;
-
-          gap: 1rem !important;
+        & .change-background__preview-container {
+          position: relative;
+          min-width: 320px;
+          min-height: 240px;
+          width: 100%;
+          height: 100%;
+          outline: none !important;
+          border: none !important;
         }
 
-        & .change-background__filters-list {
-          max-height: 100px;
-          ;
-        }
+        .change-background__aside {
+          font-size: 0.9rem;
+          width: 100% !important;
+          border: none !important;
+          padding: 0 !important;
+          max-height: fit-content;
+          min-width: 100vw;
+          overflow-x: auto;
+          overflow-y: hidden;
 
-        /* button {
+
+
+          & .change-background__aside-header {
+            width: auto;
+            padding: 0;
+            text-align: center;
+            font-weight: bold;
+
+            & h3 {
+              display: none;
+            }
+
+            & .change-background__options-field {
+              width: 100%;
+              height: 3.3rem;
+              position: absolute;
+              top: 0rem;
+              left: 0rem;
+              margin-top: 0;
+              text-align: center;
+              font-weight: normal;
+              border-top: none;
+              display: flex;
+              justify-content: stretch;
+              gap: 0rem;
+              padding: 0;
+
+              & legend {
+                display: none;
+              }
+
+              & p {
+                text-align: center;
+              }
+
+              & .change-background__display-label {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                & input[type="radio"] {
+                  position: absolute;
+                  visibility: hidden;
+                }
+
+                &:has(input[type="radio"]:checked) {
+                  background-color: var(--color-primary);
+                }
+
+                & .change-background__display-option {
+                  font-family: 'Courier New', Courier, monospace;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0;
+                  padding: 0;
+                  margin: 0;
+                }
+              }
+            }
+          }
+
+          & .change-background__aside-main {
+            height: 20vh;
+            position: relative;
+            flex-grow: 2;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 0.5rem 0;
+
+            & fieldset {
+              border: none !important;
+              padding: 0.5rem 0rem;
+            }
+
+
+
+
+            & .change-background__picker-field {
+              min-width: 100vw !important;
+              padding: 0 !important;
+              border: none;
+              text-align: center;
+              gap: 1rem !important;
+              justify-content: center;
+              align-items: flex-end;
+              overflow: hidden;
+
+              & .change-background__picker-wrapper {
+                width: 100% !important;
+                height: 100% !important;
+                gap: 1rem !important;
+                white-space: nowrap !important;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+
+                & .change-background__color-input-wrapper {
+                  width: 100% !important;
+                  height: 100% !important;
+                  padding: 0;
+                  justify-content: center;
+
+                  & .change-background__color-code-selector-wrapper {
+                    width: 100% !important;
+                    height: 100% !important;
+                    gap: 0 !important;
+                    flex-direction: row !important;
+                    justify-content: center;
+                    align-items: center;
+
+                    & .change-background__color-main {
+                      width: 100% !important;
+                      height: 100% !important;
+                      gap: 1rem !important;
+                      padding-left: 1rem !important;
+
+
+                      &>div:last-child {
+                        gap: 0rem !important;
+
+                      }
+                    }
+
+                    & .change-background__color-footer {
+                      width: 100% !important;
+                      height: 100% !important;
+                      padding: 1rem;
+                      display: flex !important;
+                      flex-direction: column !important;
+                      justify-content: space-between !important;
+                      align-items: center !important;
+
+                      & .change-background__hex-input-wrapper {
+                        width: max-content !important;
+                        gap: 1rem !important;
+                        justify-content: center;
+                        align-items: center;
+                      }
+
+                    }
+                  }
+
+                }
+              }
+            }
+
+            & .change-background__gradient-field {
+              padding: 0.2rem !important;
+
+              & .change-background__gradient-field-radio {
+                padding: 0.5rem !important;
+                gap: 0.5rem !important;
+              }
+            }
+
+            & .change-background__filters-list {
+              max-height: 100px;
+            }
+
+            & .change-background__filter-field {
+              width: 100%;
+              /* height: 50cqb; */
+              height: 10rem;
+              max-height: 10rem;
+              border: none;
+              border-top: 1px solid;
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+              align-items: center;
+              gap: 0.2rem;
+
+
+              & legend {
+                text-align: center;
+              }
+
+              & .change-background__filter-content-wrapper {
+                flex-grow: 2;
+                width: 100%;
+                max-height: fit-content;
+                overflow-y: scroll;
+
+
+                & .change-background__filter-slider-container {
+                  width: 100%;
+                  font-family: 'Courier New', Courier, monospace;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  & .change-background__filter-slider-label {
+                    width: 6rem;
+
+                  }
+
+                  & .change-background__filter-slider-wrapper {
+                    flex: 2;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: right;
+                    gap: 1rem;
+                  }
+
+
+                  & .change-background__filter-input-number {
+                    box-sizing: content-box;
+                    width: 3.1rem;
+                    font-size: 1rem;
+                    text-align: left;
+                    background-color: var(--bg-dark);
+                    border-radius: 2px;
+                    color: var(--color-text);
+                    border: none !important;
+
+                    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+            }
+
+          }
+
+          & .change-background__aside-footer {
+            position: absolute;
+            align-self: flex-end !important;
+
+            & .change-background__save-button {
+              box-shadow: none !important;
+              border-radius: 0 !important;
+              min-width: 100% !important;
+              height: 3rem !important;
+              font-size: medium;
+            }
+          }
+
+          /* button {
           width: 8rem !important;
           height: 6rem !important;
           border-radius: 50px !important;
         } */
+        }
       }
     }
   }

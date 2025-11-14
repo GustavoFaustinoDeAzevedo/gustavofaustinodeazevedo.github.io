@@ -38,7 +38,7 @@ const InputHEX = ({
   };
 
   return (
-    <div className="change-background__color-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
+    <div className="change-background__hex-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
       <div className="text-bold font-courier">#</div>
       <input
         autoComplete="off"
@@ -50,7 +50,7 @@ const InputHEX = ({
         value={hex.replace('#', '')}
         onChange={handleChange}
         placeholder="RRGGBB"
-        className="change-background__color-input width-4 text-color-info"
+        className="change-background__color-main-input width-4 text-color-info"
       />
     </div>
   );

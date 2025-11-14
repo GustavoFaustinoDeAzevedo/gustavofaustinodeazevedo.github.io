@@ -70,7 +70,7 @@ const SystemFile = ({
     }
   };
 
-  // TODO Adicionar a opção de selecionar vários arquivos, tenho que trocar o sistema padrão de focus por um
+  // TODO Adicionar (num futuro distante) a opção de selecionar vários arquivos, tenho que trocar o sistema padrão de focus por um
   // personalizado que permite selecionar vários arquivos ao mesmo tempo.
 
   return (

@@ -56,7 +56,7 @@ const RadioMapper = ({
             checked={selectedValue === option.value}
             onChange={() => onChange(option.value)}
           />
-          {option.label}
+          <p>{option.label}</p>
         </label>
       ))}
     </fieldset>

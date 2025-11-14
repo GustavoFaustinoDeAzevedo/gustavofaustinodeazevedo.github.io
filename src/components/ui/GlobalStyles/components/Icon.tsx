@@ -7,7 +7,7 @@ interface IconProps {
 }
 //'/icons/about-me-icon.png'
 const Icon = styled.i.withConfig({
-  shouldForwardProp: (prop) => prop !== 'variant',
+  shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'customPicture',
 })<IconProps>(({ variant = 'html-file', customPicture }) => {
   const iconVerification = variant in iconVariants;
   const pictureVerification = !!customPicture;

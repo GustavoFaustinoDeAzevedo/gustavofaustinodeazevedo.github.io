@@ -114,6 +114,7 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
   const radioDisplayProps = {
     fieldsetClassName: 'change-background__options-field border-muted ',
     legendClassName: 'change-background__display-legend ',
+    radioLabelClassName: 'change-background__display-label ',
     radioClassName: 'change-background__display-option  cursor-pointer',
     options: displayChoicesRoot?.choices,
     onChange: handleRadioState as any,
@@ -127,6 +128,7 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
   const BackgroundControl = useMemo(() => {
     return (
       <>
+        <BackgroundControlPicker {...backgroundControlProps} />
         {backgroundPreviewConfig.display === 'image' ? (
           <BackgroundControlFilter
             language={language}
@@ -145,7 +147,6 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
             displayChoicesRoot={displayChoicesRoot}
           />
         )}
-        <BackgroundControlPicker {...backgroundControlProps} />
       </>
     );
   }, [
