@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import TaskbarItem from './TaskbarItem';
+import TaskbarTask from './TaskbarTask';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import actions from '@/store/actions';
 
-const TaskbarItems = () => {
+const TaskbarTasks = () => {
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow } = windowActions;
   const { language } = useSelector((state: RootState) => state.settings);
@@ -38,7 +38,7 @@ const TaskbarItems = () => {
             )
             .map(({ windowId, title, windowState, icon }, index) => {
               return (
-                <TaskbarItem
+                <TaskbarTask
                   key={windowId}
                   id={windowId ?? ''}
                   title={title?.[language] ?? ''}
@@ -63,4 +63,4 @@ const TaskbarItems = () => {
   );
 };
 
-export default React.memo(TaskbarItems);
+export default React.memo(TaskbarTasks);

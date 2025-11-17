@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
-import { StartMenu, TaskbarItems } from '..';
-import actions from '@/store/actions';
+import React from 'react';
+import { StartMenu, TaskbarTasks } from '..';
 import TaskbarRightSection from './TaskbarRightSection';
 import { useIsMobile } from '@/shared';
 
@@ -9,8 +8,8 @@ const Taskbar = () => {
 
   return (
     <nav className="taskbar">
-      {!isMobile && <StartMenu />}
-      <TaskbarItems />
+      <StartMenu />
+      <TaskbarTasks />
       <TaskbarRightSection />
     </nav>
   );

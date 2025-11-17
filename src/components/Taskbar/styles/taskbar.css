@@ -1,9 +1,9 @@
 :root {
-  --taskbar-height: 40px;
+  --taskbar-height: 2.5rem;
   --taskbar-color: #181818ed;
   --taskbar-backdrop-filter: blur(10px);
   --taskbar-border-color: 2px solid #292929;
-}
+} 
 
 @layer components {
   .taskbar {

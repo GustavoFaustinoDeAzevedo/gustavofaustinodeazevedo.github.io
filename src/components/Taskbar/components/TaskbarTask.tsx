@@ -11,7 +11,7 @@ interface TaskbarItemProps {
   title: string;
 }
 
-const TaskbarItem = ({
+const TaskbarTask = ({
   id,
   isMinimized,
   icon,
@@ -43,4 +43,4 @@ const TaskbarItem = ({
   );
 };
 
-export default TaskbarItem;
+export default TaskbarTask;

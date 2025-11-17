@@ -9,6 +9,7 @@ import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { StylesConfig } from '@/components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { WindowData } from '@/store/actions/useWindowActions';
+import { useIsMobile } from '@/shared';
 
 const StartMenu = () => {
   const startMenuRef = useRef(null);
@@ -21,6 +22,8 @@ const StartMenu = () => {
   const { history } = useSelector((state: RootState) => state.window);
   const { language } = useSelector((state: RootState) => state.settings);
   const { instaledApps } = useSelector((state: RootState) => state.file);
+
+  const isMobile = useIsMobile();
 
   const stylesConfig: StylesConfig = useMemo(
     () => ({
@@ -55,12 +58,12 @@ const StartMenu = () => {
       });
     } else {
       gsap.to(startMenuRef.current, {
-        y: '100%',
+        y: isMobile ? '-100%' : '100%',
         ease: 'power2.in',
         duration: '0.2',
       });
     }
-  }, [menuVisibility]);
+  }, [isMobile,menuVisibility]);
 
   useClickOutside({
     mainRef: startMenuRef,
@@ -86,7 +89,7 @@ const StartMenu = () => {
 
   return useMemo(
     () => (
-      <div className="start-menu">
+      <div className={'start-menu'}>
         <button
           ref={startButtonRef as React.RefObject<HTMLButtonElement>}
           title={language !== 'por' ? 'Start Menu' : 'Menu Iniciar'}
@@ -101,7 +104,11 @@ const StartMenu = () => {
           />
         </button>
 
-        <div className="start-menu__container">
+        <div
+          className={
+            isMobile ? 'start-menu__container--mobile' : 'start-menu__container'
+          }
+        >
           <aside ref={startMenuRef} className="start-menu__wrapper">
             <header className="start-menu__header">
               <Icon className="start-menu__search-file-icon" variant="search" />
@@ -128,7 +135,7 @@ const StartMenu = () => {
                 onChange={handleSearchAppChange}
               />
             </header>
-            <main className="flex flex-column gap-2 margin-bottom-5">
+            <main className="flex flex-column gap-2 ">
               <fieldset className="start-menu__fieldset">
                 <legend className="text-xs text-bold">
                   {language !== 'por' ? 'Apps' : 'Aplicativos'}
