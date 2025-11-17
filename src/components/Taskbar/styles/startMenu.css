@@ -47,7 +47,7 @@
         }
       }
 
-      & .start-menu__container {
+      & .start-menu__container, & .start-menu__container--mobile {
         position: absolute;
         overflow: hidden;
         bottom: 3rem;
@@ -57,7 +57,7 @@
 
         & .start-menu__wrapper {
           position: relative;
-          transform: translateY(100%);
+          /* transform: translateY(100%); */
           padding: 1rem;
           display: flex;
           flex-direction: column;
@@ -148,6 +148,7 @@
               overflow-y: auto;
               gap: 5px;
 
+
               & .start-menu__list-item {
                 width: 100%;
                 display: flex;
@@ -194,6 +195,8 @@
                 }
               }
             }
+
+
           }
 
           & .start-menu__footer {
@@ -244,10 +247,64 @@
                 mask-position: center;
                 border-radius: 5px;
               }
+            }
+          }
+        }
+      }
 
+
+      & .start-menu__container--mobile {
+        width: 100vw;
+        height: calc(100vh - var(--taskbar-height));
+        position: absolute;
+        overflow: hidden;
+        top: var(--taskbar-height);
+        left: 0;
+
+        & .start-menu__wrapper {
+          transform: translate(0,-100%);
+          width: 100%;
+          height: calc(100vh - var(--taskbar-height));
+          border-radius: 0;
+          padding: 0;
+
+
+          & .start-menu__fieldset {
+            border: none;
+            color: var(--color-text);
+            overflow: hidden;
+            padding: 0;
+            padding-top: 0.5rem;
+
+            & legend {
+              padding: 0 1rem;
             }
 
+            & .start-menu__list {
+              height: 10rem;
+              width: 100%;
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              overflow-y: auto;
+              gap: 5px;
+            }
+          }
 
+          & .start-menu__footer {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            background: var(--taskbar-color) !important;
+            height: fit-content;
+            width: 100%;
+            flex-direction: row-reverse;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+
+            & .start-menu__footer-button {
+              flex-direction: row-reverse;
+            }
           }
         }
       }
