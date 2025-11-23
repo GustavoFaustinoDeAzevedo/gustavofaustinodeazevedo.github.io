@@ -63,7 +63,7 @@ const StartMenu = () => {
         duration: '0.2',
       });
     }
-  }, [isMobile,menuVisibility]);
+  }, [isMobile, menuVisibility]);
 
   useClickOutside({
     mainRef: startMenuRef,
@@ -86,6 +86,12 @@ const StartMenu = () => {
   const handleSearchAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchAppValue(e.target.value);
   };
+
+  const handleSearchAppBlur = () => {
+    setSearchAppValue((prev) => prev.trimEnd());
+  };
+
+  const handleCleanInput = () => setSearchAppValue('');
 
   return useMemo(
     () => (
@@ -111,7 +117,18 @@ const StartMenu = () => {
         >
           <aside ref={startMenuRef} className="start-menu__wrapper">
             <header className="start-menu__header">
-              <Icon className="start-menu__search-file-icon" variant="search" />
+              <Icon
+                className="start-menu__search-file-icon left"
+                variant="search"
+              />
+              {searchAppValue && (
+                <p
+                  className="start-menu__search-file-icon right"
+                  onClick={handleCleanInput}
+                >
+                  ✖
+                </p>
+              )}
               <input
                 className="start-menu__search-file-input"
                 tabIndex={-1}
@@ -133,6 +150,7 @@ const StartMenu = () => {
                 role="search"
                 value={searchAppValue}
                 onChange={handleSearchAppChange}
+                onBlur={handleSearchAppBlur}
               />
             </header>
             <main className="flex flex-column gap-2 ">
