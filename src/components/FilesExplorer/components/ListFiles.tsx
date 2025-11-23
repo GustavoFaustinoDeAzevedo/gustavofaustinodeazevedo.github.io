@@ -44,9 +44,10 @@ const ListFiles = ({
 
   const childrenFiltered = (() => {
     if (!filters || filters.length === 0) return children;
+
     let filtersArray = filters as string[];
     if (!Array.isArray(filters)) {
-      filtersArray = [filters as string];
+      filtersArray = [filters as string].map((f) => f.trim());
     }
     return children.filter((item) =>
       filtersArray.every((filter: string) =>
