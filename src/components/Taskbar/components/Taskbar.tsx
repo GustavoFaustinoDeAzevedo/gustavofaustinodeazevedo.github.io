@@ -1,6 +1,7 @@
 import React from 'react';
-import { StartMenu, TaskbarTasks } from '..';
+import TaskbarTasks from './TaskbarTasks';
 import TaskbarRightSection from './TaskbarRightSection';
+import StartMenu from './StartMenu';
 import { useIsMobile } from '@/shared';
 
 const Taskbar = () => {
