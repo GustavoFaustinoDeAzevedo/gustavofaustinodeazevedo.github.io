@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClickOutside from '../../../shared/hooks/useClickOutside';
+import useClickOutside from '../../../../shared/hooks/useClickOutside';
 import gsap from 'gsap';
 import { Language } from '@/store/slices/settings';
 
