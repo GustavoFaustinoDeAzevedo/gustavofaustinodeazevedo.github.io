@@ -6,12 +6,13 @@ const StartMenuToggler = ({
   language,
   menuVisibility,
   handleToggleVisibility,
+  startButtonRef,
 }: {
   language: Language;
   menuVisibility: boolean;
   handleToggleVisibility: () => void;
+  startButtonRef: React.RefObject<HTMLButtonElement | null>;
 }) => {
-  const startButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <button
       ref={startButtonRef}

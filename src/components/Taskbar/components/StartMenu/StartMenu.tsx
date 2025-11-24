@@ -16,7 +16,7 @@ const StartMenu = () => {
   // Refs =========================================================
 
   const startMenuRef = useRef(null);
-  const startButtonRef = useRef<HTMLElement | null>(null);
+  const startButtonRef = useRef<HTMLButtonElement | null>(null);
 
   // States =========================================================
 
@@ -122,6 +122,7 @@ const StartMenu = () => {
           language={language}
           menuVisibility={menuVisibility}
           handleToggleVisibility={handleToggleVisibility}
+          startButtonRef={startButtonRef}
         />
 
         <div
@@ -147,7 +148,7 @@ const StartMenu = () => {
               fileWrapperStyle={stylesConfig}
             />
 
-            <StartMenuFooter />
+            {/* <StartMenuFooter /> */}
           </aside>
         </div>
       </div>
