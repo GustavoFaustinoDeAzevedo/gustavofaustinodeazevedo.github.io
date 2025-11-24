@@ -1,106 +1,99 @@
 # GustavOS
 
-> This portfolio project showcases an operating system simulation implemented with React/JavaScript.
+> Este projeto de portfólio apresenta uma simulação de sistema operacional implementada com React/TypeScript.
 
 ---
 
-## Last README Update
+## Ultimo Update do README
 
-`13-06-2025`
-
----
-
-## Description
-
-This project is a personal portfolio website designed to showcase my skills and experience in web development, specifically using React/JS and HTML/CSS. It serves as a centralized hub for my projects, professional background, and contact information.
-
-As I gain more experience, the project will be updated with new content and information. It is an eternal work in progress project, and will be improved over time.
+`23-11-2025`
 
 ---
 
-## Things Already Made
+## Descrição
 
-- [x] A basic desktop (background, windows, taskbar).
-- [x] Responsive user interface.
-- [x] Draggable windows.
-- [x] A basic Context menu.
-- [x] Executable Desktop Icons
-- [x] Clock + Date.
-- [x] A modify language system + button on taskbar. (Broken)
-- [x] A basic start menu. (Broken)
-- [x] A basic sort for desktop icons. (Broken)
-- [x] Better React states organization after migration from React's `useReducer` to Redux.
-- [x] A simple calculator. 
+Este projeto é um site de portfólio pessoal, criado para destacar minhas habilidades e experiências em desenvolvimento web, com foco em React/TS e HTML/CSS. Ele funciona como um espaço central onde apresento meus projetos, minha trajetória como programador e formas de contato.
+
+À medida que evoluo na carreira e adquiro novas experiências, o portfólio será constantemente atualizado com conteúdos e melhorias. É um projeto em permanente construção, que continuará sendo aprimorado ao longo do tempo.
 
 ---
 
-## Things to Be Done
+## O Que Já Foi Feito
 
-- [ ] Improve animations.
-- [ ] Add automated tests.
-- [ ] Improve developer documentation.
-- [ ] Improve start menu.
-- [ ] Option to change background color/image.
-- [ ] Context menu needs some improvements.
-- [ ] Add simple OS-based projects:
-  - [ ] Todo List.
-  - [ ] Basic Paint.
-  - [ ] Minefield.
+- [x] Área de trabalho.
+- [x] Interface Responsiva.
+- [x] Janelas arrastáveis, responsivos e reutilizáveis.
+- [x] "Arquivos" executáveis.
+- [x] Relógio + Data.
+- [x] Tradução dinâmica entre inglês e português.
+- [x] Barra de tarefas com menu iniciar.
+- [x] Calculadora.
+- [x] Configuração de fundo de tela da área de trabalho
+
+---
+
+## O Que Pretendo Fazer (não necessáriamente nessa ordem)
+
+- [ ] Uma documentação robusta.
+- [ ] Um menu para quando o usuário clicar com o botão direito do mouse (context menu).
+- [ ] Sistema de cadastro, conexão e configuração do usuário.
+- [ ] Dados persistentes.
+- [ ] Versão simplificada do portfólio.
+- [ ] Adicionar mais apps relacionados ao sistema operacional:
+  - [ ] Lista de Tarefas.
+  - [ ] App estilo "Paint".
+  - [ ] Campo Minado.
   - [ ] Snake.
-  - [ ] Text editor.
-  - [ ] Basic image editor.
-  - [ ] Notes.
-  - [ ] I'll think about more in the future 😅.
+  - [ ] Editor de Texto.
+  - [ ] Editor de Imagem.
+  - [ ] Anotações.
+  - [ ] Continuar criando mais futuramente.
 
 ---
 
-## How to Set Up/Use
+## Como executar
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io
-   ```
-2. Navigate to the project folder:
-   ```bash
-   cd gustavofaustinodeazevedo.github.io
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Launch the development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+git clone https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io
+cd gustavofaustinodeazevedo.github.io
+npm install
+npm run dev
+```
 
 ---
 
-## Technologies Used
+## Tecnologias Usadas
 
-- ReactJS
+- ReactTS
 - CSS
+- SASS
 - GSAP
 - HeroIcons
 - Vite
 - Redux
-- React-Colorful
+- Styled-Components
 
 ---
 
-## Contributions
+## Contribuições
 
-Contributions are welcome! Please open an `issue` or submit a `pull request`.
+Este é um projeto pessoal, mas estou sempre aberto a sugestões para melhorar o código, o design ou o conteúdo.
+
+1.  Faça um **Fork** do projeto.
+2.  Crie uma nova **Branch** (`git checkout -b feature/melhoria`).
+3.  Faça o **Commit** das suas alterações (`git commit -m 'feat: Adiciona um gato andando na tela'`).
+4.  Faça o **Push** para a Branch (`git push origin feature/melhoria`).
+5.  Abra um **Pull Request**.
+
+---
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para verificar os detalhes.
 
 ---
 
-## License
+## Demonstração
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+[Clique aqui para ver o projeto sendo executado no Github Pages](https://gustavofaustinodeazevedo.github.io)
 
----
-
-## Demo
-
-[Click here to see for yourself](https://gustavofaustinodeazevedo.github.io)
-
----
