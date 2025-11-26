@@ -35,7 +35,7 @@
     }
 
     &.focus:not(.minimized):not(.maximized) {
-      box-shadow: 0px 16px 12px 8px #0000002e;
+      box-shadow: 0px 16px 38px 16px rgba(0, 0, 0, 0.2), 0px 16px 35px 1px rgba(0, 0, 0, 0.2), 0px 16px 35px 1px rgba(0, 0, 0, 0.2), 0px 16px 35px 1px rgba(0, 0, 0, 0.2), 0px 16px 35px 1px rgba(0, 0, 0, 0.2);
       transition: margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       border-color: var(--color-header-active);
     }

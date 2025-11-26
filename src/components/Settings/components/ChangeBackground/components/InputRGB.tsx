@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { SliderGroup } from '@/components/ui';
+import { SliderGroup } from '@components/ui';
 import { Language } from '@/store/slices/settings';
 
 type RGB = { r: number; g: number; b: number };

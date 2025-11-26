@@ -21,15 +21,27 @@ const LanguageSelector = ({
     if (!languageSelectorRef.current) return;
     if (languageSelectorVisibility) {
       gsap.to(languageSelectorRef.current, {
-        y: '0px',
-        ease: 'power2.out',
-        duration: '0.2',
+        display: 'flex',
+        duration: '0',
+        onComplete: () => {
+          gsap.to(languageSelectorRef.current, {
+            y: '0px',
+            ease: 'power2.out',
+            duration: '0.2',
+          });
+        },
       });
     } else {
       gsap.to(languageSelectorRef.current, {
         y: isMobile ? '-100%' : '100%',
         ease: 'power2.in',
         duration: '0.2',
+        onComplete: () => {
+          gsap.to(languageSelectorRef.current, {
+            display: 'none',
+            duration: '0',
+          });
+        },
       });
     }
   }, [languageSelectorVisibility, isMobile]);

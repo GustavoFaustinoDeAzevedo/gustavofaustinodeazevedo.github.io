@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 
 const WindowHeader = ({
   title = 'Untitled',

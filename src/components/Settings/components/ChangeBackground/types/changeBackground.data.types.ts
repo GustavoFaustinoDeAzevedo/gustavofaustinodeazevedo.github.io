@@ -1,6 +1,6 @@
 import { EffectValues, FilterValues } from '@/store/slices/settings';
 import { changeBackgroundTextContent } from '../data/changeBackground.data';
-import { SliderData } from '@/components/ui/Slider/SliderItem';
+import { SliderData } from '@components/ui/Slider/SliderItem';
 import { ColorGradientsList, GradientValues } from '../data/colorFilters.data';
 
 export type FilterList = {

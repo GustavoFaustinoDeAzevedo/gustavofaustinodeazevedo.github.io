@@ -1,4 +1,4 @@
-import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { useSeed } from '@/shared/hooks';
 import { leftSideCardLanguage, contactCard } from './ContactCard.data';
 import { Language } from '@/store/slices/settings';

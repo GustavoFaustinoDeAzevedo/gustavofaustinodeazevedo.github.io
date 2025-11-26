@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import Button from '@/components/ui/Button';
+import Button from '@components/ui/Button';
 import InputRGB from './InputRGB';
 import InputHEX from './InputHEX';
 import { Language } from '@/store/slices/settings';

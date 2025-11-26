@@ -1,16 +1,10 @@
-import Calculator from '@/apps/Calculator';
-import Notepad from '@/apps/Notepad';
-import {
-  AboutMe,
-  MySkills,
-  SendMessage,
-  ContactCard,
-} from '@/components/Portfolio';
-import BrowserSimulator from '@/components/BrowserSimulator';
-import TaskManager from '@/components/TaskManager';
-import { ChangeBackgroundMenu } from '@/components/Settings';
+import { Notepad, Calculator } from '@apps';
+import { AboutMe, MySkills, SendMessage, ContactCard } from '@portfolio';
+import BrowserSimulator from '@components/BrowserSimulator';
+import TaskManager from '@components/TaskManager';
+import { ChangeBackgroundMenu } from '@components/Settings';
 import AnimatedInput from '../components/AnimatedInput';
-import Button from '@/components/ui/Button';
+import Button from '@components/ui/Button';
 
 const CommandPromptSection = () => (
   <textarea

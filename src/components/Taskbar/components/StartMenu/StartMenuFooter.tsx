@@ -1,4 +1,4 @@
-import Icon from "@/components/ui/GlobalStyles/components/Icon";
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 
 const StartMenuFooter = () => {
   return (

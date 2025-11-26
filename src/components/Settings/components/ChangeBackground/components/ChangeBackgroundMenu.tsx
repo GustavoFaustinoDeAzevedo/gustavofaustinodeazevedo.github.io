@@ -7,7 +7,7 @@ import actions from '@/store/actions';
 import BackgroundControlPicker from './BackgroundControlPicker';
 
 import { BackgroundPreviewDisplay } from '../types/changeBackground.types';
-import { Radio, Button } from '@/components/ui';
+import { Radio, Button } from '@components/ui';
 import { EffectValues, FilterValues, Language } from '@/store/slices/settings';
 import DesktopBackgroundPreview from './BackgroundPreview';
 import BackgroundControlFilter from './BackgroundControlFilter';

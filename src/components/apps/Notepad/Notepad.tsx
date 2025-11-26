@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Dropdown from '@/components/ui/Dropdown/Dropdow';
+import Dropdown from '@components/ui/Dropdown/Dropdow';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 

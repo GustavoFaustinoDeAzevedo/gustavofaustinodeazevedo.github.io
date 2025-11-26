@@ -7,7 +7,7 @@ type WindowContext = {
   windowRef: React.RefObject<HTMLElement | null>;
 };
 
-const flattenWindowParams = (
+const flattenWindowParams =  (
   { windowIndex, language, headerRef, windowRef }: WindowContext,
   { windowId, size, position, windowState, ...restParams }: WindowData
 ) => {

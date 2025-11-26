@@ -1,6 +1,6 @@
-import { ListFiles } from '@/components/FilesExplorer';
-import { StylesConfig } from '@/components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
-import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import { ListFiles } from '@components/FilesExplorer';
+import { StylesConfig } from '@components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { FileNode } from '@/data/filesData';
 import { WindowData } from '@/store/actions/useWindowActions';
 import { Language } from '@/store/slices/settings';
