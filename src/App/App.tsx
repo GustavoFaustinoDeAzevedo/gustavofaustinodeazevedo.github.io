@@ -1,13 +1,11 @@
-import React, {  useRef, useState } from 'react';
-
-
+import React, { useRef, useState } from 'react';
 
 import './app.styles.css';
 
-import Desktop from '@/components/Desktop';
-import Taskbar from '@/components/Taskbar';
+import Desktop from '@components/Desktop';
+import Taskbar from '@components/Taskbar';
 
-import ListWindows from '@/components/Window';
+import ListWindows from '@window';
 import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';
@@ -17,7 +15,6 @@ import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
 import actions from '@/store/actions';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
-
 
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);

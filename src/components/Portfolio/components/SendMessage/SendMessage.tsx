@@ -1,5 +1,5 @@
-import Button from '@/components/ui/Button';
-import AnimatedInput from '@/components/Window/components/AnimatedInput';
+import Button from '@components/ui/Button';
+import AnimatedInput from '@window/components/AnimatedInput';
 import { Language } from '@/store/slices/settings';
 import formData from './SendMessage.data';
 
@@ -53,7 +53,7 @@ const SendMessage = ({ language }: { language: Language }) => {
           />
         ))}
         <Button
-          type="submit" 
+          type="submit"
           ariaLabel={formDataTranslated.button.ariaLabel}
           variant={'primary'}
         >

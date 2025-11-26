@@ -4,7 +4,7 @@ import useClickOutside from '@/shared/hooks/useClickOutside';
 import actions from '@/store/actions';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
-import { StylesConfig } from '@/components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
+import { StylesConfig } from '@components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { WindowData } from '@/store/actions/useWindowActions';
 import { useIsMobile } from '@/shared';
 import StartMenuHeader from './StartMenuHeader';
@@ -68,12 +68,19 @@ const StartMenu = () => {
     if (!startMenuRef.current) return;
     if (menuVisibility) {
       gsap.to(startMenuRef.current, {
-        y: '0',
-        ease: 'power2.out',
-        duration: '0.2',
+        display: 'flex',
+        duration: '0',
+        onComplete: () => {
+          gsap.to(startMenuRef.current, {
+            y: '0',
+            ease: 'power2.out',
+            duration: '0.2',
+          });
+        },
       });
     } else {
       gsap.to(startMenuRef.current, {
+        display: 'none',
         y: isMobile ? '-100%' : '100%',
         ease: 'power2.in',
         duration: '0.2',

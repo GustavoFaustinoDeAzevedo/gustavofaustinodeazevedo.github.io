@@ -1,4 +1,4 @@
-import { SliderGroup } from '@/components/ui';
+import { SliderGroup } from '@components/ui';
 import { FilterValues, Language } from '@/store/slices/settings';
 import { useCallback } from 'react';
 

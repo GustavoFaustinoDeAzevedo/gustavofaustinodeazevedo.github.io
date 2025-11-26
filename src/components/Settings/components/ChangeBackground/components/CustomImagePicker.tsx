@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Button from '@/components/ui/Button';
+import Button from '@components/ui/Button';
 import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 type Translations = {

@@ -1,4 +1,4 @@
-import { ListFiles } from '@/components/FilesExplorer';
+import { ListFiles } from '@components/FilesExplorer';
 
 // import displayWindowContent from '../utils/displayWindowContent';
 

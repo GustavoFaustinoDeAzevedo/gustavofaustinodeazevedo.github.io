@@ -1,16 +1,11 @@
-import {
-  AboutMe,
-  ContactCard,
-  MySkills,
-  SendMessage,
-} from '@/components/Portfolio';
+import { AboutMe, ContactCard, MySkills, SendMessage } from '@portfolio';
 import { Language } from '../settings';
-import TaskManager from '@/components/TaskManager';
-import BrowserSimulator from '@/components/BrowserSimulator';
-import { ChangeBackgroundMenu } from '@/components/Settings';
-import Calculator from '@/apps/Calculator';
-import Notepad from '@/apps/Notepad';
-import ConsoleCommand from '@/components/ConsoleCommand';
+import TaskManager from '@components/TaskManager';
+import BrowserSimulator from '@components/BrowserSimulator';
+import { ChangeBackgroundMenu } from '@components/Settings';
+import Calculator from '@apps/Calculator';
+import Notepad from '@apps/Notepad';
+import ConsoleCommand from '@components/ConsoleCommand';
 
 export const returnWindowContent = (
   contentId: string,

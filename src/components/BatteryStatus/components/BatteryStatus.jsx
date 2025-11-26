@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 import useBatteryStatus from '../hooks/useBatteryStatus';
 import BatteryStatusStyled from './BatteryStatusStyled';
 import BatteryStatusTextStyled from './BatteryStatusTextStyled';

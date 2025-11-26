@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Icon from '@/components/ui/GlobalStyles/components/Icon';
+import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { fileParts } from './fileWrapperStyle';
 
 export const StyledFileWrapper = styled.li`

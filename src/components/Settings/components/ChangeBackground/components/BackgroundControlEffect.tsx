@@ -1,4 +1,4 @@
-import { Radio, Slider } from '@/components/ui';
+import { Radio, Slider } from '@components/ui';
 import { EffectValues } from '@/store/slices/settings';
 import { useCallback } from 'react';
 

@@ -14,7 +14,17 @@ gsap.registerPlugin(useGSAP);
 
 type WindowProps = {
   windowParams: any;
-  windowHandlers: any;
+  windowHandlers: {
+    updateWindowState: (updates: any) => void;
+    handleClose: () => void;
+    handleFocus: () => void;
+    handleRequestClose?: () => void;
+    handleRequestMinimize?: () => void;
+    handleRequestMaximize?: () => void;
+    handleRequestRestore?: () => void;
+    handleResetFocus?: () => void;
+    handleRequestFocus?: () => void;
+  };
   desktopRef: React.RefObject<HTMLDivElement | null>;
   filesActions: any;
   isMobile: boolean;
@@ -129,9 +139,9 @@ const Window = ({
   });
 
   //handler para lidar com o focus da janela ===================================
-
   const handleFocus = useCallback(() => {
-    return isFocused ? null : handleRequestFocus;
+    if (isFocused) return null;
+    if (handleRequestFocus) handleRequestFocus();
   }, [isFocused, handleRequestFocus]);
 
   //JSX ========================================================================

@@ -1,5 +1,3 @@
-import { boolean } from 'mathjs';
-import { HandleChangeBackground } from '../../Settings/ChangeBackground/types/changeBackground.data.types';
 import { useCallback } from 'react';
 
 type WindowAction =
@@ -30,8 +28,6 @@ const createWindowHandlers = (
       //A função leva um valor booleano e chama UpdateWindowState com a ação e o valor.
       useCallback(
         () => updateWindowState({ [action]: true }),
-        //A matriz de dependência é uma matriz de valores da qual a função depende.
-        //Nesse caso, a função depende do UpdateWindowState.
         [updateWindowState]
       ),
     ])

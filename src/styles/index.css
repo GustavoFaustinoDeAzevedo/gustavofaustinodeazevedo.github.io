@@ -8,7 +8,7 @@
 @import '../components/ConsoleCommand/style.css';
 @import '../components/Settings/index.css';
 @import '../components/Portfolio/index.css';
-@import '../apps/index.css';
+@import '../components/apps/index.css';
 @import './utilities.css';
 /* @import '../scss/main.css'; */
 @import '../shared/styles/main.css';
