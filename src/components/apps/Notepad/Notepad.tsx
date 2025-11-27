@@ -41,6 +41,9 @@ const Notepad = ({ windowId }: { windowId: string }) => {
         </ul>
       </nav>
       <textarea
+        name="notepad"
+        title={text}
+        placeholder=""
         className="notepad__text"
         onChange={handleTextChange}
         value={text}

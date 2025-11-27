@@ -16,7 +16,6 @@ import {
   newFile,
 } from './windowSlice.utils';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
-import { Language } from '../settings/settingsSlice.types';
 
 const windowSlice = createSlice({
   name: 'window',
