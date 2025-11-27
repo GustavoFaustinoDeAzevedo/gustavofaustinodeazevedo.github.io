@@ -22,6 +22,7 @@ export interface FileNode {
   children?: FileNode[];
   initialDimensions?: { width: string | '1000px'; height: string | '600px' };
   initialStates?: { maximized?: boolean; minimized?: boolean };
+  content?: string;
 }
 
 // Estado do slice de arquivos
