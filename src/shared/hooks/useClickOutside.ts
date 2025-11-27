@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 type UseClickOutsideParams = {
   mainRef: React.RefObject<HTMLElement | null>;
-  onClickOutside: (event: MouseEvent | TouchEvent) => void;
+  onClickOutside: (e: MouseEvent | TouchEvent) => void;
   isActive?: boolean;
   extraRef?: React.RefObject<HTMLElement> | Element | null;
   ignoreSelectors?: string[];
@@ -18,8 +18,8 @@ const useClickOutside = ({
   useEffect(() => {
     if (!isActive) return;
 
-    const handleClick = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as HTMLElement;
+    const handleClick = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as HTMLElement;
 
       const isInIgnoredElement = ignoreSelectors.some((selector) =>
         target.closest(selector)
@@ -38,7 +38,7 @@ const useClickOutside = ({
       ) {
         return;
       }
-      onClickOutside(event);
+      onClickOutside(e);
     };
 
     document.addEventListener('pointerdown', handleClick, { capture: true });
