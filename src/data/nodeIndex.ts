@@ -1,18 +1,33 @@
+type LanguageTitle = { eng: string; por: string };
+
 type FileNode = {
+  id: string;
   fileId: string;
-  title: { eng: string; por: string };
-  icon?: string;
-  type: string;
   parentId?: string;
+  title: LanguageTitle;
+  icon?: string;
+  type?: 'folder' | 'app' | 'text' | 'file';
+  initialStates?: Record<string, boolean>;
+  initialDimensions?: {
+    width: string | '1000px';
+    height: string | '600px;';
+  };
   children?: string[];
-  initialDimensions?: { width: string; height: string };
+  content?: any;
+  nodeDepth?: number;
   isUnique?: boolean;
+  windowMask?: {
+    src: string;
+    title: LanguageTitle;
+    icon: string;
+  };
 };
 
 export type FileNodeIndex = Record<string, FileNode>;
 
 const nodeIndex: FileNodeIndex = {
   root: {
+    id: crypto.randomUUID(),
     fileId: 'root',
     title: { eng: 'C:', por: 'C:' },
     icon: 'folder',
@@ -20,6 +35,7 @@ const nodeIndex: FileNodeIndex = {
     children: ['users'],
   },
   users: {
+    id: crypto.randomUUID(),
     fileId: 'users',
     title: { eng: 'Users', por: 'Usuários' },
     icon: 'users',
@@ -28,6 +44,7 @@ const nodeIndex: FileNodeIndex = {
     children: ['guests'],
   },
   guests: {
+    id: crypto.randomUUID(),
     fileId: 'guests',
     title: { eng: 'Guest', por: 'Convidado' },
     icon: 'user',
@@ -36,6 +53,7 @@ const nodeIndex: FileNodeIndex = {
     children: ['desktop'],
   },
   desktop: {
+    id: crypto.randomUUID(),
     fileId: 'desktop',
     title: { eng: 'Desktop', por: 'Área de Trabalho' },
     icon: 'desktop',
@@ -53,6 +71,7 @@ const nodeIndex: FileNodeIndex = {
     ],
   },
   about: {
+    id: crypto.randomUUID(),
     fileId: 'about',
     title: { eng: 'About Me', por: 'Sobre Mim' },
     icon: 'about',
@@ -60,45 +79,46 @@ const nodeIndex: FileNodeIndex = {
     parentId: 'desktop',
     initialDimensions: { width: '650px', height: '520px' },
   },
-  projects: {
-    fileId: 'projects',
-    title: {
-      eng: 'Program Files (Work in Progress 1/25 [PAUSED])',
-      por: 'Arquivos de Programas (Em Desenvolvimento 1/25 [PAUSED])',
-    },
-    icon: 'folder',
-    type: 'folder',
-    parentId: 'desktop',
-    children: [
-      'calculator',
-      'notepad',
-      'todo',
-      'weather',
-      'memory-game',
-      'snake-game',
-      'piano-app',
-      'tetris-game',
-      'rock-paper-scissors',
-      'tic-tac-toe',
-      'quiz-app',
-      'pomodoro-timer',
-      'stopwatch',
-      'currency-converter',
-      'markdown-editor',
-      'image-gallery',
-      'calendar-app',
-      'music-player',
-      'video-player',
-      'drawing-app',
-      'chat-app',
-      'rss-reader',
-      'password-manager',
-      'expense-tracker',
-      'habit-tracker',
-      'new-projects',
-    ],
-  },
+  // projects: {
+  //   fileId: 'projects',
+  //   title: {
+  //     eng: 'Program Files (Work in Progress 1/25 [PAUSED])',
+  //     por: 'Arquivos de Programas (Em Desenvolvimento 1/25 [PAUSED])',
+  //   },
+  //   icon: 'folder',
+  //   type: 'folder',
+  //   parentId: 'desktop',
+  //   children: [
+  //     'calculator',
+  //     'notepad',
+  //     'todo',
+  //     'weather',
+  //     'memory-game',
+  //     'snake-game',
+  //     'piano-app',
+  //     'tetris-game',
+  //     'rock-paper-scissors',
+  //     'tic-tac-toe',
+  //     'quiz-app',
+  //     'pomodoro-timer',
+  //     'stopwatch',
+  //     'currency-converter',
+  //     'markdown-editor',
+  //     'image-gallery',
+  //     'calendar-app',
+  //     'music-player',
+  //     'video-player',
+  //     'drawing-app',
+  //     'chat-app',
+  //     'rss-reader',
+  //     'password-manager',
+  //     'expense-tracker',
+  //     'habit-tracker',
+  //     'new-projects',
+  //   ],
+  // },
   calculator: {
+    id: crypto.randomUUID(),
     fileId: 'calculator',
     title: { eng: 'Calculator', por: 'Calculadora' },
     icon: 'calculator',
@@ -107,6 +127,7 @@ const nodeIndex: FileNodeIndex = {
     initialDimensions: { width: '400px', height: '500px' },
   },
   notepad: {
+    id: crypto.randomUUID(),
     fileId: 'notepad',
     title: {
       eng: 'Notepad (Work in Progress',
@@ -118,12 +139,14 @@ const nodeIndex: FileNodeIndex = {
     initialDimensions: { width: '500px', height: '500px' },
   },
   todo: {
+    id: crypto.randomUUID(),
     fileId: 'todo',
     title: { eng: 'To-Do List', por: 'Lista de Tarefas' },
     type: 'app',
     parentId: 'projects',
   },
   weather: {
+    id: crypto.randomUUID(),
     fileId: 'weather',
     title: { eng: 'Weather App', por: 'Aplicativo de Clima' },
     type: 'app',
@@ -273,11 +296,12 @@ const nodeIndex: FileNodeIndex = {
   contact: {
     fileId: 'contact',
     title: { eng: 'Contact', por: 'Contato' },
-    icon: 'contact',
+    icon: 'business-card-icon',
     type: 'app',
     parentId: 'desktop',
-    initialDimensions: { width: '490px', height: '550px' },
+    initialDimensions: { width: '490px', height: '600px' },
   },
+
   'change-background': {
     fileId: 'change-background',
     title: {

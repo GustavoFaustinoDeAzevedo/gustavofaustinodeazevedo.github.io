@@ -22,7 +22,6 @@ export interface FileNode {
   children?: FileNode[];
   initialDimensions?: { width: string | '1000px'; height: string | '600px' };
   initialStates?: { maximized?: boolean; minimized?: boolean };
-  content?: string;
 }
 
 // Estado do slice de arquivos
@@ -30,6 +29,6 @@ export interface FileState {
   instaledApps: FileNode[];
   filesList: FileNode;
   rootPath: string;
-  defaultPath: string;
+  desktopPath: string;
   sort: SortType;
 }

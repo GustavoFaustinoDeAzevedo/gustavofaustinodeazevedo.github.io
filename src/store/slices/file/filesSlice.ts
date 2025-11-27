@@ -30,28 +30,22 @@ const newFile = (
  *Procurar recursivamente um nó que corresponda à profundidade do pai e ao targetId,
  *e adiciona um novo arquivo a seus filhos.
  */
-const updateChildrenById = (
-  node: FileNode,
-  targetId: string,
-  fileToBeAdded: FileNode,
-  nodeDepth: number
-): boolean => {
-  // Se encontrarmos o nó de destino, adiciona o novo arquivo
-  if (node.fileId === targetId && node.nodeDepth === nodeDepth - 1) {
-    node.children = newFile(node, fileToBeAdded, nodeDepth);
-    return true;
+
+export const findByPath = (root: FileNode, path: string): FileNode | null => {
+  let parts = path.split('/');
+
+  if (parts[0] === root.fileId) {
+    parts = parts.slice(1);
   }
 
-  // Caso contrário, segue para próximo nó filho
-  if (Array.isArray(node.children)) {
-    for (const child of node.children) {
-      if (updateChildrenById(child, targetId, fileToBeAdded, nodeDepth)) {
-        return true;
-      }
-    }
+  let current: FileNode | undefined = root;
+
+  for (const part of parts) {
+    if (!current || !current.children) return null;
+    current = current.children.find((child) => child.fileId === part);
   }
 
-  return false;
+  return current ?? null;
 };
 
 /**
@@ -93,7 +87,7 @@ const initialState: FileState = {
   instaledApps: instaledAppsData,
   filesList: handleNestedEntities(rootFolder),
   rootPath: 'root/',
-  defaultPath: 'root/users/guests/desktop',
+  desktopPath: 'root/users/guests/desktop',
   sort: 'asc',
 };
 
@@ -110,7 +104,7 @@ export const fileSlice = createSlice({
       }>
     ) => {
       const { newFileData, currentNode, nodeDepth } = action.payload;
-      updateChildrenById(state.filesList, currentNode, newFileData, nodeDepth);
+      // updateChildrenById(state.filesList, currentNode, newFileData, nodeDepth);
     },
 
     removeFile: (state, action: PayloadAction<{ fileId: string }>) => {

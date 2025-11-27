@@ -3,12 +3,14 @@ import { ListFiles } from '../FilesExplorer';
 import DesktopBackground from './components';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import { findByPath } from '@/store/slices/file/filesSlice';
 
 const Desktop = () => {
-  const rootFolder = useSelector((state: RootState) => state.file.filesList);
+  const root = useSelector((state: RootState) => state.file.filesList);
   const { language } = useSelector((state: RootState) => state.settings);
-  const children =
-    rootFolder.children?.[0]?.children?.[0]?.children?.[0]?.children ?? [];
+  const children = findByPath(root, 'users/guests/desktop')?.children ?? [];
+  console.log(children);
+  // rootFolder.children?.[0]?.children?.[0]?.children?.[0]?.children ?? [];
 
   return useMemo(
     () => (
