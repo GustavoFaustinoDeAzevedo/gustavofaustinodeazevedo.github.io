@@ -35,7 +35,7 @@ const ListFiles = ({
   filters,
   doubleClickToOpen,
 }: ListFilesProps) => {
-  if (children === undefined || children.length < 0) return;
+  if (children === undefined || children?.length < 0) return;
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
