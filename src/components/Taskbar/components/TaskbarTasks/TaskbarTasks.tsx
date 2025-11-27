@@ -25,6 +25,9 @@ const TaskbarTasks = () => {
   const handleWindowRestore = (windowId: string) => {
     handleWindow(windowId, 'isRequestingRestore', true);
   };
+  const handleWindowFocus = (windowId: string) => {
+    handleWindow(windowId, 'isRequestingFocus', true);
+  };
   return useMemo(
     () => (
       <ul className="taskbar__window-list">
@@ -48,6 +51,7 @@ const TaskbarTasks = () => {
                   focusedWindow={focusedWindow ?? ''}
                   handleWindowMinimize={handleWindowMinimize}
                   handleWindowRestore={handleWindowRestore}
+                  handleWindowFocus={handleWindowFocus}
                 />
               );
             })}

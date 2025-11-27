@@ -8,6 +8,7 @@ interface TaskbarItemProps {
   focusedWindow: string;
   handleWindowMinimize: (id: string) => void;
   handleWindowRestore: (id: string) => void;
+  handleWindowFocus: (id: string) => void;
   title: string;
 }
 
@@ -19,9 +20,13 @@ const TaskbarTask = ({
   focusedWindow,
   handleWindowMinimize,
   handleWindowRestore,
+  handleWindowFocus,
   title,
 }: TaskbarItemProps) => {
   const handleClick = () => {
+    if (!isMinimized && focusedWindow !== id) {
+      return handleWindowFocus(id);
+    }
     return isMinimized ? handleWindowRestore(id) : handleWindowMinimize(id);
   };
 
@@ -31,6 +36,7 @@ const TaskbarTask = ({
       className={`taskbar__window open 
          ${focusedWindow === id ? 'focus' : ''} 
          ${isMinimized ? 'minimized' : ''}
+         ${id.replace(/[.#]/g, '')}-taskbar-task
       `}
       title={title}
       onClick={handleClick}
