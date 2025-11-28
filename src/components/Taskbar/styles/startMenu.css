@@ -85,7 +85,6 @@
               height: 1.2rem !important;
               top: 50%;
               transform: translateY(-50%);
-
               transition: all 0.2s;
               background-color: transparent !important;
               filter: grayscale(0.5) brightness(150%);
@@ -98,14 +97,22 @@
               }
 
               &.right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 width: 1.5rem !important;
                 height: 1.5rem !important;
+                padding: 1.5rem;
                 font-size: 1rem;
                 left: unset;
-                right: 2.5rem;
+                right: 1.3rem;
                 cursor: pointer !important;
                 text-align: center;
-                color: var(--color-background-7);
+                color: var(--color-secondary) !important;
+
+                &:hover {
+                  color: var(--color-primary) !important;
+                }
               }
             }
 
