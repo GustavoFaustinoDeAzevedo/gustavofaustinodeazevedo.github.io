@@ -2,6 +2,29 @@ import { FileNode } from './filesData';
 
 const instaledAppsData: FileNode[] = [
   {
+    fileId: 'about',
+    title: { eng: 'About Me', por: 'Sobre Mim' },
+    icon: 'about',
+    type: 'text',
+    initialDimensions: { width: '650px', height: '520px' },
+  },
+  {
+    fileId: 'skills',
+    title: { eng: 'Skills', por: 'Habilidades' },
+    icon: 'skills',
+    type: 'file',
+    initialDimensions: { width: '750px', height: '540px' },
+  },
+
+  {
+    fileId: 'contact',
+    title: { eng: 'Contact Info', por: 'Informações de Contato' },
+    icon: 'business-card-icon',
+    type: 'app',
+    initialDimensions: { width: '490px', height: '600px' },
+  },
+
+  {
     fileId: 'sendMessage',
     title: { eng: 'Send Message', por: 'Enviar Mensagem' },
     icon: 'contact',
