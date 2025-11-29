@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Dropdown from '@components/ui/Dropdown/Dropdow';
+import { Dropdown } from '@/components/ui';
+import { dropdownItem } from '@/components/ui/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
@@ -7,13 +8,11 @@ const Notepad = ({ windowId }: { windowId: string }) => {
   const content = useSelector(
     (state: RootState) => state.file.filesList.content
   );
-  const dropdownList = [
+  const dropdownList: dropdownItem[] = [
     { label: 'New Tab' },
     { label: 'New Window' },
     { label: 'Open' },
-    { label: 'Recent' },
     { label: 'Save' },
-    { label: 'Save as' },
     { label: 'Save All' },
     { isDivisor: true },
     { label: 'Page Options' },
@@ -24,7 +23,7 @@ const Notepad = ({ windowId }: { windowId: string }) => {
     { label: 'Close All' },
   ];
   const [text, setText] = useState(content);
-  const handleTextChange = (e) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
   return (
@@ -32,11 +31,7 @@ const Notepad = ({ windowId }: { windowId: string }) => {
       <nav className="notepad__nav">
         <ul>
           <li>
-            <Dropdown
-              dropdownList={dropdownList}
-              dropdownTitle="File"
-              windowKey={windowId}
-            />
+            <Dropdown dropdownList={dropdownList} dropdownTitle="File" />
           </li>
         </ul>
       </nav>
