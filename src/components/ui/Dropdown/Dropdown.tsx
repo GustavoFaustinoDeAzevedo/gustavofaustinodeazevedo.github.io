@@ -100,6 +100,7 @@ const Dropdown = ({
           id={dropdownId}
           key={dropdownId}
           aria-label={dropdownTitle}
+          className="dropdown__menu"
         >
           {dropdownList.map((item: dropdownItem, index: number) => (
             <li key={`${dropdownId}-${index}`}>

@@ -13,7 +13,7 @@ const useClickOutside = ({
   onClickOutside,
   isActive = true,
   extraRef = null,
-  ignoreSelectors = ['.context-menu.active'],
+  ignoreSelectors = ['.ignore-click-outside'],
 }: UseClickOutsideParams) => {
   useEffect(() => {
     if (!isActive) return;

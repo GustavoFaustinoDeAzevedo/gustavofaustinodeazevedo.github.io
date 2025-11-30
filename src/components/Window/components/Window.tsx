@@ -136,10 +136,14 @@ const Window = ({
     mainRef: windowRef,
     onClickOutside: handleResetFocus as (e: MouseEvent | TouchEvent) => void,
     isActive: isFocused,
-    ignoreSelectors: [`.${windowId.replace(/[.#]/g, "")}-taskbar-task`],
+    ignoreSelectors: [
+      `.${windowId.replace(/[.#]/g, '')}-taskbar-task`,
+      '.dropdown__menu',  
+    ],
   });
 
   //handler para lidar com o focus da janela ===================================
+
   const handleFocus = useCallback(() => {
     if (isFocused) return null;
     if (handleRequestFocus) handleRequestFocus();
