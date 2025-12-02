@@ -1,9 +1,7 @@
 import { useClickOutside } from '@/shared';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import StyledDropdownMenu from './StyledDropdownMenu';
 
 export type dropdownItem = {
   label?: string;
@@ -15,42 +13,6 @@ type DropdownProps = {
   dropdownTitle?: string;
   dropdownId?: string;
 };
-
-const DropdownMenu = styled.ul<{
-  $isOpen: boolean;
-  $top: number;
-  $left: number;
-}>`
-  position: absolute;
-  top: ${(props) => props.$top}px;
-  left: ${(props) => props.$left}px;
-  display: ${(props) => (props.$isOpen ? 'block' : 'none')};
-  background-color: var(--color-background-2);
-  min-width: 160px;
-  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  z-index: 9999;
-  padding: 0.5rem 0;
-
-  & li {
-    color: var(--color-text);
-    padding: 0.2rem 1.5rem;
-    text-decoration: none;
-    display: block;
-    cursor: var(--cursor-pointer);
-
-    &:hover {
-      background-color: #ffffff1a;
-    }
-  }
-
-  & hr {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: 0.5rem 0;
-  }
-`;
 
 const Dropdown = ({
   dropdownList = [],
@@ -93,14 +55,14 @@ const Dropdown = ({
         {dropdownTitle}
       </button>
       {createPortal(
-        <DropdownMenu
+        <StyledDropdownMenu
           $isOpen={isOpen}
           $top={coords.top}
           $left={coords.left}
           id={dropdownId}
           key={dropdownId}
           aria-label={dropdownTitle}
-          className="dropdown__menu"
+          className={`dropdown__menu ${isOpen ? 'visible' : 'hidden'}`}
         >
           {dropdownList.map((item: dropdownItem, index: number) => (
             <li key={`${dropdownId}-${index}`}>
@@ -113,7 +75,7 @@ const Dropdown = ({
               )}
             </li>
           ))}
-        </DropdownMenu>,
+        </StyledDropdownMenu>,
         document.body
       )}
     </div>
