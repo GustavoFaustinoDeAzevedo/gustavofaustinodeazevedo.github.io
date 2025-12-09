@@ -4,8 +4,9 @@ type UseClickOutsideParams = {
   mainRef: React.RefObject<HTMLElement | null>;
   onClickOutside: (e: MouseEvent | TouchEvent) => void;
   isActive?: boolean;
-  extraRef?: React.RefObject<HTMLElement> | Element | null;
-  ignoreSelectors?: string[];
+  extraRef?: React.RefObject<HTMLElement> | HTMLElement | null;
+  ignoredSelectors?: string[];
+  ignoredDataAttributes?: string[];
 };
 
 const useClickOutside = ({
@@ -13,7 +14,8 @@ const useClickOutside = ({
   onClickOutside,
   isActive = true,
   extraRef = null,
-  ignoreSelectors = ['.ignore-click-outside'],
+  ignoredSelectors = ['.ignore-click-outside'],
+  ignoredDataAttributes = ['data-ignore-click-outside'],
 }: UseClickOutsideParams) => {
   useEffect(() => {
     if (!isActive) return;
@@ -21,8 +23,12 @@ const useClickOutside = ({
     const handleClick = (e: MouseEvent | TouchEvent) => {
       const target = e.target as HTMLElement;
 
-      const isInIgnoredElement = ignoreSelectors.some((selector) =>
+      const isInIgnoredElement = ignoredSelectors.some((selector) =>
         target.closest(selector)
+      );
+
+      const isInIgnoredDataAttribute = ignoredDataAttributes.some((attr) =>
+        target.closest(`[${attr}]`)
       );
 
       const isInExtraRef =
@@ -34,7 +40,8 @@ const useClickOutside = ({
         !mainRef.current ||
         mainRef.current.contains(target) ||
         isInExtraRef ||
-        isInIgnoredElement
+        isInIgnoredElement ||
+        isInIgnoredDataAttribute
       ) {
         return;
       }
@@ -48,7 +55,14 @@ const useClickOutside = ({
         capture: true,
       });
     };
-  }, [mainRef, extraRef, onClickOutside, isActive, ignoreSelectors]);
+  }, [
+    mainRef,
+    extraRef,
+    onClickOutside,
+    isActive,
+    ignoredSelectors,
+    ignoredDataAttributes,
+  ]);
 };
 
 export default useClickOutside;
