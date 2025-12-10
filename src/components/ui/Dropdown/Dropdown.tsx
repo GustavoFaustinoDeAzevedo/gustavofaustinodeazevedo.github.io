@@ -22,10 +22,12 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
 
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const dropdownRef = useRef<HTMLElement>(null);
+  const buttonRef = useRef<HTMLElement>(null);
 
-  const handleClick = () => {
+  const handleClick = (isDivisor?: boolean) => {
+    console.log(isDivisor);
+    if (isDivisor === true) return;
     setIsOpen((prev) => !prev);
   };
 
@@ -43,13 +45,14 @@ const Dropdown = ({
     mainRef: dropdownRef,
     onClickOutside: () => handleClick(),
     isActive: isOpen,
+    extraRef: buttonRef as React.RefObject<HTMLElement>,
   });
   return (
-    <div ref={dropdownRef} className={'dropdown__container'}>
+    <div className={'dropdown__container'}>
       <button
-        ref={buttonRef}
+        ref={buttonRef as React.RefObject<HTMLButtonElement>}
         type="button"
-        onClick={handleClick}
+        onClick={() => handleClick()}
         className="dropdown__toggler"
       >
         {dropdownTitle}
@@ -62,16 +65,18 @@ const Dropdown = ({
           id={dropdownId}
           key={dropdownId}
           aria-label={dropdownTitle}
-          className={`dropdown__menu ${isOpen ? 'visible' : 'hidden'}`}
+          data-dropdown-menu
+          ref={dropdownRef as React.RefObject<HTMLUListElement>}
         >
           {dropdownList.map((item: dropdownItem, index: number) => (
-            <li key={`${dropdownId}-${index}`}>
+            <li
+              onClick={() => handleClick(item.isDivisor ?? false)}
+              key={`${dropdownId}-${index}`}
+            >
               {item.isDivisor ? (
-                <hr />
+                <hr className="dropdown__menu-divisor" />
               ) : (
-                <p className="" onClick={handleClick}>
-                  {item.label}
-                </p>
+                <p className="">{item.label}</p>
               )}
             </li>
           ))}

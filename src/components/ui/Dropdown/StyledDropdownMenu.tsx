@@ -14,7 +14,7 @@ const StyledDropdownMenu = styled.ul<{
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  z-index: 9999;
+  z-index: 1;
   padding: 0.5rem 0;
 
   & li {
@@ -24,7 +24,7 @@ const StyledDropdownMenu = styled.ul<{
     display: block;
     cursor: var(--cursor-pointer);
 
-    &:hover {
+    &:hover:not(:has(> .dropdown__menu-divisor)) {
       background-color: #ffffff1a;
     }
   }
