@@ -26,7 +26,6 @@ const Dropdown = ({
   const buttonRef = useRef<HTMLElement>(null);
 
   const handleClick = (isDivisor?: boolean) => {
-    console.log(isDivisor);
     if (isDivisor === true) return;
     setIsOpen((prev) => !prev);
   };
@@ -47,6 +46,7 @@ const Dropdown = ({
     isActive: isOpen,
     extraRef: buttonRef as React.RefObject<HTMLElement>,
   });
+  
   return (
     <div className={'dropdown__container'}>
       <button
