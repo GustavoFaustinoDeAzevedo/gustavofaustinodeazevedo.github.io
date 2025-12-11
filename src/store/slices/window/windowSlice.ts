@@ -16,6 +16,7 @@ import {
   newFile,
 } from './windowSlice.utils';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
+import { help } from 'mathjs';
 
 const windowSlice = createSlice({
   name: 'window',
@@ -54,7 +55,9 @@ const windowSlice = createSlice({
         isUnique,
         isRequestingMaximize = false,
         content,
+        windowType = 'window',
         initialDimensions,
+        helpContent = null,
       }: WindowData = action.payload;
 
       if (isUnique && title) {
@@ -107,6 +110,7 @@ const windowSlice = createSlice({
       const newWindow: WindowNode = {
         windowId: newId,
         currentNode: windowId,
+        helpContent,
         nodeDepth,
         title,
         icon,
@@ -116,6 +120,7 @@ const windowSlice = createSlice({
         children,
         content,
         initialDimensions,
+        windowType,
         position: { lastX: 0, lastY: 0, x: 0, y: 0 },
         size: { lastWidth: 0, lastHeight: 0, width: 0, height: 0 },
         windowState: { ...baseState },

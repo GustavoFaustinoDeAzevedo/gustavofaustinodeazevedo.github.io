@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import WindowHeader from './windowHeader';
+import WindowHeader from './WindowHeader';
 import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '@/shared/hooks/useClickOutside';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
@@ -44,6 +44,7 @@ const Window = ({
     currentNode,
     zIndex,
     isOpened,
+    helpContent,
     title,
     icon,
     children,
@@ -75,6 +76,7 @@ const Window = ({
     handleRequestRestore,
     handleRequestClose,
     handleRequestFocus,
+    helpContent,
     windowId,
     title,
     icon,
