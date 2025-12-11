@@ -1,4 +1,4 @@
-import Window from './Window';
+import Window from '../core';
 import useFilesActions from '@/store/actions/useFilesActions';
 import useSettingsActions from '@/store/actions/useSettingsActions';
 import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
@@ -31,7 +31,6 @@ const WindowManager = ({
   desktopRef,
   filesActions,
 }: WindowManagerProps) => {
-  
   const { windowId = '' } = windowRawParams;
 
   //Refs para janela e header

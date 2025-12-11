@@ -67,9 +67,9 @@ export interface WindowNode {
   isRequestingMinimize?: boolean;
   isRequestingRestore?: boolean;
   initialDimensions?: Size;
+  helpContent?: string | null;
+  windowType?: 'window' | 'modal' | 'dialog' | 'tool' | 'notification';
 }
-
-//Estado do slice
 
 export interface WindowSliceState {
   openedWindowList: WindowNode[];

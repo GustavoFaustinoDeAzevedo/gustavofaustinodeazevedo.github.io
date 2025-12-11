@@ -1,3 +1,2 @@
-import windowReducer from './windowSlice';
-export default windowReducer;
+export { default } from './windowSlice';
 export * from './windowSlice.types';
