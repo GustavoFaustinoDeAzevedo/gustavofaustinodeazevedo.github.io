@@ -1,8 +1,9 @@
 import React from 'react';
 import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { Language } from '@/store/slices/settings';
+import { windowHeaderData } from '../data';
 
-type WindowHeaderProps = {
+export type WindowHeaderProps = {
   title?: { [key in Language]: string };
   headerRef?: React.RefObject<HTMLDivElement> | null;
   icon?: string;
@@ -21,13 +22,8 @@ const WindowHeader = ({
   headerRef = null,
   icon = '',
   language = 'eng',
-  isMaximized = false,
-  helpContent = null,
   handleRequestFocus,
-  handleRequestMinimize,
-  handleRequestMaximize,
-  handleRequestRestore,
-  handleRequestClose,
+  ...props
 }: WindowHeaderProps) => {
   const stylePng = {
     color: 'var(--color-text)',
@@ -46,6 +42,11 @@ const WindowHeader = ({
     backgroundPosition: 'center',
   };
 
+  const headerData = windowHeaderData({
+    ...props,
+    language,
+  });
+
   return (
     <div className="window__header">
       <span
@@ -61,69 +62,21 @@ const WindowHeader = ({
         {title[language as keyof typeof title] || 'Untitled'}
       </span>
       <div className="window__header-controls">
-        {helpContent && (
-          <button
-            type="button"
-            aria-label={language === 'por' ? 'Ajuda' : 'Help'}
-            title={language === 'por' ? 'Ajuda' : 'Help'}
-            className="window__header-controls-help"
-            onClick={() => alert(helpContent)}
-          >
-            <Icon variant="help" />
-          </button>
-        )}
-        {handleRequestMinimize && (
-          <button
-            type="button"
-            aria-label={language === 'por' ? 'Minimizar' : 'Minimize'}
-            title={language === 'por' ? 'Minimizar' : 'Minimize'}
-            className="window__header-controls-minimize"
-            onClick={handleRequestMinimize}
-          >
-            <Icon variant="minimize" style={styleSvg} />
-          </button>
-        )}
-        {handleRequestMaximize && (
-          <button
-            type="button"
-            aria-label={
-              language === 'por'
-                ? isMaximized
-                  ? 'Restaurar'
-                  : 'Maximizar'
-                : isMaximized
-                ? 'Restore'
-                : 'Maximize'
-            }
-            title={
-              language === 'por'
-                ? isMaximized
-                  ? 'Restaurar'
-                  : 'Maximizar'
-                : isMaximized
-                ? 'Restore'
-                : 'Maximize'
-            }
-            className="window__header-controls-maximize"
-            onClick={isMaximized ? handleRequestRestore : handleRequestMaximize}
-          >
-            <Icon
-              variant={`${isMaximized ? 'restore' : 'maximize'}`}
-              style={styleSvg}
-            />
-          </button>
-        )}
-        {handleRequestClose && (
-          <button
-            type="button"
-            aria-label={language === 'por' ? 'Fechar' : 'Close'}
-            title={language === 'por' ? 'Fechar' : 'Close'}
-            className="window__header-controls-close"
-            onClick={handleRequestClose}
-          >
-            <Icon variant="close" style={styleSvg} />
-          </button>
-        )}
+        {headerData.map(({ name, title, icon, action, condition }) => {
+          if (condition === false) return null;
+          return (
+            <button
+              key={name}
+              type="button"
+              aria-label={title}
+              title={title}
+              className={`window__header-controls-${name}`}
+              onClick={action}
+            >
+              <Icon variant={icon} style={styleSvg} />
+            </button>
+          );
+        })}
       </div>
     </div>
   );
