@@ -1,0 +1,1 @@
+export { default as windowHeaderData } from './windowHeader.data';
