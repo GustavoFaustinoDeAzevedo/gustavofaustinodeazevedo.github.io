@@ -20,7 +20,6 @@ const useKeyboardBlockOnMouseHold = (): boolean => {
       if (isBlocked) {
         e.preventDefault();
         e.stopPropagation();
-        console.log(`⛔ Tecla "${e.key}" bloqueada (mouse segurado)`);
       }
     };
 
