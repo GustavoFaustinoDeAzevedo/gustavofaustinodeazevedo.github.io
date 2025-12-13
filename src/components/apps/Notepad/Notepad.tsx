@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { use, useCallback, useRef, useState } from 'react';
 import { Dropdown } from '@/components/ui';
 import { dropdownItem } from '@/components/ui/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+// import './Notepad.styles.css';
 
 const Notepad = ({ windowId }: { windowId: string }) => {
   const content = useSelector(
@@ -23,9 +24,13 @@ const Notepad = ({ windowId }: { windowId: string }) => {
     { label: 'Close All' },
   ];
   const [text, setText] = useState(content);
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
+  const textareaRef = useRef(null);
+  // const handleTextChange = useCallback(
+  //   (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //     setText(e.target.value);
+  //   },
+  //   []
+  // );
   return (
     <div className="notepad">
       <nav className="notepad__nav">
@@ -36,11 +41,11 @@ const Notepad = ({ windowId }: { windowId: string }) => {
         </ul>
       </nav>
       <textarea
+        ref={textareaRef}
         name="notepad"
         title={text}
         placeholder=""
         className="notepad__text"
-        onChange={handleTextChange}
         value={text}
       />
     </div>

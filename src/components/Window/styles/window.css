@@ -13,7 +13,6 @@
     max-width: 100%;
     max-height: calc(100dvh - var(--taskbar-height));
     display: none;
-
     overflow: hidden;
     resize: both;
     transition: margin 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -58,9 +57,7 @@
     }
 
     & .window__header {
-      min-height: var(--window-header-height);
       height: var(--window-header-height);
-
       background: var(--color-header-inactive);
       min-width: max-content;
       display: flex;
@@ -140,15 +137,16 @@
     }
 
     & .window__content {
-      min-height: min-content;
+      position: sticky;
+      width: 100%;
+      min-width: fit-content;
+      min-width: webkit-fill-available;
+      min-height: 0;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
       background-color: var(--color-secondary-background);
       background-image: var(--pattern-1);
-      min-width: -webkit-fill-available;
-      min-width: fit-content;
+
       position: relative;
       container-type: size;
     }

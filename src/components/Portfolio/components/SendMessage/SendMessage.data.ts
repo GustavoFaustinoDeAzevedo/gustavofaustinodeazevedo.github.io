@@ -50,7 +50,7 @@ const formData: FormDataTranslations = {
       id: 'email',
       type: 'input',
       name: 'Email',
-      placeholder: 'Ex: 0oYQF@example.com',
+      placeholder: 'Ex: charlielima@example.com',
       label: 'Email',
     },
     message: {
@@ -89,7 +89,7 @@ const formData: FormDataTranslations = {
       id: 'email',
       type: 'input',
       name: 'Email',
-      placeholder: 'Ex: 0oYQF@example.com',
+      placeholder: 'Ex: charlielima@exemplo.com',
       label: 'Email',
     },
     message: {
