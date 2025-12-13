@@ -226,6 +226,7 @@
     background: var(--color-background-4) !important;
     border-radius: 0px !important;
     transition: background-color 0.4s ease;
+    cursor: initial;
   }
 
   ::-webkit-scrollbar-thumb:hover {

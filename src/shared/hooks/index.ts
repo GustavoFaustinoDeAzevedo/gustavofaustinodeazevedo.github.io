@@ -4,3 +4,4 @@ export { default as useIsMobile } from './useIsMobile';
 export { default as useMouseEvents } from './useMouseEvents';
 export { default as useClickOutside } from './useClickOutside';
 export { default as useUserBrowserDarkMode } from './useUserBrowserDarkMode';
+export { default as useKeyboardBlockOnMouseHold } from './useKeyboardBlockOnMouseHold';
