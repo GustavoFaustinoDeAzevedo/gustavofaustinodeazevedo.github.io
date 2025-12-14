@@ -2,6 +2,7 @@ import Button from '@components/ui/Button';
 import AnimatedInput from '@window/components/AnimatedInput';
 import { Language } from '@/store/slices/settings';
 import formData from './SendMessage.data';
+import { useSelector } from 'react-redux';
 
 const SendMessage = ({ language }: { language: Language }) => {
   const formDataTranslated = formData[language];

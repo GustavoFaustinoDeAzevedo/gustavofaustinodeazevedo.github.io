@@ -213,6 +213,7 @@
 
   ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
 
   /* Track */
@@ -234,10 +235,17 @@
     /* Um azul um pouco mais escuro no hover */
   }
 
+  ::-webkit-scrollbar-corner {
+    visibility: hidden;
+  }
+
   .no-scroll::-webkit-scrollbar-track,
   .no-scroll::-webkit-scrollbar-thumb {
     visibility: hidden;
   }
+
+
+
 
   /* Handle on hover */
   /* ::-webkit-scrollbar-thumb:hover {

@@ -54,7 +54,7 @@ export const rootFolder: FileNode = {
                   title: { eng: 'About Me', por: 'Sobre Mim' },
                   icon: 'about',
                   type: 'text',
-                  initialDimensions: { width: '650px', height: '520px' },
+                  initialDimensions: { width: '650px', height: '600px' },
                 },
                 //temporariamente inativo
                 // {

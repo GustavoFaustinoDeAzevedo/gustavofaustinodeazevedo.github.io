@@ -89,14 +89,22 @@
             border-top: 1px solid;
             display: flex;
             justify-content: center;
-            gap: 4rem;
+            gap: 5rem;
             padding: 1rem 2rem;
 
-            & .change-background__display-option {
+            & .change-background__display-label {
               font-family: 'Courier New', Courier, monospace;
               display: flex;
-              gap: 5px;
+              flex-direction: row;
+              gap: 10px;
               justify-content: left;
+              cursor: pointer;
+
+              &:has(input[type="radio"]:checked) {
+                color: var(--color-info);
+                font-weight: bold;
+              }
+
             }
           }
         }

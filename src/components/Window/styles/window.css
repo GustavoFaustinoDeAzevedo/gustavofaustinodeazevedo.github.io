@@ -143,12 +143,17 @@
       min-width: webkit-fill-available;
       min-height: 0;
       height: 100%;
+      overflow: auto;
 
       background-color: var(--color-secondary-background);
       background-image: var(--pattern-1);
 
       position: relative;
       container-type: size;
+
+      @media screen and (max-width: 600px) {
+        overflow: hidden;
+      }
     }
 
 
