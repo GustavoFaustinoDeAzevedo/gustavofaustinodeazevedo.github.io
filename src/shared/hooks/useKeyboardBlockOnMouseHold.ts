@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Bloqueia eventos de teclado enquanto o botão esquerdo do mouse estiver pressionado.
  * Retorna `true` se o teclado estiver bloqueado.
  */
 const useKeyboardBlockOnMouseHold = (): boolean => {
-  const [isBlocked, setIsBlocked] = useState(false);
+  // const [isBlocked, setIsBlocked] = useState(false);
+  const isBlocked = useRef(false);
 
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
-      if (e.button === 0) setIsBlocked(true); // botão esquerdo
+      if (e.button === 0) isBlocked.current = true;
     };
 
     const handleMouseUp = (e: MouseEvent) => {
-      if (e.button === 0) setIsBlocked(false);
+      if (e.button === 0) isBlocked.current = false;
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isBlocked) {
+      if (isBlocked.current) {
         e.preventDefault();
         e.stopPropagation();
       }
@@ -32,9 +33,9 @@ const useKeyboardBlockOnMouseHold = (): boolean => {
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('keydown', handleKeyDown, true);
     };
-  }, [isBlocked]);
+  }, []);
 
-  return isBlocked;
+  return isBlocked.current;
 };
 
 export default useKeyboardBlockOnMouseHold;
