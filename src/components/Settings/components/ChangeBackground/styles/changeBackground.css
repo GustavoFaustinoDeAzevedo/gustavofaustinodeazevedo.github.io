@@ -252,19 +252,24 @@
               gap: 2rem;
               padding: 0.5rem 0;
 
-              & .change-background__color-input-wrapper {
-                position: relative;
+              & .change-background__file-input {
+                display: none;
+
+              }
+
+              & .change-background__color-picker {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
                 gap: 1rem;
+                padding: 0.5rem 0;
 
                 & .change-background__color-slider {
                   position: relative;
                   appearance: none;
                   outline: none;
-                  height: 0.8rem;
+                  height: 1rem;
                 }
 
                 input[type="range"]::-webkit-slider-thumb {
@@ -295,6 +300,45 @@
                   cursor: pointer;
                 }
 
+                & .input-hex__container {
+                  position: relative;
+                  width: 4.3rem;
+
+                  & .input-hex {
+                    opacity: 0;
+                    position: relative;
+                    background: transparent;
+                    color: transparent;
+                    width: 4.3rem;
+                    z-index: 2;
+                  }
+
+                  & .input-hex__highlight {
+                    font-family: 'Courier New', Courier, monospace;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                    overflow: hidden;
+                    pointer-events: visible;
+                  }
+
+
+                  & .input-hex__highlight--red {
+                    color: #FF6347;
+                  }
+
+                  & .input-hex__highlight--green {
+                    color: #0f0;
+                  }
+
+                  & .input-hex__highlight--blue {
+                    color: #8FE3FF;
+                  }
+                }
+
                 & .change-background__color-main-input {
                   position: relative;
                   width: 3.3rem;
@@ -302,10 +346,12 @@
                   text-align: left;
                   background-color: var(--color-background-1);
                   padding-left: 0.3rem;
-                  font-weight: bold;
                   transition: all 0.1s ease-in-out;
                   border-radius: 2px;
                   outline-style: none;
+
+
+
 
 
 
@@ -360,16 +406,22 @@
                   }
 
                 }
+
+                & .change-background__color-footer {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: baseline;
+                  gap: 1rem;
+                }
               }
-
-              & .change-background__file-input {
-                display: none;
-
-              }
-
             }
+
+
+
           }
         }
+
 
         & .change-background__aside-footer {
           position: sticky;
@@ -525,32 +577,26 @@
                 align-items: center;
                 padding: 0;
 
-                & .change-background__color-input-wrapper {
+                & .change-background__color-selector-wrapper {
                   width: 100% !important;
                   height: 100% !important;
-                  padding: 0;
+                  gap: 0 !important;
+                  flex-direction: row !important;
                   justify-content: center;
+                  align-items: center;
 
-                  & .change-background__color-code-selector-wrapper {
+                  & .change-background__color-main {
                     width: 100% !important;
                     height: 100% !important;
-                    gap: 0 !important;
-                    flex-direction: row !important;
-                    justify-content: center;
-                    align-items: center;
-
-                    & .change-background__color-main {
-                      width: 100% !important;
-                      height: 100% !important;
-                      gap: 1rem !important;
-                      padding-left: 1rem !important;
+                    gap: 1rem !important;
+                    padding-left: 1rem !important;
 
 
-                      &>div:last-child {
-                        gap: 0rem !important;
+                    &>div:last-child {
+                      gap: 0rem !important;
 
-                      }
                     }
+
 
                     & .change-background__color-footer {
                       width: 100% !important;
@@ -563,7 +609,6 @@
 
                       & .change-background__hex-input-wrapper {
                         width: max-content !important;
-                        gap: 1rem !important;
                         justify-content: center;
                         align-items: center;
                       }
