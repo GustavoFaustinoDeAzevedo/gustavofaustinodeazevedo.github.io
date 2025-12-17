@@ -49,30 +49,28 @@ const CustomColorPicker = ({
   );
 
   return (
-    <div className="change-background__color-input-wrapper">
-      <div className="change-background__color-code-selector-wrapper flex flex-column gap-2">
-        <InputRGB
-          language={language}
-          inputColor={inputColor}
-          className={'change-background__color-main'}
-          handleChangeColor={handleChangeColor}
-        />
-        <div className="change-background__color-footer">
-          <div className="flex flex-row gap-1">
-            <p className="font-courier">HEX</p>
-            <InputHEX
-              language={language}
-              inputColor={inputColor}
-              handleChangeColor={handleChangeColor}
-            />
-          </div>
-          <Button
-            onClick={() => handleChangeColor(defaultDesktopColor)}
-            type="submit"
-          >
-            {displayChoicesContent?.settings?.picker?.button ?? 'Reset'}
-          </Button>
+    <div className="change-background__color-picker">
+      <InputRGB
+        language={language}
+        inputColor={inputColor}
+        className={'change-background__color-main'}
+        handleChangeColor={handleChangeColor}
+      />
+      <div className="change-background__color-footer">
+        <div className="flex flex-row gap-1">
+          <p className="font-courier">HEX</p>
+          <InputHEX
+            language={language}
+            inputColor={inputColor}
+            handleChangeColor={handleChangeColor}
+          />
         </div>
+        <Button
+          onClick={() => handleChangeColor(defaultDesktopColor)}
+          type="submit"
+        >
+          {displayChoicesContent?.settings?.picker?.button ?? 'Reset'}
+        </Button>
       </div>
     </div>
   );

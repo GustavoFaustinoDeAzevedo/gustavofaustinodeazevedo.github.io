@@ -1,6 +1,7 @@
 import { Radio, Slider } from '@components/ui';
 import { EffectValues } from '@/store/slices/settings';
 import { useCallback } from 'react';
+import { SliderData } from '@/components/ui/Slider/SliderItem';
 
 interface BackgroundControlEffectProps {
   language: string;
@@ -132,17 +133,19 @@ const BackgroundControlEffect = ({
       <Slider
         sliderContainerClass={'flex gap-1 justify-center border-none'}
         inputNumberClass={'change-background__gradient-field-angle'}
-        sliderValue={backgroundPreviewConfig.effect.angle}
-        sliderData={{
-          id: 'angle',
-          label: language === 'por' ? 'Ângulo' : 'Angle',
-          min: 0,
-          max: 360,
-          step: 1,
-          default: 0,
+        sliderInitialValues={backgroundPreviewConfig.effect.angle}
+        sliderObjectData={{
+          angle: {
+            id: 'angle',
+            label: language === 'por' ? 'Ângulo' : 'Angle',
+            min: 0,
+            max: 360,
+            step: 1,
+            default: 0,
+          },
         }}
         sliderValuesHandler={handleAngleValue}
-        disabled={
+        disabledList={
           backgroundPreviewConfig.effect.active.includes('_disabled') ||
           backgroundPreviewConfig.effect.active === 'radial'
         }

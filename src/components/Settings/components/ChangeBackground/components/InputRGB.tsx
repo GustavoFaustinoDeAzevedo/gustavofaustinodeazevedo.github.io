@@ -103,7 +103,7 @@ const InputRGB = ({
         inputNumberActive={false}
       />
 
-      <div className=" flex flex-row gap-2 flex-space-evenly">
+      <div className="margin-top-1 flex flex-row gap-2 flex-space-evenly">
         {Object.values(colorsData).map((value) => (
           <input
             key={value.id}

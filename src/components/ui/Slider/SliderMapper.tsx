@@ -17,6 +17,7 @@ type SliderMapData = {
   onTouchEnd?: any;
   inputNumberActive?: boolean[] | boolean | any;
   ignoredList?: string[];
+  disabledList?: string[];
 };
 
 const SliderMapper = ({
@@ -35,6 +36,7 @@ const SliderMapper = ({
   sliderValuesHandler,
   inputNumberActive,
   ignoredList,
+  disabledList,
 }: SliderMapData) => {
   if (sliderObjectData === undefined || sliderInitialValues === undefined)
     return;

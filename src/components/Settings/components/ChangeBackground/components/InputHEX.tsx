@@ -38,19 +38,30 @@ const InputHEX = ({
   };
 
   return (
-    <div className="change-background__hex-input-wrapper flex flex-row flex-flex-start flex-align-center gap-0">
-      <div className="text-bold font-courier">#</div>
+    <div className="input-hex__container">
+      <strong className="input-hex__highlight">
+        <span>#</span>
+        <span className="input-hex__highlight--red">
+          {hex.replace('#', '').slice(0, 2)}
+        </span>
+        <span className="input-hex__highlight--green">
+          {hex.replace('#', '').slice(2, 4)}
+        </span>
+        <span className="input-hex__highlight--blue">
+          {hex.replace('#', '').slice(4, 6)}
+        </span>
+      </strong>
       <input
         autoComplete="off"
         type="text"
         name="inputColor"
         id="inputColor"
-        maxLength={6}
+        maxLength={7}
         title={language === 'eng' ? 'Hex Color' : 'Cor em Hexadecimal'}
-        value={hex.replace('#', '')}
+        value={`${hex.replace('#', '')}`}
         onChange={handleChange}
         placeholder="RRGGBB"
-        className="change-background__color-main-input width-4 text-color-info"
+        className="input-hex"
       />
     </div>
   );
