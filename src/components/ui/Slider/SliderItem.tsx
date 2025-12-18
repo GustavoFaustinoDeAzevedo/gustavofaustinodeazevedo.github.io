@@ -42,7 +42,6 @@ const SliderItem = React.memo(
     inputNumberActive = true,
     disabled = false,
   }: SliderItemProps) => {
-
     if (!sliderData) return null;
     if (sliderValue === undefined || isNaN(sliderValue)) return null;
     const displayValue = Number(sliderValue).toFixed(
@@ -53,6 +52,9 @@ const SliderItem = React.memo(
         sliderValuesHandler(index, e.target.valueAsNumber),
       [index, sliderValuesHandler]
     );
+
+    const sliderId = crypto.randomUUID();
+
     return (
       <div
         className={
@@ -72,7 +74,7 @@ const SliderItem = React.memo(
           className={sliderClass}
           style={{ background: accentColor }}
           key={`slider-${sliderData.id}-${index}`}
-          id={`slider-${sliderData.id}-${index}`}
+          id={sliderId}
           onMouseUp={onMouseUp ?? null}
           onTouchEnd={onTouchEnd ?? null}
           aria-valuemin={sliderData.min}
