@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Button from '@components/ui/Button';
 import InputRGB from './InputRGB';
 import InputHEX from './InputHEX';
@@ -53,27 +53,26 @@ const CustomColorPicker = ({
       <InputRGB
         language={language}
         inputColor={inputColor}
-        className={'change-background__color-main'}
+        className={'change-background__color-rgb'} //main
         handleChangeColor={handleChangeColor}
       />
-      <div className="change-background__color-footer">
-        <div className="flex flex-row gap-1">
-          <p className="font-courier">HEX</p>
-          <InputHEX
-            language={language}
-            inputColor={inputColor}
-            handleChangeColor={handleChangeColor}
-          />
-        </div>
-        <Button
-          onClick={() => handleChangeColor(defaultDesktopColor)}
-          type="submit"
-        >
-          {displayChoicesContent?.settings?.picker?.button ?? 'Reset'}
-        </Button>
+      <div className="change-background__color-hex">
+        <p className="font-courier">HEX</p>
+        <InputHEX
+          language={language}
+          inputColor={inputColor}
+          handleChangeColor={handleChangeColor}
+        />
       </div>
+      <Button
+        onClick={() => handleChangeColor(defaultDesktopColor)}
+        type="submit"
+        className="change-background__color-default-button"
+      >
+        {displayChoicesContent?.settings?.picker?.button ?? 'Reset'}
+      </Button>
     </div>
   );
 };
 
-export default CustomColorPicker;
+export default React.memo(CustomColorPicker);

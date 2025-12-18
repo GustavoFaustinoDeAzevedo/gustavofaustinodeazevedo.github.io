@@ -2,10 +2,11 @@ import { Radio, Slider } from '@components/ui';
 import { EffectValues } from '@/store/slices/settings';
 import { useCallback } from 'react';
 import { SliderData } from '@/components/ui/Slider/SliderItem';
+import { BackgroundPreviewConfig } from './ChangeBackgroundMenu';
 
 interface BackgroundControlEffectProps {
   language: string;
-  backgroundPreviewConfig: any;
+  backgroundPreviewConfig: BackgroundPreviewConfig;
   displayChoicesContent: any;
   setBackgroundPreviewConfig: any;
   displayChoicesRoot: any;
@@ -62,10 +63,10 @@ const BackgroundControlEffect = ({
   return (
     <fieldset className="change-background__gradient-field border-muted">
       <legend>{displayChoicesContent?.settings?.effect?.legend}</legend>
-      <div className="flex gap-1 items-center">
+      <div className="change-background__gradient-toggle flex flex-row-reverse gap-1 items-center">
         <label
           htmlFor="temporaryCheckboxId"
-          className="font-courier text-m width-6 cursor-pointer"
+          className="font-courier text-m width-5 cursor-pointer"
         >
           {!backgroundPreviewConfig.effect.active.includes('_disabled')
             ? language === 'por'
@@ -87,9 +88,9 @@ const BackgroundControlEffect = ({
           <span className="toggle round"></span>
         </label>
       </div>
-      <div className="flex">
+      <div className="change-background__gradient-options-container flex">
         <fieldset className="change-background__gradient-field-checkbox font-courier">
-          <label className="flex gap-1">
+          <label className="switch">
             <input
               type="checkbox"
               disabled={backgroundPreviewConfig.effect.active.includes(
@@ -98,6 +99,7 @@ const BackgroundControlEffect = ({
               onChange={(e) => handleEffectValue('inverted', e.target.checked)}
               checked={backgroundPreviewConfig.effect.inverted}
             />
+            <span className="toggle round"></span>
             <p
               className={
                 backgroundPreviewConfig.effect.active.includes('_disabled')
@@ -108,7 +110,7 @@ const BackgroundControlEffect = ({
               {language === 'por' ? 'Invertido' : 'Inverted'}
             </p>
           </label>
-          <label className="flex gap-1">
+          <label className="switch">
             <input
               type="checkbox"
               disabled={backgroundPreviewConfig.effect.active.includes(
@@ -117,6 +119,7 @@ const BackgroundControlEffect = ({
               onChange={(e) => handleEffectValue('mirrored', e.target.checked)}
               checked={backgroundPreviewConfig.effect.mirrored}
             />
+            <span className="toggle round"></span>
             <p
               className={
                 backgroundPreviewConfig.effect.active.includes('_disabled')
@@ -131,9 +134,11 @@ const BackgroundControlEffect = ({
         <Radio {...radioGradientProps} />
       </div>
       <Slider
-        sliderContainerClass={'flex gap-1 justify-center border-none'}
+        sliderContainerClass={
+          'change-background__gradient-field-angle-container flex gap-1 justify-center border-none'
+        }
         inputNumberClass={'change-background__gradient-field-angle'}
-        sliderInitialValues={backgroundPreviewConfig.effect.angle}
+        sliderInitialValues={backgroundPreviewConfig.effect}
         sliderObjectData={{
           angle: {
             id: 'angle',
@@ -145,10 +150,10 @@ const BackgroundControlEffect = ({
           },
         }}
         sliderValuesHandler={handleAngleValue}
-        disabledList={
-          backgroundPreviewConfig.effect.active.includes('_disabled') ||
-          backgroundPreviewConfig.effect.active === 'radial'
-        }
+        // disabled={
+        //   backgroundPreviewConfig.effect.active.includes('_disabled') ||
+        //   backgroundPreviewConfig.effect.active === 'radial'
+        // }
       />
     </fieldset>
   );

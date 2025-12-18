@@ -3,6 +3,16 @@ import { SliderGroup } from '@components/ui';
 import { Language } from '@/store/slices/settings';
 
 type RGB = { r: number; g: number; b: number };
+type Color = {
+  id: keyof RGB;
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  default: number;
+};
 
 const hexToRgb = (hex: string): RGB => {
   const shortRegex = /^#?([0-9A-F])([0-9A-F])([0-9A-F])$/i;
@@ -67,6 +77,7 @@ const InputRGB = ({
         min: 0,
         max: 255,
         step: 1,
+        default: rgb[key],
         value: rgb[key],
         handler: (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = Number(e.target.value);
@@ -76,7 +87,7 @@ const InputRGB = ({
         },
       };
       return acc;
-    }, {} as Record<keyof RGB, any>);
+    }, {} as Record<keyof RGB, Color>);
   }, [rgb, language, updateChannel]);
 
   const handleSliderInput = useCallback(
@@ -103,7 +114,7 @@ const InputRGB = ({
         inputNumberActive={false}
       />
 
-      <div className="margin-top-1 flex flex-row gap-2 flex-space-evenly">
+      <div className="change-background__color-input-container margin-top-1 flex flex-row gap-2 flex-space-evenly">
         {Object.values(colorsData).map((value) => (
           <input
             key={value.id}
@@ -115,7 +126,7 @@ const InputRGB = ({
             onMouseUp={() => handleChangeColor(rgbToHex(rgb))}
             onTouchEnd={() => handleChangeColor(rgbToHex(rgb))}
             onKeyUp={() => handleChangeColor(rgbToHex(rgb))}
-            className={`${className}-input ${value.id}`}
+            className={`${className}-input ${className}-input--${value.id}`}
             title={value.label}
             placeholder={value.id.toUpperCase()}
           />
