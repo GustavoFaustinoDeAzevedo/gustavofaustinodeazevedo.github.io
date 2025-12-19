@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 // import './Notepad.styles.css';
 
-const Notepad = ({ windowId }: { windowId: string }) => {
+const Notepad = () => {
   const content = useSelector(
     (state: RootState) => state.file.filesList.content
   );

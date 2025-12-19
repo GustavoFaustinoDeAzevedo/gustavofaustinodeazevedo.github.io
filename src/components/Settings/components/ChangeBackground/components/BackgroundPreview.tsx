@@ -1,4 +1,4 @@
-import { BackgroundPreviewConfig } from './ChangeBackgroundMenu';
+import { BackgroundPreviewConfig } from './BackgroundPreferences';
 import DesktopBackgroundPreviewStyled from './DesktopBackgroundPreviewStyled';
 
 export interface DesktopBackgroundPreviewProps {

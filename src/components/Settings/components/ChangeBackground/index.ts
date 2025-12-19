@@ -1,1 +1,1 @@
-export { ChangeBackgroundMenu } from "./components";
+export { BackgroundPreferences } from './components';
