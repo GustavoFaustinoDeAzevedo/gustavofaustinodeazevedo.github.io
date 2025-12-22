@@ -2,7 +2,7 @@ import { AboutMe, ContactCard, MySkills, SendMessage } from '@portfolio';
 import { Language } from '../settings';
 import TaskManager from '@components/TaskManager';
 import BrowserSimulator from '@components/BrowserSimulator';
-import { ChangeBackgroundMenu } from '@components/Settings';
+import { BackgroundPreferences } from '@components/Settings';
 import Calculator from '@apps/Calculator';
 import Notepad from '@apps/Notepad';
 import ConsoleCommand from '@components/ConsoleCommand';
@@ -41,11 +41,11 @@ export const returnWindowContent = (
       browser: () => <BrowserSimulator />,
       github: () => <BrowserSimulator src={src} />,
       'background-color-picker': () => (
-        <ChangeBackgroundMenu language={language} />
+        <BackgroundPreferences language={language} />
       ),
-      'change-background': () => <ChangeBackgroundMenu language={language} />,
+      'change-background': () => <BackgroundPreferences language={language} />,
       calculator: () => <Calculator />,
-      notepad: () => <Notepad windowId={windowId} />,
+      notepad: () => <Notepad />,
     };
     return map[contentId as keyof typeof map]?.();
   } catch (error) {

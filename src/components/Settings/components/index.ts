@@ -1,1 +1,1 @@
-export { ChangeBackgroundMenu } from './ChangeBackground';
+export { BackgroundPreferences } from './ChangeBackground';

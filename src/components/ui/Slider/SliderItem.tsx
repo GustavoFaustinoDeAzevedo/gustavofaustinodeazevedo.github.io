@@ -24,6 +24,7 @@ type SliderItemProps = {
   index?: string;
   inputNumberActive?: boolean[] | boolean | any;
   disabled?: boolean;
+  onChange?: any;
 };
 
 const SliderItem = React.memo(
@@ -41,6 +42,7 @@ const SliderItem = React.memo(
     index,
     inputNumberActive = true,
     disabled = false,
+    onChange,
   }: SliderItemProps) => {
     if (!sliderData) return null;
     if (sliderValue === undefined || isNaN(sliderValue)) return null;
@@ -48,9 +50,12 @@ const SliderItem = React.memo(
       sliderData?.step < 1 ? 2 : 0
     );
     const handlerOnChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) =>
-        sliderValuesHandler(index, e.target.valueAsNumber),
-      [index, sliderValuesHandler]
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (onChange !== undefined) onChange(index, e.target.valueAsNumber);
+        if (sliderValuesHandler !== undefined)
+          sliderValuesHandler(index, e.target.valueAsNumber);
+      },
+      [index, onChange, sliderValuesHandler]
     );
 
     const sliderId = crypto.randomUUID();

@@ -22,7 +22,7 @@ export interface BackgroundPreviewConfig {
   filters: FilterValues;
 }
 
-const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
+const BackgroundPreferences = ({ language }: { language: Language }) => {
   // Valores armazenados no redux ==========================================
 
   const storedDesktopBackgroundColor = useSelector(
@@ -194,4 +194,4 @@ const ChangeBackgroundMenu = ({ language }: { language: Language }) => {
   );
 };
 
-export default React.memo(ChangeBackgroundMenu);
+export default React.memo(BackgroundPreferences);

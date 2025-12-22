@@ -11,29 +11,32 @@ export interface BackgroundPayload {
   isBackgroundImage?: boolean;
 }
 
+export type Filters = {
+  blur: number;
+  brightness: number;
+  contrast: number;
+  grayscale: number;
+  hue: number;
+  invert: number;
+  saturation: number;
+  sepia: number;
+};
+
 export type FilterValues = {
   preset: string;
-  values: {
-    blur: number;
-    brightness: number;
-    contrast: number;
-    grayscale: number;
-    hue: number;
-    invert: number;
-    saturation: number;
-    sepia: number;
-  };
+  custom: Filters;
+  values: Filters;
 };
 
 export type EffectValues = {
-  active: string;
+  active: 'linear' | 'radial' | 'conic' | '' | 'none';
   mirrored: boolean;
   inverted: boolean;
   angle: number;
 };
 
 //interface de estado para o slice de configurações
-export interface SettingsState {
+export interface SettingsSliceState {
   language: Language;
   isMobile: boolean;
   desktopBackgroundDefaultColor: string;

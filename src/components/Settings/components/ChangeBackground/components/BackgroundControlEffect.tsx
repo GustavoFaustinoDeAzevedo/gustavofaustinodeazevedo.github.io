@@ -2,7 +2,7 @@ import { Radio, Slider } from '@components/ui';
 import { EffectValues } from '@/store/slices/settings';
 import { useCallback } from 'react';
 import { SliderData } from '@/components/ui/Slider/SliderItem';
-import { BackgroundPreviewConfig } from './ChangeBackgroundMenu';
+import { BackgroundPreviewConfig } from './BackgroundPreferences';
 
 interface BackgroundControlEffectProps {
   language: string;
