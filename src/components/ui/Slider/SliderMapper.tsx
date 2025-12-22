@@ -17,6 +17,7 @@ type SliderMapData = {
   onTouchEnd?: any;
   inputNumberActive?: boolean[] | boolean | any;
   ignoredList?: string[];
+  onChange?: any;
 };
 
 const SliderMapper = ({
@@ -35,8 +36,8 @@ const SliderMapper = ({
   sliderValuesHandler,
   inputNumberActive,
   ignoredList,
+  onChange,
 }: SliderMapData) => {
-  console.log(sliderObjectData, sliderInitialValues);
   if (sliderObjectData === undefined || sliderInitialValues === undefined)
     return;
 
@@ -70,6 +71,7 @@ const SliderMapper = ({
                   ? ''
                   : sliderObjectData[key].accentColor)
               }
+              onChange={onChange}
               sliderLabelClass={sliderLabelClass}
               inputNumberClass={inputNumberClass}
               index={key}

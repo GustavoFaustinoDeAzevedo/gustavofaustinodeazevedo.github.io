@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  SettingsState,
+  SettingsSliceState,
   Language,
   BackgroundPayload,
+  EffectValues,
+  FilterValues,
 } from './settingsSlice.types';
 import { useIsMobile } from '@/shared';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
@@ -17,24 +19,36 @@ const defaultLanguage: Language = navigatorLanguage.startsWith('pt')
 const defaultBackgroundColor = '#13538A';
 
 const defaultBackgroundColorContrast = '#ffffff';
-const defaultFilterPreset = 'original';
-const defaultFilterValues = {
+const defaultFilterPreset = 'default';
+
+const defaultCustomFilterValues = {
   brightness: 0.9,
   contrast: 1,
   saturation: 0.9,
   grayscale: 0,
   hue: 0,
-  blur: 0.5,
+  blur: 1,
+  invert: 0,
+  sepia: 0,
+};
+const defaultFilterValues = {
+  brightness: 1,
+  contrast: 1,
+  saturation: 1,
+  grayscale: 0,
+  hue: 0,
+  blur: 0,
   invert: 0,
   sepia: 0,
 };
 
-const defaultFilter = {
+const defaultFilter: FilterValues = {
   preset: defaultFilterPreset,
+  custom: defaultCustomFilterValues,
   values: defaultFilterValues,
 };
 
-const defaultEffect = {
+const defaultEffect: EffectValues = {
   active: 'linear',
   mirrored: true,
   inverted: true,
@@ -57,7 +71,7 @@ const viewportHeight = window.innerHeight;
 export const desktopBackgroundInitialImage =
   'images/Wallpapers/winluk06-tree-6147402.jpg'; // `https://picsum.photos/${viewportWidth}/${viewportHeight}`;
 
-const initialState: SettingsState = {
+const initialState: SettingsSliceState = {
   language: defaultLanguage,
   isMobile: isMobile,
   desktopBackgroundDefaultColor: defaultBackgroundColor,

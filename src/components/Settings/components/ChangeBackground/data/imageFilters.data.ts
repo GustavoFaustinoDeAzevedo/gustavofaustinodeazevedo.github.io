@@ -62,8 +62,39 @@ export const imageFilters = {
   por: getImageFilters('por'),
 };
 
+export type FilterValues = {
+  brightness: number;
+  contrast: number;
+  saturation: number;
+  hue: number;
+  grayscale: number;
+  sepia: number;
+  invert: number;
+  blur: number;
+};
+
+export type Preset = {
+  id: string;
+  name: string;
+  values: FilterValues;
+};
+
+export type PresetList = {
+  [Language in 'eng' | 'por']: Preset[];
+};
+
 const presetValues = {
-  original: {
+  custom: {
+    brightness: 1,
+    contrast: 1,
+    saturation: 1,
+    hue: 0,
+    grayscale: 0,
+    sepia: 0,
+    invert: 0,
+    blur: 0,
+  },
+  default: {
     brightness: 1,
     contrast: 1,
     saturation: 1,
@@ -266,6 +297,8 @@ const presetValues = {
 };
 
 const presetNames = {
+  custom: { por: 'Personalizado', eng: 'Custom' },
+  default: { por: 'Padrão', eng: 'Default' },
   vintage: { por: 'Vintage', eng: 'Vintage' },
   neon: { por: 'Neon', eng: 'Neon' },
   ice: { por: 'Frio', eng: 'Cool' },
@@ -287,7 +320,7 @@ const presetNames = {
   clean: { por: 'Limpo', eng: 'Clean' },
 };
 
-export const getPresetList = (lang: Language) => {
+export const getPresetList = (lang: Language): Preset[] => {
   return Object.keys(presetValues).map((id) => ({
     id,
     name: presetNames[id as keyof typeof presetNames]?.[lang] || id,
@@ -295,7 +328,7 @@ export const getPresetList = (lang: Language) => {
   }));
 };
 
-export const presetList = {
+export const presetList: PresetList = {
   por: getPresetList('por'),
   eng: getPresetList('eng'),
 };

@@ -26,7 +26,7 @@ export interface FileNode {
 }
 
 // Estado do slice de arquivos
-export interface FileState {
+export interface FileSliceState {
   instaledApps: FileNode[];
   filesList: FileNode;
   rootPath: string;

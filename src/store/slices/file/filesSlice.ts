@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
-import { FileNode, FileState } from './filesSlice.type';
+import { FileNode, FileSliceState } from './filesSlice.types';
 import instaledAppsData from '@/data/instaledAppsData';
 
 /**
@@ -83,7 +83,7 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
 
 // Slice
 
-const initialState: FileState = {
+const initialState: FileSliceState = {
   instaledApps: instaledAppsData,
   filesList: handleNestedEntities(rootFolder),
   rootPath: 'root/',
