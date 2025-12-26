@@ -3,7 +3,7 @@ import {
   ContactCard,
   MySkills,
   SendMessage,
-} from '@components/portfolio';
+} from '@components/Portfolio';
 import { Language } from '../settings';
 import TaskManager from '@components/TaskManager';
 import BrowserSimulator from '@components/BrowserSimulator';
