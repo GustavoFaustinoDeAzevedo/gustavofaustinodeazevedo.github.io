@@ -1,10 +1,11 @@
 import Icon from '@components/ui/GlobalStyles/components/Icon';
-import { useSeed } from '@/shared/hooks';
 import { leftSideCardLanguage, contactCard } from './ContactCard.data';
-import { Language } from '@/store/slices/settings';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
-const ContactCard = ({ language }: { language: Language }) => {
-  const seed = useSeed('contact-card');
+const ContactCard = () => {
+  const language = useSelector((state: RootState) => state.settings.language);
+  const key = crypto.randomUUID();
 
   return (
     <div className="contact-card__container">
@@ -29,7 +30,7 @@ const ContactCard = ({ language }: { language: Language }) => {
             {contactCard.map(({ icon, text, href }, index) => (
               <li
                 className="contact-card__list-item"
-                key={`${seed}-${text}-${index}`}
+                key={`${key}-${text}-${index}`}
                 aria-label={text}
                 title={text}
               >

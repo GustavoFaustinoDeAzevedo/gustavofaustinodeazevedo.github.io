@@ -1,4 +1,9 @@
-import { AboutMe, ContactCard, MySkills, SendMessage } from '@portfolio';
+import {
+  AboutMe,
+  ContactCard,
+  MySkills,
+  SendMessage,
+} from '@components/portfolio';
 import { Language } from '../settings';
 import TaskManager from '@components/TaskManager';
 import BrowserSimulator from '@components/BrowserSimulator';
@@ -6,6 +11,7 @@ import { BackgroundPreferences } from '@components/Settings';
 import Calculator from '@apps/Calculator';
 import Notepad from '@apps/Notepad';
 import ConsoleCommand from '@components/ConsoleCommand';
+import DevMenu from '@/components/DevMenu';
 
 export const returnWindowContent = (
   contentId: string,
@@ -27,11 +33,12 @@ export const returnWindowContent = (
 ) => {
   try {
     const map = {
-      about: () => <AboutMe language={language} />,
-      skills: () => <MySkills language={language} />,
-      sendMessage: () => <SendMessage language={language} />,
-      contact: () => <ContactCard language={language} />,
-      cmd: () => <ConsoleCommand language={language}>Test</ConsoleCommand>,
+      devMenu: () => <DevMenu />,
+      about: () => <AboutMe />,
+      skills: () => <MySkills />,
+      sendMessage: () => <SendMessage />,
+      contact: () => <ContactCard />,
+      cmd: () => <ConsoleCommand />,
       'task-manager': () => (
         <TaskManager
           handleUpdateWindow={windowActions?.handleUpdateWindow}
@@ -40,10 +47,8 @@ export const returnWindowContent = (
       ),
       browser: () => <BrowserSimulator />,
       github: () => <BrowserSimulator src={src} />,
-      'background-color-picker': () => (
-        <BackgroundPreferences language={language} />
-      ),
-      'change-background': () => <BackgroundPreferences language={language} />,
+      'background-color-picker': () => <BackgroundPreferences />,
+      'change-background': () => <BackgroundPreferences />,
       calculator: () => <Calculator />,
       notepad: () => <Notepad />,
     };

@@ -1,4 +1,4 @@
-export { stringLimiter, exceedsCharLimit } from './utils';
+export { stringLimiter, exceedsCharLimit, isLocalHost } from './utils';
 export {
   useSeed,
   usePrev,

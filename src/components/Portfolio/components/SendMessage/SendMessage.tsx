@@ -3,8 +3,10 @@ import AnimatedInput from '@window/components/AnimatedInput';
 import { Language } from '@/store/slices/settings';
 import formData from './SendMessage.data';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
-const SendMessage = ({ language }: { language: Language }) => {
+const SendMessage = () => {
+  const language = useSelector((state: RootState) => state.settings.language);
   const formDataTranslated = formData[language];
   const fields = [
     {
