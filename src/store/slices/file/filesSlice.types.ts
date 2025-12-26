@@ -10,6 +10,7 @@ export interface FileNode {
     eng: string;
     por: string;
   };
+  permission?: string;
   nodeDepth?: number;
   type?: 'folder' | 'app' | 'text' | 'file';
   icon?: string;

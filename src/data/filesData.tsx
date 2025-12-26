@@ -1,28 +1,9 @@
 //Este arquivo contém a estrutura do sistema de arquivos, incluindo pastas e arquivos com suas respectivas propriedades.
 //É usado para preencher o File Explorer e gerenciar o sistema de arquivos no aplicativo.
 
-type LanguageTitle = { eng: string; por: string };
+import { FileNode } from '@/store/slices/file';
 
-export interface FileNode {
-  fileId: string;
-  title: LanguageTitle;
-  icon?: string;
-  type?: 'folder' | 'app' | 'text' | 'file';
-  initialStates?: Record<string, boolean>;
-  initialDimensions?: {
-    width: string | '1000px';
-    height: string | '600px;';
-  };
-  children?: FileNode[];
-  content?: any;
-  nodeDepth?: number;
-  isUnique?: boolean;
-  windowMask?: {
-    src: string;
-    title: LanguageTitle;
-    icon: string;
-  };
-}
+type LanguageTitle = { eng: string; por: string };
 
 export const rootFolder: FileNode = {
   fileId: 'root',
@@ -49,6 +30,14 @@ export const rootFolder: FileNode = {
               icon: 'desktop',
               type: 'folder',
               children: [
+                {
+                  fileId: 'devMenu',
+                  title: { eng: 'Dev Menu', por: 'Menu de Desenvolvedor' },
+                  icon: '',
+                  type: 'app',
+                  initialDimensions: { width: '400px', height: '500px' },
+                  permission: 'admin',
+                },
                 {
                   fileId: 'about',
                   title: { eng: 'About Me', por: 'Sobre Mim' },

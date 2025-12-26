@@ -1,6 +1,10 @@
+import { RootState } from '@/store';
 import skillsContent, { Skills } from './MySkills.data';
+import { useSelector } from 'react-redux';
 
-const MySkills = ({ language }: { language: string }) => {
+const MySkills = () => {
+  const language = useSelector((state: RootState) => state.settings.language);
+
   const selected = skillsContent?.[
     language as keyof typeof skillsContent
   ] as Skills;

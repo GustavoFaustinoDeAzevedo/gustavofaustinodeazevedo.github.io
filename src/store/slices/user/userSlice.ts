@@ -3,6 +3,8 @@
 import User from '@/store/utils/db.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FileNode } from '../file';
+import { loadUser } from '@store/actions';
+import { remove } from 'dexie';
 
 type UserSliceState = {
   users: User[];
@@ -13,8 +15,9 @@ const usersInitialState: User[] = [
     id: 1,
     name: 'Admin',
     config: {
+      apps: [''],
       window: {
-        windowList: [],
+        openedWindowList: [],
         focusedWindow: null,
         history: [],
       },
@@ -32,8 +35,8 @@ const usersInitialState: User[] = [
           inverted: false,
         },
         desktopBackgroundFilter: {
-          preset: 'Initial',
-          values: {
+          preset: 'custom',
+          custom: {
             brightness: 0.9,
             contrast: 1,
             saturation: 0.9,
@@ -43,9 +46,20 @@ const usersInitialState: User[] = [
             invert: 0,
             sepia: 0,
           },
+          values: {
+            brightness: 1,
+            contrast: 1,
+            saturation: 1,
+            grayscale: 0,
+            hue: 0,
+            blur: 0,
+            invert: 0,
+            sepia: 0,
+          },
         },
+        desktopBackgroundImage: '',
+        isBackgroundImage: false,
       },
-      apps: {},
       permission: 'admin',
     },
   },
@@ -79,28 +93,29 @@ export const fileSlice = createSlice({
   name: 'file',
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<{ newUser: User }>) => {
-      const { newFileData, currentNode, nodeDepth } = action.payload;
-      // updateChildrenById(state.filesList, currentNode, newFileData, nodeDepth);
+    addUser: (state, action) => {
+      state.users = [...state.users, action.payload];
     },
 
-    removeFile: (state, action: PayloadAction<{ fileId: string }>) => {
-      const removeById = (node: FileNode, fileId: string) => {
-        node.children = node.children?.filter(
-          (child) => child.fileId !== fileId
-        );
-        node.children?.forEach((child) => removeById(child, fileId));
-      };
-      removeById(state.filesList, action.payload.fileId);
+    loadUsers: (state, action) => {
+      state.users = action.payload;
     },
 
-    sortFiles: (state) => {
-      const children = state.filesList.children ?? [];
-      state.filesList.children = toggleSort(children, state.sort);
-      state.sort = state.sort === 'asc' ? 'desc' : 'asc';
+    updateUser: (state, action) => {
+      const userIndex = state.users.findIndex(
+        (user) => user.id === action.payload.id
+      );
+      state.users[userIndex] = action.payload;
+    },
+
+    removeUser: (state, action) => {
+      const userIndex = state.users.findIndex(
+        (user) => user.id === action.payload
+      );
+      state.users.splice(userIndex, 1);
     },
   },
 });
 
-export const { addFile, removeFile, sortFiles } = fileSlice.actions;
+export const { addUser, loadUsers, updateUser, removeUser } = fileSlice.actions;
 export default fileSlice.reducer;

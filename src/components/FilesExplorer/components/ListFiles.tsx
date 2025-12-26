@@ -5,7 +5,7 @@ import { FileNode } from '@/store/slices/file';
 import { Language } from '@/store/slices/settings';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { useIsMobile } from '@/shared';
+import { isLocalHost, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { filter } from 'mathjs';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
@@ -43,19 +43,20 @@ const ListFiles = ({
   };
 
   const childrenFiltered = (() => {
-    if (!filters || filters.length === 0) return children;
+    if (!filters) return children;
 
-    let filtersArray = filters as string[];
-    if (!Array.isArray(filters)) {
-      filtersArray = [filters as string].map((f) => f.trim());
-    }
-    return children.filter((item) =>
-      filtersArray.every((filter: string) =>
-        stringNormalizer(item.title[language]).includes(
-          stringNormalizer(filter)
-        )
-      )
-    );
+    const filtersArray = (Array.isArray(filters) ? filters : [filters])
+      .map((f) => String(f).trim())
+      .filter(Boolean)
+      .map(stringNormalizer);
+
+    if (filtersArray.length === 0) return children;
+
+    return children.filter((item) => {
+      const title = String(item?.title?.[language] ?? '');
+      const normTitle = stringNormalizer(title);
+      return filtersArray.every((filter) => normTitle.includes(filter));
+    });
   })();
 
   const isDoubleClick =
@@ -79,10 +80,16 @@ const ListFiles = ({
             children,
             nodeDepth,
             initialDimensions,
+            permission,
           },
           windowIndex
         ) => {
-          if (fileId === undefined || fileId === null) return null;
+          if (
+            fileId === undefined ||
+            fileId === null ||
+            (permission === 'admin' && !isLocalHost)
+          )
+            return null;
           const finalIcon =
             icon ??
             typeToIcon[type as keyof typeof typeToIcon] ??

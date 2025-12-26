@@ -22,7 +22,7 @@ export interface BackgroundPreviewConfig {
   filters: FilterValues;
 }
 
-const BackgroundPreferences = ({ language }: { language: Language }) => {
+const BackgroundPreferences = () => {
   // Valores armazenados no redux ==========================================
 
   const storedDesktopBackgroundColor = useSelector(
@@ -45,6 +45,8 @@ const BackgroundPreferences = ({ language }: { language: Language }) => {
   const storedDesktopBackgroundFilters = useSelector(
     (state: RootState) => state.settings.desktopBackgroundFilter
   );
+
+  const language = useSelector((state: RootState) => state.settings.language);
 
   // useState ==============================================================
 
