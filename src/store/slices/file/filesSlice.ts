@@ -4,7 +4,7 @@ import { FileNode, FileSliceState } from './filesSlice.types';
 import instaledAppsData from '@/data/instaledAppsData';
 
 /**
- * Adiciona um novo arquivo em node.children, garantindo que o mais recente
+ * Adiciona um novo arquivo em node.content, garantindo que o mais recente
  * o arquivo adicionado é colocado em penúltimo lugar quando há dois ou mais filhos.
  */
 const newFile = (
@@ -12,18 +12,18 @@ const newFile = (
   fileToBeAdded: FileNode,
   nodeDepth: number
 ): FileNode[] => {
-  const children = [...(node.children ?? []), { ...fileToBeAdded, nodeDepth }];
+  const content = [...(node.content ?? []), { ...fileToBeAdded, nodeDepth }];
 
-  if (children.length >= 2) {
-    const lastIndex = children.length - 1;
-    const secondLastIndex = children.length - 2;
-    [children[secondLastIndex], children[lastIndex]] = [
-      children[lastIndex],
-      children[secondLastIndex],
+  if (content.length >= 2) {
+    const lastIndex = content.length - 1;
+    const secondLastIndex = content.length - 2;
+    [content[secondLastIndex], content[lastIndex]] = [
+      content[lastIndex],
+      content[secondLastIndex],
     ];
   }
 
-  return children;
+  return content;
 };
 
 /**
@@ -41,8 +41,8 @@ export const findByPath = (root: FileNode, path: string): FileNode | null => {
   let current: FileNode | undefined = root;
 
   for (const part of parts) {
-    if (!current || !current.children) return null;
-    current = current.children.find((child) => child.fileId === part);
+    if (!current || !current.content) return null;
+    current = current.content.find((child) => child.fileId === part);
   }
 
   return current ?? null;
@@ -71,21 +71,25 @@ const toggleSort = (files: FileNode[], sortType: string): FileNode[] => {
  * Atribui recursivamente nodeDepth para cada nó com base em sua profundidade na árvore.
  */
 const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
-  const children = obj.children?.map((file) => {
+  const content = obj.content?.map((file) => {
     const current = { ...file, nodeDepth: nodeDepth + 1 };
-    return file.children
+    return file.content
       ? handleNestedEntities(current, nodeDepth + 1)
       : current;
   });
 
-  return { ...obj, nodeDepth, children };
+  return { ...obj, nodeDepth, content };
 };
+
+
+
+const filesList = handleNestedEntities(rootFolder);
 
 // Slice
 
 const initialState: FileSliceState = {
   instaledApps: instaledAppsData,
-  filesList: handleNestedEntities(rootFolder),
+  filesList: filesList,
   rootPath: 'root/',
   desktopPath: 'root/users/guests/desktop',
   sort: 'asc',
@@ -104,22 +108,21 @@ export const fileSlice = createSlice({
       }>
     ) => {
       const { newFileData, currentNode, nodeDepth } = action.payload;
-      // updateChildrenById(state.filesList, currentNode, newFileData, nodeDepth);
     },
 
     removeFile: (state, action: PayloadAction<{ fileId: string }>) => {
       const removeById = (node: FileNode, fileId: string) => {
-        node.children = node.children?.filter(
+        node.content = node.content?.filter(
           (child) => child.fileId !== fileId
         );
-        node.children?.forEach((child) => removeById(child, fileId));
+        node.content?.forEach((child) => removeById(child, fileId));
       };
       removeById(state.filesList, action.payload.fileId);
     },
 
     sortFiles: (state) => {
-      const children = state.filesList.children ?? [];
-      state.filesList.children = toggleSort(children, state.sort);
+      const content = state.filesList.content ?? [];
+      state.filesList.content = toggleSort(content, state.sort);
       state.sort = state.sort === 'asc' ? 'desc' : 'asc';
     },
   },

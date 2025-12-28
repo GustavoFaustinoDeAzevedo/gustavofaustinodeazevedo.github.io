@@ -3,7 +3,7 @@ import Button from '@ui/Button';
 import { useCallback, useState } from 'react';
 import actions from '@/store/actions';
 
-const TaskManager = ({ handleUpdateWindow, language }) => {
+const TaskManager = () => {
   const taskList = useSelector((state) => state.window.openedWindowList);
   const [selectedTask, setSelectedTask] = useState(null);
 

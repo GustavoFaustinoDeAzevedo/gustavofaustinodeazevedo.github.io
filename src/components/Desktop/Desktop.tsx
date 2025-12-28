@@ -7,10 +7,7 @@ import { findByPath } from '@/store/slices/file/filesSlice';
 
 const Desktop = () => {
   const root = useSelector((state: RootState) => state.file.filesList);
-  const { language } = useSelector((state: RootState) => state.settings);
-  const children = findByPath(root, 'users/guests/desktop')?.children ?? [];
-  console.log(children);
-  // rootFolder.children?.[0]?.children?.[0]?.children?.[0]?.children ?? [];
+  const content = findByPath(root, 'users/guests/desktop')?.content ?? [];
 
   return useMemo(
     () => (
@@ -20,12 +17,11 @@ const Desktop = () => {
           currentNode={'desktop'}
           className={'desktop-files__wrapper'}
           openMode={'window'}
-          language={language}
-          children={children}
+          content={content}
         />
       </div>
     ),
-    [language]
+    [content]
   );
 };
 

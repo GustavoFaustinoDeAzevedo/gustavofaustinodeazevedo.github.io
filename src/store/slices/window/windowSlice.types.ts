@@ -53,7 +53,7 @@ export interface WindowNode {
   type?: string;
   content?: any;
   src?: string;
-  children?: FileNode[];
+  content?: FileNode[];
   position?: Position;
   size?: Size;
   windowState?: WindowState;

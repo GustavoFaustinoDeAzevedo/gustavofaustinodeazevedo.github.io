@@ -1,7 +1,7 @@
 import { ListFiles } from '@components/FilesExplorer';
 import { StylesConfig } from '@components/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
 import Icon from '@components/ui/GlobalStyles/components/Icon';
-import { FileNode } from '@/data/filesData';
+import { FileNode } from '@/store/slices/file';
 import { WindowData } from '@/store/actions/useWindowActions';
 import { Language } from '@/store/slices/settings';
 import { Title } from '@/store/slices/window';
@@ -38,7 +38,7 @@ const StartMenuMain = ({
           className={'start-menu__list'}
           openMode={'window'}
           language={language}
-          children={installedApps}
+          content={installedApps}
           doubleClickToOpen={false}
           stylesConfig={stylesConfig}
           filters={searchAppValue}

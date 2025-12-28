@@ -73,10 +73,10 @@ export const newFile = (
   node: FileNode,
   fileToBeAdded: FileNode
 ): FileNode[] => {
-  const children = node.children ?? [];
-  if (children.length < 2) return [...children, fileToBeAdded];
+  const content = node.content ?? [];
+  if (content.length < 2) return [...content, fileToBeAdded];
 
-  return [children[0], fileToBeAdded, ...children.slice(1)];
+  return [content[0], fileToBeAdded, ...content.slice(1)];
 };
 
 /**
@@ -88,8 +88,8 @@ export const newFile = (
 export const findNode = (obj: FileNode, targetId: string): FileNode | null => {
   if (obj.windowId === targetId) return obj;
 
-  if (obj.children) {
-    for (let child of obj.children) {
+  if (obj.content) {
+    for (let child of obj.content) {
       const result = findNode(child, targetId);
       if (result) return result;
     }
@@ -105,8 +105,8 @@ export const findPath = (
 ): string[] | undefined => {
   if (obj.windowId === targetId) return path;
 
-  if (obj.children) {
-    for (let child of obj.children) {
+  if (obj.content) {
+    for (let child of obj.content) {
       const result = findPath(child, targetId, [
         ...(path as any),
         obj.windowId as any,
@@ -131,22 +131,3 @@ export const focusWindow = (state: WindowSliceState, windowId: string) => {
     foundWindow.windowState.requests.focus = false;
   }
 };
-
-// export const returnWindowContent = ({
-//   windowId,
-//   language,
-//   src,
-//   type,
-//   windowActions,
-//   children,
-// }: {
-//   windowId?: string;
-//   language: Language;
-//   src?: string;
-//   type?: string;
-//   windowActions?: any;
-//   children?: any;
-// }) => {
-
-//   return map[contentId]?.()
-// };

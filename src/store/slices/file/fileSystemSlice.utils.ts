@@ -17,7 +17,7 @@ export const duplicateNode = (
       por: `${source.title.por} (cópia)`,
     },
     parentId: targetFolderId,
-    children: source.children ? [...source.children] : undefined,
+    content: source.content ? [...source.content] : undefined,
   };
 
   return {
@@ -25,7 +25,7 @@ export const duplicateNode = (
     [newId]: newNode,
     [targetFolderId]: {
       ...target,
-      children: [...(target.children ?? []), newId],
+      content: [...(target.content ?? []), newId],
     },
   };
 };
@@ -45,11 +45,11 @@ export const getParent = (nodeIndex: Record<string, any>, fileId: string) => {
   return nodeIndex[node.parentId] ?? null;
 };
 
-export const getChildren = (
+export const getContent = (
   nodeIndex: Record<string, any>,
   folderId: string
 ) => {
   const folder = nodeIndex[folderId];
-  if (!folder || folder.type !== 'folder' || !folder.children) return [];
-  return folder.children.map((id: string) => nodeIndex[id]).filter(Boolean);
+  if (!folder || folder.type !== 'folder' || !folder.content) return [];
+  return folder.content.map((id: string) => nodeIndex[id]).filter(Boolean);
 };

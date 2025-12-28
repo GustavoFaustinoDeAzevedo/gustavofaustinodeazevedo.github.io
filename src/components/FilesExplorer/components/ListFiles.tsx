@@ -1,20 +1,17 @@
 import SystemFile from './SystemFile';
-import handleOpenFile, { HandleOpenFileProps } from '../utils/handleOpenFile';
+import handleOpenFile from '../utils/handleOpenFile';
 import actions from '@/store/actions';
 import { FileNode } from '@/store/slices/file';
-import { Language } from '@/store/slices/settings';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { isLocalHost, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
-import { filter } from 'mathjs';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
 
 type ListFilesProps = {
   handleGlobalClick?: () => void;
   currentNode: string;
-  language: Language;
-  children: FileNode[];
+  content?: FileNode[];
   className?: string;
   stylesConfig?: StylesConfig;
   openMode?: string;
@@ -26,8 +23,7 @@ type ListFilesProps = {
 const ListFiles = ({
   handleGlobalClick,
   currentNode,
-  language,
-  children,
+  content,
   className = '',
   stylesConfig,
   openMode,
@@ -35,24 +31,30 @@ const ListFiles = ({
   filters,
   doubleClickToOpen,
 }: ListFilesProps) => {
-  if (children === undefined || children?.length < 0) return;
+  if (content === undefined || content?.length < 0) return;
+
+  // redux state
+  const language = useSelector((state: RootState) => state?.settings.language);
+
+  // window actions
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
     app: 'html-file',
   };
 
-  const childrenFiltered = (() => {
-    if (!filters) return children;
+  // contantes
+  const contentFiltered = (() => {
+    if (!filters) return content;
 
     const filtersArray = (Array.isArray(filters) ? filters : [filters])
       .map((f) => String(f).trim())
       .filter(Boolean)
       .map(stringNormalizer);
 
-    if (filtersArray.length === 0) return children;
+    if (filtersArray.length === 0) return content;
 
-    return children.filter((item) => {
+    return content.filter((item: FileNode) => {
       const title = String(item?.title?.[language] ?? '');
       const normTitle = stringNormalizer(title);
       return filtersArray.every((filter) => normTitle.includes(filter));
@@ -65,82 +67,79 @@ const ListFiles = ({
 
   const isMobile = useIsMobile();
 
-  return (
-    <ul className={className ?? 'files-container'}>
-      {childrenFiltered?.map(
-        (
-          {
-            fileId,
-            title,
-            icon,
-            type,
-            windowMask,
-            isUnique,
-            initialStates,
-            children,
-            nodeDepth,
-            initialDimensions,
-            permission,
-          },
-          windowIndex
-        ) => {
-          if (
-            fileId === undefined ||
-            fileId === null ||
-            (permission === 'admin' && !isLocalHost)
-          )
-            return null;
-          const finalIcon =
-            icon ??
-            typeToIcon[type as keyof typeof typeToIcon] ??
-            'window-icon';
-          const iconTitle = language === 'por' ? title?.por : title?.eng;
-          const windowTitle = windowMask?.title ?? title;
+  // jsx
+  const mapContent = contentFiltered?.map(
+    (
+      {
+        fileId,
+        title,
+        icon,
+        type,
+        windowMask,
+        isUnique,
+        initialStates,
+        content,
+        nodeDepth,
+        initialDimensions,
+        permission,
+      }: FileNode,
+      windowIndex: number
+    ) => {
+      if (
+        fileId === undefined ||
+        fileId === null ||
+        !isLocalHost // TODO: trocar por permissão do usuário
+      )
+        return null;
+      const finalIcon =
+        icon ?? typeToIcon[type as keyof typeof typeToIcon] ?? 'window-icon';
+      const iconTitle = language === 'por' ? title?.por : title?.eng;
+      const windowTitle = windowMask?.title ?? title;
 
-          const windowIcon =
-            windowMask?.icon ??
-            icon ??
-            typeToIcon[type as keyof typeof typeToIcon] ??
-            'window-icon';
-          const src = windowMask?.src ?? '';
+      const windowIcon =
+        windowMask?.icon ??
+        icon ??
+        typeToIcon[type as keyof typeof typeToIcon] ??
+        'window-icon';
+      const src = windowMask?.src ?? '';
 
-          const handleClick = () => {
-            handleGlobalClick?.();
-            handleOpenFile({
-              fileId,
-              currentNode,
-              windowTitle,
-              windowIcon,
-              openMode,
-              src,
-              isUnique,
-              initialStates,
-              children,
-              type,
-              nodeType,
-              initialDimensions,
-              nodeDepth,
-              handleUpdateWindow,
-              handleOpenWindow,
-            });
-          };
+      const handleClick = () => {
+        handleGlobalClick?.();
+        handleOpenFile({
+          fileId,
+          currentNode,
+          windowTitle,
+          windowIcon,
+          openMode,
+          src,
+          isUnique,
+          initialStates,
+          content,
+          type,
+          nodeType,
+          initialDimensions,
+          nodeDepth,
+          handleUpdateWindow,
+          handleOpenWindow,
+        });
+      };
 
-          return (
-            <SystemFile
-              key={`file-${fileId}-${windowIndex}`}
-              fileId={fileId}
-              title={iconTitle}
-              icon={finalIcon}
-              stylesConfig={stylesConfig}
-              isDoubleClick={isDoubleClick}
-              isMobile={isMobile}
-              onClick={handleClick}
-            />
-          );
-        }
-      )}
-    </ul>
+      return (
+        <SystemFile
+          key={`file-${fileId}-${windowIndex}`}
+          fileId={fileId}
+          title={iconTitle}
+          icon={finalIcon}
+          stylesConfig={stylesConfig}
+          isDoubleClick={isDoubleClick}
+          isMobile={isMobile}
+          onClick={handleClick}
+        />
+      );
+    }
   );
+
+  return <ul className={className ?? 'files-container'}>{mapContent}</ul>;
 };
 
 export default ListFiles;

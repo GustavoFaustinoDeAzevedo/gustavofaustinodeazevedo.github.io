@@ -21,7 +21,7 @@ const BaseLink = styled.a`
   }
 `;
 
-export function SmartLink({ href, onClick, children, ...rest }) {
+const SmartLink = ({ href, onClick, children, ...rest }) => {
   const isLink = !!href;
 
   return (
@@ -35,4 +35,4 @@ export function SmartLink({ href, onClick, children, ...rest }) {
       {children}
     </BaseLink>
   );
-}
+};

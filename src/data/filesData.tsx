@@ -3,40 +3,38 @@
 
 import { FileNode } from '@/store/slices/file';
 
-type LanguageTitle = { eng: string; por: string };
-
 export const rootFolder: FileNode = {
   fileId: 'root',
   nodeDepth: 0,
   title: { eng: 'C:', por: 'C:' },
   icon: 'folder',
   type: 'folder',
-  children: [
+  content: [
     {
       fileId: 'users',
       title: { eng: 'Users', por: 'Usuários' },
       icon: 'users',
       type: 'folder',
-      children: [
+      content: [
         {
           fileId: 'guests',
           title: { eng: 'Guest', por: 'Convidado' },
           icon: 'user',
           type: 'folder',
-          children: [
+          content: [
             {
               fileId: 'desktop',
               title: { eng: 'Desktop', por: 'Área de Trabalho' },
               icon: 'desktop',
               type: 'folder',
-              children: [
+              content: [
                 {
                   fileId: 'devMenu',
                   title: { eng: 'Dev Menu', por: 'Menu de Desenvolvedor' },
                   icon: '',
                   type: 'app',
                   initialDimensions: { width: '400px', height: '500px' },
-                  permission: 'admin',
+                  
                 },
                 {
                   fileId: 'about',
@@ -44,6 +42,7 @@ export const rootFolder: FileNode = {
                   icon: 'about',
                   type: 'text',
                   initialDimensions: { width: '650px', height: '600px' },
+
                 },
                 //temporariamente inativo
                 // {
@@ -54,7 +53,7 @@ export const rootFolder: FileNode = {
                 //   },
                 //   icon: 'folder',
                 //   type: 'folder',
-                //   children: [
+                //   content: [
                 //     {
                 //       fileId: 'calculator',
                 //       title: { eng: 'Calculator', por: 'Calculadora' },
@@ -325,7 +324,7 @@ export const placeholder: FileNode = {
   title: { eng: 'placeholder', por: 'placeholder' },
   icon: 'folder',
   type: 'folder',
-  children: [
+  content: [
     { fileId: 'new', title: { eng: 'New', por: 'Novo' }, icon: 'plus-circle' },
   ],
 };

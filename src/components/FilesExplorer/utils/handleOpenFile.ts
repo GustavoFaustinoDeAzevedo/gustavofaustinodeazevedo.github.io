@@ -15,7 +15,7 @@ export interface HandleOpenFileProps {
   type?: string;
   nodeType: string;
   nodeDepth?: number;
-  children?: FileNode[];
+  content?: FileNode[];
   isUnique?: boolean;
   handleOpenWindow: any;
   handleUpdateWindow: any;
@@ -31,7 +31,7 @@ export const handleOpenFile = ({
   isUnique = false,
   initialStates,
   openMode,
-  children,
+  content,
   type,
   nodeType,
   nodeDepth,
@@ -49,7 +49,7 @@ export const handleOpenFile = ({
         title: windowTitle,
         icon: windowIcon,
         src,
-        children,
+        content,
         isUnique,
         isRequestingMaximize: initialStates?.maximized,
         type,
@@ -64,7 +64,7 @@ export const handleOpenFile = ({
         title: windowTitle,
         icon: windowIcon,
         src,
-        children,
+        content,
         isUnique,
         type,
         nodeDepth,

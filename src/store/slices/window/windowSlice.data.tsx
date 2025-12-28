@@ -3,7 +3,7 @@ import {
   ContactCard,
   MySkills,
   SendMessage,
-} from '@components/portfolio';
+} from '@components/Portfolio';
 import { Language } from '../settings';
 import TaskManager from '@components/TaskManager';
 import BrowserSimulator from '@components/BrowserSimulator';
@@ -17,18 +17,14 @@ export const returnWindowContent = (
   contentId: string,
   {
     windowId,
-    language,
     src,
     type,
-    windowActions,
-    children,
+    content,
   }: {
     windowId?: string;
-    language: Language;
     src?: string;
     type?: string;
-    windowActions?: any;
-    children?: any;
+    content?: any;
   }
 ) => {
   try {
@@ -40,10 +36,7 @@ export const returnWindowContent = (
       contact: () => <ContactCard />,
       cmd: () => <ConsoleCommand />,
       'task-manager': () => (
-        <TaskManager
-          handleUpdateWindow={windowActions?.handleUpdateWindow}
-          language={language}
-        />
+        <TaskManager  />
       ),
       browser: () => <BrowserSimulator />,
       github: () => <BrowserSimulator src={src} />,

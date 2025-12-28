@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import nodeIndex, { FileNodeIndex } from '@/data/nodeIndex';
+import nodeIndex from '@data/filesData';
+
 
 type Node = {
   fileId: string;
@@ -7,7 +8,7 @@ type Node = {
   icon?: string;
   type: string;
   parentId?: string;
-  children?: string[];
+  content?: string[];
   initialDimensions?: { width: string; height: string };
   isUnique?: boolean;
 };

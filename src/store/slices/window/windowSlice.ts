@@ -49,12 +49,11 @@ const windowSlice = createSlice({
         title,
         icon,
         src,
-        children = [],
+        content = [],
         type,
         nodeDepth,
         isUnique,
         isRequestingMaximize = false,
-        content,
         windowType = 'window',
         initialDimensions,
         helpContent = null,
@@ -117,7 +116,6 @@ const windowSlice = createSlice({
         zIndex: getNextZIndex(state),
         type,
         src,
-        children,
         content,
         initialDimensions,
         windowType,
@@ -168,7 +166,6 @@ const windowSlice = createSlice({
         minimized,
         maximized,
         focused,
-        children,
         content,
         isRequestingOpen,
         isRequestingRestore,
@@ -200,11 +197,10 @@ const windowSlice = createSlice({
         icon,
         currentNode,
         nodeDepth,
-        children:
+        content:
           currentWindow[currentNode] !== currentNode
-            ? newFile(currentWindow, children)
-            : children,
-        content,
+            ? newFile(currentWindow, content)
+            : content,
       });
 
       state.openedWindowList[winIndex].position = updateStateIfDefined(

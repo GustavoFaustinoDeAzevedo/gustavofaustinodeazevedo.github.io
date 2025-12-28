@@ -210,22 +210,20 @@
     z-index: 0;
   }
 
+  /* Estilização da barra de rolagem */
 
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     visibility: hidden;
-
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: var(--color-background-4) !important;
-    border-radius: 0px !important;
+    border-radius: 5px !important;
     transition: background-color 0.4s ease;
     cursor: initial;
   }

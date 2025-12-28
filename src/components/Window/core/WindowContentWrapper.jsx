@@ -6,7 +6,7 @@ const WindowContentWrapper = ({
   isOpened,
   windowId,
   currentNode,
-  children,
+  content,
   windowHandlers,
   language,
   windowList,
@@ -19,7 +19,7 @@ const WindowContentWrapper = ({
       windowId={windowId}
       currentNode={currentNode}
       src={src}
-      children={children ?? {}}
+      content={content ?? {}}
       windowActions={windowHandlers}
       type={type}
       language={language}

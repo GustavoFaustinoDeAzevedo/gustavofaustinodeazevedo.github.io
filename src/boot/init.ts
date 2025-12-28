@@ -1,19 +1,16 @@
 // boot/init.ts
-import { useSystemStore } from '../store/systemStore';
-import { appsRegistry } from '../registry/apps';
-import { FsNode } from '../types/system';
+
+import { FileNode } from '@/store/slices/file';
 
 export function boot() {
-  const setApps = useSystemStore.setState;
-  const setFs = useSystemStore.setState;
 
   setApps((s) => ({ apps: appsRegistry }));
 
-  const desktop: FsNode = {
+  const desktop: FileNode = {
     id: 'desktop',
     name: 'Desktop',
     type: 'folder',
-    children: [
+    content: [
       { id: 'shortcut-notepad', name: 'Notepad', type: 'app-shortcut', targetAppId: 'notepad' },
       { id: 'shortcut-about', name: 'Sobre', type: 'app-shortcut', targetAppId: 'about' },
     ],
