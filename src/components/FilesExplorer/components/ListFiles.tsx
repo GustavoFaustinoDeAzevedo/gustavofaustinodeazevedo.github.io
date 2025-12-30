@@ -87,8 +87,8 @@ const ListFiles = ({
     ) => {
       if (
         fileId === undefined ||
-        fileId === null ||
-        !isLocalHost // TODO: trocar por permissão do usuário
+        fileId === null
+        //!isLocalHost // TODO: trocar por permissão do usuário
       )
         return null;
       const finalIcon =

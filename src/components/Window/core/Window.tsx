@@ -12,19 +12,21 @@ import { UseWindowLifecycleProps } from '../types/hooks.types';
 
 gsap.registerPlugin(useGSAP);
 
+type WindowHandlers = {
+  updateWindowState: (updates: any) => void;
+  handleClose: () => void;
+  handleFocus: () => void;
+  handleRequestClose?: () => void;
+  handleRequestMinimize?: () => void;
+  handleRequestMaximize?: () => void;
+  handleRequestRestore?: () => void;
+  handleResetFocus?: () => void;
+  handleRequestFocus?: () => void;
+};
+
 type WindowProps = {
   windowParams: any;
-  windowHandlers: {
-    updateWindowState: (updates: any) => void;
-    handleClose: () => void;
-    handleFocus: () => void;
-    handleRequestClose?: () => void;
-    handleRequestMinimize?: () => void;
-    handleRequestMaximize?: () => void;
-    handleRequestRestore?: () => void;
-    handleResetFocus?: () => void;
-    handleRequestFocus?: () => void;
-  };
+  windowHandlers: WindowHandlers;
   desktopRef: React.RefObject<HTMLDivElement | null>;
   filesActions: any;
   isMobile: boolean;
