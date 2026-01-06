@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import nodeIndex from '@data/filesData';
 
-
 type Node = {
   fileId: string;
   title: { eng: string; por: string };
@@ -42,15 +41,9 @@ export const fileSystemSlice = createSlice({
 
     deleteNode: (state, action /*nodeId: string*/) => {},
 
-    moveNode: (
-      state,
-      action /*nodeId: string, targetFolderId: string*/
-    ) => {},
+    moveNode: (state, action /*nodeId: string, targetFolderId: string*/) => {},
 
-    renameNode: (
-      state,
-      action /*nodeId: string, newTitle: string*/
-    ) => {},
+    renameNode: (state, action /*nodeId: string, newTitle: string*/) => {},
 
     duplicateNode: (
       state,
@@ -64,15 +57,9 @@ export const fileSystemSlice = createSlice({
 
     // Buscas e indexação
 
-    setNodeIndex: (
-      state,
-      action /*index: Record<string, Node>*/
-    ) => {},
+    setNodeIndex: (state, action /*index: Record<string, Node>*/) => {},
 
-    mergeNodeIndex: (
-      state,
-      action /*index: Record<string, Node>*/
-    ) => {},
+    mergeNodeIndex: (state, action /*index: Record<string, Node>*/) => {},
 
     // Outros
 
