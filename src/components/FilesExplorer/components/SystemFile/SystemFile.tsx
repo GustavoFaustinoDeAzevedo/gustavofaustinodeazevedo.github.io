@@ -22,7 +22,7 @@ const defaultProps: StylesConfig = {
     enableBorder: true,
     enableTextShadow: true,
     enableBorderRadius: true,
-    enableTransform: true,
+    enableTransform: false,
     enableSmoothTransition: true,
   },
 };

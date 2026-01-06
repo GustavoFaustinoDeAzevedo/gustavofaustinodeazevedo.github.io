@@ -1,5 +1,8 @@
-//Este arquivo contém a estrutura do sistema de arquivos, incluindo pastas e arquivos com suas respectivas propriedades.
+//Este arquivo contém a estrutura do sistema de arquivos inicial, incluindo pastas e arquivos 
+// com suas respectivas propriedades.
 //É usado para preencher o File Explorer e gerenciar o sistema de arquivos no aplicativo.
+//No futuro esse arquivo não existirá mais e, inicialmente, o sistema criará um sistema de arquivos vazio e o 
+// usuário poderá adicionar arquivos/pastas.
 
 import { FileNode } from '@/store/slices/file';
 
