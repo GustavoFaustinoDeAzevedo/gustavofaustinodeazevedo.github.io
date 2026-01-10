@@ -3,6 +3,7 @@ import actions from '@/store/actions';
 import { useIsMobile } from '@/shared';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
 
 const ListWindows = ({
   desktopRef,
@@ -24,7 +25,7 @@ const ListWindows = ({
 
   const isMobile = useIsMobile();
 
-  return filteredWindowList?.map(({ ...windowParams }, index) => (
+  const windowMapper = filteredWindowList?.map(({ ...windowParams }, index) => (
     <WindowManager
       isMobile={isMobile}
       windowIndex={index}
@@ -37,6 +38,8 @@ const ListWindows = ({
       windowActions={windowActions}
     />
   ));
+
+  return windowMapper;
 };
 
 export default ListWindows;

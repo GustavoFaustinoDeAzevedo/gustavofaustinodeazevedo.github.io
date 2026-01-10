@@ -2,7 +2,7 @@ import Window from '../core';
 import useFilesActions from '@/store/actions/useFilesActions';
 import useSettingsActions from '@/store/actions/useSettingsActions';
 import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import actions from '@/store/actions';
 import createWindowHandlers from '../utils/createWindowHandlers';
 import flattenWindowParams from '../utils/flattenWindowParams';
@@ -83,15 +83,18 @@ const WindowManager = ({
     windowRawParams
   );
 
-  return (
-    <Window
-      // className={className}
-      isMobile={isMobile}
-      desktopRef={desktopRef}
-      windowParams={windowParams}
-      windowHandlers={windowHandlers}
-      filesActions={filesActions}
-    />
+  return useMemo(
+    () => (
+      <Window
+        // className={className}
+        isMobile={isMobile}
+        desktopRef={desktopRef}
+        windowParams={windowParams}
+        windowHandlers={windowHandlers}
+        filesActions={filesActions}
+      />
+    ),
+    [desktopRef, filesActions, isMobile, windowHandlers, windowParams]
   );
 };
 

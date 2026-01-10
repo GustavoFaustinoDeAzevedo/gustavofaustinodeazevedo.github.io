@@ -16,7 +16,6 @@ import {
   newFile,
 } from './windowSlice.utils';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
-import { help } from 'mathjs';
 
 const windowSlice = createSlice({
   name: 'window',
