@@ -1,5 +1,5 @@
 import { useClickOutside } from '@/shared';
-import { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import StyledDropdownMenu from './StyledDropdownMenu';
 
@@ -46,7 +46,7 @@ const Dropdown = ({
     isActive: isOpen,
     extraRef: buttonRef as React.RefObject<HTMLElement>,
   });
-  
+
   return (
     <div className={'dropdown__container'}>
       <button
@@ -87,4 +87,4 @@ const Dropdown = ({
   );
 };
 
-export default Dropdown;
+export default React.memo(Dropdown);

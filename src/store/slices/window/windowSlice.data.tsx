@@ -35,15 +35,13 @@ export const returnWindowContent = (
       sendMessage: () => <SendMessage />,
       contact: () => <ContactCard />,
       cmd: () => <ConsoleCommand />,
-      'task-manager': () => (
-        <TaskManager  />
-      ),
+      'task-manager': () => <TaskManager />,
       browser: () => <BrowserSimulator />,
       github: () => <BrowserSimulator src={src} />,
       'background-color-picker': () => <BackgroundPreferences />,
       'change-background': () => <BackgroundPreferences />,
       calculator: () => <Calculator />,
-      notepad: () => <Notepad />,
+      notepad: () => <Notepad content={content as string} />,
     };
     return map[contentId as keyof typeof map]?.();
   } catch (error) {

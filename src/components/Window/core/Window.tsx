@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -9,6 +9,7 @@ import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '@/shared/hooks/useClickOutside';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import { UseWindowLifecycleProps } from '../types/hooks.types';
+import { re } from 'mathjs';
 
 gsap.registerPlugin(useGSAP);
 
@@ -71,7 +72,26 @@ const Window = ({
 
   //encapsulamento de props ====================================================
 
-  const windowHeaderProps = {
+  const windowHeaderProps = useMemo(() => {
+    return {
+      headerRef,
+      handleRequestMinimize,
+      handleRequestMaximize,
+      handleRequestRestore,
+      handleRequestClose,
+      handleRequestFocus,
+      helpContent,
+      windowId,
+      title,
+      icon,
+      isOpened,
+      isFocused: isFocused,
+      isMinimized,
+      isMaximized,
+      language,
+      isMobile,
+    };
+  }, [
     headerRef,
     handleRequestMinimize,
     handleRequestMaximize,
@@ -83,15 +103,28 @@ const Window = ({
     title,
     icon,
     isOpened,
-    isFocused: isFocused,
+    isFocused,
     isMinimized,
     isMaximized,
     language,
     isMobile,
-  };
+  ]);
 
-  const windowContentWrapperProps = {
-    isFocused: isFocused,
+  const windowContentWrapperProps = useMemo(() => {
+    return {
+      isFocused: isFocused,
+      isOpened,
+      windowId,
+      currentNode,
+      src,
+      windowHandlers,
+      content,
+      filesActions,
+      type,
+      language,
+    };
+  }, [
+    isFocused,
     isOpened,
     windowId,
     currentNode,
@@ -101,7 +134,7 @@ const Window = ({
     filesActions,
     type,
     language,
-  };
+  ]);
 
   //Função para obter dimensões da janela ======================================
 

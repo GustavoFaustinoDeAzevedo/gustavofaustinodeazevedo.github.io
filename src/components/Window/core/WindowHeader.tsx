@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { Language } from '@/store/slices/settings';
 import { windowHeaderData } from '../data';
@@ -47,38 +47,45 @@ const WindowHeader = ({
     language,
   });
 
-  return (
-    <div className="window__header">
-      <span
-        onTouchStart={handleRequestFocus}
-        onClick={handleRequestFocus}
-        onMouseDown={handleRequestFocus}
-        ref={headerRef}
-        title={title[language as keyof typeof title] || 'Untitled'}
-        aria-label={title[language as keyof typeof title] || 'Untitled'}
-        className="window__header-title"
-      >
-        <Icon variant={icon || 'default'} style={stylePng} />
-        {title[language as keyof typeof title] || 'Untitled'}
-      </span>
-      <div className="window__header-controls">
-        {headerData.map(({ name, title, icon, action, condition }) => {
-          if (condition === false) return null;
-          return (
-            <button
-              key={name}
-              type="button"
-              aria-label={title}
-              title={title}
-              className={`window__header-controls-${name}`}
-              onClick={action}
-            >
-              <Icon variant={icon} style={styleSvg} />
-            </button>
-          );
-        })}
+  const headerControls = useMemo(
+    () =>
+      headerData.map(({ name, title, icon, action, condition }) => {
+        if (condition === false) return null;
+        return (
+          <button
+            key={name}
+            type="button"
+            aria-label={title}
+            title={title}
+            className={`window__header-controls-${name}`}
+            onClick={action}
+          >
+            <Icon variant={icon} style={styleSvg} />
+          </button>
+        );
+      }),
+    [headerData, styleSvg]
+  );
+
+  return useMemo(
+    () => (
+      <div className="window__header">
+        <span
+          onTouchStart={handleRequestFocus}
+          onClick={handleRequestFocus}
+          onMouseDown={handleRequestFocus}
+          ref={headerRef}
+          title={title[language as keyof typeof title] || 'Untitled'}
+          aria-label={title[language as keyof typeof title] || 'Untitled'}
+          className="window__header-title"
+        >
+          <Icon variant={icon} style={stylePng} />
+          {title[language as keyof typeof title] || 'Untitled'}
+        </span>
+        <div className="window__header-controls">{headerControls}</div>
       </div>
-    </div>
+    ),
+    [title, language, icon, handleRequestFocus, headerRef, headerData]
   );
 };
 

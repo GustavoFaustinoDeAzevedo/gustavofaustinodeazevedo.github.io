@@ -21,7 +21,7 @@ const WindowContent = ({
   windowId: string;
   currentNode: string;
   src?: string;
-  content?: FileNode[];
+  content?: any;
   type?: string;
 }) => {
   const contentId = windowId.split('#')[1];
