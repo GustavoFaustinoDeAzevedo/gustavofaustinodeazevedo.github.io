@@ -73,6 +73,11 @@ const WindowHeader = ({
         <span
           onTouchStart={handleRequestFocus}
           onClick={handleRequestFocus}
+          onDoubleClick={
+            props.isMaximized
+              ? props.handleRequestRestore
+              : props.handleRequestMaximize
+          }
           onMouseDown={handleRequestFocus}
           ref={headerRef}
           title={title[language as keyof typeof title] || 'Untitled'}

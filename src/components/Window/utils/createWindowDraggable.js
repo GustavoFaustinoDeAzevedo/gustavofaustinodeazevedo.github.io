@@ -5,7 +5,7 @@ import gsap from 'gsap';
 gsap.registerPlugin(Draggable);
 
 
-const createWindowDraggable = ({ windowRef, triggerElement, bounds, onFocus, updateWindowState, width, height, isFocused }) => {
+const createWindowDraggable = ({ windowRef, triggerElement, bounds, onFocus, updateWindowState, width, height }) => {
   Draggable.create(windowRef.current, {
     trigger: triggerElement,
     type: 'x,y',

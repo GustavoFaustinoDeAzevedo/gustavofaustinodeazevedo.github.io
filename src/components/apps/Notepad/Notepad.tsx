@@ -1,32 +1,67 @@
 import { use, useCallback, useMemo, useRef, useState } from 'react';
 import { Dropdown } from '@/components/ui';
-import { dropdownItem } from '@/components/ui/Dropdown/Dropdown';
+import { DropdownItem } from '@/components/ui/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { e } from 'mathjs';
+import actions from '@/store/actions';
+
 // import './Notepad.styles.css';
 
 const Notepad = ({ content = '' }) => {
   // const content = useSelector(
   //   (state: RootState) => state.file.filesList.content
   // );
-  const dropdownList: dropdownItem[] = useMemo(
-    () => [
-      { label: 'New Tab' },
-      { label: 'New Window' },
-      { label: 'Open' },
-      { label: 'Save' },
-      { label: 'Save All' },
-      { isDivisor: true },
-      { label: 'Page Options' },
-      { label: 'Print' },
-      { isDivisor: true },
-      { label: 'Close Tab' },
-      { label: 'Close Window' },
-      { label: 'Close All' },
-    ],
-    []
-  );
+
+  const language = useSelector((state: RootState) => state.settings.language);
+  const { handleNewFile } = actions.useFilesActions();
+
+  const dropdownList: { eng: DropdownItem[]; por: DropdownItem[] } =
+    useMemo(() => {
+      return {
+        eng: [
+          { label: 'New Tab' },
+          { label: 'New Window' },
+          { label: 'Open' },
+          {
+            label: 'Save',
+          },
+          { label: 'Save All' },
+          { isDivisor: true },
+          { label: 'Page Options' },
+          { label: 'Print' },
+          { isDivisor: true },
+          { label: 'Close Tab' },
+          { label: 'Close Window' },
+          { label: 'Close All' },
+        ],
+        por: [
+          { label: 'Nova Aba' },
+          { label: 'Nova Janela' },
+          { label: 'Abrir' },
+          {
+            label: 'Salvar',
+            onClick: () => {
+              console.log('Saving file...');
+              handleNewFile('users/guests/desktop', {
+                fileId: `file-${Date.now()}`,
+                name: 'NewFile.txt',
+                content: text,
+                icon: 'file',
+                title: { eng: 'New File', por: 'Novo Arquivo' },
+              });
+            },
+          },
+          { label: 'Salvar Tudo' },
+          { isDivisor: true },
+          { label: 'Opções da Página' },
+          { label: 'Imprimir' },
+          { isDivisor: true },
+          { label: 'Fechar Aba' },
+          { label: 'Fechar Janela' },
+          { label: 'Fechar Tudo' },
+        ],
+      };
+    }, []);
   const [text, setText] = useState(
     content[0] ? JSON.stringify(content, null, 2) : ''
   );
@@ -45,7 +80,12 @@ const Notepad = ({ content = '' }) => {
         <nav className="notepad__nav">
           <ul>
             <li>
-              <Dropdown dropdownList={dropdownList} dropdownTitle="File" />
+              <Dropdown
+                dropdownList={
+                  dropdownList[language as keyof typeof dropdownList]
+                }
+                dropdownTitle="File"
+              />
             </li>
           </ul>
         </nav>

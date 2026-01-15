@@ -85,7 +85,7 @@ const Window = ({
       title,
       icon,
       isOpened,
-      isFocused: isFocused,
+      isFocused,
       isMinimized,
       isMaximized,
       language,

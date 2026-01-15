@@ -1,26 +1,19 @@
 import { useDispatch } from 'react-redux';
-import { addFile, removeFile, sortFiles } from '../slices/file/filesSlice';
+import { newFile, removeFile } from '../slices/file/filesSlice';
 import { FileNode } from '@/data/filesData';
 
 const useFilesActions = () => {
   const dispatch = useDispatch();
 
-  const handleNewFile = (
-    newFileData: FileNode,
-    currentNode: string,
-    nodeDepth: number
-  ) => {
-    dispatch(addFile({ newFileData, currentNode, nodeDepth }));
+  const handleNewFile = (path: string, data: FileNode) => {
+    dispatch(newFile({ path, data }));
   };
 
   const handleRemoveFile = (fileToRemove: FileNode) => {
     dispatch(removeFile(fileToRemove));
   };
 
-  const handleSortFiles = () => {
-    dispatch(sortFiles());
-  };
-  return { handleNewFile, handleRemoveFile, handleSortFiles };
+  return { handleNewFile, handleRemoveFile };
 };
 
 export default useFilesActions;

@@ -76,7 +76,7 @@ export interface Shortcut {
 // Estado do slice de arquivos
 export interface FileSliceState {
   instaledApps: FileNode[];
-  shortcuts: Shortcut;
+  shortcuts?: Shortcut;
   filesList: FileNode;
   rootPath: string;
   desktopPath: string;
