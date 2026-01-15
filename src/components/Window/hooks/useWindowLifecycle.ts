@@ -103,7 +103,6 @@ const useWindowLifecycle = ({
           updateWindowState,
           width,
           height,
-          isFocused,
         });
     },
   });

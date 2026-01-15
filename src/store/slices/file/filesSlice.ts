@@ -3,37 +3,71 @@ import { rootFolder } from '@/data/filesData';
 import { FileNode, FileSliceState } from './filesSlice.types';
 import instaledAppsData from '@/data/instaledAppsData';
 
-/**
- * Adiciona um novo arquivo em node.content, garantindo que o mais recente
- * o arquivo adicionado é colocado em penúltimo lugar quando há dois ou mais filhos.
- */
-const newFile = (
-  node: FileNode,
-  fileToBeAdded: FileNode,
-  nodeDepth: number
-): FileNode[] => {
-  const content = [...(node.content ?? []), { ...fileToBeAdded, nodeDepth }];
+const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
+  if (!parent.content) parent.content = [];
 
-  if (content.length >= 2) {
-    const lastIndex = content.length - 1;
-    const secondLastIndex = content.length - 2;
-    [content[secondLastIndex], content[lastIndex]] = [
-      content[lastIndex],
-      content[secondLastIndex],
-    ];
+  // pega todos os títulos já existentes
+  const existingTitles = parent.content.map((child) => child.title);
+
+  let counter = 1;
+  let conflict = existingTitles.some((childTitle) => {
+    if (typeof childTitle === 'string' && typeof newNode.title === 'string') {
+      return childTitle === newNode.title;
+    }
+    if (typeof childTitle === 'object' && typeof newNode.title === 'object') {
+      // compara todos os idiomas
+      return Object.keys(newNode.title).some(
+        (lang) =>
+          childTitle[lang as keyof typeof childTitle] ===
+          newNode.title[lang as keyof typeof newNode.title]
+      );
+    }
+    return false;
+  });
+
+  // enquanto houver conflito, limpa o sufixo anterior (caso tenha)
+  // e adiciona sufixo em todos os idiomas
+
+  while (conflict) {
+    for (const lang in newNode.title) {
+      newNode.title[lang as keyof typeof newNode.title] = newNode.title[
+        lang as keyof typeof newNode.title
+      ].replace(/\s\(\d+\)$/g, '');
+      newNode.title[lang as keyof typeof newNode.title] = `${
+        newNode.title[lang as keyof typeof newNode.title]
+      } (${counter})`;
+    }
+    counter++;
+
+    conflict = existingTitles.some((childTitle) => {
+      if (typeof childTitle === 'object' && typeof newNode.title === 'object') {
+        return Object.keys(newNode.title).some(
+          (lang) =>
+            childTitle[lang as keyof typeof childTitle] ===
+            newNode.title[lang as keyof typeof newNode.title]
+        );
+      }
+      return false;
+    });
   }
 
-  return content;
+  parent.content.push(newNode);
 };
 
 /**
- *Procurar recursivamente um nó que corresponda à profundidade do pai e ao targetId,
- *e adiciona um novo arquivo a seus filhos.
+ * Procura recursivamente um nó que corresponda à ao caminho fornecido em relação ao nó raiz fornecido
+ * (não o nó raiz do sistema, mas o nó passado à função)
+ * @returns O nó encontrado ou null se não for encontrado
  */
 
-export const findByPath = (root: FileNode, path: string): FileNode | null => {
+export const findByPath = (
+  root: FileNode,
+  path: string,
+  newNode?: FileNode
+): FileNode | null => {
   let parts = path.split('/');
 
+  // se o primeiro elemento do caminho for o próprio root, remove
   if (parts[0] === root.fileId) {
     parts = parts.slice(1);
   }
@@ -41,8 +75,14 @@ export const findByPath = (root: FileNode, path: string): FileNode | null => {
   let current: FileNode | undefined = root;
 
   for (const part of parts) {
-    if (!current || !current.content) return null;
+    if (!current?.content) return null;
     current = current.content.find((child) => child.fileId === part);
+  }
+
+  // se newNode for fornecido, adiciona-o ao nó encontrado
+  if (newNode && current) {
+    if (!current.content) current.content = [];
+    addNodeWithConflictResolution(current, newNode);
   }
 
   return current ?? null;
@@ -81,8 +121,6 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
   return { ...obj, nodeDepth, content };
 };
 
-
-
 const filesList = handleNestedEntities(rootFolder);
 
 // Slice
@@ -99,34 +137,36 @@ export const fileSlice = createSlice({
   name: 'file',
   initialState,
   reducers: {
-    addFile: (
+    newFile: (
       state,
       action: PayloadAction<{
-        newFileData: FileNode;
-        currentNode: string;
-        nodeDepth: number;
+        path: string;
+        data: FileNode;
       }>
     ) => {
-      const { newFileData, currentNode, nodeDepth } = action.payload;
+      const { data, path } = action.payload;
+      findByPath(state.filesList, path, data);
+    },
+
+    updateFile: (
+      state,
+      action: PayloadAction<{
+        path: string;
+        updates: Partial<FileNode>;
+      }>
+    ) => {
+      const { path, updates } = action.payload;
     },
 
     removeFile: (state, action: PayloadAction<{ fileId: string }>) => {
       const removeById = (node: FileNode, fileId: string) => {
-        node.content = node.content?.filter(
-          (child) => child.fileId !== fileId
-        );
+        node.content = node.content?.filter((child) => child.fileId !== fileId);
         node.content?.forEach((child) => removeById(child, fileId));
       };
       removeById(state.filesList, action.payload.fileId);
     },
-
-    sortFiles: (state) => {
-      const content = state.filesList.content ?? [];
-      state.filesList.content = toggleSort(content, state.sort);
-      state.sort = state.sort === 'asc' ? 'desc' : 'asc';
-    },
   },
 });
 
-export const { addFile, removeFile, sortFiles } = fileSlice.actions;
+export const { newFile, removeFile, updateFile } = fileSlice.actions;
 export default fileSlice.reducer;

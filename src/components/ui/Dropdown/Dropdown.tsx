@@ -3,13 +3,14 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import StyledDropdownMenu from './StyledDropdownMenu';
 
-export type dropdownItem = {
+export type DropdownItem = {
   label?: string;
   isDivisor?: boolean;
+  onClick?: () => void;
 };
 
 type DropdownProps = {
-  dropdownList?: dropdownItem[];
+  dropdownList?: DropdownItem[];
   dropdownTitle?: string;
   dropdownId?: string;
 };
@@ -25,9 +26,13 @@ const Dropdown = ({
   const dropdownRef = useRef<HTMLElement>(null);
   const buttonRef = useRef<HTMLElement>(null);
 
-  const handleClick = (isDivisor?: boolean) => {
+  const handleClick = (item: DropdownItem = {}, isDivisor?: boolean) => {
     if (isDivisor === true) return;
+    console.log(item.label);
     setIsOpen((prev) => !prev);
+    console.log(item);
+    if (item.onClick === undefined) return;
+    item.onClick();
   };
 
   useLayoutEffect(() => {
@@ -68,9 +73,9 @@ const Dropdown = ({
           data-dropdown-menu
           ref={dropdownRef as React.RefObject<HTMLUListElement>}
         >
-          {dropdownList.map((item: dropdownItem, index: number) => (
+          {dropdownList.map((item: DropdownItem, index: number) => (
             <li
-              onClick={() => handleClick(item.isDivisor ?? false)}
+              onClick={() => handleClick(item, item.isDivisor ?? false)}
               key={`${dropdownId}-${index}`}
             >
               {item.isDivisor ? (

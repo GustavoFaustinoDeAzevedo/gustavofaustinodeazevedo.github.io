@@ -41,6 +41,8 @@ const ListFiles = ({
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
     app: 'html-file',
+    folder: 'folder',
+    file: 'file',
   };
 
   // contantes
