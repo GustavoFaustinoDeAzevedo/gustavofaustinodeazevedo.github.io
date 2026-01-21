@@ -8,6 +8,7 @@ const WindowContentWrapper = ({
   windowId,
   currentNode,
   content,
+  contentKey,
   windowHandlers,
   language,
   windowList,
@@ -21,6 +22,7 @@ const WindowContentWrapper = ({
       currentNode={currentNode}
       src={src}
       content={content ?? {}}
+      contentKey={contentKey}
       windowActions={windowHandlers}
       type={type}
       language={language}
@@ -33,7 +35,7 @@ const WindowContentWrapper = ({
 
   return useMemo(
     () => <div className="window__content">{windowContent}</div>,
-    [windowContent]
+    [windowContent],
   );
 };
 export default WindowContentWrapper;

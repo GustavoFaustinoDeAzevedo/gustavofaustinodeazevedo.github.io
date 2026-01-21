@@ -47,24 +47,39 @@ const WindowHeader = ({
     language,
   });
 
-  const headerControls = useMemo(
-    () =>
-      headerData.map(({ name, title, icon, action, condition }) => {
-        if (condition === false) return null;
-        return (
-          <button
-            key={name}
-            type="button"
-            aria-label={title}
-            title={title}
-            className={`window__header-controls-${name}`}
-            onClick={action}
-          >
-            <Icon variant={icon} style={styleSvg} />
-          </button>
-        );
-      }),
-    [headerData, styleSvg]
+  const headerIcon = useMemo(
+    () => (
+      <Icon
+        variant={icon}
+        style={stylePng}
+        aria-hidden="true"
+        title={title[language as keyof typeof title] || 'Untitled'}
+      />
+    ),
+    [icon, language, title],
+  );
+
+  const headerControls = headerData.map(
+    ({ name, title, icon, action, condition }) => {
+      if (condition === false) return null;
+      return (
+        <button
+          key={name}
+          type="button"
+          aria-label={title}
+          title={title}
+          className={`window__header-controls-${name}`}
+          onClick={action}
+        >
+          {useMemo(
+            () => (
+              <Icon variant={icon} style={styleSvg} />
+            ),
+            [icon],
+          )}
+        </button>
+      );
+    },
   );
 
   return useMemo(
@@ -84,13 +99,13 @@ const WindowHeader = ({
           aria-label={title[language as keyof typeof title] || 'Untitled'}
           className="window__header-title"
         >
-          <Icon variant={icon} style={stylePng} />
+          {headerIcon}
           {title[language as keyof typeof title] || 'Untitled'}
         </span>
         <div className="window__header-controls">{headerControls}</div>
       </div>
     ),
-    [title, language, icon, handleRequestFocus, headerRef, headerData]
+    [title, language, icon, handleRequestFocus, headerRef, headerData],
   );
 };
 

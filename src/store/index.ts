@@ -1,8 +1,11 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
-import windowReducer from './slices/window';
-import contextMenuReducer from './slices/contextMenuSlice';
-import filesReducer from './slices/file';
-import settingsReducer from './slices/settings';
+import {
+  windowReducer,
+  contextMenuReducer,
+  filesReducer,
+  settingsReducer,
+  userReducer,
+} from './slices';
 
 const logger: Middleware = (store) => (next) => (action) => {
   console.log('%c[Middleware] Dispatching:', 'color: cyan', action);
@@ -17,6 +20,7 @@ export const store = configureStore({
     contextMenu: contextMenuReducer,
     file: filesReducer,
     settings: settingsReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

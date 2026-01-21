@@ -1,4 +1,4 @@
-import { FileSliceState } from '../slices/file';
+import { FileNode } from '../slices/file';
 import { SettingsSliceState } from '../slices/settings';
 import { WindowSliceState } from '../slices/window';
 
@@ -8,9 +8,13 @@ export default interface User {
 
   config: {
     apps: string[];
-    window: WindowSliceState;
-    settings: SettingsSliceState;
-    file: FileSliceState;
     permission: string;
+    folders: string[];
+    store: {
+      window: WindowSliceState;
+      settings: SettingsSliceState;
+      userFolders: FileNode[];
+      appsConfig: Record<string, any>;
+    };
   };
 }

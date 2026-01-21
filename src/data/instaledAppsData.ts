@@ -1,4 +1,4 @@
-import { FileNode } from './filesData';
+import { FileNode } from '@/store/slices/file';
 
 const instaledAppsData: FileNode[] = [
   {

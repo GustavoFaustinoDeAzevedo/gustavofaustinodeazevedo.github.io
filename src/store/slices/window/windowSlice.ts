@@ -29,7 +29,7 @@ const windowSlice = createSlice({
       const windowId = action.payload;
       state.focusedWindow = windowId;
       const foundWindow = state.openedWindowList.find(
-        (win) => win.windowId === windowId
+        (win) => win.windowId === windowId,
       );
       if (foundWindow && foundWindow.windowState) {
         foundWindow.zIndex = getNextZIndex(state);
@@ -41,7 +41,7 @@ const windowSlice = createSlice({
 
     openWindow: (
       state: WindowSliceState,
-      action: { payload: WindowData }
+      action: { payload: WindowData },
     ): void => {
       const {
         windowId,
@@ -52,6 +52,7 @@ const windowSlice = createSlice({
         type,
         nodeDepth,
         isUnique,
+        contentKey,
         isRequestingMaximize = false,
         windowType = 'window',
         initialDimensions,
@@ -61,7 +62,7 @@ const windowSlice = createSlice({
       if (isUnique && title) {
         const { eng, por } = title;
         const foundSameWindow = state.openedWindowList.find(
-          (win) => win.title?.por === por && win.title?.eng === eng
+          (win) => win.title?.por === por && win.title?.eng === eng,
         );
         if (
           foundSameWindow &&
@@ -116,6 +117,7 @@ const windowSlice = createSlice({
         type,
         src,
         content,
+        contentKey,
         initialDimensions,
         windowType,
         position: { lastX: 0, lastY: 0, x: 0, y: 0 },
@@ -139,7 +141,7 @@ const windowSlice = createSlice({
 
     closeWindow: (state, action) => {
       state.openedWindowList = state.openedWindowList.filter(
-        (win: WindowNode) => win.windowId !== action.payload
+        (win: WindowNode) => win.windowId !== action.payload,
       );
     },
 
@@ -166,6 +168,7 @@ const windowSlice = createSlice({
         maximized,
         focused,
         content,
+        contentKey,
         isRequestingOpen,
         isRequestingRestore,
         isRequestingClose,
@@ -177,7 +180,7 @@ const windowSlice = createSlice({
 
       if (opened === false) {
         state.openedWindowList = state.openedWindowList.filter(
-          (win: WindowNode) => win.windowId !== windowId
+          (win: WindowNode) => win.windowId !== windowId,
         );
         return;
       }
@@ -196,6 +199,7 @@ const windowSlice = createSlice({
         icon,
         currentNode,
         nodeDepth,
+        contentKey,
         content:
           currentWindow[currentNode] !== currentNode
             ? newFile(currentWindow, content)
@@ -209,7 +213,7 @@ const windowSlice = createSlice({
           lastY,
           x,
           y,
-        }
+        },
       );
 
       state.openedWindowList[winIndex].size = updateStateIfDefined(
@@ -219,7 +223,7 @@ const windowSlice = createSlice({
           lastHeight,
           width,
           height,
-        }
+        },
       );
 
       currentWindowState.status = updateStateIfDefined(
@@ -228,7 +232,7 @@ const windowSlice = createSlice({
           minimized,
           maximized,
           opened,
-        }
+        },
       );
 
       currentWindowState.requests = updateStateIfDefined(
@@ -240,7 +244,7 @@ const windowSlice = createSlice({
           minimize: isRequestingMinimize,
           maximize: isRequestingMaximize,
           focus: isRequestingFocus,
-        }
+        },
       );
     },
   },

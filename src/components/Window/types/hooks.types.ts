@@ -7,6 +7,7 @@ type NumOrStr = number | string;
 export interface WindowParams {
   /* identidade / ordem */
   windowId: string;
+  contentKey?: string;
   windowIndex: number;
 
   /* posição / dimensões correntes */

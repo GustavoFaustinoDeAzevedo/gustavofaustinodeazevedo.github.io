@@ -7,6 +7,7 @@ import { RootState } from '@/store';
 import { isLocalHost, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
+import { Title } from '@/store/slices/window';
 
 type ListFilesProps = {
   handleGlobalClick?: () => void;
@@ -34,7 +35,7 @@ const ListFiles = ({
   if (content === undefined || content?.length < 0) return;
 
   // redux state
-  const language = useSelector((state: RootState) => state?.settings.language);
+  
 
   // window actions
   const windowActions = actions.useWindowActions();
@@ -57,7 +58,9 @@ const ListFiles = ({
     if (filtersArray.length === 0) return content;
 
     return content.filter((item: FileNode) => {
-      const title = String(item?.title?.[language] ?? '');
+      const title = String(
+        item?.title?.[language as keyof typeof item.title] ?? '',
+      );
       const normTitle = stringNormalizer(title);
       return filtersArray.every((filter) => normTitle.includes(filter));
     });
@@ -81,11 +84,12 @@ const ListFiles = ({
         isUnique,
         initialStates,
         content,
+        contentKey,
         nodeDepth,
         initialDimensions,
         permission,
       }: FileNode,
-      windowIndex: number
+      windowIndex: number,
     ) => {
       if (
         fileId === undefined ||
@@ -95,7 +99,7 @@ const ListFiles = ({
         return null;
       const finalIcon =
         icon ?? typeToIcon[type as keyof typeof typeToIcon] ?? 'window-icon';
-      const iconTitle = language === 'por' ? title?.por : title?.eng;
+      const iconTitle = (title as Title)?.por ?? (title as Title)?.eng;
       const windowTitle = windowMask?.title ?? title;
 
       const windowIcon =
@@ -109,6 +113,7 @@ const ListFiles = ({
         handleGlobalClick?.();
         handleOpenFile({
           fileId,
+          contentKey,
           currentNode,
           windowTitle,
           windowIcon,
@@ -130,7 +135,7 @@ const ListFiles = ({
         <SystemFile
           key={`file-${fileId}-${windowIndex}`}
           fileId={fileId}
-          title={iconTitle}
+          title={windowTitle}
           icon={finalIcon}
           stylesConfig={stylesConfig}
           isDoubleClick={isDoubleClick}
@@ -138,7 +143,7 @@ const ListFiles = ({
           onClick={handleClick}
         />
       );
-    }
+    },
   );
 
   return <ul className={className ?? 'files-container'}>{mapContent}</ul>;

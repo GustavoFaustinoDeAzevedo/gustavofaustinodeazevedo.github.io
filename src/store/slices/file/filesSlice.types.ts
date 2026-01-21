@@ -41,8 +41,9 @@ export type InitialStates = {
 // Estrutura básica de um arquivo/nó na árvore
 export interface FileNode {
   windowId?: string;
+  contentKey?: string;
   fileId: string;
-  title: Title;
+  title?: Title;
   permission?: Permission;
   nodeDepth?: number;
   type?: 'folder' | 'app' | 'text' | 'file';
@@ -78,7 +79,5 @@ export interface FileSliceState {
   instaledApps: FileNode[];
   shortcuts?: Shortcut;
   filesList: FileNode;
-  rootPath: string;
-  desktopPath: string;
-  sort: SortType;
+  userFolders: FileNode[];
 }

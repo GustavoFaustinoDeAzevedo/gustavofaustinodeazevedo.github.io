@@ -51,7 +51,7 @@ export interface WindowNode {
   icon?: string;
   zIndex?: number;
   type?: string;
-  content?: any;
+  contentKey?: string;
   src?: string;
   content?: FileNode[];
   position?: Position;

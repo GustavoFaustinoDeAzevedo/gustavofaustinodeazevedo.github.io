@@ -2,7 +2,7 @@ import { ListFiles } from '@components/FilesExplorer';
 
 // import displayWindowContent from '../utils/displayWindowContent';
 
-import { returnWindowContent } from '@/store/slices/window/windowSlice.data';
+import { returnWindowContent } from '@/store/slices/window/windowSlice.registry';
 import { FileNode } from '@/store/slices/file';
 
 /** O windowId tem o formato: window#contentId#[randomString] para que cada janela possa ser uma janela única.
@@ -13,19 +13,21 @@ import { FileNode } from '@/store/slices/file';
 
 const WindowContent = ({
   windowId,
+  contentKey,
   currentNode,
   src,
   content,
   type,
 }: {
   windowId: string;
+  contentKey: string;
   currentNode: string;
   src?: string;
   content?: any;
   type?: string;
 }) => {
-  const contentId = windowId.split('#')[1];
-  const windowContent = returnWindowContent(contentId, {
+  //const contentId = windowId.split('#')[1];
+  const windowContent = returnWindowContent(contentKey, {
     windowId: currentNode,
     src,
     type,
