@@ -6,6 +6,9 @@ import {
 } from './StyledFileWrapper';
 import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
 import { StylesConfig } from './StyledFileWrapper/fileWrapperStyle';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { Title } from '@/store/slices/file';
 
 const defaultProps: StylesConfig = {
   $direction: 'vertical',
@@ -37,7 +40,7 @@ const SystemFile = ({
   isMobile,
 }: {
   fileId: string;
-  title: string;
+  title?: Title;
   icon: string;
   onClick?: () => void;
   stylesConfig?: StylesConfig;
@@ -45,6 +48,8 @@ const SystemFile = ({
   isMobile?: boolean;
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
+
+  const language = useSelector((state: RootState) => state?.settings.language);
 
   const handleSingleClick = (e: React.MouseEvent) => {
     if (isDoubleClick && !isMobile) {
@@ -70,23 +75,31 @@ const SystemFile = ({
     }
   };
 
+  const translatedTitle = title?.[language as keyof typeof title] || '';
+
   // TODO Adicionar (num futuro distante) a opção de selecionar vários arquivos, tenho que trocar o sistema padrão de focus por um
   // personalizado que permite selecionar vários arquivos ao mesmo tempo.
+
+  const memoizedIcon = useMemo(
+    () => <StyledFileWrapper__Icon variant={icon} {...stylesConfig} />,
+    [icon, stylesConfig],
+  );
 
   return (
     <StyledFileWrapper
       tabIndex={0}
-      aria-label={title}
-      title={title}
+      aria-label={translatedTitle}
+      title={translatedTitle}
       onKeyDown={handleKeyDown}
       onDoubleClick={handleDoubleClick}
       onMouseUp={handleSingleClick}
       id={fileId}
       {...stylesConfig}
     >
-      <StyledFileWrapper__Icon variant={icon} {...stylesConfig} />
+      {memoizedIcon}
+
       <StyledFileWrapper__Text {...stylesConfig}>
-        {title}
+        {translatedTitle || ''}
       </StyledFileWrapper__Text>
     </StyledFileWrapper>
   );

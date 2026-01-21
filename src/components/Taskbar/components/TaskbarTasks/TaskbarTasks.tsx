@@ -7,11 +7,8 @@ import actions from '@/store/actions';
 const TaskbarTasks = () => {
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow } = windowActions;
+  const { openedWindowList } = useSelector((state: RootState) => state.window);
   const { language } = useSelector((state: RootState) => state.settings);
-  const { openedWindowList, focusedWindow } = useSelector(
-    (state: RootState) => state.window
-  );
-
   const handleWindow = (id: string, request: string, value?: boolean) => {
     handleUpdateWindow({
       windowId: id,
@@ -28,42 +25,31 @@ const TaskbarTasks = () => {
   const handleWindowFocus = (windowId: string) => {
     handleWindow(windowId, 'isRequestingFocus', true);
   };
+
   return useMemo(
     () => (
       <ul className="taskbar__window-list">
         {openedWindowList?.[0]?.windowState?.status.opened &&
-          openedWindowList
-            .filter(
-              ({ windowId }) =>
-                windowId !== 'New' &&
-                windowId !== 'placeholder' &&
-                windowId !== 'desktop'
-            )
-            .map(({ windowId, title, windowState, icon }, index) => {
+          openedWindowList.map(
+            ({ windowId, title, windowState, icon }, index) => {
               return (
                 <TaskbarTask
                   key={windowId}
                   id={windowId ?? ''}
-                  title={title?.[language] ?? ''}
+                  title={title?.[language as keyof typeof title] || ''}
                   isMinimized={windowState?.status.minimized ?? false}
                   icon={icon ?? 'html-file'}
                   index={index}
-                  focusedWindow={focusedWindow ?? ''}
                   handleWindowMinimize={handleWindowMinimize}
                   handleWindowRestore={handleWindowRestore}
                   handleWindowFocus={handleWindowFocus}
                 />
               );
-            })}
+            },
+          )}
       </ul>
     ),
-    [
-      openedWindowList,
-      language,
-      focusedWindow,
-      handleWindowMinimize,
-      handleWindowRestore,
-    ]
+    [openedWindowList, language],
   );
 };
 

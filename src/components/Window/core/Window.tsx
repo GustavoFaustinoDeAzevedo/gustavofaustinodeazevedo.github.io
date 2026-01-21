@@ -51,6 +51,7 @@ const Window = ({
     title,
     icon,
     content,
+    contentKey,
     isMinimized,
     isMaximized,
     language,
@@ -72,26 +73,7 @@ const Window = ({
 
   //encapsulamento de props ====================================================
 
-  const windowHeaderProps = useMemo(() => {
-    return {
-      headerRef,
-      handleRequestMinimize,
-      handleRequestMaximize,
-      handleRequestRestore,
-      handleRequestClose,
-      handleRequestFocus,
-      helpContent,
-      windowId,
-      title,
-      icon,
-      isOpened,
-      isFocused,
-      isMinimized,
-      isMaximized,
-      language,
-      isMobile,
-    };
-  }, [
+  const windowHeaderProps = {
     headerRef,
     handleRequestMinimize,
     handleRequestMaximize,
@@ -108,7 +90,7 @@ const Window = ({
     isMaximized,
     language,
     isMobile,
-  ]);
+  };
 
   const windowContentWrapperProps = useMemo(() => {
     return {
@@ -119,6 +101,7 @@ const Window = ({
       src,
       windowHandlers,
       content,
+      contentKey,
       filesActions,
       type,
       language,
@@ -198,7 +181,12 @@ const Window = ({
         id={windowId}
         onClick={handleFocus}
       >
-        <WindowHeader {...windowHeaderProps} />
+        {useMemo(
+          () => (
+            <WindowHeader {...windowHeaderProps} />
+          ),
+          [windowHeaderProps],
+        )}
         {!errorOcurred && (
           <WindowContentWrapper {...(windowContentWrapperProps as any)} />
         )}

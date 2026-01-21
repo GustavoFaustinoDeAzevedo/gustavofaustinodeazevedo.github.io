@@ -25,6 +25,7 @@ const useWindowLifecycle = ({
   const {
     windowId,
     windowIndex,
+    contentKey,
     x,
     y,
     lastX,
@@ -89,6 +90,7 @@ const useWindowLifecycle = ({
         lastHeight: initH,
         isRequestingOpen: false,
         isRequestingFocus: true,
+        contentKey,
         isRequestingMaximize: isRequestingMaximize || isMobile,
         opened: true,
       });
@@ -157,7 +159,7 @@ const useWindowLifecycle = ({
         },
         windowIndex + 1,
         null,
-        isMobile
+        isMobile,
       );
     },
   });
@@ -189,7 +191,7 @@ const useWindowLifecycle = ({
         lastY,
         lastWidth,
         lastHeight,
-        isMobile
+        isMobile,
       ),
   });
 

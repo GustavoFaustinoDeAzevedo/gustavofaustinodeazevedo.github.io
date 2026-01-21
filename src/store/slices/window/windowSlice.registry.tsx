@@ -14,7 +14,7 @@ import ConsoleCommand from '@components/ConsoleCommand';
 import DevMenu from '@/components/DevMenu';
 
 export const returnWindowContent = (
-  contentId: string,
+  contentKey: string,
   {
     windowId,
     src,
@@ -25,7 +25,7 @@ export const returnWindowContent = (
     src?: string;
     type?: string;
     content?: any;
-  }
+  },
 ) => {
   try {
     const map = {
@@ -35,15 +35,14 @@ export const returnWindowContent = (
       sendMessage: () => <SendMessage />,
       contact: () => <ContactCard />,
       cmd: () => <ConsoleCommand />,
-      'task-manager': () => <TaskManager />,
+      taskManager: () => <TaskManager />,
       browser: () => <BrowserSimulator />,
       github: () => <BrowserSimulator src={src} />,
-      'background-color-picker': () => <BackgroundPreferences />,
-      'change-background': () => <BackgroundPreferences />,
+      backgroundPreferences: () => <BackgroundPreferences />,
       calculator: () => <Calculator />,
       notepad: () => <Notepad content={content as string} />,
     };
-    return map[contentId as keyof typeof map]?.();
+    return map[contentKey as keyof typeof map]?.();
   } catch (error) {
     alert('Erro');
   }

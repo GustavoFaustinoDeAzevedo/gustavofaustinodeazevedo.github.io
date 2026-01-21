@@ -9,6 +9,7 @@ const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
   // pega todos os títulos já existentes
   const existingTitles = parent.content.map((child) => child.title);
 
+  // verifica se houve conflito
   let counter = 1;
   let conflict = existingTitles.some((childTitle) => {
     if (typeof childTitle === 'string' && typeof newNode.title === 'string') {
@@ -19,7 +20,7 @@ const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
       return Object.keys(newNode.title).some(
         (lang) =>
           childTitle[lang as keyof typeof childTitle] ===
-          newNode.title[lang as keyof typeof newNode.title]
+          newNode.title?.[lang as keyof typeof newNode.title],
       );
     }
     return false;
@@ -40,14 +41,16 @@ const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
     counter++;
 
     conflict = existingTitles.some((childTitle) => {
-      if (typeof childTitle === 'object' && typeof newNode.title === 'object') {
-        return Object.keys(newNode.title).some(
+      if (typeof childTitle !== 'object' && typeof newNode.title !== 'object')
+        return null;
+      return (
+        newNode.title &&
+        Object.keys(newNode.title).some(
           (lang) =>
-            childTitle[lang as keyof typeof childTitle] ===
-            newNode.title[lang as keyof typeof newNode.title]
-        );
-      }
-      return false;
+            childTitle?.[lang as keyof typeof childTitle] ===
+            newNode.title?.[lang as keyof typeof newNode.title],
+        )
+      );
     });
   }
 
@@ -63,7 +66,7 @@ const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
 export const findByPath = (
   root: FileNode,
   path: string,
-  newNode?: FileNode
+  newNode?: FileNode,
 ): FileNode | null => {
   let parts = path.split('/');
 
@@ -100,7 +103,7 @@ const toggleSort = (files: FileNode[], sortType: string): FileNode[] => {
   sorted.sort((a, b) =>
     sortType === 'asc'
       ? a.fileId.localeCompare(b.fileId)
-      : b.fileId.localeCompare(a.fileId)
+      : b.fileId.localeCompare(a.fileId),
   );
 
   sorted.push(last);
@@ -128,9 +131,7 @@ const filesList = handleNestedEntities(rootFolder);
 const initialState: FileSliceState = {
   instaledApps: instaledAppsData,
   filesList: filesList,
-  rootPath: 'root/',
-  desktopPath: 'root/users/guests/desktop',
-  sort: 'asc',
+  userFolders: [],
 };
 
 export const fileSlice = createSlice({
@@ -142,7 +143,7 @@ export const fileSlice = createSlice({
       action: PayloadAction<{
         path: string;
         data: FileNode;
-      }>
+      }>,
     ) => {
       const { data, path } = action.payload;
       findByPath(state.filesList, path, data);
@@ -153,7 +154,7 @@ export const fileSlice = createSlice({
       action: PayloadAction<{
         path: string;
         updates: Partial<FileNode>;
-      }>
+      }>,
     ) => {
       const { path, updates } = action.payload;
     },

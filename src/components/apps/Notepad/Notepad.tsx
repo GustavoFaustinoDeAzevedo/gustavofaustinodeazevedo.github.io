@@ -24,6 +24,19 @@ const Notepad = ({ content = '' }) => {
           { label: 'Open' },
           {
             label: 'Save',
+            onClick: () => {
+              console.log('Saving file...');
+              handleNewFile('users/guests/desktop', {
+                fileId: `file-${Date.now()}`,
+                key: 'notepad',
+                content: text,
+                icon: 'notepad',
+                type: 'text',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                title: { eng: 'New File', por: 'Novo Arquivo' },
+              });
+            },
           },
           { label: 'Save All' },
           { isDivisor: true },
@@ -44,9 +57,12 @@ const Notepad = ({ content = '' }) => {
               console.log('Saving file...');
               handleNewFile('users/guests/desktop', {
                 fileId: `file-${Date.now()}`,
-                name: 'NewFile.txt',
+                key: 'notepad',
                 content: text,
-                icon: 'file',
+                icon: 'notepad',
+                type: 'text',
+                createdAt: new Date(),
+                updatedAt: new Date(),
                 title: { eng: 'New File', por: 'Novo Arquivo' },
               });
             },
@@ -63,7 +79,7 @@ const Notepad = ({ content = '' }) => {
       };
     }, []);
   const [text, setText] = useState(
-    content[0] ? JSON.stringify(content, null, 2) : ''
+    content[0] ? JSON.stringify(content, null, 2) : '',
   );
   const textareaRef = useRef(null);
 
@@ -71,7 +87,7 @@ const Notepad = ({ content = '' }) => {
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setText(e.target.value);
     },
-    []
+    [],
   );
 
   return useMemo(
@@ -101,7 +117,7 @@ const Notepad = ({ content = '' }) => {
         />
       </div>
     ),
-    [text]
+    [text],
   );
 };
 

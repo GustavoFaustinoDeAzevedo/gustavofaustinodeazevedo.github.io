@@ -6,8 +6,11 @@ import { useSelector } from 'react-redux';
 import { findByPath } from '@/store/slices/file/filesSlice';
 
 const Desktop = () => {
-  const root = useSelector((state: RootState) => state.file.filesList);
-  const content = findByPath(root, 'users/guests/desktop')?.content ?? [];
+  const root = useSelector((state: RootState) =>
+    state.user.currentUser.config.store.userFolders.find(
+      (folder) => folder.contentKey === 'desktop',
+    ),
+  );
 
   return useMemo(
     () => (
@@ -17,11 +20,11 @@ const Desktop = () => {
           currentNode={'desktop'}
           className={'desktop-files__wrapper'}
           openMode={'window'}
-          content={content}
+          content={root?.content || []}
         />
       </div>
     ),
-    [content]
+    [root?.content],
   );
 };
 

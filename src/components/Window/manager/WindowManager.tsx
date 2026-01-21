@@ -47,7 +47,7 @@ const WindowManager = ({
     (updates: WindowData): void => {
       windowActions.handleUpdateWindow({ ...updates, windowId });
     },
-    [windowId, windowActions.handleUpdateWindow]
+    [windowId, windowActions.handleUpdateWindow],
   );
 
   // Handler para lidar com a perda do foco da janela
@@ -80,7 +80,7 @@ const WindowManager = ({
 
   const windowParams = flattenWindowParams(
     { windowIndex, language, windowRef, headerRef },
-    windowRawParams
+    windowRawParams,
   );
 
   return useMemo(
@@ -94,7 +94,7 @@ const WindowManager = ({
         filesActions={filesActions}
       />
     ),
-    [desktopRef, filesActions, isMobile, windowHandlers, windowParams]
+    [desktopRef, filesActions, isMobile, windowHandlers],
   );
 };
 
