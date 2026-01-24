@@ -35,7 +35,7 @@ const ListFiles = ({
   if (content === undefined || content?.length < 0) return;
 
   // redux state
-  
+  const language = useSelector((state: RootState) => state?.settings.language);
 
   // window actions
   const windowActions = actions.useWindowActions();

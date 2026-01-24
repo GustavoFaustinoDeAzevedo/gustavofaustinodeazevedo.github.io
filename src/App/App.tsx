@@ -16,21 +16,22 @@ import actions from '@/store/actions';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 
-import { useKeyboardBlockOnMouseHold } from '@shared/hooks';
+import { useKeyboardBlockOnMouseHold, useLocalStorage } from '@shared/hooks';
 
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
   const loaded = useBackgroundImageLoad(
     desktopBackgroundInitialImage,
     'images/Wallpapers/pexels-rpnickson-2559941.jpg',
-    15000
+    15000,
   );
   const desktopRef = useRef<HTMLDivElement | null>(null);
   // const isUserBrowserDarkMode = useUserBrowserDarkMode();
 
   const contextMenuActions = actions.useContextMenuActions();
   const isMouseDown = useKeyboardBlockOnMouseHold();
-  console.log(isMouseDown);
+  // const [user, setUser] = useLocalStorage('user', 'guest');
+  // console.log(user);
 
   return (
     <>

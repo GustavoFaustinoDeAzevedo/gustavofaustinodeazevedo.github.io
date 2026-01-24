@@ -50,6 +50,19 @@ const useWindowLifecycle = ({
   const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
     windowHandlers;
 
+  useEffect(() => {
+    if (isMobile) return;
+    createWindowDraggable({
+      windowRef,
+      triggerElement: headerRef.current,
+      bounds: desktopRef.current,
+      onFocus: () => handleFocus(),
+      updateWindowState,
+      width,
+      height,
+    });
+  }, [isMobile, headerRef]);
+
   /* ──────────── Foco ────────────── */
   useEffect(() => {
     if (isRequestingFocus) {
@@ -69,6 +82,7 @@ const useWindowLifecycle = ({
         y: isMobile ? 'var(--taskbar-height)' : randomY,
         transformOrigin: isMobile ? 'top' : 'default',
       });
+      console.log('Opening window:', windowId);
 
       const { width: initW, height: initH } = (initialDimensions as {
         width: string;
@@ -96,16 +110,6 @@ const useWindowLifecycle = ({
       });
 
       /* torna arrastável */
-      !isMobile &&
-        createWindowDraggable({
-          windowRef,
-          triggerElement: headerRef.current,
-          bounds: desktopRef.current,
-          onFocus: () => handleFocus(),
-          updateWindowState,
-          width,
-          height,
-        });
     },
   });
 
@@ -205,6 +209,18 @@ const useWindowLifecycle = ({
         handleResetFocus();
       }),
   });
+
+  /* ─────────── Atualizar ──────────── */
+  useEffect(() => {
+    if (!windowRef?.current || !isOpened) return;
+    gsap.set(windowRef.current, {
+      width: width,
+      height: height,
+      x: x,
+      y: y,
+      display: 'flex',
+    });
+  }, [windowRef]);
 };
 
 export default useWindowLifecycle;
