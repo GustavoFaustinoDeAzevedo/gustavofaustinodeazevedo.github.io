@@ -93,6 +93,7 @@ const usersInitialState: User[] = [
                 title: { eng: 'Send Message', por: 'Enviar Mensagem' },
                 icon: 'contact',
                 type: 'app',
+                initialDimensions: { width: '490px', height: '620px' },
               },
               {
                 fileId: 'backgroundPreferences',

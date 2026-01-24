@@ -13,6 +13,7 @@ const Notepad = ({ content = '' }) => {
   // );
 
   const language = useSelector((state: RootState) => state.settings.language);
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const { handleNewFile } = actions.useFilesActions();
 
   const dropdownList: { eng: DropdownItem[]; por: DropdownItem[] } =
@@ -26,7 +27,7 @@ const Notepad = ({ content = '' }) => {
             label: 'Save',
             onClick: () => {
               console.log('Saving file...');
-              handleNewFile('users/guests/desktop', {
+              handleNewFile(`users/${currentUser.name}/desktop`, {
                 fileId: `file-${Date.now()}`,
                 key: 'notepad',
                 content: text,

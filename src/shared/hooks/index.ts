@@ -3,5 +3,6 @@ export { default as usePrev } from './usePrev';
 export { default as useIsMobile } from './useIsMobile';
 export { default as useMouseEvents } from './useMouseEvents';
 export { default as useClickOutside } from './useClickOutside';
+export { default as useLocalStorage } from './useLocalStorage';
 export { default as useUserBrowserDarkMode } from './useUserBrowserDarkMode';
 export { default as useKeyboardBlockOnMouseHold } from './useKeyboardBlockOnMouseHold';
