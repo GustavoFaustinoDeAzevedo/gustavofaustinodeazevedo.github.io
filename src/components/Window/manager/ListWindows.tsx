@@ -1,45 +1,35 @@
 import WindowManager from './WindowManager';
-import actions from '@/store/actions';
 import { useIsMobile } from '@/shared';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import React, { useMemo } from 'react';
 
-const ListWindows = ({
-  desktopRef,
-}: {
-  desktopRef: React.RefObject<HTMLDivElement | null>;
-}) => {
-  const language = useSelector((state: RootState) => state.settings.language);
-  const windowList = useSelector(
-    (state: RootState) => state.window.openedWindowList
-  );
+const ListWindows = ({ desktopRef }: { desktopRef: React.RefObject<HTMLDivElement | null> }) => {
+  const windowList = useSelector((state: RootState) => state.window.openedWindowList);
 
-  const filteredWindowList = windowList?.filter(
-    ({ windowId }) => windowId !== 'new' && windowId !== 'placeholder'
+  const filteredWindowList = useMemo(
+    () => windowList?.filter(({ windowId }) => windowId !== 'new' && windowId !== 'placeholder'),
+    [windowList]
   );
-
-  const windowActions = actions.useWindowActions();
-  const settingsActions = actions.useSettingsActions();
-  const filesActions = actions.useFilesActions();
 
   const isMobile = useIsMobile();
 
-  const windowMapper = filteredWindowList?.map(({ ...windowParams }, index) => (
-    <WindowManager
-      isMobile={isMobile}
-      windowIndex={index}
-      key={windowParams.windowId}
-      settingsActions={settingsActions}
-      windowRawParams={windowParams}
-      language={language}
-      desktopRef={desktopRef}
-      filesActions={filesActions}
-      windowActions={windowActions}
-    />
-  ));
+  const windowMapper = useMemo(
+    () =>
+      filteredWindowList?.map((windowParams, index) => (
+        <WindowManager
+          isMobile={isMobile}
+          windowIndex={index}
+          key={windowParams.windowId}
+          windowRawParams={windowParams} 
+          desktopRef={desktopRef}
+        />
+      )),
+    [filteredWindowList, isMobile, desktopRef]
+  );
 
-  return windowMapper;
+  return <>{windowMapper}</>;
 };
 
-export default ListWindows;
+export default React.memo(ListWindows);
+

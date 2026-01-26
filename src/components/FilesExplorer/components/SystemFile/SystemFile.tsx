@@ -45,6 +45,7 @@ const SystemFile = ({
   onClick?: () => void;
   stylesConfig?: StylesConfig;
   isDoubleClick?: boolean;
+  
   isMobile?: boolean;
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
