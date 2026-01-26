@@ -1,4 +1,4 @@
-import { WindowData } from '@/store/actions/useWindowActions';
+import { WindowNode } from '@/store/slices/window';
 
 type WindowContext = {
   windowIndex: number;
@@ -9,7 +9,7 @@ type WindowContext = {
 
 const flattenWindowParams = (
   { windowIndex, language, headerRef, windowRef }: WindowContext,
-  { windowId, size, position, windowState, ...restParams }: WindowData,
+  { windowId, size, position, windowState, ...restParams }: WindowNode,
 ) => {
   return {
     ...restParams,

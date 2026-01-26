@@ -62,6 +62,9 @@ const windowAnimations = {
     }
     const { width, height } = windowRef.current.getBoundingClientRect();
 
+    const screenWidth = window.screen.width;
+
+
     gsap.to(windowRef.current, {
       x: isMobile ? 0 : x * 55,
       y: '100vh',
@@ -70,8 +73,8 @@ const windowAnimations = {
       width: isMobile ? width : '0',
       height: isMobile ? height : 0,
       scale: isMobile ? 1 : 0,
-
-      duration: 0.4,
+      opacity: isMobile ? 1 : 0,
+      duration: 0.5,
       display: 'none',
       ease: isMobile ? 'power2.in' : 'expo.inOut',
       onComplete: () => {

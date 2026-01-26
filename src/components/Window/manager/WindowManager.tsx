@@ -2,11 +2,14 @@ import Window from '../core';
 import useFilesActions from '@/store/actions/useFilesActions';
 import useSettingsActions from '@/store/actions/useSettingsActions';
 import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
-import { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import actions from '@/store/actions';
 import createWindowHandlers from '../utils/createWindowHandlers';
 import flattenWindowParams from '../utils/flattenWindowParams';
 import useRefs from '@/contexts/useRefs';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import { WindowNode } from '@/store/slices/window';
 
 type WindowActions = ReturnType<typeof useWindowActions>;
 type FilesActions = ReturnType<typeof useFilesActions>;
@@ -15,23 +18,24 @@ type SettingActions = ReturnType<typeof useSettingsActions>;
 type WindowManagerProps = {
   isMobile: boolean;
   windowIndex: number;
-  windowRawParams: WindowData;
-  language: string;
+  windowRawParams: WindowNode;
   desktopRef: React.RefObject<HTMLDivElement | null>;
-  filesActions: FilesActions;
-  windowActions: WindowActions;
-  settingsActions: SettingActions;
 };
 
 const WindowManager = ({
   isMobile,
   windowIndex,
   windowRawParams,
-  language,
   desktopRef,
-  filesActions,
 }: WindowManagerProps) => {
   const { windowId = '' } = windowRawParams;
+
+  const language = useSelector((state: RootState) => state.settings.language);
+
+  //Actions
+
+  const windowActions = actions.useWindowActions();
+  const filesActions = actions.useFilesActions();
 
   //Refs para janela e header
 
@@ -39,16 +43,15 @@ const WindowManager = ({
   const windowRef = createRef(windowId);
   const headerRef = useRef(null);
 
-  const windowActions = actions.useWindowActions();
-
   //Handler principal para lidar com as atualizações do estado da janela
 
   const updateWindowState = useCallback(
     (updates: WindowData): void => {
       windowActions.handleUpdateWindow({ ...updates, windowId });
     },
-    [windowId, windowActions.handleUpdateWindow],
+    [windowActions, windowId],
   );
+  
 
   // Handler para lidar com a perda do foco da janela
 
@@ -63,6 +66,7 @@ const WindowManager = ({
   }, [updateWindowState]);
 
   const handleFocus = useCallback(() => {
+    if (windowRawParams.isFocused) return null;
     updateWindowState({ focused: true, isRequestingFocus: false });
   }, [updateWindowState]);
 
@@ -78,24 +82,33 @@ const WindowManager = ({
 
   // Planificação de parametros da janela
 
-  const windowParams = flattenWindowParams(
-    { windowIndex, language, windowRef, headerRef },
-    windowRawParams,
+  const windowParams = useMemo(
+    () =>
+      flattenWindowParams(
+        { windowIndex, language, windowRef, headerRef },
+        windowRawParams,
+      ),
+    [windowIndex, language, windowRef, headerRef, windowRawParams],
   );
 
-  return useMemo(
-    () => (
-      <Window
-        // className={className}
-        isMobile={isMobile}
-        desktopRef={desktopRef}
-        windowParams={windowParams}
-        windowHandlers={windowHandlers}
-        filesActions={filesActions}
-      />
-    ),
-    [desktopRef, filesActions, isMobile, windowHandlers],
+  return (
+    <Window
+      // className={className}
+      isMobile={isMobile}
+      desktopRef={desktopRef}
+      windowParams={windowParams}
+      windowHandlers={windowHandlers}
+      filesActions={filesActions}
+    />
   );
 };
 
-export default WindowManager;
+export default React.memo(WindowManager, (prev, next) => {
+  return (
+    prev.isMobile === next.isMobile &&
+    prev.windowIndex === next.windowIndex &&
+    prev.desktopRef === next.desktopRef &&
+    prev.windowRawParams.windowId === next.windowRawParams.windowId &&
+    prev.windowRawParams.windowState === next.windowRawParams.windowState
+  );
+});

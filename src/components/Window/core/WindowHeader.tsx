@@ -86,14 +86,6 @@ const WindowHeader = ({
     () => (
       <div className="window__header">
         <span
-          onTouchStart={handleRequestFocus}
-          onClick={handleRequestFocus}
-          onDoubleClick={
-            props.isMaximized
-              ? props.handleRequestRestore
-              : props.handleRequestMaximize
-          }
-          onMouseDown={handleRequestFocus}
           ref={headerRef}
           title={title[language as keyof typeof title] || 'Untitled'}
           aria-label={title[language as keyof typeof title] || 'Untitled'}
@@ -105,7 +97,7 @@ const WindowHeader = ({
         <div className="window__header-controls">{headerControls}</div>
       </div>
     ),
-    [title, language, icon, handleRequestFocus, headerRef, headerData],
+    [title, language, icon, handleRequestFocus, headerRef],
   );
 };
 

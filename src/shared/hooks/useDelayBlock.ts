@@ -15,7 +15,7 @@ export function useDelayBlock(delayMs: number = 2000) {
         setIsBlocked(false);
       }, delayMs);
     },
-    [isBlocked, delayMs]
+    [isBlocked, delayMs],
   );
 
   const cancel = useCallback(() => {

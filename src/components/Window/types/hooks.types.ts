@@ -83,8 +83,11 @@ export interface UseWindowLifecycleProps {
   desktopRef: RefObject<HTMLElement | null>;
   windowParams: WindowParams;
   windowHandlers: WindowHandlers;
+  clickLock: boolean;
+  setClickLock: (value: boolean) => void;
   isMobile: boolean;
   updateWindowState: (updates: Partial<WindowParams>) => void;
+  handleClickLock: (action: () => void) => void;
   animations: typeof windowAnimations;
   getWindowInfo: () => { savedWidth?: number; savedHeight?: number };
 }

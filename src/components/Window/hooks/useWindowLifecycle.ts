@@ -4,7 +4,7 @@ import useAnimationSafe from '../hooks/useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
 import createWindowDraggable from '../utils/createWindowDraggable';
 import { UseWindowLifecycleProps } from '../types/hooks.types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * @file useWindowLifecycle.ts
@@ -47,21 +47,26 @@ const useWindowLifecycle = ({
     isOpened,
   } = windowParams;
 
-  const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
-    windowHandlers;
+  const {
+    updateWindowState,
+    handleFocus,
+    handleResetFocus,
+    handleClose,
+  } = windowHandlers;
+
+  /* ──────────── Criação do draggable ────────────── */
 
   useEffect(() => {
     if (isMobile) return;
     createWindowDraggable({
-      windowRef,
-      triggerElement: headerRef.current,
-      bounds: desktopRef.current,
-      onFocus: () => handleFocus(),
-      updateWindowState,
-      width,
-      height,
+      windowRef: windowRef as React.RefObject<HTMLElement>,
+      triggerElement: headerRef.current as HTMLElement,
+      desktopRef: desktopRef as React.RefObject<HTMLElement>,
+      updateWindowState: updateWindowState as <T>(state: T) => void,
+      width: width as number,
+      height: height as number,
     });
-  }, [isMobile, headerRef]);
+  }, [isMobile, headerRef, windowRef]);
 
   /* ──────────── Foco ────────────── */
   useEffect(() => {
@@ -210,9 +215,23 @@ const useWindowLifecycle = ({
       }),
   });
 
-  /* ─────────── Atualizar ──────────── */
+  /* ─────────── Quando houver predefinição ──────────── */
   useEffect(() => {
     if (!windowRef?.current || !isOpened) return;
+    if (isMinimized) {
+      gsap.set(windowRef.current, {
+        x: x,
+        y: '100vh',
+        minWidth: isMobile ? width : '150px',
+        minHeight: '150px',
+        scale: 0,
+        opacity: 0,
+        height: isMobile ? height : 0,
+        ease: isMobile ? 'power2.in' : 'expo.inOut',
+      });
+      return;
+    }
+
     gsap.set(windowRef.current, {
       width: width,
       height: height,
@@ -220,7 +239,7 @@ const useWindowLifecycle = ({
       y: y,
       display: 'flex',
     });
-  }, [windowRef]);
+  }, []);
 };
 
 export default useWindowLifecycle;

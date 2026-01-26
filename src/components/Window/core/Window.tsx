@@ -40,6 +40,9 @@ const Window = ({
   isMobile,
 }: WindowProps) => {
   const [errorOcurred, setErrorOcurred] = useState(false);
+  const handleMouseDown = () => {
+    !isFocused ? handleFocus() : null;
+  };
   //props vindos do pai =====================================================================
 
   const {
@@ -62,6 +65,7 @@ const Window = ({
     headerRef,
   } = windowParams;
   const {
+    handleFocus,
     updateWindowState,
     handleRequestClose,
     handleRequestMinimize,
@@ -160,12 +164,7 @@ const Window = ({
     ignoredDataAttributes: ['data-dropdown-menu'],
   });
 
-  //handler para lidar com o focus da janela ===================================
-
-  const handleFocus = useCallback(() => {
-    if (isFocused) return null;
-    if (handleRequestFocus) handleRequestFocus();
-  }, [isFocused, handleRequestFocus]);
+  //==
 
   //JSX ========================================================================
 
@@ -179,7 +178,7 @@ const Window = ({
         style={{ zIndex }}
         // onContextMenu={handleContextMenu}
         id={windowId}
-        onClick={handleFocus}
+        onMouseDown={handleMouseDown}
       >
         {useMemo(
           () => (
