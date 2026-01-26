@@ -26,7 +26,7 @@ export const store = configureStore({
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  //preloadedState: persistedState,
+  preloadedState: persistedState,
 });
 
 store.subscribe(() => {
