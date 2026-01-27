@@ -3,13 +3,11 @@ import gsap from 'gsap';
 
 const windowAnimations = {
 
-  openWindow: (windowRef, width, height, handler = () => { }, isMobile) => {
+  openWindow: (windowRef, handler = () => { }, isMobile) => {
     if (!windowRef?.current) return;
     gsap.fromTo(windowRef.current, { scale: 0.8, opacity: 0 }, {
       scale: 1,
       opacity: 1,
-      width: width,
-      height: height,
       duration: 0.3,
       ease: 'power2.out',
       display: 'flex',
@@ -64,22 +62,42 @@ const windowAnimations = {
 
     const screenWidth = window.screen.width;
 
-
-    gsap.to(windowRef.current, {
-      x: isMobile ? 0 : x * 55,
-      y: '100vh',
-      minWidth: isMobile ? width : '150px',
-      minHeight: '150px',
-      width: isMobile ? width : '0',
-      height: isMobile ? height : 0,
-      scale: isMobile ? 1 : 0,
-      opacity: isMobile ? 1 : 0,
-      duration: 0.5,
+    const desktopParams = {
+      x: x * 55,
+      minWidth: '150px',
+      width: 0,
+      height: 0,
+      scale: 0,
+      opacity: 0,
+      duration: 0.3,
       display: 'none',
-      ease: isMobile ? 'power2.in' : 'expo.inOut',
+      ease: 'expo2.Out',
+    }
+
+    const mobileParams = {
+      x: 0,
+      minWidth: width,
+      width: width,
+      height: height,
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: 'power2.in',
+    }
+
+    const sharedParams = {
+      y: '100vh',
+      minHeight: '150px',
+      display: 'none',
       onComplete: () => {
         handler();
       },
+    }
+
+
+    gsap.to(windowRef.current, {
+      ...(isMobile ? mobileParams : desktopParams),
+      ...sharedParams,
     });
   },
 
@@ -94,8 +112,8 @@ const windowAnimations = {
       scale: 1,
       opacity: 1,
       display: 'flex',
-      duration: 0.4,
-      ease: isMobile ? 'power2.in' : 'expo.inOut',
+      duration: 0.2,
+      ease: isMobile ? 'power2.in' : 'expo2.in',
       onComplete: () => {
         handler();
         gsap.set(windowRef.current, {
