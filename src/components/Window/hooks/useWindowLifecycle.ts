@@ -47,12 +47,8 @@ const useWindowLifecycle = ({
     isOpened,
   } = windowParams;
 
-  const {
-    updateWindowState,
-    handleFocus,
-    handleResetFocus,
-    handleClose,
-  } = windowHandlers;
+  const { updateWindowState, handleFocus, handleResetFocus, handleClose } =
+    windowHandlers;
 
   /* ──────────── Criação do draggable ────────────── */
 
@@ -82,12 +78,6 @@ const useWindowLifecycle = ({
     animation: (element) => {
       const { randomX, randomY } = getRandomPosition();
       if (!element) return;
-      gsap.set(element, {
-        x: isMobile ? '0rem' : randomX,
-        y: isMobile ? 'var(--taskbar-height)' : randomY,
-        transformOrigin: isMobile ? 'top' : 'default',
-      });
-      console.log('Opening window:', windowId);
 
       const { width: initW, height: initH } = (initialDimensions as {
         width: string;
@@ -96,8 +86,16 @@ const useWindowLifecycle = ({
         width: '1000px',
         height: '600px',
       };
+      gsap.set(element, {
+        x: isMobile ? '0rem' : randomX,
+        y: isMobile ? 'var(--taskbar-height)' : randomY,
+        width: initW,
+        height: initH,
+        scale: isMobile ? 1 : 0.8,
+        transformOrigin: isMobile ? 'top' : 'center',
+      });
 
-      windowAnimations.openWindow(windowRef, initW, initH, () => {}, isMobile);
+      windowAnimations.openWindow(windowRef, () => {}, isMobile);
       updateWindowState({
         x: randomX,
         y: randomY,
@@ -113,8 +111,6 @@ const useWindowLifecycle = ({
         isRequestingMaximize: isRequestingMaximize || isMobile,
         opened: true,
       });
-
-      /* torna arrastável */
     },
   });
 
