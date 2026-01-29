@@ -15,7 +15,10 @@ const logger: Middleware = (store) => (next) => (action) => {
   return result;
 };
 
-const persistedState = loadState();
+const [persistedState, isDataPersistent] = loadState() as [
+  () => RootState,
+  boolean,
+];
 
 export const store = configureStore({
   reducer: {
@@ -26,7 +29,7 @@ export const store = configureStore({
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  preloadedState: persistedState,
+  preloadedState: isDataPersistent ? undefined : persistedState,
 });
 
 store.subscribe(() => {

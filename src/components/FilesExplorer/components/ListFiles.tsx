@@ -88,13 +88,18 @@ const ListFiles = ({
         nodeDepth,
         initialDimensions,
         permission,
+        hidden,
       }: FileNode,
       windowIndex: number,
     ) => {
+      const userPermission = useSelector(
+        (state: RootState) => state.user.currentUser.config.permission,
+      );
       if (
         fileId === undefined ||
         fileId === null ||
-        (fileId === 'devMenu' && !isLocalHost)
+        userPermission !== 'admin' ||
+        hidden === true
       )
         return null;
       const finalIcon =

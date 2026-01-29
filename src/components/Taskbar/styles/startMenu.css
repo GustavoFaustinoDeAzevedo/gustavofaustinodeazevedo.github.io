@@ -272,6 +272,15 @@
                 mask-position: center;
                 border-radius: 5px;
               }
+
+
+            }
+
+            & .start-menu__footer-toggle-container {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 1rem;
             }
           }
         }

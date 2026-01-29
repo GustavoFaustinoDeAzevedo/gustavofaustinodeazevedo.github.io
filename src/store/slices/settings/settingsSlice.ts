@@ -59,7 +59,7 @@ const checkIsMobile = (): boolean => {
   const screenCheck: boolean = window.matchMedia('(max-width: 768px)').matches;
   const userAgentCheck: boolean =
     /android|iphone|ipad|ipod|blackberry|windows phone/i.test(
-      navigator.userAgent
+      navigator.userAgent,
     );
   return screenCheck || userAgentCheck;
 };
@@ -74,6 +74,7 @@ export const desktopBackgroundInitialImage =
 const initialState: SettingsSliceState = {
   language: defaultLanguage,
   isMobile: isMobile,
+  isDataPersistent: true,
   desktopBackgroundDefaultColor: defaultBackgroundColor,
   desktopBackgroundColor: defaultBackgroundColor,
   desktopBackgroundColorContrast: defaultBackgroundColorContrast,
@@ -127,9 +128,12 @@ export const settingsSlice = createSlice({
     changeDoubleCkick: (state, action: PayloadAction<boolean>) => {
       state.isDoubleClick = action.payload;
     },
+    changePersistentData: (state, action: PayloadAction<boolean>) => {
+      state.isDataPersistent = action.payload;
+    },
   },
 });
 
-export const { changeLanguage, changeBackground, changeDoubleCkick } =
+export const { changeLanguage, changeBackground, changeDoubleCkick,changePersistentData } =
   settingsSlice.actions;
 export default settingsSlice.reducer;

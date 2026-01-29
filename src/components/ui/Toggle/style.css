@@ -1,0 +1,63 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    --switch-width: 2rem;
+    --switch-height: 1.15rem;
+    --toggle-size: calc(var(--switch-width) - var(--switch-height));
+    --toggle-padding: 0.15rem;
+    width: var(--switch-width);
+    height: var(--switch-height);
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .toggle:before {
+    position: absolute;
+    content: "";
+    height: var(--toggle-size);
+    width: var(--toggle-size);
+    left: var(--toggle-padding);
+    bottom: var(--toggle-padding);
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked+.toggle {
+    background-color: #2196F3;
+  }
+
+  input:focus+.toggle {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked+.toggle:before {
+    -webkit-transform: translateX(var(--toggle-size));
+    -ms-transform: translateX(var(--toggle-size));
+    transform: translateX(var(--toggle-size));
+  }
+
+  /* Rounded sliders */
+  .toggle.round {
+    border-radius: 34px;
+  }
+
+  .toggle.round:before {
+    border-radius: 50%;
+  }

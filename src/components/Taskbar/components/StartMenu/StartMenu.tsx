@@ -155,7 +155,7 @@ const StartMenu = () => {
               fileWrapperStyle={stylesConfig}
             />
 
-            {/* <StartMenuFooter /> */}
+             <StartMenuFooter /> 
           </aside>
         </div>
       </div>
