@@ -39,6 +39,7 @@ export type EffectValues = {
 export interface SettingsSliceState {
   language: Language;
   isMobile: boolean;
+  isDataPersistent: boolean;
   desktopBackgroundDefaultColor: string;
   desktopBackgroundColor: string;
   desktopBackgroundColorContrast: string;

@@ -49,6 +49,7 @@ export interface FileNode {
   type?: 'folder' | 'app' | 'text' | 'file';
   extension?: string;
   size?: Size;
+  hidden?: boolean;
   createdAt?: Date;
   modifiedAt?: Date;
   accessedAt?: Date;
