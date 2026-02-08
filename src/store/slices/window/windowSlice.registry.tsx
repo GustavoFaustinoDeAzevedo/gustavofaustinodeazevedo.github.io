@@ -1,17 +1,14 @@
 import {
+  BackgroundPreferences,
+  Calculator,
+  Notepad,
+  DevMenu,
+  Tests,
   AboutMe,
   ContactCard,
-  MySkills,
   SendMessage,
-} from '@components/Portfolio';
-import { Language } from '../settings';
-import TaskManager from '@components/TaskManager';
-import BrowserSimulator from '@components/BrowserSimulator';
-import { BackgroundPreferences } from '@components/Settings';
-import Calculator from '@apps/Calculator';
-import Notepad from '@apps/Notepad';
-import ConsoleCommand from '@components/ConsoleCommand';
-import DevMenu from '@/components/DevMenu';
+  MySkills,
+} from '@/components';
 
 export const returnWindowContent = (
   contentKey: string,
@@ -34,13 +31,14 @@ export const returnWindowContent = (
       skills: () => <MySkills />,
       sendMessage: () => <SendMessage />,
       contact: () => <ContactCard />,
-      cmd: () => <ConsoleCommand />,
-      taskManager: () => <TaskManager />,
-      browser: () => <BrowserSimulator />,
-      github: () => <BrowserSimulator src={src} />,
+      // cmd: () => <ConsoleCommand />,
+      // taskManager: () => <TaskManager />,
+      // browser: () => <BrowserSimulator />,
+      // github: () => <BrowserSimulator src={src} />,
       backgroundPreferences: () => <BackgroundPreferences />,
       calculator: () => <Calculator />,
       notepad: () => <Notepad content={content as string} />,
+      tests: () => <Tests />,
     };
     return map[contentKey as keyof typeof map]?.();
   } catch (error) {

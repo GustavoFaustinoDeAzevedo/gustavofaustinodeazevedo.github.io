@@ -1,2 +1,3 @@
-export { default, WindowManager } from './manager';
-export { default as AnimatedInput } from './components';
+export * from './manager';
+export * from './components';
+export * from './variants';

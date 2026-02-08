@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './NotificationWindow.css';
 
 type NotificationWindowProps = {
   id: string;
