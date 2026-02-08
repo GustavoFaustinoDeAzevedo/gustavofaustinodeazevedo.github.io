@@ -1,0 +1,31 @@
+@layer components {
+  .dialog-window {
+    background-color: #1f3449;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px #0000001a;
+  }
+
+  .notification-window {
+    background-color: #1f3449;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px #0000001a;
+  }
+
+  .modal-window {
+    background-color: #1f3449;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px #0000001a;
+  }
+
+  .toast-window {
+    background-color: #1f3449;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px #0000001a;
+  }
+
+  .tool-window {
+    background-color: #1f3449;
+    border-radius: var(--border-radius);
+    box-shadow: var(shadow);
+  }
+}

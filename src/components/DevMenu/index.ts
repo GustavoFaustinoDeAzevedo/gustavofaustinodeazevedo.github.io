@@ -1,1 +1,1 @@
-export { default } from './DevMenu';
+export { default as DevMenu } from './DevMenu';

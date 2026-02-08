@@ -114,6 +114,13 @@ const usersInitialState: User[] = [
                 type: 'app',
                 hidden: true,
               },
+              {
+                fileId: 'tests',
+                contentKey: 'tests',
+                title: { eng: 'Tests', por: 'Testes' },
+                icon: '',
+                type: 'app',
+              },
             ],
           },
           {
