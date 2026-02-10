@@ -1,15 +1,10 @@
-@import './base.css';
-@import '../components/Desktop/style.css';
-@import '../components/TaskManager/styles/index.css';
-@import '../components/Window/styles/index.css';
-@import '../components/Taskbar/styles/index.css';
-@import '../components/FilesExplorer/styles/index.css';
-@import '../components/ContextMenu/style.css';
-@import '../components/ConsoleCommand/style.css';
-@import '../components/Settings/index.css';
-@import '../components/Portfolio/index.css';
-@import '../components/apps/index.css';
-@import '../components/ui/index.css';
-@import './utilities.css';
+@import "./reset.css"layer(reset);
+@import "./base.css"layer(base);
+@import "./components.css"layer(components);
+@import "./utilities.css"layer(utilities);
+@import '../shared/styles/main.css'layer(utilities);
+
+
+@layer reset, base, components, utilities;
+
 /* @import '../scss/main.css'; */
-@import '../shared/styles/main.css';

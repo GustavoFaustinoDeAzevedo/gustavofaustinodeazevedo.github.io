@@ -1,0 +1,56 @@
+@layer reset {
+
+  /* Box sizing e margem universal */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Altura mínima para ocupar viewport */
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Listas sem estilo */
+  ul, ol {
+    list-style: none;
+  }
+
+  /* Links sem sublinhado por padrão */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Imagens responsivas */
+  img, picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Botões sem estilos nativos */
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Tabelas consistentes */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /* Remove animações/reduz movimento para usuários com preferências */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

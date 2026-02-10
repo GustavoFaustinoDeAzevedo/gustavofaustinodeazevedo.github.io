@@ -1,0 +1,12 @@
+@import '../components/Desktop/style.css';
+@import '../components/TaskManager/styles/index.css';
+@import '../components/Window/styles/index.css';
+@import '../components/Taskbar/styles/index.css';
+@import '../components/FilesExplorer/styles/index.css';
+@import '../components/ContextMenu/style.css';
+@import '../components/ConsoleCommand/style.css';
+@import '../components/Settings/index.css';
+@import '../components/Portfolio/index.css';
+@import '../components/apps/index.css';
+@import '../components/ui/index.css';
+@import '../components/Tests/tests.styles.css';
