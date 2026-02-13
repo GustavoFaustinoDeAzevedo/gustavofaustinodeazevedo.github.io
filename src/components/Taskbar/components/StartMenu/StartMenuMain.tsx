@@ -24,32 +24,61 @@ const StartMenuMain = ({
   searchAppValue: string;
   fileWrapperStyle: StylesConfig;
 }) => {
+  //TODO  organizar o código
   const stylesConfig = useMemo(() => ({ ...fileWrapperStyle, gap: '2px' }), []);
-
-  return (
-    <main className="flex flex-column gap-2">
+  let dotCount = 0;
+  const installedAppsFieldset = useMemo(
+    () => (
       <fieldset className="start-menu__fieldset">
         <legend className="text-xs text-bold">
           {language !== 'por' ? 'Apps' : 'Aplicativos'}
         </legend>
-        <ListFiles
-          handleGlobalClick={handleToggleVisibility}
-          currentNode={''}
-          className={'start-menu__list'}
-          openMode={'window'}
-          language={language}
-          content={installedApps}
-          doubleClickToOpen={false}
-          stylesConfig={stylesConfig}
-          filters={searchAppValue}
-        />
+        <ul className="carousel">
+          {installedApps.map((_, index: number) => {
+            const key = crypto.randomUUID();
+            if (index % 4 === 0) {
+              dotCount += 1;
+              return (
+                <li className="carousel-item" key={key}>
+                  <ListFiles
+                    handleGlobalClick={handleToggleVisibility}
+                    currentNode={''}
+                    className={'start-menu__list'}
+                    openMode={'window'}
+                    content={installedApps.slice(index, index + 4)}
+                    doubleClickToOpen={false}
+                    stylesConfig={stylesConfig}
+                    filters={searchAppValue}
+                  />
+                </li>
+              );
+            }
+          })}
+        </ul>
+        <div className="dots">
+          {Array.from({ length: dotCount + 1 }).map(() => {
+            const key = crypto.randomUUID();
+            return <span key={key} className="dot"></span>;
+          })}
+        </div>
       </fieldset>
+    ),
+    [
+      language,
+      installedApps,
+      handleToggleVisibility,
+      searchAppValue,
+      stylesConfig,
+    ],
+  );
 
-      <fieldset className="start-menu__fieldset">
+  const appHistoryFieldset = useMemo(
+    () => (
+      <fieldset className="start-menu__fieldset margin-bottom-4">
         <legend className="text-xs text-bold">
           {language !== 'por' ? 'History' : 'Histórico'}
         </legend>
-        <ul className="start-menu__list">
+        <ul className="start-menu__list ">
           {history?.map((value: Title, index: number) => {
             const key = value[language as keyof typeof value] || String(index);
             return (
@@ -70,6 +99,14 @@ const StartMenuMain = ({
           })}
         </ul>
       </fieldset>
+    ),
+    [language, history, handleOpenHistoryApp],
+  );
+
+  return (
+    <main className="flex flex-column gap-2">
+      {installedAppsFieldset}
+      {appHistoryFieldset}
     </main>
   );
 };

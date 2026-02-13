@@ -158,11 +158,39 @@
           }
 
           & .start-menu__fieldset {
+            height: 250px;
             border: none;
             color: var(--color-text);
-            overflow: hidden;
+            overflow-y: hidden;
             padding: 0 2rem;
             padding-top: 1rem;
+
+
+            .carousel {
+              height: 220px;
+              display: flex;
+              flex-direction: column;
+              overflow-y: auto;
+              flex: 0 0 8rem;
+              scroll-snap-type: y mandatory;
+              -webkit-overflow-scrolling: touch;
+              scroll-behavior: smooth;
+              will-change: scroll-position;
+
+              &::-webkit-scrollbar {
+                width: 0;
+              }
+
+
+              & .carousel-item {
+                height: 13rem;
+                flex: 0 0 100%;
+                overflow: hidden;
+                scroll-snap-align: start;
+              }
+            }
+
+
 
             & .start-menu__list {
               height: 13rem;
@@ -170,8 +198,10 @@
               list-style: none;
               display: flex;
               flex-direction: column;
-              overflow-y: auto;
+              overflow-y: scroll;
               gap: 5px;
+
+
 
 
               & .start-menu__list-item {
@@ -221,6 +251,26 @@
               }
             }
 
+            .dots {
+              text-align: center;
+              margin-top: 10px;
+            }
+
+            .dot {
+              display: inline-block;
+              width: 8px;
+              height: 8px;
+              margin: 0 4px;
+              background: #cccccc80;
+              border-radius: 50%;
+              transform: scale(1);
+            }
+
+            .dot.active {
+              transform: scale(1.2);
+              background: #ccc;
+            }
+
 
           }
 
@@ -229,6 +279,8 @@
             bottom: 0 !important;
             left: 0 !important;
             background: #1212124c !important;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             height: auto;
             width: 100%;
             display: flex;
