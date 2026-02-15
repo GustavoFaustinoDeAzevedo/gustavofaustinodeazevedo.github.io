@@ -9,7 +9,7 @@ import { WindowData } from '@/store/actions/useWindowActions';
 import {
   getNextZIndex,
   updateHistory,
-  indexLocator,
+  windowLocator,
   focusWindow,
   findPath,
   findNode,
@@ -20,7 +20,9 @@ import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
 const windowSlice = createSlice({
   name: 'window',
   initialState: {
+    openedWindows: {},
     openedWindowList: [],
+    activeWindowParams: {},
     focusedWindow: null,
     history: [],
   } as WindowSliceState,
@@ -28,9 +30,10 @@ const windowSlice = createSlice({
     generalFocus: (state, action) => {
       const windowId = action.payload;
       state.focusedWindow = windowId;
-      const foundWindow = state.openedWindowList.find(
-        (win) => win.windowId === windowId,
-      );
+
+      const foundWindow = state.openedWindows[windowId];
+      state.activeWindowParams = foundWindow || {};
+
       if (foundWindow && foundWindow.windowState) {
         foundWindow.zIndex = getNextZIndex(state);
         foundWindow.windowState.requests.focus = true;
@@ -59,29 +62,26 @@ const windowSlice = createSlice({
         helpContent = null,
       }: WindowData = action.payload;
 
-      if (isUnique && title) {
-        const { eng, por } = title;
-        const foundSameWindow = state.openedWindowList.find(
-          (win) => win.title?.por === por && win.title?.eng === eng,
-        );
+      if (isUnique && windowId) {
+        const currentWindow = state.openedWindows[windowId];
         if (
-          foundSameWindow &&
-          foundSameWindow.position &&
-          foundSameWindow.size &&
-          foundSameWindow.windowId !== undefined &&
-          foundSameWindow.windowState
+          currentWindow &&
+          currentWindow.position &&
+          currentWindow.size &&
+          currentWindow.windowState
         ) {
-          state.focusedWindow = foundSameWindow.windowId;
-          foundSameWindow.windowState.requests.restore = true;
+          state.focusedWindow = currentWindow.windowId || null;
+          currentWindow.windowState.requests.restore = true;
           return;
         }
       }
 
-      if (!title) return; //temporario para evitar erros
+      if (!windowId) return;
+
       state.history = updateHistory(state.history, {
         icon,
         reopenProps: action.payload,
-        ...title,
+        ...(title as Title),
       });
 
       const newId = `window#${windowId}#${Date.now()}#${Math.random()}`;
@@ -125,37 +125,45 @@ const windowSlice = createSlice({
         windowState: { ...baseState },
       };
 
-      state.openedWindowList = [...state.openedWindowList, newWindow];
+      state.openedWindows[newId] = newWindow;
 
       focusWindow(state, newId);
     },
 
     resetFocus: (state, action) => {
       const windowId = action.payload;
-      const winIndex = indexLocator(windowId, state);
-      if (winIndex === -1) return;
-      const currentWindow: any = state.openedWindowList[winIndex];
-      currentWindow.windowState.status.focused = false;
+      const currentWindow: WindowNode | undefined =
+        state.openedWindows[windowId];
+      if (!currentWindow) return;
+
+      if (currentWindow.windowState) {
+        currentWindow.windowState.status.focused = false;
+      }
+
       state.focusedWindow = null;
     },
 
     closeWindow: (state, action) => {
-      state.openedWindowList = state.openedWindowList.filter(
-        (win: WindowNode) => win.windowId !== action.payload,
-      );
+      const windowId = action.payload;
+      if (!windowId) return;
+
+      delete state.openedWindows[windowId];
+
+      // Se a janela fechada estava focada, limpa o foco
+      if (state.focusedWindow === windowId) {
+        state.focusedWindow = null;
+      }
     },
 
-    updateWindow: (state, action) => {
-      if (!action.payload?.windowId || action.payload.windowId === undefined)
-        return;
-
+    updateWindow: (state, action: PayloadAction<WindowData>) => {
       const {
-        opened,
         windowId,
-        currentNode,
         title,
         icon,
+        currentNode,
         nodeDepth,
+        content,
+        contentKey,
         lastX,
         lastY,
         x,
@@ -164,88 +172,75 @@ const windowSlice = createSlice({
         lastHeight,
         width,
         height,
-        minimized,
-        maximized,
-        focused,
-        content,
-        contentKey,
-        isRequestingOpen,
-        isRequestingRestore,
-        isRequestingClose,
-        isRequestingMinimize,
-        isRequestingMaximize,
-        isRequestingFocus,
-        safe = true,
+        opened = action.payload.isOpened,
+        minimized = action.payload.isMinimized,
+        maximized = action.payload.isMaximized,
+        focused = action.payload.isFocused,
+        open = action.payload.isRequestingOpen,
+        restore = action.payload.isRequestingRestore,
+        close = action.payload.isRequestingClose,
+        minimize = action.payload.isRequestingMinimize,
+        maximize = action.payload.isRequestingMaximize,
+        focus = action.payload.isRequestingFocus,
       } = action.payload;
 
+      if (!windowId) return;
+
       if (opened === false) {
-        state.openedWindowList = state.openedWindowList.filter(
-          (win: WindowNode) => win.windowId !== windowId,
-        );
+        delete state.openedWindows[windowId];
         return;
       }
 
-      const winIndex = indexLocator(windowId, state);
-      if (winIndex === -1) return;
+      const currentWindow = windowLocator(windowId, state);
+      if (!currentWindow || !currentWindow.windowState) return;
 
-      const currentWindow: any = state.openedWindowList[winIndex];
-
-      const currentWindowState = currentWindow.windowState;
-
-      if (focused) focusWindow(state, windowId);
-
-      state.openedWindowList[winIndex] = updateStateIfDefined(currentWindow, {
+      // Atualiza campos principais
+      updateStateIfDefined(currentWindow, {
         title,
         icon,
         currentNode,
         nodeDepth,
         contentKey,
-        content:
-          currentWindow[currentNode] !== currentNode
-            ? newFile(currentWindow, content)
-            : content,
+        content,
       });
 
-      state.openedWindowList[winIndex].position = updateStateIfDefined(
-        currentWindow.position,
-        {
-          lastX,
-          lastY,
-          x,
-          y,
-        },
-      );
+      // Atualiza posição
+      updateStateIfDefined(currentWindow.position as object, {
+        lastX,
+        lastY,
+        x,
+        y,
+      });
 
-      state.openedWindowList[winIndex].size = updateStateIfDefined(
-        currentWindow.size,
-        {
-          lastWidth,
-          lastHeight,
-          width,
-          height,
-        },
-      );
+      // Atualiza tamanho
+      updateStateIfDefined(currentWindow.size as object, {
+        lastWidth,
+        lastHeight,
+        width,
+        height,
+      });
 
-      currentWindowState.status = updateStateIfDefined(
-        currentWindowState.status,
-        {
-          minimized,
-          maximized,
-          opened,
-        },
-      );
+      // Atualiza status
+      updateStateIfDefined(currentWindow.windowState.status, {
+        minimized,
+        maximized,
+        opened,
+        focused,
+      });
 
-      currentWindowState.requests = updateStateIfDefined(
-        currentWindowState.requests,
-        {
-          open: isRequestingOpen,
-          restore: isRequestingRestore,
-          close: isRequestingClose,
-          minimize: isRequestingMinimize,
-          maximize: isRequestingMaximize,
-          focus: isRequestingFocus,
-        },
-      );
+      // Atualiza requests
+      updateStateIfDefined(currentWindow.windowState.requests, {
+        open,
+        restore,
+        close,
+        minimize,
+        maximize,
+        focus,
+      });
+
+      if (focused) {
+        focusWindow(state, windowId);
+      }
     },
   },
 });

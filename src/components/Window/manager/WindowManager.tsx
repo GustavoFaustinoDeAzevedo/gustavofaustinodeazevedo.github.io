@@ -1,7 +1,5 @@
 import Window from '../core';
-import useFilesActions from '@/store/actions/useFilesActions';
-import useSettingsActions from '@/store/actions/useSettingsActions';
-import useWindowActions, { WindowData } from '@/store/actions/useWindowActions';
+import { WindowData } from '@/store/actions/useWindowActions';
 import React, { useCallback, useMemo, useRef } from 'react';
 import actions from '@/store/actions';
 import createWindowHandlers from '../utils/createWindowHandlers';
@@ -11,24 +9,23 @@ import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { WindowNode } from '@/store/slices/window';
 
-type WindowActions = ReturnType<typeof useWindowActions>;
-type FilesActions = ReturnType<typeof useFilesActions>;
-type SettingActions = ReturnType<typeof useSettingsActions>;
-
 type WindowManagerProps = {
   isMobile: boolean;
   windowIndex: number;
-  windowRawParams: WindowNode;
+  windowId: string;
   desktopRef: React.RefObject<HTMLDivElement | null>;
 };
 
 const WindowManager = ({
   isMobile,
   windowIndex,
-  windowRawParams,
+  windowId,
   desktopRef,
 }: WindowManagerProps) => {
-  const { windowId = '' } = windowRawParams;
+
+  const windowRawParams = useSelector(
+    (state: RootState) => state.window.openedWindows[windowId],
+  );
 
   const language = useSelector((state: RootState) => state.settings.language);
 
@@ -49,28 +46,27 @@ const WindowManager = ({
     (updates: WindowData): void => {
       windowActions.handleUpdateWindow({ ...updates, windowId });
     },
-    [windowActions, windowId],
+    [windowActions],
   );
-  
 
-  // Handler para lidar com a perda do foco da janela
+  // Handlers para lidar com as ações da janela
 
   const handleResetFocus = useCallback(() => {
     windowActions.handleResetFocus(windowId);
   }, [windowActions.handleResetFocus]);
 
-  // Handler para lidar com o fechamento da janela
 
   const handleClose = useCallback(() => {
     updateWindowState({ opened: false });
-  }, [updateWindowState]);
+  }, []);
+
 
   const handleFocus = useCallback(() => {
-    if (windowRawParams.isFocused) return null;
+    if (windowRawParams?.isFocused) return null;
     updateWindowState({ focused: true, isRequestingFocus: false });
-  }, [updateWindowState]);
+  }, []);
 
-  // Criação dos handlers da janela
+  // Encapsulamento dos handlers
 
   const windowHandlers = {
     updateWindowState,
@@ -86,7 +82,7 @@ const WindowManager = ({
     () =>
       flattenWindowParams(
         { windowIndex, language, windowRef, headerRef },
-        windowRawParams,
+        windowRawParams as WindowNode,
       ),
     [windowIndex, language, windowRef, headerRef, windowRawParams],
   );
@@ -103,12 +99,14 @@ const WindowManager = ({
   );
 };
 
-export default React.memo(WindowManager, (prev, next) => {
-  return (
-    prev.isMobile === next.isMobile &&
-    prev.windowIndex === next.windowIndex &&
-    prev.desktopRef === next.desktopRef &&
-    prev.windowRawParams.windowId === next.windowRawParams.windowId &&
-    prev.windowRawParams.windowState === next.windowRawParams.windowState
-  );
-});
+export default React.memo(WindowManager);
+
+// export default React.memo(WindowManager, (prev, next) => {
+//   return (
+//     prev.isMobile === next.isMobile &&
+//     prev.windowIndex === next.windowIndex &&
+//     prev.desktopRef === next.desktopRef &&
+//     prev.windowRawParams.windowId === next.windowRawParams.windowId &&
+//     prev.windowRawParams.windowState === next.windowRawParams.windowState
+//   );
+// });

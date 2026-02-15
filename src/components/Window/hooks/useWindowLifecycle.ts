@@ -109,7 +109,7 @@ const useWindowLifecycle = ({
         isRequestingFocus: true,
         contentKey,
         isRequestingMaximize: isRequestingMaximize || isMobile,
-        opened: true,
+        isOpened: true,
       });
     },
   });
@@ -132,7 +132,7 @@ const useWindowLifecycle = ({
           lastHeight: savedHeight,
           isRequestingMaximize: false,
           isRequestingFocus: true,
-          maximized: true,
+          isMaximized: true,
         });
       });
     },
@@ -158,7 +158,7 @@ const useWindowLifecycle = ({
             lastHeight: savedHeight,
             isRequestingMinimize: false,
             isRequestingFocus: false,
-            minimized: true,
+            isMinimized: true,
           });
           handleResetFocus();
         },
@@ -178,8 +178,8 @@ const useWindowLifecycle = ({
         windowRef,
         () => {
           updateWindowState({
-            maximized: isMinimized && isMaximized,
-            minimized: false,
+            isMaximized: isMinimized && isMaximized,
+            isMinimized: false,
             isRequestingRestore: false,
             isRequestingFocus: true,
             x: lastX,

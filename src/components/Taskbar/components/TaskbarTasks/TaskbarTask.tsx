@@ -1,31 +1,48 @@
 import { RootState } from '@/store';
-import { Title } from '@/store/slices/file';
+import actions from '@/store/actions';
 import Icon from '@components/ui/GlobalStyles/components/Icon';
 import React, { use, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 interface TaskbarItemProps {
   id: string;
-  isMinimized: boolean;
-  icon: string;
   index: number;
-  handleWindowMinimize: (id: string) => void;
-  handleWindowRestore: (id: string) => void;
-  handleWindowFocus: (id: string) => void;
-  title?: string;
 }
 
-const TaskbarTask = ({
-  id,
-  isMinimized,
-  icon,
-  index,
-  handleWindowMinimize,
-  handleWindowRestore,
-  handleWindowFocus,
-  title,
-}: TaskbarItemProps) => {
-  const { focusedWindow } = useSelector((state: RootState) => state.window);
+const TaskbarTask = ({ id, index }: TaskbarItemProps) => {
+
+  const focusedWindow = useSelector(
+    (state: RootState) => state.window.focusedWindow,
+  );
+  const windowData = useSelector(
+    (state: RootState) => state.window.openedWindows[id],
+  );
+  const language = useSelector((state: RootState) => state.settings.language);
+
+  if (!windowData) return null;
+
+  const { title, windowState, icon } = windowData;
+  const isMinimized = windowState?.status.minimized ?? false;
+
+
+  const { handleUpdateWindow } = actions.useWindowActions();
+
+  const handleWindow = (windowId: string, request: string, value?: boolean) => {
+    handleUpdateWindow({
+      windowId,
+      [request]: value ?? true,
+    });
+  };
+
+  const handleWindowMinimize = (windowId: string) => {
+    handleWindow(windowId, 'isRequestingMinimize', true);
+  };
+  const handleWindowRestore = (windowId: string) => {
+    handleWindow(windowId, 'isRequestingRestore', true);
+  };
+  const handleWindowFocus = (windowId: string) => {
+    handleWindow(windowId, 'isRequestingFocus', true);
+  };
 
   const handleClick = () => {
     if (!isMinimized && focusedWindow !== id) {
@@ -37,7 +54,7 @@ const TaskbarTask = ({
   const memoizedIcon = useMemo(
     () => (
       <Icon
-        variant={icon}
+        variant={icon ?? 'html-file'}
         style={{ backgroundColor: 'transparent', width: '1.8rem' }}
       />
     ),
@@ -52,7 +69,7 @@ const TaskbarTask = ({
          ${isMinimized ? 'minimized' : ''}
          ${id.replace(/[.#]/g, '')}-taskbar-task
       `}
-      title={title}
+      title={title?.[language as keyof typeof title] || ''}
       onClick={handleClick}
     >
       {memoizedIcon}
@@ -60,4 +77,4 @@ const TaskbarTask = ({
   );
 };
 
-export default TaskbarTask;
+export default React.memo(TaskbarTask);

@@ -5,51 +5,17 @@ import { RootState } from '@/store';
 import actions from '@/store/actions';
 
 const TaskbarTasks = () => {
-  const windowActions = actions.useWindowActions();
-  const { handleUpdateWindow } = windowActions;
-  const { openedWindowList } = useSelector((state: RootState) => state.window);
-  const { language } = useSelector((state: RootState) => state.settings);
-  const handleWindow = (id: string, request: string, value?: boolean) => {
-    handleUpdateWindow({
-      windowId: id,
-      [request]: value ?? true,
-    });
-  };
+  const openedWindows = useSelector(
+    (state: RootState) => state.window.openedWindows,
+  );
 
-  const handleWindowMinimize = (windowId: string) => {
-    handleWindow(windowId, 'isRequestingMinimize', true);
-  };
-  const handleWindowRestore = (windowId: string) => {
-    handleWindow(windowId, 'isRequestingRestore', true);
-  };
-  const handleWindowFocus = (windowId: string) => {
-    handleWindow(windowId, 'isRequestingFocus', true);
-  };
+  const mappedTasksIds = Object.keys(openedWindows).map((id, index) => (
+    <TaskbarTask key={id} id={id} index={index} />
+  ));
 
   return useMemo(
-    () => (
-      <ul className="taskbar__window-list">
-        {openedWindowList?.[0]?.windowState?.status.opened &&
-          openedWindowList.map(
-            ({ windowId, title, windowState, icon }, index) => {
-              return (
-                <TaskbarTask
-                  key={windowId}
-                  id={windowId ?? ''}
-                  title={title?.[language as keyof typeof title] || ''}
-                  isMinimized={windowState?.status.minimized ?? false}
-                  icon={icon ?? 'html-file'}
-                  index={index}
-                  handleWindowMinimize={handleWindowMinimize}
-                  handleWindowRestore={handleWindowRestore}
-                  handleWindowFocus={handleWindowFocus}
-                />
-              );
-            },
-          )}
-      </ul>
-    ),
-    [openedWindowList, language],
+    () => <ul className="taskbar__window-list">{mappedTasksIds}</ul>,
+    [mappedTasksIds],
   );
 };
 

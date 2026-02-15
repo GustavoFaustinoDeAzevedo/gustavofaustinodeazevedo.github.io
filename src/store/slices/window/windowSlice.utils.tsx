@@ -1,4 +1,4 @@
-import { Title, WindowSliceState } from './windowSlice.types';
+import { Title, WindowNode, WindowSliceState } from './windowSlice.types';
 import { FileNode } from '../file';
 import { WindowData } from '@/store/actions/useWindowActions';
 
@@ -10,29 +10,34 @@ import { WindowData } from '@/store/actions/useWindowActions';
  * @param {boolean} getMaxZIndex - Se deve retornar o maior zIndex atual.
  * @returns {number} - O próximo zIndex.
  */
-export const getNextZIndex = (state: WindowSliceState, getMaxZIndex = false) =>
-  getMaxZIndex
-    ? Math.max(0, ...state.openedWindowList.map((win) => win.zIndex || 0))
-    : state.openedWindowList.reduce(
-        (max, win) => Math.max(max, win.zIndex || 0),
-        0
-      ) + 1;
+export const getNextZIndex = (
+  state: WindowSliceState,
+  getMaxZIndex = false,
+): number => {
+  const windows = Object.values(state.openedWindows);
+
+  if (windows.length === 0) return 1;
+
+  const maxZ = windows.reduce((max, win) => Math.max(max, win.zIndex || 0), 0);
+
+  return getMaxZIndex ? maxZ : maxZ + 1;
+};
 
 /**
- * Atualiza o histórico adicionando o windowId dado ao incio da lista e removendo
- * qualquer entrada duplicada.
- * @param {Title[]} history - O histórico atual.
- * @param {Title} windowId - O windowId a ser adicionado ao histórico.
- * @returns {Title[]} - O histórico atualizado.
+ * Atualiza o histórico adicionando o windowId dado ao início da lista
+ * e removendo qualquer entrada duplicada.
+ * Mantém no máximo 10 itens.
  */
 export const updateHistory = (history: Title[], windowId: Title): Title[] => {
   try {
-    const filteredHistory = history.filter((item) =>
-      Object.entries(item).some(
-        ([key, val]) => ['por', 'eng'].includes(key) && val !== windowId[key]
-      )
-    );
-    return [windowId, ...filteredHistory].slice(0, 10);
+    const seen = new Set<string>();
+    const newHistory = [windowId, ...history].filter((item) => {
+      const key = `${item.por}-${item.eng}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    return newHistory.slice(0, 10);
   } catch (error) {
     console.error('Error updating history:', error);
     return history;
@@ -40,91 +45,29 @@ export const updateHistory = (history: Title[], windowId: Title): Title[] => {
 };
 
 /**
- * Retorna a posição do windowId na lista de janelas abertas.
- * Caso a janela não seja encontrada, retorna -1.
- * @param {string} windowId - O windowId a ser localizado.
- * @param {WindowSliceState} state - O estado atual do slice de janelas.
- * @returns {number} - A posição do windowId.
+ * Verifica se o windowId existe no dicionário de janelas abertas.
+ * Retorna a janela correspondente ou undefined se não existir.
  */
-export const indexLocator = (
+export const windowLocator = (
   windowId: string,
-  state: WindowSliceState
-): number => {
+  state: WindowSliceState,
+): WindowNode | undefined => {
   try {
-    return state.openedWindowList.findIndex((win) => win.windowId === windowId);
+    return state.openedWindows[windowId];
   } catch (error) {
-    console.error('Error locating node depth:', error);
-    return -1;
+    console.error('Error locating window:', error);
+    return undefined;
   }
-};
-
-/**
- * Adiciona um novo arquivo na lista de filhos do nó pai, garantindo que o arquivo
- * mais recentemente adicionado seja colocado na segunda posição da lista
- * quando houver dois ou mais filhos.
- * @param {FileNode} node  - O nó pai.
- * @param {FileNode} fileToBeAdded - O novo arquivo a ser adicionado.
- * @returns {FileNode[]} - A lista de filhos atualizada.
- */
-export const newFile = (
-  node: FileNode,
-  fileToBeAdded: FileNode
-): FileNode[] => {
-  const content = node.content ?? [];
-  if (content.length < 2) return [...content, fileToBeAdded];
-
-  return [content[0], fileToBeAdded, ...content.slice(1)];
-};
-
-/**
- * Encontra um nó na estrutura de árvore de janelas com windowId igual ao targetId.
- * @param {FileNode} obj - O nó pai.
- * @param {string} targetId - O windowId do nó a ser encontrado.
- * @returns {FileNode | null} - O nó encontrado ou nulo caso não seja encontrado.
- */
-export const findNode = (obj: FileNode, targetId: string): FileNode | null => {
-  if (obj.windowId === targetId) return obj;
-
-  if (obj.content) {
-    for (let child of obj.content) {
-      const result = findNode(child, targetId);
-      if (result) return result;
-    }
-  }
-
-  return null;
-};
-
-export const findPath = (
-  obj: FileNode,
-  targetId: string,
-  path: string[] = []
-): string[] | undefined => {
-  if (obj.windowId === targetId) return path;
-
-  if (obj.content) {
-    for (let child of obj.content) {
-      const result = findPath(child, targetId, [
-        ...(path as any),
-        obj.windowId as any,
-      ]);
-      if (result) return result;
-    }
-  }
-
-  return undefined;
 };
 
 export const focusWindow = (state: WindowSliceState, windowId: string) => {
   state.focusedWindow = windowId;
-  const foundWindow = state.openedWindowList.find(
-    (win) => win.windowId === windowId
-  );
-  if (foundWindow && foundWindow.windowState) {
-    state.focusedWindow = windowId;
-    foundWindow.zIndex = getNextZIndex(state);
-    foundWindow.windowState.status.focused = true;
-    foundWindow.windowState.status.minimized = false;
-    foundWindow.windowState.requests.focus = false;
-  }
+
+  const foundWindow: WindowNode | undefined = state.openedWindows[windowId];
+  if (!foundWindow || !foundWindow.windowState) return;
+
+  foundWindow.zIndex = getNextZIndex(state);
+  foundWindow.windowState.status.focused = true;
+  foundWindow.windowState.status.minimized = false;
+  foundWindow.windowState.requests.focus = false;
 };
