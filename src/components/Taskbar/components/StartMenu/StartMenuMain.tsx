@@ -56,7 +56,7 @@ const StartMenuMain = ({
           })}
         </ul>
         <div className="dots">
-          {Array.from({ length: dotCount + 1 }).map(() => {
+          {Array.from({ length: dotCount }).map(() => {
             const key = crypto.randomUUID();
             return <span key={key} className="dot"></span>;
           })}

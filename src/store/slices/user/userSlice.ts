@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Notepad, Calculator } from '@components/apps';
 import { FileNode } from '../file';
 import { remove } from 'dexie';
+import { Title } from '../window/windowSlice.types';
 
 const usersInitialState: User[] = [
   {
@@ -15,7 +16,7 @@ const usersInitialState: User[] = [
       permission: 'admin',
       store: {
         window: {
-          openedWindowList: [''],
+          openedWindows: {},
           focusedWindow: null,
           history: [''],
         },

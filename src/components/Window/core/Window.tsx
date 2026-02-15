@@ -98,7 +98,7 @@ const Window = ({
 
   const windowContentWrapperProps = useMemo(() => {
     return {
-      isFocused: isFocused,
+      isFocused,
       isOpened,
       windowId,
       currentNode,

@@ -62,6 +62,20 @@ export interface WindowNode {
   isMaximized?: boolean;
   isMinimized?: boolean;
   isOpened?: boolean;
+  unique?: boolean;
+  focused?: boolean;
+  maximized?: boolean;
+  minimized?: boolean;
+  opened?: boolean;
+  open?: boolean;
+  close?: boolean;
+  focus?: boolean;
+  restore?: boolean;
+  maximize?: boolean;
+  minimize?: boolean;
+  isRequestingClose?: boolean;
+  isRequestingFocus?: boolean;
+  isRequestingOpen?: boolean;
   isRequestingFullScreen?: boolean;
   isRequestingMaximize?: boolean;
   isRequestingMinimize?: boolean;
@@ -72,6 +86,8 @@ export interface WindowNode {
 }
 
 export interface WindowSliceState {
+  activeWindowParams: WindowNode;
+  openedWindows: Record<string, WindowNode>;
   openedWindowList: WindowNode[];
   focusedWindow: string | null;
   history: Title[];

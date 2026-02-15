@@ -6,20 +6,16 @@
  * @template T - O tipo do objeto de estado.
  */
 
-const updateStateIfDefined = <T extends Record<string, unknown>>(
-  state: T,
-  updates: Partial<T>
+const updateStateIfDefined = <T extends object>(
+  target: T,
+  updates: Partial<T>,
 ): T => {
-
-  const definedUpdates = Object.fromEntries(
-    Object.entries(updates).filter(([_, value]) => value !== undefined)
-  ) as T;
-
-
-  return {
-    ...state,
-    ...definedUpdates,
-  };
+  Object.entries(updates).forEach(([key, value]) => {
+    if (value !== undefined) {
+      (target as any)[key] = value;
+    }
+  });
+  return target;
 };
 
 export default updateStateIfDefined;
