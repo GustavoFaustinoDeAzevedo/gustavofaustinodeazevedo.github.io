@@ -22,7 +22,6 @@ const StartMenuFooter = () => {
   };
 
   const handleToggle = () => {
-    console.log(isDataPersistent);
     handleChangePersistentData(!isDataPersistent);
   };
   return (

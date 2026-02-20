@@ -21,21 +21,21 @@ export type WindowState = {
   requests: Partial<Record<WindowRequestType, boolean>>;
 };
 
-export interface Position {
+export interface WindowPosition {
   lastX?: number;
   lastY?: number;
   x?: number;
   y?: number;
 }
 
-export interface Size {
+export interface WindowSize {
   lastWidth?: number;
   lastHeight?: number;
   width?: number;
   height?: number;
 }
 
-export interface Title {
+export interface WindowTitle {
   por: string;
   eng: string;
   icon?: string | any;
@@ -47,15 +47,15 @@ export interface WindowNode {
   windowId?: string;
   currentNode?: string;
   nodeDepth?: number;
-  title?: Title;
+  title?: WindowTitle;
   icon?: string;
   zIndex?: number;
   type?: string;
   contentKey?: string;
   src?: string;
   content?: FileNode[];
-  position?: Position;
-  size?: Size;
+  position?: WindowPosition;
+  size?: WindowSize;
   windowState?: WindowState;
   isUnique?: boolean;
   isFocused?: boolean;
@@ -80,7 +80,7 @@ export interface WindowNode {
   isRequestingMaximize?: boolean;
   isRequestingMinimize?: boolean;
   isRequestingRestore?: boolean;
-  initialDimensions?: Size;
+  initialDimensions?: WindowSize;
   helpContent?: string | null;
   windowType?: 'window' | 'modal' | 'dialog' | 'tool' | 'notification';
 }
@@ -90,5 +90,5 @@ export interface WindowSliceState {
   openedWindows: Record<string, WindowNode>;
   openedWindowList: WindowNode[];
   focusedWindow: string | null;
-  history: Title[];
+  history: WindowTitle[];
 }

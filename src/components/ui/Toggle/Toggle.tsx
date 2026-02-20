@@ -1,3 +1,4 @@
+import React from 'react';
 import './style.css';
 
 export interface ToggleProps {
@@ -50,4 +51,4 @@ const Toggle = ({
   );
 };
 
-export default Toggle;
+export default React.memo(Toggle);

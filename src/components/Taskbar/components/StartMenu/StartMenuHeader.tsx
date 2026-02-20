@@ -1,19 +1,20 @@
 import Icon from '@components/ui/GlobalStyles/components/Icon';
 import { Language } from '@/store/slices/settings';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
 const StartMenuHeader = ({
   searchAppValue,
   handleCleanInput,
   handleSearchAppChange,
   handleSearchAppBlur,
-  language,
 }: {
   searchAppValue: string;
   handleCleanInput: () => void;
   handleSearchAppChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSearchAppBlur: () => void;
-  language: Language;
 }) => {
+  const { language } = useSelector((state: RootState) => state.settings);
   return (
     <header className="start-menu__header">
       <Icon className="start-menu__search-file-icon left" variant="search" />

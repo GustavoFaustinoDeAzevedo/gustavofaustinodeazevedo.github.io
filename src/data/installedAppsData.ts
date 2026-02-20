@@ -1,6 +1,6 @@
 import { FileNode } from '@/store/slices/file';
 
-const instaledAppsData: FileNode[] = [
+const installedApps: FileNode[] = [
   {
     fileId: 'about',
     title: { eng: 'About Me', por: 'Sobre Mim' },
@@ -69,4 +69,4 @@ const instaledAppsData: FileNode[] = [
   },
 ];
 
-export default instaledAppsData;
+export default installedApps;

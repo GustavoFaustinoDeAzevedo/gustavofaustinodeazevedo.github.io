@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
 import { FileNode, FileSliceState } from './filesSlice.types';
-import instaledAppsData from '@/data/instaledAppsData';
+import installedApps from '@/data/installedAppsData';
 
 const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
   if (!parent.content) parent.content = [];
@@ -126,13 +126,8 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
 
 const filesList = handleNestedEntities(rootFolder);
 
-// Slice
-//TODO Fazer com que o initialState pegue a pasta do usuário logado que será guardado no localStorage.
-// Por enquanto, está pegando a pasta 'desktop' do rootFolder, tenho que fazer com que pegue a pasta 
-// 'desktop' do usuário logado. Depois, quando eu fizer o sistema de login, aí eu ajusto isso.
-
 const initialState: FileSliceState = {
-  instaledApps: instaledAppsData,
+  installedApps: installedApps,
   filesList: filesList,
   userFolders: [],
 };

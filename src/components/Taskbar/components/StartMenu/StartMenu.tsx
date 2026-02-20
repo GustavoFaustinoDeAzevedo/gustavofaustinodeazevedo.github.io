@@ -27,40 +27,9 @@ const StartMenu = () => {
 
   const { handleOpenWindow } = actions.useWindowActions();
 
-  // Redux =========================================================
-
-  const { history } = useSelector((state: RootState) => state.window);
-  const { language } = useSelector((state: RootState) => state.settings);
-  const { instaledApps } = useSelector((state: RootState) => state.file);
-
   // Hooks =========================================================
 
   const isMobile = useIsMobile();
-
-  // Estilos dos arquivos =========================================================
-
-  const stylesConfig: StylesConfig = useMemo(
-    () => ({
-      $direction: 'horizontal',
-      $size: '',
-      $fontSize: '0.8rem',
-      $fontWeight: 'normal',
-      $iconSize: '2rem',
-      $color: 'var(--color-text)',
-      $backgroundColor: { default: 'transparent', hover: '#ffffff1a' },
-      $borderRadius: '0rem',
-      $togglers: {
-        enableFilter: false,
-        enableShadow: false,
-        enableBorder: true,
-        enableTextShadow: true,
-        enableBorderRadius: true,
-        enableTransform: false,
-        enableSmoothTransition: true,
-      },
-    }),
-    []
-  );
 
   // Animações ==================================================================
 
@@ -126,7 +95,6 @@ const StartMenu = () => {
     () => (
       <div className={'start-menu'}>
         <StartMenuToggler
-          language={language}
           menuVisibility={menuVisibility}
           handleToggleVisibility={handleToggleVisibility}
           startButtonRef={startButtonRef}
@@ -143,34 +111,25 @@ const StartMenu = () => {
               handleCleanInput={handleCleanInput}
               handleSearchAppChange={handleSearchAppChange}
               handleSearchAppBlur={handleSearchAppBlur}
-              language={language}
             />
             <StartMenuMain
-              language={language}
-              installedApps={instaledApps}
-              history={history}
               handleToggleVisibility={handleToggleVisibility}
-              handleOpenHistoryApp={handleOpenHistoryApp}
               searchAppValue={searchAppValue}
-              fileWrapperStyle={stylesConfig}
             />
 
-             <StartMenuFooter /> 
+            <StartMenuFooter />
           </aside>
         </div>
       </div>
     ),
     [
       history,
-      language,
       menuVisibility,
       startButtonRef,
       startMenuRef,
-      stylesConfig,
-      instaledApps,
       handleToggleVisibility,
       handleOpenHistoryApp,
-    ]
+    ],
   );
 };
 
