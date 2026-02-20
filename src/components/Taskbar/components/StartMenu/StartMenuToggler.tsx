@@ -1,18 +1,17 @@
 import Icon from '@components/ui/GlobalStyles/components/Icon';
-import { Language } from '@/store/slices/settings';
-import { useRef } from 'react';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
 const StartMenuToggler = ({
-  language,
   menuVisibility,
   handleToggleVisibility,
   startButtonRef,
 }: {
-  language: Language;
   menuVisibility: boolean;
   handleToggleVisibility: () => void;
   startButtonRef: React.RefObject<HTMLButtonElement | null>;
 }) => {
+  const { language } = useSelector((state: RootState) => state.settings);
   return (
     <button
       ref={startButtonRef}

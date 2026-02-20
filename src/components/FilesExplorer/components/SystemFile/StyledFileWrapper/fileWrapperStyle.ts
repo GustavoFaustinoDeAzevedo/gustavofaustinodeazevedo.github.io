@@ -18,6 +18,7 @@ export interface StylesConfig {
     enableTransform: boolean;
     enableSmoothTransition: boolean;
   };
+  gap?: string;
 }
 
 export const fileParts = ({

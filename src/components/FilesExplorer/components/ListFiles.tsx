@@ -8,6 +8,8 @@ import { isLocalHost, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
 import { Title } from '@/store/slices/window';
+import { Language } from '../../PageMeta/PageMeta';
+import { useMemo } from 'react';
 
 type ListFilesProps = {
   handleGlobalClick?: () => void;
@@ -47,7 +49,7 @@ const ListFiles = ({
   };
 
   // contantes
-  const contentFiltered = (() => {
+  const contentFiltered = useMemo(() => {
     if (!filters) return content;
 
     const filtersArray = (Array.isArray(filters) ? filters : [filters])
@@ -64,7 +66,7 @@ const ListFiles = ({
       const normTitle = stringNormalizer(title);
       return filtersArray.every((filter) => normTitle.includes(filter));
     });
-  })();
+  }, [filters, content, language]);
 
   const isDoubleClick =
     doubleClickToOpen ??
