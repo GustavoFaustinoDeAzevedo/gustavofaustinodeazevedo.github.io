@@ -6,7 +6,7 @@
 
 ## Ultimo Update do README
 
-`23-11-2025`
+`21-02-2025`
 
 ---
 
@@ -29,6 +29,7 @@ Este projeto é um site de portfólio pessoal, criado para destacar minhas habil
 - [x] Barra de tarefas com menu iniciar.
 - [x] Calculadora.
 - [x] Configuração de fundo de tela da área de trabalho
+- [x] Dados persistentes.
 
 ---
 
@@ -37,7 +38,6 @@ Este projeto é um site de portfólio pessoal, criado para destacar minhas habil
 - [ ] Uma documentação robusta.
 - [ ] Um menu para quando o usuário clicar com o botão direito do mouse (context menu).
 - [ ] Sistema de cadastro, conexão e configuração do usuário.
-- [ ] Dados persistentes.
 - [ ] Versão simplificada do portfólio.
 - [ ] Adicionar mais apps relacionados ao sistema operacional:
   - [ ] Lista de Tarefas.
@@ -96,4 +96,3 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](L
 ## Demonstração
 
 [Clique aqui para ver o projeto sendo executado no Github Pages](https://gustavofaustinodeazevedo.github.io)
-

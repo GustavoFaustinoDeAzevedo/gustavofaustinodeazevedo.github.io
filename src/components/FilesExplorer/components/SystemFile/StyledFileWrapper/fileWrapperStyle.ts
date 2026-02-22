@@ -125,7 +125,6 @@ export const fileParts = ({
       webkitTextStroke: $togglers?.enableTextShadow && '2px black',
       wrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
       wordWrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
-      overflow: 'hidden',
       textOverflow: 'ellipsis',
       WebkitLineClamp: 2,
       lineClamp: 2,
