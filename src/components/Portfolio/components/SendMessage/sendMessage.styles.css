@@ -25,12 +25,15 @@
       & .placeholder {
         position: absolute;
         left: 1rem;
-        top: 0.8rem;
+        top: 1rem;
         font-size: 1rem;
         color: var(--color-text);
+        opacity: 1;
         pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
+        transition: color 0.4s ease;
+
       }
 
       & input, & textarea {
@@ -44,19 +47,13 @@
 
         &::placeholder {
           color: #ffffff;
-          visibility: visible;
-        }
-
-
-        &::placeholder {
-          visibility: hidden;
           opacity: 0.4;
+          visibility: hidden;
         }
 
         &:focus::placeholder {
           visibility: visible;
         }
-
 
         &:focus {
           outline: none;
@@ -130,8 +127,6 @@
         & input, & textarea {
           margin-bottom: 0rem !important;
         }
-
-
       }
     }
   }
