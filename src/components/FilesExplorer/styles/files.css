@@ -61,7 +61,7 @@
         /* filter: invert(1); */
       }
 
-      /* Label text for the desktop icon */
+      /* Texto do label para o ícone da área de trabalho */
       & .icon-text {
         width: 5rem;
         text-align: center;
