@@ -15,11 +15,14 @@ export default defineConfig({
       '@portfolio': path.resolve(__dirname, 'src/components/Portfolio'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@utils': path.resolve(__dirname, 'src/utils'),
-      '@window': path.resolve(__dirname, 'src/components/Window'),
+      '@userInterface': path.resolve(
+        __dirname,
+        'src/components/UserInterfaceWindow',
+      ),
       '@windowUtils': path.resolve(__dirname, 'src/components/Window/utils'),
       '@filesUtils': path.resolve(
         __dirname,
-        'src/components/FilesExplorer/utils'
+        'src/components/FilesExplorer/utils',
       ),
       '@ui': path.resolve(__dirname, 'src/components/ui'),
       '@shared': path.resolve(__dirname, 'src/shared'),

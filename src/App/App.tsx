@@ -5,7 +5,7 @@ import './app.styles.css';
 import Desktop from '@components/Desktop';
 import Taskbar from '@components/Taskbar';
 
-import { ListWindows } from '@window';
+import { ListWindows } from '@/components/UserInterfaceWindow';
 import { RefsProvider } from '@/contexts/RefsContext';
 
 import { ThemeProvider } from 'styled-components';

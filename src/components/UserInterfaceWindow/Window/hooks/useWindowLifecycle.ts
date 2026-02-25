@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import getRandomPosition from '../utils/getRandomPosition';
-import useAnimationSafe from '../hooks/useAnimationSafe';
+import useAnimationSafe from './useAnimationSafe';
 import windowAnimations from '../utils/windowAnimations';
 import createWindowDraggable from '../utils/createWindowDraggable';
 import { UseWindowLifecycleProps } from '../types/hooks.types';

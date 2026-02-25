@@ -1,5 +1,5 @@
 import Button from '@components/ui/Button';
-import AnimatedInput from '@window/components/AnimatedInput';
+import AnimatedInput from '@/components/UserInterfaceWindow/Window/components/AnimatedInput';
 import formData from './SendMessage.data';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -14,9 +14,25 @@ const SendMessage = () => {
   // Memoiza fields só quando tradução muda
   const fields = useMemo(
     () => [
-      { id: 'name', type: 'input', name: 'Name', config: formDataTranslated.name },
-      { id: 'email', type: 'email', name: 'Email', config: formDataTranslated.email },
-      { id: 'message', type: 'text', name: 'Message', config: formDataTranslated.message, textArea: true },
+      {
+        id: 'name',
+        type: 'input',
+        name: 'Name',
+        config: formDataTranslated.name,
+      },
+      {
+        id: 'email',
+        type: 'email',
+        name: 'Email',
+        config: formDataTranslated.email,
+      },
+      {
+        id: 'message',
+        type: 'text',
+        name: 'Message',
+        config: formDataTranslated.message,
+        textArea: true,
+      },
     ],
     [formDataTranslated],
   );
@@ -66,4 +82,3 @@ const SendMessage = () => {
 };
 
 export default React.memo(SendMessage);
-
