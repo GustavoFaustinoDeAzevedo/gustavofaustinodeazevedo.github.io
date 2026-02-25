@@ -7,32 +7,21 @@ import React, { useMemo } from 'react';
 
 const SendMessage = () => {
   const language = useSelector((state: RootState) => state.settings.language);
+
+  // Memoiza tradução só quando language muda
   const formDataTranslated = useMemo(() => formData[language], [language]);
+
+  // Memoiza fields só quando tradução muda
   const fields = useMemo(
     () => [
-      {
-        id: 'name',
-        type: 'input',
-        name: 'Name',
-        config: formDataTranslated.name,
-      },
-      {
-        id: 'email',
-        type: 'email',
-        name: 'Email',
-        config: formDataTranslated.email,
-      },
-      {
-        id: 'message',
-        type: 'text',
-        name: 'Message',
-        config: formDataTranslated.message,
-        textArea: true,
-      },
+      { id: 'name', type: 'input', name: 'Name', config: formDataTranslated.name },
+      { id: 'email', type: 'email', name: 'Email', config: formDataTranslated.email },
+      { id: 'message', type: 'text', name: 'Message', config: formDataTranslated.message, textArea: true },
     ],
     [formDataTranslated],
   );
 
+  // Memoiza mappedFields só quando fields mudam
   const mappedFields = useMemo(
     () =>
       fields.map(({ id, type, name, config, textArea }) => (
@@ -48,7 +37,7 @@ const SendMessage = () => {
           textArea={textArea}
         />
       )),
-    [formDataTranslated],
+    [fields],
   );
 
   return (
@@ -76,4 +65,5 @@ const SendMessage = () => {
   );
 };
 
-export default SendMessage;
+export default React.memo(SendMessage);
+
