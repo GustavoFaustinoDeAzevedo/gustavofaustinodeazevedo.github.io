@@ -45,7 +45,7 @@ const SystemFile = ({
   onClick?: () => void;
   stylesConfig?: StylesConfig;
   isDoubleClick?: boolean;
-  
+
   isMobile?: boolean;
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
@@ -76,7 +76,10 @@ const SystemFile = ({
     }
   };
 
-  const translatedTitle = title?.[language as keyof typeof title] || '';
+  const translatedTitle = useMemo(
+    () => title?.[language as keyof typeof title] || '',
+    [language, title],
+  );
 
   // TODO Adicionar (num futuro distante) a opção de selecionar vários arquivos, tenho que trocar o sistema padrão de focus por um
   // personalizado que permite selecionar vários arquivos ao mesmo tempo.
@@ -84,6 +87,15 @@ const SystemFile = ({
   const memoizedIcon = useMemo(
     () => <StyledFileWrapper__Icon variant={icon} {...stylesConfig} />,
     [icon, stylesConfig],
+  );
+
+  const memoizedTitle = useMemo(
+    () => (
+      <StyledFileWrapper__Text {...stylesConfig}>
+        {translatedTitle}
+      </StyledFileWrapper__Text>
+    ),
+    [translatedTitle],
   );
 
   return (
@@ -98,10 +110,7 @@ const SystemFile = ({
       {...stylesConfig}
     >
       {memoizedIcon}
-
-      <StyledFileWrapper__Text {...stylesConfig}>
-        {translatedTitle || ''}
-      </StyledFileWrapper__Text>
+      {memoizedTitle}
     </StyledFileWrapper>
   );
 };

@@ -36,9 +36,6 @@ const ListFiles = ({
 }: ListFilesProps) => {
   if (content === undefined || content?.length < 0) return;
 
-  // redux state
-  const language = useSelector((state: RootState) => state?.settings.language);
-
   // window actions
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
@@ -60,13 +57,13 @@ const ListFiles = ({
     if (filtersArray.length === 0) return content;
 
     return content.filter((item: FileNode) => {
-      const title = String(
-        item?.title?.[language as keyof typeof item.title] ?? '',
-      );
-      const normTitle = stringNormalizer(title);
+      
+      const allTitles = Object.values(item?.title ?? {}).join(' ');
+      const normTitle = stringNormalizer(allTitles);
+
       return filtersArray.every((filter) => normTitle.includes(filter));
     });
-  }, [filters, content, language]);
+  }, [content, filters]);
 
   const isDoubleClick =
     doubleClickToOpen ??

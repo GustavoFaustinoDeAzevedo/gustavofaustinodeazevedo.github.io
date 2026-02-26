@@ -1,22 +1,23 @@
-import React, { useRef, useState } from 'react';
-
+import React, { useRef, useState, Suspense } from 'react';
 import './app.styles.css';
 
-import Desktop from '@components/Desktop';
-import Taskbar from '@components/Taskbar';
-
-import { ListWindows } from '@/components/UserInterfaceWindow';
 import { RefsProvider } from '@/contexts/RefsContext';
-
 import { ThemeProvider } from 'styled-components';
 
 import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
-
 import actions from '@/store/actions';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
-
 import { useKeyboardBlockOnMouseHold, useLocalStorage } from '@shared/hooks';
+
+// Lazy imports
+const Desktop = React.lazy(() => import('@components/Desktop'));
+const Taskbar = React.lazy(() => import('@components/Taskbar'));
+const ListWindows = React.lazy(() =>
+  import('@/components/UserInterfaceWindow').then((module) => ({
+    default: module.ListWindows,
+  })),
+);
 
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
@@ -26,12 +27,6 @@ const App = () => {
     15000,
   );
   const desktopRef = useRef<HTMLDivElement | null>(null);
-  // const isUserBrowserDarkMode = useUserBrowserDarkMode();
-
-  const contextMenuActions = actions.useContextMenuActions();
-  const isMouseDown = useKeyboardBlockOnMouseHold();
-  // const [user, setUser] = useLocalStorage('user', 'guest');
-  // console.log(user);
 
   return (
     <>
@@ -43,31 +38,26 @@ const App = () => {
       {loaded && (
         <>
           {isLoadingAnimation && (
-            <>
-              <div
-                className="loading-screen__ending-layer-1"
-                onAnimationEnd={() => setIsLoadingAnimation(false)}
-              ></div>
-            </>
+            <div
+              className="loading-screen__ending-layer-1"
+              onAnimationEnd={() => setIsLoadingAnimation(false)}
+            ></div>
           )}
 
           <div className="desktop" ref={desktopRef}>
-            <Desktop />
-            <RefsProvider>
-              <ListWindows desktopRef={desktopRef} />
-              <Taskbar />
-            </RefsProvider>
+            <Suspense fallback={<div>Carregando Desktop...</div>}>
+              <Desktop />
+            </Suspense>
 
-            {/* 
-            {contextMenu.visible && (
-              <ContextMenu
-                {...contextMenu}
-                language={language}
-                items={useItemsHandler()}
-                onClose={handleHideContextMenu}
-              />
-            )}
-          */}
+            <RefsProvider>
+              <Suspense fallback={<div>Carregando janelas...</div>}>
+                <ListWindows desktopRef={desktopRef} />
+              </Suspense>
+
+              <Suspense fallback={<div>Carregando Taskbar...</div>}>
+                <Taskbar />
+              </Suspense>
+            </RefsProvider>
           </div>
         </>
       )}
