@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import DesktopBackgroundStyled from './DesktopBackgroundStyled/DesktopBackgroundStyled';
@@ -28,4 +28,6 @@ const DesktopBackground: FC<DesktopBackgroundProps> = ({ className }) => {
   );
 };
 
-export default DesktopBackground;
+export default React.memo(DesktopBackground);
+
+
