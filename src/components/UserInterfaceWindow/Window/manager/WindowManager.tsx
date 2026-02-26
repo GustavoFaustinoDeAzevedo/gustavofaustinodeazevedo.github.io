@@ -100,13 +100,3 @@ const WindowManager = ({
 };
 
 export default React.memo(WindowManager);
-
-// export default React.memo(WindowManager, (prev, next) => {
-//   return (
-//     prev.isMobile === next.isMobile &&
-//     prev.windowIndex === next.windowIndex &&
-//     prev.desktopRef === next.desktopRef &&
-//     prev.windowRawParams.windowId === next.windowRawParams.windowId &&
-//     prev.windowRawParams.windowState === next.windowRawParams.windowState
-//   );
-// });
