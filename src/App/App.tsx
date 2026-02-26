@@ -2,15 +2,11 @@ import React, { useRef, useState, Suspense } from 'react';
 import './app.styles.css';
 
 import { RefsProvider } from '@/contexts/RefsContext';
-import { ThemeProvider } from 'styled-components';
-
-import useUserBrowserDarkMode from '@/shared/hooks/useUserBrowserDarkMode';
-import actions from '@/store/actions';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
-import { useKeyboardBlockOnMouseHold, useLocalStorage } from '@shared/hooks';
+import LoadingScreen from './LoadingScreen';
 
-// Lazy imports
+
 const Desktop = React.lazy(() => import('@components/Desktop'));
 const Taskbar = React.lazy(() => import('@components/Taskbar'));
 const ListWindows = React.lazy(() =>
@@ -30,11 +26,8 @@ const App = () => {
 
   return (
     <>
-      {!loaded && (
-        <div className="loading-screen flex justify-end items-end padding-4">
-          <p className="animate-spin text-3xl z-tooltip">💿</p>
-        </div>
-      )}
+      {!loaded && <LoadingScreen text="Carregando sistema..." icon="💿" />}
+
       {loaded && (
         <>
           {isLoadingAnimation && (
@@ -45,16 +38,28 @@ const App = () => {
           )}
 
           <div className="desktop" ref={desktopRef}>
-            <Suspense fallback={<div>Carregando Desktop...</div>}>
+            <Suspense
+              fallback={
+                <LoadingScreen text="Carregando Desktop..." icon="🖥️" />
+              }
+            >
               <Desktop />
             </Suspense>
 
             <RefsProvider>
-              <Suspense fallback={<div>Carregando janelas...</div>}>
+              <Suspense
+                fallback={
+                  <LoadingScreen text="Carregando janelas..." icon="🗂️" />
+                }
+              >
                 <ListWindows desktopRef={desktopRef} />
               </Suspense>
 
-              <Suspense fallback={<div>Carregando Taskbar...</div>}>
+              <Suspense
+                fallback={
+                  <LoadingScreen text="Carregando Taskbar..." icon="🛠️" />
+                }
+              >
                 <Taskbar />
               </Suspense>
             </RefsProvider>
@@ -65,4 +70,4 @@ const App = () => {
   );
 };
 
-export default React.memo(App);
+export default App;
