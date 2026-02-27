@@ -6,11 +6,16 @@ import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 import LoadingScreen from './LoadingScreen';
 
-
-const Desktop = React.lazy(() => import('@components/Desktop'));
-const Taskbar = React.lazy(() => import('@components/Taskbar'));
+const Desktop = React.lazy(() =>
+  import('@/components/DesktopEnvironment').then((module) => ({
+    default: module.Desktop,
+  })),
+);
+const Taskbar = React.lazy(
+  () => import('@/components/DesktopEnvironment/CoreElements/Taskbar'),
+);
 const ListWindows = React.lazy(() =>
-  import('@/components/UserInterface').then((module) => ({
+  import('@/components/DesktopEnvironment').then((module) => ({
     default: module.ListWindows,
   })),
 );
@@ -26,46 +31,24 @@ const App = () => {
 
   return (
     <>
-      {!loaded && <LoadingScreen text="Carregando sistema..." icon="💿" />}
+      <Suspense fallback={<LoadingScreen text="Carregando..." icon="💿" />}>
+        {isLoadingAnimation && (
+          <div
+            className="loading-screen__ending-layer-1"
+            onAnimationEnd={() => setIsLoadingAnimation(false)}
+          ></div>
+        )}
 
-      {loaded && (
-        <>
-          {isLoadingAnimation && (
-            <div
-              className="loading-screen__ending-layer-1"
-              onAnimationEnd={() => setIsLoadingAnimation(false)}
-            ></div>
-          )}
+        <div className="desktop" ref={desktopRef}>
+          <Desktop />
 
-          <div className="desktop" ref={desktopRef}>
-            <Suspense
-              fallback={
-                <LoadingScreen text="Carregando Desktop..." icon="🖥️" />
-              }
-            >
-              <Desktop />
-            </Suspense>
+          <RefsProvider>
+            <ListWindows desktopRef={desktopRef} />
 
-            <RefsProvider>
-              <Suspense
-                fallback={
-                  <LoadingScreen text="Carregando janelas..." icon="🗂️" />
-                }
-              >
-                <ListWindows desktopRef={desktopRef} />
-              </Suspense>
-
-              <Suspense
-                fallback={
-                  <LoadingScreen text="Carregando Taskbar..." icon="🛠️" />
-                }
-              >
-                <Taskbar />
-              </Suspense>
-            </RefsProvider>
-          </div>
-        </>
-      )}
+            <Taskbar />
+          </RefsProvider>
+        </div>
+      </Suspense>
     </>
   );
 };

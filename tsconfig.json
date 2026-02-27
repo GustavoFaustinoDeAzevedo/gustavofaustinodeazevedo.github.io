@@ -17,15 +17,19 @@
       "@shared/*": ["src/shared/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@userInterface/*": ["src/components/UserInterface/*"],
-      "@windowUtils/*": [
-        "src/components/UserInterface/WindowFamilies/Window/utils/*"
+      "@filesUtils/*": ["src/components/DesktopEnvironment/*"],
+      "@desktopEnv/*": ["src/components/DesktopEnvironment/*"],
+      "@shell/*": ["src/components/DesktopEnvironment/*"],
+      "@systemShell/*": ["src/components/DesktopEnvironment/*"],
+      "@nativeApps/*": [
+        "src/components/DesktopEnvironment/NativeApplications/*"
       ],
-      "@filesUtils/*": ["src/components/FilesExplorer/utils/*"],
-      "@ui/*": ["src/components/ui/*"],
-      "@App/*": ["src/App/*"],
-      "@portfolio/*": ["src/components/Portfolio/*"],
-      "@apps/*": ["src/components/apps/*"]
+      "@windowFamilies/*": [
+        "src/components/DesktopEnvironment/WindowFamilies/*"
+      ],
+      "@window/*": ["src/components/DesktopEnvironment/Window/*"],
+
+      "@portfolio/*": ["src/components/Portfolio/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

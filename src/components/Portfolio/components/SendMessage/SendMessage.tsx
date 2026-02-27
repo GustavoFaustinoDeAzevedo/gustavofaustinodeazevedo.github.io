@@ -1,5 +1,5 @@
-import Button from '@/components/UserInterface/UIControls/InputControls/Button';
-import AnimatedInput from '@/components/UserInterface/WindowFamilies/Window/components/AnimatedInput';
+import { Button } from '@/components/DesktopEnvironment';
+import AnimatedInput from '@/components/DesktopEnvironment/WindowFamilies/Window/components/AnimatedInput';
 import formData from './SendMessage.data';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';

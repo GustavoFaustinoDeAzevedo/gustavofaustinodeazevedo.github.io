@@ -1,0 +1,136 @@
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import gsap from 'gsap';
+import useClickOutside from '@/shared/hooks/useClickOutside';
+import actions from '@/store/actions';
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import { StylesConfig } from '@/components/DesktopEnvironment/NativeApplications/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
+import { WindowData } from '@/store/actions/useWindowActions';
+import { useIsMobile } from '@/shared';
+import StartMenuHeader from './StartMenuHeader';
+import StartMenuMain from './StartMenuMain';
+import StartMenuFooter from './StartMenuFooter';
+import StartMenuToggler from './StartMenuToggler';
+
+const StartMenu = () => {
+  // Refs =========================================================
+
+  const startMenuRef = useRef(null);
+  const startButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // States =========================================================
+
+  const [menuVisibility, setMenuVisibility] = useState(false);
+  const [searchAppValue, setSearchAppValue] = useState('');
+
+  // actions =========================================================
+
+  const { handleOpenWindow } = actions.useWindowActions();
+
+  // Hooks =========================================================
+
+  const isMobile = useIsMobile();
+
+  // Animações ==================================================================
+
+  useEffect(() => {
+    if (!startMenuRef.current) return;
+    if (menuVisibility) {
+      gsap.to(startMenuRef.current, {
+        display: 'flex',
+        duration: '0',
+        onComplete: () => {
+          gsap.to(startMenuRef.current, {
+            y: '0',
+            ease: 'power2.out',
+            duration: '0.2',
+          });
+        },
+      });
+    } else {
+      gsap.to(startMenuRef.current, {
+        display: 'none',
+        y: isMobile ? '-100%' : '100%',
+        ease: 'power2.in',
+        duration: '0.2',
+      });
+    }
+  }, [isMobile, menuVisibility]);
+
+  // Tratamento do click fora do menu ============================================
+
+  useClickOutside({
+    mainRef: startMenuRef,
+    onClickOutside: () => {
+      setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
+    },
+    isActive: menuVisibility,
+    extraRef: startButtonRef as React.RefObject<HTMLElement>,
+  });
+
+  // Handlers ====================================================================
+
+  const handleToggleVisibility = () => {
+    setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
+  };
+
+  const handleOpenHistoryApp = (appProps: WindowData) => {
+    handleOpenWindow(appProps);
+    setMenuVisibility((prev: boolean) => (prev = !menuVisibility));
+  };
+
+  const handleSearchAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchAppValue(e.target.value);
+  };
+
+  const handleSearchAppBlur = () => {
+    setSearchAppValue((prev) => prev.trimEnd());
+  };
+
+  const handleCleanInput = () => setSearchAppValue('');
+
+  // Render =====================================================================
+
+  return useMemo(
+    () => (
+      <div className={'start-menu'}>
+        <StartMenuToggler
+          menuVisibility={menuVisibility}
+          handleToggleVisibility={handleToggleVisibility}
+          startButtonRef={startButtonRef}
+        />
+
+        <div
+          className={
+            isMobile ? 'start-menu__container--mobile' : 'start-menu__container'
+          }
+        >
+          <aside ref={startMenuRef} className="start-menu__wrapper">
+            <StartMenuHeader
+              searchAppValue={searchAppValue}
+              handleCleanInput={handleCleanInput}
+              handleSearchAppChange={handleSearchAppChange}
+              handleSearchAppBlur={handleSearchAppBlur}
+            />
+            <StartMenuMain
+              handleToggleVisibility={handleToggleVisibility}
+              searchAppValue={searchAppValue}
+            />
+
+            <StartMenuFooter />
+          </aside>
+        </div>
+      </div>
+    ),
+    [
+      history,
+      menuVisibility,
+      startButtonRef,
+      startMenuRef,
+      handleToggleVisibility,
+      handleOpenHistoryApp,
+    ],
+  );
+};
+
+export default StartMenu;
