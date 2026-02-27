@@ -8,25 +8,43 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@App': path.resolve(__dirname, 'src/App'),
-      '@apps': path.resolve(__dirname, 'src/components/apps'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@data': path.resolve(__dirname, 'src/data'),
       '@os': path.resolve(__dirname, 'src/os'),
       '@portfolio': path.resolve(__dirname, 'src/components/Portfolio'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@utils': path.resolve(__dirname, 'src/utils'),
-      '@userInterface': path.resolve(
+      '@windowUtils': path.resolve(
         __dirname,
-        'src/components/UserInterface',
+        'src/components/DesktopEnvironment/WindowFamilies/Window/utils',
       ),
-      '@windowUtils': path.resolve(__dirname, 'src/components/Window/utils'),
+      '@desktopEnv': path.resolve(
+        __dirname,
+        'src/components/DesktopEnvironment',
+      ),
+      '@shell': path.resolve(__dirname, 'src/components/DesktopEnvironment'),
+      '@systemShell': path.resolve(
+        __dirname,
+        'src/components/DesktopEnvironment',
+      ),
       '@filesUtils': path.resolve(
         __dirname,
-        'src/components/FilesExplorer/utils',
+        'src/components/DesktopEnvironment/NativeApplications/FilesExplorer/utils',
       ),
-      '@ui': path.resolve(__dirname, 'src/components/ui'),
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@store': path.resolve(__dirname, 'src/store'),
+      '@nativeApps': path.resolve(
+        __dirname,
+        'src/components/DesktopEnvironment/NativeApplications',
+      ),
+      '@windowFamilies': path.resolve(
+        __dirname,
+        'src/components/DesktopEnvironment/WindowFamilies',
+      ),
+      '@window': path.resolve(
+        __dirname,
+        'src/components/DesktopEnvironment/Window',
+      ),
     },
   },
   server: {

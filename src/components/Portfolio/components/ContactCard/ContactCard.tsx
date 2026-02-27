@@ -1,4 +1,4 @@
-import Icon from '@components/ui/GlobalStyles/components/Icon';
+import Icon from '@/components/DesktopEnvironment/UIControls/GlobalStyles/components/Icon';
 import { leftSideCardLanguage, contactCard } from './ContactCard.data';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';

@@ -1,7 +1,7 @@
 // src/components/PageMeta.tsx
 
 import { useEffect } from 'react';
-import { iconVariants } from '@components/ui/GlobalStyles/utils/icons';
+import { iconVariants } from '@/components/DesktopEnvironment/UIControls/GlobalStyles/utils/icons';
 import { WindowNode } from '@/store/slices/window';
 
 // Language codes used in window titles
