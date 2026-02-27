@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Button from '@components/ui/Button';
+import Button from '@/components/UserInterface/UIControls/InputControls/Button';
 import InputRGB from './InputRGB';
 import InputHEX from './InputHEX';
 import { Language } from '@/store/slices/settings';
@@ -45,7 +45,7 @@ const CustomColorPicker = ({
       setInputColor(formatted);
       handleChangeBackground?.('color', formatted);
     },
-    [handleChangeBackground]
+    [handleChangeBackground],
   );
 
   return (

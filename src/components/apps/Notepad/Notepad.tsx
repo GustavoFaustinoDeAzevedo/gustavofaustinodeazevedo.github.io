@@ -1,6 +1,6 @@
 import { use, useCallback, useMemo, useRef, useState } from 'react';
 import { Dropdown } from '@/components/ui';
-import { DropdownItem } from '@/components/ui/Dropdown/Dropdown';
+import { DropdownItem } from '@/components/UserInterface/UIControls/SelectionControls/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import actions from '@/store/actions';

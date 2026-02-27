@@ -1,6 +1,6 @@
 export * from './apps';
 export * from './ui';
-export * from './UserInterfaceWindow/Window';
+export * from './UserInterface';
 export * from './Portfolio';
 export * from './Settings';
 export * from './FilesExplorer';

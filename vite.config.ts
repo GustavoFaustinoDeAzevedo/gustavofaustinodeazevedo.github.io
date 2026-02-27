@@ -17,7 +17,7 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@userInterface': path.resolve(
         __dirname,
-        'src/components/UserInterfaceWindow',
+        'src/components/UserInterface',
       ),
       '@windowUtils': path.resolve(__dirname, 'src/components/Window/utils'),
       '@filesUtils': path.resolve(
