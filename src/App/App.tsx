@@ -6,19 +6,21 @@ import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 import LoadingScreen from './LoadingScreen';
 
-const Desktop = React.lazy(() =>
-  import('@/components/DesktopEnvironment').then((module) => ({
-    default: module.Desktop,
-  })),
-);
-const Taskbar = React.lazy(
-  () => import('@/components/DesktopEnvironment/CoreElements/Taskbar'),
-);
-const ListWindows = React.lazy(() =>
-  import('@/components/DesktopEnvironment').then((module) => ({
-    default: module.ListWindows,
-  })),
-);
+const [Desktop, Taskbar, ListWindows] = [
+  React.lazy(() =>
+    import('@/components/DesktopEnvironment').then((module) => ({
+      default: module.Desktop,
+    })),
+  ),
+  React.lazy(
+    () => import('@/components/DesktopEnvironment/CoreElements/Taskbar'),
+  ),
+  React.lazy(() =>
+    import('@/components/DesktopEnvironment').then((module) => ({
+      default: module.ListWindows,
+    })),
+  ),
+];
 
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
