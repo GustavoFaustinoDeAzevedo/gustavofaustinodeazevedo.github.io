@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Button from '@components/ui/Button';
+import Button from '@/components/UserInterface/UIControls/InputControls/Button';
 import { ChangeBackgroundProps } from '../types/changeBackground.types';
 
 type Translations = {
@@ -18,7 +18,7 @@ const CustomImagePicker = ({
     por: 'Componente de Seletor de Imagem Personalizada',
   };
   const [preview, setPreview] = useState<string | null>(
-    backgroundPreviewImage ?? null
+    backgroundPreviewImage ?? null,
   );
   const fileRef = useRef<HTMLInputElement>(null);
 

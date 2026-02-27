@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Button from '@ui/Button';
+import Button from '@/components/UserInterface/UIControls/InputControls/Button';
 import { useCallback, useState } from 'react';
 import actions from '@/store/actions';
 
@@ -17,7 +17,7 @@ const TaskManager = () => {
 
   const updateWindowState = useCallback(
     (updates) => handleUpdateWindow({ id: selectedTask, ...updates }),
-    [selectedTask, handleUpdateWindow]
+    [selectedTask, handleUpdateWindow],
   );
 
   const handleClose = () => updateWindowState({ requestingClose: true });

@@ -1,7 +1,7 @@
 import { Radio, Slider } from '@components/ui';
 import { EffectValues } from '@/store/slices/settings';
 import { useCallback } from 'react';
-import { SliderData } from '@/components/ui/Slider/SliderItem';
+import { SliderData } from '@/components/UserInterface/UIControls/SelectionControls/Slider/SliderItem';
 import { BackgroundPreviewConfig } from './BackgroundPreferences';
 
 interface BackgroundControlEffectProps {
@@ -32,18 +32,18 @@ const BackgroundControlEffect = ({
         };
       });
     },
-    [setBackgroundPreviewConfig, backgroundPreviewConfig.effect]
+    [setBackgroundPreviewConfig, backgroundPreviewConfig.effect],
   );
   const handleGradientToggle = () => {
     if (!backgroundPreviewConfig.effect.active.includes('_disabled')) {
       handleEffectValue(
         'active',
-        `${backgroundPreviewConfig.effect.active}_disabled`
+        `${backgroundPreviewConfig.effect.active}_disabled`,
       );
     } else {
       handleEffectValue(
         'active',
-        backgroundPreviewConfig.effect.active.replace('_disabled', '')
+        backgroundPreviewConfig.effect.active.replace('_disabled', ''),
       );
     }
   };
@@ -73,8 +73,8 @@ const BackgroundControlEffect = ({
               ? 'Ativo'
               : 'Active'
             : language === 'por'
-            ? 'Inativo'
-            : 'Inactive'}
+              ? 'Inativo'
+              : 'Inactive'}
         </label>
         <label className="switch">
           <input
@@ -94,7 +94,7 @@ const BackgroundControlEffect = ({
             <input
               type="checkbox"
               disabled={backgroundPreviewConfig.effect.active.includes(
-                '_disabled'
+                '_disabled',
               )}
               onChange={(e) => handleEffectValue('inverted', e.target.checked)}
               checked={backgroundPreviewConfig.effect.inverted}
@@ -114,7 +114,7 @@ const BackgroundControlEffect = ({
             <input
               type="checkbox"
               disabled={backgroundPreviewConfig.effect.active.includes(
-                '_disabled'
+                '_disabled',
               )}
               onChange={(e) => handleEffectValue('mirrored', e.target.checked)}
               checked={backgroundPreviewConfig.effect.mirrored}

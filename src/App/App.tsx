@@ -10,7 +10,7 @@ import LoadingScreen from './LoadingScreen';
 const Desktop = React.lazy(() => import('@components/Desktop'));
 const Taskbar = React.lazy(() => import('@components/Taskbar'));
 const ListWindows = React.lazy(() =>
-  import('@/components/UserInterfaceWindow').then((module) => ({
+  import('@/components/UserInterface').then((module) => ({
     default: module.ListWindows,
   })),
 );
