@@ -4,7 +4,6 @@ export * from './UserInterface';
 export * from './Portfolio';
 export * from './Settings';
 export * from './FilesExplorer';
-export * from './CommonDialogs';
 export * from './Tests';
 export * from './DevMenu';
 export * from './ContextMenu';
