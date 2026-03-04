@@ -1,82 +1,88 @@
 import Window from '../core';
 import { WindowData } from '@/store/actions/useWindowActions';
 import React, { useCallback, useMemo, useRef } from 'react';
-import actions from '@/store/actions';
-import createWindowHandlers from '../utils/createWindowHandlers';
 import flattenWindowParams from '../utils/flattenWindowParams';
 import useRefs from '@/contexts/useRefs';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 import { WindowNode } from '@/store/slices/window';
+import { Language } from '@/store/slices/settings';
+import useWindowHandlers from '../utils/createWindowHandlers';
 
 type WindowManagerProps = {
   isMobile: boolean;
   windowIndex: number;
   windowId: string;
-  desktopRef: React.RefObject<HTMLDivElement | null>;
+  bounds: React.RefObject<HTMLDivElement | null>;
+  language: Language;
+  windowRawParams: WindowNode;
+  actions: {
+    windowActions: {
+      handleUpdateWindow: (data: WindowData) => void;
+      handleResetFocus: (windowId: string) => void;
+      handleCloseWindow: (windowId: string) => void;
+      handleGeneralFocus: (windowId: string) => void;
+    };
+    filesActions?: {
+      handleOpenFile: (path: string) => void;
+      handleNewFile: (path: string, data: any) => void;
+      handleRemoveFile: (fileToRemove: any) => void;
+    };
+  };
 };
 
 const WindowManager = ({
   isMobile,
   windowIndex,
   windowId,
-  desktopRef,
+  bounds,
+  language,
+  windowRawParams,
+  actions,
 }: WindowManagerProps) => {
-
-  const windowRawParams = useSelector(
-    (state: RootState) => state.window.openedWindows[windowId],
-  );
-
-  const language = useSelector((state: RootState) => state.settings.language);
-
-  //Actions
-
-  const windowActions = actions.useWindowActions();
-  const filesActions = actions.useFilesActions();
-
-  //Refs para janela e header
+  const { windowActions, filesActions = {} } = actions;
 
   const { createRef } = useRefs();
   const windowRef = createRef(windowId);
   const headerRef = useRef(null);
 
-  //Handler principal para lidar com as atualizações do estado da janela
-
   const updateWindowState = useCallback(
     (updates: WindowData): void => {
       windowActions.handleUpdateWindow({ ...updates, windowId });
     },
-    [windowActions],
+    [windowActions, windowId],
   );
 
-  // Handlers para lidar com as ações da janela
-
   const handleResetFocus = useCallback(() => {
+    if (!windowRawParams.windowState?.status.focused) return;
     windowActions.handleResetFocus(windowId);
-  }, [windowActions.handleResetFocus]);
-
+  }, [windowActions, windowId]);
 
   const handleClose = useCallback(() => {
     updateWindowState({ opened: false });
-  }, []);
-
+  }, [updateWindowState]);
 
   const handleFocus = useCallback(() => {
-    if (windowRawParams?.isFocused) return null;
+    if (windowRawParams?.windowState?.status.focused) return null;
     updateWindowState({ focused: true, isRequestingFocus: false });
-  }, []);
+  }, [updateWindowState, windowRawParams?.windowState?.status.focused]);
 
-  // Encapsulamento dos handlers
+  const extraHandlers = useWindowHandlers(updateWindowState);
 
-  const windowHandlers = {
-    updateWindowState,
-    handleResetFocus,
-    handleClose,
-    handleFocus,
-    ...createWindowHandlers(updateWindowState),
-  };
-
-  // Planificação de parametros da janela
+  const windowHandlers = useMemo(
+    () => ({
+      updateWindowState,
+      handleResetFocus,
+      handleClose,
+      handleFocus,
+      ...extraHandlers,
+    }),
+    [
+      updateWindowState,
+      handleResetFocus,
+      handleClose,
+      handleFocus,
+      extraHandlers,
+    ],
+  );
 
   const windowParams = useMemo(
     () =>
@@ -84,14 +90,13 @@ const WindowManager = ({
         { windowIndex, language, windowRef, headerRef },
         windowRawParams as WindowNode,
       ),
-    [windowIndex, language, windowRef, headerRef, windowRawParams],
+    [language, windowRawParams, windowRef],
   );
 
   return (
     <Window
-      // className={className}
       isMobile={isMobile}
-      desktopRef={desktopRef}
+      bounds={bounds}
       windowParams={windowParams}
       windowHandlers={windowHandlers}
       filesActions={filesActions}

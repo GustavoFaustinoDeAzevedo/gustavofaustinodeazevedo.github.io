@@ -1,0 +1,54 @@
+.error-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2C2C2C;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Segoe UI", sans-serif;
+  z-index: 9999999;
+}
+
+.error-title {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #f90101;
+}
+
+.error-message {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.error-details {
+  background: #484848;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  overflow-x: auto;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.error-button {
+  padding: 6px 12px;
+  background: #0078d7;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-button:hover {
+  background: #005a9e;
+}

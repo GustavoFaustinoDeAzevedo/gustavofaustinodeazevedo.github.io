@@ -3,4 +3,5 @@
 @import './FilesExplorer/styles/index.css';
 @import './Calculator/styles.css';
 @import './Notepad/Notepad.styles.css';
+@import './ErrorFallback/ErrorFallback.css'
 /* @import './StickyNotes/styles.css'; */

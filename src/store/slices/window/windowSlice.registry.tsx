@@ -8,6 +8,7 @@ import {
   ContactCard,
   SendMessage,
   MySkills,
+  CorruptedFile,
 } from '@/components';
 
 export const returnWindowContent = (
@@ -39,6 +40,7 @@ export const returnWindowContent = (
       calculator: () => <Calculator />,
       notepad: () => <Notepad content={content as string} />,
       tests: () => <Tests />,
+      corruptedFile: () => <CorruptedFile message='Test' />,
     };
     return map[contentKey as keyof typeof map]?.();
   } catch (error) {
