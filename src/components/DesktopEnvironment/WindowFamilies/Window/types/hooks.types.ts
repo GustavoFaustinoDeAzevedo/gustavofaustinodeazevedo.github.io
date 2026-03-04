@@ -80,7 +80,7 @@ export interface CreateWindowDraggableOptions {
 export interface UseWindowLifecycleProps {
   windowRef: RefObject<HTMLElement | null>;
   headerRef: RefObject<HTMLElement | null>;
-  desktopRef: RefObject<HTMLElement | null>;
+  bounds: RefObject<HTMLElement | null>;
   windowParams: WindowParams;
   windowHandlers: WindowHandlers;
   clickLock: boolean;

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import WindowContent from './WindowContent';
 
 const WindowContentWrapper = ({
@@ -33,9 +33,6 @@ const WindowContentWrapper = ({
     <></>
   );
 
-  return useMemo(
-    () => <div className="window__content">{windowContent}</div>,
-    [windowContent],
-  );
+  return <div className="window__content">{windowContent}</div>;
 };
-export default WindowContentWrapper;
+export default React.memo(WindowContentWrapper);

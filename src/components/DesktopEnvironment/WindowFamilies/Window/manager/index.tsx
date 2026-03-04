@@ -1,2 +1,2 @@
-export { default as ListWindows } from './ListWindows';
 export { default as WindowManager } from './WindowManager';
+export { default as WindowMapper } from './WindowMapper';

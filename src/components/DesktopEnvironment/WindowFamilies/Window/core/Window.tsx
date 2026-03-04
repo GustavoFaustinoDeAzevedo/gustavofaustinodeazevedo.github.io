@@ -9,7 +9,7 @@ import WindowContentWrapper from './WindowContentWrapper';
 import useClickOutside from '@/shared/hooks/useClickOutside';
 import useWindowLifecycle from '../hooks/useWindowLifecycle';
 import { UseWindowLifecycleProps } from '../types/hooks.types';
-import { re } from 'mathjs';
+import ErrorFallback from '@/components/DesktopEnvironment/NativeApplications/ErrorFallback/ErrorFallback';
 
 gsap.registerPlugin(useGSAP);
 
@@ -28,18 +28,17 @@ type WindowHandlers = {
 type WindowProps = {
   windowParams: any;
   windowHandlers: WindowHandlers;
-  desktopRef: React.RefObject<HTMLDivElement | null>;
+  bounds: React.RefObject<HTMLDivElement | null>;
   filesActions: any;
   isMobile: boolean;
 };
 const Window = ({
   windowParams,
   windowHandlers,
-  desktopRef,
+  bounds,
   filesActions,
   isMobile,
 }: WindowProps) => {
-  const [errorOcurred, setErrorOcurred] = useState(false);
   const handleMouseDown = () => {
     !isFocused ? handleFocus() : null;
   };
@@ -63,6 +62,8 @@ const Window = ({
     isFocused,
     windowRef,
     headerRef,
+    windowIndex,
+    isRequestingOpen,
   } = windowParams;
   const {
     handleFocus,
@@ -96,21 +97,7 @@ const Window = ({
     isMobile,
   };
 
-  const windowContentWrapperProps = useMemo(() => {
-    return {
-      isFocused,
-      isOpened,
-      windowId,
-      currentNode,
-      src,
-      windowHandlers,
-      content,
-      contentKey,
-      filesActions,
-      type,
-      language,
-    };
-  }, [
+  const windowContentWrapperProps = {
     isFocused,
     isOpened,
     windowId,
@@ -118,10 +105,11 @@ const Window = ({
     src,
     windowHandlers,
     content,
+    contentKey,
     filesActions,
     type,
     language,
-  ]);
+  };
 
   //Função para obter dimensões da janela ======================================
 
@@ -133,20 +121,12 @@ const Window = ({
     };
   }, [windowRef]);
 
-  //Função para verificar erros no conteúdo da janela=========================
-
-  const ErrorFallback = ({ error, resetErrorBoundary }: any) => {
-    console.log(error.message);
-    setErrorOcurred(true);
-    return null;
-  };
-
   //Gerenciamento do ciclo de vida da janela ===================================
 
   useWindowLifecycle({
     windowRef,
     headerRef,
-    desktopRef,
+    bounds,
     windowParams,
     windowHandlers,
     updateWindowState,
@@ -164,33 +144,36 @@ const Window = ({
     ignoredDataAttributes: ['data-dropdown-menu'],
   });
 
-  //==
-
   //JSX ========================================================================
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <div
-        ref={windowRef}
-        className={`window ${isFocused ? 'focus' : ''}  ${
-          isMaximized ? 'maximized' : ''
-        } parent`}
-        style={{ zIndex }}
-        // onContextMenu={handleContextMenu}
-        id={windowId}
-        onMouseDown={handleMouseDown}
+    <div
+      ref={windowRef}
+      className={`window ${isFocused ? 'focus' : ''}  ${
+        isMaximized ? 'maximized' : ''
+      } parent`}
+      style={{ zIndex }}
+      // onContextMenu={handleContextMenu}
+      id={windowId}
+      onMouseDown={handleMouseDown}
+    >
+      <WindowHeader {...windowHeaderProps} />
+      <ErrorBoundary
+        FallbackComponent={(fallbackProps) => (
+          <ErrorFallback
+            {...fallbackProps}
+            handleClose={() =>
+              updateWindowState({
+                isRequestingClose: true,
+              })
+            }
+            queueRef={headerRef}
+          />
+        )}
       >
-        {useMemo(
-          () => (
-            <WindowHeader {...windowHeaderProps} />
-          ),
-          [windowHeaderProps],
-        )}
-        {!errorOcurred && (
-          <WindowContentWrapper {...(windowContentWrapperProps as any)} />
-        )}
-      </div>
-    </ErrorBoundary>
+        <WindowContentWrapper {...(windowContentWrapperProps as any)} />
+      </ErrorBoundary>
+    </div>
   );
 };
 

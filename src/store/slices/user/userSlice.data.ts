@@ -109,9 +109,12 @@ export const usersInitialState: User[] = [
                 hidden: true,
               },
               {
-                fileId: 'tests',
-                contentKey: 'tests',
-                title: { eng: 'Tests', por: 'Testes' },
+                fileId: 'corruptedFile',
+                contentKey: 'corruptedFile',
+                title: {
+                  eng: 'Corrupted File Test',
+                  por: 'Teste de Arquivo Corrompido',
+                },
                 icon: '',
                 type: 'app',
               },

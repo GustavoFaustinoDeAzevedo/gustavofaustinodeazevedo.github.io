@@ -1,5 +1,12 @@
+import Window from '../../Window/core/Window';
+
 const ChooseFontDialog = () => {
-  return <></>;
-}
+  const WindowParams = {};
+  return (
+    <>
+      <Window windowParams={WindowParams}  />
+    </>
+  );
+};
 
 export default ChooseFontDialog;

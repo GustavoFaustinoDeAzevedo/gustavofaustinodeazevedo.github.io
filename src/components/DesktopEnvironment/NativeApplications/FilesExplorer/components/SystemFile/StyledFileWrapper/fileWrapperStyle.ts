@@ -117,6 +117,7 @@ export const fileParts = ({
       flexGrow: 1,
       fontWeight: $fontWeight,
       fontFamily: $fontFamily,
+      overflow: 'hidden',
       color: $color,
       borderRadius: '8px',
       textAlign: $direction === 'horizontal' ? 'left' : 'center',
@@ -125,9 +126,9 @@ export const fileParts = ({
       webkitTextStroke: $togglers?.enableTextShadow && '2px black',
       wrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
       wordWrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
-      textOverflow: 'ellipsis',
       WebkitLineClamp: 2,
       lineClamp: 2,
+      textOverflow: 'ellipsis',
       fontSize: $fontSize,
       filter:
         $togglers?.enableFilter &&
@@ -140,6 +141,12 @@ export const fileParts = ({
       transition:
         $togglers?.enableSmoothTransition &&
         'color 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease, filter 0.3s ease',
+
+      ':focus &': {
+        overflow: 'visible',
+        WebkitLineClamp: 'initial',
+        lineClamp: 'initial',
+      },
     },
   };
 };

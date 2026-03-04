@@ -1,50 +1,66 @@
 import { Draggable } from 'gsap/Draggable';
 import gsap from 'gsap';
-import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
-import { useState } from 'react';
 
 gsap.registerPlugin(Draggable);
 
 type CreateWindowDraggableOptions = {
   windowRef: React.RefObject<HTMLElement>;
-  triggerElement: HTMLElement;
-  desktopRef: React.RefObject<HTMLElement>;
-  updateWindowState: <T>(state: T) => void;
-  width: number;
-  height: number;
+  triggerElement?: React.RefObject<HTMLElement> | null;
+  bounds: React.RefObject<HTMLElement>;
+  updateWindowState?: (state: {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+    startX?: number;
+    startY?: number;
+    startWidth?: number;
+    startHeight?: number;
+  }) => void;
+  width?: number;
+  height?: number;
 };
 
 const createWindowDraggable = ({
   windowRef,
   triggerElement,
-  desktopRef,
+  bounds,
   updateWindowState,
   width,
   height,
 }: CreateWindowDraggableOptions) => {
-  if (!windowRef?.current || !desktopRef?.current) return;
+  if (!windowRef.current || !bounds?.current) return;
 
-  Draggable.create(windowRef.current, {
-    trigger: triggerElement,
+  return Draggable.create(windowRef.current, {
+    trigger: triggerElement?.current ?? windowRef.current,
     type: 'x,y',
     zIndexBoost: false,
-    bounds: desktopRef.current,
+    bounds: bounds.current,
     inertia: true,
     allowEventDefault: true,
+    edgeResistance: 0,
     onDragStart: function () {
-      const { x, y } = this;
-      updateWindowState({
-        startX: x,
-        startY: y,
-        startWidth: width,
-        startHeight: height,
-      });
+      if (updateWindowState) {
+        const { x, y } = this;
+        updateWindowState({
+          startX: x,
+          startY: y,
+          startWidth: width,
+          startHeight: height,
+        });
+      }
     },
     onDragEnd: function () {
-      const { x, y } = this;
-      const finalWidth = this.target.getBoundingClientRect().width;
-      const finalHeight = this.target.getBoundingClientRect().height;
-      updateWindowState({ x, y, width: finalWidth, height: finalHeight });
+      if (updateWindowState) {
+        const { x, y } = this;
+        const rect = this.target.getBoundingClientRect();
+        updateWindowState({
+          x,
+          y,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
     },
   });
 };

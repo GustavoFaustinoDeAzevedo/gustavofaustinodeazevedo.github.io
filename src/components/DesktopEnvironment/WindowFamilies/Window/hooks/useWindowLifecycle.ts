@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 const useWindowLifecycle = ({
   windowRef,
   headerRef,
-  desktopRef,
+  bounds,
   windowParams,
   windowHandlers,
   isMobile,
@@ -56,8 +56,8 @@ const useWindowLifecycle = ({
     if (isMobile) return;
     createWindowDraggable({
       windowRef: windowRef as React.RefObject<HTMLElement>,
-      triggerElement: headerRef.current as HTMLElement,
-      desktopRef: desktopRef as React.RefObject<HTMLElement>,
+      triggerElement: headerRef as React.RefObject<HTMLElement>,
+      bounds: bounds as React.RefObject<HTMLElement>,
       updateWindowState: updateWindowState as <T>(state: T) => void,
       width: width as number,
       height: height as number,

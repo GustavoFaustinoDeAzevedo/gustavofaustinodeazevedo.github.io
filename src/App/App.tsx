@@ -6,7 +6,7 @@ import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 import LoadingScreen from './LoadingScreen';
 
-const [Desktop, Taskbar, ListWindows] = [
+const [Desktop, Taskbar, SystemWindowsList] = [
   React.lazy(() =>
     import('@/components/DesktopEnvironment').then((module) => ({
       default: module.Desktop,
@@ -15,11 +15,7 @@ const [Desktop, Taskbar, ListWindows] = [
   React.lazy(
     () => import('@/components/DesktopEnvironment/CoreElements/Taskbar'),
   ),
-  React.lazy(() =>
-    import('@/components/DesktopEnvironment').then((module) => ({
-      default: module.ListWindows,
-    })),
-  ),
+  React.lazy(() => import('./SystemWindowsList')),
 ];
 
 const App = () => {
@@ -45,7 +41,7 @@ const App = () => {
           <Desktop />
 
           <RefsProvider>
-            <ListWindows desktopRef={desktopRef} />
+            <SystemWindowsList bounds={desktopRef} />
 
             <Taskbar />
           </RefsProvider>
