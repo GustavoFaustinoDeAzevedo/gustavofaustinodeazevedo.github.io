@@ -9,6 +9,7 @@ import {
   SendMessage,
   MySkills,
   CorruptedFile,
+  ConsoleCommand,
 } from '@/components';
 
 export const returnWindowContent = (
@@ -32,7 +33,7 @@ export const returnWindowContent = (
       skills: () => <MySkills />,
       sendMessage: () => <SendMessage />,
       contact: () => <ContactCard />,
-      // cmd: () => <ConsoleCommand />,
+      cmd: () => <ConsoleCommand />,
       // taskManager: () => <TaskManager />,
       // browser: () => <BrowserSimulator />,
       // github: () => <BrowserSimulator src={src} />,
@@ -40,7 +41,7 @@ export const returnWindowContent = (
       calculator: () => <Calculator />,
       notepad: () => <Notepad content={content as string} />,
       tests: () => <Tests />,
-      corruptedFile: () => <CorruptedFile message='Test' />,
+      corruptedFile: () => <CorruptedFile message="Test" />,
     };
     return map[contentKey as keyof typeof map]?.();
   } catch (error) {

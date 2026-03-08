@@ -6,7 +6,6 @@ const installedApps: FileNode[] = [
     title: { eng: 'About Me', por: 'Sobre Mim' },
     icon: 'about',
     type: 'text',
-    initialDimensions: { width: '650px', height: '520px' },
   },
   {
     fileId: 'skills',
@@ -66,6 +65,16 @@ const installedApps: FileNode[] = [
     icon: 'sticky-notes',
     type: 'app',
     initialDimensions: { width: '400px', height: '500px' },
+  },
+  {
+    fileId: 'cmd',
+    contentKey: 'cmd',
+    title: {
+      eng: 'Terminal (unfinished)',
+      por: 'Terminal (incompleto)',
+    },
+    icon: 'command',
+    type: 'app',
   },
 ];
 

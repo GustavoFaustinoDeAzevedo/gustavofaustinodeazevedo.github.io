@@ -1,11 +1,10 @@
 @layer components {
 
   .console-command {
-    font-family: Consolas, "courier new", sans-serif;
     font-size: large;
     height: 100%;
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     border: none;
     outline: none;
     resize: none;
@@ -16,5 +15,53 @@
     top: 0;
     left: 0;
     color: white;
+
+    & .console-command__output {
+      flex: 1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-break: anywhere;
+      font-size: 1.2rem;
+      font-family: Consolas, "courier new", sans-serif;
+      resize: none;
+      background-color: #000000;
+      color: white;
+    }
+
+    & .console-command__input-container {}
+
+    & .console-command__directory {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 1.2rem;
+      font-family: Consolas, "courier new", sans-serif;
+      resize: none;
+      background-color: #000000;
+      color: white;
+    }
+
+    & .console-command__input {
+      outline: none;
+      flex: 1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background-color: #000000;
+      color: 'white';
+      cursor: default;
+      font-size: 1.2rem;
+      font-family: Consolas, "courier new", sans-serif;
+      flex-shrink: 0;
+      border: none;
+      resize: none;
+    }
+
+    span {
+      align-self: baseline;
+      cursor: default;
+      display: inline;
+      font-family: Consolas, "courier new", sans-serif;
+      flex-shrink: 1;
+
+    }
   }
 }
