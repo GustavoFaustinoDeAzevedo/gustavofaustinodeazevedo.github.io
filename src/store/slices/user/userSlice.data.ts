@@ -1,3 +1,5 @@
+import { IconVariantStyle } from '@/components/DesktopEnvironment/UIControls/GlobalStyles/utils/icons';
+
 import User from '@/store/utils/db.types';
 
 export const usersInitialState: User[] = [
@@ -107,6 +109,16 @@ export const usersInitialState: User[] = [
                 icon: '',
                 type: 'app',
                 hidden: true,
+              },
+              {
+                fileId: 'cmd',
+                contentKey: 'cmd',
+                title: {
+                  eng: 'Terminal (unfinished)',
+                  por: 'Terminal (incompleto)',
+                },
+                icon: 'command',
+                type: 'app',
               },
               {
                 fileId: 'corruptedFile',
