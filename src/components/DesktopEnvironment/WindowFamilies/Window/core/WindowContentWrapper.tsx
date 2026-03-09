@@ -1,20 +1,25 @@
 import React, { useMemo } from 'react';
 import WindowContent from './WindowContent';
+import { Permission } from '@/store/slices/file';
 
 const WindowContentWrapper = ({
-  onFocus,
-  isFocused,
   isOpened,
   windowId,
   currentNode,
   content,
   contentKey,
-  windowHandlers,
-  language,
-  windowList,
-  filesActions,
+  permission,
   src,
   type,
+}: {
+  isOpened: boolean;
+  windowId: string;
+  currentNode: string;
+  content?: any;
+  contentKey: string;
+  permission?: Permission;
+  src?: string;
+  type?: string;
 }) => {
   const windowContent = isOpened ? (
     <WindowContent
@@ -23,11 +28,8 @@ const WindowContentWrapper = ({
       src={src}
       content={content ?? {}}
       contentKey={contentKey}
-      windowActions={windowHandlers}
+      permission={permission}
       type={type}
-      language={language}
-      windowList={windowList}
-      filesActions={filesActions}
     />
   ) : (
     <></>

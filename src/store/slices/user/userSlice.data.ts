@@ -7,7 +7,7 @@ export const usersInitialState: User[] = [
     id: 1,
     name: 'Admin',
     config: {
-      apps: [],
+      apps: ['about', 'skills', 'contact', 'sendMessage'],
       permission: 'admin',
       store: {
         window: {
@@ -121,6 +121,31 @@ export const usersInitialState: User[] = [
                 type: 'app',
               },
               {
+                fileId: 'highPermissionFile',
+                contentKey: 'highPermissionFile',
+                title: {
+                  eng: 'High Permission File Test',
+                  por: 'Teste de Arquivo de Permissão Alta',
+                },
+                icon: '',
+                type: 'test',
+                permission: {
+                  read: false,
+                  write: false,
+                  execute: false,
+                },
+              },
+              {
+                fileId: 'notFoundFile',
+                contentKey: 'notFoundFile',
+                title: {
+                  eng: 'Not Found File Test',
+                  por: 'Teste de Arquivo Nao Encontrado',
+                },
+                icon: '',
+                type: 'notFound',
+              },
+              {
                 fileId: 'corruptedFile',
                 contentKey: 'corruptedFile',
                 title: {
@@ -128,7 +153,7 @@ export const usersInitialState: User[] = [
                   por: 'Teste de Arquivo Corrompido',
                 },
                 icon: '',
-                type: 'app',
+                type: 'test',
               },
             ],
           },

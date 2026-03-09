@@ -3,7 +3,7 @@ import { ListFiles } from '@/components/DesktopEnvironment/NativeApplications/Fi
 // import displayWindowContent from '../utils/displayWindowContent';
 
 import { returnWindowContent } from '@/store/slices/window/windowSlice.registry';
-import { FileNode } from '@/store/slices/file';
+import { Permission } from '@/store/slices/file';
 
 /** O windowId tem o formato: window#contentId#[randomString] para que cada janela possa ser uma janela única.
  * O contentId representa a ID do conteúdo da janela que será renderizado.
@@ -16,12 +16,14 @@ const WindowContent = ({
   contentKey,
   currentNode,
   src,
+  permission,
   content,
   type,
 }: {
   windowId: string;
   contentKey: string;
   currentNode: string;
+  permission?: Permission;
   src?: string;
   content?: any;
   type?: string;
@@ -32,6 +34,7 @@ const WindowContent = ({
     src,
     type,
     content,
+    permission,
   });
 
   return (

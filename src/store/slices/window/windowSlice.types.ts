@@ -62,6 +62,7 @@ export interface WindowNode {
   isMaximized?: boolean;
   isMinimized?: boolean;
   isOpened?: boolean;
+  permission?: string;
   unique?: boolean;
   focused?: boolean;
   maximized?: boolean;

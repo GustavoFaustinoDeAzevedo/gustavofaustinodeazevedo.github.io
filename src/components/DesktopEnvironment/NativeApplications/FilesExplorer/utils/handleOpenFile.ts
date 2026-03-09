@@ -1,9 +1,10 @@
-import { FileNode } from '@/store/slices/file';
+import { FileNode, Permission } from '@/store/slices/file';
 import { Title } from '@/store/slices/window';
 
 export interface HandleOpenFileProps {
   fileId: string;
   contentKey?: string;
+  permission?: Permission;
   initialDimensions?: { width: string | '1000px'; height: string | '600px' };
   currentNode: string;
   windowTitle?: Title | string;
@@ -27,6 +28,7 @@ export const handleOpenFile = ({
   fileId,
   contentKey = fileId,
   initialDimensions,
+  permission,
   currentNode,
   windowTitle = { eng: 'Untitled', por: 'Sem Título' },
   windowIcon,
@@ -51,6 +53,7 @@ export const handleOpenFile = ({
         windowId: fileId,
         title: windowTitle,
         icon: windowIcon,
+        permission,
         src,
         content,
         contentKey,
@@ -67,6 +70,7 @@ export const handleOpenFile = ({
         currentNode: fileId,
         title: windowTitle,
         icon: windowIcon,
+        permission,
         src,
         content,
         isUnique,

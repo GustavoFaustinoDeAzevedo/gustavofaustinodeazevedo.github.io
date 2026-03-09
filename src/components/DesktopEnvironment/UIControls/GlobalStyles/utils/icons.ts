@@ -1,6 +1,3 @@
-import { re } from 'mathjs';
-import { useMemo } from 'react';
-
 type CSSProperties = React.CSSProperties;
 export type IconVariantStyle = Partial<
   Pick<CSSProperties, 'backgroundImage' | 'maskImage' | 'WebkitMaskImage'>
@@ -120,5 +117,8 @@ export const iconVariants: Record<string, IconVariantStyle> = {
   'menu-hamburguer': {
     maskImage: "url('/icons/three-horizontal-lines-icon.svg')",
     WebkitMaskImage: "url('/icons/three-horizontal-lines-icon.svg')",
+  },
+  blankIcon: {
+    backgroundImage: "url('/icons/blank-file-icon.png')",
   },
 };
