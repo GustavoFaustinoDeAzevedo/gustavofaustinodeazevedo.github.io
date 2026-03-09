@@ -65,3 +65,12 @@
     }
   }
 }
+
+
+
+
+
+.filho:has(.filho & ~ *:focus) {
+  display: block;
+  
+}

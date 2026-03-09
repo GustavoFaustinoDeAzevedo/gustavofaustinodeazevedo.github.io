@@ -140,7 +140,7 @@ export const usersInitialState: User[] = [
                 contentKey: 'notFoundFile',
                 title: {
                   eng: 'Not Found File Test',
-                  por: 'Teste de Arquivo Nao Encontrado',
+                  por: 'Teste de Arquivo Não Encontrado',
                 },
                 icon: '',
                 type: 'notFound',

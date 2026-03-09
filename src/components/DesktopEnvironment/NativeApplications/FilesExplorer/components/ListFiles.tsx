@@ -4,11 +4,10 @@ import actions from '@/store/actions';
 import { FileNode } from '@/store/slices/file';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { isLocalHost, useIsMobile } from '@/shared';
+import { isLocalHost, useClickOutside, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
-import { Title } from '@/store/slices/window';
-import { Language } from '../../../../PageMeta/PageMeta';
+import { WindowTitle } from '@/store/slices/window';
 import { useMemo } from 'react';
 
 type ListFilesProps = {
@@ -21,6 +20,7 @@ type ListFilesProps = {
   nodeType?: string;
   filters?: string | string[];
   doubleClickToOpen?: boolean;
+  containerRef?: React.RefObject<HTMLDivElement>;
 };
 
 const ListFiles = ({
@@ -33,6 +33,7 @@ const ListFiles = ({
   nodeType = 'desktop',
   filters,
   doubleClickToOpen,
+  containerRef,
 }: ListFilesProps) => {
   if (content === undefined || content?.length < 0) return;
 
@@ -46,7 +47,7 @@ const ListFiles = ({
     test: 'blank-icon',
   };
 
-  // contantes
+  // constantes
   const contentFiltered = useMemo(() => {
     if (!filters) return content;
 
@@ -103,7 +104,8 @@ const ListFiles = ({
         return null;
       const finalIcon =
         icon ?? typeToIcon[type as keyof typeof typeToIcon] ?? 'window-icon';
-      const iconTitle = (title as Title)?.por ?? (title as Title)?.eng;
+      const iconTitle =
+        (title as WindowTitle)?.por ?? (title as WindowTitle)?.eng;
       const windowTitle = windowMask?.title ?? title;
 
       const windowIcon =

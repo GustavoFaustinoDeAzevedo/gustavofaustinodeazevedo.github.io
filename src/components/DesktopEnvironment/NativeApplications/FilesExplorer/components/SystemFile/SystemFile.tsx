@@ -12,7 +12,7 @@ import { Title } from '@/store/slices/file';
 
 const defaultProps: StylesConfig = {
   $direction: 'vertical',
-  $size: '6rem',
+  $size: '6.2rem',
   $fontSize: '1rem',
   $fontFamily: 'inherit',
   $fontWeight: '900',
@@ -99,19 +99,29 @@ const SystemFile = ({
   );
 
   return (
-    <StyledFileWrapper
-      tabIndex={0}
-      aria-label={translatedTitle}
-      title={translatedTitle}
-      onKeyDown={handleKeyDown}
-      onDoubleClick={handleDoubleClick}
-      onMouseUp={handleSingleClick}
-      id={fileId}
-      {...stylesConfig}
-    >
-      {memoizedIcon}
-      {memoizedTitle}
-    </StyledFileWrapper>
+    <li>
+      <label>
+        <input
+          title={translatedTitle}
+          type="radio"
+          className={'none'}
+          name="file"
+          id={fileId}
+        />
+        <StyledFileWrapper
+          tabIndex={0}
+          aria-label={translatedTitle}
+          onKeyDown={handleKeyDown}
+          onDoubleClick={handleDoubleClick}
+          onMouseUp={handleSingleClick}
+          id={fileId}
+          {...stylesConfig}
+        >
+          {memoizedIcon}
+          {memoizedTitle}
+        </StyledFileWrapper>
+      </label>
+    </li>
   );
 };
 

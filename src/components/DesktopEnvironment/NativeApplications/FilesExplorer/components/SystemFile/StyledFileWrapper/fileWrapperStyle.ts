@@ -55,24 +55,27 @@ export const fileParts = ({
       pointerEvents: 'initial',
       backdropFilter: $togglers?.enableFilter && 'blur(0px)',
 
-      '&:focus': {
+      'input[type="radio"]:checked + &:focus:not(:hover) ': {
         background: $backgroundColor?.hover,
         backdropFilter: $togglers?.enableFilter && 'blur(8px) brightness(1.5)',
+      },
 
-        '&>*': {
-          transform: $togglers?.enableTransform && 'translateY(-5px)',
-          filter:
-            $togglers?.enableFilter &&
-            `brightness(1.1) ${
-              $togglers.enableShadow && 'drop-shadow(0px 5px 1px #0000008a)'
-            }`,
-        },
+      'input[type="radio"]:checked + &>*': {
+        transform: $togglers?.enableTransform && 'translateY(-5px)',
+        overflow: 'visible',
+        WebkitLineClamp: 'initial',
+        lineClamp: 'initial',
+        filter:
+          $togglers?.enableFilter &&
+          `brightness(1.1) ${
+            $togglers.enableShadow && 'drop-shadow(0px 5px 1px #0000008a)'
+          }`,
       },
 
       '&:hover': {
         background: $backgroundColor?.hover,
         transition: $togglers?.enableSmoothTransition && 'all 0.3s',
-        backdropFilter: $togglers?.enableFilter && 'blur(8px)',
+        backdropFilter: $togglers?.enableFilter && 'blur(8px) brightness(1)',
 
         '&>*': {
           transform: $togglers?.enableTransform && 'translateY(-10px)',
@@ -141,12 +144,6 @@ export const fileParts = ({
       transition:
         $togglers?.enableSmoothTransition &&
         'color 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease, filter 0.3s ease',
-
-      ':focus &': {
-        overflow: 'visible',
-        WebkitLineClamp: 'initial',
-        lineClamp: 'initial',
-      },
     },
   };
 };
