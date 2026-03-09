@@ -37,7 +37,7 @@ const installedApps: FileNode[] = [
       por: 'Alterar Fundo (incompleto)',
     },
     icon: 'image-outline-icon',
-    type: 'app',
+    type: 'systemApp',
     isUnique: true,
     initialStates: { maximized: true },
     initialDimensions: { width: '1200px', height: '800px' },
@@ -46,14 +46,14 @@ const installedApps: FileNode[] = [
     fileId: 'calculator',
     title: { eng: 'Calculator', por: 'Calculadora' },
     icon: 'calculator',
-    type: 'app',
+    type: 'systemApp',
     initialDimensions: { width: '400px', height: '500px' },
   },
   {
     fileId: 'notepad',
     title: { eng: 'Notepad (unfinished)', por: 'Bloco de Notas (incompleto)' },
     icon: 'notepad',
-    type: 'app',
+    type: 'systemApp',
     initialDimensions: { width: '400px', height: '500px' },
   },
   {
@@ -74,7 +74,7 @@ const installedApps: FileNode[] = [
       por: 'Terminal (incompleto)',
     },
     icon: 'command',
-    type: 'app',
+    type: 'systemApp',
   },
 ];
 

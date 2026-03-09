@@ -62,6 +62,7 @@ const Window = ({
     isFocused,
     windowRef,
     headerRef,
+    permission,
     windowIndex,
     isRequestingOpen,
   } = windowParams;
@@ -107,6 +108,7 @@ const Window = ({
     content,
     contentKey,
     filesActions,
+    permission,
     type,
     language,
   };

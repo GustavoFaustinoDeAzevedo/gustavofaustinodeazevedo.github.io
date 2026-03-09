@@ -19,9 +19,12 @@ const IconStyled = styled.i.withConfig({
       backgroundImage: `url(${customPicture})`,
     };
   }
+
+  //TODO substituir 'blankIcon' por uma variável do store para que seja possível alterar o icone padrao
+
   return {
     ...iconBaseStyle,
-    ...iconVariants[iconVerification ? variant : 'html-file'],
+    ...iconVariants[iconVerification ? variant : 'blankIcon'],
     backgroundColor: 'currentColor',
   };
 });
@@ -36,7 +39,7 @@ const IconWrapper: React.FC<IconProps & React.HTMLAttributes<HTMLElement>> =
 
     (prevProps, nextProps) =>
       prevProps.variant === nextProps.variant &&
-      prevProps.customPicture === nextProps.customPicture
+      prevProps.customPicture === nextProps.customPicture,
   );
 
 const Icon = React.memo(IconWrapper);

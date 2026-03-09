@@ -46,7 +46,7 @@ export interface FileNode {
   title?: Title;
   permission?: Permission;
   nodeDepth?: number;
-  type?: 'folder' | 'app' | 'text' | 'file';
+  type?: 'folder' | 'app' | 'text' | 'file' | 'systemApp' | 'test' | 'notFound';
   extension?: string;
   size?: Size;
   hidden?: boolean;

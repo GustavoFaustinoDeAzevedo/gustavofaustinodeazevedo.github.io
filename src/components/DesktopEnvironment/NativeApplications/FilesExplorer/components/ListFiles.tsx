@@ -42,7 +42,8 @@ const ListFiles = ({
   const typeToIcon = {
     app: 'html-file',
     folder: 'folder',
-    file: 'file',
+    notFound: 'blank-icon',
+    test: 'blank-icon',
   };
 
   // contantes
@@ -124,6 +125,7 @@ const ListFiles = ({
           src,
           isUnique,
           initialStates,
+          permission,
           content,
           type,
           nodeType,
