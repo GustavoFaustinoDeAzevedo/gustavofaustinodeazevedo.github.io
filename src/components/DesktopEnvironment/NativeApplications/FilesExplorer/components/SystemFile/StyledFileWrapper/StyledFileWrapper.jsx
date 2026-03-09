@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Icon from '@/components/DesktopEnvironment/UIControls/GlobalStyles/components/Icon';
 import { fileParts } from './fileWrapperStyle';
 
-export const StyledFileWrapper = styled.li`
+export const StyledFileWrapper = styled.div`
   ${(props) => fileParts(props).wrapper}
 `;
 

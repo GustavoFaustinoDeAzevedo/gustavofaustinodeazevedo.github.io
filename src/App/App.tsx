@@ -25,7 +25,7 @@ const App = () => {
     'images/Wallpapers/pexels-rpnickson-2559941.jpg',
     15000,
   );
-  const desktopRef = useRef<HTMLDivElement | null>(null);
+  const desktopRef = useRef<HTMLDivElement>(document.createElement('div'));
 
   return (
     <>
