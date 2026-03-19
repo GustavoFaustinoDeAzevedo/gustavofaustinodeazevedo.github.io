@@ -8,7 +8,7 @@ export default interface User {
 
   config: {
     apps: string[];
-    permission: string;
+    roles: string[];
     folders: string[];
     store: {
       window: WindowSliceState;

@@ -63,6 +63,7 @@ const Window = ({
     windowRef,
     headerRef,
     permission,
+    owner,
     windowIndex,
     isRequestingOpen,
   } = windowParams;
@@ -109,6 +110,7 @@ const Window = ({
     contentKey,
     filesActions,
     permission,
+    owner,
     type,
     language,
   };

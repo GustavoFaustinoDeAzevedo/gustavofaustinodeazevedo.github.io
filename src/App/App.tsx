@@ -28,26 +28,24 @@ const App = () => {
   const desktopRef = useRef<HTMLDivElement>(document.createElement('div'));
 
   return (
-    <>
-      <Suspense fallback={<LoadingScreen text="Carregando..." icon="💿" />}>
-        {isLoadingAnimation && (
-          <div
-            className="loading-screen__ending-layer-1"
-            onAnimationEnd={() => setIsLoadingAnimation(false)}
-          ></div>
-        )}
+    <Suspense fallback={<LoadingScreen text="Carregando..." icon="💿" />}>
+      {isLoadingAnimation && (
+        <div
+          className="loading-screen__ending-layer-1"
+          onAnimationEnd={() => setIsLoadingAnimation(false)}
+        ></div>
+      )}
 
-        <div className="desktop" ref={desktopRef}>
-          <Desktop />
+      <div className="desktop" ref={desktopRef}>
+        <Desktop />
 
-          <RefsProvider>
-            <SystemWindowsList bounds={desktopRef} />
+        <RefsProvider>
+          <SystemWindowsList bounds={desktopRef} />
 
-            <Taskbar />
-          </RefsProvider>
-        </div>
-      </Suspense>
-    </>
+          <Taskbar />
+        </RefsProvider>
+      </div>
+    </Suspense>
   );
 };
 

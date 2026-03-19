@@ -3,14 +3,17 @@ import { ListFiles } from '../../NativeApplications/FilesExplorer';
 import DesktopBackground from './components';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import { usersSelectors } from '@/store/slices/users/userSlice';
+import { FileNode } from '@/store/slices/file';
+import { User } from '@/store/slices/users/userSlice.types';
 
 const Desktop = () => {
-  const root = useSelector((state: RootState) =>
-    state.user.currentUser.config.store.userFolders.find(
-      (folder) => folder.contentKey === 'desktop',
-    ),
-  );
-
+  const userData = useSelector((state: RootState) =>
+    usersSelectors.selectById(state, 0),
+  ) as User;
+  const desktopFolder = userData?.config.store.userFolders.find(
+    (folder: FileNode) => folder.contentKey === 'desktop',
+  ) as FileNode;
   return (
     <div className="desktop-display">
       <DesktopBackground />
@@ -18,7 +21,7 @@ const Desktop = () => {
         currentNode="desktop"
         className="desktop-files__wrapper"
         openMode="window"
-        content={root?.content || []}
+        content={desktopFolder?.content || []}
       />
     </div>
   );

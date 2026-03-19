@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import actions from '@/store/actions';
 
 const StartMenuFooter = () => {
-  const userName = useSelector(
-    (state: RootState) => state.user.currentUser.name,
-  );
+  // const userName = useSelector(
+  //   (state: RootState) => state.user.currentUser.name,
+  // );
 
   const isDataPersistent = useSelector(
     (state: RootState) => state.settings.isDataPersistent,

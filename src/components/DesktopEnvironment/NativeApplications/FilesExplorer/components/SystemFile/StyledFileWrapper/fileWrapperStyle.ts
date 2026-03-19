@@ -65,10 +65,18 @@ export const fileParts = ({
         overflow: 'visible',
         WebkitLineClamp: 'initial',
         lineClamp: 'initial',
+        webkitTextStroke: $togglers?.enableTextShadow && '2px black',
+      },
+
+      'input[type="radio"]:not(:checked) + &:not(:focus)>*': {
+        WebkitLineClamp: 2,
+        lineClamp: 2,
+        textOverflow: 'ellipsis',
         filter:
           $togglers?.enableFilter &&
-          `brightness(1.1) ${
-            $togglers.enableShadow && 'drop-shadow(0px 5px 1px #0000008a)'
+          `brightness(1) ${
+            $togglers.enableShadow &&
+            'drop-shadow(0px 0px 1px #000000ff)  drop-shadow(0px 0px 1px #000000ff)'
           }`,
       },
 
@@ -129,9 +137,6 @@ export const fileParts = ({
       webkitTextStroke: $togglers?.enableTextShadow && '2px black',
       wrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
       wordWrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
-      WebkitLineClamp: 2,
-      lineClamp: 2,
-      textOverflow: 'ellipsis',
       fontSize: $fontSize,
       filter:
         $togglers?.enableFilter &&

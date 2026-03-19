@@ -14,6 +14,7 @@ import {
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { Permission } from '../file';
+import { roles } from '../users/userSlice.data';
 
 export const returnWindowContent = (
   contentKey: string,
@@ -22,12 +23,14 @@ export const returnWindowContent = (
     src,
     type,
     permission,
+    owner,
     content,
   }: {
     windowId?: string;
     src?: string;
     type?: string;
     permission?: Permission;
+    owner?: string;
     content?: any;
   },
 ) => {
@@ -50,7 +53,6 @@ export const returnWindowContent = (
   };
 
   const contentKeyValidation = contentKey in map;
-  console.log(permission);
 
   const permissionValidation =
     permission === undefined

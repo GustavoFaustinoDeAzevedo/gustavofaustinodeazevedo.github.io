@@ -4,7 +4,8 @@ import {
   contextMenuReducer,
   filesReducer,
   settingsReducer,
-  userReducer,
+  usersReducer,
+  permissionReducer,
 } from './slices';
 import { loadState, saveState } from '@/shared';
 
@@ -26,7 +27,8 @@ export const store = configureStore({
     contextMenu: contextMenuReducer,
     file: filesReducer,
     settings: settingsReducer,
-    user: userReducer,
+    users: usersReducer,
+    permission: permissionReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   preloadedState: isDataPersistent ? undefined : persistedState,
@@ -35,6 +37,8 @@ export const store = configureStore({
 store.subscribe(() => {
   saveState(store.getState());
 });
+
+export * from './apis';
 
 export type RootState = ReturnType<typeof store.getState>;
 

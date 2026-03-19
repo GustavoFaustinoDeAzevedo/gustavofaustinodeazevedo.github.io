@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   StyledFileWrapper,
   StyledFileWrapper__Icon,
@@ -8,7 +8,8 @@ import { useDelayBlock } from '@/shared/hooks/useDelayBlock';
 import { StylesConfig } from './StyledFileWrapper/fileWrapperStyle';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { Title } from '@/store/slices/file';
+import { Permission, Title } from '@/store/slices/file';
+import User from '@/store/utils/db.types';
 
 const defaultProps: StylesConfig = {
   $direction: 'vertical',
@@ -37,6 +38,8 @@ const SystemFile = ({
   onClick,
   stylesConfig = useMemo(() => ({ ...defaultProps }), []),
   isDoubleClick,
+  currentUser,
+  permission,
   isMobile,
 }: {
   fileId: string;
@@ -45,7 +48,8 @@ const SystemFile = ({
   onClick?: () => void;
   stylesConfig?: StylesConfig;
   isDoubleClick?: boolean;
-
+  permission?: Permission;
+  currentUser?: User;
   isMobile?: boolean;
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
