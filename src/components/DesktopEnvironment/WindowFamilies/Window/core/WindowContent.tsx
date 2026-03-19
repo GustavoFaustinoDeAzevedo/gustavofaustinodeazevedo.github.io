@@ -17,6 +17,7 @@ const WindowContent = ({
   currentNode,
   src,
   permission,
+  owner,
   content,
   type,
 }: {
@@ -24,6 +25,7 @@ const WindowContent = ({
   contentKey: string;
   currentNode: string;
   permission?: Permission;
+  owner?: string;
   src?: string;
   content?: any;
   type?: string;
@@ -35,6 +37,7 @@ const WindowContent = ({
     type,
     content,
     permission,
+    owner,
   });
 
   return (

@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import {
   addUser,
-  loadUsers,
+  // loadUsers,
   removeUser,
   updateUser,
-} from '../slices/user/userSlice';
+} from '../slices/users/userSlice';
 import User from '../utils/db.types';
 
 const useUserActions = () => {
@@ -15,7 +15,7 @@ const useUserActions = () => {
   };
 
   const handleLoadUsers = (payload: User[]) => {
-    dispatch(loadUsers(payload));
+    // dispatch(loadUsers(payload));
   };
 
   const handleUpdateUser = (payload: User) => {

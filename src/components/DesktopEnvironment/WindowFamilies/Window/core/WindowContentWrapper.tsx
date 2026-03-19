@@ -9,6 +9,7 @@ const WindowContentWrapper = ({
   content,
   contentKey,
   permission,
+  owner,
   src,
   type,
 }: {
@@ -18,6 +19,7 @@ const WindowContentWrapper = ({
   content?: any;
   contentKey: string;
   permission?: Permission;
+  owner?: string;
   src?: string;
   type?: string;
 }) => {
@@ -29,6 +31,7 @@ const WindowContentWrapper = ({
       content={content ?? {}}
       contentKey={contentKey}
       permission={permission}
+      owner={owner}
       type={type}
     />
   ) : (

@@ -11,9 +11,6 @@ import {
   updateHistory,
   windowLocator,
   focusWindow,
-  findPath,
-  findNode,
-  newFile,
 } from './windowSlice.utils';
 import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
 
@@ -55,6 +52,7 @@ const windowSlice = createSlice({
         type,
         nodeDepth,
         permission,
+        owner,
         isUnique,
         contentKey,
         isRequestingMaximize = false,
@@ -121,6 +119,7 @@ const windowSlice = createSlice({
         contentKey,
         initialDimensions,
         permission,
+        owner,
         windowType,
         position: { lastX: 0, lastY: 0, x: 0, y: 0 },
         size: { lastWidth: 0, lastHeight: 0, width: 0, height: 0 },

@@ -6,11 +6,7 @@ type SortType = 'asc' | 'desc'; // provisório
 export type Title = { eng: string; por: string };
 
 // Permissões de acesso de um arquivo/nó
-export type Permission = {
-  read: boolean;
-  write: boolean;
-  execute: boolean;
-};
+export type Permission = string[];
 
 // Atributos de um arquivo/nó
 export type Attributes = {

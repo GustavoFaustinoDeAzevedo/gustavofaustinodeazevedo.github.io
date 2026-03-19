@@ -9,6 +9,8 @@ import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
 import { WindowTitle } from '@/store/slices/window';
 import { useMemo } from 'react';
+import { usersSelectors } from '@/store/slices/users/userSlice';
+import User from '@/store/utils/db.types';
 
 type ListFilesProps = {
   handleGlobalClick?: () => void;
@@ -37,7 +39,17 @@ const ListFiles = ({
 }: ListFilesProps) => {
   if (content === undefined || content?.length < 0) return;
 
+  // redux
+
+  const currentUserId = useSelector(
+    (state: RootState) => state.users.currentUserId,
+  );
+  const currentUser = useSelector((state: RootState) =>
+    usersSelectors.selectById(state, currentUserId),
+  ) as User;
+
   // window actions
+
   const windowActions = actions.useWindowActions();
   const { handleUpdateWindow, handleOpenWindow } = windowActions;
   const typeToIcon = {
@@ -48,6 +60,9 @@ const ListFiles = ({
   };
 
   // constantes
+
+  const userRoles = currentUser?.config.roles ?? ['guest'];
+
   const contentFiltered = useMemo(() => {
     if (!filters) return content;
 
@@ -73,6 +88,7 @@ const ListFiles = ({
   const isMobile = useIsMobile();
 
   // jsx
+
   const mapContent = contentFiltered?.map(
     (
       {
@@ -87,20 +103,13 @@ const ListFiles = ({
         contentKey,
         nodeDepth,
         initialDimensions,
+        owner,
         permission,
         hidden,
       }: FileNode,
       windowIndex: number,
     ) => {
-      const userPermission = useSelector(
-        (state: RootState) => state.user.currentUser.config.permission,
-      );
-      if (
-        fileId === undefined ||
-        fileId === null ||
-        userPermission !== 'admin' ||
-        hidden === true
-      )
+      if (fileId === undefined || fileId === null || hidden === true)
         return null;
       const finalIcon =
         icon ?? typeToIcon[type as keyof typeof typeToIcon] ?? 'window-icon';
@@ -127,6 +136,8 @@ const ListFiles = ({
           src,
           isUnique,
           initialStates,
+          userRoles,
+          owner,
           permission,
           content,
           type,

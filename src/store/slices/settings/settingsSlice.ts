@@ -6,8 +6,6 @@ import {
   EffectValues,
   FilterValues,
 } from './settingsSlice.types';
-import { useIsMobile } from '@/shared';
-import updateStateIfDefined from '@/store/utils/updateStateIfDefined';
 
 const navigatorLanguage =
   (typeof navigator !== 'undefined' && navigator.language) || 'en-US';

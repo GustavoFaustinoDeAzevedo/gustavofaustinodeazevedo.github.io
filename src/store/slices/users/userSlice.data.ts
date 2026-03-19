@@ -1,14 +1,13 @@
 import { IconVariantStyle } from '@/components/DesktopEnvironment/UIControls/GlobalStyles/utils/icons';
+import { User } from './userSlice.types';
 
-import User from '@/store/utils/db.types';
-
-export const usersInitialState: User[] = [
+export const placeholderUsers: User[] = [
   {
     id: 1,
     name: 'Admin',
     config: {
       apps: ['about', 'skills', 'contact', 'sendMessage'],
-      permission: 'admin',
+      roles: ['admin'],
       store: {
         window: {
           openedWindows: {},
@@ -129,11 +128,7 @@ export const usersInitialState: User[] = [
                 },
                 icon: '',
                 type: 'test',
-                permission: {
-                  read: false,
-                  write: false,
-                  execute: false,
-                },
+                permission: ['GOD'],
               },
               {
                 fileId: 'notFoundFile',
@@ -200,22 +195,201 @@ export const usersInitialState: User[] = [
   },
   {
     id: 2,
-    name: 'Guests',
+    name: { eng: 'Guests', por: 'Visitantes' },
     config: {
-      window: {},
-      settings: {},
-      apps: {},
-      permission: 'guest',
-    },
-  },
-  {
-    id: 3,
-    name: 'Gustavo',
-    config: {
-      window: {},
-      settings: {},
-      apps: {},
-      permission: 'standard',
+      apps: [''],
+      roles: ['guest'],
+      store: {
+        window: {
+          openedWindows: {},
+          focusedWindow: null,
+          history: [''],
+        },
+        settings: {
+          language: 'por',
+          isDoubleClick: true,
+          isMobile: false,
+          isDataPersistent: true,
+          desktopBackgroundDefaultColor: '#13538A',
+          desktopBackgroundColor: '#13538A',
+          desktopBackgroundColorContrast: '#ffffff',
+          desktopBackgroundEffect: {
+            active: 'none',
+            angle: 0,
+            mirrored: false,
+            inverted: false,
+          },
+          desktopBackgroundFilter: {
+            preset: 'custom',
+            custom: {
+              brightness: 1,
+              contrast: 1,
+              saturation: 1,
+              grayscale: 0,
+              hue: 0,
+              blur: 0,
+              invert: 0,
+              sepia: 0,
+            },
+            values: {
+              brightness: 1,
+              contrast: 1,
+              saturation: 1,
+              grayscale: 0,
+              hue: 0,
+              blur: 0,
+              invert: 0,
+              sepia: 0,
+            },
+          },
+          desktopBackgroundImage: '',
+          isBackgroundImage: false,
+        },
+        userFolders: [
+          {
+            fileId: 'desktop',
+            contentKey: 'desktop',
+            title: { eng: 'Desktop', por: 'Área de Trabalho' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+          {
+            fileId: 'documents',
+            title: { eng: 'Documents', por: 'Documentos' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+          {
+            fileId: 'downloads',
+            title: { eng: 'Downloads', por: 'Downloads' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+          {
+            fileId: 'music',
+            title: { eng: 'Music', por: 'Música' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+          {
+            fileId: 'pictures',
+            title: { eng: 'Pictures', por: 'Imagens' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+          {
+            fileId: 'videos',
+            title: { eng: 'Videos', por: 'Vídeos' },
+            icon: 'folder',
+            type: 'folder',
+            content: [],
+          },
+        ],
+        appsConfig: {},
+      },
     },
   },
 ];
+
+export const defaultConfig = {
+  apps: [''],
+  roles: ['standard'],
+  store: {
+    window: {
+      openedWindows: {},
+      focusedWindow: null,
+      history: [''],
+    },
+    settings: {
+      language: 'por',
+      isDoubleClick: true,
+      isMobile: false,
+      isDataPersistent: true,
+      desktopBackgroundDefaultColor: '#13538A',
+      desktopBackgroundColor: '#13538A',
+      desktopBackgroundColorContrast: '#ffffff',
+      desktopBackgroundEffect: {
+        active: 'none',
+        angle: 0,
+        mirrored: false,
+        inverted: false,
+      },
+      desktopBackgroundFilter: {
+        preset: 'custom',
+        custom: {
+          brightness: 1,
+          contrast: 1,
+          saturation: 1,
+          grayscale: 0,
+          hue: 0,
+          blur: 0,
+          invert: 0,
+          sepia: 0,
+        },
+        values: {
+          brightness: 1,
+          contrast: 1,
+          saturation: 1,
+          grayscale: 0,
+          hue: 0,
+          blur: 0,
+          invert: 0,
+          sepia: 0,
+        },
+      },
+      desktopBackgroundImage: '',
+      isBackgroundImage: false,
+    },
+    userFolders: [
+      {
+        fileId: 'desktop',
+        contentKey: 'desktop',
+        title: { eng: 'Desktop', por: 'Área de Trabalho' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'documents',
+        title: { eng: 'Documents', por: 'Documentos' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'downloads',
+        title: { eng: 'Downloads', por: 'Downloads' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'music',
+        title: { eng: 'Music', por: 'Música' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'pictures',
+        title: { eng: 'Pictures', por: 'Imagens' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'videos',
+        title: { eng: 'Videos', por: 'Vídeos' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+    ],
+    appsConfig: {},
+  },
+};
