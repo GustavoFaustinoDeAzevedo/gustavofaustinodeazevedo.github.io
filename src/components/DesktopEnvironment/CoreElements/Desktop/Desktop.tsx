@@ -8,8 +8,11 @@ import { FileNode } from '@/store/slices/file';
 import { User } from '@/store/slices/users/userSlice.types';
 
 const Desktop = () => {
+  const currentUserId = useSelector(
+    (state: RootState) => state.users.currentUserId,
+  );
   const userData = useSelector((state: RootState) =>
-    usersSelectors.selectById(state, 0),
+    usersSelectors.selectById(state, currentUserId),
   ) as User;
   const desktopFolder = userData?.config.store.userFolders.find(
     (folder: FileNode) => folder.contentKey === 'desktop',

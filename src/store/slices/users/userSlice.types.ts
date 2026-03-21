@@ -8,7 +8,6 @@ export interface User {
   config: {
     apps: string[];
     roles: string[];
-    folders: string[];
     store: {
       window: WindowSliceState;
       settings: SettingsSliceState;
