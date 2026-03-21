@@ -52,7 +52,6 @@ export const handleOpenFile = ({
 }: HandleOpenFileProps) => {
   try {
     const hasRole = permission?.every((item) => userRoles?.includes(item));
-    console.log(hasRole);
     if (!hasRole && permission !== undefined) {
       alert(
         '------------------------------------------\n(Temporary alert for testing purposes)\n------------------------------------------\nUser does not have permission to open this file.',

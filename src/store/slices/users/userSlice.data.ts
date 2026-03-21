@@ -1,7 +1,108 @@
 import { IconVariantStyle } from '@/components/DesktopEnvironment/UIControls/GlobalStyles/utils/icons';
 import { User } from './userSlice.types';
 
+export const defaultConfig: User['config'] = {
+  apps: [''],
+  roles: ['standard'],
+  store: {
+    window: {
+      activeWindowParams: {},
+      openedWindows: {},
+      openedWindowList: [],
+      focusedWindow: null,
+      history: [],
+    },
+    settings: {
+      language: 'por',
+      isDoubleClick: true,
+      isMobile: false,
+      isDataPersistent: true,
+      desktopBackgroundDefaultColor: '#13538A',
+      desktopBackgroundColor: '#13538A',
+      desktopBackgroundColorContrast: '#ffffff',
+      desktopBackgroundEffect: {
+        active: 'none',
+        angle: 0,
+        mirrored: false,
+        inverted: false,
+      },
+      desktopBackgroundFilter: {
+        preset: 'custom',
+        custom: {
+          brightness: 1,
+          contrast: 1,
+          saturation: 1,
+          grayscale: 0,
+          hue: 0,
+          blur: 0,
+          invert: 0,
+          sepia: 0,
+        },
+        values: {
+          brightness: 1,
+          contrast: 1,
+          saturation: 1,
+          grayscale: 0,
+          hue: 0,
+          blur: 0,
+          invert: 0,
+          sepia: 0,
+        },
+      },
+      desktopBackgroundImage: '',
+      isBackgroundImage: false,
+    },
+    userFolders: [
+      {
+        fileId: 'desktop',
+        contentKey: 'desktop',
+        title: { eng: 'Desktop', por: 'Área de Trabalho' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'documents',
+        title: { eng: 'Documents', por: 'Documentos' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'downloads',
+        title: { eng: 'Downloads', por: 'Downloads' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'music',
+        title: { eng: 'Music', por: 'Música' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'pictures',
+        title: { eng: 'Pictures', por: 'Imagens' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+      {
+        fileId: 'videos',
+        title: { eng: 'Videos', por: 'Vídeos' },
+        icon: 'folder',
+        type: 'folder',
+        content: [],
+      },
+    ],
+    appsConfig: {},
+  },
+};
+
 export const placeholderUsers: User[] = [
+  { id: 0, name: 'Default Config', config: defaultConfig },
   {
     id: 1,
     name: 'Admin',
@@ -134,8 +235,8 @@ export const placeholderUsers: User[] = [
                 fileId: 'notFoundFile',
                 contentKey: 'notFoundFile',
                 title: {
-                  eng: 'Not Found File Test',
-                  por: 'Teste de Arquivo Não Encontrado',
+                  eng: 'Not Found Content Test',
+                  por: 'Teste de Conteúdo Não Encontrado',
                 },
                 icon: '',
                 type: 'notFound',
@@ -295,101 +396,3 @@ export const placeholderUsers: User[] = [
     },
   },
 ];
-
-export const defaultConfig = {
-  apps: [''],
-  roles: ['standard'],
-  store: {
-    window: {
-      openedWindows: {},
-      focusedWindow: null,
-      history: [''],
-    },
-    settings: {
-      language: 'por',
-      isDoubleClick: true,
-      isMobile: false,
-      isDataPersistent: true,
-      desktopBackgroundDefaultColor: '#13538A',
-      desktopBackgroundColor: '#13538A',
-      desktopBackgroundColorContrast: '#ffffff',
-      desktopBackgroundEffect: {
-        active: 'none',
-        angle: 0,
-        mirrored: false,
-        inverted: false,
-      },
-      desktopBackgroundFilter: {
-        preset: 'custom',
-        custom: {
-          brightness: 1,
-          contrast: 1,
-          saturation: 1,
-          grayscale: 0,
-          hue: 0,
-          blur: 0,
-          invert: 0,
-          sepia: 0,
-        },
-        values: {
-          brightness: 1,
-          contrast: 1,
-          saturation: 1,
-          grayscale: 0,
-          hue: 0,
-          blur: 0,
-          invert: 0,
-          sepia: 0,
-        },
-      },
-      desktopBackgroundImage: '',
-      isBackgroundImage: false,
-    },
-    userFolders: [
-      {
-        fileId: 'desktop',
-        contentKey: 'desktop',
-        title: { eng: 'Desktop', por: 'Área de Trabalho' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-      {
-        fileId: 'documents',
-        title: { eng: 'Documents', por: 'Documentos' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-      {
-        fileId: 'downloads',
-        title: { eng: 'Downloads', por: 'Downloads' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-      {
-        fileId: 'music',
-        title: { eng: 'Music', por: 'Música' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-      {
-        fileId: 'pictures',
-        title: { eng: 'Pictures', por: 'Imagens' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-      {
-        fileId: 'videos',
-        title: { eng: 'Videos', por: 'Vídeos' },
-        icon: 'folder',
-        type: 'folder',
-        content: [],
-      },
-    ],
-    appsConfig: {},
-  },
-};
