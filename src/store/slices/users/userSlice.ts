@@ -13,9 +13,10 @@ const usersAdapter = createEntityAdapter<User>();
 
 const initialState: EntityState<User, number> & UsersExtraState =
   usersAdapter.getInitialState({
-    ids: [1,2,3],
+    ids: [1, 2, 3],
     entities: placeholderUsers,
-    currentUserId: 1,
+    currentUserId: 2,
+    currentUser: null,
     loading: false,
   });
 
@@ -36,6 +37,14 @@ const usersSlice = createSlice({
     removeUser: usersAdapter.removeOne,
     setCurrentUserId: (state, action: PayloadAction<number>) => {
       state.currentUserId = action.payload;
+    },
+    setCurrentUser: (state, action: PayloadAction<number>) => {
+      const user = state.entities[action.payload];
+      if (user) {
+        state.currentUser = user;
+      } else {
+        state.currentUser = state.entities[1] ?? undefined;
+      }
     },
   },
 
@@ -58,6 +67,6 @@ export const usersSelectors = usersAdapter.getSelectors(
   (state: RootState) => state.users,
 );
 
-export const { addUser, updateUser, removeUser, setCurrentUserId } =
+export const { addUser, updateUser, removeUser, setCurrentUserId, setCurrentUser } =
   usersSlice.actions;
 export default usersSlice.reducer;

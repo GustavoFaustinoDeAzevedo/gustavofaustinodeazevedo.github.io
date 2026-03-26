@@ -19,5 +19,6 @@ export interface User {
 
 export interface UsersExtraState {
   currentUserId: number;
+  currentUser: User | null;
   loading: boolean;
 }

@@ -353,7 +353,28 @@ export const placeholderUsers: User[] = [
             title: { eng: 'Desktop', por: 'Área de Trabalho' },
             icon: 'folder',
             type: 'folder',
-            content: [],
+            content: [
+              {
+                fileId: 'backgroundPreferences',
+                contentKey: 'backgroundPreferences',
+                title: {
+                  eng: 'Background Preferences',
+                  por: 'Preferências de Fundo',
+                },
+                icon: 'image-outline-icon',
+                type: 'app',
+              },
+              {
+                fileId: 'cmd',
+                contentKey: 'cmd',
+                title: {
+                  eng: 'Terminal (unfinished)',
+                  por: 'Terminal (incompleto)',
+                },
+                icon: 'command',
+                type: 'app',
+              },
+            ],
           },
           {
             fileId: 'documents',

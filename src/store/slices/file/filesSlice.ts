@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { rootFolder } from '@/data/filesData';
 import { FileNode, FileSliceState } from './filesSlice.types';
-import installedApps from '@/data/installedAppsData';
+import { installedApps, systemApps } from '@/data/installedAppsData';
 
 const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
   if (!parent.content) parent.content = [];
@@ -127,6 +127,7 @@ const handleNestedEntities = (obj: FileNode, nodeDepth = 0): FileNode => {
 const filesList = handleNestedEntities(rootFolder);
 
 const initialState: FileSliceState = {
+  systemApps: systemApps,
   installedApps: installedApps,
   filesList: filesList,
   userFolders: [],
