@@ -1,6 +1,7 @@
 import { ListFiles } from '@/components/DesktopEnvironment/NativeApplications/FilesExplorer';
 import { StylesConfig } from '@/components/DesktopEnvironment/NativeApplications/FilesExplorer/components/SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { RootState } from '@/store';
+import { usersSelectors } from '@/store/slices/users/userSlice';
 import { useSelector } from 'react-redux';
 
 const InstalledAppsFieldset = ({
@@ -11,7 +12,18 @@ const InstalledAppsFieldset = ({
   handleToggleVisibility: () => void;
 }) => {
   const language = useSelector((state: RootState) => state?.settings.language);
-  const { installedApps } = useSelector((state: RootState) => state.file);
+  const { installedApps, systemApps } = useSelector(
+    (state: RootState) => state.file,
+  );
+
+  const { currentUser } = useSelector((state: RootState) => state.users);
+
+  const userApps = installedApps.filter((app) =>
+    currentUser?.config.apps.includes(app.fileId),
+  );
+
+  const totalApps = [...systemApps, ...userApps];
+
   const stylesConfig: StylesConfig = {
     $direction: 'horizontal',
     $size: '',
@@ -39,7 +51,7 @@ const InstalledAppsFieldset = ({
         {language !== 'por' ? 'Apps' : 'Aplicativos'}
       </legend>
       <ul className="carousel">
-        {installedApps?.map((_, index: number) => {
+        {totalApps?.map((_, index: number) => {
           const key = crypto.randomUUID();
           if (index % 4 === 0) {
             dotCount += 1;
@@ -50,7 +62,7 @@ const InstalledAppsFieldset = ({
                   currentNode={''}
                   className={'start-menu__list'}
                   openMode={'window'}
-                  content={installedApps.slice(index, index + 4)}
+                  content={totalApps.slice(index, index + 4)}
                   doubleClickToOpen={false}
                   stylesConfig={stylesConfig}
                   filters={searchAppValue}

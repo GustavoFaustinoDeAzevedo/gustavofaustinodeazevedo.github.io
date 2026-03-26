@@ -5,6 +5,10 @@ import { RefsProvider } from '@/contexts/RefsContext';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
 import { desktopBackgroundInitialImage } from '@/store/slices/settings/settingsSlice';
 import LoadingScreen from './LoadingScreen';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import actions from '@/store/actions';
+import { useLayoutEffect } from 'react';
 
 const [Desktop, Taskbar, SystemWindowsList] = [
   React.lazy(() =>
@@ -20,12 +24,19 @@ const [Desktop, Taskbar, SystemWindowsList] = [
 
 const App = () => {
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
+  const { handleCurrentUser } = actions.useUserActions();
+  const userId = useSelector((state: RootState) => state.users.currentUserId);
+
   const loaded = useBackgroundImageLoad(
     desktopBackgroundInitialImage,
     'images/Wallpapers/pexels-rpnickson-2559941.jpg',
     15000,
   );
   const desktopRef = useRef<HTMLDivElement>(document.createElement('div'));
+
+  useLayoutEffect(() => {
+    handleCurrentUser(userId);
+  }, [userId, handleCurrentUser]);
 
   return (
     <Suspense fallback={<LoadingScreen text="Carregando..." icon="💿" />}>

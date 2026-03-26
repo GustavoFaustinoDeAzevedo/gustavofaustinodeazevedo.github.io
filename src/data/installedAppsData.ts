@@ -1,37 +1,8 @@
 import { FileNode } from '@/store/slices/file';
 
-const installedApps: FileNode[] = [
+export const systemApps: FileNode[] = [
   {
-    fileId: 'about',
-    title: { eng: 'About Me', por: 'Sobre Mim' },
-    icon: 'about',
-    type: 'text',
-  },
-  {
-    fileId: 'skills',
-    title: { eng: 'Skills', por: 'Habilidades' },
-    icon: 'skills',
-    type: 'file',
-    initialDimensions: { width: '750px', height: '540px' },
-  },
-
-  {
-    fileId: 'contact',
-    title: { eng: 'Contact Info', por: 'Informações de Contato' },
-    icon: 'business-card-icon',
-    type: 'app',
-    initialDimensions: { width: '490px', height: '600px' },
-  },
-
-  {
-    fileId: 'sendMessage',
-    title: { eng: 'Send Message', por: 'Enviar Mensagem' },
-    icon: 'contact',
-    type: 'app',
-    initialDimensions: { width: '490px', height: '620px' },
-  },
-  {
-    fileId: 'change-background',
+    fileId: 'backgroundPreferences',
     title: {
       eng: 'Change Background (unfinished)',
       por: 'Alterar Fundo (incompleto)',
@@ -78,4 +49,33 @@ const installedApps: FileNode[] = [
   },
 ];
 
-export default installedApps;
+export const installedApps: FileNode[] = [
+  {
+    fileId: 'about',
+    title: { eng: 'About Me', por: 'Sobre Mim' },
+    icon: 'about',
+    type: 'text',
+  },
+  {
+    fileId: 'skills',
+    title: { eng: 'Skills', por: 'Habilidades' },
+    icon: 'skills',
+    type: 'file',
+    initialDimensions: { width: '750px', height: '540px' },
+  },
+  {
+    fileId: 'contact',
+    title: { eng: 'Contact Info', por: 'Informações de Contato' },
+    icon: 'business-card-icon',
+    type: 'app',
+    initialDimensions: { width: '490px', height: '600px' },
+  },
+
+  {
+    fileId: 'sendMessage',
+    title: { eng: 'Send Message', por: 'Enviar Mensagem' },
+    icon: 'contact',
+    type: 'app',
+    initialDimensions: { width: '490px', height: '620px' },
+  },
+];
