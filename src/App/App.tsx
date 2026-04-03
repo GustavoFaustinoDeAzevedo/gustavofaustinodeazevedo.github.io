@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import actions from '@/store/actions';
 import { useLayoutEffect } from 'react';
+import ScriptPortfolio from '@/components/SimplifiedVersion/ScriptVersion/ScriptPortfolio';
 
 const [Desktop, Taskbar, SystemWindowsList] = [
   React.lazy(() =>
@@ -23,6 +24,7 @@ const [Desktop, Taskbar, SystemWindowsList] = [
 ];
 
 const App = () => {
+  //return <ScriptPortfolio />;
   const [isLoadingAnimation, setIsLoadingAnimation] = useState(true);
   const { handleCurrentUser } = actions.useUserActions();
   const userId = useSelector((state: RootState) => state.users.currentUserId);
