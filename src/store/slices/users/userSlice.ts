@@ -15,7 +15,7 @@ const initialState: EntityState<User, number> & UsersExtraState =
   usersAdapter.getInitialState({
     ids: [1, 2, 3],
     entities: placeholderUsers,
-    currentUserId: 2,
+    currentUserId: 1,
     currentUser: null,
     loading: false,
   });
