@@ -10,8 +10,8 @@ import { useSelector } from 'react-redux';
 const ScriptPortfolio = () => {
   const language = useSelector((state: RootState) => state.settings.language);
   return (
-    <div>
-      <header>
+    <div className="portfolio-container">
+      <header className="portfolio-header">
         <h1 className="portfolio-header__text">
           {language === 'por'
             ? 'Bem vindo à versão simplificada do  meu Portfólio'
@@ -21,23 +21,27 @@ const ScriptPortfolio = () => {
           <a href="#aboutMe">{language === 'por' ? 'Sobre mim' : 'About me'}</a>
         </nav>
       </header>
-      <AboutMe
-        classContainer="classContainer"
-        classWrapper="classWrapper"
-        classImage="classImage"
-        classTitleContainer="classTitleContainer"
-        classTitle=""
-        classSubtitle=""
-        classText=""
-        classHorizontalRule="classHorizontalRule"
-      />
-      <MySkills />
-      <>
-        <section id="aboutMe">
-          <SendMessage />
-        </section>
-        <ContactCard />
-      </>
+      <main className="portfolio-main">
+        <AboutMe
+          classContainer="classContainer portfolio-main__item"
+          classWrapper="classWrapper"
+          classImage="classImage"
+          classTitleContainer="classTitleContainer"
+          classTitle=""
+          classSubtitle=""
+          classText=""
+          classHorizontalRule="classHorizontalRule"
+        />
+        <div className="portfolio-main__item">
+          <MySkills />
+        </div>
+        <div className="portfolio-main__item">
+          <section id="aboutMe">
+            <SendMessage />
+          </section>
+          <ContactCard />
+        </div>
+      </main>
     </div>
   );
 };
