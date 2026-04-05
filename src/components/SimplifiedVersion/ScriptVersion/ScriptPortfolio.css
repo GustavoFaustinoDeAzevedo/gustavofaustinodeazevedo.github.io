@@ -1,49 +1,99 @@
-.classContainer {
-  width: 50vw;
-  height: 100vh;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  
-}
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-.classWrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+  .portfolio-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
-.classImage {
-  width: 10rem;
-  height: 10rem;
-  object-fit: cover;
-  margin-bottom: 1rem;
-}
+    & .portfolio-header {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      background-color: black;
+      display: flex;
+      flex-shrink: 1;
+      flex-grow: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
 
-.classTitleContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+    & .portfolio-main {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      will-change: scroll-position;
 
-.classTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
+      & .portfolio-main__item {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        scroll-snap-align: start;
+        flex: 0 0 100%;
+      }
+    }
+  }
 
-.classSubtitle {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
+  /* Componente AboutMe */
 
-.classHorizontalRule {
-  width: 100%;
-  height: 2px;
-  margin-bottom: 1rem
-}
+  .classContainer {
+    width: 50vw;
+    height: 100vh;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+
+  }
+
+  .classWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .classImage {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .classTitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .classTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .classSubtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .classHorizontalRule {
+    width: 100%;
+    height: 2px;
+    margin-bottom: 1rem
+  }
