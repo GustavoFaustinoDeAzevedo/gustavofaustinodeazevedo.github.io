@@ -17,11 +17,33 @@
       display: flex;
       flex-shrink: 1;
       flex-grow: 0;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       text-align: center;
       padding: 2rem;
+
+      & .portfolio-header__nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        a {
+          padding: 0.5rem;
+          text-decoration: none;
+          background-color: transparent;
+          color: var(--color-text);
+          transition: background-color 0.3s ease-in-out;
+          border-radius: 3px;
+        }
+
+        a:hover {
+          background-color: var(--color-background-3);
+          transition: background-color 0.3s ease-in-out;
+        }
+      }
     }
 
     & .portfolio-main {
@@ -37,11 +59,14 @@
       will-change: scroll-position;
 
       & .portfolio-main__item {
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
         overflow: hidden;
         scroll-snap-align: start;
         flex: 0 0 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

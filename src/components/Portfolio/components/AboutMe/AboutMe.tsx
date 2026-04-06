@@ -2,15 +2,17 @@ import { useSelector } from 'react-redux';
 import aboutMeData, { AboutMeData } from './aboutMe.data';
 import { RootState } from '@/store';
 
+interface AboutMeStyles {
+  stylesContainer?: Record<string, number | string>;
+  stylesWrapper?: Record<string, number | string>;
+  stylesImage?: Record<string, number | string>;
+  stylesText?: Record<string, number | string>;
+  stylesTitle?: Record<string, number | string>;
+  stylesSubtitle?: Record<string, number | string>;
+}
+
 interface AboutMeProps {
-  classContainer?: string;
-  classWrapper?: string;
-  classImage?: string;
-  classTitleContainer?: string;
-  classTitle?: string;
-  classSubtitle?: string;
-  classHorizontalRule?: string;
-  classText?: string;
+  styles?: AboutMeStyles;
   text?: string;
   image?: string;
   imageAlt?: string;
@@ -20,13 +22,15 @@ interface AboutMeProps {
 
 const AboutMe = (props: AboutMeProps) => {
   const language = useSelector((state: RootState) => state.settings.language);
+  const { styles, text, image, imageAlt, title, subtitle } = props;
   return (
     <main
-      className={props.classContainer || 'about-me'}
+      className={'about-me'}
+      style={styles?.stylesContainer}
       aria-label="About Me Section"
       data-initial-dimension='{"width": "500px", "height": "550px"}'
     >
-      <div className={props.classWrapper || 'about-me__wrapper'}>
+      <div className={'about-me__wrapper'} style={styles?.stylesWrapper}>
         <img
           src={props.image || 'images/profile-pic.png'}
           alt={props.imageAlt || aboutMeData[language].imageAlt}
@@ -34,23 +38,26 @@ const AboutMe = (props: AboutMeProps) => {
           decoding="async"
           referrerPolicy="no-referrer"
           fetchPriority="high"
-          className={props.classImage || 'about-me__image'}
+          className={'about-me__image'}
+          style={styles?.stylesImage}
         />
 
         <section
-          className={props.classTitleContainer || 'about-me__title-container'}
+          className={'about-me__title-container'}
+          style={styles?.stylesTitle}
         >
-          <h2 className={props.classTitle || 'about-me__title'}>
+          <h2 className={'about-me__title'} style={styles?.stylesTitle}>
             {props.title || aboutMeData[language].title}
           </h2>
-          <h3 className={props.classSubtitle || 'about-me__subtitle'}>
+          <h3 className={'about-me__subtitle'} style={styles?.stylesTitle}>
             {aboutMeData[language].subtitle}
           </h3>
           <hr
-            className={props.classHorizontalRule || 'about-me__horizontal-rule'}
+            className={'about-me__horizontal-rule'}
+            style={styles?.stylesSubtitle}
           />
         </section>
-        <p className={props.classText || 'about-me__text'}>
+        <p className={'about-me__text'} style={styles?.stylesText}>
           {props.text || aboutMeData[language].text}
         </p>
       </div>
