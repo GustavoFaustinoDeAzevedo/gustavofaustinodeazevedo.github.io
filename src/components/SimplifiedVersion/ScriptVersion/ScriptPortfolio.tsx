@@ -1,3 +1,4 @@
+import Carousel from '@/components/DesktopEnvironment/UIControls/Data&Collections';
 import {
   AboutMe,
   ContactCard,
@@ -62,7 +63,7 @@ const ScriptPortfolio = () => {
             ? 'Bem vindo ao meu Portfólio'
             : 'Welcome to my Portfolio'}
         </h1>
-        <nav className='portfolio-header__nav' >
+        <nav className="portfolio-header__nav">
           <a href="#aboutMe">{language === 'por' ? 'Sobre mim' : 'About me'}</a>
           <a href="#mySkills">
             {language === 'por' ? 'Minhas habilidades' : 'My skills'}
@@ -70,7 +71,30 @@ const ScriptPortfolio = () => {
           <a href="#contact">{language === 'por' ? 'Contato' : 'Contact'}</a>
         </nav>
       </header>
-      <main className="portfolio-main">
+      <Carousel
+        carouselWrapperStyles={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          scrollSnapType: 'y mandatory',
+          WebkitOverflowScrolling: 'touch',
+          scrollBehavior: 'smooth',
+          willChange: 'scroll-position',
+        }}
+        carouselItemStyles={{
+          height: '100%',
+          width: '100%',
+          overflow: 'hidden',
+          scrollSnapAlign: 'start',
+          flex: '0 0 100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <section id="aboutMe" className="portfolio-main__item">
           <AboutMe styles={aboutMeStyles} image="images/profile-pic-2.png" />
         </section>
@@ -87,7 +111,25 @@ const ScriptPortfolio = () => {
           <SendMessage />
           <ContactCard />
         </section>
-      </main>
+      </Carousel>
+      {/* <main className="portfolio-main">
+        <section id="aboutMe" className="portfolio-main__item">
+          <AboutMe styles={aboutMeStyles} image="images/profile-pic-2.png" />
+        </section>
+        <section
+          id="mySkills"
+          className="portfolio-main__item portfolio-main__skills"
+        >
+          <MySkills />
+        </section>
+        <section
+          id="contact"
+          className="portfolio-main__item portfolio-main__contact"
+        >
+          <SendMessage />
+          <ContactCard />
+        </section>
+      </main> */}
     </div>
   );
 };
