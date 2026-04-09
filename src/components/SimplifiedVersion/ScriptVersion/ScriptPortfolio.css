@@ -1,122 +1,145 @@
+.portfolio-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000000;
+  background: linear-gradient(0deg, #0e0e1a 0%, #000000 100%);
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
+.portfolio-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: transparent;
+  z-index: 1;
 
-  .portfolio-container {
-    width: 100vw;
-    height: 100vh;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  & .portfolio-header {
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    color: #E0E0E0;
+    background-color: #000000;
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 2rem;
 
-    & .portfolio-header {
-      position: sticky;
-      z-index: 100;
-      top: 0;
-      background-color: black;
+    & .portfolio-header__nav {
       display: flex;
-      flex-shrink: 1;
-      flex-grow: 0;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
-      text-align: center;
-      padding: 2rem;
+      justify-content: center;
+      gap: 1rem;
 
-      & .portfolio-header__nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
+      a {
 
-        a {
-          padding: 0.5rem;
-          text-decoration: none;
-          background-color: transparent;
-          color: var(--color-text);
-          transition: background-color 0.3s ease-in-out;
-          border-radius: 3px;
-        }
-
-        a:hover {
-          background-color: var(--color-background-3);
-          transition: background-color 0.3s ease-in-out;
-        }
+        padding: 1rem;
+        text-decoration: none;
+        background-color: transparent;
+        transition: all 0.3s ease-in-out;
+        border-radius: 3px;
       }
-    }
 
-    & .portfolio-main {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      will-change: scroll-position;
+      a:hover {
+        color: #FFD700;
+        transition: all 0.3s ease-in-out;
 
-      & .portfolio-main__item {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        scroll-snap-align: start;
-        flex: 0 0 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+
+        &.portfolio-header__contact {
+          color: #e59900da;
+
+        }
       }
     }
   }
 
-  /* Componente AboutMe */
-
-  .classContainer {
-    width: 50vw;
-    height: 100vh;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-
-  }
-
-  .classWrapper {
+  & .portfolio-main {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    will-change: scroll-position;
 
-  .classImage {
-    width: 10rem;
-    height: 10rem;
-    object-fit: cover;
-    margin-bottom: 1rem;
+    & .portfolio-main__item {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      scroll-snap-align: start;
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
+}
 
-  .classTitleContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+/* Componente AboutMe */
 
-  .classTitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
+.classContainer {
+  width: 50vw;
+  height: 100vh;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
 
-  .classSubtitle {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
+}
 
-  .classHorizontalRule {
-    width: 100%;
-    height: 2px;
-    margin-bottom: 1rem
-  }
+.classWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.classImage {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.classTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.classTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.classSubtitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.classHorizontalRule {
+  width: 100%;
+  height: 2px;
+  margin-bottom: 1rem
+}

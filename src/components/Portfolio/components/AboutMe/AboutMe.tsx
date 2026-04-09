@@ -7,7 +7,9 @@ interface AboutMeStyles {
   stylesWrapper?: Record<string, number | string>;
   stylesImage?: Record<string, number | string>;
   stylesText?: Record<string, number | string>;
+  stylesTitleContainer?: Record<string, number | string>;
   stylesTitle?: Record<string, number | string>;
+  stylesHorizontalRule?: Record<string, number | string>;
   stylesSubtitle?: Record<string, number | string>;
 }
 
@@ -33,7 +35,9 @@ const AboutMe = (props: AboutMeProps) => {
       <div className={'about-me__wrapper'} style={styles?.stylesWrapper}>
         <img
           src={props.image || 'images/profile-pic.png'}
-          alt={props.imageAlt || aboutMeData[language].imageAlt}
+          alt={
+            props.image ? props.imageAlt || '' : aboutMeData[language].imageAlt
+          }
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
@@ -43,21 +47,35 @@ const AboutMe = (props: AboutMeProps) => {
         />
 
         <section
-          className={'about-me__title-container'}
-          style={styles?.stylesTitle}
+          className={
+            (!styles?.stylesTitleContainer && 'about-me__title-container') || ''
+          }
+          style={styles?.stylesTitleContainer}
         >
-          <h2 className={'about-me__title'} style={styles?.stylesTitle}>
+          <h2
+            className={(!styles?.stylesTitle && 'about-me__title') || ''}
+            style={styles?.stylesTitle}
+          >
             {props.title || aboutMeData[language].title}
           </h2>
-          <h3 className={'about-me__subtitle'} style={styles?.stylesTitle}>
+          <h3
+            className={(!styles?.stylesSubtitle && 'about-me__subtitle') || ''}
+            style={styles?.stylesSubtitle}
+          >
             {aboutMeData[language].subtitle}
           </h3>
           <hr
-            className={'about-me__horizontal-rule'}
-            style={styles?.stylesSubtitle}
+            className={
+              (!styles?.stylesHorizontalRule && 'about-me__horizontal-rule') ||
+              ''
+            }
+            style={styles?.stylesHorizontalRule}
           />
         </section>
-        <p className={'about-me__text'} style={styles?.stylesText}>
+        <p
+          className={(!styles?.stylesText && 'about-me__text') || ''}
+          style={styles?.stylesText}
+        >
           {props.text || aboutMeData[language].text}
         </p>
       </div>
