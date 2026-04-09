@@ -158,6 +158,8 @@
   --color-danger: #ff0000 !important;
 }
 
+
+
 @keyframes blink {
   0%, 100% {
     opacity: 1;

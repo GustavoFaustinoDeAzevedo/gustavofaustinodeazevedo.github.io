@@ -22,97 +22,106 @@ const ScriptPortfolio = () => {
       width: '100%',
       height: '100%',
       display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'start',
       justifyContent: 'center',
+      padding: '2rem 5rem 15rem 10rem',
     },
     stylesImage: {
-      maxWidth: '40rem',
-      maxHeight: '40rem',
+      maxWidth: '10rem',
+      maxHeight: '10rem',
       borderRadius: '50%',
       border: 'none',
       objectFit: 'cover',
       marginBottom: '0rem',
     },
     stylesTitleContainer: {
-      display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
     },
     stylesTitle: {
-      fontSize: '1.5rem',
+      fontSize: '2rem',
       fontWeight: 'bold',
       marginBottom: '0.5rem',
-      textAlign: 'center',
     },
-    stylesSubtitle: { fontSize: '1rem', marginBottom: '1rem' },
-    stylesText: {},
+    stylesSubtitle: {
+      fontSize: '4rem',
+      marginBottom: '1rem',
+      textAlign: 'left',
+    },
+    stylesText: {
+      width: '50%',
+      textAlign: 'justify',
+    },
     stylesHorizontalRule: {
-      width: '100%',
+      width: '70%',
       height: '2px',
       marginBottom: '1rem',
     },
   };
   return (
-    <div className="portfolio-container">
-      <header className="portfolio-header">
-        <h1 className="portfolio-header__text">
-          {language === 'por'
-            ? 'Bem vindo ao meu Portfólio'
-            : 'Welcome to my Portfolio'}
-        </h1>
-        <nav className="portfolio-header__nav">
-          <a href="#aboutMe">{language === 'por' ? 'Sobre mim' : 'About me'}</a>
-          <a href="#mySkills">
-            {language === 'por' ? 'Minhas habilidades' : 'My skills'}
-          </a>
-          <a href="#contact">{language === 'por' ? 'Contato' : 'Contact'}</a>
-        </nav>
-      </header>
-      <Carousel
-        carouselWrapperStyles={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          overflowX: 'hidden',
-          overflowY: 'auto',
-          scrollSnapType: 'y mandatory',
-          WebkitOverflowScrolling: 'touch',
-          scrollBehavior: 'smooth',
-          willChange: 'scroll-position',
-        }}
-        carouselItemStyles={{
-          height: '100%',
-          width: '100%',
-          overflow: 'hidden',
-          scrollSnapAlign: 'start',
-          flex: '0 0 100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <section id="aboutMe" className="portfolio-main__item">
-          <AboutMe styles={aboutMeStyles} image="images/profile-pic-2.png" />
-        </section>
-        <section
-          id="mySkills"
-          className="portfolio-main__item portfolio-main__skills"
+    <>
+      <div className="portfolio-background"></div>
+      <div className="portfolio-container">
+        <header className="portfolio-header">
+          <h1 className="portfolio-header__text">
+            Gustavo Faustino de Azevedo
+          </h1>
+          <nav className="portfolio-header__nav">
+            <a href="#aboutMe">
+              {language === 'por' ? 'Sobre mim' : 'About me'}
+            </a>
+            <a href="#mySkills">
+              {language === 'por' ? 'Minhas habilidades' : 'My skills'}
+            </a>
+            <a href="#contact" className="portfolio-header__contact">
+              {language === 'por' ? 'Contato' : 'Contact'}
+            </a>
+          </nav>
+        </header>
+        <Carousel
+          carouselWrapperStyles={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            overflowX: 'hidden',
+            overflowY: 'auto',
+            scrollSnapType: 'y mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollBehavior: 'smooth',
+            willChange: 'scroll-position',
+          }}
+          carouselItemStyles={{
+            height: '100%',
+            width: '100%',
+            overflow: 'hidden',
+            scrollSnapAlign: 'start',
+            flex: '0 0 100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
-          <MySkills />
-        </section>
-        <section
-          id="contact"
-          className="portfolio-main__item portfolio-main__contact"
-        >
-          <SendMessage />
-          <ContactCard />
-        </section>
-      </Carousel>
-      {/* <main className="portfolio-main">
+          <section id="aboutMe" className="portfolio-main__item">
+            <AboutMe styles={aboutMeStyles} image=" " title=" " />
+          </section>
+          <section
+            id="mySkills"
+            className="portfolio-main__item portfolio-main__skills"
+          >
+            <MySkills />
+          </section>
+          <section
+            id="contact"
+            className="portfolio-main__item portfolio-main__contact"
+          >
+            <SendMessage />
+            <ContactCard />
+          </section>
+        </Carousel>
+        {/* <main className="portfolio-main">
         <section id="aboutMe" className="portfolio-main__item">
           <AboutMe styles={aboutMeStyles} image="images/profile-pic-2.png" />
         </section>
@@ -130,7 +139,8 @@ const ScriptPortfolio = () => {
           <ContactCard />
         </section>
       </main> */}
-    </div>
+      </div>
+    </>
   );
 };
 
