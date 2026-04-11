@@ -40,10 +40,10 @@ const ScriptPortfolio = () => {
       marginBottom: '0rem',
       filter:
         'grayscale(30%) brightness(1.2) drop-shadow(0 0 10px rgba(0,150,255,0.3))',
-      WebkitMaskImage: 'linear-gradient(to bottom, #000000, #00000000)',
+      WebkitMaskImage: 'linear-gradient(to bottom, #000000 80%, #00000000 100%)',
       WebkitMaskRepeat: 'no-repeat',
       WebkitMaskSize: 'cover',
-      maskImage: 'linear-gradient(to bottom, #000000, #00000000)',
+      maskImage: 'linear-gradient(to bottom, #000000 80%, #00000000 100%)',
       maskRepeat: 'no-repeat',
       maskSize: 'cover',
     },
@@ -68,6 +68,7 @@ const ScriptPortfolio = () => {
     stylesText: {
       width: '50%',
       textAlign: 'justify',
+      lineHeight: '1.8',
     },
     stylesHorizontalRule: {
       width: '70%',
