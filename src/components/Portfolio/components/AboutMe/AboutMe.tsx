@@ -15,11 +15,11 @@ interface AboutMeStyles {
 
 interface AboutMeProps {
   styles?: AboutMeStyles;
-  text?: string;
+  text?: React.ReactNode;
   image?: string;
   imageAlt?: string;
-  title?: string;
-  subtitle?: string;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
 }
 
 const AboutMe = (props: AboutMeProps) => {
@@ -62,7 +62,7 @@ const AboutMe = (props: AboutMeProps) => {
             className={(!styles?.stylesSubtitle && 'about-me__subtitle') || ''}
             style={styles?.stylesSubtitle}
           >
-            {aboutMeData[language].subtitle}
+            {props.subtitle || aboutMeData[language].subtitle}
           </h3>
           <hr
             className={

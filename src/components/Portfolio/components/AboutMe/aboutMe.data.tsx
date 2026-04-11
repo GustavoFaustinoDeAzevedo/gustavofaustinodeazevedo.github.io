@@ -19,7 +19,8 @@ const aboutMeData: AboutMeData = {
     title: 'Gustavo Faustino de Azevêdo',
     subtitle: (
       <>
-        Desenvolvedor Web React/TS <br key="br" /> Especialista em HTML/CSS.
+        Desenvolvedor Web React/TS <br key="br" />
+        <strong>Especialista em HTML/CSS.</strong>
       </>
     ),
     text: 'Graduado em Engenharia da Computação, sou apaixonado por criar interfaces intuitivas e visualmente marcantes com HTML, CSS e React. Estou em busca de oportunidades como desenvolvedor front-end para crescer profissionalmente e colaborar em projetos que entreguem experiências eficientes e bem planejadas aos usuários.',

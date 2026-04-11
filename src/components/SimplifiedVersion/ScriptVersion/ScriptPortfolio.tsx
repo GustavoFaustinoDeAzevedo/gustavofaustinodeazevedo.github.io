@@ -6,6 +6,7 @@ import {
   SendMessage,
 } from '@/components/Portfolio';
 import { RootState } from '@/store';
+import { filter } from 'mathjs';
 import { useSelector } from 'react-redux';
 
 const ScriptPortfolio = () => {
@@ -27,12 +28,24 @@ const ScriptPortfolio = () => {
       padding: '2rem 5rem 15rem 10rem',
     },
     stylesImage: {
-      maxWidth: '10rem',
-      maxHeight: '10rem',
-      borderRadius: '50%',
+      position: 'absolute',
+      bottom: '20%',
+      right: '10%',
+      maxWidth: '100%',
+      maxHeight: '100%',
+      width: '40rem',
+      borderRadius: '0',
       border: 'none',
       objectFit: 'cover',
       marginBottom: '0rem',
+      filter:
+        'grayscale(30%) brightness(1.2) drop-shadow(0 0 10px rgba(0,150,255,0.3))',
+      WebkitMaskImage: 'linear-gradient(to bottom, #000000, #00000000)',
+      WebkitMaskRepeat: 'no-repeat',
+      WebkitMaskSize: 'cover',
+      maskImage: 'linear-gradient(to bottom, #000000, #00000000)',
+      maskRepeat: 'no-repeat',
+      maskSize: 'cover',
     },
     stylesTitleContainer: {
       flexDirection: 'column',
@@ -41,12 +54,14 @@ const ScriptPortfolio = () => {
       textAlign: 'center',
     },
     stylesTitle: {
-      fontSize: '2rem',
-      fontWeight: 'bold',
+      fontSize: '2.5rem',
+      fontWeight: 700,
       marginBottom: '0.5rem',
     },
     stylesSubtitle: {
-      fontSize: '4rem',
+      fontSize: '2.5rem',
+      color: '#00d4ff',
+      fontWeight: 600,
       marginBottom: '1rem',
       textAlign: 'left',
     },
@@ -76,7 +91,7 @@ const ScriptPortfolio = () => {
               {language === 'por' ? 'Minhas habilidades' : 'My skills'}
             </a>
             <a href="#contact" className="portfolio-header__contact">
-              {language === 'por' ? 'Contato' : 'Contact'}
+              {language === 'por' ? 'Entre em Contato' : 'Contact Me'}
             </a>
           </nav>
         </header>
@@ -105,7 +120,20 @@ const ScriptPortfolio = () => {
           }}
         >
           <section id="aboutMe" className="portfolio-main__item">
-            <AboutMe styles={aboutMeStyles} image=" " title=" " />
+            <AboutMe
+              styles={aboutMeStyles}
+              image="images/profile-pic-2.png"
+              title={
+                language === 'por'
+                  ? 'Desenvolvedor Web React/TS'
+                  : 'Web Developer React/TS'
+              }
+              subtitle={
+                language === 'por'
+                  ? 'Especialista em HTML/CSS.'
+                  : 'HTML/CSS Expert.'
+              }
+            />
           </section>
           <section
             id="mySkills"
