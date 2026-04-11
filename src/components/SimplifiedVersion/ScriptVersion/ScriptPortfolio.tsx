@@ -43,7 +43,7 @@ const ScriptPortfolio = () => {
       WebkitMaskImage: 'linear-gradient(to bottom, #000000 80%, #00000000 100%)',
       WebkitMaskRepeat: 'no-repeat',
       WebkitMaskSize: 'cover',
-      maskImage: 'linear-gradient(to bottom, #000000 60%, #00000000 100%)',
+      maskImage: 'linear-gradient(to bottom, #000000 80%, #00000000 100%)',
       maskRepeat: 'no-repeat',
       maskSize: 'cover',
     },
