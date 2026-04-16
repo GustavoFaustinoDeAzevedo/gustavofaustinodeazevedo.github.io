@@ -96,3 +96,7 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](L
 ## Demonstração
 
 [Clique aqui para ver o projeto sendo executado no Github Pages](https://gustavofaustinodeazevedo.github.io)
+
+## Status do projeto
+
+Em desenvolvimento
