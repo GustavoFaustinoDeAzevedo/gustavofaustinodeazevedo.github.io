@@ -6,7 +6,7 @@
 
 ## Ultimo Update do README
 
-`21-02-2025`
+`16-04-2026`
 
 ---
 
@@ -18,36 +18,31 @@ Este projeto é um site de portfólio pessoal, criado para destacar minhas habil
 
 ---
 
-## O Que Já Foi Feito
+## Funcionalidades implementadas
 
-- [x] Área de trabalho.
-- [x] Interface Responsiva.
-- [x] Janelas arrastáveis, responsivos e reutilizáveis.
-- [x] "Arquivos" executáveis.
-- [x] Relógio + Data.
-- [x] Tradução dinâmica entre inglês e português.
-- [x] Barra de tarefas com menu iniciar.
-- [x] Calculadora.
-- [x] Configuração de fundo de tela da área de trabalho
-- [x] Dados persistentes.
+- Área de trabalho.
+- Interface Responsiva.
+- Janelas arrastáveis, responsivos e reutilizáveis.
+- "Arquivos" executáveis.
+- Relógio + Data.
+- Tradução dinâmica entre inglês e português.
+- Barra de tarefas com menu iniciar.
+- Calculadora.
+- Configuração de fundo de tela da área de trabalho
+- Dados persistentes.
 
 ---
 
-## O Que Pretendo Fazer (não necessáriamente nessa ordem)
+## Funcionalidades em desenvolvimento
 
-- [ ] Uma documentação robusta.
-- [ ] Um menu para quando o usuário clicar com o botão direito do mouse (context menu).
-- [ ] Sistema de cadastro, conexão e configuração do usuário.
-- [ ] Versão simplificada do portfólio.
-- [ ] Adicionar mais apps relacionados ao sistema operacional:
-  - [ ] Lista de Tarefas.
-  - [ ] App estilo "Paint".
-  - [ ] Campo Minado.
-  - [ ] Snake.
-  - [ ] Editor de Texto.
-  - [ ] Editor de Imagem.
-  - [ ] Anotações.
-  - [ ] Continuar criando mais futuramente.
+- Menu para quando o usuário clicar com o botão direito do mouse (context menu).
+- Sistema de cadastro, conexão e configuração do usuário.
+- Versão simplificada do portfólio.
+- Mais apps relacionados ao sistema operacional:
+  - Terminal.
+  - Permissões de Usuário.
+  - Editor de Texto.
+  - Editor de Imagem.
 
 ---
 
