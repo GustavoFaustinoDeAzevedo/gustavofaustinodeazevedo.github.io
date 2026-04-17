@@ -8,7 +8,7 @@ import { isLocalHost, useClickOutside, useIsMobile } from '@/shared';
 import { StylesConfig } from './SystemFile/StyledFileWrapper/fileWrapperStyle';
 import { stringNormalizer } from '@/shared/utils/stringFunctions';
 import { WindowTitle } from '@/store/slices/window';
-import { useMemo } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { usersSelectors } from '@/store/slices/users/userSlice';
 import User from '@/store/utils/db.types';
 
@@ -87,9 +87,40 @@ const ListFiles = ({
 
   const isMobile = useIsMobile();
 
+  const [items, setItems] = useState(contentFiltered ?? []);
+  const draggedIndex = useRef<number | null>(null);
+
+  // handlers para mover arquivos
+
+  const handleDragStart = useCallback((index: number) => {
+    draggedIndex.current = index;
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+  }, []);
+
+  const handleDrop = useCallback(
+    (index: number) => {
+      if (draggedIndex.current === null) return;
+      const newItems = [...items];
+      const draggedItem = newItems[draggedIndex.current as number];
+      const currentItem = newItems[index];
+
+      newItems.splice(index, 1);
+      newItems.splice(index, 0, draggedItem);
+      newItems.splice(draggedIndex.current as number, 1);
+      newItems.splice(draggedIndex.current as number, 0, currentItem);
+
+      setItems(newItems);
+      draggedIndex.current = null;
+    },
+    [items, draggedIndex],
+  );
+
   // jsx
 
-  const mapContent = contentFiltered?.map(
+  const mapContent = items?.map(
     (
       {
         fileId,
@@ -107,7 +138,7 @@ const ListFiles = ({
         permission,
         hidden,
       }: FileNode,
-      windowIndex: number,
+      index: number,
     ) => {
       if (fileId === undefined || fileId === null || hidden === true)
         return null;
@@ -151,7 +182,7 @@ const ListFiles = ({
 
       return (
         <SystemFile
-          key={`file-${fileId}-${windowIndex}`}
+          key={`file-${fileId}-${index}`}
           fileId={fileId}
           title={windowTitle}
           icon={finalIcon}
@@ -159,12 +190,18 @@ const ListFiles = ({
           isDoubleClick={isDoubleClick}
           isMobile={isMobile}
           onClick={handleClick}
+          handlers={{ handleDragStart, handleDragOver, handleDrop }}
+          index={index}
         />
       );
     },
   );
 
-  return <ul className={className ?? 'files-container'}>{mapContent}</ul>;
+  return (
+    <ul className={className ?? 'files-container'} onDragOver={handleDragOver}>
+      {mapContent}
+    </ul>
+  );
 };
 
 export default ListFiles;

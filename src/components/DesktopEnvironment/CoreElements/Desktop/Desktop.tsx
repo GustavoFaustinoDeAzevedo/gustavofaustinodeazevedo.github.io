@@ -18,7 +18,7 @@ const Desktop = () => {
     (folder: FileNode) => folder.contentKey === 'desktop',
   ) as FileNode;
   return (
-    <div className="desktop-display">
+    <div className="desktop-display" onDragOver={(e) => e.preventDefault()}>
       <DesktopBackground />
       <ListFiles
         currentNode="desktop"
