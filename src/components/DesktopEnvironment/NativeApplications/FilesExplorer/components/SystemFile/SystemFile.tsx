@@ -41,6 +41,8 @@ const SystemFile = ({
   currentUser,
   permission,
   isMobile,
+  handlers,
+  index,
 }: {
   fileId: string;
   title?: Title;
@@ -51,10 +53,17 @@ const SystemFile = ({
   permission?: Permission;
   currentUser?: User;
   isMobile?: boolean;
+  index: number;
+  handlers: {
+    handleDragStart: (index: number) => void;
+    handleDragOver: (e: React.DragEvent) => void;
+    handleDrop: (index: number) => void;
+  };
 }) => {
   const { isBlocked, trigger } = useDelayBlock(1000);
 
   const language = useSelector((state: RootState) => state?.settings.language);
+  const { handleDragStart, handleDragOver, handleDrop } = handlers;
 
   const handleSingleClick = (e: React.MouseEvent) => {
     if (isDoubleClick && !isMobile) {
@@ -103,8 +112,12 @@ const SystemFile = ({
   );
 
   return (
-    <li>
-      <label>
+    <li
+      draggable
+      onDragStart={() => handleDragStart(index)}
+      onDrop={() => handleDrop(index)}
+    >
+      <label htmlFor={fileId}>
         <input
           title={translatedTitle}
           type="radio"
