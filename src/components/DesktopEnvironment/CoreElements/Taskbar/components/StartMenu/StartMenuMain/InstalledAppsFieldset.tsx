@@ -26,7 +26,6 @@ const InstalledAppsFieldset = ({
 
   const stylesConfig: StylesConfig = {
     $direction: 'horizontal',
-    $size: '',
     $fontSize: '0.8rem',
     $fontWeight: 'normal',
     $iconSize: '2rem',

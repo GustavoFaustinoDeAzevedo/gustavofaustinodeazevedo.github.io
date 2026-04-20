@@ -13,7 +13,7 @@ import User from '@/store/utils/db.types';
 
 const defaultProps: StylesConfig = {
   $direction: 'vertical',
-  $size: '6.2rem',
+  $size: { width: '6.25rem', height: '6.25rem' },
   $fontSize: '1rem',
   $fontFamily: 'inherit',
   $fontWeight: '900',
@@ -132,6 +132,7 @@ const SystemFile = ({
           onDoubleClick={handleDoubleClick}
           onMouseUp={handleSingleClick}
           id={fileId}
+          $index={index}
           {...stylesConfig}
         >
           {memoizedIcon}

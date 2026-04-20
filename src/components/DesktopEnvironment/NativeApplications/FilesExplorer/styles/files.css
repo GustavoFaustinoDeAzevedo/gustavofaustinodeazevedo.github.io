@@ -61,24 +61,6 @@
         /* filter: invert(1); */
       }
 
-      /* Texto do label para o ícone da área de trabalho */
-      & .icon-text {
-        width: 5rem;
-        text-align: center;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        word-wrap: break-word;
-        font-size: 0.8rem;
-        color: rgb(var(--color-rgb-desktop-bg-contrast));
-        text-shadow: var(--s-text-outline);
-        -webkit-user-select: none;
-        user-select: none;
-        transition: color 0.3s ease-in-out;
-        /* filter: invert(1) ; */
-      }
     }
   }
 }

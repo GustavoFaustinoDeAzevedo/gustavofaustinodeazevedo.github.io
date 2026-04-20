@@ -221,35 +221,45 @@ export const placeholderUsers: User[] = [
                 type: 'app',
               },
               {
-                fileId: 'highPermissionFile',
-                contentKey: 'highPermissionFile',
+                fileId: 'folderTest',
                 title: {
-                  eng: 'High Permission File Test',
-                  por: 'Teste de Arquivo de Permissão Alta',
+                  eng: 'Test Files Folder',
+                  por: 'Pasta com Arquivos de Teste',
                 },
-                icon: '',
-                type: 'test',
-                permission: ['GOD'],
-              },
-              {
-                fileId: 'notFoundFile',
-                contentKey: 'notFoundFile',
-                title: {
-                  eng: 'Not Found Content Test',
-                  por: 'Teste de Conteúdo Não Encontrado',
-                },
-                icon: '',
-                type: 'notFound',
-              },
-              {
-                fileId: 'corruptedFile',
-                contentKey: 'corruptedFile',
-                title: {
-                  eng: 'Corrupted File Test',
-                  por: 'Teste de Arquivo Corrompido',
-                },
-                icon: '',
-                type: 'test',
+                type: 'folder',
+                content: [
+                  {
+                    fileId: 'highPermissionFile',
+                    contentKey: 'highPermissionFile',
+                    title: {
+                      eng: 'High Permission File Test',
+                      por: 'Teste de Arquivo de Permissão Alta',
+                    },
+                    icon: '',
+                    type: 'test',
+                    permission: ['GOD'],
+                  },
+                  {
+                    fileId: 'notFoundFile',
+                    contentKey: 'notFoundFile',
+                    title: {
+                      eng: 'Not Found Content Test',
+                      por: 'Teste de Conteúdo Não Encontrado',
+                    },
+                    icon: '',
+                    type: 'notFound',
+                  },
+                  {
+                    fileId: 'corruptedFile',
+                    contentKey: 'corruptedFile',
+                    title: {
+                      eng: 'Corrupted File Test',
+                      por: 'Teste de Arquivo Corrompido',
+                    },
+                    icon: '',
+                    type: 'test',
+                  },
+                ],
               },
             ],
           },

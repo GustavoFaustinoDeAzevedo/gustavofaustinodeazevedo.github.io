@@ -1,13 +1,14 @@
 //file variants = default | smallDefault | largeDefault | horizontal | vertical | verticalSmall | verticalLarge | horizontalSmall | horizontalLarge | onlyIcon | onlyText
 export interface StylesConfig {
   $direction?: 'vertical' | 'horizontal';
-  $size?: string;
+  $size?: { width: string; height: string };
   $fontSize?: string;
   $fontFamily?: string;
   $fontWeight?: string;
   $iconSize?: string;
   $color?: string;
   $backgroundColor?: { default: string; hover: string };
+  $index?: number;
   $borderRadius?: string;
   $togglers?: {
     enableFilter: boolean;
@@ -31,13 +32,14 @@ export const fileParts = ({
   $color,
   $backgroundColor,
   $borderRadius,
+  $index,
   $togglers, // = {
 }: StylesConfig) => {
   return {
     wrapper: {
       padding: $direction === 'horizontal' ? '0.5rem 1rem' : '0.4rem 0',
-      width: $direction === 'horizontal' ? '100%' : $size,
-      height: $direction === 'horizontal' ? '' : $size,
+      width: $size !== undefined ? $size.width : '100%',
+      height: $size !== undefined ? $size.height : '',
       display: 'flex',
       flexDirection: $direction === 'horizontal' ? 'row' : 'column',
       justifyContent:
@@ -54,10 +56,14 @@ export const fileParts = ({
         'backdrop-filter 0.3s ease-in-out, color 0.2s ease-in-out, background 0.3s ease-in-out, text-shadow 0.2s ease-in-out, transform 0.3s ease, filter 0.3s ease',
       pointerEvents: 'initial',
       backdropFilter: $togglers?.enableFilter && 'blur(0px)',
-
       'input[type="radio"]:checked + &:focus:not(:hover) ': {
         background: $backgroundColor?.hover,
         backdropFilter: $togglers?.enableFilter && 'blur(8px) brightness(1.5)',
+      },
+
+      'input[type="radio"]:checked + &': {
+        position: 'relative',
+        zIndex: 999 - ($index || 0),
       },
 
       'input[type="radio"]:checked + &>*': {
@@ -125,7 +131,9 @@ export const fileParts = ({
     },
 
     text: {
+      width: $direction === 'horizontal' ? 'max-content' : '',
       flexGrow: 1,
+      alignSelf: $direction === 'horizontal' ? 'flex-start' : 'center',
       fontWeight: $fontWeight,
       fontFamily: $fontFamily,
       overflow: 'hidden',
@@ -137,6 +145,8 @@ export const fileParts = ({
       webkitTextStroke: $togglers?.enableTextShadow && '2px black',
       wrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
       wordWrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
+      textOverflow: 'ellipsis',
+      textWrap: $direction === 'horizontal' ? 'nowrap' : 'break-word',
       fontSize: $fontSize,
       filter:
         $togglers?.enableFilter &&
