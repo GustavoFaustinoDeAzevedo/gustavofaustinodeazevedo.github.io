@@ -23,6 +23,7 @@ type ListFilesProps = {
   filters?: string | string[];
   doubleClickToOpen?: boolean;
   containerRef?: React.RefObject<HTMLDivElement>;
+  style?: React.CSSProperties;
 };
 
 const ListFiles = ({
@@ -35,6 +36,7 @@ const ListFiles = ({
   nodeType = 'desktop',
   filters,
   doubleClickToOpen,
+  style,
   containerRef,
 }: ListFilesProps) => {
   if (content === undefined || content?.length < 0) return;
@@ -198,7 +200,11 @@ const ListFiles = ({
   );
 
   return (
-    <ul className={className ?? 'files-container'} onDragOver={handleDragOver}>
+    <ul
+      className={className ?? (style !== undefined ? '' : 'files-container')}
+      style={style}
+      onDragOver={handleDragOver}
+    >
       {mapContent}
     </ul>
   );
