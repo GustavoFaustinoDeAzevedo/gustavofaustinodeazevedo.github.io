@@ -30,7 +30,6 @@ const AboutMe = (props: AboutMeProps) => {
       className={'about-me'}
       style={styles?.stylesContainer}
       aria-label="About Me Section"
-      data-initial-dimension='{"width": "500px", "height": "550px"}'
     >
       <div className={'about-me__wrapper'} style={styles?.stylesWrapper}>
         <img
