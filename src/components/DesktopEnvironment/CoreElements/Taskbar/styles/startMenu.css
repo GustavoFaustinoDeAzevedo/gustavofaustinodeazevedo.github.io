@@ -167,6 +167,7 @@
 
 
             .carousel {
+              position: relative;
               height: 220px;
               display: flex;
               flex-direction: column;
@@ -187,9 +188,8 @@
                 overflow: hidden;
                 scroll-snap-align: start;
               }
+
             }
-
-
 
             & .start-menu__list {
               height: 13rem;
