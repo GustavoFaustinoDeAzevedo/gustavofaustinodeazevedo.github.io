@@ -12,33 +12,33 @@ import { useSelector } from 'react-redux';
 const ScriptPortfolio = () => {
   const language = useSelector((state: RootState) => state.settings.language);
   const aboutMeStyles = {
-    stylesContainer: {
+    container: {
       width: '100vw',
       height: '100vh',
       padding: '0rem',
       position: 'relative',
       overflow: 'hidden',
     },
-    stylesWrapper: {
+    wrapper: {
       width: '100%',
       height: '100%',
       display: 'flex',
-      alignItems: 'start',
-      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row-reverse',
       padding: '10rem',
+      gap: '0rem',
     },
-    stylesImage: {
+    image: {
       // display: 'none',
-      position: 'absolute',
-      bottom: '5',
-      right: '10%',
+      // position: 'absolute',
+      // bottom: '5',
+      // right: '10%',
       maxWidth: '100%',
       maxHeight: '100%',
-      width: '40rem',
+      width: 'fit-content',
       borderRadius: '0',
       border: 'none',
       objectFit: 'cover',
-      marginBottom: '0rem',
       filter:
         'grayscale(30%) brightness(1.2) drop-shadow(0 0 10px rgba(0,150,255,0.3))',
       WebkitMaskImage:
@@ -50,33 +50,38 @@ const ScriptPortfolio = () => {
       maskSize: 'cover',
       transition: 'none',
     },
-    stylesTitleContainer: {
+    textContainer: {
+      display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'end',
       justifyContent: 'center',
       textAlign: 'center',
     },
-    stylesTitle: {
+    titleContainer: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    title: {
       fontSize: '2.5rem',
       fontWeight: 700,
       marginBottom: '0.5rem',
     },
-    stylesSubtitle: {
+    subtitle: {
       fontSize: '2.5rem',
       color: '#00d4ff',
       fontWeight: 600,
       marginBottom: '1rem',
-      textAlign: 'left',
     },
-    stylesText: {
+    horizontalRule: {
+      justifySelf: 'center',
       width: '50%',
-      textAlign: 'justify',
-      lineHeight: '1.8',
-    },
-    stylesHorizontalRule: {
-      width: '70%',
       height: '2px',
       marginBottom: '1rem',
+    },
+    text: {
+      textAlign: 'justify',
+      lineHeight: '1.8',
     },
   };
   return (
@@ -155,9 +160,7 @@ const ScriptPortfolio = () => {
             </section>
           </Carousel>
         </main>
-        <footer className="portfolio-footer">
-
-        </footer>
+        <footer className="portfolio-footer"></footer>
         {/* <main className="portfolio-main">
         <section id="aboutMe" className="portfolio-main__item">
           <AboutMe styles={aboutMeStyles} image="images/profile-pic-2.png" />
