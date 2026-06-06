@@ -1,0 +1,11 @@
+export { default as Notepad } from './Notepad';
+export { default as Calculator } from './Calculator';
+// export { default as StickyNotes } from './StickyNotes';
+export { default as ConsoleCommand } from './ConsoleCommand';
+export * from './Settings';
+export * from './FilesExplorer';
+export { default as DevMenu } from './DevMenu';
+export { default as TaskManager } from './TaskManager';
+export { default as ErrorFallback } from './ErrorFallback';
+export { default as Tests } from './Tests';
+export { default as CorruptedFile } from './CorruptedFile';

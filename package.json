@@ -35,6 +35,7 @@
     "react-dom": "^19.1.0",
     "react-error-boundary": "^5.0.0",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.17.0",
     "redux": "^5.0.1",
     "sass": "^1.93.2",
     "styled-components": "^6.1.19",

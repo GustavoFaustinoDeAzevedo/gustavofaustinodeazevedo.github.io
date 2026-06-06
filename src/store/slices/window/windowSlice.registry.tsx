@@ -4,17 +4,19 @@ import {
   Notepad,
   DevMenu,
   Tests,
-  AboutMe,
-  ContactCard,
-  SendMessage,
-  MySkills,
   CorruptedFile,
   ConsoleCommand,
-} from '@/components';
+} from '@GustavOS/components';
+import {
+  AboutMe,
+  ContactCard,
+  MySkills,
+  SendMessage,
+} from '@portfolio/components';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { Permission } from '../file';
-import { roles } from '../users/userSlice.data';
+// import { roles } from '../users/userSlice.data';
 
 export const returnWindowContent = (
   contentKey: string,

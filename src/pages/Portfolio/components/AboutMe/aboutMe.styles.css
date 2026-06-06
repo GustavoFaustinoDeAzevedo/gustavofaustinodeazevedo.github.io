@@ -1,0 +1,135 @@
+@layer components {
+  .about-me {
+
+    min-height: 500px;
+    width: 100cqi;
+    height: 100cqb;
+    overflow: hidden;
+
+    & .about-me__wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      min-height: 520px;
+      transition: all 0.3s ease;
+      padding: 2rem 1rem 3rem 1rem;
+
+
+
+      @container (max-width: 600px) {
+        gap: 15px;
+        padding: 1rem 0.5rem 2rem 0.5rem;
+      }
+
+      & .about-me__image {
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        max-width: 12rem;
+        border-radius: 50%;
+        transition: all 0.5s ease;
+        border: 10px solid var(--color-muted);
+        border-style: outset;
+
+        @container (max-width: 600px) {
+          width: 10rem;
+          border: 5px solid var(--color-muted);
+          border-style: outset;
+        }
+      }
+
+      & .about-me__text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & .about-me__title-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: max-content;
+
+          & h2, & h3 {
+            text-align: center;
+            transition: font-size 0.75s ease;
+          }
+
+          & h2 {
+            width: 100%;
+            color: var(--color-text);
+          }
+
+          & h3 {
+            width: 75%;
+            font-size: 1rem !important;
+            color: var(--color-text2);
+          }
+
+          & hr {
+            margin: 1rem 0 0.5rem 0;
+            width: 50%;
+            max-width: 440px;
+            border: none;
+            border-top: 1px solid var(--color-background-7);
+          }
+
+          & .about-me__horizontal-rule {
+            margin: 1rem 0 2.5rem 0;
+            width: 50%;
+            max-width: 440px;
+            border: none;
+            border-top: 1px solid var(--color-background-7);
+          }
+
+          @container (max-width: 600px) {
+            & h2 {
+              font-size: 1.3rem;
+
+              @container (max-width: 320px) {
+                width: 80%;
+              }
+            }
+
+            & h3 {
+              font-size: 0.8rem;
+            }
+
+          }
+        }
+
+        & .about-me__text {
+          padding: 0 0.5rem;
+          color: var(--color-text1);
+          min-width: min-content;
+          height: 200px;
+          overflow: auto;
+          max-width: 80%;
+          transition: font-size 0.5s ease;
+          font-size: 1rem;
+          text-align: justify;
+          display: inline-block;
+
+          @container (max-width: 600px) {
+            height: 40%;
+            font-size: 0.9rem !important;
+
+          }
+
+          @container (max-height: 500px) {
+            height: 40%;
+          }
+
+          @container (min-width: 600px) {
+            max-width: 600px;
+          }
+        }
+      }
+    }
+  }
+}

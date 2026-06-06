@@ -12,24 +12,20 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@store/*": ["src/store/*"],
-      "@data/*": ["src/data/*"],
-      "@os/*": ["src/os/*"],
+      "@data/*": ["src/pages/GustavOS/data/*"],
+      "@GustavOS/*": ["src/pages/GustavOS/*"],
       "@shared/*": ["src/shared/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@filesUtils/*": ["src/components/DesktopEnvironment/*"],
-      "@desktopEnv/*": ["src/components/DesktopEnvironment/*"],
-      "@shell/*": ["src/components/DesktopEnvironment/*"],
-      "@systemShell/*": ["src/components/DesktopEnvironment/*"],
-      "@nativeApps/*": [
-        "src/components/DesktopEnvironment/NativeApplications/*"
-      ],
-      "@windowFamilies/*": [
-        "src/components/DesktopEnvironment/WindowFamilies/*"
-      ],
-      "@window/*": ["src/components/DesktopEnvironment/Window/*"],
+      // "@nativeApps/*": [
+      //   "src/components/DesktopEnvironment/NativeApplications/*"
+      // ],
+      // "@windowFamilies/*": [
+      //   "src/components/DesktopEnvironment/WindowFamilies/*"
+      // ],
+      // "@window/*": ["src/components/DesktopEnvironment/Window/*"],
 
-      "@portfolio/*": ["src/components/Portfolio/*"]
+      "@portfolio/*": ["src/pages/Portfolio/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
