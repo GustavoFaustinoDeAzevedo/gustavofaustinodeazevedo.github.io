@@ -1,5 +1,5 @@
 import React, { useRef, useState, Suspense } from 'react';
-import './kernel.styles.css';
+import './Kernel.css';
 
 import { RefsProvider } from '@GustavOS/contexts/RefsContext';
 import useBackgroundImageLoad from '@/shared/hooks/useBackgroundImageLoad';
