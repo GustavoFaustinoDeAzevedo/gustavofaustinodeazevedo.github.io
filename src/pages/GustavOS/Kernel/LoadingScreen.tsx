@@ -1,5 +1,5 @@
 import React from 'react';
-import './Kernel.styles.css';
+import './kernel.styles.css';
 
 interface LoadingScreenProps {
   text?: string;
