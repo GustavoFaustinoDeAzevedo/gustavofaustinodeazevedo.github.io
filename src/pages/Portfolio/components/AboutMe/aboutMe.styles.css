@@ -41,6 +41,10 @@
       }
 
       & .about-me__text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         & .about-me__title-container {
           width: 100%;
@@ -75,6 +79,14 @@
             border-top: 1px solid var(--color-background-7);
           }
 
+          & .about-me__horizontal-rule {
+            margin: 1rem 0 2.5rem 0;
+            width: 50%;
+            max-width: 440px;
+            border: none;
+            border-top: 1px solid var(--color-background-7);
+          }
+
           @container (max-width: 600px) {
             & h2 {
               font-size: 1.3rem;
@@ -94,9 +106,8 @@
         & .about-me__text {
           padding: 0 0.5rem;
           color: var(--color-text1);
-          max-width: 700px;
           min-width: min-content;
-          height: 20%;
+          height: 200px;
           overflow: auto;
           max-width: 80%;
           transition: font-size 0.5s ease;
@@ -107,12 +118,15 @@
           @container (max-width: 600px) {
             height: 40%;
             font-size: 0.9rem !important;
-            margin-bottom: 1rem;
 
           }
 
-          @container (min-height: 500px) {
+          @container (max-height: 500px) {
             height: 40%;
+          }
+
+          @container (min-width: 600px) {
+            max-width: 600px;
           }
         }
       }
