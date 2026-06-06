@@ -9,42 +9,42 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
       '@App': path.resolve(__dirname, 'src/App'),
       '@components': path.resolve(__dirname, 'src/components'),
-      '@data': path.resolve(__dirname, 'src/data'),
-      '@os': path.resolve(__dirname, 'src/os'),
-      '@portfolio': path.resolve(__dirname, 'src/components/Portfolio'),
+      '@data': path.resolve(__dirname, 'src/pages/GustavOS/data'),
+      '@GustavOS': path.resolve(__dirname, 'src/pages/GustavOS'),
+      '@portfolio': path.resolve(__dirname, 'src/pages/Portfolio'),
       '@styles': path.resolve(__dirname, 'src/styles'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@windowUtils': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment/WindowFamilies/Window/utils',
-      ),
-      '@desktopEnv': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment',
-      ),
-      '@shell': path.resolve(__dirname, 'src/components/DesktopEnvironment'),
-      '@systemShell': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment',
-      ),
-      '@filesUtils': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment/NativeApplications/FilesExplorer/utils',
-      ),
+      // '@utils': path.resolve(__dirname, 'src/utils'),
+      // '@windowUtils': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment/WindowFamilies/Window/utils',
+      // ),
+      // '@desktopEnv': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment',
+      // ),
+      // '@shell': path.resolve(__dirname, 'src/components/DesktopEnvironment'),
+      // '@systemShell': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment',
+      // ),
+      // '@filesUtils': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment/NativeApplications/FilesExplorer/utils',
+      // ),
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@nativeApps': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment/NativeApplications',
-      ),
-      '@windowFamilies': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment/WindowFamilies',
-      ),
-      '@window': path.resolve(
-        __dirname,
-        'src/components/DesktopEnvironment/Window',
-      ),
+      // '@nativeApps': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment/NativeApplications',
+      // ),
+      // '@windowFamilies': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment/WindowFamilies',
+      // ),
+      // '@window': path.resolve(
+      //   __dirname,
+      //   'src/components/DesktopEnvironment/Window',
+      // ),
     },
   },
   server: {

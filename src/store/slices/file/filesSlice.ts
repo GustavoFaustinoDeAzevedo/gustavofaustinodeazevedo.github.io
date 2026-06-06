@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { rootFolder } from '@/data/filesData';
+import { rootFolder } from '@data/filesData';
 import { FileNode, FileSliceState } from './filesSlice.types';
-import { installedApps, systemApps } from '@/data/installedAppsData';
+import { installedApps, systemApps } from '@data/installedAppsData';
 
 const addNodeWithConflictResolution = (parent: FileNode, newNode: FileNode) => {
   if (!parent.content) parent.content = [];

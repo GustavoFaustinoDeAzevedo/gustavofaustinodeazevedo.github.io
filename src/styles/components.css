@@ -1,4 +1,2 @@
-@import '../components//DesktopEnvironment/index.css';
-@import '../components/Portfolio/index.css';
-@import '../components/Tests/tests.styles.css';
-@import '../components/SimplifiedVersion/index.css';
+@import '../pages/GustavOS/index.css';
+@import '../pages/Portfolio/index.css';

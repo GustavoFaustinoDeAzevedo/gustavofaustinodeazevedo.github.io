@@ -1,4 +1,4 @@
-import { IconVariantStyle } from '@/components/DesktopEnvironment/UIControls/GlobalStyles/utils/icons';
+// import { IconVariantStyle } from '@GustavOS/componentsUIControls/GlobalStyles/utils/icons';
 import { User } from './userSlice.types';
 
 export const defaultConfig: User['config'] = {
