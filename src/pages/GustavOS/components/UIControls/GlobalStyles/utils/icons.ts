@@ -63,8 +63,7 @@ export const iconVariants: Record<string, IconVariantStyle> = {
   'arrow-up': { backgroundImage: "url('/icons/chevron_up.svg')" },
   'arrow-down': { backgroundImage: "url('/icons/chevron_down.svg')" },
   github: {
-    maskImage: "url('/icons/github-icon.svg')",
-    WebkitMaskImage: "url('/icons/github-icon.svg')",
+    backgroundImage: "url('/icons/github-mark-white.png')",
   },
   linkedin: {
     maskImage: "url('/icons/linkedin-square-icon.svg')",

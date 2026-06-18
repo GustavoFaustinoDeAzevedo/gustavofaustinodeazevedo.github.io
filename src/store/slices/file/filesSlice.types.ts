@@ -6,7 +6,9 @@ type SortType = 'asc' | 'desc'; // provisório
 export type Title = { eng: string; por: string };
 
 // Permissões de acesso de um arquivo/nó
-export type Permission = string[];
+export type Permission = [
+  'read' | 'write' | 'execute' | 'admin' | 'GOD' | 'none',
+];
 
 // Atributos de um arquivo/nó
 export type Attributes = {
@@ -42,7 +44,15 @@ export interface FileNode {
   title?: Title;
   permission?: Permission;
   nodeDepth?: number;
-  type?: 'folder' | 'app' | 'text' | 'file' | 'systemApp' | 'test' | 'notFound';
+  type?:
+    | 'folder'
+    | 'link'
+    | 'app'
+    | 'text'
+    | 'file'
+    | 'systemApp'
+    | 'test'
+    | 'notFound';
   extension?: string;
   size?: Size;
   hidden?: boolean;
@@ -56,7 +66,7 @@ export interface FileNode {
   attributes?: Attributes;
   initialDimensions?: InitialDimensions;
   initialStates?: InitialStates;
-  content?: FileNode[];
+  content?: FileNode[] | string;
 }
 
 export interface Shortcut {

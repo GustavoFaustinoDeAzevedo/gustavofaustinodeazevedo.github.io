@@ -221,6 +221,18 @@ export const placeholderUsers: User[] = [
                 type: 'app',
               },
               {
+                fileId: 'github',
+                contentKey: 'github',
+                title: {
+                  eng: 'GitHub',
+                  por: 'GitHub',
+                },
+                icon: 'github',
+                type: 'link',
+                content:
+                  'https://github.com/GustavoFaustinoDeAzevedo/gustavofaustinodeazevedo.github.io',
+              },
+              {
                 fileId: 'folderTest',
                 title: {
                   eng: 'Test Files Folder',

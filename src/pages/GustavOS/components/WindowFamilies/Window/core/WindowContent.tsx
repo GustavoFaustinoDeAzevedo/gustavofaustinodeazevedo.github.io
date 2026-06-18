@@ -21,15 +21,22 @@ const WindowContent = ({
   owner,
   content,
   type,
+  actions,
 }: {
   windowId: string;
   contentKey: string;
   currentNode: string;
-  permission?: Permission;
+  permission?: {
+    read: boolean;
+    write: boolean;
+    execute: boolean;
+    delete: boolean;
+  };
   owner?: string;
   src?: string;
   content?: any;
   type?: string;
+  actions?: any;
 }) => {
   //const contentId = windowId.split('#')[1];
 
@@ -64,8 +71,8 @@ const WindowContent = ({
     padding: '2rem',
   };
 
-  if (type === 'folder') {
-    return (
+  const mapTypes = {
+    folder: () => (
       <ListFiles
         style={wrapperStyle}
         stylesConfig={stylesConfig}
@@ -75,7 +82,17 @@ const WindowContent = ({
         openMode={'window'}
         doubleClickToOpen={true}
       />
-    );
+    ),
+    link: () => {
+      window.open(content, '_blank');
+      actions?.handleClose();
+      return null;
+    },
+  };
+
+  if (mapTypes[type as keyof typeof mapTypes]) {
+    const Component = mapTypes[type as keyof typeof mapTypes];
+    return <>{Component()}</>;
   }
 
   const windowContent = returnWindowContent(contentKey, {
