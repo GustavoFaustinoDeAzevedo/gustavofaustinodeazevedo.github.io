@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import WindowContent from './WindowContent';
 import { Permission } from '@/store/slices/file';
+import { WindowHandlers } from './Window';
 
 const WindowContentWrapper = ({
   isOpened,
@@ -12,16 +13,23 @@ const WindowContentWrapper = ({
   owner,
   src,
   type,
+  windowHandlers,
 }: {
   isOpened: boolean;
   windowId: string;
   currentNode: string;
   content?: any;
   contentKey: string;
-  permission?: Permission;
+  permission?: {
+    read: boolean;
+    write: boolean;
+    execute: boolean;
+    delete: boolean;
+  };
   owner?: string;
   src?: string;
   type?: string;
+  windowHandlers: WindowHandlers;
 }) => {
   const windowContent = isOpened ? (
     <WindowContent
@@ -33,6 +41,7 @@ const WindowContentWrapper = ({
       permission={permission}
       owner={owner}
       type={type}
+      actions={windowHandlers}
     />
   ) : (
     <></>

@@ -31,27 +31,32 @@ export const returnWindowContent = (
     windowId?: string;
     src?: string;
     type?: string;
-    permission?: Permission;
+    permission?: {
+      read: boolean;
+      write: boolean;
+      execute: boolean;
+      delete: boolean;
+    };
     owner?: string;
     content?: any;
   },
 ) => {
   const language = useSelector((state: RootState) => state.settings.language);
   const map = {
-    devMenu: () => <DevMenu />,
-    about: () => <AboutMe />,
-    skills: () => <MySkills />,
-    sendMessage: () => <SendMessage />,
-    contact: () => <ContactCard />,
-    cmd: () => <ConsoleCommand />,
-    // taskManager: () => <TaskManager />,
-    // browser: () => <BrowserSimulator />,
-    // github: () => <BrowserSimulator src={src} />,
-    backgroundPreferences: () => <BackgroundPreferences />,
-    calculator: () => <Calculator />,
-    notepad: () => <Notepad content={content as string} />,
-    tests: () => <Tests />,
-    corruptedFile: () => <CorruptedFile message="Test" />,
+    devMenu: <DevMenu />,
+    about: <AboutMe />,
+    skills: <MySkills />,
+    sendMessage: <SendMessage />,
+    contact: <ContactCard />,
+    cmd: <ConsoleCommand />,
+    // taskManager:  <TaskManager />,
+    // browser:  <BrowserSimulator />,
+    // github:  <BrowserSimulator src={src} />,
+    backgroundPreferences: <BackgroundPreferences />,
+    calculator: <Calculator />,
+    notepad: <Notepad content={content as string} />,
+    tests: <Tests />,
+    corruptedFile: <CorruptedFile message="Test" />,
   };
 
   const contentKeyValidation = contentKey in map;
@@ -69,7 +74,7 @@ export const returnWindowContent = (
       }[language],
     );
 
-  if (contentKeyValidation) return map[contentKey as keyof typeof map]?.();
+  if (contentKeyValidation) return map[contentKey as keyof typeof map];
 
   throw new Error(
     {

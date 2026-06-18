@@ -13,7 +13,7 @@ import { ErrorFallback } from '@GustavOS/components';
 
 gsap.registerPlugin(useGSAP);
 
-type WindowHandlers = {
+export type WindowHandlers = {
   updateWindowState: (updates: any) => void;
   handleClose: () => void;
   handleFocus: () => void;
