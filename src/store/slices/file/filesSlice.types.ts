@@ -1,6 +1,15 @@
-import { Size } from '../window';
-
 type SortType = 'asc' | 'desc'; // provisório
+
+// Tipos de arquivos
+export type FileType =
+  | 'folder'
+  | 'link'
+  | 'app'
+  | 'text'
+  | 'file'
+  | 'systemApp'
+  | 'test'
+  | 'notFound';
 
 // Título de um arquivo/nó pode ser string simples ou um objeto com traduções
 export type Title = { eng: string; por: string };
@@ -44,17 +53,9 @@ export interface FileNode {
   title?: Title;
   permission?: Permission;
   nodeDepth?: number;
-  type?:
-    | 'folder'
-    | 'link'
-    | 'app'
-    | 'text'
-    | 'file'
-    | 'systemApp'
-    | 'test'
-    | 'notFound';
+  type?: FileType;
   extension?: string;
-  size?: Size;
+  size?: number;
   hidden?: boolean;
   createdAt?: Date;
   modifiedAt?: Date;
